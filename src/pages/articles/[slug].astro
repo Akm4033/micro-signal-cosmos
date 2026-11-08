@@ -1,0 +1,658 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { CATEGORIES } from '../../data/categories';
+import { getPublishedArticles, type Article } from '../../data/articles';
+import { render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const publishedArticles = await getPublishedArticles();
+
+  return publishedArticles.map((article) => {
+    const slug = article.data.slug || article.id;
+    return {
+      params: { slug },
+      props: { article },
+    };
+  });
+}
+
+interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+
+// Resolve category metadata from the official taxonomy
+const category = CATEGORIES.find(
+  (c) =>
+    c.slug.toLowerCase() === article.data.category.toLowerCase().trim() ||
+    c.name.toLowerCase() === article.data.category.toLowerCase().trim()
+);
+
+const categoryName = category?.name || article.data.category;
+const categoryHref = category?.href || `/category/${article.data.category}/`;
+const categoryAccent = category?.accent || 'sky';
+
+// Format publication and update dates
+const publishDateFormatted = article.data.publishDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+const publishDateISO = article.data.publishDate.toISOString();
+
+const updatedDateFormatted = article.data.updatedDate
+  ? article.data.updatedDate.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+  : null;
+const updatedDateISO = article.data.updatedDate ? article.data.updatedDate.toISOString() : null;
+
+// Determine related articles:
+// Prioritize published articles from the same category, excluding current article.
+// Fallback to other recent published articles if needed, up to 3 total.
+const allPublished = await getPublishedArticles();
+const currentSlug = article.data.slug || article.id;
+const otherArticles = allPublished.filter((a) => (a.data.slug || a.id) !== currentSlug);
+
+const sameCategoryArticles = otherArticles.filter(
+  (a) => a.data.category.toLowerCase().trim() === article.data.category.toLowerCase().trim()
+);
+const differentCategoryArticles = otherArticles.filter(
+  (a) => a.data.category.toLowerCase().trim() !== article.data.category.toLowerCase().trim()
+);
+
+const relatedArticles = [...sameCategoryArticles, ...differentCategoryArticles].slice(0, 3);
+
+// JSON-LD Structured Data (TechArticle + BreadcrumbList)
+const siteUrl = Astro.site?.href.replace(/\/$/, '') || '';
+const articleUrl = siteUrl ? `${siteUrl}/articles/${currentSlug}/` : `/articles/${currentSlug}/`;
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'TechArticle',
+      '@id': `${articleUrl}#article`,
+      headline: article.data.title,
+      description: article.data.description,
+      url: articleUrl,
+      datePublished: publishDateISO,
+      dateModified: updatedDateISO || publishDateISO,
+      author: {
+        '@type': 'Person',
+        name: article.data.author,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Micro Signal Cosmos',
+        url: siteUrl || '/',
+      },
+      articleSection: categoryName,
+      keywords: (article.data.tags || []).join(', '),
+      ...(article.data.coverImage
+        ? {
+            image: article.data.coverImage.startsWith('http')
+              ? article.data.coverImage
+              : siteUrl
+                ? `${siteUrl}${article.data.coverImage}`
+                : article.data.coverImage,
+          }
+        : {}),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${articleUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: siteUrl ? `${siteUrl}/` : '/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Articles',
+          item: siteUrl ? `${siteUrl}/articles/` : '/articles/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: article.data.title,
+          item: articleUrl,
+        },
+      ],
+    },
+  ],
+};
+---
+
+<Layout
+  title={`${article.data.title} | Micro Signal Cosmos`}
+  description={article.data.description}
+  type="article"
+  image={article.data.coverImage}
+  jsonLd={articleJsonLd}
+>
+  <Header />
+
+  <main id="main-content" class="bg-[#0B1020] py-12 sm:py-16 lg:py-20">
+    <div class="container-main">
+
+      <!-- Breadcrumbs and Navigation -->
+      <div class="mx-auto max-w-3xl mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <nav aria-label="Breadcrumb">
+          <ol class="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-400">
+            <li>
+              <a
+                href="/"
+                class="transition-colors hover:text-sky-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded"
+              >
+                Home
+              </a>
+            </li>
+            <li aria-hidden="true" class="text-slate-600">/</li>
+            <li>
+              <a
+                href="/articles/"
+                class="transition-colors hover:text-sky-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded"
+              >
+                Articles
+              </a>
+            </li>
+            <li aria-hidden="true" class="text-slate-600">/</li>
+            <li class="font-medium text-slate-300 truncate max-w-[200px] sm:max-w-xs" aria-current="page">
+              {article.data.title}
+            </li>
+          </ol>
+        </nav>
+
+        <a
+          href="/articles/"
+          class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-sky-400 transition-all hover:gap-2 hover:text-sky-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded"
+        >
+          <span aria-hidden="true">←</span> Back to all articles
+        </a>
+      </div>
+
+      <!-- Article Header -->
+      <header class="mx-auto max-w-3xl">
+        <!-- Category Badge -->
+        <div class="mb-5">
+          <a
+            href={categoryHref}
+            class:list={[
+              'inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-semibold tracking-wider uppercase transition-all focus-visible:outline-none focus-visible:ring-2',
+              categoryAccent === 'purple'
+                ? 'border-purple-400/30 bg-purple-400/10 text-purple-300 hover:border-purple-400 hover:bg-purple-400/20 focus-visible:ring-purple-400'
+                : 'border-sky-400/30 bg-sky-400/10 text-sky-300 hover:border-sky-400 hover:bg-sky-400/20 focus-visible:ring-sky-400',
+            ]}
+          >
+            <span
+              class:list={[
+                'h-1.5 w-1.5 rounded-full',
+                categoryAccent === 'purple' ? 'bg-purple-400' : 'bg-sky-400',
+              ]}
+              aria-hidden="true"
+            ></span>
+            {categoryName}
+          </a>
+        </div>
+
+        <!-- Main Title -->
+        <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl leading-tight sm:leading-tight">
+          {article.data.title}
+        </h1>
+
+        <!-- Excerpt / Description -->
+        <p class="mt-6 text-lg sm:text-xl font-normal leading-relaxed text-slate-300">
+          {article.data.description}
+        </p>
+
+        <!-- Meta Bar (Author, Dates, Reading Time) -->
+        <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-y border-white/10 py-5 text-xs sm:text-sm text-slate-400">
+          <!-- Author -->
+          <div class="flex items-center gap-2.5">
+            <div
+              class="flex h-8 w-8 items-center justify-center rounded-full border border-sky-400/30 bg-sky-400/10 text-xs font-bold text-sky-300 shadow-[0_0_15px_rgba(56,189,248,0.15)]"
+              aria-hidden="true"
+            >
+              MS
+            </div>
+            <div>
+              <span class="block font-medium text-slate-200">{article.data.author}</span>
+            </div>
+          </div>
+
+          <span aria-hidden="true" class="hidden text-slate-700 sm:inline">•</span>
+
+          <!-- Publication Date -->
+          <div class="flex items-center gap-1.5">
+            <svg
+              class="h-4 w-4 text-slate-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="1.75"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+            <span>
+              Published <time datetime={publishDateISO} class="text-slate-300">{publishDateFormatted}</time>
+            </span>
+          </div>
+
+          <!-- Updated Date (conditional) -->
+          {updatedDateFormatted && (
+            <>
+              <span aria-hidden="true" class="hidden text-slate-700 sm:inline">•</span>
+              <div class="flex items-center gap-1.5">
+                <svg
+                  class="h-4 w-4 text-slate-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  />
+                </svg>
+                <span>
+                  Updated <time datetime={updatedDateISO} class="text-slate-300">{updatedDateFormatted}</time>
+                </span>
+              </div>
+            </>
+          )}
+
+          <span aria-hidden="true" class="hidden text-slate-700 sm:inline">•</span>
+
+          <!-- Reading Time -->
+          {article.data.readingTime && (
+            <div class="flex items-center gap-1.5">
+              <svg
+                class="h-4 w-4 text-slate-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.75"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span class="text-slate-300">{article.data.readingTime}</span>
+            </div>
+          )}
+        </div>
+
+        <!-- Cover Image (when provided) -->
+        {article.data.coverImage && (
+          <div class="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-[#141C2E]">
+            <img
+              src={article.data.coverImage}
+              alt={article.data.title}
+              class="h-auto max-h-[480px] w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        )}
+      </header>
+
+      <!-- Article Content Area -->
+      <article class="mx-auto max-w-3xl mt-12">
+        <div class="article-content">
+          <Content />
+        </div>
+
+        <!-- Article Tags -->
+        {article.data.tags && article.data.tags.length > 0 && (
+          <div class="mt-12 pt-8 border-t border-white/10">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 mr-2">
+                Topic Tags:
+              </span>
+              {article.data.tags.map((tag) => (
+                <span class="rounded-lg border border-white/10 bg-[#141C2E] px-3 py-1 text-xs font-medium text-slate-300">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Editorial Footer Callout -->
+        <div class="mt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 rounded-2xl border border-white/10 bg-[#141C2E] p-6 sm:p-8">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-sky-400">
+              Published in {categoryName}
+            </p>
+            <p class="mt-1 text-sm leading-relaxed text-slate-400">
+              Explore more analysis, insights, and discoveries in this field.
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center gap-3">
+            <a
+              href={categoryHref}
+              class="inline-flex items-center gap-2 rounded-lg border border-sky-400/40 bg-sky-400/10 px-4 py-2.5 text-xs font-semibold text-sky-300 transition-all hover:bg-sky-400/20 hover:border-sky-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+            >
+              Browse {categoryName} →
+            </a>
+            <a
+              href="/articles/"
+              class="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-semibold text-slate-300 transition-all hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+            >
+              All Articles
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Related Articles Section -->
+      {relatedArticles.length > 0 && (
+        <section class="mx-auto mt-20 max-w-4xl border-t border-white/10 pt-16" aria-labelledby="related-heading">
+          <div class="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[0.2em] text-sky-400">
+                Continue Reading
+              </p>
+              <h2 id="related-heading" class="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                Related <span class="text-sky-400">Articles</span>
+              </h2>
+            </div>
+            <a
+              href="/articles/"
+              class="text-xs sm:text-sm font-semibold text-sky-400 transition-colors hover:text-sky-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded"
+            >
+              View all articles →
+            </a>
+          </div>
+
+          <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {relatedArticles.map((rel) => {
+              const relSlug = rel.data.slug || rel.id;
+              const relCat = CATEGORIES.find(
+                (c) =>
+                  c.slug.toLowerCase() === rel.data.category.toLowerCase().trim() ||
+                  c.name.toLowerCase() === rel.data.category.toLowerCase().trim()
+              );
+              const relCatName = relCat?.name || rel.data.category;
+              const relCatAccent = relCat?.accent || 'sky';
+              const relDateFormatted = rel.data.publishDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              });
+
+              return (
+                <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#141C2E] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-sky-400/40">
+                  <div>
+                    <div class="flex items-center justify-between gap-2 text-xs">
+                      <span
+                        class:list={[
+                          'font-semibold uppercase tracking-wider',
+                          relCatAccent === 'purple' ? 'text-purple-400' : 'text-sky-400',
+                        ]}
+                      >
+                        {relCatName}
+                      </span>
+                      <span class="text-slate-400">{rel.data.readingTime || '5 min read'}</span>
+                    </div>
+
+                    <h3 class="mt-4 text-base font-bold leading-snug text-white transition-colors group-hover:text-sky-300">
+                      <a
+                        href={`/articles/${relSlug}/`}
+                        class="focus-visible:outline-none focus-visible:underline"
+                      >
+                        {rel.data.title}
+                      </a>
+                    </h3>
+
+                    <p class="mt-3 text-xs leading-relaxed text-slate-400 line-clamp-3">
+                      {rel.data.description}
+                    </p>
+                  </div>
+
+                  <div class="mt-6 flex items-center justify-between border-t border-white/5 pt-4 text-xs">
+                    <span class="text-slate-400">{relDateFormatted}</span>
+                    <a
+                      href={`/articles/${relSlug}/`}
+                      class="inline-flex items-center gap-1 font-semibold text-sky-400 transition-all group-hover:gap-2"
+                      aria-label={`Read article: ${rel.data.title}`}
+                    >
+                      Read <span aria-hidden="true">→</span>
+                    </a>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* ===================================================
+     ARTICLE CONTENT STYLING (PREMIUM DARK MAGAZINE)
+     =================================================== */
+  .article-content {
+    color: #CBD5E1; /* slate-300 (12.4:1 contrast ratio against #0B1020) */
+    font-size: 1.125rem;
+    line-height: 1.85;
+  }
+
+  /* Headings */
+  .article-content :global(h2) {
+    color: #FFFFFF;
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 2.75rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    letter-spacing: -0.02em;
+  }
+
+  .article-content :global(h3) {
+    color: #F1F5F9;
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-top: 2.25rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .article-content :global(h4) {
+    color: #E2E8F0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Paragraphs */
+  .article-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  /* Emphasis */
+  .article-content :global(strong) {
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+
+  .article-content :global(em) {
+    color: #E2E8F0;
+    font-style: italic;
+  }
+
+  /* Lists */
+  .article-content :global(ul) {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .article-content :global(ol) {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    margin-bottom: 1.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .article-content :global(li) {
+    margin-bottom: 0.65rem;
+    padding-left: 0.35rem;
+    color: #CBD5E1;
+  }
+
+  .article-content :global(li::marker) {
+    color: #38BDF8; /* Electric blue bullet accent */
+  }
+
+  /* Blockquotes */
+  .article-content :global(blockquote) {
+    margin: 2rem 0;
+    padding: 1.25rem 1.75rem;
+    background: rgba(20, 28, 46, 0.6);
+    border-left: 4px solid #38BDF8;
+    border-radius: 0 0.875rem 0.875rem 0;
+    color: #E2E8F0;
+    font-style: italic;
+  }
+
+  .article-content :global(blockquote p:last-child) {
+    margin-bottom: 0;
+  }
+
+  /* Links */
+  .article-content :global(a) {
+    color: #38BDF8;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.2s ease;
+  }
+
+  .article-content :global(a:hover) {
+    color: #7DD3FC;
+  }
+
+  /* Inline Code */
+  .article-content :global(:not(pre) > code) {
+    background: #1C2940;
+    color: #7DD3FC;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.875em;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Preformatted & Code Blocks */
+  .article-content :global(pre) {
+    background: #141C2E !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.875rem;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+    overflow-x: auto; /* Horizontally scrollable on mobile */
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: #E2E8F0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .article-content :global(pre code) {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    color: inherit !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  /* Tables */
+  .article-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    font-size: 0.9375rem;
+  }
+
+  .article-content :global(th) {
+    background: #141C2E;
+    color: #FFFFFF;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .article-content :global(td) {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: #CBD5E1;
+  }
+
+  .article-content :global(tr:nth-child(even) td) {
+    background: rgba(20, 28, 46, 0.35);
+  }
+
+  /* Horizontal Divider */
+  .article-content :global(hr) {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(56, 189, 248, 0.4), transparent);
+    margin: 3rem 0;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 640px) {
+    .article-content {
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+    .article-content :global(h2) {
+      font-size: 1.45rem;
+      margin-top: 2rem;
+    }
+    .article-content :global(h3) {
+      font-size: 1.25rem;
+      margin-top: 1.75rem;
+    }
+    .article-content :global(pre) {
+      padding: 1rem;
+      margin: 1.5rem 0;
+      font-size: 0.8125rem;
+    }
+  }
+</style>
+

@@ -1,0 +1,315 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Environment-configurable form backend (e.g. Web3Forms or Formspree)
+// Provide PUBLIC_WEB3FORMS_KEY in your hosting dashboard or .env to activate live email relay.
+const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY || process.env.PUBLIC_WEB3FORMS_KEY || '';
+const isFormLive = Boolean(web3formsKey && web3formsKey.trim().length > 0);
+---
+
+<Layout
+  title="Contact Us | Micro Signal Cosmos"
+  description="Get in touch with the Micro Signal Cosmos editorial team for story inquiries, feedback, corrections, and partnerships."
+>
+  <Header />
+
+  <main id="main-content" class="bg-[#0B1020] py-16 sm:py-24">
+    <div class="container-main">
+
+      <!-- Header Section -->
+      <div class="mx-auto max-w-3xl text-center">
+        <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-sky-400/20 bg-sky-400/5 px-4 py-2">
+          <span class="h-2 w-2 rounded-full bg-sky-400"></span>
+          <span class="text-xs font-semibold tracking-wider text-sky-300 uppercase">
+            Communications
+          </span>
+        </div>
+
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+          Connect With <span class="bg-gradient-to-r from-sky-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">Our Team</span>
+        </h1>
+
+        <p class="mt-7 text-base leading-8 text-slate-400 sm:text-lg">
+          Whether you have a question about an article, a research discovery to share, or feedback on our publications, our editorial desk welcomes your transmission.
+        </p>
+      </div>
+
+      <!-- Communication Channels Grid -->
+      <section class="mx-auto mt-14 max-w-4xl" aria-labelledby="channels-heading">
+        <h2 id="channels-heading" class="sr-only">Communication Channels</h2>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- Editorial & Pitches -->
+          <div class="rounded-xl border border-white/10 bg-[#141C2E] p-7 transition-all hover:border-sky-400/30">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-sky-400/20 bg-sky-400/10 text-sky-400 font-bold text-sm">
+              ED
+            </span>
+            <h3 class="mt-5 text-lg font-bold text-white">Editorial Inquiries</h3>
+            <p class="mt-2 text-xs leading-6 text-slate-400">
+              For article feedback, story suggestions, and editorial commentary.
+            </p>
+            <p class="mt-4 text-xs font-mono text-sky-300">
+              [editorial@microsignalcosmos.com]
+            </p>
+          </div>
+
+          <!-- Corrections & Accuracy -->
+          <div class="rounded-xl border border-white/10 bg-[#141C2E] p-7 transition-all hover:border-purple-400/30">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-purple-400/20 bg-purple-400/10 text-purple-400 font-bold text-sm">
+              QC
+            </span>
+            <h3 class="mt-5 text-lg font-bold text-white">Corrections & Accuracy</h3>
+            <p class="mt-2 text-xs leading-6 text-slate-400">
+              Spotted an error or factual issue? Help us maintain precision.
+            </p>
+            <p class="mt-4 text-xs font-mono text-purple-300">
+              [corrections@microsignalcosmos.com]
+            </p>
+          </div>
+
+          <!-- Media & Partnerships -->
+          <div class="rounded-xl border border-white/10 bg-[#141C2E] p-7 transition-all hover:border-sky-400/30 sm:col-span-2 lg:col-span-1">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-sky-400/20 bg-sky-400/10 text-sky-400 font-bold text-sm">
+              PR
+            </span>
+            <h3 class="mt-5 text-lg font-bold text-white">Media & Collaboration</h3>
+            <p class="mt-2 text-xs leading-6 text-slate-400">
+              For press inquiries, licensing questions, and publication partnerships.
+            </p>
+            <p class="mt-4 text-xs font-mono text-sky-300">
+              [contact@microsignalcosmos.com]
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Form & Social Section -->
+      <div class="mx-auto mt-12 grid max-w-4xl gap-8 lg:grid-cols-5">
+
+        <!-- Contact Form Box -->
+        <div class="rounded-2xl border border-white/10 bg-[#141C2E] p-8 sm:p-10 lg:col-span-3">
+          <h2 class="text-xl font-bold text-white">Send a Message</h2>
+          <p class="mt-2 text-xs text-slate-400">
+            Fill out the form below. We typically respond within 24 to 48 business hours.
+          </p>
+
+          {isFormLive ? (
+            <form
+              action="https://api.web3forms.com/submit"
+              method="POST"
+              class="mt-8 space-y-5"
+            >
+              <input type="hidden" name="access_key" value={web3formsKey} />
+              <input type="hidden" name="subject" value="Transmission to Micro Signal Cosmos" />
+              <input type="hidden" name="from_name" value="Micro Signal Cosmos Reader Desk" />
+              <!-- Honeypot Spam Protection -->
+              <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off" />
+
+              <div>
+                <label for="contact-name" class="block text-xs font-semibold uppercase tracking-wider text-slate-300">
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  id="contact-name"
+                  name="name"
+                  required
+                  placeholder="Ada Lovelace"
+                  class="mt-2 w-full rounded-lg border border-white/10 bg-[#0B1020] px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400/50"
+                />
+              </div>
+
+              <div>
+                <label for="contact-email" class="block text-xs font-semibold uppercase tracking-wider text-slate-300">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="contact-email"
+                  name="email"
+                  required
+                  placeholder="reader@example.com"
+                  class="mt-2 w-full rounded-lg border border-white/10 bg-[#0B1020] px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400/50"
+                />
+              </div>
+
+              <div>
+                <label for="contact-topic" class="block text-xs font-semibold uppercase tracking-wider text-slate-300">
+                  Topic
+                </label>
+                <select
+                  id="contact-topic"
+                  name="topic"
+                  class="mt-2 w-full rounded-lg border border-white/10 bg-[#0B1020] px-4 py-3 text-sm text-slate-300 focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400/50"
+                >
+                  <option value="general">General Inquiry</option>
+                  <option value="editorial">Editorial / Article Feedback</option>
+                  <option value="correction">Correction Report</option>
+                  <option value="press">Press / Partnership</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="contact-message" class="block text-xs font-semibold uppercase tracking-wider text-slate-300">
+                  Message
+                </label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows="4"
+                  required
+                  minlength="10"
+                  placeholder="Share your thoughts or inquiry with our team..."
+                  class="mt-2 w-full rounded-lg border border-white/10 bg-[#0B1020] px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400/50"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full rounded-lg bg-sky-400 py-3.5 text-sm font-bold text-slate-950 transition-all hover:bg-sky-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-400"
+              >
+                Send Transmission
+              </button>
+            </form>
+          ) : (
+            <form
+              class="mt-8 space-y-5"
+              onsubmit="event.preventDefault(); document.getElementById('relay-notice')?.classList.remove('hidden');"
+            >
+              <!-- Honeypot Spam Protection (Ready) -->
+              <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off" />
+
+              <div>
+                <label for="contact-name" class="block text-xs font-semibold uppercase tracking-wider text-slate-300">
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  id="contact-name"
+                  name="name"
+                  required
+                  placeholder="Ada Lovelace"
+                  class="mt-2 w-full rounded-lg border border-white/10 bg-[#0B1020] px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400/50"
+                />
+              </div>
+
+              <div>
+                <label for="contact-email" class="block text-xs font-semibold uppercase tracking-wider text-slate-300">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="contact-email"
+                  name="email"
+                  required
+                  placeholder="reader@example.com"
+                  class="mt-2 w-full rounded-lg border border-white/10 bg-[#0B1020] px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400/50"
+                />
+              </div>
+
+              <div>
+                <label for="contact-topic" class="block text-xs font-semibold uppercase tracking-wider text-slate-300">
+                  Topic
+                </label>
+                <select
+                  id="contact-topic"
+                  name="topic"
+                  class="mt-2 w-full rounded-lg border border-white/10 bg-[#0B1020] px-4 py-3 text-sm text-slate-300 focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400/50"
+                >
+                  <option value="general">General Inquiry</option>
+                  <option value="editorial">Editorial / Article Feedback</option>
+                  <option value="correction">Correction Report</option>
+                  <option value="press">Press / Partnership</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="contact-message" class="block text-xs font-semibold uppercase tracking-wider text-slate-300">
+                  Message
+                </label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows="4"
+                  required
+                  minlength="10"
+                  placeholder="Share your thoughts or inquiry with our team..."
+                  class="mt-2 w-full rounded-lg border border-white/10 bg-[#0B1020] px-4 py-3 text-sm text-white placeholder-slate-500 focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400/50"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full rounded-lg bg-sky-400 py-3.5 text-sm font-bold text-slate-950 transition-all hover:bg-sky-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-400"
+              >
+                Send Transmission
+              </button>
+
+              <div id="relay-notice" role="status" aria-live="polite" class="hidden rounded-xl border border-sky-400/30 bg-sky-400/10 p-4 text-xs text-sky-200">
+                <p class="font-semibold text-sky-300">Mail Relay In Preparation</p>
+                <p class="mt-1 text-slate-300">
+                  Thank you for your interest. To activate live mail delivery, configure the <code class="rounded bg-[#0B1020] px-1 py-0.5 text-sky-300">PUBLIC_WEB3FORMS_KEY</code> environment variable in your hosting dashboard as detailed in <code class="rounded bg-[#0B1020] px-1 py-0.5 text-sky-300">DEPLOYMENT.md</code>.
+                </p>
+              </div>
+
+              <p class="text-center text-[11px] text-slate-400">
+                Note: Email dispatch service will be activated once our dedicated mail relay is connected.
+              </p>
+            </form>
+          )}
+        </div>
+
+        <!-- Social & Information Sidebar -->
+        <div class="flex flex-col justify-between gap-6 rounded-2xl border border-white/10 bg-[#0E1628] p-8 lg:col-span-2">
+          <div>
+            <h3 class="text-base font-bold text-white uppercase tracking-wider">
+              Follow Our Channels
+            </h3>
+            <p class="mt-3 text-xs leading-6 text-slate-400">
+              Stay connected with Micro Signal Cosmos across our official social profiles:
+            </p>
+
+            <div class="mt-6 space-y-3">
+              <a
+                href="https://www.facebook.com/profile.php?id=61596288235891"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-between rounded-lg border border-white/10 bg-[#141C2E] px-4 py-3 text-sm text-slate-300 transition-colors hover:border-sky-400 hover:text-sky-300"
+              >
+                <span>Facebook Page</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+
+              <a
+                href="https://www.youtube.com/@MicroSignalCosmos"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-between rounded-lg border border-white/10 bg-[#141C2E] px-4 py-3 text-sm text-slate-300 transition-colors hover:border-purple-400 hover:text-purple-300"
+              >
+                <span>YouTube Channel</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="border-t border-white/10 pt-6">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">
+              Publisher Details
+            </h4>
+            <p class="mt-2 text-xs leading-5 text-slate-400">
+              Micro Signal Cosmos Publication<br />
+              [Publisher Address: To be specified upon registration]<br />
+              [Operational Jurisdiction: To be confirmed]
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+

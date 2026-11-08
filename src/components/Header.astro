@@ -1,0 +1,85 @@
+---
+import { CATEGORIES } from '../data/categories';
+
+const navItems = [
+  { name: 'Home', href: '/' },
+  ...CATEGORIES.map((c) => ({
+    name: c.name,
+    shortName: c.shortName || c.name,
+    href: c.href,
+  })),
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-white/10 bg-[#0B1020]/95 backdrop-blur-lg">
+  <div class="container-main">
+
+    <div class="flex min-h-20 items-center justify-between gap-6">
+
+      <!-- Brand -->
+      <a href="/" class="shrink-0" aria-label="Micro Signal Cosmos homepage">
+        <span class="block text-xl font-bold tracking-tight text-white sm:text-2xl">
+          Micro Signal
+          <span class="text-sky-400">Cosmos</span>
+        </span>
+        <span class="mt-1 block text-[10px] tracking-[0.2em] text-slate-400 uppercase">
+          Discover More. Understand Better.
+        </span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav aria-label="Main navigation" class="hidden items-center gap-5 xl:gap-6 lg:flex">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class="text-sm font-medium text-slate-300 transition-colors hover:text-sky-400"
+            title={item.name}
+          >
+            {item.shortName || item.name}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Mobile Menu -->
+      <details class="relative lg:hidden">
+        <summary
+          class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-lg border border-white/10 text-white hover:border-sky-400"
+          aria-label="Toggle navigation menu"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </summary>
+
+        <nav
+          aria-label="Mobile navigation"
+          class="absolute right-0 top-14 z-50 w-72 rounded-xl border border-white/10 bg-[#141C2E] p-4 shadow-2xl"
+        >
+          <div class="flex flex-col gap-1">
+            {navItems.map((item) => (
+              <a
+                href={item.href}
+                class="rounded-lg px-4 py-3 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-sky-400"
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+        </nav>
+      </details>
+
+    </div>
+
+  </div>
+</header>

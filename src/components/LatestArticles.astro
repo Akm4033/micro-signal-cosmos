@@ -1,0 +1,137 @@
+---
+import { CATEGORIES } from '../data/categories';
+import { getPublishedArticles, getFeaturedArticles } from '../data/articles';
+
+// Retrieve published and featured articles (drafts strictly excluded)
+const publishedArticles = await getPublishedArticles();
+const featuredArticles = await getFeaturedArticles();
+
+// Avoid duplicating the primary featured article if separate homepage sections are intended
+const featuredSlugs = new Set(featuredArticles.map((a) => a.data.slug || a.id));
+let latestArticles = publishedArticles.filter((a) => !featuredSlugs.has(a.data.slug || a.id));
+
+// Fallback: If all published articles happen to be featured or no non-featured exist, display all published articles
+if (latestArticles.length === 0) {
+  latestArticles = publishedArticles;
+}
+
+function getCategoryInfo(categoryValue: string) {
+  const norm = categoryValue.toLowerCase().trim();
+  return (
+    CATEGORIES.find((c) => c.slug.toLowerCase() === norm || c.name.toLowerCase() === norm) || {
+      name: categoryValue,
+      icon: '01',
+      accent: 'sky' as const,
+    }
+  );
+}
+---
+
+{latestArticles.length > 0 && (
+  <section id="latest-articles" class="bg-[#0B1020] py-20" aria-labelledby="latest-heading">
+    <div class="container-main">
+
+      <!-- Section Heading -->
+      <div class="mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+
+        <div>
+          <p class="mb-3 text-xs font-bold tracking-[0.2em] text-sky-400 uppercase">
+            Fresh Perspectives
+          </p>
+
+          <h2 id="latest-heading" class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Latest <span class="text-sky-400">Articles</span>
+          </h2>
+
+          <p class="mt-3 max-w-xl text-sm leading-7 text-slate-400">
+            Discover informative guides, original insights and ideas
+            worth exploring.
+          </p>
+        </div>
+
+        <a
+          href="/articles/"
+          class="inline-flex items-center gap-2 text-sm font-semibold text-sky-400 transition-colors hover:text-sky-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded"
+        >
+          View All Articles
+          <span aria-hidden="true">→</span>
+        </a>
+
+      </div>
+
+      <!-- Articles Grid -->
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+        {latestArticles.map((article, idx) => {
+          const slug = article.data.slug || article.id;
+          const catInfo = getCategoryInfo(article.data.category);
+          const number = String(idx + 1).padStart(2, '0');
+          const formattedDate = article.data.publishDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          });
+          const readingTime = article.data.readingTime || '5 min read';
+
+          return (
+            <article class="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#141C2E] transition-all duration-300 hover:-translate-y-1 hover:border-sky-400/30">
+
+              <!-- Article Visual -->
+              <div class="relative flex h-52 items-center justify-center overflow-hidden bg-gradient-to-br from-[#172B45] to-[#241D40]">
+
+                <div class="absolute h-36 w-36 rounded-full border border-sky-400/20"></div>
+                <div class="absolute h-24 w-24 rounded-full border border-purple-400/30"></div>
+
+                <span
+                  class:list={[
+                    'relative text-5xl font-bold',
+                    catInfo.accent === 'purple' ? 'text-purple-400/50' : 'text-sky-400/50',
+                  ]}
+                >
+                  {number}
+                </span>
+
+                <span class="absolute bottom-4 left-4 rounded-full border border-white/10 bg-[#0B1020]/70 px-3 py-1.5 text-xs font-semibold text-slate-300 backdrop-blur">
+                  {catInfo.name}
+                </span>
+
+              </div>
+
+              <!-- Article Content -->
+              <div class="flex flex-1 flex-col p-6">
+
+                <div class="flex flex-wrap items-center gap-3 text-xs text-slate-400">
+                  <span>{formattedDate}</span>
+                  <span aria-hidden="true">•</span>
+                  <span>{readingTime}</span>
+                </div>
+
+                <h3 class="mt-4 text-xl font-bold leading-snug text-white transition-colors group-hover:text-sky-300">
+                  {article.data.title}
+                </h3>
+
+                <p class="mt-3 text-sm leading-7 text-slate-400 line-clamp-3">
+                  {article.data.description}
+                </p>
+
+                <div class="mt-auto border-t border-white/10 pt-5 mt-6">
+                  <a
+                    href={`/articles/${slug}/`}
+                    class="inline-flex items-center gap-2 text-sm font-semibold text-sky-400 transition-all hover:gap-3 focus-visible:outline-none focus-visible:underline"
+                  >
+                    Read Article
+                    <span aria-hidden="true">→</span>
+                  </a>
+                </div>
+
+              </div>
+
+            </article>
+          );
+        })}
+
+      </div>
+
+    </div>
+  </section>
+)}
