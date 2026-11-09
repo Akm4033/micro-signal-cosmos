@@ -9,7 +9,17 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const { db, hashPassword, verifyPassword } = require('./db.cjs');
+const {
+  db,
+  hashPassword,
+  verifyPassword,
+  getSetting,
+  setSetting,
+  canPublishToday,
+  isAutoPublishEnabled,
+  getHumanReviewQueue,
+  resolveHumanReview
+} = require('./db.cjs');
 const { generateWithProvider, compareModels, verifyDraftQuality } = require('./llm.cjs');
 const { publishArticle, unpublishArticle, calculateReadingTime } = require('./publish.cjs');
 
@@ -209,6 +219,13 @@ const server = http.createServer(async (req, res) => {
         `).get();
 
         const recentLogs = db.prepare('SELECT * FROM audit_logs ORDER BY timestamp DESC LIMIT 8').all();
+        const reviewQueueCount = db.prepare("SELECT COUNT(*) as count FROM human_review_queue WHERE status = 'PENDING'").get().count;
+        const quota = canPublishToday();
+        const autoPublish = isAutoPublishEnabled();
+        const rolloutStage = getSetting('rollout_stage', 'STAGE_B');
+        const killSwitch = getSetting('auto_publish_kill_switch', 'DISABLED');
+        const dailyCostSpend = parseFloat(getSetting('current_daily_api_cost_usd', '0.0'));
+        const dailyCostMax = parseFloat(getSetting('max_daily_api_cost_usd', '10.0'));
 
         const integrations = {
           openai: !!process.env.OPENAI_API_KEY,
@@ -221,6 +238,15 @@ const server = http.createServer(async (req, res) => {
         return sendJSON(res, 200, {
           articles: articleStats,
           topics: topicStats,
+          reviewQueueCount,
+          quota,
+          autoPublish,
+          safety: {
+            rolloutStage,
+            killSwitch,
+            dailyCostSpend,
+            dailyCostMax
+          },
           integrations,
           recentLogs
         });
@@ -603,6 +629,76 @@ const server = http.createServer(async (req, res) => {
           return sendJSON(res, 200, result);
         } catch (err) {
           return sendJSON(res, 400, { error: err.message });
+        }
+      }
+
+      // -------------------------------------------------------------
+      // API: SYSTEM SETTINGS & PRODUCTION SAFETY
+      // -------------------------------------------------------------
+      if (pathname === '/api/settings' && method === 'GET') {
+        const rows = db.prepare('SELECT * FROM system_settings').all();
+        const settings = {};
+        for (const r of rows) settings[r.key] = r.value;
+
+        return sendJSON(res, 200, {
+          settings,
+          quota: canPublishToday(),
+          autoPublish: isAutoPublishEnabled()
+        });
+      }
+
+      if (pathname === '/api/settings' && method === 'PUT') {
+        const body = await parseBody(req);
+        const allowedKeys = ['rollout_stage', 'auto_publish_kill_switch', 'daily_publish_limit', 'max_daily_api_cost_usd'];
+
+        for (const [k, v] of Object.entries(body)) {
+          if (allowedKeys.includes(k)) {
+            setSetting(k, v);
+            db.prepare('INSERT INTO audit_logs (id, user_id, action, details, timestamp) VALUES (?, ?, ?, ?, ?)').run(
+              crypto.randomUUID(),
+              user.id,
+              'UPDATE_SETTING',
+              JSON.stringify({ key: k, value: v }),
+              new Date().toISOString()
+            );
+          }
+        }
+
+        return sendJSON(res, 200, {
+          success: true,
+          quota: canPublishToday(),
+          autoPublish: isAutoPublishEnabled()
+        });
+      }
+
+      // -------------------------------------------------------------
+      // API: HUMAN REVIEW QUEUE
+      // -------------------------------------------------------------
+      if (pathname === '/api/review-queue' && method === 'GET') {
+        const status = parsedUrl.searchParams.get('status') || 'PENDING';
+        const items = getHumanReviewQueue(status);
+        return sendJSON(res, 200, items);
+      }
+
+      const resolveQueueMatch = pathname.match(/^\/api\/review-queue\/([a-zA-Z0-9-]+)\/resolve$/);
+      if (resolveQueueMatch && method === 'POST') {
+        const queueId = resolveQueueMatch[1];
+        const { status, editorNotes } = await parseBody(req);
+
+        if (!status || !['APPROVED', 'REJECTED', 'REVISION_REQUESTED'].includes(status)) {
+          return sendJSON(res, 400, { error: 'Valid status (APPROVED, REJECTED, REVISION_REQUESTED) is required' });
+        }
+
+        try {
+          const result = resolveHumanReview({
+            id: queueId,
+            status,
+            editorNotes,
+            assignedEditor: user.username
+          });
+          return sendJSON(res, 200, result);
+        } catch (err) {
+          return sendJSON(res, 404, { error: err.message });
         }
       }
 

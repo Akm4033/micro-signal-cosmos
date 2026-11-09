@@ -7,7 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const { db } = require('./db.cjs');
+const { db, canPublishToday } = require('./db.cjs');
 
 const ARTICLES_DIR = path.join(__dirname, '..', 'src', 'content', 'articles');
 const VALID_CATEGORIES = ['technology', 'artificial-intelligence', 'science', 'developer-tools'];
@@ -45,6 +45,12 @@ function publishArticle(articleIdOrSlug, options = {}) {
   // Check approval gate
   if (article.status !== 'approved' && !options.force) {
     throw new Error(`Cannot publish article "${article.slug}" because its status is "${article.status}". It must be APPROVED by an editor first.`);
+  }
+
+  // Check Daily Publishing Quota (Max 2 articles per calendar day)
+  const quota = canPublishToday();
+  if (!quota.allowed && !options.force) {
+    throw new Error(`Daily publishing limit reached: ${quota.count}/${quota.limit} articles already published today. Additional articles must wait for tomorrow's quota or be forced.`);
   }
 
   // Validate Category
