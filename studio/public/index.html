@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Micro Signal Cosmos — AI Editorial Studio</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230ea5e9'><circle cx='12' cy='12' r='10'/></svg>">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <!-- AUTH / LOGIN MODAL -->
+  <div id="login-overlay" class="modal-overlay hidden">
+    <div class="login-card">
+      <div class="login-brand">
+        <div class="brand-badge">COSMOS STUDIO</div>
+        <h2>Private Editorial Access</h2>
+        <p>Micro Signal Cosmos &bull; AI-Assisted Research &amp; Publishing</p>
+      </div>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" value="admin" required autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" value="Cosmos@Editorial2026!" required autocomplete="current-password">
+        </div>
+        <div id="login-error" class="error-banner hidden"></div>
+        <button type="submit" class="btn btn-primary btn-block">Sign In to Editorial Studio</button>
+      </form>
+      <div class="login-footnote">
+        Protected Administrative Environment &bull; Zero Public Exposure
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDIO MAIN CONTAINER -->
+  <div id="studio-app" class="app-layout">
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <span class="logo-dot"></span>
+          <span class="logo-title">Micro Signal Cosmos</span>
+        </div>
+        <div class="sidebar-sub">AI Editorial Studio v1.0</div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-tab="dashboard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-tab="topics">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span>Topic Discovery</span>
+        </button>
+        <button class="nav-item" data-tab="generator">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          <span>Multi-LLM Studio</span>
+        </button>
+        <button class="nav-item" data-tab="articles">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <span>Articles &amp; Drafts</span>
+        </button>
+        <button class="nav-item" data-tab="editor">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          <span>Markdown Editor</span>
+        </button>
+        <button class="nav-item" data-tab="seo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+          <span>SEO &amp; Affiliates</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <span class="user-avatar" id="user-initial">A</span>
+          <div class="user-meta">
+            <span class="user-name" id="user-display">admin</span>
+            <span class="user-role" id="user-role-display">Lead Editor</span>
+          </div>
+        </div>
+        <button id="btn-logout" class="btn-icon" title="Sign Out">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="main-content">
+      <!-- TOP HEADER -->
+      <header class="top-bar">
+        <div class="breadcrumbs">
+          <span class="breadcrumb-root">Cosmos Studio</span>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-active" id="current-page-title">Dashboard Overview</span>
+        </div>
+        <div class="top-actions">
+          <a href="https://micro-signal-cosmos.pages.dev/" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+            <span>View Live Site</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+          <button id="btn-quick-new" class="btn btn-primary btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>New Draft</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="content-scroll">
+        <!-- TAB 1: DASHBOARD -->
+        <section id="tab-dashboard" class="tab-panel active">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">Published Articles</div>
+              <div class="stat-value text-accent" id="stat-published">15</div>
+              <div class="stat-sub">Live on Cloudflare Pages</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Active Drafts</div>
+              <div class="stat-value text-warning" id="stat-drafts">0</div>
+              <div class="stat-sub">In progress or review</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Topic Backlog</div>
+              <div class="stat-value text-primary" id="stat-topics">4</div>
+              <div class="stat-sub">Scored across 4 pillars</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Editorial Approvals</div>
+              <div class="stat-value text-success" id="stat-approved">0</div>
+              <div class="stat-sub">Ready for 1-click publishing</div>
+            </div>
+          </div>
+
+          <!-- INTEGRATIONS & TELEMETRY AUDIT -->
+          <div class="dashboard-split mt-6">
+            <div class="panel">
+              <div class="panel-header">
+                <h3>Integrations &amp; Telemetry Posture</h3>
+                <span class="badge badge-info">Zero Fabrication</span>
+              </div>
+              <div class="integration-list">
+                <div class="integration-item">
+                  <div class="integration-icon">AI</div>
+                  <div class="integration-info">
+                    <div class="integration-title">Multi-LLM Connectors</div>
+                    <div class="integration-status" id="llm-status-desc">Anthropic &bull; OpenAI &bull; Gemini (Synthesizer active)</div>
+                  </div>
+                  <span class="badge badge-success" id="llm-badge">Operational</span>
+                </div>
+                <div class="integration-item">
+                  <div class="integration-icon">GA</div>
+                  <div class="integration-info">
+                    <div class="integration-title">Google Analytics 4</div>
+                    <div class="integration-status">Measurement ID: Not yet linked in .env</div>
+                  </div>
+                  <span class="badge badge-neutral">Pending Setup</span>
+                </div>
+                <div class="integration-item">
+                  <div class="integration-icon">GSC</div>
+                  <div class="integration-info">
+                    <div class="integration-title">Google Search Console</div>
+                    <div class="integration-status">Sitemap verification registered</div>
+                  </div>
+                  <span class="badge badge-neutral">Standby</span>
+                </div>
+                <div class="integration-item">
+                  <div class="integration-icon">ADS</div>
+                  <div class="integration-info">
+                    <div class="integration-title">Google AdSense Placements</div>
+                    <div class="integration-status">Disabled by default (Zero intrusive ads)</div>
+                  </div>
+                  <span class="badge badge-warning">Disabled (Default)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- RECENT AUDIT LOGS -->
+            <div class="panel">
+              <div class="panel-header">
+                <h3>Editorial Audit Trail</h3>
+                <span class="badge badge-neutral">Immutable Log</span>
+              </div>
+              <div class="audit-stream" id="audit-logs-container">
+                <div class="text-muted p-4">Loading audit events...</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 2: TOPIC DISCOVERY -->
+        <section id="tab-topics" class="tab-panel">
+          <div class="section-actions-bar">
+            <div>
+              <h2>Topic Discovery &amp; Backlog</h2>
+              <p class="text-muted">Targeted content ideas categorized across our 4 core engineering and science pillars.</p>
+            </div>
+            <button id="btn-add-topic" class="btn btn-primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              <span>Add Topic Idea</span>
+            </button>
+          </div>
+
+          <!-- TOPIC CREATION FORM (COLLAPSIBLE) -->
+          <div id="topic-create-card" class="panel mb-6 hidden">
+            <div class="panel-header">
+              <h3>Ingest New Editorial Topic</h3>
+              <button id="btn-close-topic-form" class="btn-icon">&times;</button>
+            </div>
+            <form id="new-topic-form" class="p-4">
+              <div class="form-row">
+                <div class="form-group flex-2">
+                  <label for="topic-title">Topic Title</label>
+                  <input type="text" id="topic-title" placeholder="e.g. Zero-Copy Networking in Linux with io_uring and eBPF" required>
+                  <div id="topic-dup-warn" class="text-warning text-xs mt-1 hidden">Warning: A similar topic or article exists.</div>
+                </div>
+                <div class="form-group flex-1">
+                  <label for="topic-category">Domain Pillar</label>
+                  <select id="topic-category" required>
+                    <option value="technology">Technology (Pillar 01)</option>
+                    <option value="artificial-intelligence">AI &amp; ML (Pillar 02)</option>
+                    <option value="science">Science (Pillar 03)</option>
+                    <option value="developer-tools">Developer Tools (Pillar 04)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group flex-1">
+                  <label for="topic-intent">Search Intent</label>
+                  <select id="topic-intent">
+                    <option value="architectural">Architectural Breakdown</option>
+                    <option value="comparative">Comparative Evaluation</option>
+                    <option value="troubleshooting">Troubleshooting &amp; Performance</option>
+                    <option value="informational">Conceptual Grounding</option>
+                  </select>
+                </div>
+                <div class="form-group flex-2">
+                  <label for="topic-keywords">Keywords (comma-separated)</label>
+                  <input type="text" id="topic-keywords" placeholder="e.g. io_uring, eBPF, zero-copy, networking">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="topic-notes">Research Brief / Target Questions</label>
+                <textarea id="topic-notes" rows="3" placeholder="What key mechanisms, paper references, or benchmarks should this article answer?"></textarea>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save to Backlog</button>
+                <button type="button" id="btn-generate-from-topic" class="btn btn-secondary">Directly Draft in Multi-LLM Studio &rarr;</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- TOPICS LIST -->
+          <div class="panel">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Title &amp; Key Questions</th>
+                    <th>Pillar</th>
+                    <th>Intent</th>
+                    <th>Status</th>
+                    <th>Keywords</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="topics-table-body">
+                  <tr><td colspan="6" class="text-center p-6 text-muted">Loading topics...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 3: MULTI-LLM STUDIO -->
+        <section id="tab-generator" class="tab-panel">
+          <div class="section-actions-bar">
+            <div>
+              <h2>Multi-LLM Article Generation Studio</h2>
+              <p class="text-muted">Synthesize deep technical drafts and compare model outputs across Anthropic, OpenAI, and Gemini.</p>
+            </div>
+          </div>
+
+          <div class="generator-layout">
+            <!-- CONTROLS PANEL -->
+            <div class="panel p-5 generator-sidebar">
+              <h3 class="mb-4">Generation Parameters</h3>
+              
+              <div class="form-group">
+                <label for="gen-topic">Topic / Working Title</label>
+                <input type="text" id="gen-topic" placeholder="e.g. Speculative Decoding in LLM Inference">
+              </div>
+
+              <div class="form-group">
+                <label for="gen-category">Target Category</label>
+                <select id="gen-category">
+                  <option value="technology">Technology</option>
+                  <option value="artificial-intelligence" selected>Artificial Intelligence</option>
+                  <option value="science">Science</option>
+                  <option value="developer-tools">Developer Tools</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="gen-provider">Primary LLM Provider</label>
+                <select id="gen-provider">
+                  <option value="anthropic">Anthropic (Claude 3.5 Sonnet)</option>
+                  <option value="openai">OpenAI (GPT-4o)</option>
+                  <option value="gemini">Google Gemini (1.5 Pro)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="gen-target-words">Target Length: <span id="gen-word-val" class="font-bold">2,500</span> words</label>
+                <input type="range" id="gen-target-words" min="1500" max="4000" step="250" value="2500">
+              </div>
+
+              <div class="form-group">
+                <label for="gen-mode">Action Mode</label>
+                <select id="gen-mode">
+                  <option value="draft">Generate Full Technical Draft</option>
+                  <option value="outline">Generate Detailed Editorial Outline</option>
+                  <option value="compare">Multi-Model Comparison (Side-by-Side)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="gen-prompt">Custom Instructions (Optional)</label>
+                <textarea id="gen-prompt" rows="3" placeholder="e.g. Include memory layout diagram, benchmark table on H100 vs A100, and failure modes."></textarea>
+              </div>
+
+              <button id="btn-run-generate" class="btn btn-primary btn-block">
+                <span>Run Generation</span>
+              </button>
+            </div>
+
+            <!-- OUTPUT / COMPARISON VIEWER -->
+            <div class="panel p-5 generator-output">
+              <div class="output-header">
+                <div>
+                  <h3 id="output-title">Model Generation Output</h3>
+                  <span class="text-xs text-muted" id="output-meta">Select parameters and click Run Generation</span>
+                </div>
+                <div class="output-actions">
+                  <button id="btn-send-to-editor" class="btn btn-success btn-sm hidden">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                    <span>Load into Article Editor &rarr;</span>
+                  </button>
+                </div>
+              </div>
+
+              <div id="output-spinner" class="spinner-container hidden">
+                <div class="spinner"></div>
+                <p class="mt-4 text-muted">Consulting LLM models &bull; Synthesizing technical breakdown...</p>
+              </div>
+
+              <div id="output-container" class="output-text-area">
+                <div class="empty-state">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                  <h4>Editorial Drafting Engine Ready</h4>
+                  <p>Choose a topic on the left or click one from your Topic Backlog. Multi-LLM generation produces structured, citation-grounded drafts ready for human review.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 4: ARTICLES & DRAFTS -->
+        <section id="tab-articles" class="tab-panel">
+          <div class="section-actions-bar">
+            <div>
+              <h2>Articles &amp; Publication Pipeline</h2>
+              <p class="text-muted">Lifecycle management: Draft &rarr; Under Review &rarr; Approved &rarr; Published</p>
+            </div>
+            <div class="filter-group">
+              <button class="filter-btn active" data-filter="all">All Articles</button>
+              <button class="filter-btn" data-filter="published">Published (15)</button>
+              <button class="filter-btn" data-filter="draft">Drafts</button>
+              <button class="filter-btn" data-filter="approved">Approved</button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Article Headline &amp; Slug</th>
+                    <th>Category</th>
+                    <th>Author</th>
+                    <th>Reading Time</th>
+                    <th>Status</th>
+                    <th>Last Updated</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="articles-table-body">
+                  <tr><td colspan="7" class="text-center p-6 text-muted">Loading articles...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 5: DUAL-PANE MARKDOWN EDITOR -->
+        <section id="tab-editor" class="tab-panel">
+          <div class="editor-header-bar">
+            <div class="editor-title-wrap">
+              <input type="text" id="editor-title" placeholder="Article Headline..." class="editor-title-input">
+              <div class="editor-slug-wrap">
+                <span class="slug-prefix">micro-signal-cosmos.pages.dev/articles/</span>
+                <input type="text" id="editor-slug" placeholder="custom-slug" class="editor-slug-input">
+              </div>
+            </div>
+            <div class="editor-top-actions">
+              <span id="editor-status-badge" class="badge badge-neutral">Draft</span>
+              <button id="btn-save-draft" class="btn btn-secondary btn-sm">Save Draft</button>
+              <button id="btn-quality-check" class="btn btn-info btn-sm">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span>Quality Gate</span>
+              </button>
+              <button id="btn-publish-now" class="btn btn-primary btn-sm">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Publish to Public Site</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- DUAL PANE WORKSPACE -->
+          <div class="editor-split-workspace">
+            <!-- LEFT: MARKDOWN INPUT -->
+            <div class="editor-pane editor-left">
+              <div class="pane-toolbar">
+                <span class="pane-title">Markdown Source</span>
+                <span class="stats-badge" id="editor-metrics">0 words &bull; 0 min read</span>
+              </div>
+              <textarea id="editor-content" class="markdown-textarea" placeholder="Write or paste your Markdown content here..."></textarea>
+            </div>
+
+            <!-- RIGHT: LIVE PREVIEW -->
+            <div class="editor-pane editor-right">
+              <div class="pane-toolbar">
+                <span class="pane-title">Live Editorial Preview</span>
+                <span class="badge badge-neutral text-xs">Astro CSS Synced</span>
+              </div>
+              <div id="editor-preview" class="markdown-preview prose-editorial">
+                <p class="text-muted italic">Type markdown in the left pane to see real-time preview...</p>
+              </div>
+            </div>
+
+            <!-- RIGHTMOST: METADATA & SCHEMA DRAWER -->
+            <div class="editor-drawer">
+              <div class="pane-toolbar">
+                <span class="pane-title">Article Metadata</span>
+              </div>
+              <div class="drawer-content">
+                <div class="form-group">
+                  <label for="meta-desc">Description (SEO Preview)</label>
+                  <textarea id="meta-desc" rows="3" placeholder="Clear technical summary..."></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="meta-category">Category</label>
+                  <select id="meta-category">
+                    <option value="technology">Technology</option>
+                    <option value="artificial-intelligence">Artificial Intelligence</option>
+                    <option value="science">Science</option>
+                    <option value="developer-tools">Developer Tools</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="meta-author">Author Persona</label>
+                  <select id="meta-author">
+                    <option value="marina">Marina Kowalski (Systems Engineer)</option>
+                    <option value="kai">Kai Nakamura (ML Engineer)</option>
+                    <option value="arun">Arun Mehta (Astrophysicist)</option>
+                    <option value="editorial-desk">Cosmos Editorial Desk</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="meta-tags">Tags (comma-separated)</label>
+                  <input type="text" id="meta-tags" placeholder="e.g. Linux, Kernel, Networking">
+                </div>
+                <div class="form-group">
+                  <label for="meta-cover">Cover Image Path</label>
+                  <input type="text" id="meta-cover" placeholder="/og/my-slug.svg">
+                </div>
+                <div class="form-checkbox">
+                  <input type="checkbox" id="meta-featured">
+                  <label for="meta-featured">Featured Spotlight on Homepage</label>
+                </div>
+                <div class="form-checkbox">
+                  <input type="checkbox" id="meta-affiliate">
+                  <label for="meta-affiliate">Contains Affiliate / Tool Links</label>
+                </div>
+
+                <hr class="drawer-divider">
+
+                <div class="form-group">
+                  <label for="meta-seo-title">SEO Title Override</label>
+                  <input type="text" id="meta-seo-title" placeholder="Optional SERP Title">
+                </div>
+                <div class="form-group">
+                  <label for="meta-seo-desc">SEO Meta Description</label>
+                  <textarea id="meta-seo-desc" rows="2" placeholder="Optional SERP Description"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 6: SEO & AFFILIATES -->
+        <section id="tab-seo" class="tab-panel">
+          <div class="section-actions-bar">
+            <div>
+              <h2>SEO Strategy &amp; Affiliate Engine</h2>
+              <p class="text-muted">Automated internal link discovery and legitimate monetization keyword matching.</p>
+            </div>
+          </div>
+
+          <div class="dashboard-split">
+            <div class="panel p-5">
+              <h3>Internal Linking Registry (`cross-links.yml`)</h3>
+              <p class="text-muted text-sm mt-1 mb-4">Cross-referencing high-authority topic clusters across our 4 pillars.</p>
+              <div class="code-preview" id="cross-links-preview">
+                Loading cross-linking rules...
+              </div>
+            </div>
+
+            <div class="panel p-5">
+              <h3>Affiliate Partner Map (`affiliate-map.json`)</h3>
+              <p class="text-muted text-sm mt-1 mb-4">Configured partner networks (DigitalOcean, Datadog, Cloudflare, Tailscale, Hugging Face).</p>
+              <div id="affiliate-list-container" class="integration-list">
+                Loading affiliate programs...
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- QUALITY CONTROL & FACT-CHECKING MODAL -->
+  <div id="quality-modal" class="modal-overlay hidden">
+    <div class="quality-card">
+      <div class="quality-header">
+        <div>
+          <h3>10-Point Pre-Flight Quality Gate</h3>
+          <p class="text-muted text-sm">Every article requires human editorial verification before publishing to the public site.</p>
+        </div>
+        <button id="btn-close-quality" class="btn-icon">&times;</button>
+      </div>
+
+      <div class="quality-body">
+        <div id="quality-ai-analysis" class="quality-ai-summary mb-4">
+          <button id="btn-run-ai-check" class="btn btn-secondary btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            <span>Run Automated AI Quality Scan</span>
+          </button>
+          <div id="quality-scan-results" class="mt-3 text-sm"></div>
+        </div>
+
+        <div class="checklist-items">
+          <label class="check-item">
+            <input type="checkbox" id="gate-1">
+            <div class="check-desc">
+              <strong>1. Primary Source Citations</strong>
+              <span>All benchmarks, paper references, and claims cite verifiable primary sources (arXiv, GitHub, RFCs, docs).</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="gate-2">
+            <div class="check-desc">
+              <strong>2. Code Runnability &amp; Invariants</strong>
+              <span>Code snippets compile, run, and follow idiomatic memory safety without undefined behavior.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="gate-3">
+            <div class="check-desc">
+              <strong>3. Mathematical &amp; Scientific Accuracy</strong>
+              <span>Formulas, units, and constants are verified and accurate.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="gate-4">
+            <div class="check-desc">
+              <strong>4. Authentic Engineering Voice</strong>
+              <span>Zero generic AI fluff, flowery clichés, or superficial analogies. Tone is rigorous and practitioner-focused.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="gate-5">
+            <div class="check-desc">
+              <strong>5. Search Intent Alignment</strong>
+              <span>Content directly solves the specific architectural, troubleshooting, or comparative query.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="gate-6">
+            <div class="check-desc">
+              <strong>6. Accessibility &amp; Image Assets</strong>
+              <span>SVG/WebP cover image is in place with descriptive alt text and captions.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="gate-7">
+            <div class="check-desc">
+              <strong>7. Trade-Offs &amp; Failure Modes</strong>
+              <span>Article explains where this pattern breaks down, edge cases, and architectural trade-offs.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="gate-8">
+            <div class="check-desc">
+              <strong>8. Mobile &amp; Readability Standard</strong>
+              <span>Clean typography, scannable subheadings (H2/H3), tables, and structured lists.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="gate-9">
+            <div class="check-desc">
+              <strong>9. Affiliate &amp; Partner Transparency</strong>
+              <span>Any commercial or recommended tool links follow disclosure standards and rel="sponsored".</span>
+            </div>
+          </label>
+          <label class="check-item highlight">
+            <input type="checkbox" id="gate-10">
+            <div class="check-desc">
+              <strong>10. Explicit Human Editorial Sign-Off</strong>
+              <span>I have personally reviewed, verified, and approved this draft for public worldwide distribution.</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="quality-footer">
+        <button id="btn-cancel-quality" class="btn btn-secondary">Cancel</button>
+        <button id="btn-approve-article" class="btn btn-success" disabled>
+          <span>Approve for Publication</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

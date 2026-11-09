@@ -151,3 +151,13 @@ vite.config.ts.timestamp-*
 # Local scratch directory
 scratch/
 
+# AI Editorial Studio local data and secrets
+.editorial/
+*.db
+*.db-wal
+*.db-shm
+.env
+.env.*
+!.env.example
+
+

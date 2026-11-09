@@ -1,0 +1,168 @@
+---
+import Base from '../layouts/Base.astro';
+
+const siteUrl = 'https://microsignalcosmos.com';
+const newsletterUrl = `${siteUrl}/newsletter/`;
+---
+
+<Base
+  title="The Weekly Signal: Engineering & Systems Newsletter | Micro Signal Cosmos"
+  description="Weekly technical deep dives into browser internals, LLM architectures, distributed databases, and astrophysics. Free, zero tracking, unsubscribe anytime."
+  canonical={newsletterUrl}
+  ogImage="/og/homepage.svg"
+>
+  <main id="main-content" class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800">
+    <div class="container-narrow">
+
+      <!-- Breadcrumbs -->
+      <nav aria-label="Breadcrumb" class="mb-8">
+        <ol class="flex items-center gap-2 text-xs text-text-muted">
+          <li>
+            <a href="/" class="transition-colors hover:text-brand-primary">Home</a>
+          </li>
+          <li aria-hidden="true" class="text-neutral-400">/</li>
+          <li class="font-semibold text-text-primary" aria-current="page">Newsletter</li>
+        </ol>
+      </nav>
+
+      <!-- Newsletter Hero Card -->
+      <div class="rounded-3xl border border-neutral-200 bg-white p-8 sm:p-12 shadow-sm dark:border-neutral-700 dark:bg-neutral-900">
+        
+        <div class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3.5 py-1 text-xs font-bold tracking-widest text-brand-primary uppercase shadow-xs dark:border-neutral-700 dark:bg-neutral-800">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span>
+          <span>THE WEEKLY SIGNAL</span>
+        </div>
+
+        <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl lg:text-5xl leading-tight">
+          Engineering &amp; Systems Deep Dives, Every Friday
+        </h1>
+
+        <p class="mt-4 text-base sm:text-lg leading-relaxed text-text-secondary">
+          Join engineers, researchers, and systems practitioners receiving one comprehensive architectural breakdown, runnable code, and curated technical analysis each week.
+        </p>
+
+        <!-- Subscription Form -->
+        <div class="mt-8 rounded-2xl border border-neutral-200 bg-neutral-50 p-6 sm:p-8 dark:border-neutral-700 dark:bg-neutral-800/60">
+          <form
+            action="https://buttondown.email/api/emails/embed-subscribe/microsignalcosmos"
+            method="post"
+            target="popupwindow"
+            onsubmit="window.open('https://buttondown.email/microsignalcosmos', 'popupwindow'); return true;"
+            class="space-y-4"
+          >
+            <div class="space-y-2">
+              <label for="newsletter-email-input" class="block text-xs font-bold uppercase tracking-wider text-text-primary">
+                Your Email Address
+              </label>
+              <input
+                id="newsletter-email-input"
+                type="email"
+                name="email"
+                required
+                placeholder="developer@domain.com"
+                class="input text-base"
+                autocomplete="email"
+              />
+            </div>
+            <input type="hidden" value="1" name="embed" />
+            <button
+              type="submit"
+              class="btn-primary w-full text-base py-3.5 shadow-sm"
+            >
+              <span>Subscribe to The Weekly Signal</span>
+              <span aria-hidden="true">&rarr;</span>
+            </button>
+            <div class="flex flex-wrap items-center justify-between text-xs text-text-muted pt-2 gap-2">
+              <span class="flex items-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Zero tracking pixels
+              </span>
+              <span class="flex items-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                1-click unsubscribe
+              </span>
+              <span class="flex items-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                No third-party data sharing
+              </span>
+            </div>
+          </form>
+        </div>
+
+        <!-- Lead Magnets Package -->
+        <div class="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-700">
+          <h2 class="text-lg font-bold text-text-primary mb-2">
+            Included Free: The 5-Part Systems Architecture Starter Pack
+          </h2>
+          <p class="text-sm text-text-secondary mb-6">
+            All new subscribers immediately receive direct download access to our 5 verified technical cheat sheets and templates:
+          </p>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded-xl border border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-800">
+              <span class="text-xs font-bold text-brand-primary uppercase">Asset 01</span>
+              <h3 class="font-bold text-sm text-text-primary mt-1">Critical Rendering Path Cheat Sheet</h3>
+              <p class="text-xs text-text-muted mt-1">Blink/Gecko pipeline breakdown with sub-frame profiling benchmarks.</p>
+            </div>
+
+            <div class="rounded-xl border border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-800">
+              <span class="text-xs font-bold text-brand-primary uppercase">Asset 02</span>
+              <h3 class="font-bold text-sm text-text-primary mt-1">Production RAG Starter Kit</h3>
+              <p class="text-xs text-text-muted mt-1">Python retrieval engine with semantic chunking and cross-encoder reranking.</p>
+            </div>
+
+            <div class="rounded-xl border border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-800">
+              <span class="text-xs font-bold text-brand-primary uppercase">Asset 03</span>
+              <h3 class="font-bold text-sm text-text-primary mt-1">Self-Hosted Bare-Metal Stack</h3>
+              <p class="text-xs text-text-muted mt-1">Docker Compose repo with Caddy, automated TLS, Prometheus, and daily backups.</p>
+            </div>
+
+            <div class="rounded-xl border border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-800">
+              <span class="text-xs font-bold text-brand-primary uppercase">Asset 04</span>
+              <h3 class="font-bold text-sm text-text-primary mt-1">Database Decision Matrix (2026)</h3>
+              <p class="text-xs text-text-muted mt-1">Decision framework comparing PostgreSQL, libSQL/SQLite, DuckDB, and ClickHouse.</p>
+            </div>
+
+            <div class="rounded-xl border border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-800 sm:col-span-2">
+              <span class="text-xs font-bold text-brand-primary uppercase">Asset 05</span>
+              <h3 class="font-bold text-sm text-text-primary mt-1">LLM Token Inference Cost Calculator</h3>
+              <p class="text-xs text-text-muted mt-1">Python notebook calculating KV cache VRAM footprint and vLLM token unit economics.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Issue Format Breakdown -->
+        <div class="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-700">
+          <h2 class="text-lg font-bold text-text-primary mb-4">
+            What Every Friday Edition Delivers
+          </h2>
+          <ul class="space-y-3 text-sm text-text-secondary">
+            <li class="flex items-start gap-3">
+              <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary font-bold text-xs mt-0.5">1</span>
+              <div>
+                <strong class="text-text-primary">One Core Architecture Breakdown:</strong>
+                Deep dive into a system mechanism (e.g., CPU cache line contention, TLS 1.3 key exchange, or vector index quantization) with diagrams and runnable snippets.
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary font-bold text-xs mt-0.5">2</span>
+              <div>
+                <strong class="text-text-primary">Production Tooling &amp; Infrastructure:</strong>
+                Real-world configuration files, self-hosted deployment blueprints, and cost analysis from live cloud workloads.
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary font-bold text-xs mt-0.5">3</span>
+              <div>
+                <strong class="text-text-primary">Research Paper of the Week:</strong>
+                Plain-English summary of an essential arXiv paper or systems RFC with practical takeaways for practitioners.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+</Base>
