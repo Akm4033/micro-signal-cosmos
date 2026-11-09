@@ -8,27 +8,25 @@
     --bg-secondary: #f9fafb;
     --bg-tertiary: #f3f4f6;
     --bg-elevated: #ffffff;
-    --text-primary: #0a0f1a;
-    --text-secondary: #374151;
-    --text-muted: #6b7280;
+    --text-primary: #0f172a;
+    --text-secondary: #1e293b;
+    --text-muted: #475569;
     --border-subtle: #e5e7eb;
     --border-default: #d1d5db;
     --brand-primary: #0ea5e9;
     --brand-accent: #8b5cf6;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg-primary: #0a0f1a;
-      --bg-secondary: #111827;
-      --bg-tertiary: #1f2937;
-      --bg-elevated: #111827;
-      --text-primary: #f9fafb;
-      --text-secondary: #d1d5db;
-      --text-muted: #9ca3af;
-      --border-subtle: #374151;
-      --border-default: #4b5563;
-    }
+  html.dark {
+    --bg-primary: #0a0f1a;
+    --bg-secondary: #111827;
+    --bg-tertiary: #1f2937;
+    --bg-elevated: #111827;
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --border-subtle: #374151;
+    --border-default: #4b5563;
   }
 
   html {
@@ -132,19 +130,19 @@
 
   /* Buttons */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-brand-primary
-           px-6 py-3 text-sm font-semibold text-white
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary
+           px-6 py-3.5 text-sm font-bold text-white
            shadow-sm hover:bg-brand-sky-deep
            focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2
-           transition-colors;
+           transition-all active:scale-[0.98];
   }
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg
-           border border-neutral-300 bg-white px-6 py-3 text-sm font-semibold text-text-primary
-           hover:bg-neutral-50 hover:border-brand-primary hover:text-brand-primary
-           dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800
+    @apply inline-flex items-center justify-center gap-2 rounded-xl
+           border border-slate-300 bg-transparent px-6 py-3.5 text-sm font-semibold text-slate-700
+           hover:bg-slate-50 hover:border-slate-400 hover:text-slate-900
+           dark:border-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-800
            focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2
-           transition-all;
+           transition-all active:scale-[0.98];
   }
 
   /* Input */
@@ -189,4 +187,14 @@
   .animate-slide-up { animation: slideUp 0.4s ease-out; }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }

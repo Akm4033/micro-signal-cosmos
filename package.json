@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "studio": "node studio/server.cjs"
+    "studio": "node studio/server.cjs",
+    "pipeline:run": "node studio/cli.cjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.5",

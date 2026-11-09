@@ -25,19 +25,34 @@ const latestArticles = sortedArticles.slice(0, 6);
           <span class="h-2 w-2 rounded-full bg-brand-primary"></span>
           <span>MICRO SIGNAL COSMOS</span>
         </div>
-        <h1 class="text-4xl font-extrabold tracking-tight text-text-primary sm:text-5xl lg:text-6xl leading-[1.12]">Explore Ideas.<span class="block text-brand-primary">Discover Possibilities.</span></h1>
-        <p class="mt-3.5 text-base sm:text-lg font-bold text-text-muted tracking-wide">Discover More. Understand Better.</p>
-        <p class="mt-5 text-base sm:text-lg leading-relaxed text-text-secondary">Explore the world of technology, science, artificial intelligence and innovation through insightful articles, practical guides and ideas that shape our future.</p>
-        <div class="mt-8 flex flex-wrap items-center gap-4">
-          <a href="/articles/" class="btn-primary"><span>Explore Articles</span><span aria-hidden="true">&rarr;</span></a>
-          <a href="#categories" class="btn-secondary"><span>Browse Topics</span></a>
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#0f172a] leading-[1.15] sm:leading-[1.12]">Explore Ideas.<span class="block text-brand-primary">Discover Possibilities.</span></h1>
+        <p class="mt-3.5 text-base sm:text-lg font-bold text-slate-600 tracking-wide">Discover More. Understand Better.</p>
+        <p class="mt-5 text-base sm:text-lg leading-relaxed text-[#1e293b]">Explore the world of technology, science, artificial intelligence and innovation through insightful articles, practical guides and ideas that shape our future.</p>
+        
+        <!-- CTA Buttons with clear hierarchy and mobile ergonomics -->
+        <div class="mt-7 mb-8 sm:my-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+          <a
+            href="/articles/"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary px-6 py-3.5 text-sm font-bold text-white shadow-sm hover:bg-brand-sky-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 transition-all active:scale-[0.98]"
+          >
+            <span>Explore Articles</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+          <a
+            href="#categories"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-transparent px-6 py-3.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:border-slate-400 hover:text-slate-900 dark:border-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 transition-all active:scale-[0.98]"
+          >
+            <span>Browse Topics</span>
+          </a>
         </div>
-        <div class="mt-10 pt-6 border-t border-neutral-200 flex flex-wrap items-center gap-2 text-xs dark:border-neutral-700">
-          <span class="font-bold uppercase tracking-wider text-text-primary mr-1">Active Streams:</span>
-          <a href="/category/technology/" class="badge badge--tech">Technology</a>
-          <a href="/category/science/" class="badge badge--science">Science</a>
-          <a href="/category/artificial-intelligence/" class="badge badge--ai">AI &amp; ML</a>
-          <a href="/category/developer-tools/" class="badge badge--devtools">Developer Tools</a>
+
+        <!-- Active Streams (Horizontally scrollable on mobile, no-scrollbar, consistent pill padding) -->
+        <div class="pt-6 border-t border-neutral-200 flex items-center gap-2.5 overflow-x-auto no-scrollbar flex-nowrap pb-1 dark:border-neutral-700">
+          <span class="shrink-0 text-xs font-extrabold uppercase tracking-wider text-[#0f172a] mr-1">Active Streams:</span>
+          <a href="/category/technology/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100 hover:border-sky-300 transition-all">Technology</a>
+          <a href="/category/science/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-violet-50 text-violet-700 border border-violet-200 hover:bg-violet-100 hover:border-violet-300 transition-all">Science</a>
+          <a href="/category/artificial-intelligence/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 hover:border-emerald-300 transition-all">AI &amp; ML</a>
+          <a href="/category/developer-tools/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100 hover:border-amber-300 transition-all">Developer Tools</a>
         </div>
       </div>
       <!-- Editorial Showcase (5 cols) -->
