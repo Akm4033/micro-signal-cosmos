@@ -5,22 +5,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Softer brand colors
-        brand: {
-          primary: '#0ea5e9',
-          'primary-hover': '#0284c7',
-          'primary-muted': '#e0f2fe',
-          accent: '#8b5cf6',
-          'accent-hover': '#7c3aed',
-          'accent-muted': '#f3e8ff',
-          sky: '#0ea5e9',
-          'sky-deep': '#0284c7',
-          'sky-muted': '#e0f2fe',
-          violet: '#8b5cf6',
-          'violet-deep': '#7c3aed',
-          'violet-muted': '#f3e8ff',
-        },
-        // Softer, more professional neutrals
+        // Professional neutral palette - warm, not cold
         neutral: {
           50: '#fafafa',
           100: '#f4f4f5',
@@ -32,24 +17,42 @@ export default {
           700: '#3f3f46',
           800: '#27272a',
           900: '#18181b',
-          950: '#09090b',
+          950: '#0f0f0f',
           0: '#ffffff',
+        },
+        // Professional brand colors - not too blue, not too purple
+        brand: {
+          primary: '#1d4ed8',        // Professional blue (blue-700)
+          'primary-hover': '#1e40af',
+          'primary-light': '#eff6ff',
+          'primary-muted': '#eff6ff',
+          accent: '#059669',         // Professional green (emerald-600)
+          'accent-hover': '#047857',
+          'accent-light': '#ecfdf5',
+          'accent-muted': '#ecfdf5',
+          warning: '#d97706',        // Amber for warnings
+          sky: '#0ea5e9',
+          'sky-deep': '#1e40af',
+          'sky-muted': '#eff6ff',
+          violet: '#8b5cf6',
+          'violet-deep': '#7c3aed',
+          'violet-muted': '#f3e8ff',
         },
         // Semantic aliases
         bg: {
-          primary: 'var(--bg-primary)',
-          secondary: 'var(--bg-secondary)',
-          tertiary: 'var(--bg-tertiary)',
-          elevated: 'var(--bg-elevated)',
+          primary: 'var(--bg-primary, #ffffff)',
+          secondary: 'var(--bg-secondary, #fafafa)',
+          tertiary: 'var(--bg-tertiary, #f4f4f5)',
+          elevated: 'var(--bg-elevated, #ffffff)',
         },
         text: {
-          primary: 'var(--text-primary)',
-          secondary: 'var(--text-secondary)',
-          muted: 'var(--text-muted)',
+          primary: 'var(--text-primary, #0f0f0f)',
+          secondary: 'var(--text-secondary, #3f3f46)',
+          muted: 'var(--text-muted, #71717a)',
         },
         border: {
-          subtle: 'var(--border-subtle)',
-          default: 'var(--border-default)',
+          subtle: 'var(--border-subtle, #e4e4e7)',
+          default: 'var(--border-default, #d4d4d8)',
         },
       },
       fontFamily: {
