@@ -113,46 +113,47 @@
            dark:bg-brand-primary/20 dark:text-brand-primary dark:border-brand-primary/40;
   }
 
-  /* Editorial Card */
+  /* Editorial Card with 3D Depth */
   .editorial-card {
     @apply relative overflow-hidden rounded-2xl bg-white
-           border border-neutral-200 shadow-sm
+           border border-neutral-200/90 shadow-[0_4px_16px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)]
            transition-all duration-300 ease-out
-           hover:shadow-lg hover:border-brand-primary/30
-           dark:bg-neutral-900 dark:border-neutral-700;
+           hover:shadow-[0_14px_30px_-4px_rgba(29,78,216,0.12),0_4px_12px_rgba(0,0,0,0.06)]
+           hover:-translate-y-1.5 hover:border-brand-primary/40
+           dark:bg-neutral-900 dark:border-neutral-800;
   }
   .editorial-card__media {
-    @apply relative aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800;
+    @apply relative h-32 sm:h-36 w-full shrink-0 overflow-hidden bg-neutral-100 dark:bg-neutral-800;
   }
   .editorial-card__gradient {
     @apply absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-transparent;
   }
   .editorial-card__category {
-    @apply absolute bottom-3 left-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full
+    @apply absolute top-3 left-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full
            text-xs font-semibold uppercase tracking-wider
            bg-brand-primary/10 text-brand-primary border border-brand-primary/30
            dark:bg-brand-primary/20 dark:text-brand-primary dark:border-brand-primary/40;
   }
   .editorial-card__content {
-    @apply p-5 sm:p-6;
+    @apply p-4 sm:p-5;
   }
   .editorial-card__meta {
     @apply flex items-center gap-2 text-caption text-text-muted mb-2;
   }
   .editorial-card__title {
-    @apply mt-2 text-h3 font-bold text-text-primary group-hover:text-brand-primary transition-colors;
+    @apply mt-1 text-base sm:text-lg font-bold text-text-primary group-hover:text-brand-primary transition-colors line-clamp-2;
   }
   .editorial-card__excerpt {
-    @apply mt-3 text-body text-text-secondary line-clamp-3;
+    @apply mt-2 text-small text-text-secondary line-clamp-2;
   }
   .editorial-card__footer {
-    @apply mt-4 flex items-center gap-3 border-t border-neutral-200 pt-4 dark:border-neutral-700;
+    @apply mt-4 flex items-center gap-3 border-t border-neutral-100 pt-3 dark:border-neutral-800;
   }
   .editorial-card__author {
     @apply flex items-center gap-2;
   }
   .editorial-card__avatar {
-    @apply w-7 h-7 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center text-xs font-bold;
+    @apply w-6 h-6 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center text-[10px] font-bold shadow-2xs;
   }
 
   /* Section Badge (inline) */
@@ -170,21 +171,23 @@
   .badge--ai { @apply bg-emerald-600/10 text-emerald-600 border-emerald-600/30; }
   .badge--devtools { @apply bg-amber-600/10 text-amber-600 border-amber-600/30; }
 
-  /* Buttons */
+  /* Buttons with 3D Depth */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary
-           px-6 py-3.5 text-sm font-bold text-white
-           shadow-sm hover:bg-brand-sky-deep
+           px-6 py-3 text-sm font-bold text-white
+           shadow-[0_3px_0_0_#1e40af] hover:shadow-[0_4px_0_0_#1e40af] hover:-translate-y-0.5
+           active:shadow-[0_1px_0_0_#1e40af] active:translate-y-0.5
            focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2
-           transition-all active:scale-[0.98];
+           transition-all;
   }
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 rounded-xl
-           border border-slate-300 bg-transparent px-6 py-3.5 text-sm font-semibold text-slate-700
-           hover:bg-slate-50 hover:border-slate-400 hover:text-slate-900
-           dark:border-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-800
+           border border-neutral-300 bg-white px-6 py-3 text-sm font-semibold text-text-primary
+           shadow-xs hover:border-brand-primary hover:text-brand-primary hover:shadow-sm hover:-translate-y-0.5
+           active:translate-y-0.5
+           dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800
            focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2
-           transition-all active:scale-[0.98];
+           transition-all;
   }
 
   /* Input */
