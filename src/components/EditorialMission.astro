@@ -1,41 +1,52 @@
 ---
-// Editorial Mission Statement Component
+// Editorial Mission Statement Component: Premium International Standard
 ---
 
-<section class="bg-[#14233B] text-white py-16 sm:py-20 relative overflow-hidden" aria-labelledby="mission-heading">
-  <!-- Subtle Background Motif -->
+<section class="bg-[#101B2D] text-white py-20 sm:py-24 relative overflow-hidden" aria-labelledby="mission-heading">
+  <!-- Fine Technical Grid Line Motif -->
   <div class="pointer-events-none absolute inset-0 -z-10 opacity-10" aria-hidden="true">
     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <pattern id="mission-dots" width="24" height="24" patternUnits="userSpaceOnUse">
-          <circle cx="2" cy="2" r="1.5" fill="white" />
+        <pattern id="editorial-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+          <path d="M 32 0 L 0 0 0 32" fill="none" stroke="white" stroke-width="1" />
         </pattern>
       </defs>
-      <rect width="100%" height="100%" fill="url(#mission-dots)" />
+      <rect width="100%" height="100%" fill="url(#editorial-grid)" />
     </svg>
   </div>
 
   <div class="container-main text-center">
     <div class="mx-auto max-w-3xl">
 
-      <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-500/10 px-3.5 py-1 text-xs font-bold tracking-widest text-sky-300 uppercase">
-        <span class="h-1.5 w-1.5 rounded-full bg-[#3478F6]"></span>
+      <!-- Eyebrow Badge -->
+      <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-sky-400/25 bg-sky-500/10 px-4 py-1.5 text-xs font-bold tracking-widest text-sky-300 uppercase">
+        <span class="h-2 w-2 rounded-full bg-[#3478F6]"></span>
         <span>Editorial Mission</span>
       </div>
 
       <h2 id="mission-heading" class="sr-only">Our Editorial Mission</h2>
 
-      <blockquote class="mt-4 text-xl sm:text-2xl lg:text-3xl font-medium leading-relaxed tracking-tight text-slate-100">
-        &ldquo;Knowledge becomes powerful when it is accessible. Micro Signal Cosmos explores the ideas, discoveries and innovations shaping our world, helping readers understand complex subjects through clear, useful and thoughtful content.&rdquo;
+      <!-- Large Stylized Quotation Mark -->
+      <span class="block text-5xl sm:text-6xl font-serif text-sky-400/30 select-none -mb-4 sm:-mb-6" aria-hidden="true">
+        &ldquo;
+      </span>
+
+      <!-- Exact Required Editorial Quote -->
+      <blockquote class="text-xl sm:text-2xl lg:text-3xl font-medium leading-relaxed tracking-tight text-slate-100">
+        Knowledge becomes powerful when it is accessible. Micro Signal Cosmos explores the ideas, discoveries and innovations shaping our world, helping readers understand complex subjects through clear, useful and thoughtful content.
       </blockquote>
 
-      <div class="mt-8 pt-6 border-t border-slate-700/60 flex items-center justify-center gap-4 text-xs tracking-wider text-slate-400 uppercase">
-        <span class="font-bold text-white">Micro Signal Cosmos</span>
-        <span aria-hidden="true">&bull;</span>
-        <span>International Digital Publication</span>
+      <!-- Editorial Footer Attribution Bar -->
+      <div class="mt-10 pt-8 border-t border-slate-700/60 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-300">
+        <span class="font-bold text-white uppercase tracking-wider">Micro Signal Cosmos</span>
+        <span aria-hidden="true" class="text-slate-600">&bull;</span>
+        <a href="/editorial-policy/" class="hover:text-sky-300 transition-colors">Editorial Policy</a>
+        <span aria-hidden="true" class="text-slate-600">&bull;</span>
+        <a href="/fact-checking-policy/" class="hover:text-sky-300 transition-colors">Fact-Checking Standards</a>
+        <span aria-hidden="true" class="text-slate-600">&bull;</span>
+        <a href="/about/" class="hover:text-sky-300 transition-colors">About Us</a>
       </div>
 
     </div>
   </div>
 </section>
-

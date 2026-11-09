@@ -13,61 +13,89 @@ const navItems = [
 ];
 ---
 
+<!-- Editorial Top Utility Bar -->
+<div class="border-b border-[#E3E8EF] bg-[#F7F9FC] text-[11px] font-medium text-[#697586] hidden sm:block">
+  <div class="container-main flex items-center justify-between py-1.5">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center gap-1.5 font-bold uppercase tracking-wider text-[#14233B]">
+        <span class="h-1.5 w-1.5 rounded-full bg-[#3478F6]"></span>
+        Micro Signal Cosmos
+      </span>
+      <span aria-hidden="true" class="text-slate-300">&bull;</span>
+      <span>International Technology & Science Publication</span>
+      <span aria-hidden="true" class="text-slate-300">&bull;</span>
+      <span>Vol. 2026</span>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="/editorial-policy/" class="hover:text-[#14233B] transition-colors">Editorial Standards</a>
+      <a href="/fact-checking-policy/" class="hover:text-[#14233B] transition-colors">Fact-checking</a>
+      <a href="/about/" class="hover:text-[#14233B] transition-colors">About</a>
+      <a href="/rss.xml" class="hover:text-[#3478F6] font-semibold transition-colors flex items-center gap-1">
+        <span>RSS</span>
+        <span aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Main Sticky Masthead -->
 <header class="sticky top-0 z-50 border-b border-[#E3E8EF] bg-white/95 backdrop-blur-md shadow-xs">
   <div class="container-main">
-
     <div class="flex min-h-20 items-center justify-between gap-4 lg:gap-8">
 
       <!-- Brand Identity -->
       <a href="/" class="shrink-0 flex flex-col group py-1" aria-label="Micro Signal Cosmos homepage">
         <span class="block text-xl font-extrabold tracking-tight text-[#14233B] sm:text-2xl transition-colors group-hover:text-[#3478F6]">
-          Micro Signal
-          <span class="text-[#3478F6]">Cosmos</span>
+          Micro Signal<span class="text-[#3478F6]">Cosmos</span>
         </span>
-        <span class="block text-[10px] font-semibold tracking-[0.2em] text-[#697586] uppercase">
+        <span class="block text-[10px] font-bold tracking-[0.22em] text-[#697586] uppercase">
           Discover More. Understand Better.
         </span>
       </a>
 
       <!-- Desktop Navigation -->
-      <nav aria-label="Main navigation" class="hidden items-center gap-1 xl:gap-2 lg:flex">
+      <nav aria-label="Main navigation" class="hidden items-center gap-1 xl:gap-1.5 lg:flex">
         {navItems.map((item) => {
           const isActive = item.href === '/' ? currentPath === '/' : currentPath.startsWith(item.href);
           return (
             <a
               href={item.href}
               class:list={[
-                'rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors',
+                'relative px-2.5 py-2 text-xs font-semibold tracking-wide transition-all rounded-md',
                 isActive
-                  ? 'text-[#3478F6] font-semibold bg-[#EEF1F5]/60'
+                  ? 'text-[#3478F6] bg-[#3478F6]/10 font-bold'
                   : 'text-[#202938] hover:text-[#3478F6] hover:bg-[#F7F9FC]',
               ]}
               aria-current={isActive ? 'page' : undefined}
               title={item.name}
             >
               {item.shortName || item.name}
+              {isActive && (
+                <span class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 h-0.5 w-4 bg-[#3478F6] rounded-full hidden lg:block" aria-hidden="true"></span>
+              )}
             </a>
           );
         })}
       </nav>
 
-      <!-- Right Controls: Search & Mobile Toggle -->
-      <div class="flex items-center gap-2.5">
-        <!-- Working Search Link Button -->
+      <!-- Right Controls: Search Trigger & Mobile Drawer Button -->
+      <div class="flex items-center gap-2">
+        <!-- Direct Search Action Button -->
         <a
           href="/articles/"
-          class="flex h-10 w-10 items-center justify-center rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] text-[#202938] transition-all hover:border-[#3478F6] hover:bg-white hover:text-[#3478F6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6]"
-          aria-label="Search articles across Micro Signal Cosmos"
+          class="flex items-center gap-2 rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] px-3 py-2 text-xs font-semibold text-[#14233B] transition-all hover:border-[#3478F6] hover:bg-white hover:text-[#3478F6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6]"
+          aria-label="Search articles archive"
           title="Search all articles"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
+            width="15"
+            height="15"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
+            stroke-width="2.5"
             stroke-linecap="round"
             stroke-linejoin="round"
             aria-hidden="true"
@@ -75,9 +103,10 @@ const navItems = [
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
+          <span class="hidden md:inline">Search</span>
         </a>
 
-        <!-- Mobile Menu Toggle -->
+        <!-- Mobile Drawer Toggle -->
         <details class="relative lg:hidden" id="mobile-nav-details">
           <summary
             class="flex h-10 w-10 min-h-[44px] min-w-[44px] cursor-pointer list-none items-center justify-center rounded-lg border border-[#E3E8EF] bg-white text-[#14233B] transition-colors hover:border-[#3478F6] hover:text-[#3478F6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6]"
@@ -103,70 +132,86 @@ const navItems = [
             </svg>
           </summary>
 
-          <nav
-            aria-label="Mobile navigation"
-            class="absolute right-0 top-14 z-50 w-72 rounded-xl border border-[#E3E8EF] bg-white p-4 shadow-xl"
+          <!-- Dropdown Navigation Overlay -->
+          <div
+            class="absolute right-0 top-full mt-2 w-72 rounded-2xl border border-[#E3E8EF] bg-white p-5 shadow-xl transition-all"
+            role="dialog"
+            aria-label="Mobile Navigation Menu"
           >
-            <!-- Mobile Quick Search -->
-            <a
-              href="/articles/"
-              class="mb-3 flex min-h-[44px] items-center justify-between rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] px-3.5 py-2 text-xs font-medium text-[#697586] hover:border-[#3478F6] hover:text-[#3478F6]"
-            >
-              <span>Search all articles...</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-            </a>
+            <div class="mb-3 pb-2 border-b border-[#E3E8EF] flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#697586]">Browse Publication</span>
+              <span class="text-[10px] font-semibold text-[#3478F6] uppercase">7 Pillars</span>
+            </div>
 
-            <div class="flex flex-col gap-1 border-t border-[#E3E8EF] pt-2">
+            <nav class="flex flex-col space-y-1">
               {navItems.map((item) => {
                 const isActive = item.href === '/' ? currentPath === '/' : currentPath.startsWith(item.href);
                 return (
                   <a
                     href={item.href}
                     class:list={[
-                      'flex min-h-[46px] items-center rounded-lg px-3.5 py-2.5 text-sm font-medium transition-colors',
+                      'rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between',
                       isActive
-                        ? 'bg-[#EEF1F5] text-[#3478F6] font-semibold'
+                        ? 'bg-[#3478F6]/10 text-[#3478F6]'
                         : 'text-[#202938] hover:bg-[#F7F9FC] hover:text-[#3478F6]',
                     ]}
-                    aria-current={isActive ? 'page' : undefined}
                   >
-                    {item.name}
+                    <span>{item.name}</span>
+                    <span aria-hidden="true" class="text-xs text-[#697586]">&rarr;</span>
                   </a>
                 );
               })}
+            </nav>
+
+            <div class="mt-4 pt-4 border-t border-[#E3E8EF] flex flex-col gap-2">
+              <a
+                href="/articles/"
+                class="flex items-center justify-center gap-1.5 rounded-lg bg-[#3478F6] py-2.5 text-xs font-semibold text-white shadow-xs transition-colors hover:bg-[#2563EB]"
+              >
+                <span>Search & Archive</span>
+                <span aria-hidden="true">&rarr;</span>
+              </a>
+              <div class="flex items-center justify-around text-xs text-[#697586] pt-1">
+                <a href="/about/" class="hover:text-[#14233B]">About</a>
+                <span>&bull;</span>
+                <a href="/editorial-policy/" class="hover:text-[#14233B]">Policies</a>
+                <span>&bull;</span>
+                <a href="/contact/" class="hover:text-[#14233B]">Contact</a>
+              </div>
             </div>
-          </nav>
+          </div>
         </details>
       </div>
 
     </div>
-
   </div>
 </header>
 
-<script is:inline>
-  const details = document.getElementById('mobile-nav-details');
-  const toggle = document.getElementById('mobile-nav-toggle');
-  if (details && toggle) {
+<script>
+  // Mobile drawer interaction script
+  const details = document.getElementById('mobile-nav-details') as HTMLDetailsElement | null;
+  const summary = document.getElementById('mobile-nav-toggle');
+
+  if (details && summary) {
+    // Sync aria-expanded
     details.addEventListener('toggle', () => {
-      toggle.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+      summary.setAttribute('aria-expanded', String(details.open));
     });
 
-    // Close mobile dropdown when clicking outside
+    // Close on click outside
     document.addEventListener('click', (e) => {
-      if (details.open && !details.contains(e.target)) {
+      if (details.open && !details.contains(e.target as Node)) {
         details.removeAttribute('open');
+        summary.setAttribute('aria-expanded', 'false');
       }
     });
 
-    // Close on Escape
+    // Close on Escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && details.open) {
         details.removeAttribute('open');
-        toggle.focus();
+        summary.setAttribute('aria-expanded', 'false');
+        summary.focus();
       }
     });
   }

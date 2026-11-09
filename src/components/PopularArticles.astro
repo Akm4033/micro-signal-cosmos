@@ -3,11 +3,12 @@ import { getPublishedArticles } from '../data/articles';
 
 // Editorially curated selection of prominent published articles
 const publishedArticles = await getPublishedArticles();
-const popularArticles = publishedArticles.slice(0, 3);
+const primaryPick = publishedArticles[0];
+const listArticles = publishedArticles.slice(0, 3);
 ---
 
-{popularArticles.length > 0 && (
-  <section class="bg-white py-16 sm:py-20 border-b border-[#E3E8EF]" aria-labelledby="popular-heading">
+{publishedArticles.length > 0 && (
+  <section class="bg-white py-14 sm:py-20 border-b border-[#E3E8EF]" aria-labelledby="popular-heading">
     <div class="container-main">
 
       <!-- Section Header -->
@@ -29,54 +30,95 @@ const popularArticles = publishedArticles.slice(0, 3);
 
         <a
           href="/articles/"
-          class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#3478F6] hover:text-[#2563EB] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6] rounded"
+          class="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-[#3478F6] hover:text-[#2563EB] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6] rounded py-1"
         >
-          <span>Browse All</span>
+          <span>Browse All Dispatches</span>
           <span aria-hidden="true">&rarr;</span>
         </a>
       </div>
 
-      <!-- Popular Articles Grid -->
-      <div class="grid gap-6 md:grid-cols-3">
-        {popularArticles.map((article, index) => {
-          const slug = article.data.slug || article.id;
-          const ranking = String(index + 1).padStart(2, '0');
+      <!-- Asymmetric Editorial Showcase (Split Layout: Spotlight + Ranked Leaderboard) -->
+      <div class="grid gap-8 lg:grid-cols-12 items-stretch">
 
-          return (
-            <article class="group relative flex flex-col justify-between rounded-xl border border-[#E3E8EF] bg-[#F7F9FC] p-6 transition-all duration-300 hover:bg-white hover:border-[#3478F6] hover:shadow-md">
-              <div>
-                <div class="flex items-center justify-between text-xs mb-3">
-                  <span class="text-2xl font-black text-[#E3E8EF] group-hover:text-[#3478F6]/20 transition-colors">
-                    #{ranking}
-                  </span>
-                  <span class="rounded-full bg-white border border-[#E3E8EF] px-2.5 py-0.5 font-bold uppercase tracking-wider text-[10px] text-[#3478F6]">
-                    {article.data.category}
-                  </span>
-                </div>
-
-                <h3 class="text-lg font-bold leading-snug text-[#14233B] transition-colors group-hover:text-[#3478F6]">
-                  <a href={`/articles/${slug}/`} class="focus-visible:outline-none focus-visible:underline">
-                    {article.data.title}
-                  </a>
-                </h3>
-
-                <p class="mt-2 text-sm leading-relaxed text-[#202938] line-clamp-2">
-                  {article.data.description}
-                </p>
-              </div>
-
-              <div class="mt-6 pt-4 border-t border-[#E3E8EF]/80 flex items-center justify-between text-xs text-[#697586]">
-                <span>{article.data.readingTime || '5 min read'}</span>
-                <span class="font-semibold text-[#3478F6] group-hover:translate-x-0.5 transition-transform">
-                  Read &rarr;
+        <!-- Left Spotlight Card (5 cols) -->
+        {primaryPick && (
+          <div class="lg:col-span-5 rounded-2xl border border-[#E3E8EF] bg-[#F7F9FC] p-6 sm:p-8 flex flex-col justify-between shadow-2xs hover:border-[#CBD5E1] transition-all">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="rounded-full bg-[#3478F6] text-white px-3 py-0.5 text-[10px] font-extrabold uppercase tracking-widest">
+                  Staff Pick
+                </span>
+                <span class="text-xs font-semibold text-[#697586]">
+                  {primaryPick.data.readingTime || '6 min read'}
                 </span>
               </div>
-            </article>
-          );
-        })}
+
+              <span class="text-xs font-bold tracking-wider uppercase text-[#3478F6]">
+                {primaryPick.data.category}
+              </span>
+
+              <h3 class="mt-2 text-xl sm:text-2xl font-extrabold text-[#14233B] hover:text-[#3478F6] transition-colors leading-snug">
+                <a href={`/articles/${primaryPick.data.slug || primaryPick.id}/`}>
+                  {primaryPick.data.title}
+                </a>
+              </h3>
+
+              <p class="mt-3 text-sm leading-relaxed text-[#4B5565]">
+                {primaryPick.data.description}
+              </p>
+            </div>
+
+            <div class="mt-8 pt-4 border-t border-[#E3E8EF] flex items-center justify-between">
+              <span class="text-xs font-medium text-[#697586]">{primaryPick.data.author}</span>
+              <a
+                href={`/articles/${primaryPick.data.slug || primaryPick.id}/`}
+                class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#3478F6] hover:text-[#2563EB]"
+              >
+                <span>Read Pick</span>
+                <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </div>
+        )}
+
+        <!-- Right Ranked Editorial List (7 cols) -->
+        <div class="lg:col-span-7 flex flex-col justify-between gap-4">
+          {listArticles.map((article, index) => {
+            const slug = article.data.slug || article.id;
+            const rank = String(index + 1).padStart(2, '0');
+
+            return (
+              <article class="group rounded-xl border border-[#E3E8EF] bg-white p-5 sm:p-6 transition-all duration-200 hover:border-[#3478F6] hover:shadow-xs flex items-start gap-5">
+                <span class="text-3xl sm:text-4xl font-black text-slate-300 group-hover:text-[#3478F6] transition-colors font-mono shrink-0">
+                  {rank}
+                </span>
+
+                <div class="flex-1">
+                  <div class="flex flex-wrap items-center gap-2 text-xs mb-1.5">
+                    <span class="font-bold uppercase tracking-wider text-[#3478F6] text-[11px]">
+                      {article.data.category}
+                    </span>
+                    <span aria-hidden="true" class="text-slate-300">&bull;</span>
+                    <span class="text-[#697586]">{article.data.readingTime || '5 min read'}</span>
+                  </div>
+
+                  <h3 class="text-base sm:text-lg font-bold text-[#14233B] group-hover:text-[#3478F6] transition-colors leading-snug">
+                    <a href={`/articles/${slug}/`} class="focus-visible:outline-none focus-visible:underline">
+                      {article.data.title}
+                    </a>
+                  </h3>
+
+                  <p class="mt-1.5 text-xs sm:text-sm text-[#4B5565] line-clamp-2">
+                    {article.data.description}
+                  </p>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
       </div>
 
     </div>
   </section>
 )}
-

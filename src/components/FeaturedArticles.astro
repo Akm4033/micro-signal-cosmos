@@ -22,7 +22,7 @@ function getCategoryInfo(categoryValue: string) {
   return (
     CATEGORIES.find((c) => c.slug.toLowerCase() === norm || c.name.toLowerCase() === norm) || {
       name: categoryValue,
-      icon: 'MS',
+      icon: '01',
       accent: 'sky' as const,
       href: `/category/${norm}/`,
     }
@@ -33,7 +33,7 @@ const mainCategoryInfo = mainFeatured ? getCategoryInfo(mainFeatured.data.catego
 ---
 
 {mainFeatured && (
-  <section class="bg-[#F7F9FC] py-16 sm:py-20 border-b border-[#E3E8EF]" aria-labelledby="featured-heading">
+  <section class="bg-[#F7F9FC] py-14 sm:py-20 border-b border-[#E3E8EF]" aria-labelledby="featured-heading">
     <div class="container-main">
 
       <!-- Section Header -->
@@ -55,39 +55,54 @@ const mainCategoryInfo = mainFeatured ? getCategoryInfo(mainFeatured.data.catego
 
         <a
           href="/articles/"
-          class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#3478F6] hover:text-[#2563EB] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6] rounded"
+          class="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-[#3478F6] hover:text-[#2563EB] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6] rounded py-1"
         >
-          <span>Explore complete archive</span>
+          <span>Explore Complete Archive</span>
           <span aria-hidden="true">&rarr;</span>
         </a>
       </div>
 
-      <!-- Featured Articles Layout (1 Prominent + 2 Supporting) -->
+      <!-- Featured Articles Grid (1 Lead + 2 Supporting) -->
       <div class="grid gap-8 lg:grid-cols-12 items-stretch">
 
         <!-- Prominent Lead Article (7 Cols) -->
         <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-[#E3E8EF] bg-white p-6 sm:p-8 shadow-xs transition-all duration-300 hover:shadow-md hover:border-[#CBD5E1] lg:col-span-7">
           <div>
-            <!-- Visual / Image Placeholder Container -->
-            <div class="relative aspect-video w-full overflow-hidden rounded-xl bg-gradient-to-br from-[#14233B] via-[#1E3A63] to-[#2563EB] flex items-center justify-center p-6 text-white mb-6">
-              <span class="text-6xl font-black text-white/10 tracking-widest">
-                {mainCategoryInfo?.icon || 'MS'}
-              </span>
+            <!-- Visual Header Container -->
+            <div class="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-gradient-to-br from-[#101B2D] via-[#14233B] to-[#2563EB] flex items-center justify-center p-6 text-white mb-6 shadow-inner">
+              
+              <!-- Subtle Background Waveform Line Pattern -->
+              <div class="absolute inset-0 opacity-15" aria-hidden="true">
+                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 60 Q 90 20, 180 60 T 360 60 T 540 60 T 720 60" fill="none" stroke="white" stroke-width="2" />
+                  <path d="M0 80 Q 90 40, 180 80 T 360 80 T 540 80 T 720 80" fill="none" stroke="white" stroke-width="1" />
+                </svg>
+              </div>
 
-              <div class="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur-md px-3 py-1 text-xs font-bold text-[#14233B]">
+              <div class="relative z-10 text-center">
+                <span class="inline-block rounded-lg bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 font-mono text-xs font-bold text-sky-200 uppercase tracking-widest mb-2">
+                  DISPATCH #{mainCategoryInfo?.icon || '01'}
+                </span>
+                <p class="text-xs uppercase tracking-widest text-slate-300 font-semibold">Primary Editorial Feature</p>
+              </div>
+
+              <!-- Top Left: Category Badge -->
+              <div class="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-white/95 backdrop-blur-md px-3 py-1 text-xs font-bold text-[#14233B] shadow-xs">
                 <span class="h-1.5 w-1.5 rounded-full bg-[#3478F6]"></span>
                 <span>{mainCategoryInfo?.name || mainFeatured.data.category}</span>
               </div>
 
+              <!-- Bottom Right: Reading Time -->
               {mainFeatured.data.readingTime && (
-                <span class="absolute bottom-4 right-4 rounded-full bg-[#101B2D]/80 backdrop-blur-md px-2.5 py-1 text-[11px] font-medium text-slate-200">
+                <span class="absolute bottom-4 right-4 rounded-full bg-[#101B2D]/85 backdrop-blur-md px-2.5 py-1 text-[11px] font-semibold text-slate-200 border border-white/10">
                   {mainFeatured.data.readingTime}
                 </span>
               )}
             </div>
 
+            <!-- Meta Line -->
             <div class="flex items-center gap-3 text-xs text-[#697586] mb-3">
-              <span class="font-medium text-[#14233B]">{mainFeatured.data.author}</span>
+              <span class="font-bold text-[#14233B]">{mainFeatured.data.author}</span>
               <span aria-hidden="true">&bull;</span>
               <time datetime={mainFeatured.data.publishDate.toISOString()}>
                 {mainFeatured.data.publishDate.toLocaleDateString('en-US', {
@@ -98,26 +113,30 @@ const mainCategoryInfo = mainFeatured ? getCategoryInfo(mainFeatured.data.catego
               </time>
             </div>
 
+            <!-- Headline -->
             <h3 class="text-2xl sm:text-3xl font-extrabold leading-tight text-[#14233B] transition-colors group-hover:text-[#3478F6]">
               <a href={`/articles/${mainFeatured.data.slug || mainFeatured.id}/`} class="focus-visible:outline-none focus-visible:underline">
                 {mainFeatured.data.title}
               </a>
             </h3>
 
+            <!-- Excerpt -->
             <p class="mt-4 text-base leading-relaxed text-[#202938]">
               {mainFeatured.data.description}
             </p>
           </div>
 
+          <!-- Footer Action -->
           <div class="mt-8 pt-5 border-t border-[#E3E8EF] flex items-center justify-between">
             <a
               href={`/articles/${mainFeatured.data.slug || mainFeatured.id}/`}
-              class="inline-flex items-center gap-1.5 text-sm font-bold text-[#3478F6] transition-all group-hover:gap-2.5 hover:text-[#2563EB]"
-              aria-label={`Read article: ${mainFeatured.data.title}`}
+              class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#3478F6] transition-all group-hover:gap-2.5 hover:text-[#2563EB]"
+              aria-label={`Read full analysis: ${mainFeatured.data.title}`}
             >
               <span>Read Full Analysis</span>
               <span aria-hidden="true">&rarr;</span>
             </a>
+            <span class="text-xs text-[#697586] font-medium">Fact-checked</span>
           </div>
         </article>
 
@@ -136,11 +155,11 @@ const mainCategoryInfo = mainFeatured ? getCategoryInfo(mainFeatured.data.catego
               <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-[#E3E8EF] bg-white p-6 shadow-xs transition-all duration-300 hover:shadow-md hover:border-[#CBD5E1] flex-1">
                 <div>
                   <div class="flex items-center justify-between gap-2 text-xs mb-3">
-                    <span class="font-bold uppercase tracking-wider text-[#3478F6]">
+                    <span class="inline-flex items-center gap-1.5 rounded-full bg-[#3478F6]/10 px-2.5 py-0.5 font-bold uppercase tracking-wider text-[11px] text-[#3478F6]">
                       {catInfo.name}
                     </span>
                     {article.data.readingTime && (
-                      <span class="text-[#697586]">{article.data.readingTime}</span>
+                      <span class="font-medium text-[#697586] text-xs">{article.data.readingTime}</span>
                     )}
                   </div>
 
@@ -156,10 +175,14 @@ const mainCategoryInfo = mainFeatured ? getCategoryInfo(mainFeatured.data.catego
                 </div>
 
                 <div class="mt-5 pt-4 border-t border-[#E3E8EF] flex items-center justify-between text-xs text-[#697586]">
-                  <span>{formattedDate}</span>
+                  <div class="flex items-center gap-2">
+                    <span class="font-medium text-[#14233B]">{article.data.author}</span>
+                    <span aria-hidden="true">&bull;</span>
+                    <time datetime={article.data.publishDate.toISOString()}>{formattedDate}</time>
+                  </div>
                   <a
                     href={`/articles/${slug}/`}
-                    class="font-semibold text-[#3478F6] group-hover:text-[#2563EB] inline-flex items-center gap-1"
+                    class="font-bold text-[#3478F6] group-hover:text-[#2563EB] inline-flex items-center gap-1 uppercase tracking-wider text-[11px]"
                   >
                     <span>Read</span>
                     <span aria-hidden="true">&rarr;</span>
