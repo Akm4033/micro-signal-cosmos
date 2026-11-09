@@ -3,7 +3,8 @@ title: "HTTPS Deep Dive: TLS 1.3, Public Key Infrastructure, and Modern Web Cryp
 description: "A comprehensive systems exploration of secure communication: the 1-RTT TLS 1.3 handshake, Diffie-Hellman ephemeral key exchange, X.509 certificate chains, Certificate Transparency logs, and mutual TLS (mTLS)."
 logo: "shield"
 slug: "https-deep-dive"
-publishDate: "2026-11-13T08:00:00Z"
+publishDate: "2026-11-09T08:30:00Z"
+updatedDate: "2026-11-09T17:00:00Z"
 category: "developer-tools"
 author: "marina"
 tags: ["Cryptography", "TLS 1.3", "HTTPS", "Cybersecurity", "Networking", "DevOps"]
@@ -93,7 +94,7 @@ The answer is the **Hierarchical Trust Chain**:
   - Signs Leaf / End-Entity Certificates
         |
         v
-[Leaf Server Certificate] (e.g. microsignalcosmos.com)
+[Leaf Server Certificate] (e.g. curion.internal)
   - Contains Subject Alternative Names (SAN)
   - Contains Server Public Key
   - Valid for 90 days

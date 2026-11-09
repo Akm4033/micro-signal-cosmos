@@ -1,9 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY || process.env.PUBLIC_WEB3FORMS_KEY || '';
-const isFormLive = Boolean(web3formsKey && web3formsKey.trim().length > 0);
-
 const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const contactUrl = `${siteUrl}/contact/`;
 ---
@@ -37,7 +34,7 @@ const contactUrl = `${siteUrl}/contact/`;
           Get in Touch
         </h1>
         <p class="mt-4 text-base sm:text-lg leading-relaxed text-text-secondary">
-          Have feedback on an investigation, found a code errata, or want to suggest a technical topic? We respond promptly.
+          Have feedback on an investigation, found code errata, or want to suggest a technical topic? We respond promptly.
         </p>
       </header>
 
@@ -45,9 +42,9 @@ const contactUrl = `${siteUrl}/contact/`;
       <div class="grid gap-6 sm:grid-cols-2 mb-12">
         <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
           <h2 class="text-sm font-bold uppercase tracking-wider text-text-muted mb-2">Editorial Desk</h2>
-          <p class="text-sm text-text-secondary">For questions, corrections, or suggestions:</p>
-          <a href="mailto:admin@microsignalcosmos.com" class="mt-3 inline-block font-semibold text-brand-primary hover:underline">
-            admin@microsignalcosmos.com
+          <p class="text-sm text-text-secondary">Direct research and correction inquiries:</p>
+          <a href="mailto:editorial@curion.pages.dev" class="mt-3 inline-block font-semibold text-brand-primary hover:underline">
+            editorial@curion.pages.dev
           </a>
         </div>
         <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
@@ -61,36 +58,134 @@ const contactUrl = `${siteUrl}/contact/`;
 
       <!-- Contact Form -->
       <div class="rounded-2xl border border-neutral-200 bg-white p-6 sm:p-10 shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
-        <h2 class="text-xl font-bold text-text-primary mb-6">Send a Message</h2>
+        <h2 class="text-xl font-bold text-text-primary mb-2">Send a Message</h2>
+        <p class="text-xs text-text-secondary mb-6">All submissions are validated on the server with active spam protection.</p>
+
+        <!-- Feedback Notification Box -->
+        <div id="contact-status" class="hidden mb-6 rounded-xl p-4 text-xs font-semibold leading-relaxed transition-all" role="alert"></div>
+
         <form
-          action={isFormLive ? "https://api.web3forms.com/submit" : "mailto:admin@microsignalcosmos.com"}
-          method={isFormLive ? "POST" : "GET"}
+          id="contact-form"
+          action="/api/contact"
+          method="POST"
           class="space-y-6"
         >
-          {isFormLive && <input type="hidden" name="access_key" value={web3formsKey} />}
+          <!-- Anti-spam Honeypot (invisible to real users) -->
+          <input type="text" name="_gotcha" id="contact-gotcha" style="display:none !important;" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
           <div class="space-y-2">
-            <label for="contact-name" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Your Name</label>
-            <input type="text" id="contact-name" name="name" required placeholder="Dr. Jane Doe" class="input" />
+            <label for="contact-name" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Your Name <span class="text-red-500">*</span></label>
+            <input type="text" id="contact-name" name="name" required minlength="2" placeholder="Dr. Jane Doe" class="input" />
           </div>
           <div class="space-y-2">
-            <label for="contact-email" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Email Address</label>
+            <label for="contact-email" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Email Address <span class="text-red-500">*</span></label>
             <input type="email" id="contact-email" name="email" required placeholder="jane@example.com" class="input" />
           </div>
           <div class="space-y-2">
-            <label for="contact-subject" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Subject</label>
-            <input type="text" id="contact-subject" name="subject" required placeholder="Correction: How Browsers Render / Topic Request" class="input" />
+            <label for="contact-subject" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Subject <span class="text-red-500">*</span></label>
+            <input type="text" id="contact-subject" name="subject" required minlength="3" placeholder="Correction: How Browsers Render / Topic Request" class="input" />
           </div>
           <div class="space-y-2">
-            <label for="contact-message" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Message</label>
-            <textarea id="contact-message" name="message" rows="5" required placeholder="Your message, code snippet errata, or inquiry..." class="input"></textarea>
+            <label for="contact-message" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Message <span class="text-red-500">*</span></label>
+            <textarea id="contact-message" name="message" rows="5" required minlength="10" maxlength="5000" placeholder="Your message, code snippet errata, or inquiry..." class="input"></textarea>
+            <span class="text-[10px] text-text-muted block text-right">Min 10 characters</span>
           </div>
-          <button type="submit" class="btn-primary w-full">
-            <span>Send Message</span>
-            <span aria-hidden="true">&rarr;</span>
+
+          <button id="contact-submit-btn" type="submit" class="btn-primary w-full cursor-pointer transition-all">
+            <span id="contact-btn-text">Send Message</span>
+            <span id="contact-btn-icon" aria-hidden="true">&rarr;</span>
           </button>
         </form>
       </div>
 
     </div>
   </main>
+
+  <script is:inline>
+    (function() {
+      const form = document.getElementById('contact-form');
+      const statusBox = document.getElementById('contact-status');
+      const submitBtn = document.getElementById('contact-submit-btn');
+      const btnText = document.getElementById('contact-btn-text');
+      const btnIcon = document.getElementById('contact-btn-icon');
+
+      if (!form || !statusBox || !submitBtn) return;
+
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Basic client validation
+        const name = (document.getElementById('contact-name')?.value || '').trim();
+        const email = (document.getElementById('contact-email')?.value || '').trim();
+        const subject = (document.getElementById('contact-subject')?.value || '').trim();
+        const message = (document.getElementById('contact-message')?.value || '').trim();
+        const gotcha = (document.getElementById('contact-gotcha')?.value || '').trim();
+
+        if (name.length < 2) {
+          showStatus('Please enter a valid name (at least 2 characters).', 'error');
+          return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          showStatus('Please enter a valid email address.', 'error');
+          return;
+        }
+        if (subject.length < 3) {
+          showStatus('Please enter a valid subject.', 'error');
+          return;
+        }
+        if (message.length < 10) {
+          showStatus('Message must be at least 10 characters long.', 'error');
+          return;
+        }
+
+        // Loading state
+        submitBtn.disabled = true;
+        submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
+        btnText.textContent = 'Verifying & Sending...';
+        btnIcon.textContent = '⏳';
+        hideStatus();
+
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({ name, email, subject, message, _gotcha: gotcha })
+          });
+
+          const data = await res.json().catch(() => ({}));
+
+          if (res.ok && data.success) {
+            showStatus(data.message || 'Thank you! Your message has been received.', 'success');
+            form.reset();
+          } else {
+            showStatus(data.error || 'Unable to deliver message. Please contact us directly at editorial@curion.pages.dev.', 'error');
+          }
+        } catch (err) {
+          showStatus('Network connection error. Please try again or email us directly at editorial@curion.pages.dev.', 'error');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+          btnText.textContent = 'Send Message';
+          btnIcon.textContent = '→';
+        }
+      });
+
+      function showStatus(msg, type) {
+        statusBox.textContent = msg;
+        statusBox.classList.remove('hidden', 'bg-red-50', 'text-red-700', 'border', 'border-red-200', 'bg-emerald-50', 'text-emerald-700', 'border-emerald-200', 'dark:bg-red-950/50', 'dark:text-red-300', 'dark:border-red-900', 'dark:bg-emerald-950/50', 'dark:text-emerald-300', 'dark:border-emerald-900');
+        if (type === 'error') {
+          statusBox.classList.add('bg-red-50', 'text-red-700', 'border', 'border-red-200', 'dark:bg-red-950/50', 'dark:text-red-300', 'dark:border-red-900');
+        } else {
+          statusBox.classList.add('bg-emerald-50', 'text-emerald-700', 'border', 'border-emerald-200', 'dark:bg-emerald-950/50', 'dark:text-emerald-300', 'dark:border-emerald-900');
+        }
+      }
+
+      function hideStatus() {
+        statusBox.classList.add('hidden');
+      }
+    })();
+  </script>
 </Base>

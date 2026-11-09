@@ -16,6 +16,23 @@ const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.S
 const canonicalUrl = canonical || (siteUrl + Astro.url.pathname);
 const ogImageUrl = ogImage || '/favicon.svg';
 const defaultDesc = 'Understand the world. Explore beyond it. CURION is an AI-powered global knowledge discovery and learning platform exploring systems engineering, AI/ML foundations, astrophysics, and developer infrastructure.';
+
+const pathname = Astro.url.pathname;
+const navLinks = [
+  { name: 'Home', href: '/' },
+  { name: 'Articles', href: '/articles/' },
+  { name: 'Technology', href: '/category/technology/' },
+  { name: 'AI & ML', href: '/category/artificial-intelligence/' },
+  { name: 'Science', href: '/category/science/' },
+  { name: 'Dev Tools', href: '/category/developer-tools/' },
+  { name: 'Tools', href: '/tools/' },
+  { name: 'About', href: '/about/' },
+];
+
+function isNavActive(href: string) {
+  if (href === '/') return pathname === '/';
+  return pathname.startsWith(href);
+}
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -138,16 +155,26 @@ const defaultDesc = 'Understand the world. Explore beyond it. CURION is an AI-po
           </div>
         </a>
 
-        <!-- Desktop Navigation -->
+        <!-- Desktop Navigation (Dynamically Highlights Active State) -->
         <nav aria-label="Main navigation" class="hidden items-center gap-1 xl:gap-1.5 lg:flex">
-          <a href="/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide rounded-lg text-slate-900 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-100 dark:hover:bg-slate-800 transition-colors" title="Home">Home</a>
-          <a href="/articles/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide rounded-lg text-slate-600 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" title="Articles">Articles</a>
-          <a href="/category/technology/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide rounded-lg text-slate-600 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" title="Technology">Technology</a>
-          <a href="/category/artificial-intelligence/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide rounded-lg text-slate-600 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" title="AI & ML">AI &amp; ML</a>
-          <a href="/category/science/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide rounded-lg text-slate-600 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" title="Science">Science</a>
-          <a href="/category/developer-tools/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide rounded-lg text-slate-600 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" title="Developer Tools">Dev Tools</a>
-          <a href="/tools/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide rounded-lg text-slate-600 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" title="Tools">Tools</a>
-          <a href="/about/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide rounded-lg text-slate-600 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" title="About">About</a>
+          {navLinks.map((link) => {
+            const active = isNavActive(link.href);
+            return (
+              <a
+                href={link.href}
+                class:list={[
+                  'px-2.5 py-1.5 text-xs font-semibold tracking-wide rounded-lg transition-colors',
+                  active
+                    ? 'text-blue-700 bg-blue-50 dark:bg-blue-950/70 dark:text-blue-300 font-bold'
+                    : 'text-slate-600 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800'
+                ]}
+                aria-current={active ? 'page' : undefined}
+                title={link.name}
+              >
+                {link.name}
+              </a>
+            );
+          })}
         </nav>
 
         <!-- Right Controls: Search + Theme Toggle + Mobile Drawer -->
@@ -207,14 +234,24 @@ const defaultDesc = 'Understand the world. Explore beyond it. CURION is an AI-po
                 <span class="text-[10px] font-semibold text-blue-600 uppercase">4 Pillars</span>
               </div>
               <nav class="flex flex-col space-y-1">
-                <a href="/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-blue-600 bg-blue-50 dark:bg-blue-950/40"><span>Home</span><span aria-hidden="true" class="text-xs text-slate-400">&rarr;</span></a>
-                <a href="/articles/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-slate-700 hover:bg-slate-50 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-slate-800"><span>Articles</span><span aria-hidden="true" class="text-xs text-slate-400">&rarr;</span></a>
-                <a href="/category/technology/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-slate-700 hover:bg-slate-50 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-slate-800"><span>Technology</span><span aria-hidden="true" class="text-xs text-slate-400">&rarr;</span></a>
-                <a href="/category/artificial-intelligence/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-slate-700 hover:bg-slate-50 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-slate-800"><span>AI &amp; ML</span><span aria-hidden="true" class="text-xs text-slate-400">&rarr;</span></a>
-                <a href="/category/science/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-slate-700 hover:bg-slate-50 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-slate-800"><span>Science</span><span aria-hidden="true" class="text-xs text-slate-400">&rarr;</span></a>
-                <a href="/category/developer-tools/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-slate-700 hover:bg-slate-50 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-slate-800"><span>Developer Tools</span><span aria-hidden="true" class="text-xs text-slate-400">&rarr;</span></a>
-                <a href="/tools/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-slate-700 hover:bg-slate-50 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-slate-800"><span>Tools</span><span aria-hidden="true" class="text-xs text-slate-400">&rarr;</span></a>
-                <a href="/about/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-slate-700 hover:bg-slate-50 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-slate-800"><span>About</span><span aria-hidden="true" class="text-xs text-slate-400">&rarr;</span></a>
+                {navLinks.map((link) => {
+                  const active = isNavActive(link.href);
+                  return (
+                    <a
+                      href={link.href}
+                      class:list={[
+                        'rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between',
+                        active
+                          ? 'text-blue-700 bg-blue-50 dark:bg-blue-950/70 dark:text-blue-300 font-bold'
+                          : 'text-slate-700 hover:bg-slate-50 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-slate-800'
+                      ]}
+                      aria-current={active ? 'page' : undefined}
+                    >
+                      <span>{link.name}</span>
+                      <span aria-hidden="true" class="text-xs text-slate-400">&rarr;</span>
+                    </a>
+                  );
+                })}
               </nav>
               <div class="mt-4 pt-3 border-t border-slate-100 flex flex-col gap-2 dark:border-slate-800">
                 <a href="/articles/" class="flex items-center justify-center gap-1.5 rounded-lg bg-blue-600 py-2 text-xs font-semibold text-white shadow-xs transition-colors hover:bg-blue-700"><span>Search All Knowledge</span><span aria-hidden="true">&rarr;</span></a>

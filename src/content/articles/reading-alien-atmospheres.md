@@ -3,7 +3,8 @@ title: "Reading Alien Atmospheres: Transmission Spectroscopy and the Search for 
 description: "How astronomers use the James Webb Space Telescope to decode the chemical skies of exoplanets: transmission spectroscopy, transit depth filtering, and the detection of methane, carbon dioxide, and water vapor."
 logo: "telescope"
 slug: "reading-alien-atmospheres"
-publishDate: "2026-11-10T08:00:00Z"
+publishDate: "2026-11-09T07:00:00Z"
+updatedDate: "2026-11-09T15:30:00Z"
 category: "science"
 author: "arun"
 tags: ["Exoplanets", "JWST", "Biosignatures", "Astronomy", "Planetary Science"]

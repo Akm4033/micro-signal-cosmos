@@ -99,7 +99,71 @@ const pageDescription = article.data.seoDescription || article.data.description;
 
 const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const articleUrl = `${siteUrl}/articles/${currentSlug}/`;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": article.data.title,
+  "description": article.data.description,
+  "url": articleUrl,
+  "datePublished": publishDateISO,
+  "dateModified": updatedDateISO || publishDateISO,
+  "author": {
+    "@type": "Person",
+    "name": author.name,
+    "jobTitle": author.role,
+    "url": author.links?.site || `${siteUrl}/about/`
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "CURION",
+    "url": siteUrl,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${siteUrl}/favicon.svg`
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": articleUrl
+  },
+  "keywords": (article.data.tags || []).join(', ')
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": siteUrl
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Articles",
+      "item": `${siteUrl}/articles/`
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": categoryName,
+      "item": `${siteUrl}/category/${categorySlug}/`
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": article.data.title,
+      "item": articleUrl
+    }
+  ]
+};
 ---
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(articleSchema)} />
+<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
 
 <ArticleLayout
   title={pageTitle}
@@ -118,6 +182,7 @@ const articleUrl = `${siteUrl}/articles/${currentSlug}/`;
   ogImage={article.data.coverImage || `/og/${currentSlug}.svg`}
   logo={article.data.logo}
   slug={currentSlug}
+  references={article.data.references || []}
   relatedArticles={relatedForProps}
 >
   <Fragment slot="toc">

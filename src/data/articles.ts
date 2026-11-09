@@ -16,8 +16,10 @@ export async function getPublishedArticles(includeDrafts = false): Promise<Artic
     process.env.ENABLE_DRAFTS === 'true' ||
     Boolean(import.meta.env?.ENABLE_DRAFTS === 'true');
 
+  const now = new Date();
   const articles = await getCollection('articles', ({ data }) => {
-    return allowDrafts ? true : !data.draft;
+    if (allowDrafts) return true;
+    return !data.draft && data.publishDate.getTime() <= now.getTime();
   });
 
   return articles.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());

@@ -1,7 +1,7 @@
 ---
 title: "Zero-Copy Networking in Linux with io_uring and eBPF"
 description: "Building and operating high-throughput systems requires understanding the exact boundary where software abstractions meet physical hardware. When stan..."
-logo: "server"
+logo: "networking"
 publishDate: "2026-11-09T10:39:07.360Z"
 updatedDate: "2026-11-09T10:39:07.360Z"
 category: "technology"

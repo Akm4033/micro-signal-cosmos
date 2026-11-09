@@ -31,8 +31,8 @@ const isTech = !isAI && !isScience && !isDevTools;
     'bg-sky-50/60 dark:bg-sky-950/30'
   } ${className}`}
 >
-  <!-- Scientific Vector Illustration Container: Full Bleed, High Contrast, Zero Dotted Background -->
-  <div class="relative z-10 w-full h-full flex items-center justify-center p-2.5 sm:p-3">
+  <!-- Scientific Vector Illustration Container: Full Bleed, High Contrast, 3D Subtle Scale on Hover -->
+  <div class="relative z-10 w-full h-full flex items-center justify-center p-2.5 sm:p-3 transition-transform duration-300 ease-out group-hover:scale-[1.03]">
     
     {/* 1. CHOOSING A DATABASE IN 2026 (Relational, Vector, Columnar & Edge Architecture) */}
     {(key.includes('database') || logo === 'database') && (
