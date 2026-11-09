@@ -11,55 +11,66 @@ export interface Author {
 }
 
 export const authors: Record<string, Author> = {
+  'editorial-desk': {
+    key: 'editorial-desk',
+    name: 'Micro Signal Cosmos',
+    role: 'Editorial & Research Desk',
+    bio: 'Independent technical publication exploring systems infrastructure, AI/ML architectures, and observational astrophysics through rigorous research and reproducible code.',
+    avatar: '/favicon.svg',
+    color: '#1d4ed8',
+    bgColor: 'bg-blue-100 dark:bg-blue-900/30',
+    initials: 'MSC',
+    links: {
+      github: 'https://github.com/Akm4033/micro-signal-cosmos',
+      about: '/about/',
+    },
+  },
   marina: {
     key: 'marina',
-    name: 'Marina Kowalski',
-    role: 'Systems Engineer',
-    bio: 'Marina builds and dissects the invisible infrastructure powering the modern web. She spent a decade optimizing JavaScript engines at Google and now writes about the systems nobody notices—until they break.',
-    avatar: '/authors/marina/avatar.svg',
-    color: '#0ea5e9',
-    bgColor: 'bg-sky-100 dark:bg-sky-900/30',
-    initials: 'MK',
+    name: 'Micro Signal Cosmos',
+    role: 'Systems & Infrastructure',
+    bio: 'Technical investigations into browser engines, CPU architecture, WebAssembly, networking, TLS 1.3, and production database internals.',
+    avatar: '/favicon.svg',
+    color: '#1d4ed8',
+    bgColor: 'bg-blue-100 dark:bg-blue-900/30',
+    initials: 'MSC',
     links: {
-      github: 'https://github.com/mkowalski',
-      mastodon: 'https://hachyderm.io/@marina',
-      site: 'https://marinakowalski.dev',
+      github: 'https://github.com/Akm4033/micro-signal-cosmos',
+      about: '/about/',
     },
   },
   kai: {
     key: 'kai',
-    name: 'Kai Nakamura',
-    role: 'ML Engineer',
-    bio: 'Kai builds the plumbing that makes AI useful—retrieval systems, serving infrastructure, evaluation harnesses. He has deployed models from 7B to 70B parameters in production and has the cloud bills to prove it.',
-    avatar: '/authors/kai/avatar.svg',
-    color: '#10b981',
+    name: 'Micro Signal Cosmos',
+    role: 'AI & Machine Learning',
+    bio: 'Algorithmic explorations into transformer architectures, inference economics, RAG systems, and evaluation benchmarks.',
+    avatar: '/favicon.svg',
+    color: '#059669',
     bgColor: 'bg-emerald-100 dark:bg-emerald-900/30',
-    initials: 'KN',
+    initials: 'MSC',
     links: {
-      github: 'https://github.com/k-nakamura',
-      blog: 'https://kai.fyi',
-      huggingface: 'https://huggingface.co/knakamura',
+      github: 'https://github.com/Akm4033/micro-signal-cosmos',
+      about: '/about/',
     },
   },
   arun: {
     key: 'arun',
-    name: 'Arun Mehta',
-    role: 'Astrophysicist',
-    bio: 'Arun studies the chemical fingerprints of distant galaxies using the world\'s largest telescopes. He believes the best science writing reconstructs the detective story behind every discovery.',
-    avatar: '/authors/arun/avatar.svg',
-    color: '#8b5cf6',
+    name: 'Micro Signal Cosmos',
+    role: 'Science & Physics',
+    bio: 'Rigorous deep dives into observational astrophysics, stellar spectroscopy, exoplanet atmospheres, and nuclear fusion.',
+    avatar: '/favicon.svg',
+    color: '#7c3aed',
     bgColor: 'bg-purple-100 dark:bg-purple-900/30',
-    initials: 'AM',
+    initials: 'MSC',
     links: {
-      orcid: 'https://orcid.org/0000-0002-XXXX-XXXX',
-      scholar: 'https://scholar.google.com/citations?user=XXXX',
-      twitter: 'https://x.com/arunmehta_astro',
+      github: 'https://github.com/Akm4033/micro-signal-cosmos',
+      about: '/about/',
     },
   },
 };
 
 export function getAuthor(key: string): Author {
-  return authors[key] || authors.marina;
+  return authors[key] || authors['editorial-desk'];
 }
 
 export function getAllAuthors(): Author[] {
