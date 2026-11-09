@@ -31,11 +31,15 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   body {
     @apply bg-[var(--bg-primary)] text-[var(--text-primary)] font-body antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   ::selection {

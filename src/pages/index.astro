@@ -18,9 +18,9 @@ const latestArticles = sortedArticles.slice(0, 6);
     <div class="pointer-events-none absolute inset-0 -z-10 opacity-30" aria-hidden="true">
       <div class="absolute inset-0 bg-[radial-gradient(#CBD5E1_1px,transparent_1px)] [background-size:28px_28px] dark:opacity-10"></div>
     </div>
-    <div class="container-wide grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
+    <div class="container-wide grid items-center gap-10 lg:grid-cols-12 lg:gap-10">
       <!-- Hero Content (7 cols) -->
-      <div class="lg:col-span-7 max-w-2xl">
+      <div class="lg:col-span-7 min-w-0 max-w-2xl">
         <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3.5 py-1.5 text-xs font-bold tracking-widest text-brand-primary uppercase shadow-2xs dark:border-neutral-700 dark:bg-neutral-900/50">
           <span class="h-2 w-2 rounded-full bg-brand-primary"></span>
           <span>MICRO SIGNAL COSMOS</span>
@@ -55,27 +55,109 @@ const latestArticles = sortedArticles.slice(0, 6);
           <a href="/category/developer-tools/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100 hover:border-amber-300 transition-all">Developer Tools</a>
         </div>
       </div>
+
       <!-- Editorial Showcase (5 cols) -->
-      <div class="lg:col-span-5 flex justify-center">
-        <div class="relative w-full max-w-[430px] rounded-2xl border border-neutral-200 bg-neutral-50 p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:border-brand-primary/30 dark:border-neutral-700 dark:bg-neutral-900/50">
-          <div class="flex items-center justify-between pb-4 border-b border-neutral-200 dark:border-neutral-700">
-            <div class="flex items-center gap-2"><span class="inline-flex h-2 w-2 rounded-full bg-brand-primary"></span><span class="text-xs font-bold uppercase tracking-wider text-text-primary">Lead Investigation</span></div>
-            <span class="rounded-full bg-white border border-neutral-200 px-2.5 py-0.5 text-[11px] font-semibold text-text-muted dark:bg-neutral-800 dark:border-neutral-700">14 min read</span>
+      <div class="lg:col-span-5 min-w-0 w-full flex justify-center lg:justify-end">
+        <article class="group w-full max-w-[420px] rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col">
+          <!-- Card Header / Eyebrow -->
+          <div class="flex items-center justify-between px-5 py-3 bg-slate-50 border-b border-slate-100 text-xs">
+            <div class="flex items-center gap-2 font-bold tracking-wider uppercase text-slate-700 text-[11px]">
+              <span class="h-2 w-2 rounded-full bg-brand-primary"></span>
+              <span>Featured Guide</span>
+            </div>
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-0.5 text-[11px] font-semibold text-slate-600 border border-slate-200 shadow-2xs">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span>14 min read</span>
+            </span>
           </div>
-          <a href="/articles/how-llms-actually-work/" class="group block relative my-5 aspect-[16/10] w-full overflow-hidden rounded-xl bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 p-6 text-white shadow-inner transition-transform group-hover:scale-[1.01]" aria-label="Read lead investigation: How LLMs Actually Work">
-            <div class="absolute inset-0 opacity-15" aria-hidden="true"><svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="hero-signal-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M 24 0 L 0 0 0 24" fill="none" stroke="white" stroke-width="1"></path></pattern></defs><rect width="100%" height="100%" fill="url(#hero-signal-grid)"></rect></svg></div>
+
+          <!-- Card Visual Anchor (Warm & Engaging, Strict Overflow Immunity) -->
+          <a
+            href="/articles/how-llms-actually-work/"
+            class="block relative w-full h-44 sm:h-48 overflow-hidden bg-gradient-to-br from-slate-900 via-sky-950 to-indigo-950 p-5 text-white transition-transform group-hover:scale-[1.01]"
+            aria-label="Read featured guide: How LLMs Actually Work"
+          >
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 opacity-20 pointer-events-none" aria-hidden="true">
+              <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="card-neural-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <circle cx="2" cy="2" r="1" fill="white" opacity="0.3"></circle>
+                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="white" stroke-width="0.5" opacity="0.2"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#card-neural-grid)"></rect>
+              </svg>
+            </div>
+
+            <!-- Foreground Content in Visual -->
             <div class="relative z-10 flex h-full flex-col justify-between">
-              <div class="flex items-center justify-between"><span class="rounded-md bg-white/10 backdrop-blur-md px-2.5 py-1 text-[11px] font-bold tracking-wider text-sky-300 uppercase border border-white/15">AI &amp; Deep Systems</span><span class="text-xs font-mono text-white/50">#FEATURED-GUIDE</span></div>
-              <div class="text-center my-auto"><div class="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-primary/20 border border-brand-primary/40 text-sky-300 shadow-md"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg></div><p class="text-xs font-semibold uppercase tracking-widest text-slate-300">Neural Architectures</p></div>
-              <div class="flex items-center justify-between text-[11px] text-slate-300"><span>Deep-Dive Tutorial</span><span class="font-bold text-white group-hover:text-sky-300 transition-colors">Read Guide &rarr;</span></div>
+              <div class="flex items-center justify-between">
+                <span class="rounded-md bg-white/15 backdrop-blur-md px-2.5 py-1 text-[11px] font-bold tracking-wider text-sky-200 uppercase border border-white/20">
+                  AI &amp; Machine Learning
+                </span>
+                <span class="text-[11px] font-mono text-sky-300/80">#FOUNDATIONS</span>
+              </div>
+
+              <!-- Center Graphic -->
+              <div class="flex items-center gap-3 my-auto">
+                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-sky-500/20 border border-sky-400/40 text-sky-300 shadow-md">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-xs font-bold uppercase tracking-wider text-white">Transformer Architecture</p>
+                  <p class="text-[11px] text-sky-200/80">Self-Attention &bull; Embeddings &bull; RoPE</p>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between text-[11px] text-slate-300">
+                <span>Interactive Visual Guide</span>
+                <span class="font-bold text-white group-hover:text-sky-300 transition-colors inline-flex items-center gap-1">
+                  Read Guide &rarr;
+                </span>
+              </div>
             </div>
           </a>
-          <div class="rounded-xl bg-white p-4 border border-neutral-200 shadow-2xs dark:border-neutral-700 dark:bg-neutral-900">
-            <h2 class="text-base font-bold text-text-primary hover:text-brand-primary transition-colors leading-snug"><a href="/articles/how-llms-actually-work/">How LLMs Actually Work: Under the Hood of the Transformer Architecture</a></h2>
-            <p class="mt-2 text-xs leading-relaxed text-text-muted line-clamp-2">A rigorous mathematical and algorithmic explanation of modern decoder-only transformers: self-attention, RoPE, SwiGLU, and decoding.</p>
-            <div class="mt-3 pt-3 border-t border-neutral-200 flex items-center justify-between text-xs dark:border-neutral-700"><span class="text-text-muted">By Kai Nakamura</span><a href="/articles/how-llms-actually-work/" class="font-bold text-brand-primary hover:underline">Read Guide &rarr;</a></div>
+
+          <!-- Card Content Body -->
+          <div class="p-5 sm:p-6 flex flex-col justify-between flex-1">
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-brand-primary transition-colors leading-snug">
+                <a href="/articles/how-llms-actually-work/">
+                  How LLMs Actually Work: Under the Hood of the Transformer Architecture
+                </a>
+              </h2>
+              <p class="mt-2.5 text-xs sm:text-sm leading-relaxed text-slate-600 line-clamp-2">
+                A rigorous, visual explanation of modern decoder-only transformers: self-attention, RoPE embeddings, SwiGLU, and token generation.
+              </p>
+            </div>
+
+            <!-- Author & Action Footer -->
+            <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="h-8 w-8 rounded-full bg-brand-primary/10 text-brand-primary font-bold text-xs flex items-center justify-center border border-brand-primary/20">
+                  KN
+                </div>
+                <div class="text-xs">
+                  <p class="font-semibold text-slate-900 leading-tight">Kai Nakamura</p>
+                  <p class="text-[11px] text-slate-500 leading-tight">AI &amp; Research Engineer</p>
+                </div>
+              </div>
+              <a
+                href="/articles/how-llms-actually-work/"
+                class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-brand-primary group-hover:text-brand-sky-deep transition-colors"
+              >
+                <span>Read</span>
+                <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   </section>
@@ -88,7 +170,7 @@ const latestArticles = sortedArticles.slice(0, 6);
         <a href="/articles/" class="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-brand-primary hover:text-brand-sky-deep transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded py-1"><span>Explore Complete Archive</span><span aria-hidden="true">&rarr;</span></a>
       </div>
       <div class="grid gap-8 lg:grid-cols-12 items-stretch">
-        <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs transition-all duration-300 hover:shadow-md hover:border-brand-primary/30 lg:col-span-7 dark:border-neutral-700 dark:bg-neutral-900">
+        <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs transition-all duration-300 hover:shadow-md hover:border-brand-primary/30 lg:col-span-7 min-w-0 dark:border-neutral-700 dark:bg-neutral-900">
           <div>
             <div class="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-gradient-to-br from-neutral-900 via-neutral-800 to-brand-primary flex items-center justify-center p-6 text-white mb-6 shadow-inner">
               <div class="absolute inset-0 opacity-15" aria-hidden="true"><svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><path d="M0 60 Q 90 20, 180 60 T 360 60 T 540 60 T 720 60" fill="none" stroke="white" stroke-width="2"></path><path d="M0 80 Q 90 40, 180 80 T 360 80 T 540 80 T 720 80" fill="none" stroke="white" stroke-width="1"></path></svg></div>
@@ -102,7 +184,7 @@ const latestArticles = sortedArticles.slice(0, 6);
           </div>
           <div class="mt-8 pt-5 border-t border-neutral-200 flex items-center justify-between"><a href="/articles/choosing-a-database-in-2026/" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-primary transition-all group-hover:gap-2.5 hover:text-brand-sky-deep" aria-label="Read full analysis"><span>Read Article</span><span aria-hidden="true">&rarr;</span></a><span class="text-xs text-text-muted font-medium">13 min read</span></div>
         </article>
-        <div class="flex flex-col gap-6 lg:col-span-5 justify-between">
+        <div class="flex flex-col gap-6 lg:col-span-5 min-w-0 justify-between">
           <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs transition-all duration-300 hover:shadow-md hover:border-brand-primary/30 flex-1 dark:border-neutral-700 dark:bg-neutral-900">
             <div><div class="flex items-center justify-between gap-2 text-xs mb-3"><span class="badge badge--science">Science</span><span class="font-medium text-text-muted text-xs">11 min read</span></div><h3 class="text-lg sm:text-xl font-bold leading-snug text-text-primary transition-colors group-hover:text-brand-primary"><a href="/articles/how-we-know-what-stars-are-made-of/" class="focus-visible:outline-none focus-visible:underline">How We Know What Stars Are Made Of: The Physics of Stellar Spectroscopy</a></h3><p class="mt-2.5 text-sm leading-relaxed text-text-secondary line-clamp-2">The detective story of quantum astrophysics: how Fraunhofer absorption lines, atomic orbital transitions, and modern diffraction spectrographs allow us to weigh and analyze stars trillions of miles away.</p></div><div class="mt-5 pt-4 border-t border-neutral-200 flex items-center justify-between text-xs text-text-muted"><div class="flex items-center gap-2"><span class="font-medium text-text-primary">Arun Mehta</span><span aria-hidden="true">&bull;</span><time datetime="2026-11-09T08:00:00.000Z">Nov 9, 2026</time></div><a href="/articles/how-we-know-what-stars-are-made-of/" class="font-bold text-brand-primary group-hover:text-brand-sky-deep inline-flex items-center gap-1 uppercase tracking-wider text-[11px]"><span>Read</span><span aria-hidden="true">&rarr;</span></a></div></article>
           <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs transition-all duration-300 hover:shadow-md hover:border-brand-primary/30 flex-1 dark:border-neutral-700 dark:bg-neutral-900">
