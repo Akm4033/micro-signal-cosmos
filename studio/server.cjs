@@ -22,6 +22,7 @@ const {
 } = require('./db.cjs');
 const { generateWithProvider, compareModels, verifyDraftQuality } = require('./llm.cjs');
 const { publishArticle, unpublishArticle, calculateReadingTime } = require('./publish.cjs');
+const { runEditorialPipeline, rollbackArticle } = require('./pipeline.cjs');
 
 const PORT = process.env.PORT || 3001;
 const PUBLIC_DIR = path.join(__dirname, 'public');
@@ -699,6 +700,31 @@ const server = http.createServer(async (req, res) => {
           return sendJSON(res, 200, result);
         } catch (err) {
           return sendJSON(res, 404, { error: err.message });
+        }
+      }
+
+      // -------------------------------------------------------------
+      // API: AUTONOMOUS EDITORIAL PIPELINE
+      // -------------------------------------------------------------
+      if (pathname === '/api/pipeline/run' && method === 'POST') {
+        const body = await parseBody(req);
+        const result = await runEditorialPipeline(body);
+        return sendJSON(res, result.success ? 200 : 422, result);
+      }
+
+      if (pathname === '/api/pipeline/jobs' && method === 'GET') {
+        const jobs = db.prepare('SELECT * FROM pipeline_jobs ORDER BY started_at DESC LIMIT 20').all();
+        return sendJSON(res, 200, jobs);
+      }
+
+      const rollbackMatch = pathname.match(/^\/api\/articles\/([a-zA-Z0-9-]+)\/rollback$/);
+      if (rollbackMatch && method === 'POST') {
+        const articleId = rollbackMatch[1];
+        try {
+          const result = rollbackArticle(articleId, { userId: user.id });
+          return sendJSON(res, 200, result);
+        } catch (err) {
+          return sendJSON(res, 400, { error: err.message });
         }
       }
 
