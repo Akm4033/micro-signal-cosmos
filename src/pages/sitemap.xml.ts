@@ -5,8 +5,8 @@ import { getPublishedArticles } from '../data/articles';
 export const GET: APIRoute = async (context) => {
   const publishedArticles = await getPublishedArticles();
 
-  // Determine site base URL (from astro.config.mjs `site` property if configured)
-  const siteUrl = context.site ? context.site.href.replace(/\/$/, '') : '';
+  // Determine site base URL (from astro.config.mjs `site` property if configured, defaulting to canonical production domain)
+  const siteUrl = (context.site ? context.site.href.replace(/\/$/, '') : '') || process.env.SITE_URL || 'https://microsignalcosmos.com';
 
   // Core static pages
   const staticPages = [

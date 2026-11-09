@@ -5,12 +5,47 @@ import Footer from '../components/Footer.astro';
 import { getPublishedArticles } from '../data/articles';
 
 const articles = await getPublishedArticles();
+
+const siteUrl = 'https://microsignalcosmos.com';
+const authorsUrl = `${siteUrl}/authors/`;
+
+const authorsJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      '@id': `${authorsUrl}#collection`,
+      name: 'Editorial Desk & Authors | Micro Signal Cosmos',
+      description: 'Meet the Micro Signal Cosmos editorial team and contributors dedicated to rigorous science, computing, and technology journalism.',
+      url: authorsUrl,
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${authorsUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: `${siteUrl}/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Editorial Desk & Authors',
+          item: authorsUrl,
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <Layout
   title="Editorial Desk & Authors | Micro Signal Cosmos"
   description="Meet the Micro Signal Cosmos editorial team and contributors dedicated to rigorous science, computing, and technology journalism."
-  canonical="https://microsignalcosmos.com/authors/"
+  canonical={authorsUrl}
+  jsonLd={authorsJsonLd}
 >
   <Header />
 

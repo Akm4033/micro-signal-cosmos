@@ -1,0 +1,3 @@
+# Cloudflare Pages 301 Permanent Redirects
+/privacy    /privacy-policy/   301
+/privacy/   /privacy-policy/   301

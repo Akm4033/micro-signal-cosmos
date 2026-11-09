@@ -2,12 +2,50 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+const siteUrl = 'https://microsignalcosmos.com';
+const pageUrl = `${siteUrl}/privacy-policy/`;
+
+const pageJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${pageUrl}#webpage`,
+      name: 'Privacy Policy | Micro Signal Cosmos',
+      description: 'Privacy Policy for Micro Signal Cosmos. Read our transparent policies on data handling, cookies, analytics, and reader privacy protection.',
+      url: pageUrl,
+      isPartOf: {
+        '@id': `${siteUrl}/#website`,
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: `${siteUrl}/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Privacy Policy',
+          item: pageUrl,
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <Layout
   title="Privacy Policy | Micro Signal Cosmos"
   description="Privacy Policy for Micro Signal Cosmos. Read our transparent policies on data handling, cookies, analytics, and reader privacy protection."
-  canonical="https://microsignalcosmos.com/privacy-policy/"
+  canonical={pageUrl}
+  jsonLd={pageJsonLd}
 >
   <Header />
 

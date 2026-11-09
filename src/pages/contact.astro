@@ -7,12 +7,51 @@ import Footer from '../components/Footer.astro';
 // Provide PUBLIC_WEB3FORMS_KEY in your hosting dashboard or .env to activate live email relay.
 const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY || process.env.PUBLIC_WEB3FORMS_KEY || '';
 const isFormLive = Boolean(web3formsKey && web3formsKey.trim().length > 0);
+
+const siteUrl = 'https://microsignalcosmos.com';
+const contactUrl = `${siteUrl}/contact/`;
+
+const contactJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ContactPage',
+      '@id': `${contactUrl}#contactpage`,
+      name: 'Contact Us | Micro Signal Cosmos',
+      description: 'Get in touch with the Micro Signal Cosmos editorial team for story inquiries, feedback, corrections, and partnerships.',
+      url: contactUrl,
+      mainEntity: {
+        '@type': 'Organization',
+        '@id': `${siteUrl}/#organization`,
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${contactUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: `${siteUrl}/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Contact Us',
+          item: contactUrl,
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <Layout
   title="Contact Us | Micro Signal Cosmos"
   description="Get in touch with the Micro Signal Cosmos editorial team for story inquiries, feedback, corrections, and partnerships."
-  canonical="https://microsignalcosmos.com/contact/"
+  canonical={contactUrl}
+  jsonLd={contactJsonLd}
 >
   <Header />
 

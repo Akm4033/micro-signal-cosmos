@@ -2,12 +2,50 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+const siteUrl = 'https://microsignalcosmos.com';
+const pageUrl = `${siteUrl}/editorial-policy/`;
+
+const pageJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${pageUrl}#webpage`,
+      name: 'Editorial Policy | Micro Signal Cosmos',
+      description: 'Editorial Policy for Micro Signal Cosmos. Read our research standards, sourcing protocols, editorial independence commitments, and review workflows.',
+      url: pageUrl,
+      isPartOf: {
+        '@id': `${siteUrl}/#website`,
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: `${siteUrl}/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Editorial Policy',
+          item: pageUrl,
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <Layout
   title="Editorial Policy | Micro Signal Cosmos"
   description="Editorial Policy for Micro Signal Cosmos. Read our research standards, sourcing protocols, editorial independence commitments, and review workflows."
-  canonical="https://microsignalcosmos.com/editorial-policy/"
+  canonical={pageUrl}
+  jsonLd={pageJsonLd}
 >
   <Header />
 
