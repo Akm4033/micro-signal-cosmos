@@ -116,7 +116,7 @@ const articleUrl = `${siteUrl}/articles/${currentSlug}/`;
   publishedTime={publishDateISO}
   updatedTime={updatedDateISO}
   canonical={articleUrl}
-  ogImage={article.data.coverImage}
+  ogImage={article.data.coverImage || `/og/${currentSlug}.svg`}
   relatedArticles={relatedForProps}
 >
   <Fragment slot="toc">

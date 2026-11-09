@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="glow" cx="80%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#0a0f1a" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1f2937" stroke-width="1" stroke-opacity="0.6" />
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0a0f1a" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+  <rect width="1200" height="630" fill="url(#glow)" />
+
+  <!-- Accent top border -->
+  <rect x="0" y="0" width="1200" height="6" fill="#10b981" />
+
+  <!-- Category Badge -->
+  <g transform="translate(80, 160)">
+    <rect width="220" height="38" rx="19" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-opacity="0.4" stroke-width="1.5" />
+    <circle cx="22" cy="19" r="4.5" fill="#10b981" />
+    <text x="36" y="24" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#10b981" letter-spacing="0.12em">AI & ML</text>
+  </g>
+
+  <!-- Title -->
+  <g>
+    <text x="80" y="280" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">Evaluating AI: Why Benchmarks Lie</text>
+    <text x="80" y="336" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">and How to Build Domain Evals</text>
+  </g>
+
+  <!-- Metadata Footer Bar -->
+  <line x1="80" y1="490" x2="1120" y2="490" stroke="#1f2937" stroke-width="1.5" />
+
+  <g transform="translate(80, 545)">
+    <!-- Brand / Tagline -->
+    <text x="0" y="0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">MICRO SIGNAL <tspan fill="#10b981">COSMOS</tspan></text>
+    <text x="0" y="24" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#9ca3af" letter-spacing="0.15em">DISCOVER MORE. UNDERSTAND BETTER.</text>
+
+    <!-- Author & Reading time on right -->
+    <text x="1040" y="0" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#f3f4f6">By Kai Nakamura</text>
+    <text x="1040" y="24" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#9ca3af">12 min read</text>
+  </g>
+</svg>

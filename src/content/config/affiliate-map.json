@@ -1,0 +1,124 @@
+{
+  "affiliate_programs": [
+    {
+      "name": "Hetzner Cloud",
+      "slug": "hetzner",
+      "category": "infrastructure",
+      "url": "https://www.hetzner.com/cloud?ref=microsignal",
+      "commission": "€10/signup",
+      "keywords": ["vps", "hetzner", "dedicated server", "cx22", "cloud server", "docker host"]
+    },
+    {
+      "name": "DigitalOcean",
+      "slug": "digitalocean",
+      "category": "infrastructure",
+      "url": "https://www.digitalocean.com/?ref=microsignal",
+      "commission": "$25/signup",
+      "keywords": ["digitalocean", "droplet", "managed postgres", "spaces", "s3 compatible", "doks"]
+    },
+    {
+      "name": "Lambda Labs",
+      "slug": "lambda-labs",
+      "category": "ai-compute",
+      "url": "https://lambdalabs.com/?via=microsignal",
+      "commission": "10% recurring",
+      "keywords": ["gpu cloud", "h100", "a100", "llm training", "gpu cluster", "vllm hosting"]
+    },
+    {
+      "name": "Qdrant Cloud",
+      "slug": "qdrant",
+      "category": "database",
+      "url": "https://qdrant.tech/?partner=microsignal",
+      "commission": "20% recurring",
+      "keywords": ["vector database", "qdrant", "vector search", "embeddings", "hnsw", "rag"]
+    },
+    {
+      "name": "Neon",
+      "slug": "neon",
+      "category": "database",
+      "url": "https://neon.tech/?utm_source=microsignal",
+      "commission": "30% recurring",
+      "keywords": ["neon", "serverless postgres", "database branching", "pgvector", "postgres"]
+    },
+    {
+      "name": "Supabase",
+      "slug": "supabase",
+      "category": "database",
+      "url": "https://supabase.com/?utm_source=microsignal",
+      "commission": "25% recurring",
+      "keywords": ["supabase", "backend as a service", "row level security", "realtime", "postgres"]
+    },
+    {
+      "name": "Turso",
+      "slug": "turso",
+      "category": "database",
+      "url": "https://turso.tech/?ref=microsignal",
+      "commission": "20% recurring",
+      "keywords": ["turso", "libsql", "edge sqlite", "embedded replica", "sqlite"]
+    },
+    {
+      "name": "Upstash",
+      "slug": "upstash",
+      "category": "database",
+      "url": "https://upstash.com/?utm_source=microsignal",
+      "commission": "30% recurring",
+      "keywords": ["upstash", "serverless redis", "serverless kafka", "vector search", "rate limiting"]
+    },
+    {
+      "name": "Clerk",
+      "slug": "clerk",
+      "category": "security",
+      "url": "https://clerk.com/?ref=microsignal",
+      "commission": "20% recurring",
+      "keywords": ["clerk", "user auth", "passkeys", "webauthn", "session management"]
+    },
+    {
+      "name": "1Password",
+      "slug": "1password",
+      "category": "security",
+      "url": "https://1password.com/?aff=microsignal",
+      "commission": "$2/signup",
+      "keywords": ["1password", "password manager", "passkey storage", "developer vault", "cli"]
+    },
+    {
+      "name": "YubiKey",
+      "slug": "yubikey",
+      "category": "security",
+      "url": "https://www.yubico.com/?aff=microsignal",
+      "commission": "5-10%",
+      "keywords": ["yubikey", "hardware security key", "fido2", "u2f", "hardware passkey"]
+    },
+    {
+      "name": "Plausible Analytics",
+      "slug": "plausible",
+      "category": "analytics",
+      "url": "https://plausible.io/?ref=microsignal",
+      "commission": "50% first year",
+      "keywords": ["plausible", "privacy analytics", "cookie free", "gdpr compliant analytics", "web stats"]
+    },
+    {
+      "name": "Buttondown",
+      "slug": "buttondown",
+      "category": "newsletter",
+      "url": "https://buttondown.email/?ref=microsignal",
+      "commission": "30% recurring",
+      "keywords": ["buttondown", "newsletter", "email delivery", "markdown newsletter", "developer email"]
+    },
+    {
+      "name": "Raycast",
+      "slug": "raycast",
+      "category": "productivity",
+      "url": "https://raycast.com/?ref=microsignal",
+      "commission": "20% recurring",
+      "keywords": ["raycast", "mac launcher", "developer shortcuts", "clipboard history", "quick command"]
+    },
+    {
+      "name": "Warp",
+      "slug": "warp",
+      "category": "productivity",
+      "url": "https://www.warp.dev/?ref=microsignal",
+      "commission": "20% recurring",
+      "keywords": ["warp terminal", "modern terminal", "rust terminal", "ai terminal", "command palette"]
+    }
+  ]
+}

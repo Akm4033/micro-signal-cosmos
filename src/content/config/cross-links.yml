@@ -1,0 +1,75 @@
+cross_links:
+  - from: "how-browsers-actually-render-a-page"
+    to:
+      - "inside-the-modern-cpu"
+      - "webassembly-in-2026"
+      - "self-hosting-101"
+  - from: "training-vs-inference-economics"
+    to:
+      - "how-llms-actually-work"
+      - "build-your-own-rag-from-scratch"
+      - "evaluating-ai-benchmarks-and-evals"
+      - "choosing-a-database-in-2026"
+  - from: "build-your-own-rag-from-scratch"
+    to:
+      - "evaluating-ai-benchmarks-and-evals"
+      - "choosing-a-database-in-2026"
+      - "how-llms-actually-work"
+  - from: "self-hosting-101"
+    to:
+      - "choosing-a-database-in-2026"
+      - "https-deep-dive"
+      - "passkeys-passwordless-auth"
+      - "inside-the-modern-cpu"
+  - from: "inside-the-modern-cpu"
+    to:
+      - "how-browsers-actually-render-a-page"
+      - "webassembly-in-2026"
+      - "training-vs-inference-economics"
+  - from: "webassembly-in-2026"
+    to:
+      - "how-browsers-actually-render-a-page"
+      - "inside-the-modern-cpu"
+      - "self-hosting-101"
+  - from: "https-deep-dive"
+    to:
+      - "passkeys-passwordless-auth"
+      - "self-hosting-101"
+      - "how-browsers-actually-render-a-page"
+  - from: "passkeys-passwordless-auth"
+    to:
+      - "https-deep-dive"
+      - "self-hosting-101"
+      - "choosing-a-database-in-2026"
+  - from: "how-we-know-what-stars-are-made-of"
+    to:
+      - "reading-alien-atmospheres"
+      - "dark-matter-evidence-and-theories"
+      - "nuclear-fusion-progress-and-reality"
+  - from: "reading-alien-atmospheres"
+    to:
+      - "how-we-know-what-stars-are-made-of"
+      - "dark-matter-evidence-and-theories"
+  - from: "dark-matter-evidence-and-theories"
+    to:
+      - "how-we-know-what-stars-are-made-of"
+      - "nuclear-fusion-progress-and-reality"
+  - from: "nuclear-fusion-progress-and-reality"
+    to:
+      - "how-we-know-what-stars-are-made-of"
+      - "dark-matter-evidence-and-theories"
+  - from: "evaluating-ai-benchmarks-and-evals"
+    to:
+      - "how-llms-actually-work"
+      - "build-your-own-rag-from-scratch"
+      - "training-vs-inference-economics"
+  - from: "choosing-a-database-in-2026"
+    to:
+      - "build-your-own-rag-from-scratch"
+      - "self-hosting-101"
+      - "https-deep-dive"
+  - from: "how-llms-actually-work"
+    to:
+      - "training-vs-inference-economics"
+      - "build-your-own-rag-from-scratch"
+      - "evaluating-ai-benchmarks-and-evals"
