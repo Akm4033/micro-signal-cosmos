@@ -113,17 +113,19 @@
            dark:bg-brand-primary/20 dark:text-brand-primary dark:border-brand-primary/40;
   }
 
-  /* Editorial Card with 3D Depth */
-  .editorial-card {
+  /* Editorial Card with 3D Depth & Bottom Bevel */
+  .editorial-card, .card-3d {
     @apply relative overflow-hidden rounded-2xl bg-white
-           border border-neutral-200/90 shadow-[0_4px_16px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)]
+           border border-neutral-200/90 border-b-2 border-b-neutral-300/80
+           shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)]
            transition-all duration-300 ease-out
-           hover:shadow-[0_14px_30px_-4px_rgba(29,78,216,0.12),0_4px_12px_rgba(0,0,0,0.06)]
-           hover:-translate-y-1.5 hover:border-brand-primary/40
-           dark:bg-neutral-900 dark:border-neutral-800;
+           hover:shadow-[0_18px_36px_-6px_rgba(29,78,216,0.14),0_6px_16px_-2px_rgba(0,0,0,0.06)]
+           hover:-translate-y-1.5 hover:border-brand-primary/40 hover:border-b-brand-primary/70
+           dark:bg-neutral-900 dark:border-neutral-800 dark:border-b-neutral-700
+           dark:hover:border-brand-primary/50 dark:hover:border-b-brand-primary;
   }
   .editorial-card__media {
-    @apply relative h-32 sm:h-36 w-full shrink-0 overflow-hidden bg-neutral-100 dark:bg-neutral-800;
+    @apply relative h-32 sm:h-34 w-full shrink-0 overflow-hidden bg-neutral-100 dark:bg-neutral-800;
   }
   .editorial-card__gradient {
     @apply absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-transparent;
@@ -156,6 +158,15 @@
     @apply w-6 h-6 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center text-[10px] font-bold shadow-2xs;
   }
 
+  /* 3D Floating Tile for Badges and Logos */
+  .tile-3d {
+    @apply relative rounded-2xl bg-white
+           shadow-[0_4px_12px_rgba(0,0,0,0.06),0_1px_2px_rgba(0,0,0,0.04)]
+           border border-neutral-200/90 border-b-2 border-b-neutral-300/80
+           transition-all duration-300
+           dark:bg-neutral-800 dark:border-neutral-700 dark:border-b-neutral-600;
+  }
+
   /* Section Badge (inline) */
   .badge {
     @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full
@@ -171,21 +182,28 @@
   .badge--ai { @apply bg-emerald-600/10 text-emerald-600 border-emerald-600/30; }
   .badge--devtools { @apply bg-amber-600/10 text-amber-600 border-amber-600/30; }
 
-  /* Buttons with 3D Depth */
-  .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary
+  /* Physical 3D Push-Buttons */
+  .btn-primary, .btn-3d-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl
+           bg-gradient-to-b from-blue-600 to-brand-primary
            px-6 py-3 text-sm font-bold text-white
-           shadow-[0_3px_0_0_#1e40af] hover:shadow-[0_4px_0_0_#1e40af] hover:-translate-y-0.5
-           active:shadow-[0_1px_0_0_#1e40af] active:translate-y-0.5
+           shadow-[0_4px_0_0_#1e40af,0_8px_16px_-2px_rgba(29,78,216,0.35)]
+           hover:shadow-[0_5px_0_0_#1e40af,0_12px_20px_-2px_rgba(29,78,216,0.45)]
+           hover:-translate-y-0.5
+           active:shadow-[0_1px_0_0_#1e40af,0_2px_4px_rgba(0,0,0,0.2)]
+           active:translate-y-1
            focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2
            transition-all;
   }
-  .btn-secondary {
+  .btn-secondary, .btn-3d-secondary {
     @apply inline-flex items-center justify-center gap-2 rounded-xl
-           border border-neutral-300 bg-white px-6 py-3 text-sm font-semibold text-text-primary
-           shadow-xs hover:border-brand-primary hover:text-brand-primary hover:shadow-sm hover:-translate-y-0.5
-           active:translate-y-0.5
-           dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800
+           border border-neutral-300 border-b-2 border-b-neutral-400/90 bg-white
+           px-6 py-3 text-sm font-semibold text-text-primary
+           shadow-[0_2px_4px_rgba(0,0,0,0.03)]
+           hover:border-brand-primary/60 hover:border-b-brand-primary hover:text-brand-primary
+           hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:-translate-y-0.5
+           active:translate-y-1 active:border-b-neutral-300
+           dark:border-neutral-700 dark:border-b-neutral-600 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800
            focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2
            transition-all;
   }

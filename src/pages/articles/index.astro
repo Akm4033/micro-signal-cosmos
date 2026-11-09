@@ -186,10 +186,10 @@ const archiveUrl = `${siteUrl}/articles/`;
                 data-article-card
                 data-category={categorySlug}
                 data-search-text={searchableText}
-                class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200/90 bg-white shadow-[0_4px_16px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-[0_14px_30px_-4px_rgba(29,78,216,0.12),0_4px_12px_rgba(0,0,0,0.06)] hover:-translate-y-1.5 transition-all duration-300 dark:bg-neutral-900 dark:border-neutral-800"
+                class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_18px_36px_-6px_rgba(29,78,216,0.14),0_6px_16px_-2px_rgba(0,0,0,0.06)] hover:-translate-y-1.5 hover:border-brand-primary/40 hover:border-b-brand-primary/70 transition-all duration-300 dark:bg-neutral-900 dark:border-neutral-800 dark:border-b-neutral-700"
               >
                 <div>
-                  <div class={`relative h-32 sm:h-36 w-full shrink-0 overflow-hidden flex items-center justify-center transition-colors ${
+                  <div class={`relative h-32 sm:h-34 w-full shrink-0 overflow-hidden flex items-center justify-center transition-colors ${
                     categorySlug.includes('tech') ? 'bg-gradient-to-br from-sky-50 via-sky-100/60 to-blue-50 border-b border-sky-100 dark:from-sky-950/30 dark:via-sky-900/20 dark:to-neutral-900 dark:border-sky-900/40' :
                     categorySlug.includes('art') || categorySlug.includes('ai') ? 'bg-gradient-to-br from-emerald-50 via-emerald-100/60 to-teal-50 border-b border-emerald-100 dark:from-emerald-950/30 dark:via-emerald-900/20 dark:to-neutral-900 dark:border-emerald-900/40' :
                     categorySlug.includes('sci') ? 'bg-gradient-to-br from-violet-50 via-purple-100/60 to-indigo-50 border-b border-violet-100 dark:from-violet-950/30 dark:via-violet-900/20 dark:to-neutral-900 dark:border-violet-900/40' :
@@ -201,7 +201,7 @@ const archiveUrl = `${siteUrl}/articles/`;
                     <a href={categoryHref} class="absolute top-2.5 left-2.5 badge badge--featured shadow-xs font-bold text-[10px]">
                       {categoryName}
                     </a>
-                    <div class="relative z-10 p-2.5 rounded-2xl bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08)] border border-neutral-200/80 group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300 dark:bg-neutral-800 dark:border-neutral-700">
+                    <div class="relative z-10 p-2.5 rounded-2xl bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] border border-neutral-200/90 border-b-2 border-b-neutral-300 group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300 dark:bg-neutral-800 dark:border-neutral-700 dark:border-b-neutral-600">
                       <ArticleLogo logo={article.data.logo || categorySlug} category={categorySlug} size="sm" />
                     </div>
                   </div>
