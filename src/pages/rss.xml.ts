@@ -5,10 +5,10 @@ import { getPublishedArticles } from '../data/articles';
 export const GET: APIRoute = async (context) => {
   const publishedArticles = await getPublishedArticles();
 
-  // Determine site base URL (from astro.config.mjs `site` property if configured)
-  const siteUrl = context.site ? context.site.href.replace(/\/$/, '') : '';
-  const channelLink = siteUrl || '/';
-  const feedSelfLink = siteUrl ? `${siteUrl}/rss.xml` : '/rss.xml';
+  // Determine site base URL (from astro.config.mjs `site` property if configured, defaulting to production canonical)
+  const siteUrl = (context.site ? context.site.href.replace(/\/$/, '') : '') || 'https://microsignalcosmos.com';
+  const channelLink = siteUrl;
+  const feedSelfLink = `${siteUrl}/rss.xml`;
 
   const itemsXml = publishedArticles
     .map((article) => {

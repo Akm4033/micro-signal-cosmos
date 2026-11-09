@@ -1,5 +1,5 @@
 
-<section class="relative isolate overflow-hidden bg-[#0B1020]">
+<section class="relative isolate overflow-hidden bg-[#0B0F19]">
   <!-- Background Effects -->
   <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
     <div class="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-blue-500/10 blur-[120px]"></div>
@@ -66,59 +66,85 @@
 
     </div>
 
-    <!-- Hero Visual -->
-    <div class="relative mx-auto flex aspect-square w-full max-w-[480px] items-center justify-center">
+    <!-- Hero Visual / Celestial Orbital Compass -->
+    <div class="relative mx-auto mt-8 flex aspect-square w-full max-w-[340px] items-center justify-center sm:max-w-[420px] lg:mt-0 lg:max-w-[480px]">
 
-      <!-- Outer Orbital Ring -->
-      <div class="absolute inset-4 rounded-full border border-sky-400/10"></div>
+      <!-- Central Core Glow -->
+      <div class="absolute h-64 w-64 rounded-full bg-gradient-to-br from-sky-500/20 via-blue-600/15 to-purple-600/20 blur-3xl"></div>
 
-      <!-- Middle Orbital Ring -->
-      <div class="absolute inset-12 rounded-full border border-purple-400/15"></div>
+      <!-- Outer Orbital Ring (Hardware-Accelerated 45s Clockwise Rotation) -->
+      <div class="animate-cosmos-orbit absolute inset-2 sm:inset-4 rounded-full border border-sky-400/25 border-dashed">
+        <!-- Orbiting celestial beacon 1 -->
+        <div class="absolute -top-1.5 left-1/2 -translate-x-1/2 h-3 w-3 rounded-full bg-[#00D2FF] shadow-[0_0_12px_#00D2FF]"></div>
+        <!-- Orbiting celestial beacon 2 -->
+        <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 h-2.5 w-2.5 rounded-full bg-[#A855F7] shadow-[0_0_12px_#A855F7]"></div>
+      </div>
+
+      <!-- Middle Counter-Rotating Ring (30s Counter-Clockwise Rotation) -->
+      <div class="animate-cosmos-orbit-reverse absolute inset-10 sm:inset-14 rounded-full border border-purple-400/25">
+        <!-- Celestial marker nodes -->
+        <div class="absolute top-1/2 -left-1 -translate-y-1/2 h-2 w-2 rounded-full bg-sky-300 shadow-[0_0_8px_#38BDF8]"></div>
+        <div class="absolute top-1/2 -right-1 -translate-y-1/2 h-2 w-2 rounded-full bg-purple-300 shadow-[0_0_8px_#A855F7]"></div>
+      </div>
 
       <!-- Inner Orbital Ring -->
-      <div class="absolute inset-24 rounded-full border border-sky-400/20"></div>
+      <div class="absolute inset-20 sm:inset-26 rounded-full border border-sky-400/30"></div>
 
-      <!-- Central Glow -->
-      <div class="absolute h-64 w-64 rounded-full bg-gradient-to-br from-sky-500/20 to-purple-500/20 blur-3xl"></div>
-
-      <!-- Central Graphic -->
-      <div class="relative flex h-44 w-44 items-center justify-center rounded-full border border-sky-400/30 bg-gradient-to-br from-[#172B49] to-[#17152F] shadow-[0_0_80px_rgba(56,189,248,0.12)]">
-
+      <!-- Central Compass Core Graphic -->
+      <div class="relative flex h-36 w-36 sm:h-44 sm:w-44 items-center justify-center rounded-full border border-sky-400/30 bg-gradient-to-br from-[#151C2E] via-[#172B49] to-[#1E1733] shadow-[0_0_80px_rgba(56,189,248,0.2)]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 120 120"
           fill="none"
-          class="h-28 w-28"
+          width="112"
+          height="112"
+          class="h-24 w-24 sm:h-28 sm:w-28 animate-cosmos-orbit-reverse"
           role="img"
-          aria-label="Abstract interconnected scientific signal illustration"
+          aria-label="Abstract interconnected scientific signal compass"
         >
-          <circle cx="60" cy="60" r="42" stroke="#38BDF8" stroke-opacity=".35" stroke-width="1.5"/>
-          <circle cx="60" cy="60" r="29" stroke="#A78BFA" stroke-opacity=".5" stroke-width="1.5"/>
-          <path d="M18 60H102M60 18V102M30 30L90 90M90 30L30 90" stroke="#38BDF8" stroke-opacity=".4" stroke-width="1.5"/>
-          <circle cx="60" cy="60" r="13" fill="#38BDF8" fill-opacity=".2" stroke="#38BDF8" stroke-width="2"/>
-          <circle cx="60" cy="60" r="5" fill="#38BDF8"/>
-          <circle cx="18" cy="60" r="3" fill="#A78BFA"/>
-          <circle cx="102" cy="60" r="3" fill="#38BDF8"/>
-          <circle cx="60" cy="18" r="3" fill="#38BDF8"/>
-          <circle cx="60" cy="102" r="3" fill="#A78BFA"/>
+          <circle cx="60" cy="60" r="42" stroke="#38BDF8" stroke-opacity=".35" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <circle cx="60" cy="60" r="29" stroke="#A855F7" stroke-opacity=".5" stroke-width="1.5"/>
+          <path d="M18 60H102M60 18V102M30 30L90 90M90 30L30 90" stroke="#00D2FF" stroke-opacity=".4" stroke-width="1.5"/>
+          <circle cx="60" cy="60" r="13" fill="#00D2FF" fill-opacity=".2" stroke="#00D2FF" stroke-width="2"/>
+          <circle cx="60" cy="60" r="5" fill="#00D2FF"/>
+          <circle cx="18" cy="60" r="3" fill="#A855F7"/>
+          <circle cx="102" cy="60" r="3" fill="#00D2FF"/>
+          <circle cx="60" cy="18" r="3" fill="#00D2FF"/>
+          <circle cx="60" cy="102" r="3" fill="#A855F7"/>
         </svg>
-
       </div>
 
-      <!-- Floating Information Cards -->
-      <div class="absolute left-0 top-1/4 rounded-xl border border-white/10 bg-[#141C2E]/90 px-4 py-3 shadow-xl backdrop-blur-md sm:left-2">
-        <p class="text-xs font-semibold text-sky-400">TECHNOLOGY</p>
-        <p class="mt-1 text-sm font-medium text-white">Explore Innovation</p>
+      <!-- Floating Frosted-Glass Badge 1: TECHNOLOGY -->
+      <div
+        class="floating-badge absolute -left-2 top-8 sm:left-1 sm:top-12 z-20 rounded-xl px-4 py-3 transition-transform hover:scale-105"
+        style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(56, 189, 248, 0.25); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.15);"
+      >
+        <div class="flex items-center gap-2">
+          <span class="h-2 w-2 rounded-full bg-[#00D2FF] shadow-[0_0_8px_#00d2ff] animate-pulse"></span>
+          <p style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; color: #38bdf8; text-transform: uppercase;">
+            TECHNOLOGY
+          </p>
+        </div>
+        <p class="mt-1" style="font-size: 0.85rem; font-weight: 500; color: #e2e8f0;">
+          Explore Innovation
+        </p>
       </div>
 
-      <div class="absolute bottom-1/4 right-0 rounded-xl border border-white/10 bg-[#141C2E]/90 px-4 py-3 shadow-xl backdrop-blur-md sm:right-2">
-        <p class="text-xs font-semibold text-purple-400">SCIENCE & AI</p>
-        <p class="mt-1 text-sm font-medium text-white">Understand Discovery</p>
+      <!-- Floating Frosted-Glass Badge 2: SCIENCE & AI -->
+      <div
+        class="floating-badge absolute -right-2 bottom-8 sm:right-1 sm:bottom-12 z-20 rounded-xl px-4 py-3 transition-transform hover:scale-105"
+        style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(168, 85, 247, 0.25); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(168, 85, 247, 0.15);"
+      >
+        <div class="flex items-center gap-2">
+          <span class="h-2 w-2 rounded-full bg-[#A855F7] shadow-[0_0_8px_#a855f7] animate-pulse"></span>
+          <p style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; color: #a78bfa; text-transform: uppercase;">
+            SCIENCE & AI
+          </p>
+        </div>
+        <p class="mt-1" style="font-size: 0.85rem; font-weight: 500; color: #e2e8f0;">
+          Understand Discovery
+        </p>
       </div>
-
-      <!-- Decorative Signal Points -->
-      <div class="absolute right-1/4 top-8 h-3 w-3 rounded-full bg-sky-400 shadow-[0_0_20px_#38BDF8]"></div>
-      <div class="absolute bottom-12 left-1/4 h-2 w-2 rounded-full bg-purple-400 shadow-[0_0_20px_#A78BFA]"></div>
 
     </div>
 

@@ -11,7 +11,7 @@ const navItems = [
 ];
 ---
 
-<header class="sticky top-0 z-50 border-b border-white/10 bg-[#0B1020]/95 backdrop-blur-lg">
+<header class="sticky top-0 z-50 border-b border-white/10 bg-[#0B0F19]/95 backdrop-blur-lg">
   <div class="container-main">
 
     <div class="flex min-h-20 items-center justify-between gap-6">
@@ -20,7 +20,7 @@ const navItems = [
       <a href="/" class="shrink-0" aria-label="Micro Signal Cosmos homepage">
         <span class="block text-xl font-bold tracking-tight text-white sm:text-2xl">
           Micro Signal
-          <span class="text-sky-400">Cosmos</span>
+          <span class="text-[#00D2FF]">Cosmos</span>
         </span>
         <span class="mt-1 block text-[10px] tracking-[0.2em] text-slate-400 uppercase">
           Discover More. Understand Better.
@@ -32,7 +32,7 @@ const navItems = [
         {navItems.map((item) => (
           <a
             href={item.href}
-            class="text-sm font-medium text-slate-300 transition-colors hover:text-sky-400"
+            class="text-sm font-medium text-slate-300 transition-colors hover:text-[#00D2FF]"
             title={item.name}
           >
             {item.shortName || item.name}
@@ -41,15 +41,17 @@ const navItems = [
       </nav>
 
       <!-- Mobile Menu -->
-      <details class="relative lg:hidden">
+      <details class="relative lg:hidden" id="mobile-nav-details">
         <summary
-          class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-lg border border-white/10 text-white hover:border-sky-400"
+          class="flex h-12 w-12 min-h-[48px] min-w-[48px] cursor-pointer list-none items-center justify-center rounded-lg border border-white/10 text-white hover:border-[#00D2FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00D2FF]"
           aria-label="Toggle navigation menu"
+          aria-expanded="false"
+          id="mobile-nav-toggle"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="22"
-            height="22"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -64,13 +66,13 @@ const navItems = [
 
         <nav
           aria-label="Mobile navigation"
-          class="absolute right-0 top-14 z-50 w-72 rounded-xl border border-white/10 bg-[#141C2E] p-4 shadow-2xl"
+          class="absolute right-0 top-14 z-50 w-72 rounded-xl border border-white/10 bg-[#151C2E] p-4 shadow-2xl"
         >
           <div class="flex flex-col gap-1">
             {navItems.map((item) => (
               <a
                 href={item.href}
-                class="rounded-lg px-4 py-3 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-sky-400"
+                class="flex min-h-[48px] items-center rounded-lg px-4 py-3 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-[#00D2FF]"
               >
                 {item.name}
               </a>
@@ -83,3 +85,13 @@ const navItems = [
 
   </div>
 </header>
+
+<script is:inline>
+  const details = document.getElementById('mobile-nav-details');
+  const toggle = document.getElementById('mobile-nav-toggle');
+  if (details && toggle) {
+    details.addEventListener('toggle', () => {
+      toggle.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+    });
+  }
+</script>

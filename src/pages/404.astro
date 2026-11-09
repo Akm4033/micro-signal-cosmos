@@ -11,7 +11,7 @@ import { CATEGORIES } from '../data/categories';
 >
   <Header />
 
-  <main id="main-content" class="relative isolate flex min-h-[calc(100vh-80px-340px)] items-center justify-center overflow-hidden bg-[#0B1020] py-16 sm:py-24">
+  <main id="main-content" class="relative isolate flex min-h-[calc(100vh-80px-340px)] items-center justify-center overflow-hidden bg-[#0B0F19] py-16 sm:py-24">
     <!-- Atmospheric Cosmic Glow -->
     <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
       <div class="absolute -top-40 right-1/4 h-96 w-96 rounded-full bg-blue-500/10 blur-[120px]"></div>
@@ -27,7 +27,7 @@ import { CATEGORIES } from '../data/categories';
           <div class="absolute h-48 w-48 rounded-full bg-gradient-to-br from-sky-500/20 to-purple-500/20 blur-2xl" aria-hidden="true"></div>
 
           <!-- Inline Cosmic Signal Graphic -->
-          <div class="relative mb-6 flex h-32 w-32 items-center justify-center rounded-full border border-sky-400/30 bg-gradient-to-br from-[#141C2E] to-[#1C1733] shadow-[0_0_60px_rgba(56,189,248,0.15)]">
+          <div class="relative mb-6 flex h-32 w-32 items-center justify-center rounded-full border border-sky-400/30 bg-gradient-to-br from-[#151C2E] to-[#1C1733] shadow-[0_0_60px_rgba(0,210,255,0.15)]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 80 80"
@@ -65,7 +65,7 @@ import { CATEGORIES } from '../data/categories';
         </h1>
 
         <!-- Supporting Message (Exact required wording) -->
-        <p class="mx-auto mt-6 max-w-lg text-base leading-8 text-slate-400 sm:text-lg">
+        <p class="mx-auto mt-6 max-w-lg text-base leading-8 text-slate-300 sm:text-lg">
           The page you're looking for seems to have drifted beyond our observable universe.
         </p>
 
@@ -97,7 +97,7 @@ import { CATEGORIES } from '../data/categories';
             {CATEGORIES.map((category) => (
               <a
                 href={category.href}
-                class="rounded-lg border border-white/10 bg-[#141C2E] px-4 py-2 text-xs font-medium text-slate-300 transition-all hover:-translate-y-0.5 hover:border-sky-400/40 hover:text-sky-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-400"
+                class="rounded-lg border border-white/10 bg-[#151C2E] px-4 py-2 text-xs font-medium text-slate-300 transition-all hover:-translate-y-0.5 hover:border-sky-400/40 hover:text-sky-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-400"
                 title={`Explore ${category.name} archive`}
               >
                 {category.name}

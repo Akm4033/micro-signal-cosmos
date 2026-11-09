@@ -19,35 +19,39 @@ const {
   jsonLd,
 } = Astro.props;
 
-// Determine canonical and production URL:
-// Only emit canonical & og:url if an explicit canonicalURL prop is provided OR if Astro.site is configured in astro.config.mjs.
-// This prevents emitting invalid "http://localhost:4321/" URLs in production builds before a real domain is purchased.
-const canonical = canonicalURL || (Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined);
+// Canonical URL configuration: Target upcoming production custom domain
+const productionBase = 'https://microsignalcosmos.com';
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : productionBase;
+const canonical = canonicalURL || new URL(Astro.url.pathname, productionBase).href;
 
-// Resolve social sharing image:
-// Only emit an absolute image URL if an image prop is provided and either already absolute or resolvable against Astro.site.
-let resolvedImage: string | undefined = undefined;
+// Resolve social sharing image (default to high-resolution brand vector if none provided):
+let resolvedImage: string = `${productionBase}/favicon.svg`;
 if (image) {
   if (image.startsWith('http://') || image.startsWith('https://')) {
     resolvedImage = image;
-  } else if (Astro.site) {
-    resolvedImage = new URL(image, Astro.site).href;
+  } else {
+    resolvedImage = new URL(image, productionBase).href;
   }
 }
 
-// Select Twitter card format based on image availability
-const twitterCard = resolvedImage ? 'summary_large_image' : 'summary';
+// Twitter Card Format: summary_large_image for elite editorial presentation
+const twitterCard = 'summary_large_image';
 
 // Base Schema.org Structured Data
-const siteUrl = Astro.site?.href.replace(/\/$/, '') || '';
 const defaultJsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
       '@type': 'Organization',
-      '@id': siteUrl ? `${siteUrl}/#organization` : '#organization',
+      '@id': `${productionBase}/#organization`,
       name: 'Micro Signal Cosmos',
-      url: siteUrl || '/',
+      url: productionBase,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${productionBase}/favicon.svg`,
+        width: 512,
+        height: 512,
+      },
       description: 'Discover More. Understand Better. Exploring technology, science, artificial intelligence, and digital innovations.',
       sameAs: [
         'https://www.facebook.com/profile.php?id=61596288235891',
@@ -56,12 +60,12 @@ const defaultJsonLd = {
     },
     {
       '@type': 'WebSite',
-      '@id': siteUrl ? `${siteUrl}/#website` : '#website',
+      '@id': `${productionBase}/#website`,
       name: 'Micro Signal Cosmos',
-      url: siteUrl || '/',
+      url: productionBase,
       description: description,
       publisher: {
-        '@id': siteUrl ? `${siteUrl}/#organization` : '#organization',
+        '@id': `${productionBase}/#organization`,
       },
     },
   ],
@@ -79,7 +83,7 @@ const finalJsonLd = jsonLd || defaultJsonLd;
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#0B1020" />
+    <meta name="theme-color" content="#0B0F19" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

@@ -11,13 +11,13 @@ import { CATEGORIES } from '../data/categories';
 >
   <Header />
 
-  <main id="main-content" class="bg-[#0B1020] py-16 sm:py-24">
+  <main id="main-content" class="bg-[#0B0F19] py-16 sm:py-24">
     <div class="container-main">
 
       <!-- Hero Section -->
       <div class="mx-auto max-w-3xl text-center">
         <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-sky-400/20 bg-sky-400/5 px-4 py-2">
-          <span class="h-2 w-2 rounded-full bg-sky-400"></span>
+          <span class="h-2 w-2 rounded-full bg-[#00D2FF]"></span>
           <span class="text-xs font-semibold tracking-wider text-sky-300 uppercase">
             About the Publication
           </span>
@@ -30,14 +30,14 @@ import { CATEGORIES } from '../data/categories';
           </span>
         </h1>
 
-        <p class="mt-7 text-base leading-8 text-slate-400 sm:text-lg">
+        <p class="mt-7 text-base leading-8 text-slate-300 sm:text-lg">
           Micro Signal Cosmos is a modern digital technology and science publication dedicated to translating complex discoveries, artificial intelligence advancements, and technological shifts into clear, engaging, and accessible knowledge.
         </p>
       </div>
 
       <!-- Core Mission Card -->
-      <div class="mx-auto mt-16 max-w-4xl rounded-2xl border border-white/10 bg-[#141C2E] p-8 sm:p-12">
-        <span class="text-xs font-bold tracking-[0.2em] text-sky-400 uppercase">
+      <div class="mx-auto mt-16 max-w-4xl rounded-2xl border border-white/10 bg-[#151C2E] p-8 sm:p-12">
+        <span class="text-xs font-bold tracking-[0.2em] text-[#00D2FF] uppercase">
           Our Editorial Mission
         </span>
 
@@ -45,7 +45,7 @@ import { CATEGORIES } from '../data/categories';
           Finding the Signal in a Universe of Noise
         </h2>
 
-        <div class="mt-6 space-y-5 text-sm leading-8 text-slate-400 sm:text-base">
+        <div class="mt-6 space-y-5 text-sm leading-8 text-slate-300 sm:text-base">
           <p>
             In today's fast-moving digital world, information is everywhere, but genuine understanding is rare. Daily feeds are flooded with sensational headlines, jargon-heavy research papers, and surface-level summaries that leave readers more confused than informed.
           </p>
@@ -76,7 +76,7 @@ import { CATEGORIES } from '../data/categories';
 
         <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {CATEGORIES.slice(0, 6).map((cat) => (
-            <div class="rounded-xl border border-white/10 bg-[#141C2E] p-6 transition-all hover:border-sky-400/30">
+            <div class="rounded-xl border border-white/10 bg-[#151C2E] p-6 transition-all hover:border-sky-400/30">
               <span class:list={[
                 'flex h-10 w-10 items-center justify-center rounded-lg border text-xs font-bold mb-5',
                 cat.accent === 'sky' ? 'border-sky-400/20 bg-sky-400/10 text-sky-400' : 'border-purple-400/20 bg-purple-400/10 text-purple-400'
@@ -84,7 +84,7 @@ import { CATEGORIES } from '../data/categories';
                 {cat.icon}
               </span>
               <h3 class="text-lg font-bold text-white">{cat.name}</h3>
-              <p class="mt-2 text-sm leading-6 text-slate-400">{cat.description}</p>
+              <p class="mt-2 text-sm leading-6 text-slate-300">{cat.description}</p>
             </div>
           ))}
         </div>
@@ -97,26 +97,26 @@ import { CATEGORIES } from '../data/categories';
         </h2>
 
         <div class="mt-10 grid gap-8 sm:grid-cols-3">
-          <div class="rounded-xl border border-white/10 bg-[#0E1628] p-6">
-            <span class="text-xs font-bold text-sky-400">01</span>
+          <div class="rounded-xl border border-white/10 bg-[#151C2E] p-6">
+            <span class="text-xs font-bold text-[#00D2FF]">01</span>
             <h3 class="mt-2 text-lg font-bold text-white">Accuracy First</h3>
-            <p class="mt-2 text-sm leading-6 text-slate-400">
+            <p class="mt-2 text-sm leading-6 text-slate-300">
               We fact-check our concepts, cite primary scientific sources, and verify technical explanations before publishing.
             </p>
           </div>
 
-          <div class="rounded-xl border border-white/10 bg-[#0E1628] p-6">
+          <div class="rounded-xl border border-white/10 bg-[#151C2E] p-6">
             <span class="text-xs font-bold text-purple-400">02</span>
             <h3 class="mt-2 text-lg font-bold text-white">Clarity Without Hype</h3>
-            <p class="mt-2 text-sm leading-6 text-slate-400">
+            <p class="mt-2 text-sm leading-6 text-slate-300">
               We avoid sensationalism and clickbait. We explain what technologies actually do, what their limitations are, and why they matter.
             </p>
           </div>
 
-          <div class="rounded-xl border border-white/10 bg-[#0E1628] p-6">
-            <span class="text-xs font-bold text-sky-400">03</span>
+          <div class="rounded-xl border border-white/10 bg-[#151C2E] p-6">
+            <span class="text-xs font-bold text-[#00D2FF]">03</span>
             <h3 class="mt-2 text-lg font-bold text-white">Respect for the Reader</h3>
-            <p class="mt-2 text-sm leading-6 text-slate-400">
+            <p class="mt-2 text-sm leading-6 text-slate-300">
               Your attention is valuable. We write concise, structured, and visually engaging editorial pieces that respect your time.
             </p>
           </div>

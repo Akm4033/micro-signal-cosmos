@@ -28,6 +28,13 @@ const { category, articles } = Astro.props;
 
 // Other categories that currently have published articles (for recommendation in empty state)
 const allPublished = await getPublishedArticles();
+const fallbackArticles = allPublished
+  .filter((a) => {
+    const artCat = a.data.category.toLowerCase().trim();
+    return artCat !== category.slug.toLowerCase().trim() && artCat !== category.name.toLowerCase().trim();
+  })
+  .slice(0, 3);
+
 const categoriesWithArticles = CATEGORIES.filter((c) => {
   return allPublished.some((a) => {
     const artCat = a.data.category.toLowerCase().trim();
@@ -35,8 +42,8 @@ const categoriesWithArticles = CATEGORIES.filter((c) => {
   });
 });
 // JSON-LD Structured Data (CollectionPage + BreadcrumbList)
-const siteUrl = Astro.site?.href.replace(/\/$/, '') || '';
-const categoryUrl = siteUrl ? `${siteUrl}/category/${category.slug}/` : `/category/${category.slug}/`;
+const siteUrl = Astro.site?.href.replace(/\/$/, '') || 'https://microsignalcosmos.com';
+const categoryUrl = `${siteUrl}/category/${category.slug}/`;
 
 const categoryJsonLd = {
   '@context': 'https://schema.org',
@@ -84,7 +91,7 @@ const categoryJsonLd = {
 >
   <Header />
 
-  <main id="main-content" class="bg-[#0B1020] py-12 sm:py-16 lg:py-20">
+  <main id="main-content" class="bg-[#0B0F19] py-12 sm:py-16 lg:py-20">
     <div class="container-main">
 
       <!-- Breadcrumbs Navigation -->
@@ -118,7 +125,7 @@ const categoryJsonLd = {
       <header class="mx-auto max-w-4xl text-center sm:text-left">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <!-- Category Pillar Badge -->
-          <div class="inline-flex items-center gap-2.5 self-center sm:self-start rounded-full border border-white/10 bg-[#141C2E] px-4 py-1.5 text-xs font-semibold tracking-wider uppercase">
+          <div class="inline-flex items-center gap-2.5 self-center sm:self-start rounded-full border border-white/10 bg-[#151C2E] px-4 py-1.5 text-xs font-semibold tracking-wider uppercase">
             <span
               class:list={[
                 'h-2 w-2 rounded-full shadow-[0_0_10px_currentColor]',
@@ -183,7 +190,7 @@ const categoryJsonLd = {
                       ? cat.accent === 'purple'
                         ? 'bg-purple-400 text-slate-950 font-bold shadow-[0_0_15px_rgba(167,139,250,0.3)]'
                         : 'bg-sky-400 text-slate-950 font-bold shadow-[0_0_15px_rgba(56,189,248,0.3)]'
-                      : 'border border-white/10 bg-[#141C2E] text-slate-300 hover:border-white/20 hover:text-white',
+                      : 'border border-white/10 bg-[#151C2E] text-slate-300 hover:border-white/20 hover:text-white',
                   ]}
                 >
                   <span
@@ -211,7 +218,7 @@ const categoryJsonLd = {
           Articles in {category.name}
         </h2>
 
-        {articles.length > 0 ? (
+        {articles.length > 0 && (
           <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {articles.map((article) => {
               const slug = article.data.slug || article.id;
@@ -223,7 +230,7 @@ const categoryJsonLd = {
               const isoDate = article.data.publishDate.toISOString();
 
               return (
-                <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#141C2E] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-sky-400/40">
+                <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#151C2E] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-sky-400/40">
                   <div>
                     <div class="flex items-center justify-between gap-2 text-xs">
                       <span
@@ -248,7 +255,7 @@ const categoryJsonLd = {
                       </a>
                     </h3>
 
-                    <p class="mt-3 text-sm leading-relaxed text-slate-400 line-clamp-3">
+                    <p class="mt-3 text-sm leading-relaxed text-slate-300 line-clamp-3">
                       {article.data.description}
                     </p>
                   </div>
@@ -272,12 +279,14 @@ const categoryJsonLd = {
               );
             })}
           </div>
-        ) : (
-          <div class="mx-auto max-w-2xl rounded-2xl border border-white/10 bg-[#141C2E] p-8 sm:p-14 text-center">
+        )}
+
+        {articles.length < 2 && (
+          <div class={`mx-auto max-w-4xl rounded-2xl border border-white/10 bg-[#151C2E] p-8 sm:p-12 text-center ${articles.length > 0 ? 'mt-14' : ''}`}>
             <!-- Cosmic Radar Icon -->
-            <div class="relative mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-sky-400/30 bg-sky-400/5 shadow-[0_0_40px_rgba(56,189,248,0.12)]">
+            <div class="relative mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-sky-400/30 bg-sky-400/5 shadow-[0_0_40px_rgba(0,210,255,0.12)]">
               <svg
-                class="h-12 w-12 text-sky-400"
+                class="h-10 w-10 text-[#00D2FF]"
                 viewBox="0 0 64 64"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -288,31 +297,55 @@ const categoryJsonLd = {
                 <circle cx="32" cy="32" r="20" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.45" />
                 <circle cx="32" cy="32" r="12" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.75" />
                 <!-- Center celestial signal dot -->
-                <circle cx="32" cy="32" r="4" fill="#38BDF8" />
+                <circle cx="32" cy="32" r="4" fill="#00D2FF" />
                 <!-- Beam pulse line -->
-                <path d="M32 32L50 14" stroke="#A78BFA" stroke-width="2" stroke-linecap="round" />
-                <circle cx="50" cy="14" r="2" fill="#A78BFA" />
+                <path d="M32 32L50 14" stroke="#A855F7" stroke-width="2" stroke-linecap="round" />
+                <circle cx="50" cy="14" r="2" fill="#A855F7" />
               </svg>
             </div>
 
-            <div class="mt-6 inline-flex items-center gap-2 rounded-full border border-sky-400/20 bg-sky-400/5 px-3 py-1">
-              <span class="h-1.5 w-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+            <div class="mt-5 inline-flex items-center gap-2 rounded-full border border-sky-400/20 bg-sky-400/5 px-3 py-1">
+              <span class="h-1.5 w-1.5 rounded-full bg-[#00D2FF] animate-pulse"></span>
               <span class="text-xs font-semibold uppercase tracking-wider text-sky-300">
-                Editorial In Progress
+                Editorial Pipeline Active
               </span>
             </div>
 
-            <h3 class="mt-4 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-              Articles Arriving Soon
+            <h3 class="mt-4 text-xl font-bold tracking-tight text-white sm:text-2xl">
+              New deep dives arriving this week. Explore our latest featured articles below.
             </h3>
 
-            <p class="mt-3 text-sm sm:text-base leading-relaxed text-slate-400">
-              Our editorial desk is currently preparing deep-dive analyses, practical guides, and foundational articles for <strong class="text-white font-medium">{category.name}</strong>.
+            <p class="mt-3 text-sm sm:text-base leading-relaxed text-slate-300 max-w-xl mx-auto">
+              {articles.length === 0
+                ? `Our editorial desk is finalizing our inaugural briefings for ${category.name}. In the meantime, explore our latest published investigations across the cosmos:`
+                : `Our editorial team is authoring additional deep dives for ${category.name}. In the meantime, explore these recommended featured analyses:`}
             </p>
 
-            <p class="mt-2 text-xs sm:text-sm text-slate-400">
-              In the meantime, explore our published insights in other categories or return to the homepage.
-            </p>
+            <!-- Quick Cards Linking to Published Articles -->
+            {fallbackArticles.length > 0 && (
+              <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 text-left">
+                {fallbackArticles.map((fallbackArt) => {
+                  const fbSlug = fallbackArt.data.slug || fallbackArt.id;
+                  return (
+                    <a
+                      href={`/articles/${fbSlug}/`}
+                      class="group block rounded-xl border border-white/10 bg-[#0B0F19] p-5 transition-all duration-200 hover:border-sky-400/40 hover:-translate-y-0.5"
+                    >
+                      <span class="text-[10px] font-bold uppercase tracking-wider text-sky-400">
+                        {fallbackArt.data.category}
+                      </span>
+                      <h4 class="mt-1 text-sm font-semibold text-white group-hover:text-sky-300 line-clamp-2">
+                        {fallbackArt.data.title}
+                      </h4>
+                      <div class="mt-3 flex items-center justify-between text-xs text-slate-400">
+                        <span>{fallbackArt.data.readingTime}</span>
+                        <span class="text-sky-400 group-hover:translate-x-0.5 transition-transform font-medium">Read →</span>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+            )}
 
             <!-- Quick Access to Active Categories -->
             <div class="mt-8 border-t border-white/5 pt-6">
