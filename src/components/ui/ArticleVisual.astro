@@ -1,0 +1,384 @@
+---
+interface Props {
+  slug?: string;
+  category?: 'tech' | 'science' | 'ai' | 'devtools' | string;
+  logo?: string;
+  class?: string;
+}
+
+const {
+  slug = '',
+  category = 'tech',
+  logo = '',
+  class: className = '',
+} = Astro.props;
+
+// Determine category theme
+const cat = category.toLowerCase();
+const isScience = cat.includes('sci');
+const isAI = cat.includes('ai') || cat.includes('art');
+const isDevTools = cat.includes('dev') || cat.includes('tool');
+const isTech = !isScience && !isAI && !isDevTools;
+
+// Map slug to visual archetype
+const key = slug.toLowerCase();
+---
+
+<div class={`relative w-full h-full overflow-hidden flex items-center justify-center select-none ${className}`}>
+  <!-- Subtle Ambient Animated Glow on Card Hover -->
+  <div class="absolute inset-0 pointer-events-none opacity-30 group-hover:opacity-75 transition-opacity duration-500">
+    {isTech && (
+      <div class="absolute -top-10 -right-10 w-44 h-44 rounded-full bg-sky-400/20 blur-2xl group-hover:bg-sky-400/35 transition-all"></div>
+    )}
+    {isAI && (
+      <div class="absolute -top-10 -right-10 w-44 h-44 rounded-full bg-emerald-400/20 blur-2xl group-hover:bg-emerald-400/35 transition-all"></div>
+    )}
+    {isScience && (
+      <div class="absolute -top-10 -right-10 w-44 h-44 rounded-full bg-purple-500/20 blur-2xl group-hover:bg-purple-500/35 transition-all"></div>
+    )}
+    {isDevTools && (
+      <div class="absolute -top-10 -right-10 w-44 h-44 rounded-full bg-amber-400/20 blur-2xl group-hover:bg-amber-400/35 transition-all"></div>
+    )}
+  </div>
+
+  <!-- Background Technical Grid Lines -->
+  <div class="absolute inset-0 opacity-20 pointer-events-none" aria-hidden="true">
+    <div class="w-full h-full bg-[radial-gradient(#94A3B8_1px,transparent_1px)] [background-size:14px_14px] dark:opacity-15"></div>
+  </div>
+
+  <!-- Dynamic Topic 2D/3D Graphic with Perspective & Interactive Hover Lift -->
+  <div class="relative z-10 w-full h-full flex items-center justify-center p-3 transition-transform duration-500 ease-out group-hover:scale-105 group-hover:-translate-y-1">
+    
+    {/* 1. CHOOSING A DATABASE (3D Isometric Data Cylinder & Query Engine) */}
+    {(key.includes('database') || logo === 'database') && (
+      <svg class="w-full h-full max-h-28 text-amber-500" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="db-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.8" />
+            <stop offset="100%" stop-color="#d97706" stop-opacity="0.2" />
+          </linearGradient>
+          <linearGradient id="db-grad-2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8" />
+            <stop offset="100%" stop-color="#0284c7" stop-opacity="0.2" />
+          </linearGradient>
+        </defs>
+        <!-- Relational Database Cylinder Stack (3D Isometric) -->
+        <g transform="translate(60, 20)">
+          <!-- Top Ellipse -->
+          <ellipse cx="40" cy="15" rx="35" ry="12" fill="url(#db-grad-1)" stroke="#f59e0b" stroke-width="1.5"/>
+          <path d="M5 15v16c0 6.6 15.7 12 35 12s35-5.4 35-12V15" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
+          <path d="M5 31v16c0 6.6 15.7 12 35 12s35-5.4 35-12V31" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <path d="M5 47v16c0 6.6 15.7 12 35 12s35-5.4 35-12V47" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
+          <!-- Active Table Rows with 3D Depth -->
+          <line x1="20" y1="28" x2="60" y2="28" stroke="#fef3c7" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="20" y1="44" x2="52" y2="44" stroke="#fef3c7" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="20" y1="60" x2="58" y2="60" stroke="#fef3c7" stroke-width="1.5" stroke-linecap="round"/>
+        </g>
+        <!-- Floating Query Index Node (Right) -->
+        <g transform="translate(142, 28)" class="transition-transform duration-300 group-hover:translate-x-1">
+          <rect width="32" height="20" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+          <text x="16" y="14" fill="#38bdf8" font-size="8" font-weight="bold" text-anchor="middle" font-family="monospace">SQL</text>
+          <path d="M-8 10L0 10" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="2 2"/>
+        </g>
+        <!-- Floating Vector Node (Left) -->
+        <g transform="translate(24, 45)" class="transition-transform duration-300 group-hover:-translate-x-1">
+          <circle cx="12" cy="12" r="12" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+          <text x="12" y="16" fill="#10b981" font-size="7" font-weight="bold" text-anchor="middle" font-family="monospace">vec</text>
+          <path d="M24 12L36 12" stroke="#10b981" stroke-width="1.5" stroke-dasharray="2 2"/>
+        </g>
+      </svg>
+    )}
+
+    {/* 2. PASSKEYS & WEBAUTHN (3D Security Key & Biometric Shield) */}
+    {(key.includes('passkey') || logo === 'key') && (
+      <svg class="w-full h-full max-h-28 text-amber-500" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Center Hardware Passkey -->
+        <g transform="translate(70, 15)">
+          <rect x="0" y="10" width="38" height="52" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+          <rect x="10" y="2" width="18" height="12" rx="3" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5"/>
+          <!-- Gold USB Contacts -->
+          <line x1="14" y1="5" x2="14" y2="10" stroke="#fbbf24" stroke-width="1.5"/>
+          <line x1="24" y1="5" x2="24" y2="10" stroke="#fbbf24" stroke-width="1.5"/>
+          <!-- Biometric Fingerprint Sensor with Glowing Rings -->
+          <circle cx="19" cy="36" r="10" fill="#f59e0b" fill-opacity="0.1" stroke="#f59e0b" stroke-width="1.5"/>
+          <path d="M14 36c0-2.8 2.2-5 5-5s5 2.2 5 5c0 2-1 3.5-2.5 4.5" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="19" cy="36" r="2" fill="#fbbf24"/>
+        </g>
+        <!-- Cryptographic Public-Private Key Pair Badges -->
+        <g transform="translate(125, 25)" class="transition-transform duration-300 group-hover:translate-x-1">
+          <circle cx="16" cy="16" r="14" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+          <path d="M11 16l3 3 7-7" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <g transform="translate(25, 30)" class="transition-transform duration-300 group-hover:-translate-x-1">
+          <rect width="30" height="24" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+          <text x="15" y="16" fill="#38bdf8" font-size="8" font-weight="bold" text-anchor="middle" font-family="monospace">FIDO2</text>
+        </g>
+      </svg>
+    )}
+
+    {/* 3. HTTPS & TLS 1.3 (3D Cryptographic Shield & 1-RTT Handshake) */}
+    {(key.includes('https') || logo === 'shield') && (
+      <svg class="w-full h-full max-h-28 text-sky-500" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 3D Security Shield Core -->
+        <g transform="translate(80, 15)">
+          <path d="M20 5 L38 12 C38 32 20 46 20 48 C20 46 2 32 2 12 Z" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+          <path d="M20 9 L34 15 C34 30 20 41 20 43 C20 41 6 30 6 15 Z" fill="#38bdf8" fill-opacity="0.15"/>
+          <!-- Padlock Center -->
+          <rect x="13" y="24" width="14" height="11" rx="2.5" fill="#38bdf8"/>
+          <path d="M16 24v-4a4 4 0 018 0v4" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="20" cy="29.5" r="1.5" fill="#0f172a"/>
+        </g>
+        <!-- 1-RTT TLS Handshake Waves -->
+        <path d="M40 32 C 55 24, 65 32, 75 26" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 3"/>
+        <path d="M75 42 C 65 48, 55 40, 40 48" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3 3"/>
+        <text x="35" y="24" fill="#38bdf8" font-size="7" font-weight="bold" font-family="monospace">ClientHello</text>
+        <!-- Cipher Suite (Right) -->
+        <g transform="translate(130, 28)">
+          <rect width="46" height="20" rx="5" fill="#0f172a" stroke="#38bdf8" stroke-width="1.2"/>
+          <text x="23" y="13" fill="#e0f2fe" font-size="7" font-weight="bold" text-anchor="middle" font-family="monospace">TLS 1.3</text>
+        </g>
+      </svg>
+    )}
+
+    {/* 4. NUCLEAR FUSION (3D Tokamak Torus & Magnetic Plasma Ring) */}
+    {(key.includes('fusion') || logo === 'fusion') && (
+      <svg class="w-full h-full max-h-28 text-purple-500" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="plasma-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ec4899" stop-opacity="1" />
+            <stop offset="50%" stop-color="#8b5cf6" stop-opacity="0.8" />
+            <stop offset="100%" stop-color="#3b82f6" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        <!-- Outer Tokamak Magnetic Coils -->
+        <g transform="translate(60, 15)">
+          <ellipse cx="40" cy="35" rx="55" ry="24" fill="none" stroke="#8b5cf6" stroke-width="1.5" stroke-opacity="0.6"/>
+          <!-- Inner Toroidal Plasma Ring with 3D Depth -->
+          <ellipse cx="40" cy="35" rx="36" ry="15" fill="none" stroke="url(#plasma-glow)" stroke-width="6" class="animate-pulse"/>
+          <ellipse cx="40" cy="35" rx="20" ry="8" fill="#0f172a" stroke="#ec4899" stroke-width="1.5"/>
+          <!-- Orbiting Fusion Particles -->
+          <circle cx="76" cy="35" r="3" fill="#f43f5e"/>
+          <circle cx="40" cy="50" r="2.5" fill="#38bdf8"/>
+          <circle cx="4" cy="35" r="2" fill="#fbbf24"/>
+        </g>
+        <!-- Temperature Indicator Pill -->
+        <g transform="translate(125, 12)">
+          <rect width="52" height="18" rx="9" fill="#0f172a" stroke="#ec4899" stroke-width="1.2"/>
+          <text x="26" y="12" fill="#f472b6" font-size="7" font-weight="bold" text-anchor="middle" font-family="monospace">150M &deg;C</text>
+        </g>
+        <!-- D-T Reaction Formula -->
+        <g transform="translate(18, 68)">
+          <text x="0" y="0" fill="#c084fc" font-size="7.5" font-weight="bold" font-family="monospace">&sup2;H + &sup3;H &rarr; &alpha; + n</text>
+        </g>
+      </svg>
+    )}
+
+    {/* 5. DARK MATTER (Gravitational Lensing & Galactic Rotation Curve) */}
+    {(key.includes('dark-matter') || logo === 'atom') && (
+      <svg class="w-full h-full max-h-28 text-purple-500" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Gravitational Lensing Rings -->
+        <g transform="translate(70, 15)">
+          <!-- Core Mass -->
+          <circle cx="30" cy="35" r="7" fill="#8b5cf6" fill-opacity="0.8"/>
+          <!-- Einstein Ring Deflection Arcs -->
+          <path d="M 0 35 A 30 30 0 0 1 60 35" stroke="#c084fc" stroke-width="2" stroke-dasharray="4 2"/>
+          <path d="M 5 35 A 25 25 0 0 0 55 35" stroke="#38bdf8" stroke-width="1.5"/>
+          <!-- Lensed Galaxy Images -->
+          <ellipse cx="2" cy="35" rx="2" ry="6" fill="#38bdf8"/>
+          <ellipse cx="58" cy="35" rx="2" ry="6" fill="#38bdf8"/>
+        </g>
+        <!-- Rotation Curve Graph Preview (Right) -->
+        <g transform="translate(132, 28)">
+          <rect width="48" height="36" rx="6" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <!-- Expected Keplerian Decline -->
+          <path d="M8 12 Q20 20 40 28" stroke="#64748b" stroke-width="1" stroke-dasharray="2 2"/>
+          <!-- Observed Flat Curve (Dark Matter Evidence) -->
+          <path d="M8 12 Q16 10 40 10" stroke="#a855f7" stroke-width="2"/>
+          <text x="24" y="32" fill="#a855f7" font-size="6" font-weight="bold" text-anchor="middle">v(r) ~ const</text>
+        </g>
+      </svg>
+    )}
+
+    {/* 6. READING ALIEN ATMOSPHERES & SPECTROSCOPY (Exoplanet Transit & Spectrum) */}
+    {(key.includes('alien') || key.includes('star') || key.includes('atmosphere') || logo === 'telescope' || logo === 'star') && (
+      <svg class="w-full h-full max-h-28 text-purple-500" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="star-glow" cx="40%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#fbbf24" stop-opacity="1"/>
+            <stop offset="60%" stop-color="#f59e0b" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <!-- Host Star with Corona -->
+        <circle cx="50" cy="50" r="30" fill="url(#star-glow)"/>
+        <!-- Transiting Exoplanet with Atmospheric Ring -->
+        <g transform="translate(75, 38)">
+          <!-- Planet Body -->
+          <circle cx="12" cy="12" r="10" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+          <!-- Atmospheric Halo -->
+          <circle cx="12" cy="12" r="13" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-opacity="0.6" stroke-dasharray="3 2"/>
+        </g>
+        <!-- Transmission Spectrum Bands (Right) -->
+        <g transform="translate(122, 22)">
+          <rect width="60" height="10" rx="3" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+          <!-- Spectral absorption notches -->
+          <line x1="12" y1="2" x2="12" y2="8" stroke="#38bdf8" stroke-width="1.5"/>
+          <line x1="28" y1="2" x2="28" y2="8" stroke="#a855f7" stroke-width="2"/>
+          <line x1="44" y1="2" x2="44" y2="8" stroke="#10b981" stroke-width="1.5"/>
+          <text x="30" y="24" fill="#a855f7" font-size="7" font-weight="bold" text-anchor="middle" font-family="monospace">H&sub2;O &bull; CH&sub4;</text>
+          <!-- JWST NIRSpec Badge -->
+          <rect y="30" width="60" height="16" rx="4" fill="#0f172a" stroke="#8b5cf6" stroke-width="1"/>
+          <text x="30" y="41" fill="#c084fc" font-size="6.5" font-weight="bold" text-anchor="middle" font-family="monospace">JWST NIRSpec</text>
+        </g>
+      </svg>
+    )}
+
+    {/* 7. HOW LLMS ACTUALLY WORK (3D Multi-Head Attention Matrix & Transformer Block) */}
+    {(key.includes('llm') || logo === 'transformer') && (
+      <svg class="w-full h-full max-h-28 text-emerald-500" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 3D Transformer Attention Layers -->
+        <g transform="translate(45, 12)">
+          <!-- Feed Forward Layer (Top) -->
+          <rect x="20" y="0" width="70" height="15" rx="4" fill="#065f46" stroke="#10b981" stroke-width="1.5"/>
+          <text x="55" y="11" fill="#ecfdf5" font-size="7.5" font-weight="bold" text-anchor="middle" font-family="monospace">SwiGLU FFN</text>
+          <!-- Multi-Head Attention Layer (Middle) -->
+          <rect x="15" y="22" width="80" height="24" rx="5" fill="#0f172a" stroke="#10b981" stroke-width="1.8"/>
+          <text x="55" y="34" fill="#10b981" font-size="7.5" font-weight="bold" text-anchor="middle" font-family="monospace">Multi-Head Attention</text>
+          <!-- Q K V Sub-Blocks -->
+          <rect x="22" y="38" width="16" height="6" rx="2" fill="#10b981"/>
+          <text x="30" y="43" fill="#0f172a" font-size="5" font-weight="bold" text-anchor="middle">Q</text>
+          <rect x="47" y="38" width="16" height="6" rx="2" fill="#38bdf8"/>
+          <text x="55" y="43" fill="#0f172a" font-size="5" font-weight="bold" text-anchor="middle">K</text>
+          <rect x="72" y="38" width="16" height="6" rx="2" fill="#f59e0b"/>
+          <text x="80" y="43" fill="#0f172a" font-size="5" font-weight="bold" text-anchor="middle">V</text>
+          <!-- RoPE Embedding Token Layer (Bottom) -->
+          <rect x="25" y="53" width="60" height="14" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1.2"/>
+          <text x="55" y="63" fill="#7dd3fc" font-size="7" font-weight="bold" text-anchor="middle" font-family="monospace">RoPE Embedding</text>
+        </g>
+        <!-- Softmax Output Vector (Right) -->
+        <g transform="translate(150, 22)">
+          <rect width="28" height="45" rx="5" fill="#0f172a" stroke="#10b981" stroke-width="1.2"/>
+          <text x="14" y="12" fill="#6ee7b7" font-size="6" font-weight="bold" text-anchor="middle">Token</text>
+          <line x1="6" y1="18" x2="22" y2="18" stroke="#10b981" stroke-width="2"/>
+          <line x1="6" y1="24" x2="16" y2="24" stroke="#10b981" stroke-width="2"/>
+          <line x1="6" y1="30" x2="20" y2="30" stroke="#10b981" stroke-width="2"/>
+          <line x1="6" y1="36" x2="10" y2="36" stroke="#10b981" stroke-width="2"/>
+        </g>
+      </svg>
+    )}
+
+    {/* 8. BROWSER INTERNALS & RENDERING (Pipeline Engine: DOM -> CSSOM -> GPU) */}
+    {(key.includes('browser') || logo === 'browser') && (
+      <svg class="w-full h-full max-h-28 text-sky-500" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 3-Stage Pipeline Flow -->
+        <g transform="translate(18, 25)">
+          <!-- Stage 1: DOM / CSSOM -->
+          <rect width="44" height="45" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+          <text x="22" y="16" fill="#7dd3fc" font-size="6.5" font-weight="bold" text-anchor="middle" font-family="monospace">DOM Tree</text>
+          <circle cx="22" cy="27" r="4" fill="#0284c7"/>
+          <line x1="14" y1="37" x2="22" y2="27" stroke="#38bdf8" stroke-width="1.2"/>
+          <line x1="30" y1="37" x2="22" y2="27" stroke="#38bdf8" stroke-width="1.2"/>
+          <circle cx="14" cy="37" r="3" fill="#38bdf8"/>
+          <circle cx="30" cy="37" r="3" fill="#38bdf8"/>
+        </g>
+        <!-- Arrow 1 -->
+        <path d="M68 48L78 48" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round"/>
+        <!-- Stage 2: Layout Geometry -->
+        <g transform="translate(82, 25)">
+          <rect width="44" height="45" rx="6" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+          <text x="22" y="16" fill="#6ee7b7" font-size="6.5" font-weight="bold" text-anchor="middle" font-family="monospace">Layout</text>
+          <!-- Box model layout representation -->
+          <rect x="10" y="24" width="24" height="15" fill="none" stroke="#10b981" stroke-width="1.2" stroke-dasharray="2 2"/>
+          <rect x="15" y="27" width="14" height="9" fill="#10b981" fill-opacity="0.3"/>
+        </g>
+        <!-- Arrow 2 -->
+        <path d="M132 48L142 48" stroke="#10b981" stroke-width="1.8" stroke-linecap="round"/>
+        <!-- Stage 3: GPU Compositor -->
+        <g transform="translate(146, 25)">
+          <rect width="44" height="45" rx="6" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5"/>
+          <text x="22" y="16" fill="#fde68a" font-size="6.5" font-weight="bold" text-anchor="middle" font-family="monospace">Raster/GPU</text>
+          <!-- GPU Layer Tiles -->
+          <polygon points="12,38 28,34 36,38 20,42" fill="#f59e0b" fill-opacity="0.7"/>
+          <polygon points="12,32 28,28 36,32 20,36" fill="#fbbf24" fill-opacity="0.9"/>
+        </g>
+      </svg>
+    )}
+
+    {/* 9. INSIDE THE MODERN CPU (Superscalar Pipeline, Execution Units, Cache) */}
+    {(key.includes('cpu') || logo === 'cpu') && (
+      <svg class="w-full h-full max-h-28 text-sky-500" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- CPU Silicon Die Surface -->
+        <g transform="translate(55, 12)">
+          <rect width="90" height="72" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="1.8"/>
+          <!-- Out-of-Order Execution Block -->
+          <rect x="8" y="8" width="34" height="26" rx="3" fill="#0284c7" fill-opacity="0.4" stroke="#38bdf8" stroke-width="1"/>
+          <text x="25" y="22" fill="#e0f2fe" font-size="6" font-weight="bold" text-anchor="middle" font-family="monospace">ALU / FPU</text>
+          <!-- Branch Predictor -->
+          <rect x="48" y="8" width="34" height="26" rx="3" fill="#1e293b" stroke="#10b981" stroke-width="1"/>
+          <text x="65" y="22" fill="#a7f3d0" font-size="6" font-weight="bold" text-anchor="middle" font-family="monospace">Branch</text>
+          <!-- L1/L2 Cache Hierarchy (Bottom) -->
+          <rect x="8" y="40" width="74" height="24" rx="4" fill="#1e293b" stroke="#f59e0b" stroke-width="1"/>
+          <text x="45" y="54" fill="#fef3c7" font-size="7" font-weight="bold" text-anchor="middle" font-family="monospace">L2 / L3 CACHE</text>
+        </g>
+        <!-- Gold Die Pins (Left and Right) -->
+        <g stroke="#fbbf24" stroke-width="1.5">
+          <line x1="42" y1="25" x2="52" y2="25"/>
+          <line x1="42" y1="40" x2="52" y2="40"/>
+          <line x1="42" y1="55" x2="52" y2="55"/>
+          <line x1="148" y1="25" x2="158" y2="25"/>
+          <line x1="148" y1="40" x2="158" y2="40"/>
+          <line x1="148" y1="55" x2="158" y2="55"/>
+        </g>
+      </svg>
+    )}
+
+    {/* 10. WEBASSEMBLY (3D WASM Binary Stack Cube & Near-Native Execution) */}
+    {(key.includes('webassembly') || key.includes('wasm') || logo === 'wasm') && (
+      <svg class="w-full h-full max-h-28 text-sky-500" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 3D WASM Isometric Cube -->
+        <g transform="translate(75, 15)">
+          <!-- Top Face -->
+          <polygon points="25,5 50,18 25,31 0,18" fill="#6366f1" fill-opacity="0.8" stroke="#818cf8" stroke-width="1.5"/>
+          <!-- Left Face -->
+          <polygon points="0,18 25,31 25,62 0,49" fill="#4338ca" stroke="#818cf8" stroke-width="1.5"/>
+          <!-- Right Face -->
+          <polygon points="25,31 50,18 50,49 25,62" fill="#312e81" stroke="#818cf8" stroke-width="1.5"/>
+          <!-- WASM Logo Stamp -->
+          <text x="25" y="22" fill="#ffffff" font-size="10" font-weight="black" text-anchor="middle" font-family="monospace">wasm</text>
+        </g>
+        <!-- Memory Stack Pointer -->
+        <g transform="translate(138, 25)">
+          <rect width="40" height="48" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1.2"/>
+          <text x="20" y="14" fill="#7dd3fc" font-size="6" font-weight="bold" text-anchor="middle" font-family="monospace">LINEAR MEM</text>
+          <line x1="6" y1="22" x2="34" y2="22" stroke="#38bdf8" stroke-width="1"/>
+          <line x1="6" y1="30" x2="34" y2="30" stroke="#38bdf8" stroke-width="1"/>
+          <line x1="6" y1="38" x2="34" y2="38" stroke="#38bdf8" stroke-width="1"/>
+        </g>
+      </svg>
+    )}
+
+    {/* 11. DEFAULT FALLBACK GRAPHIC FOR ANY OTHER ARTICLE (Dynamic Category 3D Architecture) */}
+    {!(key.includes('database') || logo === 'database' ||
+       key.includes('passkey') || logo === 'key' ||
+       key.includes('https') || logo === 'shield' ||
+       key.includes('fusion') || logo === 'fusion' ||
+       key.includes('dark-matter') || logo === 'atom' ||
+       key.includes('alien') || key.includes('star') || key.includes('atmosphere') || logo === 'telescope' || logo === 'star' ||
+       key.includes('llm') || logo === 'transformer' ||
+       key.includes('browser') || logo === 'browser' ||
+       key.includes('cpu') || logo === 'cpu' ||
+       key.includes('webassembly') || key.includes('wasm') || logo === 'wasm') && (
+      <svg class="w-full h-full max-h-28" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(60, 18)">
+          <!-- Elevated 3D Base Tile -->
+          <polygon points="40,8 80,26 40,44 0,26" fill="#1e293b" stroke={isScience ? '#a855f7' : isAI ? '#10b981' : isDevTools ? '#f59e0b' : '#38bdf8'} stroke-width="1.8"/>
+          <polygon points="0,26 40,44 40,54 0,36" fill="#0f172a" stroke={isScience ? '#a855f7' : isAI ? '#10b981' : isDevTools ? '#f59e0b' : '#38bdf8'} stroke-width="1.2"/>
+          <polygon points="40,44 80,26 80,36 40,54" fill="#0f172a" stroke={isScience ? '#a855f7' : isAI ? '#10b981' : isDevTools ? '#f59e0b' : '#38bdf8'} stroke-width="1.2"/>
+          <!-- Floating Center Token with Motion -->
+          <circle cx="40" cy="22" r="14" fill="#0f172a" stroke={isScience ? '#c084fc' : isAI ? '#6ee7b7' : isDevTools ? '#fbbf24' : '#7dd3fc'} stroke-width="2"/>
+          <circle cx="40" cy="22" r="6" fill={isScience ? '#a855f7' : isAI ? '#10b981' : isDevTools ? '#f59e0b' : '#38bdf8'}/>
+        </g>
+      </svg>
+    )}
+  </div>
+</div>

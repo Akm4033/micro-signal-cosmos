@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ArticleLogo from '../../components/ui/ArticleLogo.astro';
+import ArticleVisual from '../../components/ui/ArticleVisual.astro';
 import { CATEGORIES } from '../../data/categories';
 import { getPublishedArticles, getArticleReadingTime, getArticleSlug } from '../../data/articles';
 import { getAuthor } from '../../data/authors';
@@ -190,20 +191,17 @@ const archiveUrl = `${siteUrl}/articles/`;
               >
                 <div>
                   <div class={`relative h-32 sm:h-34 w-full shrink-0 overflow-hidden flex items-center justify-center transition-colors ${
-                    categorySlug.includes('tech') ? 'bg-gradient-to-br from-sky-50 via-sky-100/60 to-blue-50 border-b border-sky-100 dark:from-sky-950/30 dark:via-sky-900/20 dark:to-neutral-900 dark:border-sky-900/40' :
-                    categorySlug.includes('art') || categorySlug.includes('ai') ? 'bg-gradient-to-br from-emerald-50 via-emerald-100/60 to-teal-50 border-b border-emerald-100 dark:from-emerald-950/30 dark:via-emerald-900/20 dark:to-neutral-900 dark:border-emerald-900/40' :
-                    categorySlug.includes('sci') ? 'bg-gradient-to-br from-violet-50 via-purple-100/60 to-indigo-50 border-b border-violet-100 dark:from-violet-950/30 dark:via-violet-900/20 dark:to-neutral-900 dark:border-violet-900/40' :
-                    'bg-gradient-to-br from-amber-50 via-amber-100/60 to-orange-50 border-b border-amber-100 dark:from-amber-950/30 dark:via-amber-900/20 dark:to-neutral-900 dark:border-amber-900/40'
+                    categorySlug.includes('tech') ? 'bg-gradient-to-br from-sky-50 via-sky-100/60 to-blue-50 border-b border-sky-100 dark:from-sky-950/40 dark:via-sky-900/30 dark:to-neutral-900 dark:border-sky-900/50' :
+                    categorySlug.includes('art') || categorySlug.includes('ai') ? 'bg-gradient-to-br from-emerald-50 via-emerald-100/60 to-teal-50 border-b border-emerald-100 dark:from-emerald-950/40 dark:via-emerald-900/30 dark:to-neutral-900 dark:border-emerald-900/50' :
+                    categorySlug.includes('sci') ? 'bg-gradient-to-br from-violet-50 via-purple-100/60 to-indigo-50 border-b border-violet-100 dark:from-violet-950/40 dark:via-violet-900/30 dark:to-neutral-900 dark:border-violet-900/50' :
+                    'bg-gradient-to-br from-amber-50 via-amber-100/60 to-orange-50 border-b border-amber-100 dark:from-amber-950/40 dark:via-amber-900/30 dark:to-neutral-900 dark:border-amber-900/50'
                   }`}>
-                    <div class="absolute inset-0 opacity-40 pointer-events-none" aria-hidden="true">
-                      <div class="w-full h-full bg-[radial-gradient(#94A3B8_1px,transparent_1px)] [background-size:16px_16px] dark:opacity-10"></div>
-                    </div>
-                    <a href={categoryHref} class="absolute top-2.5 left-2.5 badge badge--featured shadow-xs font-bold text-[10px]">
+                    <!-- Dynamic 2D/3D Interactive Graphic (Moves & Tilts on Card Hover) -->
+                    <ArticleVisual slug={slug} category={categorySlug} logo={article.data.logo || categorySlug} />
+
+                    <a href={categoryHref} class="absolute top-2.5 left-2.5 badge badge--featured shadow-xs font-bold text-[10px] z-20">
                       {categoryName}
                     </a>
-                    <div class="relative z-10 p-2.5 rounded-2xl bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] border border-neutral-200/90 border-b-2 border-b-neutral-300 group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300 dark:bg-neutral-800 dark:border-neutral-700 dark:border-b-neutral-600">
-                      <ArticleLogo logo={article.data.logo || categorySlug} category={categorySlug} size="sm" />
-                    </div>
                   </div>
 
                   <div class="p-4 sm:p-5">
