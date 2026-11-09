@@ -19,16 +19,15 @@
 
   <!-- Category Badge -->
   <g transform="translate(80, 160)">
-    <rect width="220" height="38" rx="19" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-opacity="0.4" stroke-width="1.5" />
+    <rect width="240" height="38" rx="19" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-opacity="0.4" stroke-width="1.5" />
     <circle cx="22" cy="19" r="4.5" fill="#f59e0b" />
     <text x="36" y="24" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#f59e0b" letter-spacing="0.12em">DEVELOPER TOOLS</text>
   </g>
 
   <!-- Title -->
   <g>
-    <text x="80" y="280" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">Self-Hosting 101: Building a</text>
-    <text x="80" y="336" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">Resilient Personal Cloud on Bare</text>
-    <text x="80" y="392" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">Metal</text>
+    <text x="80" y="280" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">Self-Hosting 101: Modern Production</text>
+    <text x="80" y="336" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">Infrastructure on a Budget</text>
   </g>
 
   <!-- Metadata Footer Bar -->
@@ -39,8 +38,8 @@
     <text x="0" y="0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">MICRO SIGNAL <tspan fill="#f59e0b">COSMOS</tspan></text>
     <text x="0" y="24" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#9ca3af" letter-spacing="0.15em">DISCOVER MORE. UNDERSTAND BETTER.</text>
 
-    <!-- Author & Reading time on right -->
-    <text x="1040" y="0" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#f3f4f6">By Dr. Marina Kowalski</text>
-    <text x="1040" y="24" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#9ca3af">14 min read</text>
+    <!-- Author & Reading time -->
+    <text x="1040" y="0" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#f3f4f6">marina</text>
+    <text x="1040" y="24" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#9ca3af">11 min read</text>
   </g>
 </svg>

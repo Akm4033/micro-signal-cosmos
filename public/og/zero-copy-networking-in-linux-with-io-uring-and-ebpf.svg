@@ -39,7 +39,7 @@
     <text x="0" y="24" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#9ca3af" letter-spacing="0.15em">DISCOVER MORE. UNDERSTAND BETTER.</text>
 
     <!-- Author & Reading time -->
-    <text x="1040" y="0" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#f3f4f6">Dr. Marina Kowalski</text>
+    <text x="1040" y="0" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#f3f4f6">marina</text>
     <text x="1040" y="24" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#9ca3af">3 min read</text>
   </g>
 </svg>

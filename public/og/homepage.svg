@@ -9,38 +9,29 @@
     </pattern>
   </defs>
 
-  <!-- Background -->
   <rect width="1200" height="630" fill="#0a0f1a" />
   <rect width="1200" height="630" fill="url(#grid)" />
   <rect width="1200" height="630" fill="url(#glow)" />
-
-  <!-- Accent top border -->
   <rect x="0" y="0" width="1200" height="6" fill="#0ea5e9" />
 
-  <!-- Category Badge -->
   <g transform="translate(80, 160)">
-    <rect width="220" height="38" rx="19" fill="#0ea5e9" fill-opacity="0.15" stroke="#0ea5e9" stroke-opacity="0.4" stroke-width="1.5" />
+    <rect width="320" height="38" rx="19" fill="#0ea5e9" fill-opacity="0.15" stroke="#0ea5e9" stroke-opacity="0.4" stroke-width="1.5" />
     <circle cx="22" cy="19" r="4.5" fill="#0ea5e9" />
-    <text x="36" y="24" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#0ea5e9" letter-spacing="0.12em">INDEPENDENT TECHNICAL PUBLICATION</text>
+    <text x="36" y="24" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#0ea5e9" letter-spacing="0.12em">TECHNICAL PUBLICATION</text>
   </g>
 
-  <!-- Title -->
   <g>
-    <text x="80" y="280" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">Micro Signal Cosmos: Systems</text>
-    <text x="80" y="336" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">Engineering, Applied AI &amp;</text>
-    <text x="80" y="392" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">Astrophysics</text>
+    <text x="80" y="280" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="48" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">Micro Signal Cosmos</text>
+    <text x="80" y="340" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="34" font-weight="600" fill="#38bdf8" letter-spacing="-0.01em">Discover More. Understand Better.</text>
+    <text x="80" y="396" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="22" font-weight="400" fill="#9ca3af">Systems Engineering &bull; Applied AI/ML &bull; Astrophysics &bull; Developer Tools</text>
   </g>
 
-  <!-- Metadata Footer Bar -->
   <line x1="80" y1="490" x2="1120" y2="490" stroke="#1f2937" stroke-width="1.5" />
 
   <g transform="translate(80, 545)">
-    <!-- Brand / Tagline -->
     <text x="0" y="0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">MICRO SIGNAL <tspan fill="#0ea5e9">COSMOS</tspan></text>
-    <text x="0" y="24" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#9ca3af" letter-spacing="0.15em">DISCOVER MORE. UNDERSTAND BETTER.</text>
-
-    <!-- Author & Reading time on right -->
-    <text x="1040" y="0" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#f3f4f6">By Editorial Desk</text>
-    <text x="1040" y="24" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#9ca3af">15 In-Depth Technical Deep Dives</text>
+    <text x="0" y="24" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#9ca3af" letter-spacing="0.15em">HTTPS://MICROSIGNALCOSMOS.COM</text>
+    <text x="1040" y="0" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#f3f4f6">Independent Technical Deep Dives</text>
+    <text x="1040" y="24" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#9ca3af">Peer-Reviewed Systems Architecture</text>
   </g>
 </svg>

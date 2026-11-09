@@ -19,15 +19,15 @@
 
   <!-- Category Badge -->
   <g transform="translate(80, 160)">
-    <rect width="220" height="38" rx="19" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-opacity="0.4" stroke-width="1.5" />
+    <rect width="240" height="38" rx="19" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-opacity="0.4" stroke-width="1.5" />
     <circle cx="22" cy="19" r="4.5" fill="#10b981" />
-    <text x="36" y="24" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#10b981" letter-spacing="0.12em">AI & ML</text>
+    <text x="36" y="24" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#10b981" letter-spacing="0.12em">ARTIFICIAL INTELLIGENCE</text>
   </g>
 
   <!-- Title -->
   <g>
-    <text x="80" y="280" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">Evaluating AI: Why Benchmarks Lie</text>
-    <text x="80" y="336" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">and How to Build Domain Evals</text>
+    <text x="80" y="280" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">Evaluating AI: Modern Benchmarks,</text>
+    <text x="80" y="336" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="-0.02em">Evaluation Harnesses, and LLM-as-a-Judge</text>
   </g>
 
   <!-- Metadata Footer Bar -->
@@ -38,8 +38,8 @@
     <text x="0" y="0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">MICRO SIGNAL <tspan fill="#10b981">COSMOS</tspan></text>
     <text x="0" y="24" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#9ca3af" letter-spacing="0.15em">DISCOVER MORE. UNDERSTAND BETTER.</text>
 
-    <!-- Author & Reading time on right -->
-    <text x="1040" y="0" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#f3f4f6">By Kai Nakamura</text>
-    <text x="1040" y="24" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#9ca3af">12 min read</text>
+    <!-- Author & Reading time -->
+    <text x="1040" y="0" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#f3f4f6">kai</text>
+    <text x="1040" y="24" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#9ca3af">11 min read</text>
   </g>
 </svg>
