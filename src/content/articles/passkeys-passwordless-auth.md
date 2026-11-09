@@ -144,3 +144,4 @@ async function handlePasskeyLogin() {
 1. **Passkeys use asymmetric cryptography**: Your private key stays on your device hardware; the server only stores your public key.
 2. **Mathematically immune to phishing**: The browser cryptographically verifies domain origin during every authentication exchange.
 3. **Synced passkeys provide seamless UX**: End-to-end encrypted keychains eliminate user lockouts while maintaining zero-knowledge architecture.
+

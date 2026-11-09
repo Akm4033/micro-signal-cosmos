@@ -1,0 +1,27 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+}
+const { variant = 'primary', size = 'md', href, type = 'button', class: className = '', ...rest } = Astro.props;
+const isLink = !!href;
+const Tag = isLink ? 'a' : 'button';
+const baseClasses = 'inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2';
+const variantClasses = {
+  primary: 'bg-brand-primary text-white hover:bg-brand-sky-deep shadow-sm',
+  secondary: 'border border-neutral-300 bg-white text-text-primary hover:bg-neutral-50 hover:border-brand-primary hover:text-brand-primary dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800',
+  ghost: 'text-text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800',
+};
+const sizeClasses = {
+  sm: 'px-3 py-1.5 text-sm',
+  md: 'px-5 py-2.5 text-sm',
+  lg: 'px-7 py-3.5 text-base',
+};
+const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
+---
+<{Tag} href={href} type={isLink ? undefined : type} class={classes} {...rest}>
+  <slot />
+</{Tag}>

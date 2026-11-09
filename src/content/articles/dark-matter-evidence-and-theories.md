@@ -134,3 +134,4 @@ Extremely light hypothetical particles ($10^{-6} \text{ to } 10^{-3} \text{ eV}$
 1. **Galactic rotation curves demand unseen mass**: Outer stars orbit far too quickly to be held by visible matter alone.
 2. **The Bullet Cluster decoupled mass from gas**: Gravitational lensing proves dark matter is an actual non-collisional substance, not a mathematical flaw in gravity.
 3. **85% of cosmic matter is non-baryonic**: The hunt across underground xenon tanks and microwave cavities remains the most crucial experimental pursuit in modern particle physics.
+

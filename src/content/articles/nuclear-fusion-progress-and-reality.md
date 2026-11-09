@@ -123,3 +123,4 @@ A successful commercial plant must maintain a **Tritium Breeding Ratio ($TBR$) g
 1. **Magnetic field strength dominates economics**: High-Temperature Superconductors (REBCO) permit high-field compact reactors that break the multi-billion-dollar scale constraints of ITER.
 2. **Scientific ignition is solved; engineering net gain is next**: Moving from $Q_{\text{plasma}} > 1$ to $Q_{\text{engineering}} > 1$ requires solving wall-plug laser and magnet cooling efficiency.
 3. **The timeline is tightening**: Private capital and high-temperature superconductors have accelerated pilot plant roadmaps toward early 2030s grid demonstrations.
+

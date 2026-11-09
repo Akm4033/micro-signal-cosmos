@@ -1,0 +1,30 @@
+---
+interface Props {
+  title?: string;
+  class?: string;
+}
+const { title = 'Contents', class: className = '', ...rest } = Astro.props;
+---
+<nav class={`toc-sidebar sticky top-24 space-y-8 ${className}`} {...rest} aria-label="Table of Contents">
+  <h3 class="text-caption uppercase tracking-wider text-text-muted mb-3">{title}</h3>
+  <ol class="space-y-2">
+    <slot />
+  </ol>
+</nav>
+
+<style>
+  .toc-sidebar :global(.toc-link) {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    transition: color 0.15s ease-out;
+    padding: 0.25rem 0;
+  }
+  .toc-sidebar :global(.toc-link:hover) {
+    color: var(--brand-primary);
+  }
+  .toc-sidebar :global(.toc-link.active) {
+    color: var(--brand-primary);
+    font-weight: 500;
+  }
+</style>

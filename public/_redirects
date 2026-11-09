@@ -1,3 +1,27 @@
 # Cloudflare Pages 301 Permanent Redirects
 /privacy    /privacy-policy/   301
 /privacy/   /privacy-policy/   301
+/editorial-policy    /about/    301
+/editorial-policy/   /about/    301
+/fact-checking-policy    /about/    301
+/fact-checking-policy/   /about/    301
+/corrections-policy    /contact/    301
+/corrections-policy/   /contact/    301
+
+# Consolidated Categories (7 -> 4)
+/category/digital-world    /category/technology/    301
+/category/digital-world/*  /category/technology/    301
+/category/tutorials    /category/developer-tools/    301
+/category/tutorials/*  /category/developer-tools/    301
+/category/software-tools    /category/developer-tools/    301
+/category/software-tools/*  /category/developer-tools/    301
+/category/innovation    /category/technology/    301
+/category/innovation/*  /category/technology/    301
+
+# Legacy Articles
+/articles/understanding-artificial-intelligence    /articles/how-llms-actually-work/    301
+/articles/understanding-artificial-intelligence/*  /articles/how-llms-actually-work/    301
+/articles/scientific-discoveries-and-the-universe    /articles/how-we-know-what-stars-are-made-of/    301
+/articles/scientific-discoveries-and-the-universe/*  /articles/how-we-know-what-stars-are-made-of/    301
+/articles/technologies-shaping-digital-future    /articles/how-browsers-actually-render-a-page/    301
+/articles/technologies-shaping-digital-future/*  /articles/how-browsers-actually-render-a-page/    301

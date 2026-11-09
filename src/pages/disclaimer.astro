@@ -1,171 +1,60 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Base from '../layouts/Base.astro';
 
 const siteUrl = 'https://microsignalcosmos.com';
 const pageUrl = `${siteUrl}/disclaimer/`;
-
-const pageJsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebPage',
-      '@id': `${pageUrl}#webpage`,
-      name: 'Disclaimer | Micro Signal Cosmos',
-      description: 'Website disclaimer for Micro Signal Cosmos. Important limitations regarding published articles and technical guides.',
-      url: pageUrl,
-      isPartOf: {
-        '@id': `${siteUrl}/#website`,
-      },
-    },
-    {
-      '@type': 'BreadcrumbList',
-      '@id': `${pageUrl}#breadcrumb`,
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Home',
-          item: `${siteUrl}/`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: 'Disclaimer',
-          item: pageUrl,
-        },
-      ],
-    },
-  ],
-};
 ---
 
-<Layout
-  title="Disclaimer | Micro Signal Cosmos"
-  description="Website disclaimer for Micro Signal Cosmos. Important limitations regarding published articles and technical guides."
+<Base
+  title="Disclaimer & Affiliate Notice | Micro Signal Cosmos"
+  description="Disclaimer and affiliate monetization disclosure for Micro Signal Cosmos."
   canonical={pageUrl}
-  jsonLd={pageJsonLd}
 >
-  <Header />
-
-  <main id="main-content" class="bg-[#F7F9FC] py-12 sm:py-20">
-    <div class="container-main">
+  <main id="main-content" class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800">
+    <div class="container-narrow">
 
       <!-- Breadcrumbs -->
       <nav aria-label="Breadcrumb" class="mb-8">
-        <ol class="flex items-center gap-2 text-xs text-[#697586]">
+        <ol class="flex items-center gap-2 text-xs text-text-muted">
           <li>
-            <a href="/" class="transition-colors hover:text-[#14233B]">Home</a>
+            <a href="/" class="transition-colors hover:text-brand-primary">Home</a>
           </li>
-          <li aria-hidden="true" class="text-slate-300">/</li>
-          <li aria-current="page" class="font-medium text-[#14233B]">Disclaimer</li>
+          <li aria-hidden="true" class="text-neutral-400">/</li>
+          <li class="font-semibold text-text-primary" aria-current="page">Disclaimer</li>
         </ol>
       </nav>
 
-      <!-- Header Section -->
-      <div class="mx-auto max-w-3xl text-center">
-        <div class="inline-flex items-center gap-2 rounded-full border border-[#E3E8EF] bg-white px-3.5 py-1.5 shadow-xs">
-          <span class="h-2 w-2 rounded-full bg-[#3478F6]"></span>
-          <span class="text-xs font-semibold tracking-wider text-[#14233B] uppercase">
-            Notice & Limitations
-          </span>
-        </div>
+      <header class="mb-12">
+        <h1 class="text-display font-extrabold tracking-tight text-text-primary">Disclaimer &amp; Affiliate Policy</h1>
+        <p class="mt-4 text-lead text-text-secondary">Transparency, partner compensation, and technical testing standards.</p>
+      </header>
 
-        <h1 class="mt-6 text-3xl font-extrabold tracking-tight text-[#14233B] sm:text-5xl">
-          Website <span class="text-[#3478F6]">Disclaimer</span>
-        </h1>
+      <div class="prose-editorial max-w-none space-y-8">
+        <section>
+          <h2 class="text-h2 font-bold text-text-primary mb-4">1. Affiliate Disclosure</h2>
+          <p class="text-text-secondary">
+            Micro Signal Cosmos participates in select affiliate programs. Articles, guides, and the <a href="/tools/" class="text-brand-primary underline">Tools Directory</a> contain partner links marked with a star symbol (<strong>★</strong>).
+          </p>
+          <p class="text-text-secondary mt-3">
+            If you click an affiliate link and make a purchase or create an account, we may receive a commission or referral credit at zero additional cost to you.
+          </p>
+        </section>
 
-        <p class="mt-4 text-xs font-medium uppercase tracking-widest text-[#697586]">
-          Effective Date: November 2026 &bull; Last Revised: November 2026
-        </p>
+        <section>
+          <h2 class="text-h2 font-bold text-text-primary mb-4">2. Editorial Independence</h2>
+          <p class="text-text-secondary">
+            We never accept payment to write positive reviews or fabricate benchmarks. Every tool recommended has been used in production environments, tested against open workloads, or vetted through hands-on technical evaluation.
+          </p>
+        </section>
 
-        <p class="mt-4 text-base leading-relaxed text-[#4B5565] sm:text-lg">
-          Important notices regarding the scope, educational nature, and technical limitations of published articles.
-        </p>
+        <section>
+          <h2 class="text-h2 font-bold text-text-primary mb-4">3. Engineering &amp; Operational Disclaimer</h2>
+          <p class="text-text-secondary">
+            The technical guides, code snippets, network configurations, and database benchmarks published here are for educational, informational, and reference purposes. Deployments should always be tested within staging or local sandboxes before production implementation.
+          </p>
+        </section>
       </div>
-
-      <!-- Main Document -->
-      <article class="mx-auto mt-12 max-w-3xl rounded-2xl border border-[#E3E8EF] bg-white p-8 sm:p-12 shadow-sm text-sm leading-relaxed text-[#4B5565] space-y-10">
-
-        <!-- 1. Educational Purpose -->
-        <section aria-labelledby="educational-purpose">
-          <h2 id="educational-purpose" class="text-xl font-bold tracking-tight text-[#14233B]">
-            1. General Educational Information Only
-          </h2>
-          <p class="mt-3">
-            All content published on <strong class="font-semibold text-[#14233B]">Micro Signal Cosmos</strong>—including analytical articles, scientific summaries, artificial intelligence guides, tutorials, and cosmic explorations—is provided exclusively for general informational and educational purposes. It is crafted to stimulate intellectual curiosity and foster deeper conceptual understanding.
-          </p>
-        </section>
-
-        <!-- 2. No Professional Advice -->
-        <section aria-labelledby="no-professional-advice" class="border-t border-[#E3E8EF] pt-8">
-          <h2 id="no-professional-advice" class="text-xl font-bold tracking-tight text-[#14233B]">
-            2. No Professional Engineering, Financial, or Legal Advice
-          </h2>
-          <p class="mt-3">
-            Nothing published on Micro Signal Cosmos constitutes, or should be construed as:
-          </p>
-          <ul class="mt-4 list-disc space-y-2 pl-6">
-            <li><strong class="font-semibold text-[#14233B]">Engineering or Architectural Counseling:</strong> System designs, hardware descriptions, and architectural patterns are conceptual models and should not replace formal engineering review for mission-critical systems.</li>
-            <li><strong class="font-semibold text-[#14233B]">Financial or Investment Guidance:</strong> Articles discussing technology valuation, semiconductor markets, cryptocurrency protocols, or corporate funding do not constitute financial or investment recommendations.</li>
-            <li><strong class="font-semibold text-[#14233B]">Cybersecurity Certifications:</strong> Security discussions provide conceptual insight into cryptographic principles and should not be used as the sole basis for production infrastructure hardening.</li>
-          </ul>
-        </section>
-
-        <!-- 3. Rapid Evolution of AI & Science -->
-        <section aria-labelledby="rapid-evolution" class="border-t border-[#E3E8EF] pt-8">
-          <h2 id="rapid-evolution" class="text-xl font-bold tracking-tight text-[#14233B]">
-            3. Rapidly Evolving Scientific & AI Landscape
-          </h2>
-          <p class="mt-3">
-            Modern artificial intelligence, quantum physics, and space exploration evolve at an extraordinary velocity. Research papers, model weights, open-source APIs, and observational data can change within days of publication.
-          </p>
-          <p class="mt-3">
-            While we strive to ensure our articles and tutorials are accurate and helpful at the time of publication, we cannot guarantee that historical articles will always reflect subsequent rapid developments without periodic updates.
-          </p>
-        </section>
-
-        <!-- 4. Code Demonstrations & Tutorials -->
-        <section aria-labelledby="code-demonstrations" class="border-t border-[#E3E8EF] pt-8">
-          <h2 id="code-demonstrations" class="text-xl font-bold tracking-tight text-[#14233B]">
-            4. Code Snippets & Technical Demonstrations
-          </h2>
-          <p class="mt-3">
-            Any software snippets, configuration files, terminal commands, or mathematical scripts shared on the Website are provided as pedagogical demonstrations. Users assume full responsibility for inspecting, testing, and securing any code before running it in local or production computing environments.
-          </p>
-        </section>
-
-        <!-- 5. External Sourcing & Links -->
-        <section aria-labelledby="external-links" class="border-t border-[#E3E8EF] pt-8">
-          <h2 id="external-links" class="text-xl font-bold tracking-tight text-[#14233B]">
-            5. External Links & Third-Party Opinions
-          </h2>
-          <p class="mt-3">
-            Micro Signal Cosmos frequently links to external documentation, code repositories, and educational portals for reader convenience. We do not control, endorse, or accept liability for the continuous availability or accuracy of external websites.
-          </p>
-        </section>
-
-        <!-- Related Navigation -->
-        <section class="border-t border-[#E3E8EF] pt-8">
-          <h3 class="text-base font-bold text-[#14233B]">Additional Information</h3>
-          <div class="mt-4 grid gap-3 sm:grid-cols-3">
-            <a href="/about/" class="rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] p-3 text-xs font-semibold text-[#14233B] transition-colors hover:border-[#3478F6] hover:text-[#3478F6]">
-              About Our Blog &rarr;
-            </a>
-            <a href="/privacy-policy/" class="rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] p-3 text-xs font-semibold text-[#14233B] transition-colors hover:border-[#3478F6] hover:text-[#3478F6]">
-              Privacy Policy &rarr;
-            </a>
-            <a href="/contact/" class="rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] p-3 text-xs font-semibold text-[#14233B] transition-colors hover:border-[#3478F6] hover:text-[#3478F6]">
-              Contact Us &rarr;
-            </a>
-          </div>
-        </section>
-
-      </article>
 
     </div>
   </main>
-
-  <Footer />
-</Layout>
+</Base>

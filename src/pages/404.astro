@@ -1,97 +1,70 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Base from '../layouts/Base.astro';
 import { CATEGORIES } from '../data/categories';
 ---
 
-<Layout
+<Base
   title="404: Signal Lost | Micro Signal Cosmos"
-  description="The page you're looking for seems to have drifted beyond our observable universe."
-  noindex={true}
+  description="The transmission you are seeking has drifted beyond our observable coordinates."
 >
-  <Header />
-
-  <main id="main-content" class="relative isolate flex min-h-[calc(100vh-80px-340px)] items-center justify-center bg-[#F7F9FC] py-16 sm:py-24">
-    <div class="container-main text-center">
-      <div class="mx-auto max-w-2xl rounded-2xl border border-[#E3E8EF] bg-white p-8 sm:p-14 shadow-sm">
+  <main id="main-content" class="relative isolate flex min-h-[calc(100vh-80px-340px)] items-center justify-center bg-neutral-50 py-16 sm:py-24 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800">
+    <div class="container-narrow text-center">
+      <div class="mx-auto max-w-xl rounded-2xl border border-neutral-200 bg-white p-8 sm:p-14 shadow-sm dark:border-neutral-700 dark:bg-neutral-900">
 
         <!-- 404 Radar Visual -->
         <div class="relative mx-auto mb-6 flex flex-col items-center justify-center">
-          <div class="relative mb-6 flex h-28 w-28 items-center justify-center rounded-2xl border border-[#E3E8EF] bg-[#F7F9FC] shadow-inner">
+          <div class="relative mb-6 flex h-24 w-24 items-center justify-center rounded-2xl border border-neutral-200 bg-neutral-50 shadow-inner dark:border-neutral-700 dark:bg-neutral-800">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 80 80"
               fill="none"
-              class="h-14 w-14"
+              class="h-12 w-12"
               role="img"
-              aria-label="Lost cosmic transmission radar illustration"
+              aria-label="Lost signal radar illustration"
             >
-              <!-- Outer orbit / radar boundary -->
-              <circle cx="40" cy="40" r="34" stroke="#3478F6" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="4 3"/>
-              <!-- Intermediate orbital resonance ring -->
-              <circle cx="40" cy="40" r="24" stroke="#14233B" stroke-opacity=".2" stroke-width="1.5"/>
-              <!-- Inner signal core orbit -->
-              <circle cx="40" cy="40" r="14" stroke="#3478F6" stroke-opacity=".5" stroke-width="1.5"/>
-              <!-- Polar axes -->
-              <path d="M12 40H68M40 12V68" stroke="#14233B" stroke-opacity=".2" stroke-width="1.5"/>
-              <!-- Interrupted signal waveform -->
-              <path d="M25 40L32 30L39 49L46 33L53 40" stroke="#3478F6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <!-- Drifting signal pulse -->
-              <circle cx="46" cy="33" r="3.5" fill="#3478F6"/>
-              <!-- Satellite drift point -->
-              <circle cx="64" cy="22" r="2.5" fill="#14233B" fill-opacity=".6"/>
+              <circle cx="40" cy="40" r="34" stroke="#0ea5e9" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="4 3"/>
+              <circle cx="40" cy="40" r="24" stroke="#0a0f1a" stroke-opacity=".2" stroke-width="1.5"/>
+              <circle cx="40" cy="40" r="14" stroke="#0ea5e9" stroke-opacity=".5" stroke-width="1.5"/>
+              <path d="M12 40H68M40 12V68" stroke="#0a0f1a" stroke-opacity=".2" stroke-width="1.5"/>
+              <path d="M25 40L32 30L39 49L46 33L53 40" stroke="#0ea5e9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="46" cy="33" r="3.5" fill="#0ea5e9"/>
             </svg>
           </div>
 
-          <!-- Prominent 404 Error Number -->
-          <span class="block text-6xl font-black tracking-tight text-[#14233B] sm:text-7xl">
-            4<span class="text-[#3478F6]">0</span>4
+          <span class="block text-6xl font-black tracking-tight text-text-primary sm:text-7xl">
+            4<span class="text-brand-primary">0</span>4
           </span>
         </div>
 
-        <!-- Main Heading -->
-        <h1 class="text-2xl font-extrabold tracking-tight text-[#14233B] sm:text-3xl uppercase">
-          Signal <span class="text-[#3478F6]">Lost</span>
+        <h1 class="text-2xl font-bold text-text-primary sm:text-3xl">
+          Signal Lost in Transit
         </h1>
 
-        <!-- Supporting Message (Exact required wording) -->
-        <p class="mx-auto mt-4 max-w-md text-sm leading-relaxed text-[#4B5565] sm:text-base">
-          The page you're looking for seems to have drifted beyond our observable universe.
+        <p class="mt-4 text-sm sm:text-base leading-relaxed text-text-secondary">
+          The requested coordinate or document no longer exists at this location. It may have been relocated, consolidated, or retired.
         </p>
 
-        <!-- Prominent Actions -->
         <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <a
-            href="/"
-            class="inline-flex items-center justify-center gap-2 rounded-lg bg-[#3478F6] px-6 py-2.5 text-xs font-semibold text-white shadow-xs transition-colors hover:bg-[#2563EB]"
-          >
-            Return Home
-            <span aria-hidden="true">&rarr;</span>
+          <a href="/" class="btn-primary">
+            Return to Homepage
           </a>
-
-          <a
-            href="/articles/"
-            class="inline-flex items-center justify-center rounded-lg border border-[#E3E8EF] bg-white px-6 py-2.5 text-xs font-semibold text-[#14233B] transition-colors hover:bg-[#F7F9FC]"
-          >
-            Browse All Articles
+          <a href="/articles/" class="btn-secondary">
+            Search Archive
           </a>
         </div>
 
-        <!-- Category Exploration Hub -->
-        <div class="mt-10 border-t border-[#E3E8EF] pt-8">
-          <p class="text-xs font-bold uppercase tracking-wider text-[#697586]">
-            Active Knowledge Pillars
-          </p>
-
-          <div class="mt-4 flex flex-wrap justify-center gap-2">
-            {CATEGORIES.map((category) => (
+        <!-- Four Streams Quick Navigation -->
+        <div class="mt-10 border-t border-neutral-200 pt-6 dark:border-neutral-700">
+          <span class="block text-xs font-bold uppercase tracking-wider text-text-muted mb-3">
+            Active Knowledge Streams
+          </span>
+          <div class="flex flex-wrap justify-center gap-2">
+            {CATEGORIES.map((cat) => (
               <a
-                href={category.href}
-                class="rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] px-3.5 py-1.5 text-xs font-medium text-[#14233B] transition-all hover:border-[#3478F6] hover:bg-white hover:text-[#3478F6]"
-                title={`Explore ${category.name} stream`}
+                href={cat.href}
+                class="rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-xs font-semibold text-text-secondary hover:border-brand-primary hover:text-brand-primary transition-colors dark:border-neutral-700 dark:bg-neutral-800"
               >
-                {category.name}
+                {cat.name}
               </a>
             ))}
           </div>
@@ -100,6 +73,4 @@ import { CATEGORIES } from '../data/categories';
       </div>
     </div>
   </main>
-
-  <Footer />
-</Layout>
+</Base>

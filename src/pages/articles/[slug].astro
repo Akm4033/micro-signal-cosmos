@@ -1,8 +1,5 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { CATEGORIES } from '../../data/categories';
+import ArticleLayout from '../../layouts/Article.astro';
 import {
   getPublishedArticles,
   getArticleReadingTime,
@@ -11,8 +8,6 @@ import {
 } from '../../data/articles';
 import { getAuthor } from '../../data/authors';
 import { render } from 'astro:content';
-import ArticleAd from '../../components/ads/ArticleAd.astro';
-import SidebarAd from '../../components/ads/SidebarAd.astro';
 import AffiliateDisclosure from '../../components/monetization/AffiliateDisclosure.astro';
 import NewsletterInline from '../../components/newsletter/NewsletterInline.astro';
 import NewsletterExitIntent from '../../components/newsletter/NewsletterExitIntent.astro';
@@ -45,54 +40,40 @@ const readingTime = getArticleReadingTime(article);
 // Filter Table of Contents headings (h2 and h3)
 const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 
-// Resolve category metadata from the official taxonomy
-const category = CATEGORIES.find(
-  (c) =>
-    c.slug.toLowerCase() === article.data.category.toLowerCase().trim() ||
-    c.name.toLowerCase() === article.data.category.toLowerCase().trim()
-);
+// Category mapping
+const categoryName = article.data.category;
+const categorySlug = article.data.category.toLowerCase().trim();
 
-const categoryName = category?.name || article.data.category;
-const categoryHref = category?.href || `/category/${article.data.category}/`;
-const categoryIcon = category?.icon || '01';
+const variantMap: Record<string, 'tech' | 'science' | 'ai' | 'devtools'> = {
+  'technology': 'tech',
+  'artificial-intelligence': 'ai',
+  'science': 'science',
+  'developer-tools': 'devtools',
+  'tech': 'tech',
+  'ai': 'ai',
+  'devtools': 'devtools'
+};
+const categoryVariant = variantMap[categorySlug] || 'tech';
 
 // Format publication and update dates
-const publishDateFormatted = article.data.publishDate.toLocaleDateString('en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
 const publishDateISO = article.data.publishDate.toISOString();
+const updatedDateISO = article.data.updatedDate ? article.data.updatedDate.toISOString() : undefined;
 
-const updatedDateFormatted = article.data.updatedDate
-  ? article.data.updatedDate.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    })
-  : null;
-const updatedDateISO = article.data.updatedDate ? article.data.updatedDate.toISOString() : null;
-
-// Determine adjacent (prev/next) and related articles
+// Determine related articles
 const allPublished = await getPublishedArticles();
 const currentSlug = getArticleSlug(article);
-const currentIndex = allPublished.findIndex((a) => getArticleSlug(a) === currentSlug);
-const prevArticle = currentIndex > 0 ? allPublished[currentIndex - 1] : null;
-const nextArticle = currentIndex < allPublished.length - 1 ? allPublished[currentIndex + 1] : null;
 
-// Advanced Content Discoverability: Score related articles by Category and Tags
 const otherArticles = allPublished.filter((a) => getArticleSlug(a) !== currentSlug);
-const currentCategory = article.data.category.toLowerCase().trim();
 const currentTags = (article.data.tags || []).map((t: string) => t.toLowerCase());
 
 const scoredArticles = otherArticles.map((candidate) => {
   let score = 0;
-  if (candidate.data.category.toLowerCase().trim() === currentCategory) {
-    score += 5; // Heavy weight for same category
+  if (candidate.data.category.toLowerCase().trim() === categorySlug) {
+    score += 5;
   }
   const candidateTags = (candidate.data.tags || []).map((t: string) => t.toLowerCase());
   const sharedTags = currentTags.filter((tag: string) => candidateTags.includes(tag));
-  score += sharedTags.length * 2; // Additional weight for shared taxonomy tags
+  score += sharedTags.length * 2;
   return { article: candidate, score };
 });
 
@@ -101,932 +82,75 @@ scoredArticles.sort((a, b) => {
   return b.article.data.publishDate.getTime() - a.article.data.publishDate.getTime();
 });
 
-const relatedArticles = scoredArticles.map((s) => s.article).slice(0, 3);
+const relatedArticlesData = scoredArticles.map((s) => s.article).slice(0, 3);
+const relatedForProps = relatedArticlesData.map((a) => ({
+  slug: getArticleSlug(a),
+  title: a.data.title,
+  category: a.data.category,
+  categoryVariant: variantMap[a.data.category.toLowerCase().trim()] || 'tech',
+  readingTime: getArticleReadingTime(a),
+  excerpt: a.data.description,
+}));
 
-// Cover Image & Alt Text
-const coverImage = article.data.coverImage;
-const coverImageAlt = article.data.coverImageAlt || article.data.title;
-const coverImageCredit = article.data.coverImageCredit;
-const coverImageCaption = article.data.coverImageCaption;
-
-// Page Title & Meta Description (supports optional SEO overrides)
+// Page Title & Meta Description
 const pageTitle = article.data.seoTitle
   ? `${article.data.seoTitle} | Micro Signal Cosmos`
   : `${article.data.title} | Micro Signal Cosmos`;
 const pageDescription = article.data.seoDescription || article.data.description;
 
-// JSON-LD Structured Data
 const siteUrl = 'https://microsignalcosmos.com';
 const articleUrl = `${siteUrl}/articles/${currentSlug}/`;
-
-const articleJsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': ['NewsArticle', 'BlogPosting', 'TechArticle'],
-      '@id': `${articleUrl}#article`,
-      headline: article.data.title,
-      description: pageDescription,
-      url: articleUrl,
-      mainEntityOfPage: {
-        '@type': 'WebPage',
-        '@id': articleUrl,
-      },
-      datePublished: publishDateISO,
-      dateModified: updatedDateISO || publishDateISO,
-      author: {
-        '@type': author.id === 'editorial-desk' ? 'Organization' : 'Person',
-        name: author.name,
-        url: `${siteUrl}/authors/`,
-      },
-      publisher: {
-        '@type': 'Organization',
-        name: 'Micro Signal Cosmos',
-        url: siteUrl,
-        logo: {
-          '@type': 'ImageObject',
-          url: `${siteUrl}/favicon.svg`,
-          width: 512,
-          height: 512,
-        },
-      },
-      articleSection: categoryName,
-      keywords: (article.data.tags || []).join(', '),
-      image: coverImage
-        ? (coverImage.startsWith('http') ? coverImage : `${siteUrl}${coverImage}`)
-        : `${siteUrl}/favicon.svg`,
-    },
-    {
-      '@type': 'BreadcrumbList',
-      '@id': `${articleUrl}#breadcrumb`,
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Home',
-          item: `${siteUrl}/`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: 'Articles',
-          item: `${siteUrl}/articles/`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 3,
-          name: article.data.title,
-          item: articleUrl,
-        },
-      ],
-    },
-  ],
-};
-
-const shareEncodedUrl = encodeURIComponent(articleUrl);
-const shareEncodedTitle = encodeURIComponent(article.data.title);
 ---
 
-<Layout
+<ArticleLayout
   title={pageTitle}
   description={pageDescription}
-  type="article"
-  image={coverImage}
-  jsonLd={articleJsonLd}
+  author={article.data.author}
+  authorName={author.name}
+  authorRole={author.role}
+  authorAvatar={author.avatar}
+  category={categoryName}
+  categoryVariant={categoryVariant}
+  tags={article.data.tags}
+  readingTime={readingTime}
+  publishedTime={publishDateISO}
+  updatedTime={updatedDateISO}
+  canonical={articleUrl}
+  ogImage={article.data.coverImage}
+  relatedArticles={relatedForProps}
 >
-  <Header />
-
-  <main id="main-content" class="bg-[#F7F9FC] py-8 sm:py-12 lg:py-16">
-    <div class="container-main">
-
-      <!-- Breadcrumbs Navigation -->
-      <div class="mx-auto max-w-5xl mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-xs sm:text-sm text-[#697586]">
-        <nav aria-label="Breadcrumb">
-          <ol class="flex flex-wrap items-center gap-1.5 sm:gap-2">
-            <li>
-              <a href="/" class="hover:text-[#3478F6] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6] rounded">
-                Home
-              </a>
-            </li>
-            <li aria-hidden="true" class="text-slate-300">/</li>
-            <li>
-              <a href="/articles/" class="hover:text-[#3478F6] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6] rounded">
-                Articles
-              </a>
-            </li>
-            <li aria-hidden="true" class="text-slate-300">/</li>
-            <li>
-              <a href={categoryHref} class="hover:text-[#3478F6] transition-colors font-medium">
-                {categoryName}
-              </a>
-            </li>
-          </ol>
-        </nav>
-
-        <a
-          href="/articles/"
-          class="inline-flex items-center gap-1.5 font-bold uppercase tracking-wider text-[11px] text-[#3478F6] hover:text-[#2563EB] transition-colors"
-        >
-          <span>&larr;</span> Back to All Articles
-        </a>
-      </div>
-
-      <!-- Main Article Header Surface -->
-      <header class="mx-auto max-w-5xl rounded-2xl border border-[#E3E8EF] bg-white p-6 sm:p-10 lg:p-12 shadow-xs mb-8">
-        
-        <!-- Category & Badge Pills -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+  <Fragment slot="toc">
+    {tocHeadings.length > 0 ? (
+      tocHeadings.map((h) => (
+        <li class={h.depth === 3 ? "pl-3 text-xs" : ""}>
           <a
-            href={categoryHref}
-            class="inline-flex items-center gap-2 rounded-full border border-[#E3E8EF] bg-[#F7F9FC] px-3.5 py-1 text-xs font-bold tracking-wider uppercase text-[#3478F6] transition-colors hover:border-[#3478F6]"
+            href={`#${h.slug}`}
+            class="toc-link block text-text-secondary hover:text-brand-primary transition-colors py-1"
           >
-            <span class="h-1.5 w-1.5 rounded-full bg-[#3478F6]"></span>
-            <span>{categoryName}</span>
+            {h.text}
           </a>
-
-          <div class="flex items-center gap-2 text-xs font-semibold text-[#697586]">
-            <span class="inline-flex items-center gap-1 rounded-full bg-[#3478F6]/10 px-2.5 py-0.5 text-[11px] font-bold text-[#3478F6]">
-              Knowledge Guide
-            </span>
-            <span class="text-slate-300" aria-hidden="true">&bull;</span>
-            <span class="text-[#697586]">{readingTime}</span>
-          </div>
-        </div>
-
-        <!-- Main Article Title -->
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#14233B] leading-[1.16]">
-          {article.data.title}
-        </h1>
-
-        <!-- Article Excerpt / Lead Paragraph -->
-        <p class="mt-5 text-lg sm:text-xl font-normal leading-relaxed text-[#202938]">
-          {article.data.description}
-        </p>
-
-        <!-- Metadata & Sharing Controls Strip -->
-        <div class="mt-8 pt-6 border-t border-[#E3E8EF] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs sm:text-sm text-[#697586]">
-          
-          <!-- Author & Dates Line -->
-          <div class="flex flex-wrap items-center gap-3">
-            <a href="/authors/" class="flex items-center gap-2.5 font-bold text-[#14233B] hover:text-[#0ea5e9] transition-colors">
-              {author.avatar ? (
-                <img src={author.avatar} alt={author.name} class="h-7 w-7 rounded-full object-cover" width="28" height="28" />
-              ) : (
-                <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[#14233B] text-[10px] font-black text-white">
-                  {author.initials}
-                </span>
-              )}
-              <div>
-                <span>{author.name}</span>
-                <span class="text-slate-400 font-normal mx-1">&bull;</span>
-                <span class="text-xs font-normal text-[#697586]">{author.role}</span>
-              </div>
-            </a>
-
-            <span aria-hidden="true" class="text-slate-300">&bull;</span>
-
-            <time datetime={publishDateISO} class="text-[#697586]">
-              {publishDateFormatted}
-            </time>
-
-            {updatedDateFormatted && (
-              <>
-                <span aria-hidden="true" class="text-slate-300">&bull;</span>
-                <span class="text-[#697586]">Updated {updatedDateFormatted}</span>
-              </>
-            )}
-          </div>
-
-          <!-- Social Share Bar with Accessible Copy Feedback -->
-          <div class="flex items-center gap-2">
-            <span class="text-xs font-bold text-[#14233B] uppercase tracking-wider mr-1">Share:</span>
-            
-            <!-- Copy Link Button -->
-            <button
-              type="button"
-              id="copy-link-btn"
-              class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] px-3 text-xs font-semibold text-[#14233B] hover:border-[#3478F6] hover:text-[#3478F6] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6]"
-              aria-label="Copy article link to clipboard"
-              data-url={articleUrl}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-              </svg>
-              <span id="copy-text">Copy Link</span>
-            </button>
-
-            <!-- Twitter / X Share -->
-            <a
-              href={`https://twitter.com/intent/tweet?text=${shareEncodedTitle}&url=${shareEncodedUrl}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] text-[#14233B] hover:border-[#3478F6] hover:text-[#3478F6] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6]"
-              aria-label="Share this analysis on X"
-              title="Share on X (Twitter)"
-            >
-              <span class="text-xs font-bold">𝕏</span>
-            </a>
-
-            <!-- LinkedIn Share -->
-            <a
-              href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareEncodedUrl}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] text-[#14233B] hover:border-[#3478F6] hover:text-[#3478F6] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6]"
-              aria-label="Share this analysis on LinkedIn"
-              title="Share on LinkedIn"
-            >
-              <span class="text-xs font-bold">in</span>
-            </a>
-
-            <!-- Email Share -->
-            <a
-              href={`mailto:?subject=${shareEncodedTitle}&body=Read this article on Micro Signal Cosmos: ${shareEncodedUrl}`}
-              class="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] text-[#14233B] hover:border-[#3478F6] hover:text-[#3478F6] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6]"
-              aria-label="Share this article via email"
-              title="Email article"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Featured Visual / Editorial Header Artwork -->
-        <div class="mt-8">
-          {coverImage ? (
-            <figure class="overflow-hidden rounded-xl border border-[#E3E8EF] bg-[#F7F9FC]">
-              <img
-                src={coverImage}
-                alt={coverImageAlt}
-                width="1200"
-                height="630"
-                class="h-auto max-h-[480px] w-full object-cover"
-                loading="eager"
-              />
-              {(coverImageCaption || coverImageCredit) && (
-                <figcaption class="px-4 py-2 text-right text-[11px] text-[#697586] border-t border-[#E3E8EF] bg-white">
-                  {coverImageCaption && <span>{coverImageCaption}</span>}
-                  {coverImageCaption && coverImageCredit && <span> &bull; </span>}
-                  {coverImageCredit && <span class="italic font-medium">Credit: {coverImageCredit}</span>}
-                </figcaption>
-              )}
-            </figure>
-          ) : (
-            <div class="relative aspect-[21/9] sm:aspect-[24/9] w-full overflow-hidden rounded-xl bg-gradient-to-br from-[#101B2D] via-[#14233B] to-[#1E3A63] p-6 text-white shadow-inner flex flex-col justify-between">
-              <!-- Technical Lattice Overlay -->
-              <div class="pointer-events-none absolute inset-0 opacity-15" aria-hidden="true">
-                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <pattern id="article-cover-grid" width="32" height="32" patternUnits="userSpaceOnUse">
-                      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="white" stroke-width="1" />
-                    </pattern>
-                  </defs>
-                  <rect width="100%" height="100%" fill="url(#article-cover-grid)" />
-                </svg>
-              </div>
-
-              <!-- Top Row Info -->
-              <div class="relative z-10 flex items-center justify-between">
-                <span class="inline-block rounded-md bg-white/10 backdrop-blur-md px-3 py-1 font-mono text-[11px] font-bold text-sky-200 uppercase tracking-widest border border-white/15">
-                  TOPIC GUIDE &bull; {categoryName.toUpperCase()}
-                </span>
-                <span class="text-xs font-mono text-white/50 uppercase">Micro Signal Cosmos</span>
-              </div>
-
-              <!-- Center Motif -->
-              <div class="relative z-10 text-center my-auto">
-                <span class="block text-4xl sm:text-5xl font-black text-white/15 tracking-[0.3em] font-mono select-none">
-                  {categoryName.toUpperCase()}
-                </span>
-              </div>
-
-              <!-- Bottom Row Info -->
-              <div class="relative z-10 flex items-center justify-between text-[11px] text-slate-300">
-                <span>Discover More. Understand Better.</span>
-                <span class="font-semibold text-white">Read Article Below &darr;</span>
-              </div>
-            </div>
-          )}
-        </div>
-
-      </header>
-
-      <!-- Two-Column Editorial Reading Grid (Desktop 8+4) -->
-      <div class="mx-auto max-w-5xl grid gap-8 lg:grid-cols-12 items-start">
-
-        <!-- Main Reading Column (8 cols) -->
-        <article class="lg:col-span-8 rounded-2xl border border-[#E3E8EF] bg-white p-6 sm:p-10 shadow-xs">
-
-          <!-- Mobile Collapsible Table of Contents (< 1024px) -->
-          {tocHeadings.length > 0 && (
-            <div class="lg:hidden mb-8 rounded-xl border border-[#E3E8EF] bg-[#F7F9FC] p-4">
-              <details class="group">
-                <summary class="flex cursor-pointer list-none items-center justify-between font-bold text-sm text-[#14233B]">
-                  <span class="flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#3478F6]">
-                      <line x1="8" y1="6" x2="21" y2="6"></line>
-                      <line x1="8" y1="12" x2="21" y2="12"></line>
-                      <line x1="8" y1="18" x2="21" y2="18"></line>
-                      <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                      <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                      <line x1="3" y1="18" x2="3.01" y2="18"></line>
-                    </svg>
-                    <span>Table of Contents ({tocHeadings.length} Sections)</span>
-                  </span>
-                  <span class="text-xs text-[#3478F6] transition-transform group-open:rotate-180">
-                    &darr;
-                  </span>
-                </summary>
-                <nav class="mt-4 pt-3 border-t border-[#E3E8EF] space-y-2 text-xs">
-                  {tocHeadings.map((h) => (
-                    <a
-                      href={`#${h.slug}`}
-                      class:list={[
-                        'block transition-colors hover:text-[#3478F6] py-1',
-                        h.depth === 3 ? 'pl-4 text-[#697586]' : 'font-semibold text-[#14233B]',
-                      ]}
-                    >
-                      {h.text}
-                    </a>
-                  ))}
-                </nav>
-              </details>
-            </div>
-          )}
-
-          <!-- Affiliate Disclosure (Rendered if article contains affiliate links) -->
-          {article.data.hasAffiliateLinks && (
-            <AffiliateDisclosure customText={article.data.affiliateDisclosure} />
-          )}
-
-          <!-- 1. Above-the-Fold Monetization Placement (Zero CLS, Configurable) -->
-          <ArticleAd position="above-fold" />
-
-          <!-- Main Article Markdown Content -->
-          <div class="article-content" id="article-body-content">
-            <Content />
-          </div>
-
-          <script is:inline>
-            (function() {
-              // Copy Link Handler with Visual & Accessible Feedback
-              const copyBtn = document.getElementById('copy-link-btn');
-              const copyText = document.getElementById('copy-text');
-              let copyTimeout = null;
-              if (copyBtn && copyText) {
-                copyBtn.addEventListener('click', async () => {
-                  const url = copyBtn.getAttribute('data-url') || window.location.href;
-                  try {
-                    if (navigator.clipboard && navigator.clipboard.writeText) {
-                      await navigator.clipboard.writeText(url);
-                    } else {
-                      const tempInput = document.createElement('textarea');
-                      tempInput.value = url;
-                      tempInput.style.position = 'fixed';
-                      tempInput.style.opacity = '0';
-                      document.body.appendChild(tempInput);
-                      tempInput.focus();
-                      tempInput.select();
-                      document.execCommand('copy');
-                      document.body.removeChild(tempInput);
-                    }
-                    copyText.textContent = 'Copied!';
-                    copyBtn.classList.add('border-[#3478F6]', 'text-[#3478F6]', 'bg-[#3478F6]/10');
-                    if (copyTimeout) clearTimeout(copyTimeout);
-                    copyTimeout = setTimeout(() => {
-                      copyText.textContent = 'Copy Link';
-                      copyBtn.classList.remove('border-[#3478F6]', 'text-[#3478F6]', 'bg-[#3478F6]/10');
-                    }, 2500);
-                  } catch (e) {
-                    copyText.textContent = 'Copied!';
-                    if (copyTimeout) clearTimeout(copyTimeout);
-                    copyTimeout = setTimeout(() => {
-                      copyText.textContent = 'Copy Link';
-                    }, 2500);
-                  }
-                });
-              }
-            })();
-          </script>
-
-          <!-- 2. Post-Article Monetization Placement (Zero CLS, Configurable) -->
-          <ArticleAd position="post-article" />
-
-          <!-- Tag Strip -->
-          {article.data.tags && article.data.tags.length > 0 && (
-            <div class="mt-10 pt-6 border-t border-[#E3E8EF]">
-              <div class="flex flex-wrap items-center gap-2">
-                <span class="text-xs font-bold uppercase tracking-wider text-[#14233B] mr-2">
-                  Taxonomy Tags:
-                </span>
-                {article.data.tags.map((tag) => (
-                  <a
-                    href={`/articles/?q=${encodeURIComponent(tag)}`}
-                    class="rounded-md border border-[#E3E8EF] bg-[#F7F9FC] px-3 py-1 text-xs font-semibold text-[#202938] hover:border-[#3478F6] hover:text-[#3478F6] transition-colors"
-                  >
-                    #{tag}
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <!-- Newsletter Inline Variant -->
-          <NewsletterInline
-            className="mt-10"
-            leadMagnetTitle={article.data.title + ' Architecture & Reference Sheet'}
-          />
-
-          <!-- Sources & Further Reading -->
-          {article.data.references && article.data.references.length > 0 && (
-            <section aria-labelledby="article-references" class="mt-10 rounded-xl border border-[#E3E8EF] bg-white p-6 sm:p-7 shadow-xs">
-              <div class="flex items-center gap-2 border-b border-[#E3E8EF] pb-3">
-                <span class="flex h-5 w-5 items-center justify-center rounded bg-[#14233B] text-[10px] font-bold text-white">
-                  &para;
-                </span>
-                <h2 id="article-references" class="text-sm font-bold uppercase tracking-wider text-[#14233B]">
-                  Sources & Further Reading
-                </h2>
-              </div>
-              <ol class="mt-4 list-decimal space-y-2 pl-5 text-xs text-[#4B5565] leading-relaxed">
-                {article.data.references.map((ref) => {
-                  if (typeof ref === 'string') {
-                    return <li>{ref}</li>;
-                  }
-                  return (
-                    <li>
-                      <strong class="font-semibold text-[#14233B]">{ref.title}</strong>
-                      {ref.source && <span class="text-[#697586]"> &mdash; {ref.source}</span>}
-                      {ref.url && (
-                        <a
-                          href={ref.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="ml-1.5 font-semibold text-[#3478F6] hover:underline"
-                        >
-                          [Source ↗]
-                        </a>
-                      )}
-                    </li>
-                  );
-                })}
-              </ol>
-            </section>
-          )}
-
-          <!-- Author Biography & Contributor Credential Box -->
-          <div class="mt-10 rounded-xl border border-[#E3E8EF] bg-[#F7F9FC] p-6 sm:p-7">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              {author.avatar ? (
-                <img src={author.avatar} alt={author.name} class="h-14 w-14 shrink-0 rounded-2xl object-cover shadow-sm" width="56" height="56" />
-              ) : (
-                <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#14233B] text-white font-black text-sm shadow-sm">
-                  {author.initials}
-                </div>
-              )}
-              <div class="flex-1">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                  <div>
-                    <h3 class="text-base font-bold text-[#14233B]">
-                      {author.name}
-                    </h3>
-                    <p class="text-[11px] font-semibold text-[#0ea5e9] uppercase tracking-wider">
-                      {author.role}
-                    </p>
-                  </div>
-                  <a href="/authors/" class="text-xs font-bold text-[#0ea5e9] hover:underline">
-                    Author Profile &rarr;
-                  </a>
-                </div>
-                <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#4B5565]">
-                  {author.bio}
-                </p>
-                {author.expertise && author.expertise.length > 0 && (
-                  <div class="mt-3 flex flex-wrap gap-1.5 pt-3 border-t border-[#E3E8EF]/80">
-                    <span class="text-[10px] font-bold uppercase tracking-wider text-[#697586] mr-1">Focus:</span>
-                    {author.expertise.map((exp) => (
-                      <span class="text-[10px] font-semibold text-[#14233B] bg-white border border-[#E3E8EF] px-2 py-0.5 rounded">
-                        {exp}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          <!-- Adjacent Article Navigation (Prev / Next) -->
-          {(prevArticle || nextArticle) && (
-            <nav aria-label="Adjacent Articles" class="mt-10 pt-8 border-t border-[#E3E8EF] grid gap-4 sm:grid-cols-2">
-              {prevArticle ? (
-                <a
-                  href={`/articles/${prevArticle.data.slug || prevArticle.id}/`}
-                  class="group flex flex-col justify-between rounded-xl border border-[#E3E8EF] bg-[#F7F9FC] p-4 transition-all hover:border-[#3478F6] hover:bg-white"
-                >
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-[#697586] group-hover:text-[#3478F6]">
-                    &larr; Previous Analysis
-                  </span>
-                  <span class="mt-2 text-sm font-bold text-[#14233B] line-clamp-2 group-hover:text-[#3478F6]">
-                    {prevArticle.data.title}
-                  </span>
-                </a>
-              ) : <div></div>}
-
-              {nextArticle ? (
-                <a
-                  href={`/articles/${nextArticle.data.slug || nextArticle.id}/`}
-                  class="group flex flex-col justify-between rounded-xl border border-[#E3E8EF] bg-[#F7F9FC] p-4 text-right transition-all hover:border-[#3478F6] hover:bg-white"
-                >
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-[#697586] group-hover:text-[#3478F6]">
-                    Next Analysis &rarr;
-                  </span>
-                  <span class="mt-2 text-sm font-bold text-[#14233B] line-clamp-2 group-hover:text-[#3478F6]">
-                    {nextArticle.data.title}
-                  </span>
-                </a>
-              ) : <div></div>}
-            </nav>
-          )}
-
-        </article>
-
-        <!-- Sticky Editorial Sidebar (4 cols - Desktop Only) -->
-        <aside class="hidden lg:block lg:col-span-4 sticky top-28 space-y-6">
-
-          <!-- Desktop Sticky Table of Contents Card -->
-          {tocHeadings.length > 0 && (
-            <div class="rounded-2xl border border-[#E3E8EF] bg-white p-6 shadow-xs">
-              <div class="flex items-center justify-between pb-3 border-b border-[#E3E8EF]">
-                <h2 class="text-xs font-bold uppercase tracking-wider text-[#14233B] flex items-center gap-1.5">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-[#3478F6]">
-                    <line x1="8" y1="6" x2="21" y2="6"></line>
-                    <line x1="8" y1="12" x2="21" y2="12"></line>
-                    <line x1="8" y1="18" x2="21" y2="18"></line>
-                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
-                  </svg>
-                  <span>In This Article</span>
-                </h2>
-                <span class="text-[10px] font-semibold text-[#697586]">
-                  {tocHeadings.length} Sections
-                </span>
-              </div>
-
-              <nav aria-label="Table of contents" class="mt-4 space-y-2 max-h-[60vh] overflow-y-auto pr-1">
-                {tocHeadings.map((h) => (
-                  <a
-                    href={`#${h.slug}`}
-                    class:list={[
-                      'block transition-colors hover:text-[#3478F6] text-xs leading-relaxed py-1',
-                      h.depth === 3 ? 'pl-3 text-[#697586]' : 'font-semibold text-[#202938]',
-                    ]}
-                  >
-                    {h.text}
-                  </a>
-                ))}
-              </nav>
-
-              <div class="mt-5 pt-3 border-t border-[#E3E8EF] text-right">
-                <a href="#main-content" class="text-[11px] font-semibold text-[#3478F6] hover:underline">
-                  &uarr; Back to top
-                </a>
-              </div>
-            </div>
-          )}
-
-          <!-- About Micro Signal Cosmos Card -->
-          <div class="rounded-2xl border border-[#E3E8EF] bg-white p-6 shadow-xs">
-            <div class="flex items-center gap-2">
-              <span class="h-2 w-2 rounded-full bg-[#3478F6]"></span>
-              <h3 class="text-xs font-bold uppercase tracking-wider text-[#14233B]">
-                About Micro Signal Cosmos
-              </h3>
-            </div>
-            <p class="mt-3 text-xs leading-relaxed text-[#4B5565]">
-              An independent knowledge blog sharing clear, accessible guides and thoughtful insights across technology, science, artificial intelligence, and digital tools.
-            </p>
-            <div class="mt-4 pt-3 border-t border-[#E3E8EF] flex items-center justify-between text-[11px]">
-              <a href="/about/" class="font-bold text-[#3478F6] hover:underline">About Us &rarr;</a>
-              <a href="/articles/" class="font-bold text-[#3478F6] hover:underline">All Articles &rarr;</a>
-            </div>
-          </div>
-
-          <!-- Topic Navigation Card -->
-          <div class="rounded-2xl border border-[#E3E8EF] bg-white p-6 shadow-xs">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-[#14233B]">
-              Related Topic Stream
-            </h3>
-            <p class="mt-1 text-xs text-[#697586]">
-              Explore more articles in {categoryName}:
-            </p>
-            <div class="mt-3">
-              <a
-                href={categoryHref}
-                class="inline-flex w-full items-center justify-between rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] px-3.5 py-2 text-xs font-semibold text-[#14233B] hover:border-[#3478F6] hover:text-[#3478F6] transition-colors"
-              >
-                <span>{categoryName} Stream</span>
-                <span>&rarr;</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Desktop Sidebar Advertisement (Configurable, Zero CLS) -->
-          <SidebarAd />
-        </aside>
-
-      </div>
-
-      <!-- Related Articles Section (Bottom) -->
-      {relatedArticles.length > 0 && (
-        <section class="mx-auto mt-16 max-w-5xl" aria-labelledby="related-heading">
-          <div class="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-            <div>
-              <p class="text-xs font-bold uppercase tracking-widest text-[#3478F6] mb-1">
-                Continue Reading
-              </p>
-              <h2 id="related-heading" class="text-2xl font-extrabold tracking-tight text-[#14233B] sm:text-3xl">
-                Related <span class="text-[#3478F6]">Articles</span>
-              </h2>
-            </div>
-            <a
-              href="/articles/"
-              class="text-xs sm:text-sm font-semibold text-[#3478F6] hover:text-[#2563EB] transition-colors"
-            >
-              Browse complete catalog &rarr;
-            </a>
-          </div>
-
-          <div class="grid gap-6 md:grid-cols-3">
-            {relatedArticles.map((rel) => {
-              const relSlug = rel.data.slug || rel.id;
-              const relDateFormatted = rel.data.publishDate.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-              });
-
-              return (
-                <article class="group flex flex-col justify-between rounded-2xl border border-[#E3E8EF] bg-white p-6 shadow-xs transition-all duration-300 hover:shadow-md hover:border-[#CBD5E1]">
-                  <div>
-                    <div class="flex items-center justify-between text-xs mb-2">
-                      <span class="font-bold uppercase tracking-wider text-[#3478F6] text-[11px]">
-                        {rel.data.category}
-                      </span>
-                      <span class="text-[#697586] text-[11px]">{rel.data.readingTime || '5 min'}</span>
-                    </div>
-
-                    <h3 class="mt-2 text-base font-bold leading-snug text-[#14233B] transition-colors group-hover:text-[#3478F6]">
-                      <a href={`/articles/${relSlug}/`} class="focus-visible:outline-none focus-visible:underline">
-                        {rel.data.title}
-                      </a>
-                    </h3>
-
-                    <p class="mt-2 text-xs leading-relaxed text-[#4B5565] line-clamp-3">
-                      {rel.data.description}
-                    </p>
-                  </div>
-
-                  <div class="mt-6 pt-3 border-t border-[#E3E8EF] flex items-center justify-between text-xs text-[#697586]">
-                    <time datetime={rel.data.publishDate.toISOString()}>{relDateFormatted}</time>
-                    <a
-                      href={`/articles/${relSlug}/`}
-                      class="font-bold text-[#3478F6] group-hover:text-[#2563EB]"
-                    >
-                      Read &rarr;
-                    </a>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </section>
-      )}
-
-    </div>
-  </main>
-
-  <NewsletterExitIntent leadMagnet="Free System Architecture & Cheat Sheet Bundle" />
-
-  <Footer />
-</Layout>
-
-<style>
-  /* ===================================================
-     ARTICLE CONTENT STYLING (PREMIUM LIGHT MAGAZINE)
-     =================================================== */
-  .article-content {
-    color: #202938; /* Deep charcoal text */
-    font-size: 1.125rem; /* 18px */
-    line-height: 1.8;
-  }
-
-  /* Headings with smooth scroll clearance for sticky masthead */
-  .article-content :global(h2) {
-    color: #14233B;
-    font-size: 1.875rem;
-    font-weight: 800;
-    line-height: 1.25;
-    margin-top: 3rem;
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #EEF1F5;
-    letter-spacing: -0.02em;
-    scroll-margin-top: 6rem;
-  }
-
-  .article-content :global(h3) {
-    color: #14233B;
-    font-size: 1.45rem;
-    font-weight: 700;
-    line-height: 1.35;
-    margin-top: 2.25rem;
-    margin-bottom: 1rem;
-    letter-spacing: -0.01em;
-    scroll-margin-top: 6rem;
-  }
-
-  .article-content :global(h4) {
-    color: #14233B;
-    font-size: 1.2rem;
-    font-weight: 700;
-    line-height: 1.4;
-    margin-top: 1.75rem;
-    margin-bottom: 0.75rem;
-    scroll-margin-top: 6rem;
-  }
-
-  /* Paragraphs */
-  .article-content :global(p) {
-    margin-bottom: 1.6rem;
-  }
-
-  /* Emphasis & Citations */
-  .article-content :global(strong) {
-    color: #14233B;
-    font-weight: 700;
-  }
-
-  .article-content :global(em) {
-    color: #202938;
-    font-style: italic;
-  }
-
-  /* Lists */
-  .article-content :global(ul) {
-    list-style-type: disc;
-    padding-left: 1.5rem;
-    margin-bottom: 1.75rem;
-    margin-top: 0.5rem;
-  }
-
-  .article-content :global(ol) {
-    list-style-type: decimal;
-    padding-left: 1.5rem;
-    margin-bottom: 1.75rem;
-    margin-top: 0.5rem;
-  }
-
-  .article-content :global(li) {
-    margin-bottom: 0.6rem;
-    padding-left: 0.25rem;
-    color: #202938;
-  }
-
-  .article-content :global(li::marker) {
-    color: #3478F6;
-  }
-
-  /* Blockquotes & Pull Quotes */
-  .article-content :global(blockquote) {
-    margin: 2.25rem 0;
-    padding: 1.25rem 1.75rem;
-    background: #F8FAFC;
-    border-left: 4px solid #3478F6;
-    border-radius: 0 0.75rem 0.75rem 0;
-    color: #14233B;
-    font-style: italic;
-    font-size: 1.15rem;
-    line-height: 1.7;
-    border-top: 1px solid #EEF1F5;
-    border-right: 1px solid #EEF1F5;
-    border-bottom: 1px solid #EEF1F5;
-  }
-
-  .article-content :global(blockquote p:last-child) {
-    margin-bottom: 0;
-  }
-
-  /* Contextual Links */
-  .article-content :global(a) {
-    color: #3478F6;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    font-weight: 500;
-    transition: color 0.2s ease;
-  }
-
-  .article-content :global(a:hover) {
-    color: #2563EB;
-  }
-
-  /* Inline Code */
-  .article-content :global(:not(pre) > code) {
-    background: #EEF1F5;
-    color: #2563EB;
-    padding: 0.2rem 0.45rem;
-    border-radius: 0.375rem;
-    font-size: 0.875em;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    border: 1px solid #E2E8F0;
-  }
-
-  /* Preformatted Code & Architectural Diagrams */
-  .article-content :global(pre) {
-    background: #0F172A !important;
-    border: 1px solid #334155;
-    border-radius: 0.75rem;
-    padding: 1.25rem 1.5rem;
-    margin: 2.25rem 0;
-    overflow-x: auto;
-    font-size: 0.875rem;
-    line-height: 1.7;
-    color: #F1F5F9;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .article-content :global(pre code) {
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    color: inherit !important;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  }
-
-  /* Responsive Tables */
-  .article-content :global(table) {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    border-collapse: collapse;
-    margin: 2rem 0;
-    border: 1px solid #E3E8EF;
-    border-radius: 0.5rem;
-    font-size: 0.9375rem;
-  }
-
-  .article-content :global(th) {
-    background: #F8FAFC;
-    color: #14233B;
-    font-weight: 700;
-    text-align: left;
-    padding: 0.85rem 1rem;
-    border-bottom: 2px solid #E3E8EF;
-  }
-
-  .article-content :global(td) {
-    padding: 0.85rem 1rem;
-    border-bottom: 1px solid #E3E8EF;
-    color: #202938;
-  }
-
-  .article-content :global(tr:nth-child(even) td) {
-    background: #F8FAFC;
-  }
-
-  /* Horizontal Divider */
-  .article-content :global(hr) {
-    border: none;
-    height: 1px;
-    background: #E3E8EF;
-    margin: 3rem 0;
-  }
-
-  /* Mobile Responsive Tweaks */
-  @media (max-width: 640px) {
-    .article-content {
-      font-size: 1.0625rem;
-      line-height: 1.75;
-    }
-    .article-content :global(h2) {
-      font-size: 1.5rem;
-      margin-top: 2.25rem;
-    }
-    .article-content :global(h3) {
-      font-size: 1.25rem;
-      margin-top: 1.75rem;
-    }
-    .article-content :global(pre) {
-      padding: 1rem;
-      margin: 1.5rem 0;
-      font-size: 0.8125rem;
-    }
-  }
-</style>
+        </li>
+      ))
+    ) : (
+      <li class="text-xs text-text-muted italic">Overview</li>
+    )}
+  </Fragment>
+
+  <!-- Editorial Content Body -->
+  <div class="space-y-6">
+    <Content />
+  </div>
+
+  <!-- In-article Newsletter touchpoint -->
+  <div class="my-12">
+    <NewsletterInline />
+  </div>
+
+  <!-- Transparent Affiliate / Partner Disclosure -->
+  <div class="my-8">
+    <AffiliateDisclosure />
+  </div>
+
+  <!-- Exit intent modal trigger -->
+  <NewsletterExitIntent />
+</ArticleLayout>

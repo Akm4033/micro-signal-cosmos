@@ -1,0 +1,22 @@
+---
+interface Props {
+  initials?: string;
+  src?: string;
+  alt?: string;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  class?: string;
+}
+const { initials, src, alt, size = 'md', class: className = '', ...rest } = Astro.props;
+const sizeClasses = {
+  sm: 'w-7 h-7 text-xs',
+  md: 'w-10 h-10 text-sm',
+  lg: 'w-12 h-12 text-base',
+  xl: 'w-16 h-16 text-lg',
+};
+const classes = `inline-flex items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary font-bold ${sizeClasses[size]} ${className}`;
+---
+{src ? (
+  <img src={src} alt={alt || ''} class={`rounded-full object-cover ${sizeClasses[size]} ${className}`} {...rest} />
+) : (
+  <span class={classes} {...rest}>{initials}</span>
+)}

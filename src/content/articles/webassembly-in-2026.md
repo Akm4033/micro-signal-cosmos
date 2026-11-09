@@ -149,3 +149,4 @@ For teams building self-hosted distributed systems or deploying edge microservic
 1. **Wasm is the universal server-side binary format**: Write in Rust, Go, or C++, compile once, and execute safely on any CPU architecture.
 2. **Capability-based security eliminates supply-chain exploits**: A compromised dependency cannot scan local files or open outbound sockets unless granted explicit capability handles.
 3. **The Component Model renders legacy C FFI obsolete**: Polyglot microservices communicate seamlessly using structured, typed interfaces.
+

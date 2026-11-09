@@ -1,52 +1,144 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import FeaturedArticles from '../components/FeaturedArticles.astro';
-import Categories from '../components/Categories.astro';
-import LatestArticles from '../components/LatestArticles.astro';
-import HomepageAd from '../components/ads/HomepageAd.astro';
-import PopularArticles from '../components/PopularArticles.astro';
-import EditorialMission from '../components/EditorialMission.astro';
+import Base from '../layouts/Base.astro';
+import ArticleCard from '../components/ui/ArticleCard.astro';
 import NewsletterHero from '../components/newsletter/NewsletterHero.astro';
 import NewsletterExitIntent from '../components/newsletter/NewsletterExitIntent.astro';
-import Footer from '../components/Footer.astro';
+import { getPublishedArticles, getArticleSlug, getArticleReadingTime } from '../data/articles';
+
+const articles = await getPublishedArticles();
+const sortedArticles = [...articles].sort(
+  (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
+const latestArticles = sortedArticles.slice(0, 6);
 ---
 
-<Layout
-  title="Micro Signal Cosmos | Discover More. Understand Better."
-  description="Explore the world of technology, science, artificial intelligence and innovation through insightful articles, practical guides and ideas that shape our future."
->
-  <Header />
+<Base title="Micro Signal Cosmos | Discover More. Understand Better." description="Explore the world of technology, science, artificial intelligence and innovation through insightful articles, practical guides and ideas that shape our future.">
+  <!-- HERO SECTION -->
+  <section class="relative isolate overflow-hidden bg-white border-b border-neutral-200 py-14 sm:py-20 lg:py-24 dark:border-neutral-800">
+    <div class="pointer-events-none absolute inset-0 -z-10 opacity-30" aria-hidden="true">
+      <div class="absolute inset-0 bg-[radial-gradient(#CBD5E1_1px,transparent_1px)] [background-size:28px_28px] dark:opacity-10"></div>
+    </div>
+    <div class="container-wide grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
+      <!-- Hero Content (7 cols) -->
+      <div class="lg:col-span-7 max-w-2xl">
+        <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3.5 py-1.5 text-xs font-bold tracking-widest text-brand-primary uppercase shadow-2xs dark:border-neutral-700 dark:bg-neutral-900/50">
+          <span class="h-2 w-2 rounded-full bg-brand-primary"></span>
+          <span>MICRO SIGNAL COSMOS</span>
+        </div>
+        <h1 class="text-4xl font-extrabold tracking-tight text-text-primary sm:text-5xl lg:text-6xl leading-[1.12]">Explore Ideas.<span class="block text-brand-primary">Discover Possibilities.</span></h1>
+        <p class="mt-3.5 text-base sm:text-lg font-bold text-text-muted tracking-wide">Discover More. Understand Better.</p>
+        <p class="mt-5 text-base sm:text-lg leading-relaxed text-text-secondary">Explore the world of technology, science, artificial intelligence and innovation through insightful articles, practical guides and ideas that shape our future.</p>
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a href="/articles/" class="btn-primary"><span>Explore Articles</span><span aria-hidden="true">&rarr;</span></a>
+          <a href="#categories" class="btn-secondary"><span>Browse Topics</span></a>
+        </div>
+        <div class="mt-10 pt-6 border-t border-neutral-200 flex flex-wrap items-center gap-2 text-xs dark:border-neutral-700">
+          <span class="font-bold uppercase tracking-wider text-text-primary mr-1">Active Streams:</span>
+          <a href="/category/technology/" class="badge badge--tech">Technology</a>
+          <a href="/category/science/" class="badge badge--science">Science</a>
+          <a href="/category/artificial-intelligence/" class="badge badge--ai">AI &amp; ML</a>
+          <a href="/category/developer-tools/" class="badge badge--devtools">Developer Tools</a>
+        </div>
+      </div>
+      <!-- Editorial Showcase (5 cols) -->
+      <div class="lg:col-span-5 flex justify-center">
+        <div class="relative w-full max-w-[430px] rounded-2xl border border-neutral-200 bg-neutral-50 p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:border-brand-primary/30 dark:border-neutral-700 dark:bg-neutral-900/50">
+          <div class="flex items-center justify-between pb-4 border-b border-neutral-200 dark:border-neutral-700">
+            <div class="flex items-center gap-2"><span class="inline-flex h-2 w-2 rounded-full bg-brand-primary"></span><span class="text-xs font-bold uppercase tracking-wider text-text-primary">Lead Investigation</span></div>
+            <span class="rounded-full bg-white border border-neutral-200 px-2.5 py-0.5 text-[11px] font-semibold text-text-muted dark:bg-neutral-800 dark:border-neutral-700">14 min read</span>
+          </div>
+          <a href="/articles/how-llms-actually-work/" class="group block relative my-5 aspect-[16/10] w-full overflow-hidden rounded-xl bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 p-6 text-white shadow-inner transition-transform group-hover:scale-[1.01]" aria-label="Read lead investigation: How LLMs Actually Work">
+            <div class="absolute inset-0 opacity-15" aria-hidden="true"><svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="hero-signal-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M 24 0 L 0 0 0 24" fill="none" stroke="white" stroke-width="1"></path></pattern></defs><rect width="100%" height="100%" fill="url(#hero-signal-grid)"></rect></svg></div>
+            <div class="relative z-10 flex h-full flex-col justify-between">
+              <div class="flex items-center justify-between"><span class="rounded-md bg-white/10 backdrop-blur-md px-2.5 py-1 text-[11px] font-bold tracking-wider text-sky-300 uppercase border border-white/15">AI &amp; Deep Systems</span><span class="text-xs font-mono text-white/50">#FEATURED-GUIDE</span></div>
+              <div class="text-center my-auto"><div class="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-primary/20 border border-brand-primary/40 text-sky-300 shadow-md"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg></div><p class="text-xs font-semibold uppercase tracking-widest text-slate-300">Neural Architectures</p></div>
+              <div class="flex items-center justify-between text-[11px] text-slate-300"><span>Deep-Dive Tutorial</span><span class="font-bold text-white group-hover:text-sky-300 transition-colors">Read Guide &rarr;</span></div>
+            </div>
+          </a>
+          <div class="rounded-xl bg-white p-4 border border-neutral-200 shadow-2xs dark:border-neutral-700 dark:bg-neutral-900">
+            <h2 class="text-base font-bold text-text-primary hover:text-brand-primary transition-colors leading-snug"><a href="/articles/how-llms-actually-work/">How LLMs Actually Work: Under the Hood of the Transformer Architecture</a></h2>
+            <p class="mt-2 text-xs leading-relaxed text-text-muted line-clamp-2">A rigorous mathematical and algorithmic explanation of modern decoder-only transformers: self-attention, RoPE, SwiGLU, and decoding.</p>
+            <div class="mt-3 pt-3 border-t border-neutral-200 flex items-center justify-between text-xs dark:border-neutral-700"><span class="text-text-muted">By Kai Nakamura</span><a href="/articles/how-llms-actually-work/" class="font-bold text-brand-primary hover:underline">Read Guide &rarr;</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <main id="main-content">
-    <!-- Section B: Hero Section -->
-    <Hero />
+  <!-- EDITOR'S PICKS -->
+  <section class="bg-neutral-50 py-14 sm:py-20 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800" aria-labelledby="featured-heading">
+    <div class="container-wide">
+      <div class="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <div><div class="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-brand-primary uppercase mb-2"><span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span><span>Editor's Selection</span></div><h2 id="featured-heading" class="text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl">Featured <span class="text-brand-primary">Insights</span></h2><p class="mt-2 text-sm leading-relaxed text-text-muted max-w-xl">Essential long-form analysis, fundamental concepts, and primary scientific breakthroughs worth understanding.</p></div>
+        <a href="/articles/" class="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-brand-primary hover:text-brand-sky-deep transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded py-1"><span>Explore Complete Archive</span><span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="grid gap-8 lg:grid-cols-12 items-stretch">
+        <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs transition-all duration-300 hover:shadow-md hover:border-brand-primary/30 lg:col-span-7 dark:border-neutral-700 dark:bg-neutral-900">
+          <div>
+            <div class="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-gradient-to-br from-neutral-900 via-neutral-800 to-brand-primary flex items-center justify-center p-6 text-white mb-6 shadow-inner">
+              <div class="absolute inset-0 opacity-15" aria-hidden="true"><svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><path d="M0 60 Q 90 20, 180 60 T 360 60 T 540 60 T 720 60" fill="none" stroke="white" stroke-width="2"></path><path d="M0 80 Q 90 40, 180 80 T 360 80 T 540 80 T 720 80" fill="none" stroke="white" stroke-width="1"></path></svg></div>
+              <div class="relative z-10 text-center"><span class="inline-block rounded-lg bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 font-mono text-xs font-bold text-sky-200 uppercase tracking-widest mb-2">TOPIC #03</span><p class="text-xs uppercase tracking-widest text-slate-300 font-semibold">Featured Knowledge Guide</p></div>
+              <div class="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-white/95 backdrop-blur-md px-3 py-1 text-xs font-bold text-text-primary shadow-xs"><span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span><span>Developer Tools</span></div>
+              <span class="absolute bottom-4 right-4 rounded-full bg-neutral-900/85 backdrop-blur-md px-2.5 py-1 text-[11px] font-semibold text-slate-200 border border-white/10">13 min read</span>
+            </div>
+            <div class="flex items-center gap-3 text-xs text-text-muted mb-3"><span class="font-bold text-text-primary">Marina Kowalski</span><span aria-hidden="true">&bull;</span><time datetime="2026-11-15T08:00:00.000Z">Nov 15, 2026</time></div>
+            <h3 class="text-2xl sm:text-3xl font-extrabold leading-tight text-text-primary transition-colors group-hover:text-brand-primary"><a href="/articles/choosing-a-database-in-2026/" class="focus-visible:outline-none focus-visible:underline">Choosing a Database in 2026: A Pragmatic Systems Engineering Guide</a></h3>
+            <p class="mt-4 text-base leading-relaxed text-text-secondary">A comprehensive decision framework for modern data architectures: PostgreSQL extensions, SQLite at the edge, serverless autoscaling, vector search engines, and real-time columnar OLAP.</p>
+          </div>
+          <div class="mt-8 pt-5 border-t border-neutral-200 flex items-center justify-between"><a href="/articles/choosing-a-database-in-2026/" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-primary transition-all group-hover:gap-2.5 hover:text-brand-sky-deep" aria-label="Read full analysis"><span>Read Article</span><span aria-hidden="true">&rarr;</span></a><span class="text-xs text-text-muted font-medium">13 min read</span></div>
+        </article>
+        <div class="flex flex-col gap-6 lg:col-span-5 justify-between">
+          <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs transition-all duration-300 hover:shadow-md hover:border-brand-primary/30 flex-1 dark:border-neutral-700 dark:bg-neutral-900">
+            <div><div class="flex items-center justify-between gap-2 text-xs mb-3"><span class="badge badge--science">Science</span><span class="font-medium text-text-muted text-xs">11 min read</span></div><h3 class="text-lg sm:text-xl font-bold leading-snug text-text-primary transition-colors group-hover:text-brand-primary"><a href="/articles/how-we-know-what-stars-are-made-of/" class="focus-visible:outline-none focus-visible:underline">How We Know What Stars Are Made Of: The Physics of Stellar Spectroscopy</a></h3><p class="mt-2.5 text-sm leading-relaxed text-text-secondary line-clamp-2">The detective story of quantum astrophysics: how Fraunhofer absorption lines, atomic orbital transitions, and modern diffraction spectrographs allow us to weigh and analyze stars trillions of miles away.</p></div><div class="mt-5 pt-4 border-t border-neutral-200 flex items-center justify-between text-xs text-text-muted"><div class="flex items-center gap-2"><span class="font-medium text-text-primary">Arun Mehta</span><span aria-hidden="true">&bull;</span><time datetime="2026-11-09T08:00:00.000Z">Nov 9, 2026</time></div><a href="/articles/how-we-know-what-stars-are-made-of/" class="font-bold text-brand-primary group-hover:text-brand-sky-deep inline-flex items-center gap-1 uppercase tracking-wider text-[11px]"><span>Read</span><span aria-hidden="true">&rarr;</span></a></div></article>
+          <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs transition-all duration-300 hover:shadow-md hover:border-brand-primary/30 flex-1 dark:border-neutral-700 dark:bg-neutral-900">
+            <div><div class="flex items-center justify-between gap-2 text-xs mb-3"><span class="badge badge--tech">Technology</span><span class="font-medium text-text-muted text-xs">12 min read</span></div><h3 class="text-lg sm:text-xl font-bold leading-snug text-text-primary transition-colors group-hover:text-brand-primary"><a href="/articles/how-browsers-actually-render-a-page/" class="focus-visible:outline-none focus-visible:underline">How Browsers Actually Render a Page: From Raw Bytes to Pixels</a></h3><p class="mt-2.5 text-sm leading-relaxed text-text-secondary line-clamp-2">A technical deep dive into Blink and Gecko: DOM parsing, CSSOM construction, render tree calculation, layout geometry, GPU rasterization, and compositor layering.</p></div><div class="mt-5 pt-4 border-t border-neutral-200 flex items-center justify-between text-xs text-text-muted"><div class="flex items-center gap-2"><span class="font-medium text-text-primary">Marina Kowalski</span><span aria-hidden="true">&bull;</span><time datetime="2026-11-02T08:00:00.000Z">Nov 2, 2026</time></div><a href="/articles/how-browsers-actually-render-a-page/" class="font-bold text-brand-primary group-hover:text-brand-sky-deep inline-flex items-center gap-1 uppercase tracking-wider text-[11px]"><span>Read</span><span aria-hidden="true">&rarr;</span></a></div></article>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Section C: Featured Articles -->
-    <FeaturedArticles />
+  <!-- CATEGORIES -->
+  <section id="categories" class="bg-white py-14 sm:py-20 border-b border-neutral-200 dark:bg-neutral-950 dark:border-neutral-800" aria-labelledby="categories-heading">
+    <div class="container-wide">
+      <div class="mb-12 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <div class="max-w-2xl"><div class="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-brand-primary uppercase mb-2"><span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span><span>Knowledge Streams</span></div><h2 id="categories-heading" class="text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl">Explore Our <span class="text-brand-primary">Core Topics</span></h2><p class="mt-2 text-sm sm:text-base leading-relaxed text-text-muted">From fundamental scientific research to practical digital tools and artificial intelligence breakthroughs, explore thoughtful analysis across our four core categories.</p></div>
+        <a href="/articles/" class="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-brand-primary hover:text-brand-sky-deep transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded py-1"><span>View Full Taxonomy</span><span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <a href="/category/technology/" class="group flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50 p-6 shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-brand-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-neutral-700 dark:bg-neutral-900/50 dark:hover:bg-neutral-900"><div><div class="mb-5 flex items-center justify-between"><span class="flex h-10 w-10 items-center justify-center rounded-xl bg-white border border-neutral-200 text-xs font-extrabold text-brand-primary shadow-xs group-hover:bg-brand-primary group-hover:text-white transition-colors dark:border-neutral-700">01</span><span class="text-[11px] font-bold tracking-widest text-text-muted uppercase">Pillar 01</span></div><h3 class="text-base font-bold text-text-primary transition-colors group-hover:text-brand-primary">Technology</h3><p class="mt-2 text-xs leading-relaxed text-text-muted line-clamp-3">Browser internals, CPU architecture, WebAssembly, networking, and core computing systems.</p></div><div class="mt-6 pt-4 border-t border-neutral-200/80 flex items-center gap-1.5 text-xs font-bold text-brand-primary"><span>Explore Stream</span><span class="transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span></div></a>
+        <a href="/category/artificial-intelligence/" class="group flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50 p-6 shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-brand-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-neutral-700 dark:bg-neutral-900/50 dark:hover:bg-neutral-900"><div><div class="mb-5 flex items-center justify-between"><span class="flex h-10 w-10 items-center justify-center rounded-xl bg-white border border-neutral-200 text-xs font-extrabold text-brand-primary shadow-xs group-hover:bg-brand-primary group-hover:text-white transition-colors dark:border-neutral-700">AI</span><span class="text-[11px] font-bold tracking-widest text-text-muted uppercase">Pillar 02</span></div><h3 class="text-base font-bold text-text-primary transition-colors group-hover:text-brand-primary">AI &amp; ML</h3><p class="mt-2 text-xs leading-relaxed text-text-muted line-clamp-3">LLM training and inference, RAG systems, model evaluation, AI tooling, and engineering workflows.</p></div><div class="mt-6 pt-4 border-t border-neutral-200/80 flex items-center gap-1.5 text-xs font-bold text-brand-primary"><span>Explore Stream</span><span class="transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span></div></a>
+        <a href="/category/science/" class="group flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50 p-6 shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-brand-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-neutral-700 dark:bg-neutral-900/50 dark:hover:bg-neutral-900"><div><div class="mb-5 flex items-center justify-between"><span class="flex h-10 w-10 items-center justify-center rounded-xl bg-white border border-neutral-200 text-xs font-extrabold text-brand-primary shadow-xs group-hover:bg-brand-primary group-hover:text-white transition-colors dark:border-neutral-700">02</span><span class="text-[11px] font-bold tracking-widest text-text-muted uppercase">Pillar 03</span></div><h3 class="text-base font-bold text-text-primary transition-colors group-hover:text-brand-primary">Science</h3><p class="mt-2 text-xs leading-relaxed text-text-muted line-clamp-3">Astrophysics, nuclear fusion, particle physics, observational cosmology, and scientific inquiry.</p></div><div class="mt-6 pt-4 border-t border-neutral-200/80 flex items-center gap-1.5 text-xs font-bold text-brand-primary"><span>Explore Stream</span><span class="transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span></div></a>
+        <a href="/category/developer-tools/" class="group flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50 p-6 shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:border-brand-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-neutral-700 dark:bg-neutral-900/50 dark:hover:bg-neutral-900"><div><div class="mb-5 flex items-center justify-between"><span class="flex h-10 w-10 items-center justify-center rounded-xl bg-white border border-neutral-200 text-xs font-extrabold text-brand-primary shadow-xs group-hover:bg-brand-primary group-hover:text-white transition-colors dark:border-neutral-700">03</span><span class="text-[11px] font-bold tracking-widest text-text-muted uppercase">Pillar 04</span></div><h3 class="text-base font-bold text-text-primary transition-colors group-hover:text-brand-primary">Developer Tools</h3><p class="mt-2 text-xs leading-relaxed text-text-muted line-clamp-3">Databases, caching, search engines, observability, self-hosting infrastructure, and CLI tools.</p></div><div class="mt-6 pt-4 border-t border-neutral-200/80 flex items-center gap-1.5 text-xs font-bold text-brand-primary"><span>Explore Stream</span><span class="transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span></div></a>
+      </div>
+    </div>
+  </section>
 
-    <!-- Section D: Explore Categories -->
-    <Categories />
+  <!-- LATEST ARTICLES -->
+  <section id="latest-articles" class="bg-neutral-50 py-14 sm:py-20 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800" aria-labelledby="latest-heading">
+    <div class="container-wide">
+      <div class="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <div><div class="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-brand-primary uppercase mb-2"><span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span><span>Latest Guides</span></div><h2 id="latest-heading" class="text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl">Latest <span class="text-brand-primary">Articles</span></h2><p class="mt-2 text-sm leading-relaxed text-text-muted max-w-xl">Discover in-depth guides, practical tutorials, and informative articles published on Micro Signal Cosmos.</p></div>
+        <a href="/articles/" class="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-brand-primary hover:text-brand-sky-deep transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded py-1"><span>View All Articles</span><span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {latestArticles.map(article => (
+          <ArticleCard
+            title={article.data.title}
+            slug={getArticleSlug(article)}
+            category={article.data.category}
+            readingTime={getArticleReadingTime(article)}
+            excerpt={article.data.description}
+            author={article.data.author}
+            publishedDate={article.data.publishDate}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
 
-    <!-- Section E: Latest Articles Grid -->
-    <LatestArticles />
+  <!-- NEWSLETTER HERO -->
+  <NewsletterHero />
 
-    <!-- Optional Section: Homepage Advertisement Slot (Configurable, Zero CLS) -->
-    <HomepageAd />
-
-    <!-- Section F: Popular & Essential Articles -->
-    <PopularArticles />
-
-    <!-- Section G: Editorial Mission Statement -->
-    <EditorialMission />
-
-    <!-- Section H: Newsletter Hero Variant (Buttondown) -->
-    <NewsletterHero leadMagnet="Critical Rendering Path Cheat Sheet + RAG Starter Kit" />
-  </main>
-
-  <NewsletterExitIntent leadMagnet="Systems Architecture & AI Engineering Bundle" />
-
-  <!-- Section I: Footer -->
-  <Footer />
-</Layout>
+  <!-- EXIT INTENT MODAL -->
+  <NewsletterExitIntent />
+</Base>

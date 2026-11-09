@@ -1,0 +1,17 @@
+---
+interface Props {
+  variant?: 'default' | 'featured' | 'science' | 'tech' | 'ai' | 'devtools';
+  class?: string;
+}
+const { variant = 'default', class: className = '', ...rest } = Astro.props;
+const variantClasses = {
+  default: 'bg-neutral-100 text-neutral-700 border-neutral-200 dark:bg-neutral-800 dark:text-neutral-300 dark:border-neutral-700',
+  featured: 'bg-brand-primary/10 text-brand-primary border-brand-primary/30',
+  science: 'bg-purple-100 text-purple-700 border-purple-300 dark:bg-purple-900/30 dark:text-purple-300 dark:border-purple-700',
+  tech: 'bg-sky-100 text-sky-700 border-sky-300 dark:bg-sky-900/30 dark:text-sky-300 dark:border-sky-700',
+  ai: 'bg-emerald-100 text-emerald-700 border-emerald-300 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700',
+  devtools: 'bg-amber-100 text-amber-700 border-amber-300 dark:bg-amber-900/30 dark:text-amber-300 dark:border-amber-700',
+};
+const classes = `section-badge ${variantClasses[variant]} ${className}`;
+---
+<span class={classes} {...rest}><slot /></span>

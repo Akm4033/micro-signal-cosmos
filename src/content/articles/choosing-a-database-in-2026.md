@@ -132,3 +132,4 @@ Need real-time clickstream analytics across billions of log events?
 1. **PostgreSQL is the default engine**: Extensions like `pgvector` and `JSONB` eliminate the operational burden of managing three separate databases.
 2. **Serverless compute saves thousands**: Use scale-to-zero architectures to eliminate idle database compute bills.
 3. **Keep architectures boring**: Only introduce specialized vector or columnar stores when your traffic metrics physically demand it.
+

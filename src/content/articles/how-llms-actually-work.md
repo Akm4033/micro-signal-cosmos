@@ -151,3 +151,4 @@ To explore interactive transformer weights and inspect layer activations in real
 1. **Tokens are points in high-dimensional geometry**: Self-attention computes dynamic contextual trajectories based on similarity.
 2. **RoPE makes relative sequence order mathematically natural**: Complex rotations allow models to generalize beyond their training length.
 3. **Inference is pure matrix algebra**: Every single generated character is the deterministic result of billions of multiply-accumulate operations executed across thousands of GPU cores.
+

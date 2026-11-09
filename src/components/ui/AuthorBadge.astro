@@ -1,0 +1,32 @@
+---
+import { getAuthor } from '../../data/authors';
+
+interface Props {
+  author: string;
+  size?: 'sm' | 'md' | 'lg';
+  showBio?: boolean;
+}
+const { author, size = 'md', showBio = false } = Astro.props;
+const authorData = getAuthor(author);
+const sizeClasses = {
+  sm: 'h-6 w-6 text-xs',
+  md: 'h-8 w-8 text-sm',
+  lg: 'h-12 w-12 text-base',
+};
+---
+<div class="flex items-center gap-2.5">
+  <div class={`flex items-center justify-center rounded-full font-bold ${sizeClasses[size]} ${authorData.bgColor || 'bg-brand-primary/10'} text-brand-primary`} aria-hidden="true">
+    {authorData.initials}
+  </div>
+  <div>
+    <a href={`/authors/#${authorData.key}`} class="font-semibold text-text-primary hover:text-brand-primary transition-colors">
+      {authorData.name}
+    </a>
+    <span class="text-xs text-text-muted ml-1.5">{authorData.role}</span>
+  </div>
+  {showBio && (
+    <div class="mt-2 text-sm text-text-secondary max-w-xs">
+      {authorData.bio}
+    </div>
+  )}
+</div>

@@ -1,9 +1,7 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
+import Base from '../../layouts/Base.astro';
 import { CATEGORIES } from '../../data/categories';
-import { getPublishedArticles, getArticleReadingTime } from '../../data/articles';
+import { getPublishedArticles, getArticleReadingTime, getArticleSlug } from '../../data/articles';
 import { getAuthor } from '../../data/authors';
 
 // Retrieve all published, non-draft articles sorted by date descending
@@ -16,66 +14,31 @@ const categoryCounts = publishedArticles.reduce<Record<string, number>>((acc, ar
   return acc;
 }, {});
 
-// JSON-LD Structured Data
-const siteUrl = Astro.site?.href.replace(/\/$/, '') || 'https://microsignalcosmos.com';
+const siteUrl = 'https://microsignalcosmos.com';
 const archiveUrl = `${siteUrl}/articles/`;
-
-const archiveJsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'CollectionPage',
-      '@id': `${archiveUrl}#collection`,
-      name: 'Explore All Articles | Micro Signal Cosmos',
-      description: 'Explore our complete editorial catalog of technology, science, artificial intelligence, and digital insights.',
-      url: archiveUrl,
-    },
-    {
-      '@type': 'BreadcrumbList',
-      '@id': `${archiveUrl}#breadcrumb`,
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Home',
-          item: `${siteUrl}/`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: 'Articles',
-          item: archiveUrl,
-        },
-      ],
-    },
-  ],
-};
 ---
 
-<Layout
+<Base
   title="Explore All Articles | Micro Signal Cosmos"
-  description="Explore our complete editorial catalog of technology, science, artificial intelligence, and digital insights. Filter by topic or search our published archives."
-  type="website"
-  jsonLd={archiveJsonLd}
+  description="Explore our complete editorial catalog of technology, science, artificial intelligence, and developer tools. Filter by topic or search our published archives."
+  canonical={archiveUrl}
 >
-  <Header />
-
-  <main id="main-content" class="bg-[#F7F9FC] py-12 sm:py-16 lg:py-20">
-    <div class="container-main">
+  <main id="main-content" class="bg-neutral-50 py-12 sm:py-16 lg:py-20 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800">
+    <div class="container-wide">
 
       <!-- Breadcrumbs Navigation -->
       <nav aria-label="Breadcrumb" class="mb-8">
-        <ol class="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-[#697586]">
+        <ol class="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-text-muted">
           <li>
             <a
               href="/"
-              class="transition-colors hover:text-[#3478F6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6] rounded"
+              class="transition-colors hover:text-brand-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded"
             >
               Home
             </a>
           </li>
-          <li aria-hidden="true" class="text-slate-400">/</li>
-          <li class="font-semibold text-[#14233B]" aria-current="page">
+          <li aria-hidden="true" class="text-neutral-400">/</li>
+          <li class="font-semibold text-text-primary" aria-current="page">
             Articles Archive
           </li>
         </ol>
@@ -84,111 +47,105 @@ const archiveJsonLd = {
       <!-- Archive Hero Header -->
       <header class="mx-auto max-w-4xl text-center sm:text-left">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div class="inline-flex items-center gap-2 self-center sm:self-start rounded-full border border-[#E3E8EF] bg-white px-3.5 py-1 text-xs font-bold tracking-widest text-[#3478F6] uppercase shadow-xs">
-            <span class="h-1.5 w-1.5 rounded-full bg-[#3478F6]"></span>
+          <div class="inline-flex items-center gap-2 self-center sm:self-start rounded-full border border-neutral-200 bg-white px-3.5 py-1 text-xs font-bold tracking-widest text-brand-primary uppercase shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
+            <span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span>
             <span>Knowledge Archive</span>
           </div>
 
-          <div class="self-center sm:self-auto text-xs font-semibold text-[#697586]">
-            <span class="rounded-full border border-[#E3E8EF] bg-white px-3.5 py-1 text-[#14233B] shadow-xs">
-              <strong class="font-bold text-[#3478F6]" id="total-badge-count">{publishedArticles.length}</strong> {publishedArticles.length === 1 ? 'Article' : 'Articles'} Published
+          <div class="self-center sm:self-auto text-xs font-semibold text-text-muted">
+            <span class="rounded-full border border-neutral-200 bg-white px-3.5 py-1 text-text-primary shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
+              <strong class="font-bold text-brand-primary" id="total-badge-count">{publishedArticles.length}</strong> {publishedArticles.length === 1 ? 'Article' : 'Articles'} Published
             </span>
           </div>
         </div>
 
-        <h1 class="mt-6 text-3xl font-extrabold tracking-tight text-[#14233B] sm:text-4xl lg:text-5xl">
-          Explore All <span class="text-[#3478F6]">Articles</span>
+        <h1 class="mt-6 text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl lg:text-5xl">
+          Explore All <span class="text-brand-primary">Articles</span>
         </h1>
 
-        <p class="mt-4 max-w-2xl text-base leading-relaxed text-[#202938] sm:text-lg">
-          Discover deep-dive analyses, scientific discoveries, and practical technology guides designed to clarify complex developments and expand your digital horizons.
+        <p class="mt-4 max-w-2xl text-base leading-relaxed text-text-secondary sm:text-lg">
+          Filter by technical pillar, search keywords across all deep-dive guides, or browse our complete technical catalog.
         </p>
 
-        <!-- Search & Filtering Interface Card -->
-        <div class="mt-10 rounded-2xl border border-[#E3E8EF] bg-white p-6 sm:p-8 shadow-xs">
-          <!-- Search Bar -->
-          <div class="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between">
-            <div class="relative flex-1 max-w-xl">
-              <label for="article-search" class="sr-only">Search articles by title, description, category or tag</label>
-              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-[#697586]" aria-hidden="true">
-                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </div>
-              <input
-                id="article-search"
-                type="search"
-                placeholder="Search by title, topic, keyword or tag..."
-                class="w-full rounded-xl border border-[#E3E8EF] bg-[#F7F9FC] py-3 pl-11 pr-10 text-sm text-[#14233B] placeholder-[#697586] transition-all focus:border-[#3478F6] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3478F6]/20"
-                autocomplete="off"
-              />
-              <button
-                id="clear-search-btn"
-                type="button"
-                class="hidden absolute inset-y-0 right-0 flex items-center pr-3.5 text-[#697586] hover:text-[#14233B]"
-                aria-label="Clear search input"
-              >
-                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+        <!-- Search Input & Interactive Filter Controls -->
+        <div class="mt-8 space-y-4">
+          <!-- Instant Search Box -->
+          <div class="relative max-w-xl">
+            <label for="archive-search-input" class="sr-only">Search articles</label>
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-text-muted">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
             </div>
-
-            <!-- Dynamic Results Counter -->
-            <div id="results-count" aria-live="polite" class="text-xs sm:text-sm font-semibold text-[#697586] shrink-0 self-center">
-              Showing all {publishedArticles.length} articles
-            </div>
+            <input
+              id="archive-search-input"
+              type="search"
+              placeholder="Search by keyword, topic, or author..."
+              class="w-full rounded-xl border border-neutral-300 bg-white py-3 pl-11 pr-10 text-sm text-text-primary placeholder-text-muted shadow-xs transition-all focus:border-brand-primary focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-primary/20 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100 dark:placeholder-neutral-500"
+              autocomplete="off"
+            />
+            <button
+              id="clear-search-btn"
+              type="button"
+              class="hidden absolute inset-y-0 right-0 items-center pr-3.5 text-text-muted hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded"
+              aria-label="Clear search query"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
           </div>
 
-          <!-- Category Filter Tabs -->
-          <div class="mt-6 border-t border-[#E3E8EF] pt-5">
-            <div class="overflow-x-auto pb-2 -mx-2 px-2">
-              <div
-                role="tablist"
-                aria-label="Filter articles by category"
-                class="flex items-center gap-2 min-w-max"
+          <!-- Category Filter Pills -->
+          <div class="overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
+            <div
+              id="category-filters-container"
+              class="flex items-center gap-2 min-w-max"
+              role="tablist"
+              aria-label="Filter articles by category"
+            >
+              <span class="text-xs font-bold uppercase tracking-wider text-text-muted mr-2">
+                Streams:
+              </span>
+
+              <!-- All Articles Filter Button -->
+              <button
+                type="button"
+                role="tab"
+                aria-selected="true"
+                data-category-filter="all"
+                class="category-filter-btn inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary bg-brand-primary text-white shadow-xs border border-brand-primary"
               >
-                <span class="text-xs font-bold uppercase tracking-wider text-[#697586] mr-2">
-                  Streams:
+                <span class="h-1.5 w-1.5 rounded-full bg-white" aria-hidden="true"></span>
+                <span>All Articles</span>
+                <span class="filter-count rounded-full bg-white/20 px-1.5 py-0.2 text-[10px]">
+                  {publishedArticles.length}
                 </span>
+              </button>
 
-                <!-- All Articles Filter Button -->
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected="true"
-                  data-category-filter="all"
-                  class="category-filter-btn inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6] bg-[#3478F6] text-white shadow-xs border border-[#3478F6]"
-                >
-                  <span class="h-1.5 w-1.5 rounded-full bg-white" aria-hidden="true"></span>
-                  <span>All Articles</span>
-                  <span class="filter-count rounded-full bg-white/20 px-1.5 py-0.2 text-[10px]">
-                    {publishedArticles.length}
-                  </span>
-                </button>
-
-                <!-- 7 Individual Category Filters -->
-                {CATEGORIES.map((cat) => {
-                  const count = categoryCounts[cat.slug] || categoryCounts[cat.name.toLowerCase()] || 0;
-                  return (
-                    <button
-                      type="button"
-                      role="tab"
-                      aria-selected="false"
-                      data-category-filter={cat.slug}
-                      class="category-filter-btn inline-flex items-center gap-2 rounded-full border border-[#E3E8EF] bg-[#F7F9FC] px-3.5 py-1.5 text-xs font-semibold text-[#202938] transition-all hover:border-[#3478F6] hover:text-[#3478F6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6]"
-                    >
-                      <span class="h-1.5 w-1.5 rounded-full bg-[#3478F6]" aria-hidden="true"></span>
-                      <span>{cat.shortName || cat.name}</span>
-                      {count > 0 && (
-                        <span class="filter-count rounded-full bg-[#E3E8EF] px-1.5 py-0.2 text-[10px] text-[#697586]">
-                          {count}
-                        </span>
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
+              <!-- 4 Consolidated Category Filters -->
+              {CATEGORIES.map((cat) => {
+                const count = categoryCounts[cat.slug] || categoryCounts[cat.name.toLowerCase()] || 0;
+                return (
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected="false"
+                    data-category-filter={cat.slug}
+                    class="category-filter-btn inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-text-secondary transition-all hover:border-brand-primary hover:text-brand-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary dark:border-neutral-700 dark:bg-neutral-900"
+                  >
+                    <span class="h-1.5 w-1.5 rounded-full bg-brand-primary" aria-hidden="true"></span>
+                    <span>{cat.shortName || cat.name}</span>
+                    {count > 0 && (
+                      <span class="filter-count rounded-full bg-neutral-100 px-1.5 py-0.2 text-[10px] text-text-muted dark:bg-neutral-800">
+                        {count}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -203,7 +160,7 @@ const archiveJsonLd = {
         <!-- Active Articles Grid -->
         <div id="articles-grid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {publishedArticles.map((article) => {
-            const slug = article.data.slug || article.id;
+            const slug = getArticleSlug(article);
             const formattedDate = article.data.publishDate.toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'short',
@@ -221,7 +178,6 @@ const archiveJsonLd = {
             const categoryHref = categoryInfo?.href || `/category/${categorySlug}/`;
 
             const searchableText = `${article.data.title} ${article.data.description} ${categoryName} ${categorySlug} ${(article.data.tags || []).join(' ')} ${article.data.author}`.toLowerCase();
-
             const author = getAuthor(article.data.author);
 
             return (
@@ -229,132 +185,137 @@ const archiveJsonLd = {
                 data-article-card
                 data-category={categorySlug}
                 data-search-text={searchableText}
-                class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-[#E3E8EF] bg-white p-6 sm:p-7 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[#CBD5E1]"
+                class="editorial-card group flex flex-col justify-between"
               >
                 <div>
-                  <div class="flex items-center justify-between gap-2 text-xs mb-3">
-                    <a
-                      href={categoryHref}
-                      class="font-bold uppercase tracking-wider text-[#3478F6] hover:underline"
-                    >
+                  <div class="editorial-card__media">
+                    <div class="editorial-card__gradient"></div>
+                    <a href={categoryHref} class="editorial-card__category">
                       {categoryName}
                     </a>
-                    <span class="text-[#697586]">{getArticleReadingTime(article)}</span>
                   </div>
 
-                  <h3 class="text-xl font-bold leading-snug text-[#14233B] transition-colors group-hover:text-[#3478F6]">
-                    <a
-                      href={`/articles/${slug}/`}
-                      class="focus-visible:outline-none focus-visible:underline"
-                    >
-                      {article.data.title}
-                    </a>
-                  </h3>
+                  <div class="editorial-card__content">
+                    <div class="editorial-card__meta">
+                      <span class="font-medium text-text-primary">{author.name}</span>
+                      <span aria-hidden="true">&bull;</span>
+                      <time datetime={isoDate}>{formattedDate}</time>
+                      <span aria-hidden="true">&bull;</span>
+                      <span>{getArticleReadingTime(article)}</span>
+                    </div>
 
-                  <p class="mt-3 text-sm leading-relaxed text-[#202938] line-clamp-3">
-                    {article.data.description}
-                  </p>
+                    <h3 class="editorial-card__title">
+                      <a
+                        href={`/articles/${slug}/`}
+                        class="focus-visible:outline-none focus-visible:underline"
+                      >
+                        {article.data.title}
+                      </a>
+                    </h3>
+
+                    <p class="editorial-card__excerpt">
+                      {article.data.description}
+                    </p>
+                  </div>
                 </div>
 
-                <div class="mt-8 flex items-center justify-between border-t border-[#E3E8EF] pt-4 text-xs text-[#697586]">
-                  <div class="flex items-center gap-2">
-                    <span class="font-medium text-[#14233B]">{author.name}</span>
-                    <span aria-hidden="true">&bull;</span>
-                    <time datetime={isoDate}>{formattedDate}</time>
-                  </div>
+                <div class="px-5 pb-5 sm:px-6 sm:pb-6">
+                  <div class="editorial-card__footer">
+                    <div class="editorial-card__author">
+                      <div class="editorial-card__avatar">
+                        {author.initials}
+                      </div>
+                      <span class="text-xs font-semibold text-text-secondary">{author.role}</span>
+                    </div>
 
-                  <a
-                    href={`/articles/${slug}/`}
-                    class="inline-flex items-center gap-1 font-semibold text-[#3478F6] transition-all group-hover:gap-2 group-hover:text-[#2563EB]"
-                    aria-label={`Read article: ${article.data.title}`}
-                  >
-                    <span>Read</span>
-                    <span aria-hidden="true">&rarr;</span>
-                  </a>
+                    <a
+                      href={`/articles/${slug}/`}
+                      class="ml-auto inline-flex items-center gap-1 text-xs font-bold text-brand-primary group-hover:text-brand-sky-deep"
+                    >
+                      <span>Read</span>
+                      <span aria-hidden="true">&rarr;</span>
+                    </a>
+                  </div>
                 </div>
               </article>
             );
           })}
         </div>
 
-        <!-- Empty State: No Matches Found via Search or Filter -->
+        <!-- Empty Results State (shown via JS when search/filter has 0 matches) -->
         <div
           id="no-results-state"
-          class="hidden mx-auto max-w-xl rounded-2xl border border-[#E3E8EF] bg-white p-8 sm:p-12 text-center shadow-xs"
+          class="hidden mx-auto max-w-lg rounded-2xl border border-neutral-200 bg-white p-8 sm:p-12 text-center shadow-xs dark:border-neutral-700 dark:bg-neutral-900"
+          role="status"
+          aria-live="polite"
         >
-          <div class="relative mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#F7F9FC] border border-[#E3E8EF] text-[#3478F6] mb-4">
-            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+          <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-brand-primary/10 text-brand-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
             </svg>
           </div>
-
-          <h3 class="text-xl font-bold text-[#14233B]">
-            No Matching Articles Found
-          </h3>
-
-          <p class="mt-2 text-sm text-[#697586]">
-            We could not find any published articles matching your current search criteria.
+          <h3 class="mt-4 text-lg font-bold text-text-primary">No matching articles found</h3>
+          <p class="mt-2 text-sm text-text-muted">
+            We couldn't find any articles matching your search query or selected topic filter.
           </p>
-
           <button
-            id="reset-filter-btn"
+            id="reset-filters-btn"
             type="button"
-            class="mt-6 btn-primary text-xs"
+            class="btn-secondary mt-6"
           >
-            Clear Filters & View All Articles
+            Reset Filters
           </button>
         </div>
       </section>
 
     </div>
   </main>
+</Base>
 
-  <Footer />
-</Layout>
-
-<!-- Client-Side Instant Search & Filter Logic -->
+<!-- Client-side Search and Filter JavaScript -->
 <script is:inline>
-  (function() {
-    const searchInput = document.getElementById('article-search');
+  (function initArticleArchive() {
+    const searchInput = document.getElementById('archive-search-input');
     const clearBtn = document.getElementById('clear-search-btn');
-    const resultsCount = document.getElementById('results-count');
-    const noResultsState = document.getElementById('no-results-state');
-    const resetFilterBtn = document.getElementById('reset-filter-btn');
     const filterButtons = document.querySelectorAll('.category-filter-btn');
     const articleCards = document.querySelectorAll('[data-article-card]');
+    const noResultsState = document.getElementById('no-results-state');
+    const resetFiltersBtn = document.getElementById('reset-filters-btn');
+    const totalBadgeCount = document.getElementById('total-badge-count');
 
-    let currentFilter = 'all';
-    let currentQuery = '';
+    let currentCategory = 'all';
+    let currentSearchTerm = '';
 
-    function updateUrl() {
-      try {
-        const url = new URL(window.location.href);
-        if (currentQuery.trim()) {
-          url.searchParams.set('q', currentQuery.trim());
-        } else {
-          url.searchParams.delete('q');
-        }
-        if (currentFilter !== 'all') {
-          url.searchParams.set('category', currentFilter);
-        } else {
-          url.searchParams.delete('category');
-        }
-        window.history.replaceState({}, '', url.toString());
-      } catch (_) {}
+    // Read initial URL params (?q=... and ?category=...)
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialQuery = urlParams.get('q') || '';
+    const initialCategory = urlParams.get('category') || 'all';
+
+    if (initialQuery && searchInput) {
+      searchInput.value = initialQuery;
+      currentSearchTerm = initialQuery.toLowerCase().trim();
+      if (clearBtn) clearBtn.classList.remove('hidden');
+      if (clearBtn) clearBtn.classList.add('flex');
     }
 
-    function filterArticles(syncUrl = true) {
+    if (initialCategory) {
+      currentCategory = initialCategory.toLowerCase().trim();
+      updateFilterButtonsUI(currentCategory);
+    }
+
+    function applyFilterAndSearch() {
       let visibleCount = 0;
-      const q = currentQuery.trim().toLowerCase();
 
       articleCards.forEach((card) => {
         const cardCategory = card.getAttribute('data-category') || '';
         const cardSearchText = card.getAttribute('data-search-text') || '';
 
-        const matchesCategory = (currentFilter === 'all') || (cardCategory === currentFilter);
-        const matchesQuery = (q === '') || cardSearchText.includes(q);
+        const matchesCategory = currentCategory === 'all' || cardCategory === currentCategory;
+        const matchesSearch = !currentSearchTerm || cardSearchText.includes(currentSearchTerm);
 
-        if (matchesCategory && matchesQuery) {
+        if (matchesCategory && matchesSearch) {
           card.classList.remove('hidden');
           visibleCount++;
         } else {
@@ -362,16 +323,10 @@ const archiveJsonLd = {
         }
       });
 
-      // Update counter
-      if (resultsCount) {
-        if (q || currentFilter !== 'all') {
-          resultsCount.textContent = `Showing ${visibleCount} matching ${visibleCount === 1 ? 'article' : 'articles'}`;
-        } else {
-          resultsCount.textContent = `Showing all ${articleCards.length} articles`;
-        }
+      if (totalBadgeCount) {
+        totalBadgeCount.textContent = String(visibleCount);
       }
 
-      // Empty State Display
       if (noResultsState) {
         if (visibleCount === 0) {
           noResultsState.classList.remove('hidden');
@@ -380,93 +335,92 @@ const archiveJsonLd = {
         }
       }
 
-      if (syncUrl) {
-        updateUrl();
+      // Update URL without page reload
+      const newUrl = new URL(window.location.href);
+      if (currentSearchTerm) {
+        newUrl.searchParams.set('q', currentSearchTerm);
+      } else {
+        newUrl.searchParams.delete('q');
       }
+
+      if (currentCategory !== 'all') {
+        newUrl.searchParams.set('category', currentCategory);
+      } else {
+        newUrl.searchParams.delete('category');
+      }
+
+      window.history.replaceState({}, '', newUrl.toString());
+    }
+
+    function updateFilterButtonsUI(activeCategory) {
+      filterButtons.forEach((btn) => {
+        const btnCategory = btn.getAttribute('data-category-filter');
+        const isActive = btnCategory === activeCategory;
+
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        if (isActive) {
+          btn.className = 'category-filter-btn inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary bg-brand-primary text-white shadow-xs border border-brand-primary';
+          const dot = btn.querySelector('span');
+          if (dot) dot.className = 'h-1.5 w-1.5 rounded-full bg-white';
+        } else {
+          btn.className = 'category-filter-btn inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-text-secondary transition-all hover:border-brand-primary hover:text-brand-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary dark:border-neutral-700 dark:bg-neutral-900';
+          const dot = btn.querySelector('span');
+          if (dot) dot.className = 'h-1.5 w-1.5 rounded-full bg-brand-primary';
+        }
+      });
     }
 
     if (searchInput) {
       searchInput.addEventListener('input', (e) => {
-        currentQuery = e.target.value;
+        currentSearchTerm = e.target.value.toLowerCase().trim();
         if (clearBtn) {
-          if (currentQuery.length > 0) {
+          if (currentSearchTerm.length > 0) {
             clearBtn.classList.remove('hidden');
+            clearBtn.classList.add('flex');
           } else {
             clearBtn.classList.add('hidden');
+            clearBtn.classList.remove('flex');
           }
         }
-        filterArticles();
+        applyFilterAndSearch();
       });
     }
 
-    if (clearBtn) {
+    if (clearBtn && searchInput) {
       clearBtn.addEventListener('click', () => {
-        if (searchInput) {
-          searchInput.value = '';
-          searchInput.focus();
-        }
-        currentQuery = '';
+        searchInput.value = '';
+        currentSearchTerm = '';
         clearBtn.classList.add('hidden');
-        filterArticles();
+        clearBtn.classList.remove('flex');
+        searchInput.focus();
+        applyFilterAndSearch();
       });
     }
 
     filterButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
-        currentFilter = btn.getAttribute('data-category-filter') || 'all';
-
-        filterButtons.forEach((b) => {
-          const isSelected = b === btn;
-          b.setAttribute('aria-selected', isSelected ? 'true' : 'false');
-
-          if (isSelected) {
-            b.className = 'category-filter-btn inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6] bg-[#3478F6] text-white shadow-xs border border-[#3478F6]';
-          } else {
-            b.className = 'category-filter-btn inline-flex items-center gap-2 rounded-full border border-[#E3E8EF] bg-[#F7F9FC] px-3.5 py-1.5 text-xs font-semibold text-[#202938] transition-all hover:border-[#3478F6] hover:text-[#3478F6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6]';
-          }
-        });
-
-        filterArticles();
+        const selected = btn.getAttribute('data-category-filter') || 'all';
+        currentCategory = selected;
+        updateFilterButtonsUI(currentCategory);
+        applyFilterAndSearch();
       });
     });
 
-    if (resetFilterBtn) {
-      resetFilterBtn.addEventListener('click', () => {
-        if (searchInput) {
-          searchInput.value = '';
+    if (resetFiltersBtn && searchInput) {
+      resetFiltersBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        currentSearchTerm = '';
+        currentCategory = 'all';
+        if (clearBtn) {
+          clearBtn.classList.add('hidden');
+          clearBtn.classList.remove('flex');
         }
-        currentQuery = '';
-        if (clearBtn) clearBtn.classList.add('hidden');
-
-        const allBtn = document.querySelector('[data-category-filter="all"]');
-        if (allBtn) {
-          allBtn.click();
-        } else {
-          currentFilter = 'all';
-          filterArticles();
-        }
+        updateFilterButtonsUI('all');
+        applyFilterAndSearch();
       });
     }
 
-    // Initialize from URL search parameters (?q=... and ?category=...)
-    try {
-      const urlParams = new URLSearchParams(window.location.search);
-      const initialQuery = urlParams.get('q');
-      const initialCat = urlParams.get('category');
-
-      if (initialCat) {
-        const catBtn = document.querySelector(`[data-category-filter="${CSS.escape(initialCat.toLowerCase())}"]`);
-        if (catBtn) {
-          catBtn.click();
-        }
-      }
-
-      if (initialQuery && searchInput) {
-        searchInput.value = initialQuery;
-        currentQuery = initialQuery;
-        if (clearBtn) clearBtn.classList.remove('hidden');
-        filterArticles(false);
-      }
-    } catch (_) {}
+    // Run initial filter on load
+    applyFilterAndSearch();
   })();
 </script>

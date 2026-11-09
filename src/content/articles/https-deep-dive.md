@@ -144,3 +144,4 @@ For teams looking to deploy secure reverse proxies, configure modern TLS paramet
 1. **TLS 1.3 is 1-RTT by default**: Ephemeral key shares are packaged inside the initial ClientHello to halve connection latency.
 2. **Forward secrecy is mandatory**: Ephemeral Diffie-Hellman ensures that past communications can never be retroactively decrypted.
 3. **Certificate Transparency keeps the web honest**: Public Merkle tree logs make stealth certificate forgery mathematically detectable.
+

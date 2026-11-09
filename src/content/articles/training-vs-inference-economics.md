@@ -132,3 +132,4 @@ Teams running dedicated model inference save over **70% in monthly operational e
 1. **Inference is memory-bandwidth bound**: Optimize token throughput by tracking bytes moved across HBM, not raw TFLOPs.
 2. **Deploy Grouped-Query Attention (GQA) and FP8**: Compressing the KV cache and weights allows larger concurrent batch sizes without OOM errors.
 3. **Use vLLM with PagedAttention**: Eliminate memory fragmentation to triple your requests-per-second on identical hardware nodes.
+

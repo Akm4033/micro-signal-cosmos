@@ -189,3 +189,4 @@ For enterprise observability across client interactions, modern teams rely on sp
 1. **Rendering is an asynchronous, multi-threaded assembly line**: The Main Thread executes parsing, JavaScript, and layout; the Compositor Thread orchestrates tiles and scroll physics; GPU threads render pixels.
 2. **CSS blocks rendering; JS blocks parsing**: Keep critical CSS under 14KB to fit into initial TCP congestion window (CWND) packets.
 3. **Animate on the compositor**: Restrict CSS transitions to `transform` and `opacity` so that animations can bypass layout and paint entirely on the GPU.
+

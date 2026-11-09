@@ -1,178 +1,64 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Base from '../layouts/Base.astro';
 
 const siteUrl = 'https://microsignalcosmos.com';
 const pageUrl = `${siteUrl}/terms/`;
-
-const pageJsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebPage',
-      '@id': `${pageUrl}#webpage`,
-      name: 'Terms of Service | Micro Signal Cosmos',
-      description: 'Terms of Service governing your access and reading of the Micro Signal Cosmos digital publication.',
-      url: pageUrl,
-      isPartOf: {
-        '@id': `${siteUrl}/#website`,
-      },
-    },
-    {
-      '@type': 'BreadcrumbList',
-      '@id': `${pageUrl}#breadcrumb`,
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Home',
-          item: `${siteUrl}/`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: 'Terms of Service',
-          item: pageUrl,
-        },
-      ],
-    },
-  ],
-};
 ---
 
-<Layout
-  title="Terms of Service | Micro Signal Cosmos"
-  description="Terms of Service governing your access and reading of the Micro Signal Cosmos digital publication."
+<Base
+  title="Terms of Use | Micro Signal Cosmos"
+  description="Terms of Use for Micro Signal Cosmos. Transparent guidance on reading, code reproduction, citations, and content usage."
   canonical={pageUrl}
-  jsonLd={pageJsonLd}
 >
-  <Header />
-
-  <main id="main-content" class="bg-[#F7F9FC] py-12 sm:py-20">
-    <div class="container-main">
+  <main id="main-content" class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800">
+    <div class="container-narrow">
 
       <!-- Breadcrumbs -->
       <nav aria-label="Breadcrumb" class="mb-8">
-        <ol class="flex items-center gap-2 text-xs text-[#697586]">
+        <ol class="flex items-center gap-2 text-xs text-text-muted">
           <li>
-            <a href="/" class="transition-colors hover:text-[#14233B]">Home</a>
+            <a href="/" class="transition-colors hover:text-brand-primary">Home</a>
           </li>
-          <li aria-hidden="true" class="text-slate-300">/</li>
-          <li aria-current="page" class="font-medium text-[#14233B]">Terms of Service</li>
+          <li aria-hidden="true" class="text-neutral-400">/</li>
+          <li class="font-semibold text-text-primary" aria-current="page">Terms of Use</li>
         </ol>
       </nav>
 
-      <!-- Header Section -->
-      <div class="mx-auto max-w-3xl text-center">
-        <div class="inline-flex items-center gap-2 rounded-full border border-[#E3E8EF] bg-white px-3.5 py-1.5 shadow-xs">
-          <span class="h-2 w-2 rounded-full bg-[#3478F6]"></span>
-          <span class="text-xs font-semibold tracking-wider text-[#14233B] uppercase">
-            User Agreement
-          </span>
-        </div>
+      <header class="mb-12">
+        <h1 class="text-display font-extrabold tracking-tight text-text-primary">Terms of Use</h1>
+        <p class="mt-4 text-lead text-text-secondary">Effective Date: November 2026</p>
+      </header>
 
-        <h1 class="mt-6 text-3xl font-extrabold tracking-tight text-[#14233B] sm:text-5xl">
-          Terms of <span class="text-[#3478F6]">Service</span>
-        </h1>
+      <div class="prose-editorial max-w-none space-y-8">
+        <section>
+          <h2 class="text-h2 font-bold text-text-primary mb-4">1. Agreement to Terms</h2>
+          <p class="text-text-secondary">
+            By accessing or reading Micro Signal Cosmos, you agree to these terms of service. If you do not agree, you may discontinue using the publication.
+          </p>
+        </section>
 
-        <p class="mt-4 text-xs font-medium uppercase tracking-widest text-[#697586]">
-          Effective Date: November 2026 &bull; Last Revised: November 2026
-        </p>
+        <section>
+          <h2 class="text-h2 font-bold text-text-primary mb-4">2. Code Snippets &amp; Permissive License</h2>
+          <p class="text-text-secondary">
+            Unless otherwise marked, all standalone code snippets and technical configuration templates published in our articles are provided under the MIT License. You are welcome and encouraged to test, modify, and integrate them into your own personal or commercial projects.
+          </p>
+        </section>
 
-        <p class="mt-4 text-base leading-relaxed text-[#4B5565] sm:text-lg">
-          Please review the rules governing access, reading, and fair quotation of Micro Signal Cosmos dispatches.
-        </p>
+        <section>
+          <h2 class="text-h2 font-bold text-text-primary mb-4">3. Editorial Copyright &amp; Attribution</h2>
+          <p class="text-text-secondary">
+            Written editorial prose, explanatory text, and bespoke architectural diagrams are &copy; 2026 Micro Signal Cosmos. You may quote excerpts with clear attribution and a canonical backlink to the original article. Wholesale reproduction or automated scraping without permission is prohibited.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-h2 font-bold text-text-primary mb-4">4. Technical Accuracy &amp; Disclaimer</h2>
+          <p class="text-text-secondary">
+            Articles are written for educational and systems architecture analysis. While every article undergoes rigorous human verification, benchmarking, and review, technical specifications, APIs, and cloud pricing change frequently. Always test in isolated environments before deploying to production.
+          </p>
+        </section>
       </div>
-
-      <!-- Main Document -->
-      <article class="mx-auto mt-12 max-w-3xl rounded-2xl border border-[#E3E8EF] bg-white p-8 sm:p-12 shadow-sm text-sm leading-relaxed text-[#4B5565] space-y-10">
-
-        <!-- 1. Acceptance -->
-        <section aria-labelledby="acceptance">
-          <h2 id="acceptance" class="text-xl font-bold tracking-tight text-[#14233B]">
-            1. Acceptance of Terms
-          </h2>
-          <p class="mt-3">
-            By accessing, reading, or navigating <strong class="font-semibold text-[#14233B]">Micro Signal Cosmos</strong> ("the Website," "the Publication"), you acknowledge that you have read, understood, and agreed to be bound by these Terms of Service. If you do not agree with any provision herein, please discontinue use of the Website.
-          </p>
-        </section>
-
-        <!-- 2. Intellectual Property & Copyright -->
-        <section aria-labelledby="ip-copyright" class="border-t border-[#E3E8EF] pt-8">
-          <h2 id="ip-copyright" class="text-xl font-bold tracking-tight text-[#14233B]">
-            2. Intellectual Property & Copyright
-          </h2>
-          <p class="mt-3">
-            All original articles, tutorials, visual illustrations, branding marks, and layout designs on Micro Signal Cosmos are the proprietary property of Micro Signal Cosmos or its content creators and are protected by applicable copyright and intellectual property laws.
-          </p>
-        </section>
-
-        <!-- 3. Fair Use & Citation -->
-        <section aria-labelledby="fair-use" class="border-t border-[#E3E8EF] pt-8">
-          <h2 id="fair-use" class="text-xl font-bold tracking-tight text-[#14233B]">
-            3. Fair Use Quotation & Content Attribution
-          </h2>
-          <p class="mt-3">
-            We encourage educational commentary, discussion, and constructive sharing. You are granted permission to quote excerpts from our articles under the following conditions:
-          </p>
-          <ul class="mt-4 list-disc space-y-2 pl-6">
-            <li><strong class="font-semibold text-[#14233B]">Length Limit:</strong> Quotes must be limited to fair excerpts (up to 150 words per article).</li>
-            <li><strong class="font-semibold text-[#14233B]">Explicit Attribution:</strong> You must clearly credit <em>Micro Signal Cosmos</em> and the respective article title.</li>
-            <li><strong class="font-semibold text-[#14233B]">Direct Hyperlink:</strong> You must provide a live, direct hyperlink back to the canonical article URL.</li>
-            <li><strong class="font-semibold text-[#14233B]">No Mass Syndication:</strong> Full-article scraping, automated mirroring, or republishing of entire dispatches is strictly prohibited without prior written permission.</li>
-          </ul>
-        </section>
-
-        <!-- 4. Acceptable Conduct -->
-        <section aria-labelledby="conduct" class="border-t border-[#E3E8EF] pt-8">
-          <h2 id="conduct" class="text-xl font-bold tracking-tight text-[#14233B]">
-            4. Acceptable Reader Conduct & Security
-          </h2>
-          <p class="mt-3">
-            When interacting with the Website or transmitting inquiries through our communication forms, you agree not to:
-          </p>
-          <ul class="mt-4 list-disc space-y-2 pl-6">
-            <li>Engage in denial-of-service attacks, automated scrapers that degrade server capacity, or malicious vulnerability scans.</li>
-            <li>Submit fraudulent, abusive, defamatory, or unsolicited promotional spam through our contact forms.</li>
-            <li>Attempt to bypass security boundaries, inject unauthorized code, or tamper with page headers.</li>
-          </ul>
-        </section>
-
-        <!-- 5. Educational Disclaimer Reference -->
-        <section aria-labelledby="disclaimer-ref" class="border-t border-[#E3E8EF] pt-8">
-          <h2 id="disclaimer-ref" class="text-xl font-bold tracking-tight text-[#14233B]">
-            5. Informational Nature & No Warranty
-          </h2>
-          <p class="mt-3">
-            The publication is provided on an "as is" and "as available" basis without warranties of any kind. All technical and scientific content is intended solely for educational and informational purposes. Please review our formal <a href="/disclaimer/" class="font-semibold text-[#3478F6] hover:underline">Editorial Disclaimer</a> for details.
-          </p>
-        </section>
-
-        <!-- 6. Limitation of Liability -->
-        <section aria-labelledby="liability" class="border-t border-[#E3E8EF] pt-8">
-          <h2 id="liability" class="text-xl font-bold tracking-tight text-[#14233B]">
-            6. Limitation of Liability
-          </h2>
-          <p class="mt-3">
-            To the fullest extent permitted by applicable law, Micro Signal Cosmos, its editors, authors, and affiliates shall not be liable for any direct, indirect, incidental, consequential, or punitive damages arising from your access to, use of, or inability to access the Website or its content.
-          </p>
-        </section>
-
-        <!-- 7. Modifications & Inquiries -->
-        <section aria-labelledby="contact" class="border-t border-[#E3E8EF] pt-8">
-          <h2 id="contact" class="text-xl font-bold tracking-tight text-[#14233B]">
-            7. Revisions & Questions
-          </h2>
-          <p class="mt-3">
-            We reserve the right to revise these Terms of Service at any time. Continued use of the Website constitutes acceptance of any revised terms. For inquiries regarding licensing, reprint permissions, or terms clarification, contact our desk via the <a href="/contact/" class="font-semibold text-[#3478F6] hover:underline">Contact Desk</a>.
-          </p>
-        </section>
-
-      </article>
 
     </div>
   </main>
-
-  <Footer />
-</Layout>
+</Base>

@@ -126,3 +126,4 @@ For scientists and data researchers requiring high-memory Jupyter compute instan
 1. **Planets change size in different colors**: Light passing through atmospheric edges is filtered by specific molecular vibrational bonds.
 2. **JWST opened the infrared window**: Water, methane, carbon dioxide, and sulfur dioxide have sharp, prominent absorption bands between 1 and 5 microns.
 3. **Biosignatures require chemical disequilibrium**: The coexistence of reducing gases (methane) and oxidizing gases (oxygen) is the most robust spectroscopic indicator of life.
+

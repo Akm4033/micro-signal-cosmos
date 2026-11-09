@@ -1,367 +1,96 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Base from '../layouts/Base.astro';
 
-// Environment-configurable form backend (e.g. Web3Forms or Formspree)
-// Provide PUBLIC_WEB3FORMS_KEY in your hosting dashboard or .env to activate live email relay.
 const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY || process.env.PUBLIC_WEB3FORMS_KEY || '';
 const isFormLive = Boolean(web3formsKey && web3formsKey.trim().length > 0);
 
 const siteUrl = 'https://microsignalcosmos.com';
 const contactUrl = `${siteUrl}/contact/`;
-
-const contactJsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'ContactPage',
-      '@id': `${contactUrl}#contactpage`,
-      name: 'Contact Us | Micro Signal Cosmos',
-      description: 'Get in touch with the Micro Signal Cosmos team for article feedback, questions, corrections, or collaboration inquiries.',
-      url: contactUrl,
-      mainEntity: {
-        '@type': 'Organization',
-        '@id': `${siteUrl}/#organization`,
-      },
-    },
-    {
-      '@type': 'BreadcrumbList',
-      '@id': `${contactUrl}#breadcrumb`,
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Home',
-          item: `${siteUrl}/`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: 'Contact Us',
-          item: contactUrl,
-        },
-      ],
-    },
-  ],
-};
 ---
 
-<Layout
-  title="Contact Us | Micro Signal Cosmos"
-  description="Get in touch with the Micro Signal Cosmos team for article feedback, questions, corrections, or collaboration inquiries."
+<Base
+  title="Contact & Corrections | Micro Signal Cosmos"
+  description="Get in touch with the Micro Signal Cosmos team for article feedback, technical errata, rapid corrections, or collaboration inquiries."
   canonical={contactUrl}
-  jsonLd={contactJsonLd}
 >
-  <Header />
-
-  <main id="main-content" class="bg-[#F7F9FC] py-12 sm:py-20">
-    <div class="container-main">
+  <main id="main-content" class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800">
+    <div class="container-narrow">
 
       <!-- Breadcrumbs -->
       <nav aria-label="Breadcrumb" class="mb-8">
-        <ol class="flex items-center gap-2 text-xs text-[#697586]">
+        <ol class="flex items-center gap-2 text-xs text-text-muted">
           <li>
-            <a href="/" class="transition-colors hover:text-[#14233B]">Home</a>
+            <a href="/" class="transition-colors hover:text-brand-primary">Home</a>
           </li>
-          <li aria-hidden="true" class="text-slate-300">/</li>
-          <li aria-current="page" class="font-medium text-[#14233B]">Contact Us</li>
+          <li aria-hidden="true" class="text-neutral-400">/</li>
+          <li class="font-semibold text-text-primary" aria-current="page">Contact Desk</li>
         </ol>
       </nav>
 
-      <!-- Header Section -->
-      <div class="mx-auto max-w-3xl text-center">
-        <div class="inline-flex items-center gap-2 rounded-full border border-[#E3E8EF] bg-white px-3.5 py-1.5 shadow-xs">
-          <span class="h-2 w-2 rounded-full bg-[#3478F6]"></span>
-          <span class="text-xs font-semibold tracking-wider text-[#14233B] uppercase">
-            Get In Touch
-          </span>
+      <!-- Hero Header -->
+      <header class="mb-12">
+        <div class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3.5 py-1 text-xs font-bold tracking-widest text-brand-primary uppercase shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span>
+          <span>Contact &amp; Errata</span>
         </div>
-
-        <h1 class="mt-6 text-3xl font-extrabold tracking-tight text-[#14233B] sm:text-5xl">
-          Connect With <span class="text-[#3478F6]">Our Team</span>
+        <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl">
+          Get in Touch
         </h1>
-
-        <p class="mt-4 text-base leading-relaxed text-[#4B5565] sm:text-lg">
-          Whether you have feedback on an article, a question, or a collaboration proposal, we'd love to hear from you.
+        <p class="mt-4 text-base sm:text-lg leading-relaxed text-text-secondary">
+          Have feedback on an investigation, found a code errata, or want to suggest a technical topic? We respond promptly.
         </p>
+      </header>
+
+      <!-- Direct Contact Channels -->
+      <div class="grid gap-6 sm:grid-cols-2 mb-12">
+        <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-text-muted mb-2">Editorial Desk</h2>
+          <p class="text-sm text-text-secondary">For questions, corrections, or suggestions:</p>
+          <a href="mailto:admin@microsignalcosmos.com" class="mt-3 inline-block font-semibold text-brand-primary hover:underline">
+            admin@microsignalcosmos.com
+          </a>
+        </div>
+        <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-text-muted mb-2">Code Errata &amp; Issues</h2>
+          <p class="text-sm text-text-secondary">Submit public corrections or bug reports via GitHub:</p>
+          <a href="https://github.com/Akm4033/micro-signal-cosmos/issues" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block font-semibold text-brand-primary hover:underline">
+            GitHub Issues &rarr;
+          </a>
+        </div>
       </div>
 
-      <!-- Communication Channels Grid -->
-      <section class="mx-auto mt-12 max-w-4xl" aria-labelledby="channels-heading">
-        <h2 id="channels-heading" class="sr-only">Communication Channels</h2>
-        <div class="grid gap-6 sm:grid-cols-3">
-          <!-- Article Inquiries & Feedback -->
-          <div class="rounded-xl border border-[#E3E8EF] bg-white p-6 shadow-xs transition-all hover:border-[#3478F6]">
-            <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#3478F6]/10 text-xs font-bold text-[#3478F6]">
-              AI
-            </span>
-            <h3 class="mt-4 text-base font-bold text-[#14233B]">Article Inquiries</h3>
-            <p class="mt-1 text-xs leading-relaxed text-[#697586]">
-              Article suggestions, topic ideas, and general feedback on our guides.
-            </p>
-            <a href="#contact-message" class="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#3478F6]">
-              <span>Send Feedback</span>
-              <span aria-hidden="true">&darr;</span>
-            </a>
+      <!-- Contact Form -->
+      <div class="rounded-2xl border border-neutral-200 bg-white p-6 sm:p-10 shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
+        <h2 class="text-xl font-bold text-text-primary mb-6">Send a Message</h2>
+        <form
+          action={isFormLive ? "https://api.web3forms.com/submit" : "mailto:admin@microsignalcosmos.com"}
+          method={isFormLive ? "POST" : "GET"}
+          class="space-y-6"
+        >
+          {isFormLive && <input type="hidden" name="access_key" value={web3formsKey} />}
+          <div class="space-y-2">
+            <label for="contact-name" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Your Name</label>
+            <input type="text" id="contact-name" name="name" required placeholder="Dr. Jane Doe" class="input" />
           </div>
-
-          <!-- Corrections & Feedback -->
-          <div class="rounded-xl border border-[#E3E8EF] bg-white p-6 shadow-xs transition-all hover:border-[#3478F6]">
-            <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#14233B]/10 text-xs font-bold text-[#14233B]">
-              CF
-            </span>
-            <h3 class="mt-4 text-base font-bold text-[#14233B]">Corrections & Updates</h3>
-            <p class="mt-1 text-xs leading-relaxed text-[#697586]">
-              Spotted a typo, broken link, or outdated information? Let us know so we can fix it promptly.
-            </p>
-            <a href="#contact-message" class="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#3478F6]">
-              <span>Report an Issue &darr;</span>
-            </a>
+          <div class="space-y-2">
+            <label for="contact-email" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Email Address</label>
+            <input type="email" id="contact-email" name="email" required placeholder="jane@example.com" class="input" />
           </div>
-
-          <!-- Collaborations & General Inquiries -->
-          <div class="rounded-xl border border-[#E3E8EF] bg-white p-6 shadow-xs transition-all hover:border-[#3478F6]">
-            <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-500/10 text-xs font-bold text-emerald-600">
-              PR
-            </span>
-            <h3 class="mt-4 text-base font-bold text-[#14233B]">Collaborations & Inquiries</h3>
-            <p class="mt-1 text-xs leading-relaxed text-[#697586]">
-              Guest writing requests, partner inquiries, and general questions.
-            </p>
-            <a href="#contact-message" class="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#3478F6]">
-              <span>Send Message</span>
-              <span aria-hidden="true">&darr;</span>
-            </a>
+          <div class="space-y-2">
+            <label for="contact-subject" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Subject</label>
+            <input type="text" id="contact-subject" name="subject" required placeholder="Correction: How Browsers Render / Topic Request" class="input" />
           </div>
-        </div>
-      </section>
-
-      <!-- Contact Form & Sidebar Section -->
-      <div class="mx-auto mt-10 grid max-w-4xl gap-8 lg:grid-cols-5">
-
-        <!-- Form Column -->
-        <div class="rounded-2xl border border-[#E3E8EF] bg-white p-8 shadow-sm sm:p-10 lg:col-span-3">
-          <h2 class="text-xl font-bold text-[#14233B]">Send a Message</h2>
-          <p class="mt-1 text-xs text-[#697586]">
-            Our team reviews reader messages regularly, typically responding within 24 to 48 hours.
-          </p>
-
-          {isFormLive ? (
-            <form
-              action="https://api.web3forms.com/submit"
-              method="POST"
-              class="mt-6 space-y-4"
-            >
-              <input type="hidden" name="access_key" value={web3formsKey} />
-              <input type="hidden" name="subject" value="Message to Micro Signal Cosmos" />
-              <input type="hidden" name="from_name" value="Micro Signal Cosmos Contact Form" />
-              <!-- Honeypot Spam Protection -->
-              <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off" />
-
-              <div>
-                <label for="contact-name" class="block text-xs font-semibold text-[#14233B]">
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  id="contact-name"
-                  name="name"
-                  required
-                  placeholder="e.g. Sarah Connor"
-                  class="mt-1.5 w-full rounded-lg border border-[#E3E8EF] bg-white px-3.5 py-2.5 text-sm text-[#202938] placeholder-[#9AA4B2] shadow-xs focus:border-[#3478F6] focus:outline-none focus:ring-2 focus:ring-[#3478F6]/20"
-                />
-              </div>
-
-              <div>
-                <label for="contact-email" class="block text-xs font-semibold text-[#14233B]">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="contact-email"
-                  name="email"
-                  required
-                  placeholder="reader@example.com"
-                  class="mt-1.5 w-full rounded-lg border border-[#E3E8EF] bg-white px-3.5 py-2.5 text-sm text-[#202938] placeholder-[#9AA4B2] shadow-xs focus:border-[#3478F6] focus:outline-none focus:ring-2 focus:ring-[#3478F6]/20"
-                />
-              </div>
-
-              <div>
-                <label for="contact-topic" class="block text-xs font-semibold text-[#14233B]">
-                  Inquiry Topic
-                </label>
-                <select
-                  id="contact-topic"
-                  name="topic"
-                  class="mt-1.5 w-full rounded-lg border border-[#E3E8EF] bg-white px-3.5 py-2.5 text-sm text-[#202938] shadow-xs focus:border-[#3478F6] focus:outline-none focus:ring-2 focus:ring-[#3478F6]/20"
-                >
-                  <option value="general">General Reader Inquiry</option>
-                  <option value="feedback">Article Feedback & Ideas</option>
-                  <option value="correction">Correction Report</option>
-                  <option value="collaboration">Collaboration & Inquiries</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="contact-message" class="block text-xs font-semibold text-[#14233B]">
-                  Message
-                </label>
-                <textarea
-                  id="contact-message"
-                  name="message"
-                  rows="4"
-                  required
-                  minlength="10"
-                  placeholder="Please provide clear details regarding your inquiry or story lead..."
-                  class="mt-1.5 w-full rounded-lg border border-[#E3E8EF] bg-white px-3.5 py-2.5 text-sm text-[#202938] placeholder-[#9AA4B2] shadow-xs focus:border-[#3478F6] focus:outline-none focus:ring-2 focus:ring-[#3478F6]/20"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                class="w-full rounded-lg bg-[#3478F6] py-3 text-xs font-semibold text-white shadow-xs transition-colors hover:bg-[#2563EB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3478F6]"
-              >
-                Send Message
-              </button>
-            </form>
-          ) : (
-            <form
-              class="mt-6 space-y-4"
-              onsubmit="event.preventDefault(); document.getElementById('relay-notice')?.classList.remove('hidden');"
-            >
-              <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off" />
-
-              <div>
-                <label for="contact-name" class="block text-xs font-semibold text-[#14233B]">
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  id="contact-name"
-                  name="name"
-                  required
-                  placeholder="e.g. Sarah Connor"
-                  class="mt-1.5 w-full rounded-lg border border-[#E3E8EF] bg-white px-3.5 py-2.5 text-sm text-[#202938] placeholder-[#9AA4B2] shadow-xs focus:border-[#3478F6] focus:outline-none focus:ring-2 focus:ring-[#3478F6]/20"
-                />
-              </div>
-
-              <div>
-                <label for="contact-email" class="block text-xs font-semibold text-[#14233B]">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="contact-email"
-                  name="email"
-                  required
-                  placeholder="reader@example.com"
-                  class="mt-1.5 w-full rounded-lg border border-[#E3E8EF] bg-white px-3.5 py-2.5 text-sm text-[#202938] placeholder-[#9AA4B2] shadow-xs focus:border-[#3478F6] focus:outline-none focus:ring-2 focus:ring-[#3478F6]/20"
-                />
-              </div>
-
-              <div>
-                <label for="contact-topic" class="block text-xs font-semibold text-[#14233B]">
-                  Inquiry Topic
-                </label>
-                <select
-                  id="contact-topic"
-                  name="topic"
-                  class="mt-1.5 w-full rounded-lg border border-[#E3E8EF] bg-white px-3.5 py-2.5 text-sm text-[#202938] shadow-xs focus:border-[#3478F6] focus:outline-none focus:ring-2 focus:ring-[#3478F6]/20"
-                >
-                  <option value="general">General Reader Inquiry</option>
-                  <option value="feedback">Article Feedback & Ideas</option>
-                  <option value="correction">Correction Report</option>
-                  <option value="collaboration">Collaboration & Inquiries</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="contact-message" class="block text-xs font-semibold text-[#14233B]">
-                  Message
-                </label>
-                <textarea
-                  id="contact-message"
-                  name="message"
-                  rows="4"
-                  required
-                  minlength="10"
-                  placeholder="Please provide clear details regarding your inquiry or story lead..."
-                  class="mt-1.5 w-full rounded-lg border border-[#E3E8EF] bg-white px-3.5 py-2.5 text-sm text-[#202938] placeholder-[#9AA4B2] shadow-xs focus:border-[#3478F6] focus:outline-none focus:ring-2 focus:ring-[#3478F6]/20"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                class="w-full rounded-lg bg-[#3478F6] py-3 text-xs font-semibold text-white shadow-xs transition-colors hover:bg-[#2563EB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3478F6]"
-              >
-                Send Message
-              </button>
-
-              <div id="relay-notice" role="status" aria-live="polite" class="hidden rounded-xl border border-blue-200 bg-blue-50 p-4 text-xs text-blue-900">
-                <p class="font-bold text-[#14233B]">Mail Relay In Preparation</p>
-                <p class="mt-1 text-[#4B5565]">
-                  Thank you for your message. Live transmission requires configuring the <code class="rounded bg-white px-1.5 py-0.5 font-mono text-xs border border-blue-200">PUBLIC_WEB3FORMS_KEY</code> environment variable in your Cloudflare Pages dashboard as detailed in <code class="rounded bg-white px-1.5 py-0.5 font-mono text-xs border border-blue-200">DEPLOYMENT.md</code>.
-                </p>
-              </div>
-
-              <p class="text-center text-[11px] text-[#697586]">
-                Your message will be sent directly to our team.
-              </p>
-            </form>
-          )}
-        </div>
-
-        <!-- Sidebar Information Column -->
-        <div class="flex flex-col justify-between gap-6 rounded-2xl border border-[#E3E8EF] bg-white p-8 shadow-sm lg:col-span-2">
-          <div>
-            <h3 class="text-xs font-bold uppercase tracking-wider text-[#14233B]">
-              Official Channels
-            </h3>
-            <p class="mt-2 text-xs leading-relaxed text-[#697586]">
-              Follow Micro Signal Cosmos across our verified digital presence:
-            </p>
-
-            <div class="mt-5 space-y-3">
-              <a
-                href="https://www.facebook.com/profile.php?id=61596288235891"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center justify-between rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] px-4 py-3 text-xs font-semibold text-[#14233B] transition-colors hover:border-[#3478F6] hover:text-[#3478F6]"
-              >
-                <span>Facebook Community</span>
-                <span aria-hidden="true">&rarr;</span>
-              </a>
-
-              <a
-                href="https://www.youtube.com/@MicroSignalCosmos"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center justify-between rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] px-4 py-3 text-xs font-semibold text-[#14233B] transition-colors hover:border-[#3478F6] hover:text-[#3478F6]"
-              >
-                <span>YouTube Channel</span>
-                <span aria-hidden="true">&rarr;</span>
-              </a>
-            </div>
+          <div class="space-y-2">
+            <label for="contact-message" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Message</label>
+            <textarea id="contact-message" name="message" rows="5" required placeholder="Your message, code snippet errata, or inquiry..." class="input"></textarea>
           </div>
-
-          <div class="border-t border-[#E3E8EF] pt-6">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-[#14233B]">
-              Publisher Notice
-            </h4>
-            <p class="mt-2 text-xs leading-relaxed text-[#697586]">
-              <strong class="font-semibold text-[#14233B]">Micro Signal Cosmos</strong><br />
-              Independent digital technology and science publication.<br />
-              Target domain: <span class="font-mono text-[11px]">microsignalcosmos.com</span><br />
-              All messages are handled in accordance with our privacy policy.
-            </p>
-          </div>
-        </div>
-
+          <button type="submit" class="btn-primary w-full">
+            <span>Send Message</span>
+            <span aria-hidden="true">&rarr;</span>
+          </button>
+        </form>
       </div>
 
     </div>
   </main>
-
-  <Footer />
-</Layout>
+</Base>

@@ -1,257 +1,162 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { CATEGORIES } from '../data/categories';
-
-const siteUrl = 'https://microsignalcosmos.com';
-const aboutUrl = `${siteUrl}/about/`;
-
-const aboutJsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'AboutPage',
-      '@id': `${aboutUrl}#aboutpage`,
-      name: 'About Us | Micro Signal Cosmos',
-      description: 'Learn about Micro Signal Cosmos, our mission, vision, and how we explore science, technology, and AI through clear, practical guides.',
-      url: aboutUrl,
-      mainEntity: {
-        '@type': 'Organization',
-        '@id': `${siteUrl}/#organization`,
-      },
-    },
-    {
-      '@type': 'BreadcrumbList',
-      '@id': `${aboutUrl}#breadcrumb`,
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Home',
-          item: `${siteUrl}/`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: 'About Us',
-          item: aboutUrl,
-        },
-      ],
-    },
-  ],
-};
+import Base from '../layouts/Base.astro';
 ---
 
-<Layout
-  title="About Us | Micro Signal Cosmos"
-  description="Learn about Micro Signal Cosmos, our mission, vision, and how we explore science, technology, and AI through clear, practical guides."
-  canonical={aboutUrl}
-  jsonLd={aboutJsonLd}
->
-  <Header />
+<Base title="About Micro Signal Cosmos" description="Who runs this, how articles are made, and how the business works." canonical="https://microsignalcosmos.com/about/">
+  <div class="container-narrow py-12 sm:py-16">
+    <header class="mb-12">
+      <h1 class="text-display font-extrabold tracking-tight text-text-primary">About Micro Signal Cosmos</h1>
+      <p class="mt-4 text-lead text-text-secondary">Independent technical publication exploring systems engineering, AI/ML, and astrophysics through deep-dive guides and reproducible architectures.</p>
+    </header>
 
-  <main id="main-content" class="bg-[#F7F9FC] py-12 sm:py-20">
-    <div class="container-main">
-
-      <!-- Breadcrumbs -->
-      <nav aria-label="Breadcrumb" class="mb-8">
-        <ol class="flex items-center gap-2 text-xs text-[#697586]">
-          <li>
-            <a href="/" class="transition-colors hover:text-[#14233B]">Home</a>
-          </li>
-          <li aria-hidden="true" class="text-slate-300">/</li>
-          <li aria-current="page" class="font-medium text-[#14233B]">About Us</li>
-        </ol>
-      </nav>
-
-      <!-- Hero Header -->
-      <div class="mx-auto max-w-3xl text-center">
-        <div class="inline-flex items-center gap-2 rounded-full border border-[#E3E8EF] bg-white px-3.5 py-1.5 shadow-xs">
-          <span class="h-2 w-2 rounded-full bg-[#3478F6]"></span>
-          <span class="text-xs font-semibold tracking-wider text-[#14233B] uppercase">
-            About the Publication
-          </span>
-        </div>
-
-        <h1 class="mt-6 text-3xl font-extrabold tracking-tight text-[#14233B] sm:text-5xl lg:text-6xl">
-          Discover More.
-          <span class="mt-2 block text-[#3478F6]">
-            Understand Better.
-          </span>
-        </h1>
-
-        <p class="mt-6 text-base leading-relaxed text-[#4B5565] sm:text-lg">
-          Micro Signal Cosmos is an independent digital publication exploring the frontiers of science, computing, artificial intelligence, and human innovation. We translate complex breakthroughs into clear, grounded, and accessible knowledge.
-        </p>
+    <section class="mb-16">
+      <h2 class="text-h2 font-bold text-text-primary mb-6">Who We Are</h2>
+      <div class="prose-editorial max-w-none">
+        <p><strong>Micro Signal Cosmos</strong> is an independent technical publication exploring systems engineering, applied machine learning, and astrophysical observation through rigorous, reproducible deep dives.</p>
+        <p>This publication exists because shallow tutorials and paywalled papers don't serve practitioners. We wanted a place where complex topics — browser internals, LLM training economics, fusion physics, database internals — are explained with code, diagrams, and primary sources, not analogies.</p>
       </div>
+    </section>
 
-      <!-- Core Mission Card -->
-      <div class="mx-auto mt-14 max-w-4xl rounded-2xl border border-[#E3E8EF] bg-white p-8 sm:p-12 shadow-sm">
-        <span class="text-xs font-bold tracking-[0.2em] text-[#3478F6] uppercase">
-          Our Publishing Philosophy
-        </span>
-
-        <h2 class="mt-3 text-2xl font-bold tracking-tight text-[#14233B] sm:text-3xl">
-          Finding the Signal in a Universe of Noise
-        </h2>
-
-        <div class="mt-6 space-y-5 text-base leading-relaxed text-[#4B5565]">
-          <p>
-            In today's fast-moving digital ecosystem, information is ubiquitous, but genuine comprehension is rare. Daily feeds are flooded with sensational headlines, hype-driven narratives, and surface-level abstracts that leave readers more perplexed than enlightened.
-          </p>
-
-          <p>
-            The name <strong class="font-semibold text-[#14233B]">Micro Signal Cosmos</strong> reflects our core philosophy: just as radio astronomers filter electromagnetic static to detect faint, revealing micro-signals from distant corners of the cosmos, we filter through internet noise to isolate the foundational engineering, AI architectures, and scientific discoveries that actually matter.
-          </p>
-
-          <p>
-            Micro Signal Cosmos is a solo technical media publication. We operate with an AI-assisted workflow—leveraging modern language models (Claude, ChatGPT, Gemini, Perplexity) for comprehensive literature screening, comparative research, and initial drafting. Crucially, every line of code, architectural diagram, and factual assertion is verified, tested, and edited by human hands before publication.
-          </p>
-
-          <p>
-            To present deep technical subjects with domain precision, our articles are written through three specialized domain lenses: <strong class="font-semibold text-[#0ea5e9]">Dr. Marina Kowalski</strong> (Systems Engineering & Browser Internals), <strong class="font-semibold text-emerald-600">Kai Nakamura</strong> (Machine Learning & LLM Infrastructure), and <strong class="font-semibold text-[#8b5cf6]">Dr. Arun Mehta</strong> (Astrophysics & Observational Science).
-          </p>
-        </div>
+    <section class="mb-16">
+      <h2 class="text-h2 font-bold text-text-primary mb-6">How Articles Are Made</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="border-b-2 border-neutral-200 dark:border-neutral-700">
+              <th class="text-left p-3 font-semibold">Step</th>
+              <th class="text-left p-3 font-semibold">Process</th>
+              <th class="text-left p-3 font-semibold">Tools</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-neutral-100 dark:border-neutral-800">
+              <td class="p-3 font-medium">Topic Selection</td>
+              <td class="p-3">Chosen based on reader questions, architecture gaps, and emerging technologies</td>
+              <td class="p-3">Editorial judgment</td>
+            </tr>
+            <tr class="border-b border-neutral-100 dark:border-neutral-800">
+              <td class="p-3 font-medium">Research</td>
+              <td class="p-3">Primary sources: arXiv, official docs, source code, GitHub issues, RFCs</td>
+              <td class="p-3">Academic databases, RFC specifications, source repositories</td>
+            </tr>
+            <tr class="border-b border-neutral-100 dark:border-neutral-800">
+              <td class="p-3 font-medium">Drafting</td>
+              <td class="p-3">Structured outline &rarr; iterative drafting with research assistance</td>
+              <td class="p-3">Technical writing workflow</td>
+            </tr>
+            <tr class="border-b border-neutral-100 dark:border-neutral-800">
+              <td class="p-3 font-medium">Verification</td>
+              <td class="p-3">Run ALL code, check ALL math, validate ALL configs, test commands</td>
+              <td class="p-3">Local execution, compiler explorer, test suites</td>
+            </tr>
+            <tr class="border-b border-neutral-100 dark:border-neutral-800">
+              <td class="p-3 font-medium">Editing</td>
+              <td class="p-3">Structure, clarity, tone, formatting, citation formatting</td>
+              <td class="p-3">Manual review and editorial style guides</td>
+            </tr>
+            <tr class="border-b border-neutral-100 dark:border-neutral-800">
+              <td class="p-3 font-medium">Fact-Check</td>
+              <td class="p-3">Every claim traced to primary source (linked in article)</td>
+              <td class="p-3">Manual verification against sources</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-medium">Publish</td>
+              <td class="p-3">Astro build &rarr; Cloudflare Pages deploy</td>
+              <td class="p-3">Git push &rarr; auto-deploy</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-
-      <!-- Core Pillars Grid -->
-      <div class="mx-auto mt-16 max-w-5xl">
-        <div class="text-center">
-          <p class="text-xs font-bold tracking-[0.2em] text-[#0ea5e9] uppercase">
-            Curated Knowledge Streams
-          </p>
-          <h2 class="mt-2 text-2xl font-bold tracking-tight text-[#14233B] sm:text-3xl">
-            Our Core Coverage Pillars
-          </h2>
-          <p class="mx-auto mt-3 max-w-2xl text-sm text-[#697586]">
-            Structured technical verticals designed for software engineers, ML researchers, and curious systems thinkers.
-          </p>
-        </div>
-
-        <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {CATEGORIES.map((cat, index) => (
-            <a
-              href={cat.href}
-              class="group flex flex-col justify-between rounded-xl border border-[#E3E8EF] bg-white p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-[#0ea5e9] hover:shadow-md"
-            >
-              <div>
-                <div class="flex items-center justify-between">
-                  <span class="flex h-10 w-10 items-center justify-center rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] text-sm font-bold text-[#14233B] group-hover:border-[#0ea5e9]/30 group-hover:bg-sky-50 group-hover:text-[#0ea5e9]">
-                    {cat.icon}
-                  </span>
-                  <span class="text-xs font-bold tracking-widest text-[#9AA4B2] uppercase">
-                    0{index + 1}
-                  </span>
-                </div>
-                <h3 class="mt-4 text-lg font-bold text-[#14233B] group-hover:text-[#0ea5e9]">
-                  {cat.name}
-                </h3>
-                <p class="mt-2 text-xs leading-relaxed text-[#697586]">
-                  {cat.description}
-                </p>
-              </div>
-
-              <div class="mt-6 flex items-center gap-1.5 text-xs font-semibold text-[#0ea5e9]">
-                <span>Explore stream</span>
-                <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">&rarr;</span>
-              </div>
-            </a>
-          ))}
-        </div>
+      <div class="prose-editorial max-w-none mt-6">
+        <p><strong>Quality gate:</strong> Every article is verified by a human before publication. Code is executed, math is checked, configurations are tested. If we haven't personally verified it, it doesn't publish.</p>
       </div>
+    </section>
 
-      <!-- Publishing Process & Corrections Policy -->
-      <div class="mx-auto mt-20 max-w-5xl border-t border-[#E3E8EF] pt-16">
-        <div class="text-center">
-          <p class="text-xs font-bold tracking-[0.2em] text-[#0ea5e9] uppercase">
-            Transparency & Process
-          </p>
-          <h2 class="mt-2 text-2xl font-bold tracking-tight text-[#14233B] sm:text-3xl">
-            How We Research, Build & Correct
-          </h2>
-          <p class="mx-auto mt-3 max-w-xl text-sm text-[#697586]">
-            Our commitment to technical rigor, runnable code, and transparent corrections.
-          </p>
-        </div>
-
-        <div class="mt-10 grid gap-6 sm:grid-cols-3">
-          <div class="rounded-xl border border-[#E3E8EF] bg-white p-7 shadow-xs">
-            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-sky-100 text-xs font-extrabold text-[#0ea5e9]">01</span>
-            <h3 class="mt-4 text-base font-bold text-[#14233B]">Primary Sources & Code Verification</h3>
-            <p class="mt-2 text-xs leading-relaxed text-[#697586]">
-              We consult official specifications, run benchmarks, test scripts in live environments, and link directly to public documentation and papers.
-            </p>
-          </div>
-
-          <div class="rounded-xl border border-[#E3E8EF] bg-white p-7 shadow-xs">
-            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-sky-100 text-xs font-extrabold text-[#0ea5e9]">02</span>
-            <h3 class="mt-4 text-base font-bold text-[#14233B]">Honest Business Model</h3>
-            <p class="mt-2 text-xs leading-relaxed text-[#697586]">
-              We are funded through non-intrusive display ads, transparent affiliate links for vetted tools (marked with ★), and digital technical products.
-            </p>
-          </div>
-
-          <div class="rounded-xl border border-[#E3E8EF] bg-white p-7 shadow-xs">
-            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-sky-100 text-xs font-extrabold text-[#0ea5e9]">03</span>
-            <h3 class="mt-4 text-base font-bold text-[#14233B]">Rapid Corrections Policy</h3>
-            <p class="mt-2 text-xs leading-relaxed text-[#697586]">
-              Found a bug in a snippet or an outdated metric? Send a note via our contact page and we will verify, patch, and document the fix promptly.
-            </p>
-          </div>
-        </div>
-
-        <!-- Quick Navigation Grid -->
-        <div class="mt-14 rounded-2xl border border-[#E3E8EF] bg-[#EEF1F5]/60 p-8">
-          <h3 class="text-base font-bold text-[#14233B]">Explore Micro Signal Cosmos</h3>
-          <p class="mt-1 text-xs text-[#697586]">
-            Dive deeper into our technical library, author profiles, or engineering tools:
-          </p>
-          <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <a href="/articles/" class="rounded-lg border border-[#E3E8EF] bg-white p-4 text-left transition-colors hover:border-[#0ea5e9] hover:bg-slate-50">
-              <span class="block text-xs font-bold text-[#14233B]">All 15 Articles &rarr;</span>
-              <span class="mt-1 block text-[11px] text-[#697586]">Browse our complete library</span>
-            </a>
-            <a href="/authors/" class="rounded-lg border border-[#E3E8EF] bg-white p-4 text-left transition-colors hover:border-[#0ea5e9] hover:bg-slate-50">
-              <span class="block text-xs font-bold text-[#14233B]">Author Lenses &rarr;</span>
-              <span class="mt-1 block text-[11px] text-[#697586]">Marina, Kai & Arun</span>
-            </a>
-            <a href="/tools/" class="rounded-lg border border-[#E3E8EF] bg-white p-4 text-left transition-colors hover:border-[#0ea5e9] hover:bg-slate-50">
-              <span class="block text-xs font-bold text-[#14233B]">Recommended Tools &rarr;</span>
-              <span class="mt-1 block text-[11px] text-[#697586]">Cloud, AI & database stack</span>
-            </a>
-            <a href="/contact/" class="rounded-lg border border-[#E3E8EF] bg-white p-4 text-left transition-colors hover:border-[#0ea5e9] hover:bg-slate-50">
-              <span class="block text-xs font-bold text-[#14233B]">Contact Us &rarr;</span>
-              <span class="mt-1 block text-[11px] text-[#697586]">Feedback or report a fix</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Action Banner -->
-        <div class="mt-12 flex flex-wrap items-center justify-between gap-4 rounded-xl border border-[#E3E8EF] bg-white p-6 shadow-xs sm:p-8">
-          <div>
-            <h4 class="text-base font-bold text-[#14233B]">Have feedback or spotted a fix?</h4>
-            <p class="mt-1 text-xs text-[#697586]">We review reader suggestions and patch technical discrepancies promptly.</p>
-          </div>
-          <div class="flex items-center gap-3">
-            <a
-              href="/contact/"
-              class="inline-flex items-center justify-center rounded-lg bg-[#0ea5e9] px-5 py-2.5 text-xs font-semibold text-white shadow-xs transition-colors hover:bg-[#0284c7]"
-            >
-              Contact Our Team
-            </a>
-            <a
-              href="/articles/"
-              class="inline-flex items-center justify-center rounded-lg border border-[#E3E8EF] bg-white px-5 py-2.5 text-xs font-semibold text-[#14233B] transition-colors hover:bg-slate-50"
-            >
-              Browse Articles
-            </a>
-          </div>
-        </div>
+    <section class="mb-16">
+      <h2 class="text-h2 font-bold text-text-primary mb-6">Content Philosophy</h2>
+      <div class="prose-editorial max-w-none">
+        <h3 class="text-h3 font-bold mb-3">What you'll find here:</h3>
+        <ul>
+          <li><strong>Primary sources</strong> — every claim links to a paper, spec, doc, or repo</li>
+          <li><strong>Runnable code</strong> — snippets you can copy-paste and execute</li>
+          <li><strong>Decision frameworks</strong> — not "use X," but "choose X when Y, Z when W"</li>
+          <li><strong>No fluff</strong> — if a section doesn't teach, it's cut</li>
+        </ul>
+        <h3 class="text-h3 font-bold mt-6 mb-3">What you won't find:</h3>
+        <ul>
+          <li>Press release rewrites</li>
+          <li>"Top 10" lists without technical depth</li>
+          <li>Opinion pieces disguised as analysis</li>
+          <li>Content we haven't verified</li>
+        </ul>
       </div>
+    </section>
 
-    </div>
-  </main>
+    <section class="mb-16">
+      <h2 class="text-h2 font-bold text-text-primary mb-6">Categories</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-900/50"><h3 class="font-bold text-text-primary mb-2">Technology</h3><p class="text-text-secondary">Browser internals, CPU architecture, WebAssembly, networking, systems</p></div>
+        <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-900/50"><h3 class="font-bold text-text-primary mb-2">AI &amp; ML</h3><p class="text-text-secondary">LLM training/inference, RAG, evaluation, tooling, workflows</p></div>
+        <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-900/50"><h3 class="font-bold text-text-primary mb-2">Science</h3><p class="text-text-secondary">Astrophysics, fusion, particle physics, scientific method</p></div>
+        <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-900/50"><h3 class="font-bold text-text-primary mb-2">Developer Tools</h3><p class="text-text-secondary">Databases, caching, search, observability, self-hosting, CLI</p></div>
+      </div>
+    </section>
 
-  <Footer />
-</Layout>
+    <section class="mb-16">
+      <h2 class="text-h2 font-bold text-text-primary mb-6">Business Model</h2>
+      <div class="prose-editorial max-w-none">
+        <p>We're transparent because hidden incentives erode trust.</p>
+        <table class="w-full border-collapse mb-6">
+          <thead><tr class="border-b-2 border-neutral-200 dark:border-neutral-700"><th class="text-left p-3 font-semibold">Revenue Stream</th><th class="text-left p-3 font-semibold">Status</th><th class="text-left p-3 font-semibold">How It Works</th></tr></thead>
+          <tbody>
+            <tr class="border-b border-neutral-100 dark:border-neutral-800"><td class="p-3 font-medium">Display ads</td><td class="p-3">Inactive by default</td><td class="p-3">Configurable placement containers designed without layout shifts</td></tr>
+            <tr class="border-b border-neutral-100 dark:border-neutral-800"><td class="p-3 font-medium">Affiliate links</td><td class="p-3">Active</td><td class="p-3">Hosting, cloud, databases, security tools. Only products we use. Marked with ★</td></tr>
+            <tr class="border-b border-neutral-100 dark:border-neutral-800"><td class="p-3 font-medium">Digital products</td><td class="p-3">Building</td><td class="p-3">Technical guides, checklists, reference templates, code repositories</td></tr>
+            <tr class="border-b border-neutral-100 dark:border-neutral-800"><td class="p-3 font-medium">Newsletter sponsorships</td><td class="p-3">Planned</td><td class="p-3">Relevant technical tools aligned with audience interests</td></tr>
+            <tr><td class="p-3 font-medium">Courses/cohorts</td><td class="p-3">Future</td><td class="p-3">Deep-dive technical workshops</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Affiliate rule:</strong> We only link products we've personally used in production or tested extensively. If we wouldn't recommend it to a colleague, it's not linked.</p>
+        <p><strong>No sponsored content</strong> — if a sponsor ever collaborates on placement, it is prominently labeled and never influences technical accuracy.</p>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-h2 font-bold text-text-primary mb-6">Newsletter: The Weekly Signal</h2>
+      <div class="prose-editorial max-w-none">
+        <p><strong>Free, weekly, no spam.</strong></p>
+        <ul>
+          <li>3–5 technical articles worth your time</li>
+          <li>One technical concept explained simply</li>
+          <li>One tool or workflow we're using in production</li>
+          <li>Zero tracking pixels, zero third-party data sharing</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-h2 font-bold text-text-primary mb-6">Corrections &amp; Feedback</h2>
+      <div class="prose-editorial max-w-none">
+        <p><strong>If we got something wrong, tell us.</strong></p>
+        <ul>
+          <li>Contact Form: <a href="/contact/" class="text-brand-primary underline">Contact Desk</a></li>
+          <li>Email: <a href="mailto:admin@microsignalcosmos.com" class="text-brand-primary underline">admin@microsignalcosmos.com</a></li>
+          <li>GitHub Issues: <a href="https://github.com/Akm4033/micro-signal-cosmos/issues" class="text-brand-primary underline" target="_blank" rel="noopener noreferrer">github.com/Akm4033/micro-signal-cosmos/issues</a></li>
+          <li>Response time: Usually within 24 to 48 hours</li>
+        </ul>
+        <p>Corrections are transparently appended to articles with timestamps and precise errata notes. No silent edits.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-h2 font-bold text-text-primary mb-6">Contact</h2>
+      <div class="prose-editorial max-w-none">
+        <ul>
+          <li>Inquiries: <a href="/contact/" class="text-brand-primary underline">Contact Form</a></li>
+          <li>Direct Email: <a href="mailto:admin@microsignalcosmos.com" class="text-brand-primary underline">admin@microsignalcosmos.com</a></li>
+          <li>GitHub: <a href="https://github.com/Akm4033/micro-signal-cosmos" class="text-brand-primary underline" target="_blank" rel="noopener noreferrer">github.com/Akm4033/micro-signal-cosmos</a></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</Base>

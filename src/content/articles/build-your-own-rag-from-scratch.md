@@ -204,3 +204,4 @@ For teams looking for fully managed, high-performance vector infrastructure with
 1. **Chunk on natural semantics**: Never split across paragraphs, code functions, or Markdown tables.
 2. **Combine dense + sparse search**: Dense captures intent; BM25 guarantees keyword and error code fidelity.
 3. **Always rerank**: A cross-encoder reranker is the single most effective upgrade for eliminating RAG hallucinations.
+

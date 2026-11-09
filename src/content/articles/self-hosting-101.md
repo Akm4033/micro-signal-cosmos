@@ -200,3 +200,4 @@ Schedule this via a cron job at 03:00 UTC daily. Restoring takes a single comman
 1. **Separate public traffic from admin traffic**: Open ports 80/443 to the world via Caddy; access SSH and databases exclusively through Tailscale.
 2. **Network isolation is free security**: Place internal databases on an `internal: true` Docker network to prevent accidental port exposure.
 3. **Automate encrypted offsite backups**: Use Restic with Cloudflare R2 for zero-egress backup storage.
+

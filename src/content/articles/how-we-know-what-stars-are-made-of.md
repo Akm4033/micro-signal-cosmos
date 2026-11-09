@@ -127,3 +127,4 @@ For readers looking to explore the mathematical foundations of astrophysics and 
 1. **Every element has an unforgeable quantum fingerprint**: Atomic orbitals absorb only specific photon energies.
 2. **Stellar atmospheres act as selective filters**: Dense core blackbody radiation passes through outer gas envelopes, leaving dark absorption lines.
 3. **Spectra reveal dynamics**: Doppler shifts, Zeeman magnetic splitting, and thermal broadening convert starlight into a complete physical laboratory report.
+

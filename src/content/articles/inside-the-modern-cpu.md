@@ -163,3 +163,4 @@ For engineers hosting performance-critical systems and compiling bare-metal work
 1. **Hardware is memory-bound, not compute-bound**: Organizing data in contiguous arrays (Struct of Arrays instead of Array of Structs) optimizes cache prefetchers.
 2. **Beware the 64-byte cache line**: Pad atomic variables across thread boundaries to prevent false sharing.
 3. **Write predictable code**: Keep hot branches monotonic or sorted to let modern TAg branch predictors achieve 99%+ accuracy.
+
