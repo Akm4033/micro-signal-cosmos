@@ -95,11 +95,11 @@
 }
 
 @layer components {
-  /* Layout Containers */
-  .container-narrow { max-width: 680px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; width: 100%; }
-  .container-medium { max-width: 920px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; width: 100%; }
-  .container-wide { max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; width: 100%; }
-  .container-full { max-width: 1360px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; width: 100%; }
+  /* Layout Containers: Responsive, Centered & Expansive for Modern Displays */
+  .container-narrow { max-width: 760px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; width: 100%; }
+  .container-medium { max-width: 1040px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; width: 100%; }
+  .container-wide { max-width: 1440px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; width: 100%; }
+  .container-full { max-width: 1600px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; width: 100%; }
 
   @media (min-width: 640px) {
     .container-narrow, .container-medium, .container-wide, .container-full {
@@ -109,9 +109,41 @@
   }
 
   @media (min-width: 1024px) {
-    .container-narrow, .container-medium, .container-wide, .container-full {
+    .container-wide {
       padding-left: 2rem;
       padding-right: 2rem;
+      max-width: 1360px;
+    }
+    .container-full {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1480px;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .container-wide {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+      max-width: 1440px;
+    }
+    .container-full {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+      max-width: 1600px;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .container-wide {
+      padding-left: 3rem;
+      padding-right: 3rem;
+      max-width: 1560px;
+    }
+    .container-full {
+      padding-left: 3rem;
+      padding-right: 3rem;
+      max-width: 1720px;
     }
   }
 

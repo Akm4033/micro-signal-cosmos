@@ -14,534 +14,561 @@ const {
 } = Astro.props;
 
 const key = (slug || '').toLowerCase();
-const uid = key.replace(/[^a-z0-9]/g, '-') || 'default';
+const cat = (category || 'tech').toLowerCase();
+
+// Determine category theme for subtle background tint (zero dotted patterns)
+const isAI = cat.includes('ai') || cat.includes('art') || key.includes('llm') || key.includes('rag') || key.includes('benchmark') || key.includes('eval');
+const isScience = cat.includes('sci') || key.includes('star') || key.includes('fusion') || key.includes('dark-matter') || key.includes('alien') || key.includes('atmosphere');
+const isDevTools = cat.includes('dev') || cat.includes('tool') || key.includes('database') || key.includes('passkey') || key.includes('https') || key.includes('self-hosting');
+const isTech = !isAI && !isScience && !isDevTools;
 ---
 
-<div class={`relative w-full h-full overflow-hidden flex items-center justify-center select-none bg-slate-50 dark:bg-slate-900/60 ${className}`}>
-  <!-- Technical Grid Background -->
-  <div class="absolute inset-0 opacity-40 pointer-events-none" aria-hidden="true">
-    <div class="w-full h-full bg-[radial-gradient(#CBD5E1_1px,transparent_1px)] dark:bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:16px_16px]"></div>
-  </div>
-
-  <!-- Scientific Vector Illustration Container -->
-  <div class="relative z-10 w-full h-full flex items-center justify-center p-3">
+<div
+  class={`relative w-full h-full overflow-hidden flex items-center justify-center select-none transition-colors ${
+    isAI ? 'bg-emerald-50/60 dark:bg-emerald-950/30' :
+    isScience ? 'bg-purple-50/60 dark:bg-purple-950/30' :
+    isDevTools ? 'bg-amber-50/60 dark:bg-amber-950/30' :
+    'bg-sky-50/60 dark:bg-sky-950/30'
+  } ${className}`}
+>
+  <!-- Scientific Vector Illustration Container: Full Bleed, High Contrast, Zero Dotted Background -->
+  <div class="relative z-10 w-full h-full flex items-center justify-center p-2.5 sm:p-3">
     
-    {/* 1. CHOOSING A DATABASE (Relational, Vector, & Edge Storage Architecture) */}
+    {/* 1. CHOOSING A DATABASE IN 2026 (Relational, Vector, Columnar & Edge Architecture) */}
     {(key.includes('database') || logo === 'database') && (
-      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Database architecture diagram">
-        <!-- Relational Engine Node -->
-        <g transform="translate(25, 20)">
-          <rect width="65" height="85" rx="6" class="fill-white dark:fill-slate-800 stroke-blue-600 dark:stroke-blue-400" stroke-width="1.5"/>
-          <rect x="0" y="0" width="65" height="18" rx="6" class="fill-blue-50 dark:fill-blue-950/60 stroke-blue-600 dark:stroke-blue-400" stroke-width="1.5"/>
-          <text x="32.5" y="12" class="fill-blue-700 dark:fill-blue-300 font-sans font-bold text-[8px]" text-anchor="middle">RELATIONAL</text>
-          <line x1="8" y1="32" x2="57" y2="32" class="stroke-slate-300 dark:stroke-slate-600" stroke-width="1.2"/>
-          <line x1="8" y1="46" x2="57" y2="46" class="stroke-slate-300 dark:stroke-slate-600" stroke-width="1.2"/>
-          <line x1="8" y1="60" x2="57" y2="60" class="stroke-slate-300 dark:stroke-slate-600" stroke-width="1.2"/>
-          <text x="32.5" y="80" class="fill-slate-500 dark:fill-slate-400 font-mono text-[7px]" text-anchor="middle">ACID • WAL</text>
+      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Database storage architecture diagram">
+        <!-- Relational Engine Node (PostgreSQL) -->
+        <g transform="translate(18, 20)">
+          <rect width="80" height="118" rx="8" class="fill-white dark:fill-slate-800 stroke-blue-600 dark:stroke-blue-400" stroke-width="2"/>
+          <rect width="80" height="24" rx="8" class="fill-blue-600"/>
+          <text x="40" y="16" fill="#FFFFFF" font-family="system-ui, sans-serif" font-weight="700" font-size="10" text-anchor="middle">RELATIONAL</text>
+          <!-- Table Rows -->
+          <line x1="10" y1="38" x2="70" y2="38" class="stroke-slate-300 dark:stroke-slate-600" stroke-width="1.5"/>
+          <line x1="10" y1="54" x2="70" y2="54" class="stroke-slate-300 dark:stroke-slate-600" stroke-width="1.5"/>
+          <line x1="10" y1="70" x2="70" y2="70" class="stroke-slate-300 dark:stroke-slate-600" stroke-width="1.5"/>
+          <line x1="10" y1="86" x2="70" y2="86" class="stroke-slate-300 dark:stroke-slate-600" stroke-width="1.5"/>
+          <rect x="8" y="96" width="64" height="16" rx="4" class="fill-blue-50 dark:fill-blue-950/60 stroke-blue-500" stroke-width="1"/>
+          <text x="40" y="108" class="fill-blue-700 dark:fill-blue-300" font-family="monospace" font-weight="700" font-size="8.5" text-anchor="middle">ACID • WAL</text>
         </g>
-        <!-- Data Flow Connector Lines -->
-        <path d="M 90 62 L 115 62" class="stroke-slate-400 dark:stroke-slate-500" stroke-width="1.5" stroke-dasharray="3 3"/>
-        <path d="M 165 40 L 190 30" class="stroke-blue-500" stroke-width="1.5"/>
-        <path d="M 165 85 L 190 95" class="stroke-cyan-500" stroke-width="1.5"/>
+        <!-- Connectors -->
+        <path d="M 98 79 L 126 79" class="stroke-blue-600 dark:stroke-blue-400" stroke-width="2" stroke-dasharray="4 3"/>
+        <path d="M 194 56 L 222 42" class="stroke-cyan-600 dark:stroke-cyan-400" stroke-width="2"/>
+        <polygon points="222,42 214,40 216,46" class="fill-cyan-600 dark:fill-cyan-400"/>
+        <path d="M 194 102 L 222 116" class="stroke-emerald-600 dark:stroke-emerald-400" stroke-width="2"/>
+        <polygon points="222,116 216,112 214,118" class="fill-emerald-600 dark:fill-emerald-400"/>
         <!-- Central Query Router -->
-        <g transform="translate(115, 38)">
-          <rect width="50" height="48" rx="6" class="fill-blue-600 stroke-blue-700" stroke-width="1.5"/>
-          <text x="25" y="22" fill="#FFFFFF" class="font-sans font-bold text-[8px]" text-anchor="middle">QUERY</text>
-          <text x="25" y="34" fill="#EFF6FF" class="font-mono text-[7px]" text-anchor="middle">ROUTER</text>
+        <g transform="translate(126, 48)">
+          <rect width="68" height="62" rx="8" class="fill-blue-600 stroke-blue-700" stroke-width="2"/>
+          <circle cx="34" cy="22" r="10" fill="#FFFFFF" fill-opacity="0.2"/>
+          <text x="34" y="26" fill="#FFFFFF" font-family="system-ui, sans-serif" font-weight="800" font-size="10" text-anchor="middle">QUERY</text>
+          <text x="34" y="44" fill="#DBEAFE" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">ROUTER</text>
         </g>
         <!-- Vector Store Node -->
-        <g transform="translate(190, 15)">
-          <rect width="65" height="38" rx="6" class="fill-white dark:fill-slate-800 stroke-cyan-600 dark:stroke-cyan-400" stroke-width="1.5"/>
-          <text x="32.5" y="16" class="fill-cyan-700 dark:fill-cyan-300 font-sans font-bold text-[8px]" text-anchor="middle">VECTOR (HNSW)</text>
-          <text x="32.5" y="28" class="fill-slate-500 dark:fill-slate-400 font-mono text-[7px]" text-anchor="middle">Cosine Sim</text>
+        <g transform="translate(222, 16)">
+          <rect width="84" height="52" rx="8" class="fill-white dark:fill-slate-800 stroke-cyan-600 dark:stroke-cyan-400" stroke-width="2"/>
+          <rect width="84" height="18" rx="8" class="fill-cyan-50 dark:fill-cyan-950/60 stroke-cyan-600 dark:stroke-cyan-400" stroke-width="1.5"/>
+          <text x="42" y="13" class="fill-cyan-700 dark:fill-cyan-300" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">VECTOR (HNSW)</text>
+          <text x="42" y="32" class="fill-slate-700 dark:fill-slate-300" font-family="monospace" font-size="8.5" text-anchor="middle">1536-dim</text>
+          <text x="42" y="44" class="fill-slate-500 dark:fill-slate-400" font-family="monospace" font-size="8" text-anchor="middle">Cosine Sim</text>
         </g>
         <!-- Edge Replica Node -->
-        <g transform="translate(190, 75)">
-          <rect width="65" height="38" rx="6" class="fill-white dark:fill-slate-800 stroke-emerald-600 dark:stroke-emerald-400" stroke-width="1.5"/>
-          <text x="32.5" y="16" class="fill-emerald-700 dark:fill-emerald-300 font-sans font-bold text-[8px]" text-anchor="middle">EDGE (SQLite)</text>
-          <text x="32.5" y="28" class="fill-slate-500 dark:fill-slate-400 font-mono text-[7px]" text-anchor="middle">Zero Latency</text>
+        <g transform="translate(222, 88)">
+          <rect width="84" height="52" rx="8" class="fill-white dark:fill-slate-800 stroke-emerald-600 dark:stroke-emerald-400" stroke-width="2"/>
+          <rect width="84" height="18" rx="8" class="fill-emerald-50 dark:fill-emerald-950/60 stroke-emerald-600 dark:stroke-emerald-400" stroke-width="1.5"/>
+          <text x="42" y="13" class="fill-emerald-700 dark:fill-emerald-300" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">EDGE (SQLite)</text>
+          <text x="42" y="32" class="fill-slate-700 dark:fill-slate-300" font-family="monospace" font-size="8.5" text-anchor="middle">Zero Latency</text>
+          <text x="42" y="44" class="fill-slate-500 dark:fill-slate-400" font-family="monospace" font-size="8" text-anchor="middle">Local WAL</text>
         </g>
       </svg>
     )}
 
     {/* 2. PASSKEYS & WEBAUTHN (Asymmetric Public-Key Authentication Protocol) */}
     {(key.includes('passkey') || logo === 'key') && (
-      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Passkeys WebAuthn security diagram">
-        <!-- Client Device / Authenticator -->
-        <g transform="translate(25, 20)">
-          <rect width="80" height="90" rx="8" class="fill-white dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" stroke-width="1.5"/>
-          <rect x="10" y="12" width="60" height="20" rx="4" class="fill-blue-50 dark:fill-blue-950/60 stroke-blue-500" stroke-width="1.2"/>
-          <text x="40" y="25" class="fill-blue-700 dark:fill-blue-300 font-sans font-bold text-[8px]" text-anchor="middle">AUTHENTICATOR</text>
+      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Passkeys WebAuthn security diagram">
+        <!-- Client Device / Hardware Authenticator -->
+        <g transform="translate(20, 18)">
+          <rect width="96" height="122" rx="10" class="fill-white dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" stroke-width="2"/>
+          <rect width="96" height="24" rx="10" class="fill-blue-50 dark:fill-blue-950/60 stroke-blue-500" stroke-width="1.5"/>
+          <text x="48" y="16" class="fill-blue-700 dark:fill-blue-300" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">AUTHENTICATOR</text>
           <!-- Secure Enclave Box -->
-          <rect x="10" y="40" width="60" height="38" rx="4" class="fill-slate-50 dark:fill-slate-900 stroke-amber-500" stroke-width="1.2"/>
-          <text x="40" y="54" class="fill-amber-600 dark:fill-amber-400 font-sans font-bold text-[7.5px]" text-anchor="middle">Secure Enclave</text>
-          <text x="40" y="66" class="fill-slate-500 dark:fill-slate-400 font-mono text-[7px]" text-anchor="middle">PrvKey (Ed25519)</text>
+          <rect x="10" y="36" width="76" height="48" rx="6" class="fill-amber-50 dark:fill-amber-950/50 stroke-amber-500" stroke-width="1.5"/>
+          <circle cx="48" cy="52" r="8" class="fill-amber-500/20 stroke-amber-600" stroke-width="1.5"/>
+          <text x="48" y="72" class="fill-amber-800 dark:fill-amber-300" font-family="system-ui, sans-serif" font-weight="700" font-size="8" text-anchor="middle">Secure Enclave</text>
+          <text x="48" y="98" class="fill-slate-600 dark:fill-slate-400" font-family="monospace" font-weight="600" font-size="8" text-anchor="middle">PrvKey (Ed25519)</text>
+          <text x="48" y="112" class="fill-emerald-600 dark:fill-emerald-400" font-family="system-ui, sans-serif" font-weight="700" font-size="8" text-anchor="middle">Biometric Match ✓</text>
         </g>
-        <!-- Signature Handshake Flow -->
-        <g transform="translate(108, 40)">
-          <path d="M 0 10 L 60 10" class="stroke-blue-600 dark:stroke-blue-400" stroke-width="1.5"/>
-          <polygon points="60,10 53,7 53,13" class="fill-blue-600 dark:fill-blue-400"/>
-          <text x="30" y="5" class="fill-slate-600 dark:fill-slate-400 font-mono text-[7px]" text-anchor="middle">1. Challenge</text>
-
-          <path d="M 60 35 L 0 35" class="stroke-emerald-600 dark:stroke-emerald-400" stroke-width="1.5"/>
-          <polygon points="0,35 7,32 7,38" class="fill-emerald-600 dark:fill-emerald-400"/>
-          <text x="30" y="30" class="fill-emerald-700 dark:fill-emerald-400 font-mono text-[7px]" text-anchor="middle">2. Signed AuthData</text>
+        <!-- Handshake Flow Arrows -->
+        <g transform="translate(122, 42)">
+          <path d="M 0 14 L 70 14" class="stroke-blue-600 dark:stroke-blue-400" stroke-width="2"/>
+          <polygon points="70,14 62,10 62,18" class="fill-blue-600 dark:fill-blue-400"/>
+          <text x="35" y="8" class="fill-blue-700 dark:fill-blue-300" font-family="monospace" font-weight="700" font-size="8" text-anchor="middle">1. Challenge</text>
+          
+          <path d="M 70 46 L 0 46" class="stroke-emerald-600 dark:stroke-emerald-400" stroke-width="2"/>
+          <polygon points="0,46 8,42 8,50" class="fill-emerald-600 dark:fill-emerald-400"/>
+          <text x="35" y="40" class="fill-emerald-700 dark:fill-emerald-300" font-family="monospace" font-weight="700" font-size="8" text-anchor="middle">2. Signed Sig</text>
         </g>
         <!-- Relying Party Server -->
-        <g transform="translate(175, 20)">
-          <rect width="80" height="90" rx="8" class="fill-white dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" stroke-width="1.5"/>
-          <rect x="10" y="12" width="60" height="20" rx="4" class="fill-slate-100 dark:fill-slate-700 stroke-slate-400" stroke-width="1.2"/>
-          <text x="40" y="25" class="fill-slate-700 dark:fill-slate-200 font-sans font-bold text-[8px]" text-anchor="middle">RELYING PARTY</text>
-          <!-- Public Key Verification -->
-          <rect x="10" y="40" width="60" height="38" rx="4" class="fill-emerald-50 dark:fill-emerald-950/40 stroke-emerald-500" stroke-width="1.2"/>
-          <text x="40" y="54" class="fill-emerald-700 dark:fill-emerald-300 font-sans font-bold text-[7.5px]" text-anchor="middle">Public Key Registry</text>
-          <text x="40" y="66" class="fill-slate-500 dark:fill-slate-400 font-mono text-[7px]" text-anchor="middle">Verify(Sig, PubKey)</text>
+        <g transform="translate(200, 18)">
+          <rect width="100" height="122" rx="10" class="fill-white dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" stroke-width="2"/>
+          <rect width="100" height="24" rx="10" class="fill-slate-100 dark:fill-slate-700 stroke-slate-400" stroke-width="1.5"/>
+          <text x="50" y="16" class="fill-slate-800 dark:fill-slate-200" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">RELYING PARTY</text>
+          <!-- Public Key Registry -->
+          <rect x="10" y="36" width="80" height="48" rx="6" class="fill-emerald-50 dark:fill-emerald-950/40 stroke-emerald-500" stroke-width="1.5"/>
+          <text x="50" y="54" class="fill-emerald-800 dark:fill-emerald-300" font-family="system-ui, sans-serif" font-weight="700" font-size="8" text-anchor="middle">Public Key Registry</text>
+          <text x="50" y="70" class="fill-slate-600 dark:fill-slate-400" font-family="monospace" font-size="7.5" text-anchor="middle">PubKey (x, y)</text>
+          <!-- Verification Output -->
+          <rect x="10" y="92" width="80" height="20" rx="4" class="fill-emerald-600"/>
+          <text x="50" y="106" fill="#FFFFFF" font-family="system-ui, sans-serif" font-weight="700" font-size="8" text-anchor="middle">Verified Authentic</text>
         </g>
       </svg>
     )}
 
     {/* 3. HTTPS DEEP DIVE (TLS 1.3 1-RTT Handshake Sequence) */}
     {(key.includes('https') || logo === 'shield') && (
-      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="TLS 1.3 Handshake diagram">
+      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="TLS 1.3 Handshake diagram">
         <!-- Client Timeline -->
-        <line x1="50" y1="20" x2="50" y2="115" class="stroke-slate-300 dark:stroke-slate-700" stroke-width="1.5"/>
-        <rect x="25" y="8" width="50" height="20" rx="4" class="fill-white dark:fill-slate-800 stroke-blue-600 dark:stroke-blue-400" stroke-width="1.5"/>
-        <text x="50" y="21" class="fill-blue-700 dark:fill-blue-300 font-sans font-bold text-[8px]" text-anchor="middle">CLIENT</text>
+        <line x1="55" y1="26" x2="55" y2="140" class="stroke-slate-300 dark:stroke-slate-700" stroke-width="2"/>
+        <rect x="25" y="12" width="60" height="24" rx="6" class="fill-white dark:fill-slate-800 stroke-blue-600 dark:stroke-blue-400" stroke-width="2"/>
+        <text x="55" y="28" class="fill-blue-700 dark:fill-blue-300" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">CLIENT</text>
 
         <!-- Server Timeline -->
-        <line x1="230" y1="20" x2="230" y2="115" class="stroke-slate-300 dark:stroke-slate-700" stroke-width="1.5"/>
-        <rect x="205" y="8" width="50" height="20" rx="4" class="fill-white dark:fill-slate-800 stroke-blue-600 dark:stroke-blue-400" stroke-width="1.5"/>
-        <text x="230" y="21" class="fill-blue-700 dark:fill-blue-300 font-sans font-bold text-[8px]" text-anchor="middle">SERVER</text>
+        <line x1="265" y1="26" x2="265" y2="140" class="stroke-slate-300 dark:stroke-slate-700" stroke-width="2"/>
+        <rect x="235" y="12" width="60" height="24" rx="6" class="fill-white dark:fill-slate-800 stroke-blue-600 dark:stroke-blue-400" stroke-width="2"/>
+        <text x="265" y="28" class="fill-blue-700 dark:fill-blue-300" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">SERVER</text>
 
-        <!-- Flow 1: ClientHello (Key Share) -->
-        <line x1="50" y1="42" x2="225" y2="54" class="stroke-blue-600 dark:stroke-blue-400" stroke-width="1.5"/>
-        <polygon points="225,54 218,50 219,57" class="fill-blue-600 dark:fill-blue-400"/>
-        <text x="135" y="44" class="fill-blue-700 dark:fill-blue-300 font-mono text-[7.5px]" text-anchor="middle">ClientHello + KeyShare (ECDH)</text>
+        <!-- Flow 1: ClientHello (ECDH Key Share) -->
+        <line x1="55" y1="52" x2="260" y2="68" class="stroke-blue-600 dark:stroke-blue-400" stroke-width="2"/>
+        <polygon points="260,68 250,63 252,71" class="fill-blue-600 dark:fill-blue-400"/>
+        <rect x="90" y="44" width="140" height="18" rx="4" class="fill-blue-50 dark:fill-blue-950/60 stroke-blue-400" stroke-width="1"/>
+        <text x="160" y="56" class="fill-blue-700 dark:fill-blue-300" font-family="monospace" font-weight="700" font-size="8" text-anchor="middle">ClientHello + KeyShare (X25519)</text>
 
-        <!-- Flow 2: ServerHello + Handshake Finished -->
-        <line x1="230" y1="68" x2="55" y2="80" class="stroke-emerald-600 dark:stroke-emerald-400" stroke-width="1.5"/>
-        <polygon points="55,80 62,84 61,77" class="fill-emerald-600 dark:fill-emerald-400"/>
-        <text x="145" y="70" class="fill-emerald-700 dark:fill-emerald-300 font-mono text-[7.5px]" text-anchor="middle">ServerHello + CertVerify + Finished</text>
+        <!-- Flow 2: ServerHello + CertVerify + Finished -->
+        <line x1="265" y1="84" x2="60" y2="100" class="stroke-emerald-600 dark:stroke-emerald-400" stroke-width="2"/>
+        <polygon points="60,100 70,105 68,97" class="fill-emerald-600 dark:fill-emerald-400"/>
+        <rect x="80" y="78" width="160" height="18" rx="4" class="fill-emerald-50 dark:fill-emerald-950/60 stroke-emerald-400" stroke-width="1"/>
+        <text x="160" y="90" class="fill-emerald-700 dark:fill-emerald-300" font-family="monospace" font-weight="700" font-size="8" text-anchor="middle">ServerHello + CertVerify + Finished</text>
 
-        <!-- Flow 3: Encrypted Application Data (1-RTT) -->
-        <rect x="70" y="94" width="140" height="22" rx="4" class="fill-emerald-50 dark:fill-emerald-950/40 stroke-emerald-600 dark:stroke-emerald-500" stroke-width="1.2"/>
-        <text x="140" y="108" class="fill-emerald-700 dark:fill-emerald-300 font-mono font-bold text-[8px]" text-anchor="middle">Encrypted HTTP/2 Traffic (1-RTT)</text>
+        <!-- Flow 3: 1-RTT Encrypted Session -->
+        <rect x="40" y="118" width="240" height="26" rx="6" class="fill-emerald-600 stroke-emerald-700" stroke-width="1.5"/>
+        <text x="160" y="134" fill="#FFFFFF" font-family="monospace" font-weight="700" font-size="9.5" text-anchor="middle">🔒 Encrypted HTTP/2 Traffic (1-RTT)</text>
       </svg>
     )}
 
     {/* 4. NUCLEAR FUSION (Magnetic Confinement Tokamak Torus Cross-Section) */}
     {(key.includes('fusion') || logo === 'fusion') && (
-      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Tokamak nuclear fusion diagram">
+      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Tokamak nuclear fusion diagram">
         <!-- Central Solenoid Core -->
-        <g transform="translate(125, 15)">
-          <rect width="30" height="100" rx="4" class="fill-slate-200 dark:fill-slate-800 stroke-purple-600 dark:stroke-purple-400" stroke-width="1.5"/>
-          <text x="15" y="55" class="fill-purple-700 dark:fill-purple-300 font-sans font-bold text-[7px]" text-anchor="middle" transform="rotate(-90 15 55)">CENTRAL SOLENOID</text>
+        <g transform="translate(144, 16)">
+          <rect width="32" height="116" rx="6" class="fill-purple-100 dark:fill-purple-950/70 stroke-purple-600 dark:stroke-purple-400" stroke-width="2"/>
+          <text x="16" y="60" class="fill-purple-800 dark:fill-purple-300" font-family="system-ui, sans-serif" font-weight="800" font-size="8" text-anchor="middle" transform="rotate(-90 16 60)">SOLENOID</text>
         </g>
         <!-- Left Vacuum Vessel & Plasma Torus -->
-        <g transform="translate(40, 25)">
-          <ellipse cx="45" cy="40" rx="38" ry="32" class="stroke-slate-300 dark:stroke-slate-600 fill-white dark:fill-slate-900" stroke-width="1.5"/>
+        <g transform="translate(42, 28)">
+          <ellipse cx="50" cy="46" rx="44" ry="36" class="stroke-slate-400 dark:stroke-slate-600 fill-white dark:fill-slate-900" stroke-width="2"/>
           <!-- Toroidal Plasma Zone -->
-          <ellipse cx="45" cy="40" rx="22" ry="18" class="fill-purple-100 dark:fill-purple-950/60 stroke-purple-600 dark:stroke-purple-400" stroke-width="2"/>
-          <circle cx="45" cy="40" r="8" class="fill-purple-600"/>
-          <text x="45" y="86" class="fill-purple-700 dark:fill-purple-300 font-mono text-[7px]" text-anchor="middle">D-T Plasma</text>
+          <ellipse cx="50" cy="46" rx="26" ry="20" class="fill-purple-200/70 dark:fill-purple-900/60 stroke-purple-600 dark:stroke-purple-400" stroke-width="2.5"/>
+          <circle cx="50" cy="46" r="9" class="fill-purple-600"/>
+          <text x="50" y="98" class="fill-purple-700 dark:fill-purple-300" font-family="system-ui, sans-serif" font-weight="700" font-size="8.5" text-anchor="middle">D-T Plasma</text>
         </g>
         <!-- Right Vacuum Vessel & Plasma Torus -->
-        <g transform="translate(165, 25)">
-          <ellipse cx="45" cy="40" rx="38" ry="32" class="stroke-slate-300 dark:stroke-slate-600 fill-white dark:fill-slate-900" stroke-width="1.5"/>
-          <ellipse cx="45" cy="40" rx="22" ry="18" class="fill-purple-100 dark:fill-purple-950/60 stroke-purple-600 dark:stroke-purple-400" stroke-width="2"/>
-          <circle cx="45" cy="40" r="8" class="fill-purple-600"/>
-          <text x="45" y="86" class="fill-purple-700 dark:fill-purple-300 font-mono text-[7px]" text-anchor="middle">150M °C</text>
+        <g transform="translate(186, 28)">
+          <ellipse cx="50" cy="46" rx="44" ry="36" class="stroke-slate-400 dark:stroke-slate-600 fill-white dark:fill-slate-900" stroke-width="2"/>
+          <ellipse cx="50" cy="46" rx="26" ry="20" class="fill-purple-200/70 dark:fill-purple-900/60 stroke-purple-600 dark:stroke-purple-400" stroke-width="2.5"/>
+          <circle cx="50" cy="46" r="9" class="fill-purple-600"/>
+          <text x="50" y="98" class="fill-purple-700 dark:fill-purple-300" font-family="system-ui, sans-serif" font-weight="700" font-size="8.5" text-anchor="middle">150M °C</text>
         </g>
-        <!-- Reaction Equation -->
-        <text x="140" y="122" class="fill-slate-600 dark:fill-slate-300 font-mono font-bold text-[8px]" text-anchor="middle">²H + ³H → ⁴He (3.5 MeV) + n (14.1 MeV)</text>
+        <!-- Nuclear Reaction Equation Banner -->
+        <rect x="30" y="136" width="260" height="20" rx="4" class="fill-slate-100 dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-700" stroke-width="1"/>
+        <text x="160" y="150" class="fill-slate-800 dark:fill-slate-200" font-family="monospace" font-weight="700" font-size="9" text-anchor="middle">²H + ³H → ⁴He (3.5 MeV) + n (14.1 MeV)</text>
       </svg>
     )}
 
     {/* 5. DARK MATTER (Gravitational Lensing & Galactic Rotation Curve) */}
     {(key.includes('dark-matter') || logo === 'atom') && (
-      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Dark matter gravitational lensing diagram">
+      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Dark matter gravitational lensing diagram">
         <!-- Gravitational Lensing System (Left) -->
-        <g transform="translate(20, 15)">
-          <text x="50" y="10" class="fill-slate-700 dark:fill-slate-200 font-sans font-bold text-[8px]" text-anchor="middle">GRAVITATIONAL LENSING</text>
+        <g transform="translate(20, 16)">
+          <text x="60" y="14" class="fill-slate-800 dark:fill-slate-200" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">GRAVITATIONAL LENSING</text>
           <!-- Massive Deflector -->
-          <circle cx="50" cy="55" r="16" class="fill-purple-100 dark:fill-purple-950/70 stroke-purple-600 dark:stroke-purple-400" stroke-width="1.5"/>
-          <circle cx="50" cy="55" r="4" class="fill-purple-600"/>
-          <!-- Einstein Ring Deflection Path -->
-          <path d="M 10 55 Q 50 25 90 55" class="stroke-blue-500" stroke-width="1.2" stroke-dasharray="2 2"/>
-          <path d="M 10 55 Q 50 85 90 55" class="stroke-blue-500" stroke-width="1.2" stroke-dasharray="2 2"/>
-          <ellipse cx="90" cy="40" rx="3" ry="8" class="fill-cyan-500"/>
-          <ellipse cx="90" cy="70" rx="3" ry="8" class="fill-cyan-500"/>
-          <text x="50" y="100" class="fill-slate-500 dark:fill-slate-400 font-mono text-[7px]" text-anchor="middle">Einstein Radius θ_E</text>
+          <circle cx="60" cy="65" r="20" class="fill-purple-100 dark:fill-purple-950/70 stroke-purple-600 dark:stroke-purple-400" stroke-width="2"/>
+          <circle cx="60" cy="65" r="6" class="fill-purple-600"/>
+          <!-- Einstein Ring Deflection Light Arcs -->
+          <path d="M 10 65 Q 60 25 110 65" class="stroke-blue-500" stroke-width="2" stroke-dasharray="3 3"/>
+          <path d="M 10 65 Q 60 105 110 65" class="stroke-blue-500" stroke-width="2" stroke-dasharray="3 3"/>
+          <ellipse cx="110" cy="45" rx="4" ry="10" class="fill-cyan-500"/>
+          <ellipse cx="110" cy="85" rx="4" ry="10" class="fill-cyan-500"/>
+          <text x="60" y="122" class="fill-slate-500 dark:fill-slate-400" font-family="monospace" font-size="8" text-anchor="middle">Einstein Radius θ_E</text>
         </g>
         <!-- Divider -->
-        <line x1="140" y1="20" x2="140" y2="110" class="stroke-slate-200 dark:stroke-slate-700" stroke-width="1"/>
+        <line x1="158" y1="20" x2="158" y2="135" class="stroke-slate-300 dark:stroke-slate-700" stroke-width="1.5"/>
         <!-- Galactic Rotation Curve Plot (Right) -->
-        <g transform="translate(155, 15)">
-          <text x="55" y="10" class="fill-slate-700 dark:fill-slate-200 font-sans font-bold text-[8px]" text-anchor="middle">ROTATION CURVE</text>
+        <g transform="translate(175, 16)">
+          <text x="65" y="14" class="fill-slate-800 dark:fill-slate-200" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">ROTATION CURVE</text>
           <!-- Axes -->
-          <line x1="15" y1="85" x2="105" y2="85" class="stroke-slate-400" stroke-width="1.2"/>
-          <line x1="15" y1="85" x2="15" y2="25" class="stroke-slate-400" stroke-width="1.2"/>
+          <line x1="15" y1="105" x2="125" y2="105" class="stroke-slate-400" stroke-width="1.5"/>
+          <line x1="15" y1="105" x2="15" y2="30" class="stroke-slate-400" stroke-width="1.5"/>
           <!-- Observed Curve (Flat) -->
-          <path d="M 15 80 Q 35 40 100 40" class="stroke-purple-600 dark:stroke-purple-400" stroke-width="2"/>
-          <text x="100" y="35" class="fill-purple-700 dark:fill-purple-300 font-mono font-bold text-[7px]" text-anchor="end">Observed (Flat)</text>
-          <!-- Keplerian Decline (Expected from luminous mass alone) -->
-          <path d="M 15 80 Q 35 45 100 75" class="stroke-slate-400" stroke-width="1.2" stroke-dasharray="3 3"/>
-          <text x="100" y="82" class="fill-slate-500 font-mono text-[6.5px]" text-anchor="end">Keplerian (v ∝ r^-½)</text>
-          <!-- Axis Labels -->
-          <text x="60" y="96" class="fill-slate-500 font-mono text-[6.5px]" text-anchor="middle">Distance r (kpc)</text>
+          <path d="M 15 95 Q 40 45 120 45" class="stroke-purple-600 dark:stroke-purple-400" stroke-width="2.5"/>
+          <text x="120" y="40" class="fill-purple-700 dark:fill-purple-300" font-family="monospace" font-weight="700" font-size="8" text-anchor="end">Observed (Flat)</text>
+          <!-- Keplerian Decline -->
+          <path d="M 15 95 Q 40 55 120 95" class="stroke-slate-400" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <text x="120" y="102" class="fill-slate-500" font-family="monospace" font-size="7.5" text-anchor="end">Keplerian (v ∝ r^-½)</text>
+          <text x="70" y="122" class="fill-slate-500 font-mono" font-size="8" text-anchor="middle">Distance r (kpc) →</text>
         </g>
       </svg>
     )}
 
     {/* 6. READING ALIEN ATMOSPHERES (Exoplanet Transmission Spectroscopy) */}
     {(key.includes('alien') || key.includes('atmosphere') || logo === 'telescope') && (
-      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Transmission spectroscopy diagram">
-        <!-- Stellar Host Disk -->
-        <g transform="translate(20, 20)">
-          <circle cx="45" cy="45" r="38" class="fill-amber-100 dark:fill-amber-950/50 stroke-amber-500" stroke-width="1.5"/>
-          <circle cx="45" cy="45" r="28" class="fill-amber-200/50 dark:fill-amber-900/30"/>
+      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Transmission spectroscopy diagram">
+        <!-- Stellar Host Disk & Transiting Planet -->
+        <g transform="translate(20, 24)">
+          <circle cx="55" cy="55" r="48" class="fill-amber-100 dark:fill-amber-950/60 stroke-amber-500" stroke-width="2"/>
+          <circle cx="55" cy="55" r="36" class="fill-amber-200/60 dark:fill-amber-900/40"/>
           <!-- Transiting Planet with Atmospheric Ring -->
-          <circle cx="75" cy="45" r="14" class="fill-slate-900 stroke-cyan-500" stroke-width="1.5"/>
-          <circle cx="75" cy="45" r="18" class="stroke-cyan-400" stroke-width="1" stroke-dasharray="2 2"/>
-          <text x="45" y="100" class="fill-slate-600 dark:fill-slate-300 font-sans font-bold text-[7.5px]" text-anchor="middle">TRANSIT OCCULTATION</text>
+          <circle cx="92" cy="55" r="18" class="fill-slate-900 stroke-cyan-500" stroke-width="2"/>
+          <circle cx="92" cy="55" r="23" class="stroke-cyan-400" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <text x="55" y="122" class="fill-slate-700 dark:fill-slate-300" font-family="system-ui, sans-serif" font-weight="700" font-size="8.5" text-anchor="middle">TRANSIT OCCULTATION</text>
         </g>
-        <!-- Spectral Absorption Curve (Right) -->
-        <g transform="translate(145, 18)">
-          <rect width="115" height="85" rx="6" class="fill-white dark:fill-slate-800 stroke-slate-200 dark:stroke-slate-700" stroke-width="1.2"/>
-          <text x="57" y="16" class="fill-slate-800 dark:fill-slate-200 font-sans font-bold text-[8px]" text-anchor="middle">TRANSMISSION SPECTRUM</text>
-          <!-- Notches for H2O, CH4, CO2 -->
-          <path d="M 15 45 Q 25 45 32 32 Q 40 60 48 45 Q 60 45 70 28 Q 80 58 90 45 Q 98 45 105 45" class="stroke-cyan-600 dark:stroke-cyan-400" stroke-width="1.8"/>
-          <!-- Molecules -->
-          <text x="32" y="24" class="fill-cyan-700 dark:fill-cyan-300 font-mono text-[7px]" text-anchor="middle">H₂O</text>
-          <text x="70" y="20" class="fill-blue-700 dark:fill-blue-300 font-mono text-[7px]" text-anchor="middle">CH₄</text>
-          <text x="90" y="70" class="fill-purple-700 dark:fill-purple-300 font-mono text-[7px]" text-anchor="middle">CO₂</text>
-          <text x="57.5" y="80" class="fill-slate-400 font-mono text-[6.5px]" text-anchor="middle">Wavelength λ (μm)</text>
+        <!-- Transmission Spectrum Plot -->
+        <g transform="translate(165, 20)">
+          <rect width="135" height="110" rx="8" class="fill-white dark:fill-slate-800 stroke-slate-200 dark:stroke-slate-700" stroke-width="1.5"/>
+          <text x="67" y="18" class="fill-slate-800 dark:fill-slate-200" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">TRANSMISSION SPECTRUM</text>
+          <!-- Spectral Dips for H2O, CH4, CO2 -->
+          <path d="M 15 55 Q 28 55 38 38 Q 48 75 58 55 Q 72 55 85 34 Q 98 72 110 55 Q 120 55 125 55" class="stroke-cyan-600 dark:stroke-cyan-400" stroke-width="2.5"/>
+          <text x="38" y="30" class="fill-cyan-700 dark:fill-cyan-300" font-family="monospace" font-weight="700" font-size="8.5" text-anchor="middle">H₂O</text>
+          <text x="85" y="26" class="fill-blue-700 dark:fill-blue-300" font-family="monospace" font-weight="700" font-size="8.5" text-anchor="middle">CH₄</text>
+          <text x="110" y="85" class="fill-purple-700 dark:fill-purple-300" font-family="monospace" font-weight="700" font-size="8.5" text-anchor="middle">CO₂</text>
+          <text x="67" y="102" class="fill-slate-500 font-mono" font-size="7.5" text-anchor="middle">Wavelength λ (μm) →</text>
         </g>
       </svg>
     )}
 
     {/* 7. HOW WE KNOW WHAT STARS ARE MADE OF (Fraunhofer Lines & Stellar Spectroscopy) */}
     {(key.includes('star') || logo === 'star') && (
-      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Fraunhofer spectroscopy diagram">
+      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Fraunhofer spectroscopy diagram">
         <!-- Light Source -->
-        <g transform="translate(20, 30)">
-          <circle cx="20" cy="30" r="16" class="fill-amber-400 stroke-amber-500" stroke-width="1.5"/>
-          <text x="20" y="58" class="fill-slate-600 dark:fill-slate-400 font-mono text-[7px]" text-anchor="middle">Starlight</text>
+        <g transform="translate(18, 40)">
+          <circle cx="24" cy="35" r="20" class="fill-amber-400 stroke-amber-500" stroke-width="2"/>
+          <text x="24" y="70" class="fill-slate-700 dark:fill-slate-300" font-family="system-ui, sans-serif" font-weight="700" font-size="8" text-anchor="middle">Starlight</text>
         </g>
         <!-- Dispersion Prism -->
-        <g transform="translate(75, 20)">
-          <polygon points="25,5 50,55 0,55" class="fill-blue-50 dark:fill-slate-800 stroke-blue-600 dark:stroke-blue-400" stroke-width="1.5"/>
-          <text x="25" y="70" class="fill-blue-700 dark:fill-blue-300 font-sans font-bold text-[7.5px]" text-anchor="middle">PRISM</text>
+        <g transform="translate(80, 28)">
+          <polygon points="32,6 64,68 0,68" class="fill-blue-50 dark:fill-slate-800 stroke-blue-600 dark:stroke-blue-400" stroke-width="2"/>
+          <text x="32" y="86" class="fill-blue-700 dark:fill-blue-300" font-family="system-ui, sans-serif" font-weight="800" font-size="9" text-anchor="middle">PRISM</text>
         </g>
         <!-- Continuous Spectrum with Absorption Notches -->
-        <g transform="translate(145, 25)">
-          <text x="55" y="10" class="fill-slate-800 dark:fill-slate-200 font-sans font-bold text-[8px]" text-anchor="middle">FRAUNHOFER ABSORPTION LINES</text>
-          <!-- Spectrum Gradient Bar -->
-          <rect x="0" y="20" width="115" height="24" rx="4" class="fill-slate-100 dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" stroke-width="1"/>
-          <!-- Absorption Lines -->
-          <line x1="22" y1="20" x2="22" y2="44" stroke="#DC2626" stroke-width="2"/>
-          <text x="22" y="56" class="fill-slate-600 dark:fill-slate-300 font-mono text-[7px]" text-anchor="middle">Hα (656nm)</text>
-          <line x1="55" y1="20" x2="55" y2="44" stroke="#059669" stroke-width="2"/>
-          <text x="55" y="56" class="fill-slate-600 dark:fill-slate-300 font-mono text-[7px]" text-anchor="middle">Fe (527nm)</text>
-          <line x1="88" y1="20" x2="88" y2="44" stroke="#2563EB" stroke-width="2"/>
-          <text x="88" y="56" class="fill-slate-600 dark:fill-slate-300 font-mono text-[7px]" text-anchor="middle">Hβ (486nm)</text>
+        <g transform="translate(162, 30)">
+          <text x="70" y="14" class="fill-slate-800 dark:fill-slate-200" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">FRAUNHOFER ABSORPTION</text>
+          <!-- Spectrum Bar -->
+          <rect x="0" y="26" width="140" height="30" rx="6" class="fill-slate-100 dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" stroke-width="1.5"/>
+          <!-- Spectral Lines -->
+          <line x1="26" y1="26" x2="26" y2="56" stroke="#DC2626" stroke-width="2.5"/>
+          <text x="26" y="70" class="fill-slate-700 dark:fill-slate-300" font-family="monospace" font-weight="600" font-size="7.5" text-anchor="middle">Hα (656nm)</text>
+          <line x1="68" y1="26" x2="68" y2="56" stroke="#059669" stroke-width="2.5"/>
+          <text x="68" y="70" class="fill-slate-700 dark:fill-slate-300" font-family="monospace" font-weight="600" font-size="7.5" text-anchor="middle">Fe (527nm)</text>
+          <line x1="110" y1="26" x2="110" y2="56" stroke="#2563EB" stroke-width="2.5"/>
+          <text x="110" y="70" class="fill-slate-700 dark:fill-slate-300" font-family="monospace" font-weight="600" font-size="7.5" text-anchor="middle">Hβ (486nm)</text>
         </g>
       </svg>
     )}
 
     {/* 8. HOW LLMS ACTUALLY WORK (Transformer Block & Scaled Dot-Product Attention) */}
     {(key.includes('llm') || logo === 'transformer') && (
-      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Transformer architecture diagram">
-        <!-- SwiGLU FFN -->
-        <g transform="translate(45, 12)">
-          <rect width="190" height="22" rx="4" class="fill-emerald-50 dark:fill-emerald-950/50 stroke-emerald-600 dark:stroke-emerald-400" stroke-width="1.5"/>
-          <text x="95" y="14" class="fill-emerald-700 dark:fill-emerald-300 font-sans font-bold text-[8.5px]" text-anchor="middle">Feed-Forward Network (SwiGLU)</text>
+      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Transformer architecture diagram">
+        <!-- Feed-Forward SwiGLU Network -->
+        <g transform="translate(45, 14)">
+          <rect width="230" height="28" rx="6" class="fill-emerald-50 dark:fill-emerald-950/60 stroke-emerald-600 dark:stroke-emerald-400" stroke-width="2"/>
+          <text x="115" y="18" class="fill-emerald-800 dark:fill-emerald-300" font-family="system-ui, sans-serif" font-weight="700" font-size="10" text-anchor="middle">Feed-Forward Network (SwiGLU)</text>
         </g>
-        <!-- Residual Connector -->
-        <path d="M 35 23 L 25 23 L 25 65 L 35 65" class="stroke-slate-400" stroke-width="1.2" stroke-dasharray="2 2"/>
         <!-- Multi-Head Attention Block -->
-        <g transform="translate(45, 42)">
-          <rect width="190" height="42" rx="4" class="fill-blue-50 dark:fill-blue-950/50 stroke-blue-600 dark:stroke-blue-400" stroke-width="1.5"/>
-          <text x="95" y="15" class="fill-blue-700 dark:fill-blue-300 font-sans font-bold text-[8.5px]" text-anchor="middle">Multi-Head Self-Attention (MHA)</text>
+        <g transform="translate(45, 52)">
+          <rect width="230" height="52" rx="6" class="fill-blue-50 dark:fill-blue-950/60 stroke-blue-600 dark:stroke-blue-400" stroke-width="2"/>
+          <text x="115" y="18" class="fill-blue-800 dark:fill-blue-300" font-family="system-ui, sans-serif" font-weight="700" font-size="10" text-anchor="middle">Multi-Head Self-Attention (MHA)</text>
           <!-- Q, K, V Tensors -->
-          <rect x="25" y="22" width="38" height="14" rx="3" class="fill-white dark:fill-slate-800 stroke-blue-500" stroke-width="1"/>
-          <text x="44" y="32" class="fill-blue-600 dark:fill-blue-400 font-mono font-bold text-[7.5px]" text-anchor="middle">Query Q</text>
-          <rect x="76" y="22" width="38" height="14" rx="3" class="fill-white dark:fill-slate-800 stroke-cyan-500" stroke-width="1"/>
-          <text x="95" y="32" class="fill-cyan-600 dark:fill-cyan-400 font-mono font-bold text-[7.5px]" text-anchor="middle">Key K</text>
-          <rect x="127" y="22" width="38" height="14" rx="3" class="fill-white dark:fill-slate-800 stroke-purple-500" stroke-width="1"/>
-          <text x="146" y="32" class="fill-purple-600 dark:fill-purple-400 font-mono font-bold text-[7.5px]" text-anchor="middle">Value V</text>
+          <rect x="28" y="26" width="50" height="18" rx="4" class="fill-white dark:fill-slate-800 stroke-blue-500" stroke-width="1.5"/>
+          <text x="53" y="39" class="fill-blue-700 dark:fill-blue-300" font-family="monospace" font-weight="700" font-size="9" text-anchor="middle">Query Q</text>
+          
+          <rect x="90" y="26" width="50" height="18" rx="4" class="fill-white dark:fill-slate-800 stroke-cyan-500" stroke-width="1.5"/>
+          <text x="115" y="39" class="fill-cyan-700 dark:fill-cyan-300" font-family="monospace" font-weight="700" font-size="9" text-anchor="middle">Key K</text>
+          
+          <rect x="152" y="26" width="50" height="18" rx="4" class="fill-white dark:fill-slate-800 stroke-purple-500" stroke-width="1.5"/>
+          <text x="177" y="39" class="fill-purple-700 dark:fill-purple-300" font-family="monospace" font-weight="700" font-size="9" text-anchor="middle">Value V</text>
         </g>
-        <!-- Equation -->
-        <text x="140" y="105" class="fill-slate-600 dark:fill-slate-400 font-mono text-[7.5px]" text-anchor="middle">Attention(Q,K,V) = softmax(QKᵀ / √d_k) · V</text>
-        <text x="140" y="120" class="fill-slate-500 dark:fill-slate-500 font-mono text-[7px]" text-anchor="middle">Rotary Positional Embeddings (RoPE) + RMSNorm</text>
+        <!-- Attention Formula -->
+        <rect x="35" y="116" width="250" height="24" rx="6" class="fill-slate-100 dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-700" stroke-width="1.5"/>
+        <text x="160" y="132" class="fill-slate-800 dark:fill-slate-200" font-family="monospace" font-weight="700" font-size="9" text-anchor="middle">Attention(Q,K,V) = softmax(QKᵀ / √d_k) · V</text>
       </svg>
     )}
 
     {/* 9. BUILD YOUR OWN RAG (Two-Stage Hybrid Search & Reranking Architecture) */}
     {key.includes('rag') && (
-      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="RAG pipeline diagram">
-        <!-- User Query -->
-        <g transform="translate(15, 45)">
-          <rect width="50" height="34" rx="5" class="fill-white dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" stroke-width="1.2"/>
-          <text x="25" y="16" class="fill-slate-800 dark:fill-slate-200 font-sans font-bold text-[7.5px]" text-anchor="middle">QUERY</text>
-          <text x="25" y="26" class="fill-slate-500 font-mono text-[6.5px]" text-anchor="middle">Input Text</text>
+      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="RAG pipeline diagram">
+        <!-- Query -->
+        <g transform="translate(15, 52)">
+          <rect width="56" height="42" rx="6" class="fill-white dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" stroke-width="1.5"/>
+          <text x="28" y="20" class="fill-slate-800 dark:fill-slate-200" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">QUERY</text>
+          <text x="28" y="32" class="fill-slate-500" font-family="monospace" font-size="7.5" text-anchor="middle">Vectorize</text>
         </g>
-        <!-- Dense + Sparse Split -->
-        <g transform="translate(85, 20)">
-          <rect width="60" height="36" rx="5" class="fill-blue-50 dark:fill-blue-950/50 stroke-blue-500" stroke-width="1.2"/>
-          <text x="30" y="16" class="fill-blue-700 dark:fill-blue-300 font-sans font-bold text-[7.5px]" text-anchor="middle">Dense Vector</text>
-          <text x="30" y="27" class="fill-slate-500 font-mono text-[6.5px]" text-anchor="middle">Cosine Sim</text>
+        <!-- Split -->
+        <g transform="translate(95, 22)">
+          <rect width="68" height="42" rx="6" class="fill-blue-50 dark:fill-blue-950/60 stroke-blue-500" stroke-width="1.5"/>
+          <text x="34" y="18" class="fill-blue-700 dark:fill-blue-300" font-family="system-ui, sans-serif" font-weight="700" font-size="8.5" text-anchor="middle">Dense Vector</text>
+          <text x="34" y="32" class="fill-slate-500" font-family="monospace" font-size="7.5" text-anchor="middle">Cosine Sim</text>
         </g>
-        <g transform="translate(85, 68)">
-          <rect width="60" height="36" rx="5" class="fill-cyan-50 dark:fill-cyan-950/50 stroke-cyan-500" stroke-width="1.2"/>
-          <text x="30" y="16" class="fill-cyan-700 dark:fill-cyan-300 font-sans font-bold text-[7.5px]" text-anchor="middle">Sparse BM25</text>
-          <text x="30" y="27" class="fill-slate-500 font-mono text-[6.5px]" text-anchor="middle">Lexical Index</text>
+        <g transform="translate(95, 82)">
+          <rect width="68" height="42" rx="6" class="fill-cyan-50 dark:fill-cyan-950/60 stroke-cyan-500" stroke-width="1.5"/>
+          <text x="34" y="18" class="fill-cyan-700 dark:fill-cyan-300" font-family="system-ui, sans-serif" font-weight="700" font-size="8.5" text-anchor="middle">Sparse BM25</text>
+          <text x="34" y="32" class="fill-slate-500" font-family="monospace" font-size="7.5" text-anchor="middle">Lexical Index</text>
         </g>
         <!-- Connectors -->
-        <path d="M 65 62 L 85 38" class="stroke-slate-400" stroke-width="1.2"/>
-        <path d="M 65 62 L 85 86" class="stroke-slate-400" stroke-width="1.2"/>
-        <path d="M 145 38 L 165 62" class="stroke-slate-400" stroke-width="1.2"/>
-        <path d="M 145 86 L 165 62" class="stroke-slate-400" stroke-width="1.2"/>
+        <path d="M 71 73 L 95 43" class="stroke-slate-400" stroke-width="1.5"/>
+        <path d="M 71 73 L 95 103" class="stroke-slate-400" stroke-width="1.5"/>
+        <path d="M 163 43 L 187 73" class="stroke-slate-400" stroke-width="1.5"/>
+        <path d="M 163 103 L 187 73" class="stroke-slate-400" stroke-width="1.5"/>
         <!-- RRF Fusion Core -->
-        <g transform="translate(165, 45)">
-          <rect width="45" height="34" rx="5" class="fill-amber-50 dark:fill-amber-950/50 stroke-amber-500" stroke-width="1.2"/>
-          <text x="22.5" y="16" class="fill-amber-700 dark:fill-amber-300 font-sans font-bold text-[7.5px]" text-anchor="middle">RRF FUSION</text>
-          <text x="22.5" y="26" class="fill-slate-500 font-mono text-[6.5px]" text-anchor="middle">Rank Merge</text>
+        <g transform="translate(187, 52)">
+          <rect width="52" height="42" rx="6" class="fill-amber-50 dark:fill-amber-950/60 stroke-amber-500" stroke-width="1.5"/>
+          <text x="26" y="20" class="fill-amber-800 dark:fill-amber-300" font-family="system-ui, sans-serif" font-weight="700" font-size="8.5" text-anchor="middle">RRF FUSION</text>
+          <text x="26" y="32" class="fill-slate-500" font-family="monospace" font-size="7.5" text-anchor="middle">Rank Merge</text>
         </g>
         <!-- Cross-Encoder Reranker -->
-        <g transform="translate(225, 38)">
-          <rect width="45" height="48" rx="5" class="fill-emerald-50 dark:fill-emerald-950/50 stroke-emerald-600" stroke-width="1.5"/>
-          <text x="22.5" y="20" class="fill-emerald-700 dark:fill-emerald-300 font-sans font-bold text-[7.5px]" text-anchor="middle">RERANK</text>
-          <text x="22.5" y="32" class="fill-emerald-700 dark:fill-emerald-300 font-mono text-[6.5px]" text-anchor="middle">Cross-Enc</text>
+        <g transform="translate(255, 44)">
+          <rect width="52" height="58" rx="6" class="fill-emerald-600 stroke-emerald-700" stroke-width="2"/>
+          <text x="26" y="24" fill="#FFFFFF" font-family="system-ui, sans-serif" font-weight="800" font-size="9" text-anchor="middle">RERANK</text>
+          <text x="26" y="42" fill="#D1FAE5" font-family="monospace" font-weight="700" font-size="8" text-anchor="middle">Cross-Enc</text>
         </g>
       </svg>
     )}
 
     {/* 10. HOW BROWSERS ACTUALLY RENDER A PAGE (Critical Rendering Path) */}
     {(key.includes('browser') || logo === 'browser') && (
-      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Browser rendering pipeline diagram">
+      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Browser rendering pipeline diagram">
         <!-- Step 1: DOM / CSSOM -->
-        <g transform="translate(15, 25)">
-          <rect width="52" height="32" rx="4" class="fill-blue-50 dark:fill-blue-950/50 stroke-blue-500" stroke-width="1.2"/>
-          <text x="26" y="15" class="fill-blue-700 dark:fill-blue-300 font-sans font-bold text-[7.5px]" text-anchor="middle">DOM Tree</text>
-          <text x="26" y="25" class="fill-slate-500 font-mono text-[6.5px]" text-anchor="middle">HTML Parse</text>
+        <g transform="translate(18, 28)">
+          <rect width="60" height="38" rx="6" class="fill-blue-50 dark:fill-blue-950/60 stroke-blue-500" stroke-width="1.5"/>
+          <text x="30" y="18" class="fill-blue-700 dark:fill-blue-300" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">DOM Tree</text>
+          <text x="30" y="30" class="fill-slate-500" font-family="monospace" font-size="7.5" text-anchor="middle">HTML Parse</text>
         </g>
-        <g transform="translate(15, 68)">
-          <rect width="52" height="32" rx="4" class="fill-cyan-50 dark:fill-cyan-950/50 stroke-cyan-500" stroke-width="1.2"/>
-          <text x="26" y="15" class="fill-cyan-700 dark:fill-cyan-300 font-sans font-bold text-[7.5px]" text-anchor="middle">CSSOM</text>
-          <text x="26" y="25" class="fill-slate-500 font-mono text-[6.5px]" text-anchor="middle">Style Rules</text>
+        <g transform="translate(18, 80)">
+          <rect width="60" height="38" rx="6" class="fill-cyan-50 dark:fill-cyan-950/60 stroke-cyan-500" stroke-width="1.5"/>
+          <text x="30" y="18" class="fill-cyan-700 dark:fill-cyan-300" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">CSSOM</text>
+          <text x="30" y="30" class="fill-slate-500" font-family="monospace" font-size="7.5" text-anchor="middle">Style Rules</text>
         </g>
-        <!-- Arrow -->
-        <path d="M 67 41 L 82 58" class="stroke-slate-400" stroke-width="1.2"/>
-        <path d="M 67 84 L 82 68" class="stroke-slate-400" stroke-width="1.2"/>
+        <path d="M 78 47 L 98 72" class="stroke-slate-400" stroke-width="1.5"/>
+        <path d="M 78 99 L 98 74" class="stroke-slate-400" stroke-width="1.5"/>
         <!-- Step 2: Render Tree -->
-        <g transform="translate(82, 45)">
-          <rect width="52" height="36" rx="4" class="fill-white dark:fill-slate-800 stroke-purple-500" stroke-width="1.2"/>
-          <text x="26" y="16" class="fill-purple-700 dark:fill-purple-300 font-sans font-bold text-[7.5px]" text-anchor="middle">RENDER</text>
-          <text x="26" y="27" class="fill-slate-500 font-mono text-[6.5px]" text-anchor="middle">Visual Nodes</text>
+        <g transform="translate(98, 52)">
+          <rect width="60" height="42" rx="6" class="fill-white dark:fill-slate-800 stroke-purple-500" stroke-width="1.5"/>
+          <text x="30" y="18" class="fill-purple-700 dark:fill-purple-300" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">RENDER</text>
+          <text x="30" y="32" class="fill-slate-500" font-family="monospace" font-size="7.5" text-anchor="middle">Visual Nodes</text>
         </g>
-        <line x1="134" y1="63" x2="149" y2="63" class="stroke-slate-400" stroke-width="1.2"/>
+        <line x1="158" y1="73" x2="178" y2="73" class="stroke-slate-400" stroke-width="1.5"/>
         <!-- Step 3: Layout Geometry -->
-        <g transform="translate(149, 45)">
-          <rect width="52" height="36" rx="4" class="fill-white dark:fill-slate-800 stroke-amber-500" stroke-width="1.2"/>
-          <text x="26" y="16" class="fill-amber-700 dark:fill-amber-300 font-sans font-bold text-[7.5px]" text-anchor="middle">LAYOUT</text>
-          <text x="26" y="27" class="fill-slate-500 font-mono text-[6.5px]" text-anchor="middle">Box Metrics</text>
+        <g transform="translate(178, 52)">
+          <rect width="60" height="42" rx="6" class="fill-white dark:fill-slate-800 stroke-amber-500" stroke-width="1.5"/>
+          <text x="30" y="18" class="fill-amber-700 dark:fill-amber-300" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">LAYOUT</text>
+          <text x="30" y="32" class="fill-slate-500" font-family="monospace" font-size="7.5" text-anchor="middle">Box Metrics</text>
         </g>
-        <line x1="201" y1="63" x2="216" y2="63" class="stroke-slate-400" stroke-width="1.2"/>
-        <!-- Step 4: Paint & Composite -->
-        <g transform="translate(216, 45)">
-          <rect width="52" height="36" rx="4" class="fill-emerald-50 dark:fill-emerald-950/50 stroke-emerald-600" stroke-width="1.5"/>
-          <text x="26" y="16" class="fill-emerald-700 dark:fill-emerald-300 font-sans font-bold text-[7.5px]" text-anchor="middle">GPU PAINT</text>
-          <text x="26" y="27" class="fill-emerald-700 dark:fill-emerald-300 font-mono text-[6.5px]" text-anchor="middle">Raster Tiles</text>
+        <line x1="238" y1="73" x2="258" y2="73" class="stroke-slate-400" stroke-width="1.5"/>
+        <!-- Step 4: GPU Paint -->
+        <g transform="translate(258, 52)">
+          <rect width="52" height="42" rx="6" class="fill-emerald-600 stroke-emerald-700" stroke-width="2"/>
+          <text x="26" y="18" fill="#FFFFFF" font-family="system-ui, sans-serif" font-weight="800" font-size="9" text-anchor="middle">PAINT</text>
+          <text x="26" y="32" fill="#D1FAE5" font-family="monospace" font-weight="700" font-size="7.5" text-anchor="middle">GPU Tiles</text>
         </g>
       </svg>
     )}
 
     {/* 11. INSIDE THE MODERN CPU (Superscalar Pipeline & Cache Architecture) */}
     {(key.includes('cpu') || logo === 'cpu') && (
-      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="CPU microarchitecture diagram">
+      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="CPU microarchitecture diagram">
         <!-- Pipeline Stages -->
-        <g transform="translate(25, 20)">
-          <!-- Fetch & Branch -->
-          <rect width="50" height="38" rx="4" class="fill-blue-50 dark:fill-blue-950/50 stroke-blue-500" stroke-width="1.2"/>
-          <text x="25" y="16" class="fill-blue-700 dark:fill-blue-300 font-sans font-bold text-[7.5px]" text-anchor="middle">FETCH</text>
-          <text x="25" y="28" class="fill-slate-500 font-mono text-[6.5px]" text-anchor="middle">Branch Pred</text>
+        <g transform="translate(22, 22)">
+          <!-- Fetch -->
+          <rect width="60" height="44" rx="6" class="fill-blue-50 dark:fill-blue-950/60 stroke-blue-500" stroke-width="1.5"/>
+          <text x="30" y="18" class="fill-blue-700 dark:fill-blue-300" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">FETCH</text>
+          <text x="30" y="32" class="fill-slate-500" font-family="monospace" font-size="7.5" text-anchor="middle">Branch Pred</text>
         </g>
-        <line x1="75" y1="39" x2="88" y2="39" class="stroke-slate-400" stroke-width="1.2"/>
-        <!-- Decode & Rename -->
-        <g transform="translate(88, 20)">
-          <rect width="50" height="38" rx="4" class="fill-white dark:fill-slate-800 stroke-slate-400" stroke-width="1.2"/>
-          <text x="25" y="16" class="fill-slate-700 dark:fill-slate-200 font-sans font-bold text-[7.5px]" text-anchor="middle">DECODE</text>
-          <text x="25" y="28" class="fill-slate-500 font-mono text-[6.5px]" text-anchor="middle">uOp Rename</text>
+        <line x1="82" y1="44" x2="98" y2="44" class="stroke-slate-400" stroke-width="1.5"/>
+        <!-- Decode -->
+        <g transform="translate(98, 22)">
+          <rect width="60" height="44" rx="6" class="fill-white dark:fill-slate-800 stroke-slate-400" stroke-width="1.5"/>
+          <text x="30" y="18" class="fill-slate-800 dark:fill-slate-200" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">DECODE</text>
+          <text x="30" y="32" class="fill-slate-500" font-family="monospace" font-size="7.5" text-anchor="middle">uOp Rename</text>
         </g>
-        <line x1="138" y1="39" x2="151" y2="39" class="stroke-slate-400" stroke-width="1.2"/>
-        <!-- Out of Order Engine -->
-        <g transform="translate(151, 20)">
-          <rect width="50" height="38" rx="4" class="fill-amber-50 dark:fill-amber-950/50 stroke-amber-500" stroke-width="1.2"/>
-          <text x="25" y="16" class="fill-amber-700 dark:fill-amber-300 font-sans font-bold text-[7.5px]" text-anchor="middle">OoO ENGINE</text>
-          <text x="25" y="28" class="fill-slate-500 font-mono text-[6.5px]" text-anchor="middle">ROB Buffer</text>
+        <line x1="158" y1="44" x2="174" y2="44" class="stroke-slate-400" stroke-width="1.5"/>
+        <!-- OoO Engine -->
+        <g transform="translate(174, 22)">
+          <rect width="60" height="44" rx="6" class="fill-amber-50 dark:fill-amber-950/60 stroke-amber-500" stroke-width="1.5"/>
+          <text x="30" y="18" class="fill-amber-700 dark:fill-amber-300" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">OoO ENGINE</text>
+          <text x="30" y="32" class="fill-slate-500" font-family="monospace" font-size="7.5" text-anchor="middle">ROB Buffer</text>
         </g>
-        <line x1="201" y1="39" x2="214" y2="39" class="stroke-slate-400" stroke-width="1.2"/>
-        <!-- Execution Units -->
-        <g transform="translate(214, 20)">
-          <rect width="45" height="38" rx="4" class="fill-emerald-50 dark:fill-emerald-950/50 stroke-emerald-600" stroke-width="1.2"/>
-          <text x="22.5" y="16" class="fill-emerald-700 dark:fill-emerald-300 font-sans font-bold text-[7.5px]" text-anchor="middle">ALU / FPU</text>
-          <text x="22.5" y="28" class="fill-slate-500 font-mono text-[6.5px]" text-anchor="middle">Exec Ports</text>
+        <line x1="234" y1="44" x2="250" y2="44" class="stroke-slate-400" stroke-width="1.5"/>
+        <!-- Exec Ports -->
+        <g transform="translate(250, 22)">
+          <rect width="52" height="44" rx="6" class="fill-emerald-600 stroke-emerald-700" stroke-width="2"/>
+          <text x="26" y="18" fill="#FFFFFF" font-family="system-ui, sans-serif" font-weight="800" font-size="9" text-anchor="middle">ALU/FPU</text>
+          <text x="26" y="32" fill="#D1FAE5" font-family="monospace" font-weight="700" font-size="7.5" text-anchor="middle">Exec Ports</text>
         </g>
-        <!-- Memory Hierarchy Block Below -->
-        <g transform="translate(25, 72)">
-          <rect width="234" height="36" rx="5" class="fill-white dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-700" stroke-width="1.2"/>
-          <text x="35" y="22" class="fill-blue-700 dark:fill-blue-400 font-mono font-bold text-[8px]" text-anchor="middle">L1 (32KB)</text>
-          <line x1="70" y1="8" x2="70" y2="28" class="stroke-slate-200 dark:stroke-slate-700" stroke-width="1"/>
-          <text x="105" y="22" class="fill-cyan-700 dark:fill-cyan-400 font-mono font-bold text-[8px]" text-anchor="middle">L2 (1MB)</text>
-          <line x1="140" y1="8" x2="140" y2="28" class="stroke-slate-200 dark:stroke-slate-700" stroke-width="1"/>
-          <text x="187" y="22" class="fill-purple-700 dark:fill-purple-400 font-mono font-bold text-[8px]" text-anchor="middle">L3 Shared Cache (32MB)</text>
+        <!-- Memory Hierarchy Block -->
+        <g transform="translate(22, 84)">
+          <rect width="280" height="44" rx="8" class="fill-white dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-700" stroke-width="1.5"/>
+          <text x="45" y="26" class="fill-blue-700 dark:fill-blue-400" font-family="monospace" font-weight="700" font-size="9.5" text-anchor="middle">L1 Cache (32KB)</text>
+          <line x1="95" y1="10" x2="95" y2="34" class="stroke-slate-300 dark:stroke-slate-700" stroke-width="1.5"/>
+          <text x="145" y="26" class="fill-cyan-700 dark:fill-cyan-400" font-family="monospace" font-weight="700" font-size="9.5" text-anchor="middle">L2 Cache (1MB)</text>
+          <line x1="195" y1="10" x2="195" y2="34" class="stroke-slate-300 dark:stroke-slate-700" stroke-width="1.5"/>
+          <text x="240" y="26" class="fill-purple-700 dark:fill-purple-400" font-family="monospace" font-weight="700" font-size="9.5" text-anchor="middle">L3 Shared (32MB)</text>
         </g>
       </svg>
     )}
 
     {/* 12. WEBASSEMBLY (Component Model & WASI 0.2 System Interface) */}
     {(key.includes('webassembly') || key.includes('wasm') || logo === 'wasm') && (
-      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="WebAssembly component model diagram">
-        <!-- High-level languages -->
-        <g transform="translate(20, 25)">
-          <rect width="55" height="75" rx="5" class="fill-white dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" stroke-width="1.2"/>
-          <text x="27.5" y="16" class="fill-slate-700 dark:fill-slate-200 font-sans font-bold text-[7.5px]" text-anchor="middle">LANGUAGES</text>
-          <text x="27.5" y="34" class="fill-slate-600 dark:fill-slate-400 font-mono text-[7px]" text-anchor="middle">Rust</text>
-          <text x="27.5" y="48" class="fill-slate-600 dark:fill-slate-400 font-mono text-[7px]" text-anchor="middle">C / C++</text>
-          <text x="27.5" y="62" class="fill-slate-600 dark:fill-slate-400 font-mono text-[7px]" text-anchor="middle">Go / Zig</text>
+      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="WebAssembly component model diagram">
+        <!-- Languages -->
+        <g transform="translate(20, 24)">
+          <rect width="65" height="96" rx="8" class="fill-white dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" stroke-width="1.5"/>
+          <text x="32.5" y="20" class="fill-slate-800 dark:fill-slate-200" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">LANGUAGES</text>
+          <text x="32.5" y="42" class="fill-slate-700 dark:fill-slate-300" font-family="monospace" font-size="8.5" text-anchor="middle">Rust</text>
+          <text x="32.5" y="58" class="fill-slate-700 dark:fill-slate-300" font-family="monospace" font-size="8.5" text-anchor="middle">C / C++</text>
+          <text x="32.5" y="74" class="fill-slate-700 dark:fill-slate-300" font-family="monospace" font-size="8.5" text-anchor="middle">Go / Zig</text>
         </g>
-        <line x1="75" y1="62" x2="95" y2="62" class="stroke-blue-600" stroke-width="1.5"/>
-        <!-- Wasm Bytecode Component -->
-        <g transform="translate(95, 30)">
-          <polygon points="35,5 68,23 68,57 35,75 2,57 2,23" class="fill-indigo-50 dark:fill-indigo-950/60 stroke-indigo-600 dark:stroke-indigo-400" stroke-width="1.8"/>
-          <text x="35" y="44" class="fill-indigo-700 dark:fill-indigo-300 font-mono font-bold text-[10px]" text-anchor="middle">.wasm</text>
+        <line x1="85" y1="72" x2="115" y2="72" class="stroke-blue-600" stroke-width="2"/>
+        <!-- Wasm Bytecode -->
+        <g transform="translate(115, 32)">
+          <polygon points="40,5 78,26 78,64 40,85 2,64 2,26" class="fill-indigo-50 dark:fill-indigo-950/60 stroke-indigo-600 dark:stroke-indigo-400" stroke-width="2.5"/>
+          <text x="40" y="50" class="fill-indigo-700 dark:fill-indigo-300" font-family="monospace" font-weight="800" font-size="12" text-anchor="middle">.wasm</text>
         </g>
-        <line x1="165" y1="62" x2="185" y2="62" class="stroke-blue-600" stroke-width="1.5"/>
+        <line x1="195" y1="72" x2="225" y2="72" class="stroke-blue-600" stroke-width="2"/>
         <!-- WASI 0.2 Host Interface -->
-        <g transform="translate(185, 25)">
-          <rect width="75" height="75" rx="5" class="fill-white dark:fill-slate-800 stroke-blue-600 dark:stroke-blue-400" stroke-width="1.5"/>
-          <rect x="0" y="0" width="75" height="18" rx="5" class="fill-blue-50 dark:fill-blue-950/60 stroke-blue-600 dark:stroke-blue-400" stroke-width="1.5"/>
-          <text x="37.5" y="12" class="fill-blue-700 dark:fill-blue-300 font-sans font-bold text-[8px]" text-anchor="middle">WASI 0.2 RUNTIME</text>
-          <text x="37.5" y="34" class="fill-slate-600 dark:fill-slate-400 font-mono text-[7px]" text-anchor="middle">wasi:clocks</text>
-          <text x="37.5" y="48" class="fill-slate-600 dark:fill-slate-400 font-mono text-[7px]" text-anchor="middle">wasi:http</text>
-          <text x="37.5" y="62" class="fill-slate-600 dark:fill-slate-400 font-mono text-[7px]" text-anchor="middle">wasi:filesystem</text>
+        <g transform="translate(225, 24)">
+          <rect width="80" height="96" rx="8" class="fill-white dark:fill-slate-800 stroke-blue-600 dark:stroke-blue-400" stroke-width="2"/>
+          <rect width="80" height="24" rx="8" class="fill-blue-50 dark:fill-blue-950/60 stroke-blue-600 dark:stroke-blue-400" stroke-width="1.5"/>
+          <text x="40" y="16" class="fill-blue-700 dark:fill-blue-300" font-family="system-ui, sans-serif" font-weight="700" font-size="8.5" text-anchor="middle">WASI 0.2</text>
+          <text x="40" y="44" class="fill-slate-700 dark:fill-slate-300" font-family="monospace" font-size="8" text-anchor="middle">wasi:clocks</text>
+          <text x="40" y="60" class="fill-slate-700 dark:fill-slate-300" font-family="monospace" font-size="8" text-anchor="middle">wasi:http</text>
+          <text x="40" y="76" class="fill-slate-700 dark:fill-slate-300" font-family="monospace" font-size="8" text-anchor="middle">wasi:fs</text>
         </g>
       </svg>
     )}
 
     {/* 13. SELF-HOSTING 101 (Production Topology: Reverse Proxy, Containers, Vault) */}
     {(key.includes('self-hosting') || logo === 'server') && (
-      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Self-hosting infrastructure topology diagram">
-        <!-- Public Ingress -->
-        <g transform="translate(20, 42)">
-          <rect width="55" height="42" rx="5" class="fill-white dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" stroke-width="1.2"/>
-          <text x="27.5" y="18" class="fill-slate-700 dark:fill-slate-200 font-sans font-bold text-[7.5px]" text-anchor="middle">INTERNET</text>
-          <text x="27.5" y="30" class="fill-slate-500 font-mono text-[6.5px]" text-anchor="middle">HTTPS 443</text>
+      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Self-hosting infrastructure topology diagram">
+        <!-- Ingress -->
+        <g transform="translate(20, 50)">
+          <rect width="65" height="48" rx="8" class="fill-white dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" stroke-width="1.5"/>
+          <text x="32.5" y="20" class="fill-slate-800 dark:fill-slate-200" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">INTERNET</text>
+          <text x="32.5" y="34" class="fill-slate-500" font-family="monospace" font-size="8" text-anchor="middle">HTTPS 443</text>
         </g>
-        <line x1="75" y1="63" x2="95" y2="63" class="stroke-blue-600" stroke-width="1.5"/>
-        <!-- Reverse Proxy & TLS Certificate Vault -->
-        <g transform="translate(95, 30)">
-          <rect width="65" height="66" rx="6" class="fill-blue-50 dark:fill-blue-950/60 stroke-blue-600 dark:stroke-blue-400" stroke-width="1.5"/>
-          <text x="32.5" y="18" class="fill-blue-700 dark:fill-blue-300 font-sans font-bold text-[8px]" text-anchor="middle">REVERSE PROXY</text>
-          <text x="32.5" y="30" class="fill-slate-600 dark:fill-slate-400 font-mono text-[7px]" text-anchor="middle">Caddy / Traefik</text>
-          <text x="32.5" y="44" class="fill-emerald-600 dark:fill-emerald-400 font-mono text-[6.5px]" text-anchor="middle">Auto-TLS</text>
-          <text x="32.5" y="56" class="fill-slate-500 font-mono text-[6.5px]" text-anchor="middle">Rate Limiting</text>
+        <line x1="85" y1="74" x2="110" y2="74" class="stroke-blue-600" stroke-width="2"/>
+        <!-- Reverse Proxy & Auto-TLS -->
+        <g transform="translate(110, 32)">
+          <rect width="80" height="84" rx="8" class="fill-blue-50 dark:fill-blue-950/60 stroke-blue-600 dark:stroke-blue-400" stroke-width="2"/>
+          <text x="40" y="22" class="fill-blue-800 dark:fill-blue-300" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="middle">REVERSE PROXY</text>
+          <text x="40" y="38" class="fill-slate-600 dark:fill-slate-400" font-family="monospace" font-size="8" text-anchor="middle">Caddy / Traefik</text>
+          <text x="40" y="54" class="fill-emerald-600 dark:fill-emerald-400" font-family="monospace" font-weight="700" font-size="8" text-anchor="middle">Auto-TLS</text>
+          <text x="40" y="70" class="fill-slate-500" font-family="monospace" font-size="7.5" text-anchor="middle">Rate Limiting</text>
         </g>
-        <line x1="160" y1="63" x2="180" y2="63" class="stroke-blue-600" stroke-width="1.5"/>
-        <!-- Isolated Container Stack & ZFS Backups -->
-        <g transform="translate(180, 20)">
-          <rect width="80" height="86" rx="6" class="fill-white dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" stroke-width="1.2"/>
-          <rect x="8" y="12" width="64" height="20" rx="4" class="fill-slate-50 dark:fill-slate-700 stroke-blue-500" stroke-width="1"/>
-          <text x="40" y="25" class="fill-slate-700 dark:fill-slate-200 font-mono text-[7px]" text-anchor="middle">Docker Compose</text>
-          <rect x="8" y="38" width="64" height="20" rx="4" class="fill-slate-50 dark:fill-slate-700 stroke-emerald-500" stroke-width="1"/>
-          <text x="40" y="51" class="fill-slate-700 dark:fill-slate-200 font-mono text-[7px]" text-anchor="middle">WireGuard VPN</text>
-          <rect x="8" y="64" width="64" height="16" rx="3" class="fill-amber-50 dark:fill-amber-950/40 stroke-amber-500" stroke-width="1"/>
-          <text x="40" y="75" class="fill-amber-700 dark:fill-amber-300 font-mono text-[6.5px]" text-anchor="middle">ZFS Automated Snap</text>
+        <line x1="190" y1="74" x2="215" y2="74" class="stroke-blue-600" stroke-width="2"/>
+        <!-- Container Stack & ZFS Storage -->
+        <g transform="translate(215, 20)">
+          <rect width="90" height="108" rx="8" class="fill-white dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" stroke-width="1.5"/>
+          <rect x="8" y="14" width="74" height="24" rx="4" class="fill-blue-50 dark:fill-slate-700 stroke-blue-500" stroke-width="1"/>
+          <text x="45" y="30" class="fill-slate-800 dark:fill-slate-200" font-family="monospace" font-size="8" text-anchor="middle">Docker Compose</text>
+          
+          <rect x="8" y="44" width="74" height="24" rx="4" class="fill-emerald-50 dark:fill-slate-700 stroke-emerald-500" stroke-width="1"/>
+          <text x="45" y="60" class="fill-slate-800 dark:fill-slate-200" font-family="monospace" font-size="8" text-anchor="middle">WireGuard VPN</text>
+          
+          <rect x="8" y="74" width="74" height="24" rx="4" class="fill-amber-50 dark:fill-amber-950/40 stroke-amber-500" stroke-width="1"/>
+          <text x="45" y="90" class="fill-amber-800 dark:fill-amber-300" font-family="monospace" font-weight="700" font-size="8" text-anchor="middle">ZFS Automated</text>
         </g>
       </svg>
     )}
 
     {/* 14. ZERO-COPY LINUX NETWORKING (io_uring & Direct DMA Memory Architecture) */}
-    {(key.includes('networking') || key.includes('zero-copy')) && (
-      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Zero copy Linux networking architecture diagram">
-        <!-- User Space Box -->
-        <g transform="translate(25, 18)">
-          <rect width="230" height="32" rx="5" class="fill-white dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" stroke-width="1.2"/>
-          <text x="15" y="16" class="fill-slate-500 font-mono text-[6.5px]">USER SPACE</text>
-          <text x="115" y="22" class="fill-blue-700 dark:fill-blue-300 font-sans font-bold text-[8.5px]" text-anchor="middle">Application Process (Zero Context Switches)</text>
+    {(key.includes('networking') || key.includes('zero-copy') || key.includes('uring')) && (
+      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Zero copy Linux networking architecture diagram">
+        <!-- User Space -->
+        <g transform="translate(25, 20)">
+          <rect width="270" height="40" rx="8" class="fill-white dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-600" stroke-width="1.5"/>
+          <text x="135" y="25" class="fill-blue-700 dark:fill-blue-300" font-family="system-ui, sans-serif" font-weight="700" font-size="10" text-anchor="middle">USER SPACE: Application Process (Zero Switches)</text>
         </g>
-        <!-- Kernel Space Box -->
-        <g transform="translate(25, 62)">
-          <rect width="230" height="52" rx="5" class="fill-blue-50/50 dark:fill-blue-950/30 stroke-blue-600 dark:stroke-blue-400" stroke-width="1.5"/>
-          <text x="15" y="14" class="fill-blue-600 dark:fill-blue-400 font-mono text-[6.5px]">KERNEL SPACE</text>
-          <!-- Submission & Completion Rings -->
-          <rect x="15" y="20" width="90" height="22" rx="4" class="fill-white dark:fill-slate-800 stroke-blue-500" stroke-width="1"/>
-          <text x="60" y="34" class="fill-blue-700 dark:fill-blue-300 font-mono text-[7px]" text-anchor="middle">io_uring (SQ / CQ)</text>
-          <!-- DMA NIC Bypass -->
-          <rect x="125" y="20" width="90" height="22" rx="4" class="fill-white dark:fill-slate-800 stroke-emerald-600" stroke-width="1"/>
-          <text x="170" y="34" class="fill-emerald-700 dark:fill-emerald-400 font-mono text-[7px]" text-anchor="middle">Direct DMA (splice)</text>
+        <!-- Kernel Space with io_uring & DMA -->
+        <g transform="translate(25, 75)">
+          <rect width="270" height="65" rx="8" class="fill-blue-50/60 dark:fill-blue-950/40 stroke-blue-600 dark:stroke-blue-400" stroke-width="2"/>
+          <text x="14" y="16" class="fill-blue-700 dark:fill-blue-400" font-family="monospace" font-weight="700" font-size="8">KERNEL SPACE</text>
+          
+          <!-- io_uring Rings -->
+          <rect x="15" y="24" width="110" height="28" rx="6" class="fill-white dark:fill-slate-800 stroke-blue-500" stroke-width="1.5"/>
+          <text x="70" y="42" class="fill-blue-700 dark:fill-blue-300" font-family="monospace" font-weight="700" font-size="9" text-anchor="middle">io_uring (SQ / CQ)</text>
+          
+          <!-- Direct DMA NIC Bypass -->
+          <rect x="145" y="24" width="110" height="28" rx="6" class="fill-emerald-600 stroke-emerald-700" stroke-width="1.5"/>
+          <text x="200" y="42" fill="#FFFFFF" font-family="monospace" font-weight="700" font-size="9" text-anchor="middle">Direct DMA (splice)</text>
         </g>
       </svg>
     )}
 
     {/* 15. TRAINING VS INFERENCE ECONOMICS (Compute Cost Crossover Curves) */}
     {(key.includes('economics') || key.includes('training') || key.includes('inference') || logo === 'chart') && (
-      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="AI training vs inference economics plot">
-        <!-- Coordinate Axes -->
-        <g transform="translate(45, 15)">
-          <line x1="0" y1="85" x2="190" y2="85" class="stroke-slate-400" stroke-width="1.2"/>
-          <line x1="0" y1="85" x2="0" y2="10" class="stroke-slate-400" stroke-width="1.2"/>
+      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="AI training vs inference economics plot">
+        <g transform="translate(45, 18)">
+          <!-- Coordinate Axes -->
+          <line x1="0" y1="110" x2="230" y2="110" class="stroke-slate-400" stroke-width="1.5"/>
+          <line x1="0" y1="110" x2="0" y2="12" class="stroke-slate-400" stroke-width="1.5"/>
           
           <!-- Fixed Training CAPEX (Horizontal Line) -->
-          <line x1="0" y1="45" x2="190" y2="45" stroke="#D97706" stroke-width="2" stroke-dasharray="4 2"/>
-          <text x="185" y="40" fill="#D97706" class="font-sans font-bold text-[7.5px]" text-anchor="end">Training CAPEX (Fixed Cost)</text>
+          <line x1="0" y1="55" x2="230" y2="55" stroke="#D97706" stroke-width="2.5" stroke-dasharray="5 3"/>
+          <text x="225" y="48" fill="#D97706" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="end">Training CAPEX (Fixed Cost)</text>
 
           <!-- Inference Cumulative Cost (Exponential Curve) -->
-          <path d="M 0 85 Q 90 80 170 12" stroke="#2563EB" stroke-width="2.2" fill="none"/>
-          <text x="170" y="8" class="fill-blue-600 dark:fill-blue-400 font-sans font-bold text-[7.5px]" text-anchor="end">Inference OPEX (Tokens Served)</text>
+          <path d="M 0 110 Q 110 105 210 16" stroke="#2563EB" stroke-width="3" fill="none"/>
+          <text x="210" y="12" class="fill-blue-600 dark:fill-blue-400" font-family="system-ui, sans-serif" font-weight="700" font-size="9" text-anchor="end">Inference OPEX (Tokens)</text>
 
           <!-- Crossover ROI Dot -->
-          <circle cx="118" cy="45" r="4.5" class="fill-blue-600 stroke-white" stroke-width="1.5"/>
-          <text x="118" y="60" class="fill-slate-700 dark:fill-slate-300 font-mono font-bold text-[7px]" text-anchor="middle">Crossover Point</text>
+          <circle cx="145" cy="55" r="5.5" class="fill-blue-600 stroke-white" stroke-width="2"/>
+          <rect x="105" y="66" width="80" height="18" rx="4" class="fill-slate-900 text-white"/>
+          <text x="145" y="78" fill="#FFFFFF" font-family="monospace" font-weight="700" font-size="8" text-anchor="middle">Crossover ROI</text>
 
           <!-- Axis Labels -->
-          <text x="95" y="98" class="fill-slate-500 font-mono text-[7px]" text-anchor="middle">Cumulative Query Volume →</text>
+          <text x="115" y="126" class="fill-slate-500" font-family="monospace" font-size="8" text-anchor="middle">Cumulative Query Volume →</text>
         </g>
       </svg>
     )}
 
     {/* 16. BENCHMARKS & EVALS (Evaluation Radar & Validation Matrix) */}
     {(key.includes('benchmark') || key.includes('eval') || logo === 'clipboard') && (
-      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="AI evaluation benchmarks matrix">
-        <g transform="translate(30, 15)">
-          <rect width="220" height="95" rx="6" class="fill-white dark:fill-slate-800 stroke-slate-200 dark:stroke-slate-700" stroke-width="1.2"/>
+      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="AI evaluation benchmarks matrix">
+        <g transform="translate(30, 16)">
+          <rect width="260" height="125" rx="8" class="fill-white dark:fill-slate-800 stroke-slate-200 dark:stroke-slate-700" stroke-width="1.5"/>
           <!-- Header -->
-          <rect x="0" y="0" width="220" height="20" rx="6" class="fill-slate-50 dark:fill-slate-900 stroke-slate-200 dark:stroke-slate-700" stroke-width="1.2"/>
-          <text x="110" y="14" class="fill-slate-800 dark:fill-slate-200 font-sans font-bold text-[8px]" text-anchor="middle">FRONTIER MODEL EVALUATION BENCHMARKS</text>
+          <rect x="0" y="0" width="260" height="26" rx="8" class="fill-slate-50 dark:fill-slate-900 stroke-slate-200 dark:stroke-slate-700" stroke-width="1.5"/>
+          <text x="130" y="18" class="fill-slate-800 dark:fill-slate-200" font-family="system-ui, sans-serif" font-weight="700" font-size="9.5" text-anchor="middle">FRONTIER MODEL EVALUATION BENCHMARKS</text>
           
           <!-- Metric 1: MMLU-Pro -->
-          <g transform="translate(15, 30)">
-            <text x="0" y="10" class="fill-slate-600 dark:fill-slate-300 font-mono text-[7.5px]">MMLU-Pro (Reasoning)</text>
-            <rect x="110" y="3" width="75" height="7" rx="3.5" class="fill-slate-100 dark:fill-slate-700"/>
-            <rect x="110" y="3" width="68" height="7" rx="3.5" class="fill-blue-600"/>
-            <text x="190" y="10" class="fill-blue-700 dark:fill-blue-300 font-mono font-bold text-[7px]">91%</text>
+          <g transform="translate(20, 38)">
+            <text x="0" y="12" class="fill-slate-700 dark:fill-slate-300" font-family="monospace" font-size="8.5">MMLU-Pro (Reasoning)</text>
+            <rect x="130" y="4" width="90" height="10" rx="5" class="fill-slate-100 dark:fill-slate-700"/>
+            <rect x="130" y="4" width="82" height="10" rx="5" class="fill-blue-600"/>
+            <text x="226" y="12" class="fill-blue-700 dark:fill-blue-300" font-family="monospace" font-weight="700" font-size="8.5">91%</text>
           </g>
 
           <!-- Metric 2: GSM8K -->
-          <g transform="translate(15, 50)">
-            <text x="0" y="10" class="fill-slate-600 dark:fill-slate-300 font-mono text-[7.5px]">GSM8K (Multi-Step Math)</text>
-            <rect x="110" y="3" width="75" height="7" rx="3.5" class="fill-slate-100 dark:fill-slate-700"/>
-            <rect x="110" y="3" width="63" height="7" rx="3.5" class="fill-cyan-600"/>
-            <text x="190" y="10" class="fill-cyan-700 dark:fill-cyan-300 font-mono font-bold text-[7px]">84%</text>
+          <g transform="translate(20, 64)">
+            <text x="0" y="12" class="fill-slate-700 dark:fill-slate-300" font-family="monospace" font-size="8.5">GSM8K (Math Steps)</text>
+            <rect x="130" y="4" width="90" height="10" rx="5" class="fill-slate-100 dark:fill-slate-700"/>
+            <rect x="130" y="4" width="76" height="10" rx="5" class="fill-cyan-600"/>
+            <text x="226" y="12" class="fill-cyan-700 dark:fill-cyan-300" font-family="monospace" font-weight="700" font-size="8.5">84%</text>
           </g>
 
           <!-- Metric 3: HumanEval -->
-          <g transform="translate(15, 70)">
-            <text x="0" y="10" class="fill-slate-600 dark:fill-slate-300 font-mono text-[7.5px]">HumanEval (Code Gen)</text>
-            <rect x="110" y="3" width="75" height="7" rx="3.5" class="fill-slate-100 dark:fill-slate-700"/>
-            <rect x="110" y="3" width="71" height="7" rx="3.5" class="fill-emerald-600"/>
-            <text x="190" y="10" class="fill-emerald-700 dark:fill-emerald-300 font-mono font-bold text-[7px]">95%</text>
+          <g transform="translate(20, 90)">
+            <text x="0" y="12" class="fill-slate-700 dark:fill-slate-300" font-family="monospace" font-size="8.5">HumanEval (Code)</text>
+            <rect x="130" y="4" width="90" height="10" rx="5" class="fill-slate-100 dark:fill-slate-700"/>
+            <rect x="130" y="4" width="86" height="10" rx="5" class="fill-emerald-600"/>
+            <text x="226" y="12" class="fill-emerald-700 dark:fill-emerald-300" font-family="monospace" font-weight="700" font-size="8.5">95%</text>
           </g>
         </g>
       </svg>
@@ -561,28 +588,28 @@ const uid = key.replace(/[^a-z0-9]/g, '-') || 'default';
        key.includes('cpu') || logo === 'cpu' ||
        key.includes('webassembly') || key.includes('wasm') || logo === 'wasm' ||
        key.includes('self-hosting') || logo === 'server' ||
-       key.includes('networking') || key.includes('zero-copy') ||
+       key.includes('networking') || key.includes('zero-copy') || key.includes('uring') ||
        key.includes('economics') || key.includes('training') || key.includes('inference') || logo === 'chart' ||
        key.includes('benchmark') || key.includes('eval') || logo === 'clipboard') && (
-      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="CURION scientific matrix diagram">
-        <g transform="translate(50, 20)">
+      <svg class="w-full h-full max-h-full max-w-full" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="CURION scientific matrix diagram">
+        <g transform="translate(50, 25)">
           <!-- Knowledge Nodes -->
-          <circle cx="30" cy="30" r="14" class="fill-blue-50 dark:fill-blue-950/50 stroke-blue-600" stroke-width="1.5"/>
-          <text x="30" y="33" class="fill-blue-700 dark:fill-blue-300 font-mono font-bold text-[8px]" text-anchor="middle">01</text>
+          <circle cx="40" cy="40" r="18" class="fill-blue-50 dark:fill-blue-950/60 stroke-blue-600" stroke-width="2"/>
+          <text x="40" y="44" class="fill-blue-700 dark:fill-blue-300" font-family="monospace" font-weight="800" font-size="10" text-anchor="middle">01</text>
 
-          <circle cx="90" cy="20" r="14" class="fill-cyan-50 dark:fill-cyan-950/50 stroke-cyan-600" stroke-width="1.5"/>
-          <text x="90" y="23" class="fill-cyan-700 dark:fill-cyan-300 font-mono font-bold text-[8px]" text-anchor="middle">02</text>
+          <circle cx="110" cy="25" r="18" class="fill-cyan-50 dark:fill-cyan-950/60 stroke-cyan-600" stroke-width="2"/>
+          <text x="110" y="29" class="fill-cyan-700 dark:fill-cyan-300" font-family="monospace" font-weight="800" font-size="10" text-anchor="middle">02</text>
 
-          <circle cx="150" cy="40" r="14" class="fill-purple-50 dark:fill-purple-950/50 stroke-purple-600" stroke-width="1.5"/>
-          <text x="150" y="43" class="fill-purple-700 dark:fill-purple-300 font-mono font-bold text-[8px]" text-anchor="middle">03</text>
+          <circle cx="180" cy="50" r="18" class="fill-purple-50 dark:fill-purple-950/60 stroke-purple-600" stroke-width="2"/>
+          <text x="180" y="54" class="fill-purple-700 dark:fill-purple-300" font-family="monospace" font-weight="800" font-size="10" text-anchor="middle">03</text>
 
           <!-- Interconnect Edges -->
-          <line x1="44" y1="28" x2="76" y2="23" class="stroke-slate-300 dark:stroke-slate-600" stroke-width="1.2"/>
-          <line x1="104" y1="25" x2="136" y2="35" class="stroke-slate-300 dark:stroke-slate-600" stroke-width="1.2"/>
+          <line x1="58" y1="36" x2="92" y2="29" class="stroke-slate-400" stroke-width="2"/>
+          <line x1="128" y1="32" x2="162" y2="44" class="stroke-slate-400" stroke-width="2"/>
 
           <!-- Label -->
-          <text x="90" y="75" class="fill-slate-700 dark:fill-slate-300 font-sans font-bold text-[8px]" text-anchor="middle">CURION KNOWLEDGE DISCOVERY</text>
-          <text x="90" y="87" class="fill-slate-500 font-mono text-[7px]" text-anchor="middle">Grounded • Peer-Reviewed • Verifiable</text>
+          <text x="110" y="94" class="fill-slate-800 dark:fill-slate-200" font-family="system-ui, sans-serif" font-weight="800" font-size="10" text-anchor="middle">CURION KNOWLEDGE DISCOVERY</text>
+          <text x="110" y="108" class="fill-slate-500" font-family="monospace" font-size="8" text-anchor="middle">Grounded • Peer-Reviewed • Verifiable</text>
         </g>
       </svg>
     )}

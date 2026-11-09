@@ -65,8 +65,8 @@ const resolvedCanonical = canonical || `${siteUrl}/articles/${Astro.params.slug 
 
 <Base title={title} description={description} canonical={resolvedCanonical} ogImage={ogImage} author={author} publishedTime={publishedTime} modifiedTime={updatedTime}>
   <div class="container-wide py-10 lg:py-16">
-    <article class="max-w-full">
-      <header class="article-header mb-10 max-w-4xl mx-auto">
+    <article class="max-w-5xl mx-auto">
+      <header class="article-header mb-8">
         <div class="header-meta flex items-center gap-3 flex-wrap mb-4">
           {logo && <ArticleLogo logo={logo} category={categoryVariant} size="sm" />}
           <span class={`badge badge--${categoryVariant}`}>{category}</span>
@@ -102,11 +102,11 @@ const resolvedCanonical = canonical || `${siteUrl}/articles/${Astro.params.slug 
       </header>
 
       <!-- Prominent High-Contrast Scientific Vector Illustration Hero Banner -->
-      <div class="article-hero-visual relative h-60 sm:h-80 w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-xs dark:bg-slate-900/60 dark:border-slate-800 my-8 flex items-center justify-center p-4">
+      <div class="article-hero-visual relative h-64 sm:h-80 lg:h-96 w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 shadow-xs dark:bg-slate-900/60 dark:border-slate-800 my-8 flex items-center justify-center p-4 sm:p-6">
         <ArticleVisual slug={slug} category={categoryVariant} logo={logo} />
       </div>
 
-      <div class="article-layout grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12 max-w-full items-start">
+      <div class="article-layout grid grid-cols-1 lg:grid-cols-[260px_1fr] xl:grid-cols-[280px_1fr] gap-10 lg:gap-12 max-w-full items-start">
         <!-- Sidebar: TOC + Share + Author -->
         <aside class="toc-sidebar sticky top-24 space-y-8 hidden lg:block">
           <nav class="toc" aria-label="Table of Contents">
