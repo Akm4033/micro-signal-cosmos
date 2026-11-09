@@ -1,15 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const siteUrl = 'https://microsignalcosmos.com';
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const newsletterUrl = `${siteUrl}/newsletter/`;
 ---
 
 <Base
-  title="The Weekly Signal: Engineering & Systems Newsletter | Micro Signal Cosmos"
+  title="CURION Briefings: Systems & AI Newsletter | CURION"
   description="Weekly technical deep dives into browser internals, LLM architectures, distributed databases, and astrophysics. Free, zero tracking, unsubscribe anytime."
   canonical={newsletterUrl}
-  ogImage="/og/homepage.svg"
+  ogImage="/favicon.svg"
 >
   <main id="main-content" class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800">
     <div class="container-narrow">

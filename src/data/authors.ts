@@ -13,13 +13,13 @@ export interface Author {
 export const authors: Record<string, Author> = {
   'editorial-desk': {
     key: 'editorial-desk',
-    name: 'Micro Signal Cosmos',
+    name: 'CURION',
     role: 'Editorial & Research Desk',
-    bio: 'Independent technical publication exploring systems infrastructure, AI/ML architectures, and observational astrophysics through rigorous research and reproducible code.',
+    bio: 'Independent technical knowledge platform exploring systems infrastructure, AI/ML architectures, and observational astrophysics through rigorous research and reproducible code.',
     avatar: '/favicon.svg',
     color: '#1d4ed8',
     bgColor: 'bg-blue-100 dark:bg-blue-900/30',
-    initials: 'MSC',
+    initials: 'CU',
     links: {
       github: 'https://github.com/Akm4033/micro-signal-cosmos',
       about: '/about/',
@@ -27,13 +27,13 @@ export const authors: Record<string, Author> = {
   },
   marina: {
     key: 'marina',
-    name: 'Micro Signal Cosmos',
+    name: 'CURION',
     role: 'Systems & Infrastructure',
     bio: 'Technical investigations into browser engines, CPU architecture, WebAssembly, networking, TLS 1.3, and production database internals.',
     avatar: '/favicon.svg',
     color: '#1d4ed8',
     bgColor: 'bg-blue-100 dark:bg-blue-900/30',
-    initials: 'MSC',
+    initials: 'CU',
     links: {
       github: 'https://github.com/Akm4033/micro-signal-cosmos',
       about: '/about/',
@@ -41,13 +41,13 @@ export const authors: Record<string, Author> = {
   },
   kai: {
     key: 'kai',
-    name: 'Micro Signal Cosmos',
+    name: 'CURION',
     role: 'AI & Machine Learning',
     bio: 'Algorithmic explorations into transformer architectures, inference economics, RAG systems, and evaluation benchmarks.',
     avatar: '/favicon.svg',
     color: '#059669',
     bgColor: 'bg-emerald-100 dark:bg-emerald-900/30',
-    initials: 'MSC',
+    initials: 'CU',
     links: {
       github: 'https://github.com/Akm4033/micro-signal-cosmos',
       about: '/about/',
@@ -55,13 +55,13 @@ export const authors: Record<string, Author> = {
   },
   arun: {
     key: 'arun',
-    name: 'Micro Signal Cosmos',
+    name: 'CURION',
     role: 'Science & Physics',
     bio: 'Rigorous deep dives into observational astrophysics, stellar spectroscopy, exoplanet atmospheres, and nuclear fusion.',
     avatar: '/favicon.svg',
     color: '#7c3aed',
     bgColor: 'bg-purple-100 dark:bg-purple-900/30',
-    initials: 'MSC',
+    initials: 'CU',
     links: {
       github: 'https://github.com/Akm4033/micro-signal-cosmos',
       about: '/about/',

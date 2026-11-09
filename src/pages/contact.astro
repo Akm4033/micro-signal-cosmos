@@ -4,13 +4,13 @@ import Base from '../layouts/Base.astro';
 const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY || process.env.PUBLIC_WEB3FORMS_KEY || '';
 const isFormLive = Boolean(web3formsKey && web3formsKey.trim().length > 0);
 
-const siteUrl = 'https://microsignalcosmos.com';
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const contactUrl = `${siteUrl}/contact/`;
 ---
 
 <Base
-  title="Contact & Corrections | Micro Signal Cosmos"
-  description="Get in touch with the Micro Signal Cosmos team for article feedback, technical errata, rapid corrections, or collaboration inquiries."
+  title="Contact Desk | CURION"
+  description="Get in touch with the CURION research team for article feedback, technical errata, rapid corrections, or collaboration inquiries."
   canonical={contactUrl}
 >
   <main id="main-content" class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800">

@@ -102,7 +102,7 @@ const resolvedCanonical = canonical || `${siteUrl}/articles/${Astro.params.slug 
       </header>
 
       <!-- Prominent 3D Interactive Topic Visual Hero Banner (Visible when viewing article) -->
-      <div class="article-hero-visual relative h-52 sm:h-72 w-full overflow-hidden rounded-2xl border border-neutral-200/90 border-b-4 border-b-neutral-300/80 bg-neutral-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)] dark:bg-neutral-900 dark:border-neutral-800 dark:border-b-neutral-700 my-8">
+      <div class="article-hero-visual relative h-56 sm:h-80 w-full overflow-hidden rounded-2xl border border-neutral-200/90 border-b-4 border-b-neutral-300/80 bg-gradient-to-br from-slate-50 via-slate-100/70 to-blue-50/30 shadow-[0_4px_24px_rgba(0,0,0,0.08)] dark:bg-[#070b14] dark:border-neutral-800 dark:border-b-neutral-700 my-8 flex items-center justify-center p-4">
         <ArticleVisual slug={slug} category={categoryVariant} logo={logo} />
       </div>
 

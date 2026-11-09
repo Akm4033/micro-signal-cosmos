@@ -1,13 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const siteUrl = 'https://microsignalcosmos.com';
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const pageUrl = `${siteUrl}/terms/`;
 ---
 
 <Base
-  title="Terms of Use | Micro Signal Cosmos"
-  description="Terms of Use for Micro Signal Cosmos. Transparent guidance on reading, code reproduction, citations, and content usage."
+  title="Terms of Use | CURION"
+  description="Terms of Use for CURION. Transparent guidance on reading, code reproduction, citations, and content usage."
   canonical={pageUrl}
 >
   <main id="main-content" class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800">

@@ -16,12 +16,12 @@ const categoryCounts = publishedArticles.reduce<Record<string, number>>((acc, ar
   return acc;
 }, {});
 
-const siteUrl = 'https://microsignalcosmos.com';
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const archiveUrl = `${siteUrl}/articles/`;
 ---
 
 <Base
-  title="Explore All Articles | Micro Signal Cosmos"
+  title="Explore All Articles | CURION"
   description="Explore our complete editorial catalog of technology, science, artificial intelligence, and developer tools. Filter by topic or search our published archives."
   canonical={archiveUrl}
 >
@@ -190,11 +190,11 @@ const archiveUrl = `${siteUrl}/articles/`;
                 class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_18px_36px_-6px_rgba(29,78,216,0.14),0_6px_16px_-2px_rgba(0,0,0,0.06)] hover:-translate-y-1.5 hover:border-brand-primary/40 hover:border-b-brand-primary/70 transition-all duration-300 dark:bg-neutral-900 dark:border-neutral-800 dark:border-b-neutral-700"
               >
                 <div>
-                  <div class={`relative h-32 sm:h-34 w-full shrink-0 overflow-hidden flex items-center justify-center transition-colors ${
-                    categorySlug.includes('tech') ? 'bg-gradient-to-br from-sky-50 via-sky-100/60 to-blue-50 border-b border-sky-100 dark:from-sky-950/40 dark:via-sky-900/30 dark:to-neutral-900 dark:border-sky-900/50' :
-                    categorySlug.includes('art') || categorySlug.includes('ai') ? 'bg-gradient-to-br from-emerald-50 via-emerald-100/60 to-teal-50 border-b border-emerald-100 dark:from-emerald-950/40 dark:via-emerald-900/30 dark:to-neutral-900 dark:border-emerald-900/50' :
-                    categorySlug.includes('sci') ? 'bg-gradient-to-br from-violet-50 via-purple-100/60 to-indigo-50 border-b border-violet-100 dark:from-violet-950/40 dark:via-violet-900/30 dark:to-neutral-900 dark:border-violet-900/50' :
-                    'bg-gradient-to-br from-amber-50 via-amber-100/60 to-orange-50 border-b border-amber-100 dark:from-amber-950/40 dark:via-amber-900/30 dark:to-neutral-900 dark:border-amber-900/50'
+                  <div class={`relative h-36 sm:h-40 w-full shrink-0 overflow-hidden flex items-center justify-center transition-colors border-b ${
+                    categorySlug.includes('tech') ? 'bg-gradient-to-br from-sky-50 via-blue-50/70 to-slate-100 border-sky-100 dark:bg-[#070c18] dark:border-sky-950' :
+                    categorySlug.includes('art') || categorySlug.includes('ai') ? 'bg-gradient-to-br from-emerald-50 via-teal-50/70 to-slate-100 border-emerald-100 dark:bg-[#061210] dark:border-emerald-950' :
+                    categorySlug.includes('sci') ? 'bg-gradient-to-br from-violet-50 via-purple-50/70 to-slate-100 border-violet-100 dark:bg-[#0e0a1a] dark:border-purple-950' :
+                    'bg-gradient-to-br from-amber-50 via-orange-50/70 to-slate-100 border-amber-100 dark:bg-[#140e06] dark:border-amber-950'
                   }`}>
                     <!-- Dynamic 2D/3D Interactive Graphic (Moves & Tilts on Card Hover) -->
                     <ArticleVisual slug={slug} category={categorySlug} logo={article.data.logo || categorySlug} />

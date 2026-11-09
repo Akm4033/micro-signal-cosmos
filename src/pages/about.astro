@@ -1,20 +1,31 @@
 ---
 import Base from '../layouts/Base.astro';
+
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
+const canonicalUrl = `${siteUrl}/about/`;
 ---
 
-<Base title="About Micro Signal Cosmos" description="Who runs this, how articles are made, and how the business works." canonical="https://microsignalcosmos.com/about/">
+<Base
+  title="About CURION — Understand the world. Explore beyond it."
+  description="Who runs CURION, how knowledge guides are researched and verified, and our transparent editorial methodology."
+  canonical={canonicalUrl}
+>
   <div class="container-narrow py-12 sm:py-16">
     <header class="mb-12">
-      <h1 class="text-display font-extrabold tracking-tight text-text-primary">About Micro Signal Cosmos</h1>
-      <p class="mt-4 text-lead text-text-secondary">Independent technical publication exploring systems engineering, AI/ML, and astrophysics through deep-dive guides and reproducible architectures.</p>
+      <div class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3.5 py-1 text-xs font-bold tracking-widest text-brand-primary uppercase shadow-2xs dark:border-neutral-700 dark:bg-neutral-900/50 mb-3">
+        <span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span>
+        <span>Mission & Methodology</span>
+      </div>
+      <h1 class="text-display font-extrabold tracking-tight text-text-primary">About CURION</h1>
+      <p class="mt-4 text-lead text-text-secondary">An AI-powered global knowledge discovery and learning platform exploring systems engineering, AI/ML foundations, and observational astrophysics through deep-dive guides and reproducible architectures.</p>
     </header>
 
     <section class="mb-16">
-      <h2 class="text-h2 font-bold text-text-primary mb-6">Who Runs This</h2>
+      <h2 class="text-h2 font-bold text-text-primary mb-6">Our Mission</h2>
       <div class="prose-editorial max-w-none">
-        <p><strong>Micro Signal Cosmos is a solo project</strong> — one person using AI research and drafting tools to explore, draft, and structure technical articles, then verifying and editing everything before publishing.</p>
-        <p>I don't claim decades of hyperscale engineering experience. I'm someone who enjoys learning complex technical topics deeply and wanted to create the kind of resource I wish existed when I was learning: thorough, well-sourced, practical explanations of complex systems — browser internals, LLM architectures, database internals, fusion physics, and more.</p>
-        <p>Every article is researched using primary sources (papers, RFCs, official docs, source code), drafted with AI assistance, then verified by me: code is executed, math is checked, configs are tested. If I can't verify it, it doesn't publish.</p>
+        <p><strong>CURION exists to help curious minds understand how the world works — and explore beyond it.</strong></p>
+        <p>We believe that true mastery comes from first-principles comprehension: peeling back layers of abstraction to reveal the actual mechanical, algorithmic, and physical laws governing complex systems. Whether it is decoding the inner loops of Blink render trees, calculating the parameter costs of transformer attention heads, or measuring stellar atmospheres across light years, CURION is dedicated to clarity, rigor, and depth.</p>
+        <p>Every guide published on CURION is researched using primary sources (RFCs, peer-reviewed arXiv papers, official language specifications, and open-source implementations). Code is executed locally, equations are mathematically verified, and configurations are tested before publication.</p>
       </div>
     </section>
 
@@ -26,131 +37,62 @@ import Base from '../layouts/Base.astro';
             <tr class="border-b-2 border-neutral-200 dark:border-neutral-700">
               <th class="text-left p-3 font-semibold">Step</th>
               <th class="text-left p-3 font-semibold">Process</th>
-              <th class="text-left p-3 font-semibold">Tools</th>
+              <th class="text-left p-3 font-semibold">Tools &amp; Sources</th>
             </tr>
           </thead>
           <tbody>
             <tr class="border-b border-neutral-100 dark:border-neutral-800">
               <td class="p-3 font-medium">Topic Selection</td>
-              <td class="p-3">Chosen based on reader questions, architecture gaps, and emerging technologies</td>
-              <td class="p-3">Editorial judgment</td>
+              <td class="p-3">Chosen based on foundational importance, architecture gaps, and emerging technological shifts</td>
+              <td class="p-3">Editorial research &amp; reader inquiries</td>
             </tr>
             <tr class="border-b border-neutral-100 dark:border-neutral-800">
-              <td class="p-3 font-medium">Research</td>
-              <td class="p-3">Primary sources: arXiv, official docs, source code, GitHub issues, RFCs</td>
-              <td class="p-3">Academic databases, RFC specifications, source repositories</td>
+              <td class="p-3 font-medium">Primary Research</td>
+              <td class="p-3">Primary sources: arXiv, W3C/IETF RFCs, Linux manpages, upstream Git repositories</td>
+              <td class="p-3">Academic databases, RFC specifications, source trees</td>
             </tr>
             <tr class="border-b border-neutral-100 dark:border-neutral-800">
-              <td class="p-3 font-medium">Drafting</td>
-              <td class="p-3">Structured outline &rarr; AI-assisted drafting with research assistance &rarr; human verification &amp; editing</td>
-              <td class="p-3">AI research assistance + manual verification</td>
+              <td class="p-3 font-medium">Drafting &amp; Synthesis</td>
+              <td class="p-3">Structured architectural outline &rarr; AI-assisted research drafting &rarr; human engineering review</td>
+              <td class="p-3">AI research assistance + manual editorial craftsmanship</td>
             </tr>
             <tr class="border-b border-neutral-100 dark:border-neutral-800">
               <td class="p-3 font-medium">Verification</td>
-              <td class="p-3">Run ALL code, check ALL math, validate ALL configs, test commands</td>
-              <td class="p-3">Local execution, compiler explorer, test suites</td>
+              <td class="p-3">Run ALL code locally, check ALL math equations, validate configs, benchmark commands</td>
+              <td class="p-3">Local Linux testbeds, compiler explorer, test suites</td>
             </tr>
             <tr class="border-b border-neutral-100 dark:border-neutral-800">
-              <td class="p-3 font-medium">Editing</td>
-              <td class="p-3">Structure, clarity, tone, formatting, citation formatting</td>
-              <td class="p-3">Manual review and editorial style guides</td>
+              <td class="p-3 font-medium">Diagrams &amp; Visuals</td>
+              <td class="p-3">Author custom high-contrast 2D/3D technical isometric illustrations</td>
+              <td class="p-3">Vector SVG graphic system &amp; component architecture</td>
             </tr>
             <tr class="border-b border-neutral-100 dark:border-neutral-800">
-              <td class="p-3 font-medium">Fact-Check</td>
-              <td class="p-3">Every claim traced to primary source (linked in article)</td>
-              <td class="p-3">Manual verification against sources</td>
-            </tr>
-            <tr>
-              <td class="p-3 font-medium">Publish</td>
-              <td class="p-3">Astro build &rarr; Cloudflare Pages deploy</td>
-              <td class="p-3">Git push &rarr; auto-deploy</td>
+              <td class="p-3 font-medium">Fact-Checking</td>
+              <td class="p-3">Every technical claim traced to a primary paper or official specification</td>
+              <td class="p-3">Direct paper and specification cross-citations</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="prose-editorial max-w-none mt-6">
-        <p><strong>Quality gate:</strong> Every article is verified by a human before publication. Code is executed, math is checked, configurations are tested. AI assists with research and drafting; human verifies everything. If I can't verify it, it doesn't publish.</p>
-      </div>
     </section>
 
     <section class="mb-16">
-      <h2 class="text-h2 font-bold text-text-primary mb-6">Content Philosophy</h2>
+      <h2 class="text-h2 font-bold text-text-primary mb-6">Editorial Independence &amp; Trust</h2>
       <div class="prose-editorial max-w-none">
-        <h3 class="text-h3 font-bold mb-3">What you'll find here:</h3>
-        <ul>
-          <li><strong>Primary sources</strong> — every claim links to a paper, spec, doc, or repo</li>
-          <li><strong>Runnable code</strong> — snippets you can copy-paste and execute</li>
-          <li><strong>Decision frameworks</strong> — not "use X," but "choose X when Y, Z when W"</li>
-          <li><strong>No fluff</strong> — if a section doesn't teach, it's cut</li>
-        </ul>
-        <h3 class="text-h3 font-bold mt-6 mb-3">What you won't find:</h3>
-        <ul>
-          <li>Press release rewrites</li>
-          <li>"Top 10" lists without technical depth</li>
-          <li>Opinion pieces disguised as analysis</li>
-          <li>Content I haven't verified</li>
-        </ul>
+        <p><strong>Zero sponsored influence:</strong> CURION maintains strict editorial independence. Technical recommendations are based solely on empirical benchmarks, developer ergonomics, and system reliability.</p>
+        <p><strong>Affiliate transparency:</strong> If a tool link carries an affiliate relationship, it is clearly noted, and we only link tools we actively deploy and stand behind in production.</p>
       </div>
     </section>
 
     <section class="mb-16">
-      <h2 class="text-h2 font-bold text-text-primary mb-6">Categories</h2>
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-900/50"><h3 class="font-bold text-text-primary mb-2">Technology</h3><p class="text-text-secondary">Browser internals, CPU architecture, WebAssembly, networking, systems</p></div>
-        <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-900/50"><h3 class="font-bold text-text-primary mb-2">AI &amp; ML</h3><p class="text-text-secondary">LLM training/inference, RAG, evaluation, tooling, workflows</p></div>
-        <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-900/50"><h3 class="font-bold text-text-primary mb-2">Science</h3><p class="text-text-secondary">Astrophysics, fusion, particle physics, scientific method</p></div>
-        <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-900/50"><h3 class="font-bold text-text-primary mb-2">Developer Tools</h3><p class="text-text-secondary">Databases, caching, search, observability, self-hosting, CLI</p></div>
-      </div>
-    </section>
-
-    <!-- Editorial Focus Areas Section -->
-    <section class="mb-16">
-      <h2 class="text-h2 font-bold text-text-primary mb-6">Editorial Focus Areas</h2>
-      <p class="text-text-secondary mb-6">Articles are organized through three editorial focus areas, each representing a domain for consistent depth and perspective.</p>
-      <div class="grid gap-6 md:grid-cols-3">
-        <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-900/50">
-          <h3 class="font-bold text-text-primary mb-2">Systems &amp; Infrastructure</h3>
-          <p class="text-text-secondary">Browser internals, CPU architecture, WebAssembly, networking, TLS/PKI, self-hosted infrastructure.</p>
-        </div>
-        <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-900/50">
-          <h3 class="font-bold text-text-primary mb-2">AI &amp; Machine Learning</h3>
-          <p class="text-text-secondary">LLM training/inference economics, RAG systems, model evaluation, transformer architecture, AI tooling.</p>
-        </div>
-        <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-900/50">
-          <h3 class="font-bold text-text-primary mb-2">Science &amp; Physics</h3>
-          <p class="text-text-secondary">Stellar spectroscopy, exoplanet atmospheres, dark matter, nuclear fusion, observational cosmology.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="mb-16">
-      <h2 class="text-h2 font-bold text-text-primary mb-6">Business Model</h2>
+      <h2 class="text-h2 font-bold text-text-primary mb-6">Newsletter: CURION Briefings</h2>
       <div class="prose-editorial max-w-none">
-        <p>I'm transparent because hidden incentives erode trust.</p>
-        <table class="w-full border-collapse mb-6">
-          <thead><tr class="border-b-2 border-neutral-200 dark:border-neutral-700"><th class="text-left p-3 font-semibold">Revenue Stream</th><th class="text-left p-3 font-semibold">Status</th><th class="text-left p-3 font-semibold">How It Works</th></tr></thead>
-          <tbody>
-            <tr class="border-b border-neutral-100 dark:border-neutral-800"><td class="p-3 font-medium">Display ads</td><td class="p-3">Inactive by default</td><td class="p-3">Configurable placement containers designed without layout shifts</td></tr>
-            <tr class="border-b border-neutral-100 dark:border-neutral-800"><td class="p-3 font-medium">Affiliate links</td><td class="p-3">Active</td><td class="p-3">Hosting, cloud, databases, security tools. Only products I use. Marked with ★</td></tr>
-            <tr class="border-b border-neutral-100 dark:border-neutral-800"><td class="p-3 font-medium">Digital products</td><td class="p-3">Building</td><td class="p-3">Technical guides, checklists, reference templates, code repositories</td></tr>
-            <tr class="border-b border-neutral-100 dark:border-neutral-800"><td class="p-3 font-medium">Newsletter sponsorships</td><td class="p-3">Planned</td><td class="p-3">Relevant technical tools aligned with audience interests</td></tr>
-            <tr><td class="p-3 font-medium">Courses/cohorts</td><td class="p-3">Future</td><td class="p-3">Deep-dive technical workshops</td></tr>
-          </tbody>
-        </table>
-        <p><strong>Affiliate rule:</strong> I only link products I've personally used in production or tested extensively. If I wouldn't recommend it to a colleague, it's not linked.</p>
-        <p><strong>No sponsored content</strong> — if a sponsor ever collaborates on placement, it is prominently labeled and never influences technical accuracy.</p>
-      </div>
-    </section>
-
-    <section class="mb-16">
-      <h2 class="text-h2 font-bold text-text-primary mb-6">Newsletter: The Weekly Signal</h2>
-      <div class="prose-editorial max-w-none">
-        <p><strong>Free, weekly, no spam.</strong></p>
+        <p><strong>Free, weekly, zero spam.</strong></p>
         <ul>
-          <li>3–5 technical articles worth your time</li>
-          <li>One technical concept explained simply</li>
-          <li>One tool or workflow I'm using in production</li>
-          <li>Zero tracking pixels, zero third-party data sharing</li>
+          <li>In-depth technical analyses across systems, AI, and astrophysics</li>
+          <li>One core system or quantum mechanism explained from first principles</li>
+          <li>Curated architecture blueprints and diagrams</li>
+          <li>Zero tracking pixels, 1-click unsubscribe anytime</li>
         </ul>
       </div>
     </section>
@@ -158,25 +100,12 @@ import Base from '../layouts/Base.astro';
     <section class="mb-16">
       <h2 class="text-h2 font-bold text-text-primary mb-6">Corrections &amp; Feedback</h2>
       <div class="prose-editorial max-w-none">
-        <p><strong>If I got something wrong, tell me.</strong></p>
+        <p><strong>If you find a technical inaccuracy, please let us know.</strong></p>
         <ul>
-          <li>Contact Form: <a href="/contact/" class="text-brand-primary underline">Contact Desk</a></li>
-          <li>Email: <a href="mailto:admin@microsignalcosmos.com" class="text-brand-primary underline">admin@microsignalcosmos.com</a></li>
+          <li>Contact Form: <a href="/contact/" class="text-brand-primary underline">CURION Contact Desk</a></li>
           <li>GitHub Issues: <a href="https://github.com/Akm4033/micro-signal-cosmos/issues" class="text-brand-primary underline" target="_blank" rel="noopener noreferrer">github.com/Akm4033/micro-signal-cosmos/issues</a></li>
-          <li>Response time: Usually within 24 to 48 hours</li>
         </ul>
-        <p>Corrections are transparently appended to articles with timestamps and precise errata notes. No silent edits.</p>
-      </div>
-    </section>
-
-    <section>
-      <h2 class="text-h2 font-bold text-text-primary mb-6">Contact</h2>
-      <div class="prose-editorial max-w-none">
-        <ul>
-          <li>Inquiries: <a href="/contact/" class="text-brand-primary underline">Contact Form</a></li>
-          <li>Direct Email: <a href="mailto:admin@microsignalcosmos.com" class="text-brand-primary underline">admin@microsignalcosmos.com</a></li>
-          <li>GitHub: <a href="https://github.com/Akm4033/micro-signal-cosmos" class="text-brand-primary underline" target="_blank" rel="noopener noreferrer">github.com/Akm4033/micro-signal-cosmos</a></li>
-        </ul>
+        <p>Technical errata and verified corrections are transparently appended to articles with timestamps.</p>
       </div>
     </section>
   </div>

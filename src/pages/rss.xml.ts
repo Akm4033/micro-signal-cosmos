@@ -38,8 +38,8 @@ export const GET: APIRoute = async (context) => {
   const rssContent = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title><![CDATA[Micro Signal Cosmos]]></title>
-    <description><![CDATA[Discover More. Understand Better. Exploring modern technology, scientific research, artificial intelligence, and the digital universe.]]></description>
+    <title><![CDATA[CURION]]></title>
+    <description><![CDATA[Understand the world. Explore beyond it. CURION is an AI-powered global knowledge discovery and learning platform.]]></description>
     <link>${channelLink}</link>
     <language>en-US</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>

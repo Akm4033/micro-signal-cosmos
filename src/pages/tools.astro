@@ -1,8 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
+
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
+const canonicalUrl = `${siteUrl}/tools/`;
 ---
 
-<Base title="Tools & Resources I Use" description="The software, services, and hardware I use to build Micro Signal Cosmos. Affiliate links marked ★ — I only recommend what I use." canonical="https://microsignalcosmos.com/tools/">
+<Base title="Tools & Resources | CURION" description="The software, services, and infrastructure powering the CURION knowledge platform." canonical={canonicalUrl}>
   <div class="container-narrow py-12 sm:py-16">
     <header class="mb-12">
       <h1 class="text-display font-extrabold tracking-tight text-text-primary">Tools &amp; Resources</h1>

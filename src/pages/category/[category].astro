@@ -41,12 +41,12 @@ const categoriesWithArticles = CATEGORIES.filter((c) => {
   });
 });
 
-const siteUrl = 'https://microsignalcosmos.com';
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const categoryUrl = `${siteUrl}/category/${category.slug}/`;
 ---
 
 <Base
-  title={`${category.name} | Micro Signal Cosmos`}
+  title={`${category.name} | CURION`}
   description={category.description}
   canonical={categoryUrl}
   ogImage={`/og/category-${category.slug}.svg`}

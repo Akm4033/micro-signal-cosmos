@@ -159,12 +159,23 @@
   }
 
   /* 3D Floating Tile for Badges and Logos */
-  .tile-3d {
+  .tile-3d, .tile-curion {
     @apply relative rounded-2xl bg-white
            shadow-[0_4px_12px_rgba(0,0,0,0.06),0_1px_2px_rgba(0,0,0,0.04)]
            border border-neutral-200/90 border-b-2 border-b-neutral-300/80
            transition-all duration-300
            dark:bg-neutral-800 dark:border-neutral-700 dark:border-b-neutral-600;
+  }
+
+  /* CURION Standardized Card Container */
+  .card-curion {
+    @apply rounded-2xl bg-white
+           border border-neutral-200/90 border-b-2 border-b-neutral-300/80
+           shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)]
+           hover:shadow-[0_18px_36px_-6px_rgba(29,78,216,0.14),0_6px_16px_-2px_rgba(29,78,216,0.06)]
+           hover:-translate-y-1 hover:border-brand-primary/40 hover:border-b-brand-primary/70
+           transition-all duration-300
+           dark:bg-neutral-900 dark:border-neutral-800 dark:border-b-neutral-700;
   }
 
   /* Section Badge (inline) */
@@ -183,29 +194,29 @@
   .badge--devtools { @apply bg-amber-600/10 text-amber-600 border-amber-600/30; }
 
   /* Physical 3D Push-Buttons */
-  .btn-primary, .btn-3d-primary {
+  .btn-primary, .btn-3d-primary, .btn-curion-primary {
     @apply inline-flex items-center justify-center gap-2 rounded-xl
            bg-gradient-to-b from-blue-600 to-brand-primary
-           px-6 py-3 text-sm font-bold text-white
+           px-6 py-3 min-h-[44px] text-sm font-bold text-white
            shadow-[0_4px_0_0_#1e40af,0_8px_16px_-2px_rgba(29,78,216,0.35)]
            hover:shadow-[0_5px_0_0_#1e40af,0_12px_20px_-2px_rgba(29,78,216,0.45)]
            hover:-translate-y-0.5
            active:shadow-[0_1px_0_0_#1e40af,0_2px_4px_rgba(0,0,0,0.2)]
            active:translate-y-1
            focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2
-           transition-all;
+           transition-all cursor-pointer;
   }
-  .btn-secondary, .btn-3d-secondary {
+  .btn-secondary, .btn-3d-secondary, .btn-curion-secondary {
     @apply inline-flex items-center justify-center gap-2 rounded-xl
            border border-neutral-300 border-b-2 border-b-neutral-400/90 bg-white
-           px-6 py-3 text-sm font-semibold text-text-primary
+           px-6 py-3 min-h-[44px] text-sm font-semibold text-text-primary
            shadow-[0_2px_4px_rgba(0,0,0,0.03)]
            hover:border-brand-primary/60 hover:border-b-brand-primary hover:text-brand-primary
            hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:-translate-y-0.5
            active:translate-y-1 active:border-b-neutral-300
            dark:border-neutral-700 dark:border-b-neutral-600 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800
            focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2
-           transition-all;
+           transition-all cursor-pointer;
   }
 
   /* Input */

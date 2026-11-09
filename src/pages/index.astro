@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import ArticleCard from '../components/ui/ArticleCard.astro';
-import ArticleLogo from '../components/ui/ArticleLogo.astro';
 import ArticleVisual from '../components/ui/ArticleVisual.astro';
 import NewsletterHero from '../components/newsletter/NewsletterHero.astro';
 import NewsletterExitIntent from '../components/newsletter/NewsletterExitIntent.astro';
@@ -14,134 +13,135 @@ const sortedArticles = [...articles].sort(
 const latestArticles = sortedArticles.slice(0, 6);
 ---
 
-<Base title="Micro Signal Cosmos | Discover More. Understand Better." description="Explore the world of technology, science, artificial intelligence and innovation through insightful articles, practical guides and ideas that shape our future." ogImage="/og/homepage.svg">
+<Base
+  title="CURION — Understand the world. Explore beyond it."
+  description="An AI-powered global knowledge discovery and learning platform exploring systems engineering, AI/ML foundations, astrophysics, and developer infrastructure."
+  ogImage="/favicon.svg"
+>
   <!-- HERO SECTION -->
-  <section class="relative isolate overflow-hidden bg-white border-b border-neutral-200 py-10 sm:py-14 lg:py-16 dark:border-neutral-800">
-    <div class="pointer-events-none absolute inset-0 -z-10 opacity-30" aria-hidden="true">
-      <div class="absolute inset-0 bg-[radial-gradient(#CBD5E1_1px,transparent_1px)] [background-size:28px_28px] dark:opacity-10"></div>
+  <section class="relative isolate overflow-hidden bg-white border-b border-neutral-200/90 py-12 sm:py-16 lg:py-20 dark:bg-[#070b14] dark:border-neutral-800">
+    <div class="pointer-events-none absolute inset-0 -z-10 opacity-30 dark:opacity-20" aria-hidden="true">
+      <div class="absolute inset-0 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:28px_28px]"></div>
     </div>
-    <div class="container-wide grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
+    <div class="container-wide grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
       <!-- Hero Content (7 cols) -->
       <div class="lg:col-span-7 min-w-0 max-w-2xl">
-        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3.5 py-1 text-xs font-bold tracking-widest text-brand-primary uppercase shadow-2xs dark:border-neutral-700 dark:bg-neutral-900/50">
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3.5 py-1 text-xs font-bold tracking-widest text-brand-primary uppercase shadow-2xs dark:border-neutral-700 dark:bg-neutral-900/60">
           <span class="h-2 w-2 rounded-full bg-brand-primary animate-pulse"></span>
-          <span>MICRO SIGNAL COSMOS</span>
+          <span>CURION — KNOWLEDGE PLATFORM</span>
         </div>
-        <h1 class="text-3xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight text-[#0f172a] leading-[1.12]">Explore Ideas.<span class="block text-brand-primary">Discover Possibilities.</span></h1>
-        <p class="mt-3 text-base sm:text-lg font-bold text-slate-600 tracking-wide">Discover More. Understand Better.</p>
-        <p class="mt-4 text-sm sm:text-base leading-relaxed text-[#1e293b]">Explore the world of technology, science, artificial intelligence and innovation through insightful articles, practical guides and ideas that shape our future.</p>
         
-        <!-- CTA Buttons with 3D Depth & Ergonomics -->
-        <div class="mt-6 mb-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-          <a
-            href="/articles/"
-            class="btn-3d-primary w-full sm:w-auto"
-          >
-            <span>Explore Articles</span>
-            <span aria-hidden="true">&rarr;</span>
-          </a>
-          <a
-            href="#categories"
-            class="btn-3d-secondary w-full sm:w-auto"
-          >
-            <span>Browse Topics</span>
-          </a>
-        </div>
+        <h1 class="text-3xl sm:text-5xl lg:text-[54px] font-black tracking-tight text-neutral-900 dark:text-white leading-[1.12]">
+          Understand the world. <span class="block text-brand-primary">Explore beyond it.</span>
+        </h1>
+        
+        <p class="mt-4 text-sm sm:text-base leading-relaxed text-neutral-600 dark:text-neutral-300">
+          An AI-powered global knowledge discovery and learning platform exploring systems engineering, AI/ML foundations, observational astrophysics, and developer infrastructure through rigorous, verifiable technical analysis.
+        </p>
 
-        <!-- Active Streams (Horizontally scrollable on mobile, no-scrollbar, consistent pill padding) -->
-        <div class="pt-5 border-t border-neutral-200 flex items-center gap-2.5 overflow-x-auto no-scrollbar flex-nowrap pb-1 dark:border-neutral-700">
-          <span class="shrink-0 text-xs font-extrabold uppercase tracking-wider text-[#0f172a] mr-1">Active Streams:</span>
-          <a href="/category/technology/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100 hover:border-sky-300 transition-all shadow-2xs">Technology</a>
-          <a href="/category/science/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-violet-50 text-violet-700 border border-violet-200 hover:bg-violet-100 hover:border-violet-300 transition-all shadow-2xs">Science</a>
-          <a href="/category/artificial-intelligence/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 hover:border-emerald-300 transition-all shadow-2xs">AI &amp; ML</a>
-          <a href="/category/developer-tools/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100 hover:border-amber-300 transition-all shadow-2xs">Developer Tools</a>
+        <!-- Search Bar Entry Point -->
+        <form action="/articles/" method="get" class="mt-6 max-w-xl">
+          <div class="relative flex items-center">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-text-muted">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
+            <input
+              type="text"
+              name="q"
+              placeholder="Search 16 guides, RFCs, and concepts..."
+              aria-label="Search CURION knowledge archives"
+              class="w-full h-12 rounded-xl border border-neutral-300 bg-neutral-50 pl-11 pr-24 text-xs sm:text-sm text-neutral-900 placeholder-neutral-400 focus:border-brand-primary focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-primary/20 dark:border-neutral-700 dark:bg-neutral-800/80 dark:text-white dark:placeholder-neutral-500 transition-all shadow-xs"
+            />
+            <button
+              type="submit"
+              class="absolute right-1.5 h-9 px-4 rounded-lg bg-brand-primary text-xs font-bold text-white hover:bg-blue-700 transition-colors cursor-pointer"
+            >
+              Explore
+            </button>
+          </div>
+        </form>
+
+        <!-- Suggested Topic Keywords -->
+        <div class="mt-3 flex flex-wrap items-center gap-1.5 text-xs text-text-muted">
+          <span class="font-semibold text-neutral-500 dark:text-neutral-400 text-[11px]">Popular:</span>
+          <a href="/articles/?q=transformers" class="hover:text-brand-primary underline underline-offset-2">Transformers</a>
+          <span>&bull;</span>
+          <a href="/articles/?q=database" class="hover:text-brand-primary underline underline-offset-2">Databases</a>
+          <span>&bull;</span>
+          <a href="/articles/?q=fusion" class="hover:text-brand-primary underline underline-offset-2">Fusion</a>
+          <span>&bull;</span>
+          <a href="/articles/?q=passkeys" class="hover:text-brand-primary underline underline-offset-2">Passkeys</a>
+          <span>&bull;</span>
+          <a href="/articles/?q=webassembly" class="hover:text-brand-primary underline underline-offset-2">WASM</a>
+        </div>
+        
+        <!-- Active Knowledge Streams -->
+        <div class="mt-6 pt-5 border-t border-neutral-200/80 flex items-center gap-2 overflow-x-auto no-scrollbar flex-nowrap pb-1 dark:border-neutral-800">
+          <span class="shrink-0 text-xs font-extrabold uppercase tracking-wider text-neutral-800 dark:text-neutral-200 mr-1">Streams:</span>
+          <a href="/category/technology/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100 dark:bg-sky-950/40 dark:text-sky-300 dark:border-sky-800 transition-all">Technology</a>
+          <a href="/category/artificial-intelligence/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800 transition-all">AI &amp; ML</a>
+          <a href="/category/science/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-violet-50 text-violet-700 border border-violet-200 hover:bg-violet-100 dark:bg-violet-950/40 dark:text-violet-300 dark:border-violet-800 transition-all">Science</a>
+          <a href="/category/developer-tools/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800 transition-all">Dev Tools</a>
         </div>
       </div>
 
-      <!-- Editorial Showcase (5 cols) - Compact & 3D Tactile (Fit-to-Screen) -->
+      <!-- Lead Hero Showcase Card -->
       <div class="lg:col-span-5 min-w-0 w-full flex justify-center lg:justify-end">
-        <article class="group relative w-full max-w-[390px] rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_18px_36px_-6px_rgba(29,78,216,0.14),0_6px_16px_-2px_rgba(0,0,0,0.06)] hover:-translate-y-1.5 hover:border-brand-primary/40 hover:border-b-brand-primary/70 transition-all duration-300 overflow-hidden flex flex-col dark:bg-neutral-900 dark:border-neutral-800 dark:border-b-neutral-700">
-          <!-- Card Header / Eyebrow -->
+        <article class="group relative w-full max-w-[400px] rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white shadow-[0_4px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_40px_-10px_rgba(29,78,216,0.18)] hover:-translate-y-1.5 hover:border-brand-primary/50 hover:border-b-brand-primary/80 transition-all duration-300 overflow-hidden flex flex-col dark:bg-neutral-900 dark:border-neutral-800 dark:border-b-neutral-700">
+          <!-- Card Header -->
           <div class="flex items-center justify-between px-4 py-2.5 bg-neutral-50 border-b border-neutral-100 text-xs dark:bg-neutral-850 dark:border-neutral-800">
             <div class="flex items-center gap-2 font-bold tracking-wider uppercase text-neutral-700 text-[11px] dark:text-neutral-300">
               <span class="h-2 w-2 rounded-full bg-brand-primary animate-pulse"></span>
-              <span>Featured Guide</span>
+              <span>CURION Showcase</span>
             </div>
             <span class="inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-0.5 text-[11px] font-semibold text-neutral-600 border border-neutral-200 shadow-2xs dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-              <span>14 min read</span>
+              14 min read
             </span>
           </div>
 
-          <!-- Card Visual Anchor (Compact, Strict Overflow Containment, 3D Tile) -->
+          <!-- Card 3D Visual -->
           <a
             href="/articles/how-llms-actually-work/"
-            class="block relative w-full h-34 sm:h-36 overflow-hidden bg-gradient-to-br from-sky-50 via-emerald-50/50 to-indigo-50 border-b border-sky-100 p-3.5 sm:p-4 text-slate-800 transition-all hover:bg-sky-100/50 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 dark:border-neutral-700 dark:text-neutral-100"
+            class="block relative w-full h-40 overflow-hidden bg-gradient-to-br from-emerald-50 via-teal-50/70 to-slate-100 border-b border-emerald-100 dark:bg-[#061210] dark:border-emerald-950 transition-all flex items-center justify-center p-3"
             aria-label="Read featured guide: How LLMs Actually Work"
           >
-            <!-- Background Flat Grid Motif -->
-            <div class="absolute inset-0 opacity-40 pointer-events-none" aria-hidden="true">
-              <div class="w-full h-full bg-[radial-gradient(#94A3B8_1px,transparent_1px)] [background-size:16px_16px] dark:opacity-10"></div>
-            </div>
-
-            <!-- Foreground Content in Visual -->
-            <div class="relative z-10 flex h-full flex-col justify-between">
-              <div class="flex items-center justify-between">
-                <span class="rounded-full bg-white/95 shadow-2xs px-2.5 py-0.5 text-[10px] font-bold tracking-wider text-emerald-700 uppercase border border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800">
-                  AI &amp; Machine Learning
-                </span>
-                <span class="text-[10px] font-mono text-slate-500 font-semibold dark:text-neutral-400">#FOUNDATIONS</span>
-              </div>
-
-              <!-- Center Graphic with 3D Pop -->
-              <div class="flex items-center gap-3 my-auto">
-                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white shadow-[0_4px_12px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] border border-emerald-200/90 border-b-2 border-b-emerald-300 text-emerald-600 group-hover:scale-110 group-hover:-translate-y-0.5 transition-all duration-300 dark:bg-neutral-800 dark:border-neutral-700 dark:border-b-neutral-600">
-                  <ArticleLogo logo="transformer" category="ai" size="sm" />
-                </div>
-                <div>
-                  <p class="text-xs font-bold tracking-tight text-slate-900 dark:text-white">Transformer Architecture</p>
-                  <p class="text-[11px] text-slate-600 dark:text-neutral-400">Self-Attention &bull; Embeddings &bull; RoPE</p>
-                </div>
-              </div>
-
-              <div class="flex items-center justify-between text-[11px] text-slate-500 dark:text-neutral-400">
-                <span>Interactive Visual Guide</span>
-                <span class="font-bold text-brand-primary inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                  Read Guide &rarr;
-                </span>
-              </div>
-            </div>
+            <ArticleVisual slug="how-llms-actually-work" category="ai" logo="transformer" />
+            <span class="absolute top-3 left-3 badge badge--ai text-[10px] font-bold shadow-xs">
+              AI &amp; Neural Foundations
+            </span>
           </a>
 
-          <!-- Card Content Body (Compact) -->
+          <!-- Content Body -->
           <div class="p-4 sm:p-5 flex flex-col justify-between flex-1">
             <div>
-              <h2 class="text-sm sm:text-base font-bold text-slate-900 group-hover:text-brand-primary transition-colors leading-snug line-clamp-2 dark:text-white">
+              <h2 class="text-base sm:text-lg font-bold text-neutral-900 group-hover:text-brand-primary transition-colors leading-snug line-clamp-2 dark:text-white">
                 <a href="/articles/how-llms-actually-work/">
                   How LLMs Actually Work: Under the Hood of the Transformer Architecture
                 </a>
               </h2>
-              <p class="mt-2 text-xs leading-relaxed text-slate-600 line-clamp-2 dark:text-neutral-400">
-                A rigorous, visual explanation of modern decoder-only transformers: self-attention, RoPE embeddings, SwiGLU, and token generation.
+              <p class="mt-2 text-xs sm:text-sm leading-relaxed text-neutral-600 line-clamp-2 dark:text-neutral-400">
+                A rigorous, mathematical explanation of modern decoder-only transformers: self-attention, RoPE embeddings, SwiGLU, and token generation.
               </p>
             </div>
 
-            <!-- Author & Action Footer -->
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between dark:border-neutral-800">
+            <div class="mt-4 pt-3 border-t border-neutral-100 flex items-center justify-between dark:border-neutral-800">
               <div class="flex items-center gap-2">
-                <div class="h-6 w-6 rounded-full bg-brand-primary/10 text-brand-primary font-bold text-[10px] flex items-center justify-center border border-brand-primary/20 shadow-2xs">
-                  MC
+                <div class="h-6 w-6 rounded-full bg-brand-primary/10 text-brand-primary font-black text-[10px] flex items-center justify-center border border-brand-primary/20 shadow-2xs">
+                  CU
                 </div>
                 <div class="text-[11px]">
-                  <p class="font-semibold text-slate-900 leading-tight dark:text-white">Micro Signal Cosmos</p>
-                  <p class="text-[10px] text-slate-500 leading-tight dark:text-neutral-400">AI &amp; Machine Learning</p>
+                  <p class="font-semibold text-neutral-900 dark:text-white leading-tight">CURION</p>
+                  <p class="text-[10px] text-text-muted leading-tight">Neural Architectures Desk</p>
                 </div>
               </div>
               <a
                 href="/articles/how-llms-actually-work/"
-                class="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-brand-primary group-hover:text-brand-sky-deep transition-colors"
+                class="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-brand-primary group-hover:text-blue-700 transition-colors"
               >
-                <span>Read</span>
+                <span>Read Guide</span>
                 <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
               </a>
             </div>
@@ -149,89 +149,299 @@ const latestArticles = sortedArticles.slice(0, 6);
         </article>
       </div>
     </div>
-
   </section>
 
-  <!-- EDITOR'S PICKS -->
-  <section class="bg-neutral-50 py-14 sm:py-20 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800" aria-labelledby="featured-heading">
+  <!-- FEATURED INSIGHTS (ALL 3 CARDS HAVE VISUAL HEADERS) -->
+  <section class="bg-neutral-50 py-14 sm:py-20 border-b border-neutral-200 dark:bg-[#080d19] dark:border-neutral-800" aria-labelledby="featured-heading">
     <div class="container-wide">
       <div class="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-        <div><div class="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-brand-primary uppercase mb-2"><span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span><span>Editor's Selection</span></div><h2 id="featured-heading" class="text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl">Featured <span class="text-brand-primary">Insights</span></h2><p class="mt-2 text-sm leading-relaxed text-text-muted max-w-xl">Essential long-form analysis, fundamental concepts, and primary scientific breakthroughs worth understanding.</p></div>
-        <a href="/articles/" class="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-brand-primary hover:text-brand-sky-deep transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded py-1"><span>Explore Complete Archive</span><span aria-hidden="true">&rarr;</span></a>
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-brand-primary uppercase mb-2">
+            <span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span>
+            <span>Editor's Selection</span>
+          </div>
+          <h2 id="featured-heading" class="text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
+            Featured <span class="text-brand-primary">Insights</span>
+          </h2>
+          <p class="mt-2 text-sm leading-relaxed text-text-muted max-w-xl">
+            Essential long-form analysis, fundamental concepts, and primary scientific breakthroughs worth understanding.
+          </p>
+        </div>
+        <a href="/articles/" class="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-brand-primary hover:text-blue-700 transition-colors">
+          <span>Explore Complete Archive</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
       </div>
+
       <div class="grid gap-6 lg:grid-cols-12 items-stretch">
-        <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white p-5 sm:p-6 shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_18px_36px_-6px_rgba(29,78,216,0.14),0_6px_16px_-2px_rgba(0,0,0,0.06)] hover:-translate-y-1.5 hover:border-brand-primary/40 hover:border-b-brand-primary/70 transition-all duration-300 lg:col-span-7 min-w-0 dark:border-neutral-800 dark:border-b-neutral-700 dark:bg-neutral-900" itemprop="mainEntity" itemscope itemtype="https://schema.org/Article">
+        <!-- Lead Feature (7 cols) -->
+        <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white p-5 sm:p-6 shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_-10px_rgba(29,78,216,0.18)] hover:-translate-y-1.5 hover:border-brand-primary/50 hover:border-b-brand-primary/80 transition-all duration-300 lg:col-span-7 min-w-0 dark:border-neutral-800 dark:border-b-neutral-700 dark:bg-neutral-900" itemscope itemtype="https://schema.org/Article">
           <a href="/articles/choosing-a-database-in-2026/" class="block" aria-label="Read article: Choosing a Database in 2026">
-            <!-- Compact 3D Visual Header with Dynamic 2D/3D Graphic -->
-            <div class="relative h-36 sm:h-40 w-full overflow-hidden rounded-xl bg-gradient-to-br from-amber-50 via-amber-100/50 to-orange-50 border border-amber-200/80 flex items-center justify-center p-4 text-slate-900 mb-4 shadow-xs dark:from-neutral-900 dark:via-neutral-850 dark:to-neutral-900 dark:border-neutral-700 dark:text-white">
+            <!-- 3D Visual Header -->
+            <div class="relative h-44 sm:h-52 w-full overflow-hidden rounded-xl bg-gradient-to-br from-amber-50 via-orange-50/70 to-slate-100 border border-amber-200/80 flex items-center justify-center p-4 text-slate-900 mb-4 shadow-xs dark:bg-[#140e06] dark:border-amber-950 dark:text-white">
               <ArticleVisual slug="choosing-a-database-in-2026" category="devtools" logo="database" />
-              <div class="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-0.5 text-xs font-bold text-text-primary shadow-xs border border-neutral-200 z-20">
+              <div class="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-0.5 text-xs font-bold text-text-primary shadow-xs border border-neutral-200 z-20 dark:bg-neutral-800 dark:border-neutral-700 dark:text-white">
                 <span class="h-1.5 w-1.5 rounded-full bg-brand-warning"></span><span>Developer Tools</span>
               </div>
               <span class="absolute bottom-3 right-3 rounded-full bg-white px-2.5 py-0.5 text-[11px] font-semibold text-slate-700 border border-neutral-200 shadow-xs dark:bg-neutral-800 dark:text-neutral-200 z-20">13 min read</span>
             </div>
-            <div class="flex items-center gap-2 text-xs text-text-muted mb-2"><span class="font-medium text-text-primary text-[11px]" itemprop="author">Micro Signal Cosmos</span><span aria-hidden="true" class="text-neutral-300 dark:text-neutral-600">&bull;</span><time datetime="2026-11-15T08:00:00.000Z" class="text-[11px]">Nov 15, 2026</time></div>
-            <h3 class="text-xl sm:text-2xl font-extrabold leading-snug text-text-primary transition-colors group-hover:text-brand-primary line-clamp-2" itemprop="headline"><span class="focus-visible:outline-none focus-visible:underline">Choosing a Database in 2026: A Pragmatic Systems Engineering Guide</span></h3>
-            <p class="mt-2 text-xs sm:text-sm leading-relaxed text-text-secondary line-clamp-2" itemprop="description">A comprehensive decision framework for modern data architectures: PostgreSQL extensions, SQLite at the edge, serverless autoscaling, vector search engines, and real-time columnar OLAP.</p>
+            <div class="flex items-center gap-2 text-xs text-text-muted mb-2">
+              <span class="font-medium text-text-primary text-[11px]" itemprop="author">CURION</span>
+              <span aria-hidden="true" class="text-neutral-300 dark:text-neutral-600">&bull;</span>
+              <time datetime="2026-11-15T08:00:00.000Z" class="text-[11px]">Nov 15, 2026</time>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-extrabold leading-snug text-neutral-900 dark:text-white transition-colors group-hover:text-brand-primary line-clamp-2" itemprop="headline">
+              Choosing a Database in 2026: A Pragmatic Systems Engineering Guide
+            </h3>
+            <p class="mt-2 text-xs sm:text-sm leading-relaxed text-text-secondary line-clamp-2" itemprop="description">
+              A comprehensive decision framework for modern data architectures: PostgreSQL extensions, SQLite at the edge, serverless autoscaling, vector search engines, and real-time columnar OLAP.
+            </p>
           </a>
-          <div class="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between"><a href="/articles/choosing-a-database-in-2026/" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-primary transition-all group-hover:gap-2 hover:text-brand-primary-hover" aria-label="Read full analysis"><span>Read Article</span><span aria-hidden="true">&rarr;</span></a><span class="text-[11px] text-text-muted font-medium">13 min read</span></div>
+          <div class="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
+            <a href="/articles/choosing-a-database-in-2026/" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-primary transition-all group-hover:gap-2 hover:text-blue-700">
+              <span>Read Full Analysis</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+            <span class="text-[11px] text-text-muted font-medium">13 min read</span>
+          </div>
         </article>
-        <div class="flex flex-col gap-4 lg:col-span-5 min-w-0 justify-between">
-          <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white p-4 sm:p-5 shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_18px_36px_-6px_rgba(29,78,216,0.14)] hover:-translate-y-1 hover:border-brand-primary/40 hover:border-b-brand-primary/70 transition-all duration-300 flex-1 dark:border-neutral-800 dark:border-b-neutral-700 dark:bg-neutral-900">
-            <div>
-              <div class="flex items-center justify-between gap-2 text-xs mb-2">
-                <div class="flex items-center gap-2">
-                  <ArticleLogo logo="star" category="science" size="sm" />
-                  <span class="badge badge--science text-[10px]">Science</span>
-                </div>
-                <span class="font-medium text-text-muted text-[11px]">11 min read</span>
+
+        <!-- Two Supporting Features (5 cols) - Both With Rich 3D Visual Headers -->
+        <div class="flex flex-col gap-6 lg:col-span-5 min-w-0 justify-between">
+          <!-- Supporting Feature 1: Stellar Spectroscopy -->
+          <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white p-4 sm:p-5 shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_-10px_rgba(29,78,216,0.18)] hover:-translate-y-1 hover:border-brand-primary/50 hover:border-b-brand-primary/80 transition-all duration-300 flex-1 dark:border-neutral-800 dark:border-b-neutral-700 dark:bg-neutral-900">
+            <a href="/articles/how-we-know-what-stars-are-made-of/" class="block">
+              <div class="relative h-28 w-full overflow-hidden rounded-xl bg-gradient-to-br from-violet-50 via-purple-50/70 to-slate-100 border border-violet-100 flex items-center justify-center p-2 mb-3 shadow-2xs dark:bg-[#0e0a1a] dark:border-purple-950">
+                <ArticleVisual slug="how-we-know-what-stars-are-made-of" category="science" logo="star" />
+                <span class="absolute top-2.5 left-2.5 badge badge--science text-[10px]">Science</span>
+                <span class="absolute bottom-2.5 right-2.5 text-[10px] font-semibold text-text-muted bg-white/90 dark:bg-neutral-800/90 px-2 py-0.5 rounded-md">11 min read</span>
               </div>
-              <h3 class="text-base sm:text-lg font-bold leading-snug text-text-primary transition-colors group-hover:text-brand-primary line-clamp-2"><a href="/articles/how-we-know-what-stars-are-made-of/" class="focus-visible:outline-none focus-visible:underline">How We Know What Stars Are Made Of: The Physics of Stellar Spectroscopy</a></h3>
-              <p class="mt-2 text-xs sm:text-sm leading-relaxed text-text-secondary line-clamp-2">The detective story of quantum astrophysics: how Fraunhofer absorption lines, atomic orbital transitions, and modern diffraction spectrographs allow us to weigh and analyze stars trillions of miles away.</p>
+              <h3 class="text-sm sm:text-base font-bold leading-snug text-neutral-900 dark:text-white transition-colors group-hover:text-brand-primary line-clamp-2">
+                How We Know What Stars Are Made Of: The Physics of Stellar Spectroscopy
+              </h3>
+              <p class="mt-1 text-xs leading-relaxed text-text-secondary line-clamp-2">
+                How Fraunhofer absorption lines and quantum atomic transitions allow us to weigh and analyze distant stars.
+              </p>
+            </a>
+            <div class="mt-3 pt-2.5 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between text-xs text-text-muted">
+              <span class="font-medium text-[11px]">Nov 9, 2026</span>
+              <a href="/articles/how-we-know-what-stars-are-made-of/" class="font-bold text-brand-primary hover:text-blue-700 inline-flex items-center gap-1 uppercase tracking-wider text-[11px]">
+                <span>Read</span>
+                <span aria-hidden="true">&rarr;</span>
+              </a>
             </div>
-            <div class="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between text-xs text-text-muted"><div class="flex items-center gap-2"><span class="font-medium text-text-primary text-[11px]">Micro Signal Cosmos</span><span aria-hidden="true" class="text-neutral-300 dark:text-neutral-600">&bull;</span><time datetime="2026-11-09T08:00:00.000Z" class="text-[11px]">Nov 9, 2026</time></div><a href="/articles/how-we-know-what-stars-are-made-of/" class="font-bold text-brand-primary group-hover:text-brand-primary-hover inline-flex items-center gap-1 uppercase tracking-wider text-[11px]"><span>Read</span><span aria-hidden="true">&rarr;</span></a></div>
           </article>
-          <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white p-4 sm:p-5 shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_18px_36px_-6px_rgba(29,78,216,0.14)] hover:-translate-y-1 hover:border-brand-primary/40 hover:border-b-brand-primary/70 transition-all duration-300 flex-1 dark:border-neutral-800 dark:border-b-neutral-700 dark:bg-neutral-900">
-            <div>
-              <div class="flex items-center justify-between gap-2 text-xs mb-2">
-                <div class="flex items-center gap-2">
-                  <ArticleLogo logo="browser" category="tech" size="sm" />
-                  <span class="badge badge--tech text-[10px]">Technology</span>
-                </div>
-                <span class="font-medium text-text-muted text-[11px]">12 min read</span>
+
+          <!-- Supporting Feature 2: Browser Engine -->
+          <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white p-4 sm:p-5 shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_-10px_rgba(29,78,216,0.18)] hover:-translate-y-1 hover:border-brand-primary/50 hover:border-b-brand-primary/80 transition-all duration-300 flex-1 dark:border-neutral-800 dark:border-b-neutral-700 dark:bg-neutral-900">
+            <a href="/articles/how-browsers-actually-render-a-page/" class="block">
+              <div class="relative h-28 w-full overflow-hidden rounded-xl bg-gradient-to-br from-sky-50 via-blue-50/70 to-slate-100 border border-sky-100 flex items-center justify-center p-2 mb-3 shadow-2xs dark:bg-[#070c18] dark:border-sky-950">
+                <ArticleVisual slug="how-browsers-actually-render-a-page" category="tech" logo="browser" />
+                <span class="absolute top-2.5 left-2.5 badge badge--tech text-[10px]">Technology</span>
+                <span class="absolute bottom-2.5 right-2.5 text-[10px] font-semibold text-text-muted bg-white/90 dark:bg-neutral-800/90 px-2 py-0.5 rounded-md">12 min read</span>
               </div>
-              <h3 class="text-base sm:text-lg font-bold leading-snug text-text-primary transition-colors group-hover:text-brand-primary line-clamp-2"><a href="/articles/how-browsers-actually-render-a-page/" class="focus-visible:outline-none focus-visible:underline">How Browsers Actually Render a Page: From Raw Bytes to Pixels</a></h3>
-              <p class="mt-2 text-xs sm:text-sm leading-relaxed text-text-secondary line-clamp-2">A technical deep dive into Blink and Gecko: DOM parsing, CSSOM construction, render tree calculation, layout geometry, GPU rasterization, and compositor layering.</p>
+              <h3 class="text-sm sm:text-base font-bold leading-snug text-neutral-900 dark:text-white transition-colors group-hover:text-brand-primary line-clamp-2">
+                How Browsers Actually Render a Page: From Raw Bytes to Pixels
+              </h3>
+              <p class="mt-1 text-xs leading-relaxed text-text-secondary line-clamp-2">
+                DOM parsing, CSSOM construction, render tree calculation, layout geometry, GPU rasterization, and layering.
+              </p>
+            </a>
+            <div class="mt-3 pt-2.5 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between text-xs text-text-muted">
+              <span class="font-medium text-[11px]">Nov 2, 2026</span>
+              <a href="/articles/how-browsers-actually-render-a-page/" class="font-bold text-brand-primary hover:text-blue-700 inline-flex items-center gap-1 uppercase tracking-wider text-[11px]">
+                <span>Read</span>
+                <span aria-hidden="true">&rarr;</span>
+              </a>
             </div>
-            <div class="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between text-xs text-text-muted"><div class="flex items-center gap-2"><span class="font-medium text-text-primary text-[11px]">Micro Signal Cosmos</span><span aria-hidden="true" class="text-neutral-300 dark:text-neutral-600">&bull;</span><time datetime="2026-11-02T08:00:00.000Z" class="text-[11px]">Nov 2, 2026</time></div><a href="/articles/how-browsers-actually-render-a-page/" class="font-bold text-brand-primary group-hover:text-brand-primary-hover inline-flex items-center gap-1 uppercase tracking-wider text-[11px]"><span>Read</span><span aria-hidden="true">&rarr;</span></a></div>
           </article>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CATEGORIES -->
-  <section id="categories" class="bg-white py-14 sm:py-20 border-b border-neutral-200 dark:bg-neutral-950 dark:border-neutral-800" aria-labelledby="categories-heading">
+  <!-- 4 KNOWLEDGE PILLARS -->
+  <section id="categories" class="bg-white py-14 sm:py-20 border-b border-neutral-200 dark:bg-[#070b14] dark:border-neutral-800" aria-labelledby="categories-heading">
     <div class="container-wide">
       <div class="mb-12 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-        <div class="max-w-2xl"><div class="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-brand-primary uppercase mb-2"><span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span><span>Knowledge Streams</span></div><h2 id="categories-heading" class="text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl">Explore Our <span class="text-brand-primary">Core Topics</span></h2><p class="mt-2 text-sm sm:text-base leading-relaxed text-text-muted">From fundamental scientific research to practical digital tools and artificial intelligence breakthroughs, explore thoughtful analysis across our four core categories.</p></div>
-        <a href="/articles/" class="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-brand-primary hover:text-brand-sky-deep transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded py-1"><span>View Full Taxonomy</span><span aria-hidden="true">&rarr;</span></a>
+        <div class="max-w-2xl">
+          <div class="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-brand-primary uppercase mb-2">
+            <span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span>
+            <span>Taxonomy</span>
+          </div>
+          <h2 id="categories-heading" class="text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
+            Four Knowledge <span class="text-brand-primary">Pillars</span>
+          </h2>
+          <p class="mt-2 text-sm sm:text-base leading-relaxed text-text-muted">
+            CURION structures human discovery across four interlocked domains of knowledge.
+          </p>
+        </div>
+        <a href="/articles/" class="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-brand-primary hover:text-blue-700 transition-colors">
+          <span>View All 16 Articles</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
       </div>
+
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <a href="/category/technology/" class="group flex flex-col justify-between rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-primary/40 hover:border-b-brand-primary/70 hover:shadow-[0_18px_36px_-6px_rgba(29,78,216,0.14)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-neutral-800 dark:border-b-neutral-700 dark:bg-neutral-900"><div><div class="mb-5 flex items-center justify-between"><span class="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-50 border border-neutral-200/90 border-b-2 border-b-neutral-300 text-xs font-black text-brand-primary shadow-xs group-hover:scale-110 group-hover:-translate-y-0.5 group-hover:bg-brand-primary group-hover:text-white transition-all dark:bg-neutral-800 dark:border-neutral-700 dark:border-b-neutral-600">01</span><span class="text-[11px] font-bold tracking-widest text-text-muted uppercase">Pillar 01</span></div><h3 class="text-base font-bold text-text-primary transition-colors group-hover:text-brand-primary">Technology</h3><p class="mt-2 text-xs leading-relaxed text-text-muted line-clamp-3">Browser internals, CPU architecture, WebAssembly, networking, and core computing systems.</p></div><div class="mt-6 pt-4 border-t border-neutral-200/80 flex items-center gap-1.5 text-xs font-bold text-brand-primary"><span>Explore Stream</span><span class="transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span></div></a>
-        <a href="/category/artificial-intelligence/" class="group flex flex-col justify-between rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-primary/40 hover:border-b-brand-primary/70 hover:shadow-[0_18px_36px_-6px_rgba(29,78,216,0.14)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-neutral-800 dark:border-b-neutral-700 dark:bg-neutral-900"><div><div class="mb-5 flex items-center justify-between"><span class="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-50 border border-neutral-200/90 border-b-2 border-b-neutral-300 text-xs font-black text-brand-primary shadow-xs group-hover:scale-110 group-hover:-translate-y-0.5 group-hover:bg-brand-primary group-hover:text-white transition-all dark:bg-neutral-800 dark:border-neutral-700 dark:border-b-neutral-600">AI</span><span class="text-[11px] font-bold tracking-widest text-text-muted uppercase">Pillar 02</span></div><h3 class="text-base font-bold text-text-primary transition-colors group-hover:text-brand-primary">AI &amp; ML</h3><p class="mt-2 text-xs leading-relaxed text-text-muted line-clamp-3">LLM training and inference, RAG systems, model evaluation, AI tooling, and engineering workflows.</p></div><div class="mt-6 pt-4 border-t border-neutral-200/80 flex items-center gap-1.5 text-xs font-bold text-brand-primary"><span>Explore Stream</span><span class="transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span></div></a>
-        <a href="/category/science/" class="group flex flex-col justify-between rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-primary/40 hover:border-b-brand-primary/70 hover:shadow-[0_18px_36px_-6px_rgba(29,78,216,0.14)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-neutral-800 dark:border-b-neutral-700 dark:bg-neutral-900"><div><div class="mb-5 flex items-center justify-between"><span class="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-50 border border-neutral-200/90 border-b-2 border-b-neutral-300 text-xs font-black text-brand-primary shadow-xs group-hover:scale-110 group-hover:-translate-y-0.5 group-hover:bg-brand-primary group-hover:text-white transition-all dark:bg-neutral-800 dark:border-neutral-700 dark:border-b-neutral-600">02</span><span class="text-[11px] font-bold tracking-widest text-text-muted uppercase">Pillar 03</span></div><h3 class="text-base font-bold text-text-primary transition-colors group-hover:text-brand-primary">Science</h3><p class="mt-2 text-xs leading-relaxed text-text-muted line-clamp-3">Astrophysics, nuclear fusion, particle physics, observational cosmology, and scientific inquiry.</p></div><div class="mt-6 pt-4 border-t border-neutral-200/80 flex items-center gap-1.5 text-xs font-bold text-brand-primary"><span>Explore Stream</span><span class="transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span></div></a>
-        <a href="/category/developer-tools/" class="group flex flex-col justify-between rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-primary/40 hover:border-b-brand-primary/70 hover:shadow-[0_18px_36px_-6px_rgba(29,78,216,0.14)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary dark:border-neutral-800 dark:border-b-neutral-700 dark:bg-neutral-900"><div><div class="mb-5 flex items-center justify-between"><span class="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-50 border border-neutral-200/90 border-b-2 border-b-neutral-300 text-xs font-black text-brand-primary shadow-xs group-hover:scale-110 group-hover:-translate-y-0.5 group-hover:bg-brand-primary group-hover:text-white transition-all dark:bg-neutral-800 dark:border-neutral-700 dark:border-b-neutral-600">03</span><span class="text-[11px] font-bold tracking-widest text-text-muted uppercase">Pillar 04</span></div><h3 class="text-base font-bold text-text-primary transition-colors group-hover:text-brand-primary">Developer Tools</h3><p class="mt-2 text-xs leading-relaxed text-text-muted line-clamp-3">Databases, caching, search engines, observability, self-hosting infrastructure, and CLI tools.</p></div><div class="mt-6 pt-4 border-t border-neutral-200/80 flex items-center gap-1.5 text-xs font-bold text-brand-primary"><span>Explore Stream</span><span class="transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span></div></a>
+        <a href="/category/technology/" class="group flex flex-col justify-between rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-primary/50 hover:border-b-brand-primary/80 hover:shadow-[0_20px_40px_-10px_rgba(29,78,216,0.18)] dark:border-neutral-800 dark:border-b-neutral-700 dark:bg-neutral-900">
+          <div>
+            <div class="mb-5 flex items-center justify-between">
+              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-50 border border-sky-200 text-xs font-black text-sky-700 shadow-xs group-hover:scale-110 transition-transform dark:bg-sky-950/50 dark:border-sky-800 dark:text-sky-300">01</span>
+              <span class="text-[11px] font-bold tracking-widest text-text-muted uppercase">Pillar 01</span>
+            </div>
+            <h3 class="text-base font-bold text-neutral-900 dark:text-white transition-colors group-hover:text-brand-primary">Systems &amp; Technology</h3>
+            <p class="mt-2 text-xs leading-relaxed text-text-muted line-clamp-3">Browser internals, CPU silicon architecture, WebAssembly, zero-copy Linux networking, and computing machines.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-neutral-100 dark:border-neutral-800 flex items-center gap-1.5 text-xs font-bold text-brand-primary">
+            <span>Explore Stream</span>
+            <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+
+        <a href="/category/artificial-intelligence/" class="group flex flex-col justify-between rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-primary/50 hover:border-b-brand-primary/80 hover:shadow-[0_20px_40px_-10px_rgba(29,78,216,0.18)] dark:border-neutral-800 dark:border-b-neutral-700 dark:bg-neutral-900">
+          <div>
+            <div class="mb-5 flex items-center justify-between">
+              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-black text-emerald-700 shadow-xs group-hover:scale-110 transition-transform dark:bg-emerald-950/50 dark:border-emerald-800 dark:text-emerald-300">02</span>
+              <span class="text-[11px] font-bold tracking-widest text-text-muted uppercase">Pillar 02</span>
+            </div>
+            <h3 class="text-base font-bold text-neutral-900 dark:text-white transition-colors group-hover:text-brand-primary">AI &amp; Neural Foundations</h3>
+            <p class="mt-2 text-xs leading-relaxed text-text-muted line-clamp-3">Transformer math, inference vs training economics, production RAG pipelines, and LLM evaluation benchmarks.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-neutral-100 dark:border-neutral-800 flex items-center gap-1.5 text-xs font-bold text-brand-primary">
+            <span>Explore Stream</span>
+            <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+
+        <a href="/category/science/" class="group flex flex-col justify-between rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-primary/50 hover:border-b-brand-primary/80 hover:shadow-[0_20px_40px_-10px_rgba(29,78,216,0.18)] dark:border-neutral-800 dark:border-b-neutral-700 dark:bg-neutral-900">
+          <div>
+            <div class="mb-5 flex items-center justify-between">
+              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 border border-violet-200 text-xs font-black text-violet-700 shadow-xs group-hover:scale-110 transition-transform dark:bg-violet-950/50 dark:border-violet-800 dark:text-violet-300">03</span>
+              <span class="text-[11px] font-bold tracking-widest text-text-muted uppercase">Pillar 03</span>
+            </div>
+            <h3 class="text-base font-bold text-neutral-900 dark:text-white transition-colors group-hover:text-brand-primary">Astrophysics &amp; Physics</h3>
+            <p class="mt-2 text-xs leading-relaxed text-text-muted line-clamp-3">Stellar spectroscopy, alien exoplanet atmospheres, dark matter cosmology, and magnetic confinement nuclear fusion.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-neutral-100 dark:border-neutral-800 flex items-center gap-1.5 text-xs font-bold text-brand-primary">
+            <span>Explore Stream</span>
+            <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+
+        <a href="/category/developer-tools/" class="group flex flex-col justify-between rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-primary/50 hover:border-b-brand-primary/80 hover:shadow-[0_20px_40px_-10px_rgba(29,78,216,0.18)] dark:border-neutral-800 dark:border-b-neutral-700 dark:bg-neutral-900">
+          <div>
+            <div class="mb-5 flex items-center justify-between">
+              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 border border-amber-200 text-xs font-black text-amber-700 shadow-xs group-hover:scale-110 transition-transform dark:bg-amber-950/50 dark:border-amber-800 dark:text-amber-300">04</span>
+              <span class="text-[11px] font-bold tracking-widest text-text-muted uppercase">Pillar 04</span>
+            </div>
+            <h3 class="text-base font-bold text-neutral-900 dark:text-white transition-colors group-hover:text-brand-primary">Developer Infrastructure</h3>
+            <p class="mt-2 text-xs leading-relaxed text-text-muted line-clamp-3">Database selection architecture, Passkeys &amp; WebAuthn, TLS 1.3 cryptography, and production self-hosting.</p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-neutral-100 dark:border-neutral-800 flex items-center gap-1.5 text-xs font-bold text-brand-primary">
+            <span>Explore Stream</span>
+            <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURATED LEARNING PATHS (100% REAL ARTICLES) -->
+  <section class="bg-neutral-50 py-14 sm:py-20 border-b border-neutral-200 dark:bg-[#080d19] dark:border-neutral-800" aria-labelledby="paths-heading">
+    <div class="container-wide">
+      <div class="mb-10">
+        <div class="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-brand-primary uppercase mb-2">
+          <span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span>
+          <span>Guided Curriculum</span>
+        </div>
+        <h2 id="paths-heading" class="text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
+          Curated <span class="text-brand-primary">Learning Paths</span>
+        </h2>
+        <p class="mt-2 text-sm leading-relaxed text-text-muted max-w-xl">
+          Sequential reading paths designed to take you from foundational intuition to production-grade mastery.
+        </p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <!-- Path 1: Systems & Runtime Engineering -->
+        <div class="rounded-2xl border border-neutral-200/90 bg-white p-6 shadow-xs dark:bg-neutral-900 dark:border-neutral-800">
+          <div class="flex items-center justify-between mb-4">
+            <span class="badge badge--tech text-[10px] font-bold">Systems Path</span>
+            <span class="text-xs font-semibold text-text-muted">4 Deep Dives</span>
+          </div>
+          <h3 class="text-lg font-bold text-neutral-900 dark:text-white">Systems &amp; Runtime Engineering</h3>
+          <p class="mt-1 text-xs text-text-muted leading-relaxed">From raw silicon clock cycles to high-throughput zero-copy kernel networking.</p>
+          <div class="mt-4 space-y-2.5">
+            <a href="/articles/inside-the-modern-cpu/" class="flex items-center justify-between p-2.5 rounded-xl border border-neutral-100 hover:border-brand-primary/40 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800/60 transition-colors text-xs font-medium">
+              <span class="truncate">1. Inside the Modern CPU: Out-of-Order Execution &amp; Caches</span>
+              <span class="text-brand-primary shrink-0 ml-2">&rarr;</span>
+            </a>
+            <a href="/articles/how-browsers-actually-render-a-page/" class="flex items-center justify-between p-2.5 rounded-xl border border-neutral-100 hover:border-brand-primary/40 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800/60 transition-colors text-xs font-medium">
+              <span class="truncate">2. How Browsers Render a Page: From Bytes to Pixels</span>
+              <span class="text-brand-primary shrink-0 ml-2">&rarr;</span>
+            </a>
+            <a href="/articles/webassembly-in-2026/" class="flex items-center justify-between p-2.5 rounded-xl border border-neutral-100 hover:border-brand-primary/40 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800/60 transition-colors text-xs font-medium">
+              <span class="truncate">3. WebAssembly in 2026: Component Model &amp; WASI 0.2</span>
+              <span class="text-brand-primary shrink-0 ml-2">&rarr;</span>
+            </a>
+            <a href="/articles/zero-copy-linux-networking/" class="flex items-center justify-between p-2.5 rounded-xl border border-neutral-100 hover:border-brand-primary/40 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800/60 transition-colors text-xs font-medium">
+              <span class="truncate">4. Zero-Copy Linux Networking: io_uring &amp; DMA Transfer</span>
+              <span class="text-brand-primary shrink-0 ml-2">&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Path 2: AI & Neural Foundations -->
+        <div class="rounded-2xl border border-neutral-200/90 bg-white p-6 shadow-xs dark:bg-neutral-900 dark:border-neutral-800">
+          <div class="flex items-center justify-between mb-4">
+            <span class="badge badge--ai text-[10px] font-bold">Neural Path</span>
+            <span class="text-xs font-semibold text-text-muted">4 Deep Dives</span>
+          </div>
+          <h3 class="text-lg font-bold text-neutral-900 dark:text-white">AI &amp; Neural Foundations</h3>
+          <p class="mt-1 text-xs text-text-muted leading-relaxed">Mathematical transformer foundations, production RAG pipelines, and evaluation.</p>
+          <div class="mt-4 space-y-2.5">
+            <a href="/articles/how-llms-actually-work/" class="flex items-center justify-between p-2.5 rounded-xl border border-neutral-100 hover:border-brand-primary/40 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800/60 transition-colors text-xs font-medium">
+              <span class="truncate">1. How LLMs Actually Work: Transformer Architecture</span>
+              <span class="text-brand-primary shrink-0 ml-2">&rarr;</span>
+            </a>
+            <a href="/articles/build-your-own-rag-from-scratch/" class="flex items-center justify-between p-2.5 rounded-xl border border-neutral-100 hover:border-brand-primary/40 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800/60 transition-colors text-xs font-medium">
+              <span class="truncate">2. Build Your Own RAG from Scratch: Hybrid Retrieval</span>
+              <span class="text-brand-primary shrink-0 ml-2">&rarr;</span>
+            </a>
+            <a href="/articles/training-vs-inference-economics/" class="flex items-center justify-between p-2.5 rounded-xl border border-neutral-100 hover:border-brand-primary/40 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800/60 transition-colors text-xs font-medium">
+              <span class="truncate">3. Training vs. Inference Economics: CAPEX to OPEX</span>
+              <span class="text-brand-primary shrink-0 ml-2">&rarr;</span>
+            </a>
+            <a href="/articles/evaluating-ai-benchmarks-and-evals/" class="flex items-center justify-between p-2.5 rounded-xl border border-neutral-100 hover:border-brand-primary/40 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800/60 transition-colors text-xs font-medium">
+              <span class="truncate">4. Evaluating AI: Benchmarks, Evals, and LLM-as-a-Judge</span>
+              <span class="text-brand-primary shrink-0 ml-2">&rarr;</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- LATEST ARTICLES -->
-  <section id="latest-articles" class="bg-neutral-50 py-14 sm:py-20 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800" aria-labelledby="latest-heading">
+  <section id="latest-articles" class="bg-white py-14 sm:py-20 border-b border-neutral-200 dark:bg-[#070b14] dark:border-neutral-800" aria-labelledby="latest-heading">
     <div class="container-wide">
       <div class="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-        <div><div class="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-brand-primary uppercase mb-2"><span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span><span>Latest Guides</span></div><h2 id="latest-heading" class="text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl">Latest <span class="text-brand-primary">Articles</span></h2><p class="mt-2 text-sm leading-relaxed text-text-muted max-w-xl">Discover in-depth guides, practical tutorials, and informative articles published on Micro Signal Cosmos.</p></div>
-        <a href="/articles/" class="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-brand-primary hover:text-brand-sky-deep transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded py-1"><span>View All Articles</span><span aria-hidden="true">&rarr;</span></a>
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-brand-primary uppercase mb-2">
+            <span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span>
+            <span>Latest Discoveries</span>
+          </div>
+          <h2 id="latest-heading" class="text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
+            Latest <span class="text-brand-primary">Articles</span>
+          </h2>
+          <p class="mt-2 text-sm leading-relaxed text-text-muted max-w-xl">
+            Explore rigorous technical deep-dives across systems, artificial intelligence, and astrophysics.
+          </p>
+        </div>
+        <a href="/articles/" class="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-brand-primary hover:text-blue-700 transition-colors">
+          <span>View All 16 Articles</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
       </div>
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {latestArticles.map(article => (
@@ -253,6 +463,6 @@ const latestArticles = sortedArticles.slice(0, 6);
   <!-- NEWSLETTER HERO -->
   <NewsletterHero />
 
-  <!-- EXIT INTENT MODAL -->
+  <!-- COMPACT EXIT INTENT MODAL -->
   <NewsletterExitIntent />
 </Base>

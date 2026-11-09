@@ -1,13 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const siteUrl = 'https://microsignalcosmos.com';
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const pageUrl = `${siteUrl}/disclaimer/`;
 ---
 
 <Base
-  title="Disclaimer & Affiliate Notice | Micro Signal Cosmos"
-  description="Disclaimer and affiliate monetization disclosure for Micro Signal Cosmos."
+  title="Disclaimer & Notices | CURION"
+  description="Disclaimer and monetization notices for CURION."
   canonical={pageUrl}
 >
   <main id="main-content" class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800">

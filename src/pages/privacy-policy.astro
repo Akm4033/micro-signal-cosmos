@@ -1,13 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const siteUrl = 'https://microsignalcosmos.com';
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const pageUrl = `${siteUrl}/privacy-policy/`;
 ---
 
 <Base
-  title="Privacy Policy | Micro Signal Cosmos"
-  description="Privacy Policy for Micro Signal Cosmos. Read our transparent policies on data handling, cookies, analytics, and reader privacy protection."
+  title="Privacy Policy | CURION"
+  description="Privacy Policy for CURION. Read our transparent policies on data handling, cookies, analytics, and reader privacy protection."
   canonical={pageUrl}
 >
   <main id="main-content" class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800">

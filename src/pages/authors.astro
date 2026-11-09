@@ -4,7 +4,7 @@ import { getPublishedArticles, getArticleSlug } from '../data/articles';
 
 const allArticles = await getPublishedArticles();
 
-const siteUrl = 'https://microsignalcosmos.com';
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const focusAreasUrl = `${siteUrl}/authors/`;
 
 const focusAreas = [
@@ -45,8 +45,8 @@ const focusAreas = [
 ---
 
 <Base
-  title="Editorial Focus Areas & Standards | Micro Signal Cosmos"
-  description="Explore our three specialized editorial focus areas: Systems & Infrastructure, AI & Machine Learning, and Science & Physics."
+  title="Research Focus Areas & Standards | CURION"
+  description="Explore our three specialized research focus areas: Systems & Infrastructure, AI & Machine Learning, and Science & Physics."
   canonical={focusAreasUrl}
 >
   <main id="main-content" class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800">

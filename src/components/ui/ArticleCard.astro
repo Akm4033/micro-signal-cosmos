@@ -39,7 +39,7 @@ const {
 
 const articleHref = href || (slug ? `/articles/${slug}/` : '#');
 const authorData = getAuthor(author);
-const authorName = propAuthorName || authorData.name || 'Micro Signal Cosmos';
+const authorName = propAuthorName || authorData.name || 'CURION';
 
 const catSlug = categorySlug || category.toLowerCase().replace(/\s+/g, '-');
 const categoryVariantMap: Record<string, 'tech' | 'science' | 'ai' | 'devtools'> = {
@@ -61,30 +61,30 @@ const isoDate = rawDate ? new Date(rawDate).toISOString() : '';
 ---
 
 <article
-  class={`group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_18px_36px_-6px_rgba(29,78,216,0.14),0_6px_16px_-2px_rgba(0,0,0,0.06)] hover:-translate-y-1.5 hover:border-brand-primary/40 hover:border-b-brand-primary/70 transition-all duration-300 dark:bg-neutral-900 dark:border-neutral-800 dark:border-b-neutral-700 ${className}`}
+  class={`group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_-10px_rgba(29,78,216,0.18),0_8px_20px_-4px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 hover:border-brand-primary/50 hover:border-b-brand-primary/80 transition-all duration-300 dark:bg-neutral-900 dark:border-neutral-800 dark:border-b-neutral-700 ${className}`}
   itemscope
   itemtype="https://schema.org/Article"
 >
   <a href={articleHref} class="block" aria-label={`Read article: ${title}`}>
-    <!-- Compact 3D Visual Header with Dynamic 2D/3D Graphic & Interactive Motion -->
+    <!-- 3D Technical Visual Header (Luminous & High Contrast) -->
     <div
-      class={`relative h-32 sm:h-34 w-full shrink-0 overflow-hidden flex items-center justify-center transition-colors ${
-        categoryVariant === 'tech' ? 'bg-gradient-to-br from-sky-50 via-sky-100/60 to-blue-50 border-b border-sky-100 dark:from-sky-950/40 dark:via-sky-900/30 dark:to-neutral-900 dark:border-sky-900/50' :
-        categoryVariant === 'ai' ? 'bg-gradient-to-br from-emerald-50 via-emerald-100/60 to-teal-50 border-b border-emerald-100 dark:from-emerald-950/40 dark:via-emerald-900/30 dark:to-neutral-900 dark:border-emerald-900/50' :
-        categoryVariant === 'science' ? 'bg-gradient-to-br from-violet-50 via-purple-100/60 to-indigo-50 border-b border-violet-100 dark:from-violet-950/40 dark:via-violet-900/30 dark:to-neutral-900 dark:border-violet-900/50' :
-        'bg-gradient-to-br from-amber-50 via-amber-100/60 to-orange-50 border-b border-amber-100 dark:from-amber-950/40 dark:via-amber-900/30 dark:to-neutral-900 dark:border-amber-900/50'
+      class={`relative h-36 sm:h-40 w-full shrink-0 overflow-hidden flex items-center justify-center transition-colors border-b ${
+        categoryVariant === 'tech' ? 'bg-gradient-to-br from-sky-50 via-blue-50/70 to-slate-100 border-sky-100 dark:bg-[#070c18] dark:border-sky-950' :
+        categoryVariant === 'ai' ? 'bg-gradient-to-br from-emerald-50 via-teal-50/70 to-slate-100 border-emerald-100 dark:bg-[#061210] dark:border-emerald-950' :
+        categoryVariant === 'science' ? 'bg-gradient-to-br from-violet-50 via-purple-50/70 to-slate-100 border-violet-100 dark:bg-[#0e0a1a] dark:border-purple-950' :
+        'bg-gradient-to-br from-amber-50 via-orange-50/70 to-slate-100 border-amber-100 dark:bg-[#140e06] dark:border-amber-950'
       }`}
     >
-      <!-- Dynamic 2D/3D Interactive Graphic (Moves & Tilts on Card Hover) -->
+      <!-- Dynamic 2D/3D Interactive Graphic (Hover Motion & Pulse) -->
       <ArticleVisual slug={slug || ''} category={categoryVariant} logo={logo || catSlug} />
 
       <!-- Elevated 3D Category Pill -->
-      <span class={`absolute top-2.5 left-2.5 badge badge--${categoryVariant} shadow-xs font-bold text-[10px] pointer-events-none z-20`}>
+      <span class={`absolute top-3 left-3 badge badge--${categoryVariant} shadow-xs font-bold text-[10px] pointer-events-none z-20`}>
         {category}
       </span>
     </div>
 
-    <!-- Compact Article Content -->
+    <!-- Article Content -->
     <div class="p-4 sm:p-5">
       <div class="flex items-center gap-2 text-xs mb-2 text-text-muted">
         <span class="font-medium text-text-primary text-[11px]" itemprop="author">{authorName}</span>
@@ -114,10 +114,10 @@ const isoDate = rawDate ? new Date(rawDate).toISOString() : '';
   <div class="px-4 pb-4 sm:px-5 sm:pb-5 mt-auto">
     <div class="flex items-center justify-between border-t border-neutral-100 pt-3 dark:border-neutral-800">
       <div class="flex items-center gap-2">
-        <div class="w-6 h-6 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center text-[10px] font-bold shadow-2xs">
-          {authorData.initials || 'MC'}
+        <div class="w-6 h-6 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center text-[10px] font-black shadow-2xs">
+          {authorData.initials || 'CU'}
         </div>
-        <span class="text-[11px] font-semibold text-text-muted">{authorData.role || 'Micro Signal Cosmos'}</span>
+        <span class="text-[11px] font-semibold text-text-muted">{authorData.role || 'CURION Research Desk'}</span>
       </div>
 
       <a
