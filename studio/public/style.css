@@ -1060,3 +1060,54 @@ select:focus {
   white-space: pre-wrap;
 }
 
+/* Phase 5: Safety Status Bar & Controls Modal */
+.safety-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.settings-card {
+  width: 540px;
+  max-height: 90vh;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+.modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-badge {
+  margin-left: auto;
+  padding: 1px 6px;
+  font-size: 10px;
+}
+
+.diag-flag {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  margin: 2px 0;
+}
+
+.diag-flag-warn {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.diag-flag-danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+

@@ -1,7 +1,7 @@
 /**
- * Micro Signal Cosmos — AI Editorial Studio Client Application
- * Modular, reactive single-page interface for topics, multi-LLM drafting,
- * dual-pane markdown editing, quality checklists, and publishing.
+ * Micro Signal Cosmos — AI Editorial Studio Client Application (Phase 5 Edition)
+ * Modular, reactive interface for topics, autonomous multi-agent pipelines,
+ * human review queues, dual-pane markdown editing, safety controls, and publishing.
  */
 
 (function () {
@@ -11,6 +11,8 @@
     activeTab: 'dashboard',
     topics: [],
     articles: [],
+    reviewQueue: [],
+    settings: {},
     currentArticle: null,
     filterStatus: 'all',
     generatedText: ''
@@ -30,12 +32,33 @@
     pageTitle: document.getElementById('current-page-title'),
     btnQuickNew: document.getElementById('btn-quick-new'),
 
+    // Safety Indicators & Controls
+    chipRolloutStage: document.getElementById('chip-rollout-stage'),
+    chipKillSwitch: document.getElementById('chip-kill-switch'),
+    chipDailyQuota: document.getElementById('chip-daily-quota'),
+    chipApiCost: document.getElementById('chip-api-cost'),
+    btnOpenSettings: document.getElementById('btn-open-settings'),
+    settingsModal: document.getElementById('settings-modal'),
+    btnCloseSettings: document.getElementById('btn-close-settings'),
+    btnCancelSettings: document.getElementById('btn-cancel-settings'),
+    settingsForm: document.getElementById('settings-form'),
+    setRolloutStage: document.getElementById('set-rollout-stage'),
+    setKillSwitch: document.getElementById('set-kill-switch'),
+    setDailyLimit: document.getElementById('set-daily-limit'),
+    setMaxCost: document.getElementById('set-max-cost'),
+
     // Dashboard
     statPublished: document.getElementById('stat-published'),
-    statDrafts: document.getElementById('stat-drafts'),
+    statReviewQueue: document.getElementById('stat-review-queue'),
+    sidebarReviewBadge: document.getElementById('sidebar-review-badge'),
     statTopics: document.getElementById('stat-topics'),
     statApproved: document.getElementById('stat-approved'),
     auditLogs: document.getElementById('audit-logs-container'),
+
+    // Review Queue
+    reviewQueueTable: document.getElementById('review-queue-table-body'),
+    btnFilterQueuePending: document.getElementById('btn-filter-queue-pending'),
+    btnFilterQueueAll: document.getElementById('btn-filter-queue-all'),
 
     // Topics
     topicsTable: document.getElementById('topics-table-body'),
@@ -211,6 +234,7 @@
 
     const titles = {
       dashboard: 'Dashboard Overview',
+      'review-queue': 'Human Editorial Review Queue',
       topics: 'Topic Discovery & Ingestion',
       generator: 'Multi-LLM Drafting Studio',
       articles: 'Articles & Publication Pipeline',
@@ -220,6 +244,7 @@
     el.pageTitle.textContent = titles[tabId] || 'Editorial Studio';
 
     if (tabId === 'dashboard') loadDashboard();
+    if (tabId === 'review-queue') loadReviewQueue();
     if (tabId === 'topics') loadTopics();
     if (tabId === 'articles') loadArticles();
     if (tabId === 'seo') loadSeo();
@@ -235,10 +260,11 @@
   });
 
   // -------------------------------------------------------------
-  // DATA LOADERS
+  // DATA LOADERS & SAFETY STATUS
   // -------------------------------------------------------------
   async function loadInitialData() {
     await loadDashboard();
+    await loadReviewQueue();
     await loadTopics();
     await loadArticles();
   }
@@ -247,9 +273,35 @@
     try {
       const stats = await api('/dashboard/stats');
       el.statPublished.textContent = stats.articles?.published || 0;
-      el.statDrafts.textContent = stats.articles?.drafts || 0;
+      el.statReviewQueue.textContent = stats.reviewQueueCount || 0;
       el.statTopics.textContent = stats.topics?.total || 0;
       el.statApproved.textContent = stats.articles?.approved || 0;
+
+      // Update sidebar badge
+      if (stats.reviewQueueCount > 0) {
+        el.sidebarReviewBadge.textContent = stats.reviewQueueCount;
+        el.sidebarReviewBadge.classList.remove('hidden');
+      } else {
+        el.sidebarReviewBadge.classList.add('hidden');
+      }
+
+      // Update Safety Indicators
+      if (stats.safety) {
+        const stage = stats.safety.rolloutStage;
+        el.chipRolloutStage.textContent = stage === 'STAGE_C' ? 'Stage C (Autonomous)' : stage === 'STAGE_A' ? 'Stage A (Drafts)' : 'Stage B (Approval Queue)';
+        el.chipRolloutStage.className = `badge ${stage === 'STAGE_C' ? 'badge-warning' : stage === 'STAGE_B' ? 'badge-info' : 'badge-neutral'}`;
+
+        const isArmed = stats.safety.killSwitch === 'ENABLED';
+        el.chipKillSwitch.textContent = isArmed ? 'Kill Switch: ARMED' : 'Kill Switch: PROTECTED';
+        el.chipKillSwitch.className = `badge ${isArmed ? 'badge-warning' : 'badge-success'}`;
+
+        if (stats.quota) {
+          el.chipDailyQuota.textContent = `Quota: ${stats.quota.count}/${stats.quota.limit} Today (${stats.quota.remaining} Left)`;
+          el.chipDailyQuota.className = `badge ${stats.quota.allowed ? 'badge-neutral' : 'badge-danger'}`;
+        }
+
+        el.chipApiCost.textContent = `$${stats.safety.dailyCostSpend.toFixed(2)} / $${stats.safety.dailyCostMax.toFixed(2)}`;
+      }
 
       // Render recent audit logs
       if (stats.recentLogs && stats.recentLogs.length > 0) {
@@ -259,14 +311,14 @@
           let detailsText = '';
           try {
             const parsed = JSON.parse(log.details || '{}');
-            detailsText = parsed.title || parsed.slug || parsed.username || '';
+            detailsText = parsed.title || parsed.slug || parsed.username || parsed.reason || '';
           } catch {
             detailsText = log.details || '';
           }
           return `
             <div class="audit-item">
               <span class="audit-time">${timeStr}</span>
-              <span class="audit-action">${escapeHtml(log.action.replace('_', ' '))}</span>
+              <span class="audit-action">${escapeHtml(log.action.replace(/_/g, ' '))}</span>
               <span class="audit-detail">${escapeHtml(detailsText)}</span>
             </div>
           `;
@@ -277,6 +329,107 @@
     } catch (err) {
       console.error('Failed to load dashboard stats:', err);
     }
+  }
+
+  // -------------------------------------------------------------
+  // SAFETY CONTROLS MODAL
+  // -------------------------------------------------------------
+  el.btnOpenSettings.addEventListener('click', async () => {
+    try {
+      const data = await api('/settings');
+      state.settings = data.settings || {};
+      el.setRolloutStage.value = state.settings.rollout_stage || 'STAGE_B';
+      el.setKillSwitch.value = state.settings.auto_publish_kill_switch || 'DISABLED';
+      el.setDailyLimit.value = state.settings.daily_publish_limit || 2;
+      el.setMaxCost.value = state.settings.max_daily_api_cost_usd || 10;
+      el.settingsModal.classList.remove('hidden');
+    } catch (err) {
+      alert('Failed to load safety settings: ' + err.message);
+    }
+  });
+
+  el.btnCloseSettings.addEventListener('click', () => el.settingsModal.classList.add('hidden'));
+  el.btnCancelSettings.addEventListener('click', () => el.settingsModal.classList.add('hidden'));
+
+  el.settingsForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const stage = el.setRolloutStage.value;
+    const killSwitch = el.setKillSwitch.value;
+    const dailyLimit = parseInt(el.setDailyLimit.value, 10);
+    const maxCost = parseFloat(el.setMaxCost.value);
+
+    if (stage === 'STAGE_C' && killSwitch === 'ENABLED') {
+      const confirmed = confirm('CAUTION: You are enabling STAGE_C with Kill Switch ARMED.\n\nApproved articles will be published directly to the public live website without human intervention.\n\nProceed?');
+      if (!confirmed) return;
+    }
+
+    try {
+      await api('/settings', {
+        method: 'PUT',
+        body: JSON.stringify({
+          rollout_stage: stage,
+          auto_publish_kill_switch: killSwitch,
+          daily_publish_limit: dailyLimit,
+          max_daily_api_cost_usd: maxCost
+        })
+      });
+      el.settingsModal.classList.add('hidden');
+      alert('Safety configuration updated successfully.');
+      await loadDashboard();
+    } catch (err) {
+      alert('Failed to update settings: ' + err.message);
+    }
+  });
+
+  // -------------------------------------------------------------
+  // HUMAN REVIEW QUEUE
+  // -------------------------------------------------------------
+  async function loadReviewQueue(status = 'PENDING') {
+    try {
+      const items = await api(`/review-queue?status=${status}`);
+      state.reviewQueue = items;
+      renderReviewQueueTable();
+    } catch (err) {
+      console.error('Failed to load review queue:', err);
+    }
+  }
+
+  function renderReviewQueueTable() {
+    if (!state.reviewQueue || state.reviewQueue.length === 0) {
+      el.reviewQueueTable.innerHTML = '<tr><td colspan="5" class="text-center p-6 text-muted">No items in the review queue. All articles have passed strict verification.</td></tr>';
+      return;
+    }
+
+    el.reviewQueueTable.innerHTML = state.reviewQueue.map(item => {
+      const details = item.failure_details || {};
+      const warnings = (details.warnings || []).map(w => `<span class="diag-flag diag-flag-warn">• ${escapeHtml(w)}</span>`).join('<br>');
+      const cliches = (details.cliches || []).map(c => `<span class="diag-flag diag-flag-danger">AI Cliche: "${escapeHtml(c)}"</span>`).join(' ');
+
+      return `
+        <tr>
+          <td>
+            <div class="font-bold text-main">${escapeHtml(item.title)}</div>
+            <div class="text-xs text-muted font-mono mt-1">/articles/${escapeHtml(item.slug)}/</div>
+          </td>
+          <td><span class="badge badge-warning">${escapeHtml(item.reason.replace(/_/g, ' '))}</span></td>
+          <td>
+            <div class="text-xs">
+              ${details.score ? `<strong>Overall Score: ${details.score}/100</strong><br>` : ''}
+              ${cliches ? `${cliches}<br>` : ''}
+              ${warnings || '<span class="text-muted">General editorial review requested</span>'}
+            </div>
+          </td>
+          <td><span class="text-muted text-xs">${new Date(item.escalated_at).toLocaleTimeString()}</span></td>
+          <td>
+            <div class="flex gap-2">
+              <button class="btn btn-secondary btn-sm" onclick="window.cosmosStudio.editArticle('${item.article_id}')">Edit in Studio</button>
+              <button class="btn btn-success btn-sm" onclick="window.cosmosStudio.resolveQueueItem('${item.id}', 'APPROVED')">Approve</button>
+              <button class="btn btn-secondary btn-sm" onclick="window.cosmosStudio.resolveQueueItem('${item.id}', 'REJECTED')">Reject</button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join('');
   }
 
   // -------------------------------------------------------------
@@ -320,6 +473,7 @@
           <td>${keywords || '<span class="text-muted text-xs">—</span>'}</td>
           <td>
             <div class="flex gap-2">
+              <button class="btn btn-primary btn-sm" onclick="window.cosmosStudio.runPipelineForTopic('${t.id}')">Run Pipeline</button>
               <button class="btn btn-secondary btn-sm" onclick="window.cosmosStudio.draftFromTopic('${t.id}')">Draft</button>
               <button class="btn-icon" title="Delete" onclick="window.cosmosStudio.deleteTopic('${t.id}')">&times;</button>
             </div>
@@ -374,7 +528,77 @@
     switchTab('generator');
   });
 
+  // Global actions attached to window
   window.cosmosStudio = {
+    async runPipelineForTopic(topicId) {
+      const topic = state.topics.find(t => t.id === topicId);
+      if (!topic) return;
+
+      const confirmed = confirm(`Run autonomous editorial pipeline for:\n"${topic.title}"?\n\nThis invokes ResearchAgent -> WritingAgent -> ReviewingAgent -> SeoAgent.`);
+      if (!confirmed) return;
+
+      const btn = event.target;
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<span class="spinner" style="width:12px;height:12px;display:inline-block;vertical-align:middle;margin-right:4px;"></span> Running...';
+      btn.disabled = true;
+
+      try {
+        const res = await api('/pipeline/run', {
+          method: 'POST',
+          body: JSON.stringify({
+            topicId: topic.id,
+            title: topic.title,
+            category: topic.category,
+            notes: topic.notes,
+            intent: topic.intent
+          })
+        });
+
+        alert(`Pipeline Completed!\n\nDecision: ${res.decision}\nStage: ${res.stage}\nMessage: ${res.message || 'Article processed.'}`);
+        await loadInitialData();
+        if (res.decision === 'ESCALATED_TO_HUMAN_REVIEW') {
+          switchTab('review-queue');
+        } else {
+          switchTab('articles');
+        }
+      } catch (err) {
+        alert('Pipeline execution failed: ' + err.message);
+      } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    },
+
+    async resolveQueueItem(queueId, status) {
+      const actionLabel = status === 'APPROVED' ? 'APPROVE for publication' : 'REJECT & ARCHIVE';
+      const editorNotes = prompt(`Please enter editorial notes for this resolution (${actionLabel}):`, 'Verified by editor.');
+      if (editorNotes === null) return;
+
+      try {
+        await api(`/review-queue/${queueId}/resolve`, {
+          method: 'POST',
+          body: JSON.stringify({ status, editorNotes })
+        });
+        alert(`Review queue item successfully ${status}.`);
+        await loadInitialData();
+      } catch (err) {
+        alert('Failed to resolve queue item: ' + err.message);
+      }
+    },
+
+    async rollbackArticle(articleId, slug) {
+      const confirmed = confirm(`CAUTION: Roll back and unpublish "${slug}"?\n\nThis will immediately delete the Markdown file from src/content/articles/ and mark the database record as ARCHIVED.`);
+      if (!confirmed) return;
+
+      try {
+        await api(`/articles/${articleId}/rollback`, { method: 'POST' });
+        alert(`Success: "${slug}" has been rolled back and archived.`);
+        await loadInitialData();
+      } catch (err) {
+        alert('Rollback failed: ' + err.message);
+      }
+    },
+
     draftFromTopic(topicId) {
       const topic = state.topics.find(t => t.id === topicId);
       if (!topic) return;
@@ -457,7 +681,6 @@
         el.outputSpinner.classList.add('hidden');
         el.outputContainer.classList.remove('hidden');
 
-        // Render comparative columns
         el.outputContainer.innerHTML = `
           <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
             ${data.comparisons.map(c => `
@@ -582,6 +805,9 @@
               ${a.status === 'approved' ? `
                 <button class="btn btn-primary btn-sm" onclick="window.cosmosStudio.publishArticle('${a.id}')">Publish</button>
               ` : ''}
+              ${a.status === 'published' ? `
+                <button class="btn btn-secondary btn-sm" onclick="window.cosmosStudio.rollbackArticle('${a.id}', '${a.slug}')" title="Unpublish / Archive">Rollback</button>
+              ` : ''}
             </div>
           </td>
         </tr>
@@ -671,7 +897,6 @@
     el.editorPreview.innerHTML = parseMarkdownToHtml(raw);
   }
 
-  // Lightweight Client-Side Markdown Parser
   function parseMarkdownToHtml(md) {
     if (!md) return '<p class="text-muted italic">Type markdown in the left pane to preview...</p>';
 
@@ -802,7 +1027,6 @@
     el.qualityModal.classList.remove('hidden');
     el.qualityScanResults.innerHTML = '';
 
-    // Reset checkboxes
     el.gateCheckboxes.forEach(cb => { cb.checked = false; });
     el.btnApproveArticle.disabled = true;
   }
@@ -837,7 +1061,6 @@
         </div>
       `;
 
-      // Auto-check automated criteria if passing
       if (res.verificationScore >= 80) {
         document.getElementById('gate-1').checked = true;
         document.getElementById('gate-2').checked = res.codeBlocks > 0;
@@ -916,4 +1139,3 @@
   // Initialize
   checkAuth();
 })();
-

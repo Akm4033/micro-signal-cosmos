@@ -43,13 +43,18 @@
           <span class="logo-dot"></span>
           <span class="logo-title">Micro Signal Cosmos</span>
         </div>
-        <div class="sidebar-sub">AI Editorial Studio v1.0</div>
+        <div class="sidebar-sub">AI Editorial Studio v2.0</div>
       </div>
 
       <nav class="sidebar-nav">
         <button class="nav-item active" data-tab="dashboard">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
           <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-tab="review-queue">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          <span>Review Queue</span>
+          <span class="nav-badge badge badge-warning hidden" id="sidebar-review-badge">0</span>
         </button>
         <button class="nav-item" data-tab="topics">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -61,7 +66,7 @@
         </button>
         <button class="nav-item" data-tab="articles">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-          <span>Articles &amp; Drafts</span>
+          <span>Articles &amp; Pipeline</span>
         </button>
         <button class="nav-item" data-tab="editor">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
@@ -89,16 +94,29 @@
 
     <!-- MAIN CONTENT AREA -->
     <main class="main-content">
-      <!-- TOP HEADER -->
+      <!-- TOP HEADER WITH SAFETY CONTROLS & STATUS -->
       <header class="top-bar">
         <div class="breadcrumbs">
           <span class="breadcrumb-root">Cosmos Studio</span>
           <span class="breadcrumb-separator">/</span>
           <span class="breadcrumb-active" id="current-page-title">Dashboard Overview</span>
         </div>
+
+        <!-- SAFETY STATUS BAR -->
+        <div class="safety-status-bar">
+          <span class="badge badge-info" id="chip-rollout-stage" title="Current rollout stage">Stage B (Approval Queue)</span>
+          <span class="badge badge-success" id="chip-kill-switch" title="Kill switch status">Kill Switch: PROTECTED</span>
+          <span class="badge badge-neutral" id="chip-daily-quota" title="Daily publishing rate limit">Quota: 0/2 Today</span>
+          <span class="badge badge-neutral" id="chip-api-cost" title="Daily API spend">$0.00 / $10.00</span>
+        </div>
+
         <div class="top-actions">
+          <button id="btn-open-settings" class="btn btn-secondary btn-sm" title="Safety Controls & Configuration">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            <span>Safety Controls</span>
+          </button>
           <a href="https://micro-signal-cosmos.pages.dev/" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
-            <span>View Live Site</span>
+            <span>Live Site</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
           </a>
           <button id="btn-quick-new" class="btn btn-primary btn-sm">
@@ -118,9 +136,9 @@
               <div class="stat-sub">Live on Cloudflare Pages</div>
             </div>
             <div class="stat-card">
-              <div class="stat-label">Active Drafts</div>
-              <div class="stat-value text-warning" id="stat-drafts">0</div>
-              <div class="stat-sub">In progress or review</div>
+              <div class="stat-label">Human Review Queue</div>
+              <div class="stat-value text-warning" id="stat-review-queue">0</div>
+              <div class="stat-sub">Failed gate or citation check</div>
             </div>
             <div class="stat-card">
               <div class="stat-label">Topic Backlog</div>
@@ -190,6 +208,39 @@
           </div>
         </section>
 
+        <!-- TAB: HUMAN REVIEW QUEUE -->
+        <section id="tab-review-queue" class="tab-panel">
+          <div class="section-actions-bar">
+            <div>
+              <h2>Human Editorial Review Queue</h2>
+              <p class="text-muted">Articles automatically escalated due to quality gate warnings, uncited claims, or AI cliches. Human sign-off required.</p>
+            </div>
+            <div class="filter-group">
+              <button class="filter-btn active" id="btn-filter-queue-pending">Pending Review</button>
+              <button class="filter-btn" id="btn-filter-queue-all">All History</button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Article Headline &amp; Slug</th>
+                    <th>Escalation Reason</th>
+                    <th>Diagnostic Breakdown</th>
+                    <th>Escalated At</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="review-queue-table-body">
+                  <tr><td colspan="5" class="text-center p-6 text-muted">No items in the review queue. All articles have passed strict verification.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
         <!-- TAB 2: TOPIC DISCOVERY -->
         <section id="tab-topics" class="tab-panel">
           <div class="section-actions-bar">
@@ -247,7 +298,7 @@
               </div>
               <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Save to Backlog</button>
-                <button type="button" id="btn-generate-from-topic" class="btn btn-secondary">Directly Draft in Multi-LLM Studio &rarr;</button>
+                <button type="button" id="btn-generate-from-topic" class="btn btn-secondary">Draft in Multi-LLM Studio &rarr;</button>
               </div>
             </form>
           </div>
@@ -376,9 +427,10 @@
             </div>
             <div class="filter-group">
               <button class="filter-btn active" data-filter="all">All Articles</button>
-              <button class="filter-btn" data-filter="published">Published (15)</button>
-              <button class="filter-btn" data-filter="draft">Drafts</button>
+              <button class="filter-btn" data-filter="published">Published</button>
+              <button class="filter-btn" data-filter="under_review">Review Queue</button>
               <button class="filter-btn" data-filter="approved">Approved</button>
+              <button class="filter-btn" data-filter="draft">Drafts</button>
             </div>
           </div>
 
@@ -541,6 +593,59 @@
     </main>
   </div>
 
+  <!-- SAFETY CONTROLS MODAL -->
+  <div id="settings-modal" class="modal-overlay hidden">
+    <div class="settings-card">
+      <div class="modal-header">
+        <div>
+          <h3>System Safety &amp; Autonomous Publishing Controls</h3>
+          <p class="text-muted text-sm">Configure global kill switch, daily rate limits, and staged rollout parameters.</p>
+        </div>
+        <button id="btn-close-settings" class="btn-icon">&times;</button>
+      </div>
+      <div class="modal-body p-5">
+        <form id="settings-form">
+          <div class="form-group">
+            <label for="set-rollout-stage">Rollout Staging Level</label>
+            <select id="set-rollout-stage">
+              <option value="STAGE_A">Stage A: Drafts Only (No publishing to filesystem)</option>
+              <option value="STAGE_B" selected>Stage B: Validated + Human Approval Queue (Recommended Default)</option>
+              <option value="STAGE_C">Stage C: Fully Autonomous Publishing (Strictly Locked)</option>
+            </select>
+            <span class="text-xs text-muted">Stage C should only be unlocked after Stage B proves consistent factual grounding.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="set-kill-switch">Global Autonomous Publishing Kill Switch</label>
+            <select id="set-kill-switch">
+              <option value="DISABLED" selected>DISABLED (Protected — All publishing halted)</option>
+              <option value="ENABLED">ENABLED (Armed — Autonomous publishing allowed in Stage C)</option>
+            </select>
+            <span class="text-xs text-muted">Setting this to DISABLED instantly blocks all automated file emissions.</span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="set-daily-limit">Daily Publishing Limit (Articles / Day)</label>
+              <input type="number" id="set-daily-limit" min="1" max="10" value="2" required>
+              <span class="text-xs text-muted">Current limit: 2 articles / calendar day.</span>
+            </div>
+            <div class="form-group flex-1">
+              <label for="set-max-cost">Max Daily API Spend (USD $)</label>
+              <input type="number" id="set-max-cost" min="1" max="50" step="1" value="10" required>
+              <span class="text-xs text-muted">Budget cap to prevent runaway token costs.</span>
+            </div>
+          </div>
+
+          <div class="form-actions mt-4">
+            <button type="submit" class="btn btn-primary">Save Production Configuration</button>
+            <button type="button" id="btn-cancel-settings" class="btn btn-secondary">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- QUALITY CONTROL & FACT-CHECKING MODAL -->
   <div id="quality-modal" class="modal-overlay hidden">
     <div class="quality-card">
@@ -647,4 +752,3 @@
   <script src="/app.js"></script>
 </body>
 </html>
-
