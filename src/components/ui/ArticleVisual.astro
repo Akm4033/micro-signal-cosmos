@@ -357,7 +357,104 @@ const key = slug.toLowerCase();
       </svg>
     )}
 
-    {/* 11. DEFAULT FALLBACK GRAPHIC FOR ANY OTHER ARTICLE (Dynamic Category 3D Architecture) */}
+    {/* 11. SERVERS & SELF-HOSTING / LINUX NETWORKING (3D Rack Chassis & IO Blade) */}
+    {(key.includes('self-hosting') || key.includes('networking') || key.includes('zero-copy') || logo === 'server') && (
+      <svg class="w-full h-full max-h-28 text-sky-500" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 3D Rack Tower Chassis -->
+        <g transform="translate(55, 12)">
+          <!-- Main Chassis -->
+          <rect width="90" height="76" rx="6" fill="#0f172a" stroke="#0ea5e9" stroke-width="1.8"/>
+          <!-- Blade 1 (Top) -->
+          <rect x="6" y="8" width="78" height="16" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+          <circle cx="16" cy="16" r="3" fill="#22c55e" class="animate-pulse"/>
+          <circle cx="26" cy="16" r="3" fill="#38bdf8"/>
+          <line x1="38" y1="16" x2="74" y2="16" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
+          <!-- Blade 2 (Middle) -->
+          <rect x="6" y="30" width="78" height="16" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+          <circle cx="16" cy="38" r="3" fill="#22c55e" class="animate-pulse"/>
+          <circle cx="26" cy="38" r="3" fill="#f59e0b"/>
+          <line x1="38" y1="38" x2="74" y2="38" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
+          <!-- Blade 3 (Bottom - Storage NVMe Array) -->
+          <rect x="6" y="52" width="78" height="16" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+          <rect x="12" y="56" width="12" height="8" rx="1.5" fill="#0284c7"/>
+          <rect x="28" y="56" width="12" height="8" rx="1.5" fill="#0284c7"/>
+          <rect x="44" y="56" width="12" height="8" rx="1.5" fill="#0284c7"/>
+          <rect x="60" y="56" width="18" height="8" rx="1.5" fill="#059669"/>
+        </g>
+        <!-- Activity Glow Pins -->
+        <g stroke="#38bdf8" stroke-width="1.5">
+          <line x1="42" y1="20" x2="55" y2="20"/>
+          <line x1="42" y1="42" x2="55" y2="42"/>
+          <line x1="145" y1="20" x2="158" y2="20"/>
+          <line x1="145" y1="60" x2="158" y2="60"/>
+        </g>
+      </svg>
+    )}
+
+    {/* 12. TRAINING VS INFERENCE ECONOMICS (3D Economics Crossover & GPU FLOPs Curve) */}
+    {(key.includes('economics') || key.includes('training') || key.includes('inference') || logo === 'chart') && (
+      <svg class="w-full h-full max-h-28 text-emerald-500" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="chart-area-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#10b981" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#10b981" stop-opacity="0.05"/>
+          </linearGradient>
+        </defs>
+        <!-- Graph Frame -->
+        <g transform="translate(35, 12)">
+          <rect width="130" height="74" rx="6" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+          <!-- Grid Lines -->
+          <line x1="12" y1="20" x2="118" y2="20" stroke="#334155" stroke-width="0.8" stroke-dasharray="2 2"/>
+          <line x1="12" y1="40" x2="118" y2="40" stroke="#334155" stroke-width="0.8" stroke-dasharray="2 2"/>
+          <line x1="12" y1="60" x2="118" y2="60" stroke="#334155" stroke-width="0.8"/>
+          <!-- Shaded Cost Area Under Curve -->
+          <polygon points="12,55 35,48 65,38 95,22 118,12 118,60 12,60" fill="url(#chart-area-grad)"/>
+          <!-- Training Fixed Cost Line (Flat horizontal) -->
+          <line x1="12" y1="32" x2="118" y2="32" stroke="#f59e0b" stroke-width="1.8" stroke-dasharray="4 2"/>
+          <text x="36" y="28" fill="#fbbf24" font-size="6" font-weight="bold" font-family="monospace">Training CAPEX</text>
+          <!-- Inference Variable Cost Curve (Exponential Ascent) -->
+          <path d="M 12 55 Q 65 52 118 12" stroke="#10b981" stroke-width="2.5" fill="none"/>
+          <circle cx="118" cy="12" r="3.5" fill="#34d399"/>
+          <!-- Crossover Point Marker -->
+          <circle cx="78" cy="32" r="4" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5"/>
+          <text x="78" y="44" fill="#7dd3fc" font-size="6" font-weight="bold" text-anchor="middle" font-family="monospace">ROI Crossover</text>
+        </g>
+      </svg>
+    )}
+
+    {/* 13. BENCHMARKS & EVALS (3D Evaluation Radar & Test Matrix) */}
+    {(key.includes('benchmark') || key.includes('eval') || logo === 'clipboard') && (
+      <svg class="w-full h-full max-h-28 text-emerald-500" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Benchmark Scorecard Board -->
+        <g transform="translate(45, 12)">
+          <rect width="110" height="76" rx="6" fill="#0f172a" stroke="#10b981" stroke-width="1.8"/>
+          <!-- Header Bar -->
+          <rect x="8" y="8" width="94" height="14" rx="3" fill="#065f46"/>
+          <text x="55" y="18" fill="#ecfdf5" font-size="7" font-weight="bold" text-anchor="middle" font-family="monospace">EVAL BENCHMARK v2.6</text>
+          <!-- Test Metric Rows -->
+          <!-- Metric 1: MMLU-Pro -->
+          <rect x="8" y="26" width="94" height="12" rx="2" fill="#1e293b"/>
+          <text x="14" y="35" fill="#94a3b8" font-size="6" font-weight="bold" font-family="monospace">MMLU</text>
+          <rect x="42" y="30" width="46" height="4" rx="2" fill="#334155"/>
+          <rect x="42" y="30" width="42" height="4" rx="2" fill="#10b981"/>
+          <text x="94" y="35" fill="#34d399" font-size="6" font-weight="bold" font-family="monospace">91%</text>
+          <!-- Metric 2: GSM8K -->
+          <rect x="8" y="41" width="94" height="12" rx="2" fill="#1e293b"/>
+          <text x="14" y="50" fill="#94a3b8" font-size="6" font-weight="bold" font-family="monospace">MATH</text>
+          <rect x="42" y="45" width="46" height="4" rx="2" fill="#334155"/>
+          <rect x="42" y="45" width="38" height="4" rx="2" fill="#38bdf8"/>
+          <text x="94" y="50" fill="#38bdf8" font-size="6" font-weight="bold" font-family="monospace">84%</text>
+          <!-- Metric 3: HumanEval -->
+          <rect x="8" y="56" width="94" height="12" rx="2" fill="#1e293b"/>
+          <text x="14" y="65" fill="#94a3b8" font-size="6" font-weight="bold" font-family="monospace">CODE</text>
+          <rect x="42" y="60" width="46" height="4" rx="2" fill="#334155"/>
+          <rect x="42" y="60" width="44" height="4" rx="2" fill="#f59e0b"/>
+          <text x="94" y="65" fill="#fbbf24" font-size="6" font-weight="bold" font-family="monospace">95%</text>
+        </g>
+      </svg>
+    )}
+
+    {/* 14. DEFAULT FALLBACK GRAPHIC FOR ANY OTHER ARTICLE (Dynamic Category 3D Architecture) */}
     {!(key.includes('database') || logo === 'database' ||
        key.includes('passkey') || logo === 'key' ||
        key.includes('https') || logo === 'shield' ||
@@ -367,7 +464,10 @@ const key = slug.toLowerCase();
        key.includes('llm') || logo === 'transformer' ||
        key.includes('browser') || logo === 'browser' ||
        key.includes('cpu') || logo === 'cpu' ||
-       key.includes('webassembly') || key.includes('wasm') || logo === 'wasm') && (
+       key.includes('webassembly') || key.includes('wasm') || logo === 'wasm' ||
+       key.includes('self-hosting') || key.includes('networking') || key.includes('zero-copy') || logo === 'server' ||
+       key.includes('economics') || key.includes('training') || key.includes('inference') || logo === 'chart' ||
+       key.includes('benchmark') || key.includes('eval') || logo === 'clipboard') && (
       <svg class="w-full h-full max-h-28" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g transform="translate(60, 18)">
           <!-- Elevated 3D Base Tile -->

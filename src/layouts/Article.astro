@@ -1,6 +1,7 @@
 ---
 import Base from './Base.astro';
 import ArticleLogo from '../components/ui/ArticleLogo.astro';
+import ArticleVisual from '../components/ui/ArticleVisual.astro';
 import { getAuthor } from '../data/authors';
 
 interface Props {
@@ -19,6 +20,7 @@ interface Props {
   canonical?: string;
   ogImage?: string;
   logo?: string;
+  slug?: string;
   relatedArticles?: Array<{ slug: string; title: string; category: string; categoryVariant?: string; readingTime: string; excerpt: string }>;
 }
 
@@ -35,8 +37,11 @@ const {
   canonical,
   ogImage,
   logo,
+  slug: propSlug,
   relatedArticles = []
 } = Astro.props;
+
+const slug = propSlug || Astro.params.slug || '';
 
 const authorData = getAuthor(author);
 const authorName = Astro.props.authorName || authorData.name;
@@ -95,6 +100,11 @@ const resolvedCanonical = canonical || `${siteUrl}/articles/${Astro.params.slug 
           </div>
         </div>
       </header>
+
+      <!-- Prominent 3D Interactive Topic Visual Hero Banner (Visible when viewing article) -->
+      <div class="article-hero-visual relative h-52 sm:h-72 w-full overflow-hidden rounded-2xl border border-neutral-200/90 border-b-4 border-b-neutral-300/80 bg-neutral-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)] dark:bg-neutral-900 dark:border-neutral-800 dark:border-b-neutral-700 my-8">
+        <ArticleVisual slug={slug} category={categoryVariant} logo={logo} />
+      </div>
 
       <div class="article-layout grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12 max-w-full items-start">
         <!-- Sidebar: TOC + Share + Author -->
