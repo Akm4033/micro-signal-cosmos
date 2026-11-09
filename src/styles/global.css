@@ -54,6 +54,28 @@
   #reading-progress-bar {
     @apply fixed top-0 left-0 h-0.5 bg-brand-primary z-50 origin-left scale-x-0 transition-transform duration-100 ease-out;
   }
+
+  /* Fluid typography - scales smoothly across devices */
+  .text-display { @apply text-[clamp(2.25rem,5vw,4rem)] font-extrabold tracking-tight; }
+  .text-h1 { @apply text-[clamp(2rem,4vw,3rem)] font-bold; }
+  .text-h2 { @apply text-[clamp(1.5rem,3vw,2.25rem)] font-bold; }
+  .text-h3 { @apply text-[clamp(1.25rem,2.5vw,1.75rem)] font-bold; }
+  .text-lead { @apply text-[clamp(1.125rem,2vw,1.25rem)] leading-relaxed; }
+  .text-body { @apply text-base leading-relaxed; }
+  .text-small { @apply text-sm leading-relaxed; }
+  .text-caption { @apply text-xs leading-normal; }
+
+  /* Responsive spacing */
+  .space-y-responsive > * + * { margin-top: clamp(1rem, 2vw, 1.5rem); }
+  .space-y-tight > * + * { margin-top: clamp(0.5rem, 1vw, 0.75rem); }
+
+  /* Container queries for card grids */
+  @container (min-width: 640px) {
+    .grid-auto-fit { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @container (min-width: 1024px) {
+    .grid-auto-fit { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
 }
 
 @layer components {
@@ -183,9 +205,39 @@
   .prose-editorial ul { @apply list-disc pl-6 my-6 space-y-2; }
   .prose-editorial ol { @apply list-decimal pl-6 my-6 space-y-2; }
   .prose-editorial li { @apply text-text-secondary; }
+
+  /* Card grids that adapt */
+  .article-grid {
+    @apply grid gap-6;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+  
+  @media (min-width: 768px) {
+    .article-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .article-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* Hero section responsive */
+  .hero-content {
+    @apply px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24;
+  }
+
+  /* Navigation responsive */
+  .nav-desktop { @apply hidden lg:flex; }
+  .nav-mobile { @apply lg:hidden; }
 }
 
 @layer utilities {
+  /* Smooth transitions */
+  .transition-smooth { @apply transition-all duration-200 ease-out; }
+  .hover-lift { @apply transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg; }
+  
+  /* Focus states */
+  .focus-ring { @apply focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2; }
+  
+  /* Text balance for headlines */
   .text-balance { text-wrap: balance; }
   .animate-fade-in { animation: fadeIn 0.3s ease-out; }
   .animate-slide-up { animation: slideUp 0.4s ease-out; }

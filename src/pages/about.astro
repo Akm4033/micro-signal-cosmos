@@ -10,11 +10,11 @@ import Base from '../layouts/Base.astro';
     </header>
 
     <section class="mb-16">
-      <h2 class="text-h2 font-bold text-text-primary mb-6">Who I Am</h2>
+      <h2 class="text-h2 font-bold text-text-primary mb-6">Who Runs This</h2>
       <div class="prose-editorial max-w-none">
-        <p><strong>I'm a systems engineer and technical writer</strong> with over a decade of experience building and operating large-scale distributed systems at hyperscale. After years of debugging production incidents at 3 AM, optimizing database clusters under load, and shipping infrastructure that powers products used by millions, I started this publication to share the hard-won knowledge that doesn't make it into documentation.</p>
-        <p>My career has spanned core infrastructure at a major cloud provider, platform engineering at a fast-growing startup, and consulting for teams modernizing legacy architectures. I've designed storage engines that handle petabytes, debugged consensus protocols under network partitions, and built deployment pipelines that ship thousands of times per day. The articles here come from that experience — the problems I've solved, the trade-offs I've navigated, and the mental models that actually work in production.</p>
-        <p>This publication exists because shallow tutorials and paywalled papers don't serve practitioners. I wanted a place where complex topics — browser internals, LLM training economics, fusion physics, database internals — are explained with code, diagrams, and primary sources, not analogies.</p>
+        <p><strong>Micro Signal Cosmos is a solo project</strong> — one person using AI tools (Claude, GPT, Gemini) to research, draft, and structure technical articles, then verifying and editing everything before publishing.</p>
+        <p>I don't claim decades of hyperscale engineering experience. I'm someone who enjoys learning complex technical topics deeply and wanted to create the kind of resource I wish existed when I was learning: thorough, well-sourced, practical explanations of complex systems — browser internals, LLM architectures, database internals, fusion physics, and more.</p>
+        <p>Every article is researched using primary sources (papers, RFCs, official docs, source code), drafted with AI assistance, then verified by me: code is executed, math is checked, configs are tested. If I can't verify it, it doesn't publish.</p>
       </div>
     </section>
 
@@ -42,8 +42,8 @@ import Base from '../layouts/Base.astro';
             </tr>
             <tr class="border-b border-neutral-100 dark:border-neutral-800">
               <td class="p-3 font-medium">Drafting</td>
-              <td class="p-3">Structured outline &rarr; iterative drafting with research assistance</td>
-              <td class="p-3">Technical writing workflow</td>
+              <td class="p-3">Structured outline &rarr; AI-assisted drafting with research assistance &rarr; human verification &amp; editing</td>
+              <td class="p-3">Claude, GPT, Gemini + manual verification</td>
             </tr>
             <tr class="border-b border-neutral-100 dark:border-neutral-800">
               <td class="p-3 font-medium">Verification</td>
@@ -69,7 +69,7 @@ import Base from '../layouts/Base.astro';
         </table>
       </div>
       <div class="prose-editorial max-w-none mt-6">
-        <p><strong>Quality gate:</strong> Every article is verified by a human before publication. Code is executed, math is checked, configurations are tested. If I haven't personally verified it, it doesn't publish.</p>
+        <p><strong>Quality gate:</strong> Every article is verified by a human before publication. Code is executed, math is checked, configurations are tested. AI assists with drafting; human verifies everything. If I can't verify it, it doesn't publish.</p>
       </div>
     </section>
 
@@ -103,21 +103,21 @@ import Base from '../layouts/Base.astro';
       </div>
     </section>
 
-    <!-- Domain Lenses Section -->
+    <!-- Editorial Focus Areas Section -->
     <section class="mb-16">
-      <h2 class="text-h2 font-bold text-text-primary mb-6">Domain Lenses</h2>
-      <p class="text-text-secondary mb-6">Micro Signal Cosmos is written through three specialized domain lenses, each bringing deep engineering and scientific inquiry to complex technical concepts.</p>
+      <h2 class="text-h2 font-bold text-text-primary mb-6">Editorial Focus Areas</h2>
+      <p class="text-text-secondary mb-6">Articles are organized through three editorial focus areas, each representing a domain for consistent depth and perspective.</p>
       <div class="grid gap-6 md:grid-cols-3">
         <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-900/50">
-          <h3 class="font-bold text-text-primary mb-2">Marina Kowalski — Systems Engineer</h3>
+          <h3 class="font-bold text-text-primary mb-2">Systems &amp; Infrastructure</h3>
           <p class="text-text-secondary">Browser internals, CPU architecture, WebAssembly, networking, TLS/PKI, self-hosted infrastructure.</p>
         </div>
         <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-900/50">
-          <h3 class="font-bold text-text-primary mb-2">Kai Nakamura — ML Engineer</h3>
+          <h3 class="font-bold text-text-primary mb-2">AI &amp; Machine Learning</h3>
           <p class="text-text-secondary">LLM training/inference economics, RAG systems, model evaluation, transformer architecture, AI tooling.</p>
         </div>
         <div class="rounded-xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-900/50">
-          <h3 class="font-bold text-text-primary mb-2">Arun Mehta — Astrophysicist</h3>
+          <h3 class="font-bold text-text-primary mb-2">Science &amp; Physics</h3>
           <p class="text-text-secondary">Stellar spectroscopy, exoplanet atmospheres, dark matter, nuclear fusion, observational cosmology.</p>
         </div>
       </div>

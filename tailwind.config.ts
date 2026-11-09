@@ -5,10 +5,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Brand
+        // Softer brand colors
         brand: {
-          primary: 'var(--brand-primary)',
-          accent: 'var(--brand-accent)',
+          primary: '#0ea5e9',
+          'primary-hover': '#0284c7',
+          'primary-muted': '#e0f2fe',
+          accent: '#8b5cf6',
+          'accent-hover': '#7c3aed',
+          'accent-muted': '#f3e8ff',
           sky: '#0ea5e9',
           'sky-deep': '#0284c7',
           'sky-muted': '#e0f2fe',
@@ -16,19 +20,19 @@ export default {
           'violet-deep': '#7c3aed',
           'violet-muted': '#f3e8ff',
         },
-        // Warm Neutrals (semantic)
+        // Softer, more professional neutrals
         neutral: {
-          950: '#0a0f1a',
-          900: '#111827',
-          800: '#1f2937',
-          700: '#374151',
-          600: '#4b5563',
-          500: '#6b7280',
-          400: '#9ca3af',
-          300: '#d1d5db',
-          200: '#e5e7eb',
-          100: '#f3f4f6',
-          50: '#f9fafb',
+          50: '#fafafa',
+          100: '#f4f4f5',
+          200: '#e4e4e7',
+          300: '#d4d4d8',
+          400: '#a1a1aa',
+          500: '#71717a',
+          600: '#52525b',
+          700: '#3f3f46',
+          800: '#27272a',
+          900: '#18181b',
+          950: '#09090b',
           0: '#ffffff',
         },
         // Semantic aliases
