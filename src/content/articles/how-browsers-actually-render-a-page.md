@@ -1,6 +1,7 @@
 ---
 title: "How Browsers Actually Render a Page: Under the Hood of the Critical Rendering Path"
 description: "A comprehensive systems-level teardown of modern browser rendering pipelines: from raw byte stream parsing, DOM and CSSOM construction, through tree layout, rasterization, and GPU compositing."
+logo: "browser"
 slug: "how-browsers-actually-render-a-page"
 publishDate: "2026-11-01T08:00:00Z"
 category: "technology"

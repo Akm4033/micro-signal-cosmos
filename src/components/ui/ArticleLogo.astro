@@ -1,0 +1,49 @@
+---
+interface Props {
+  logo?: string;
+  category?: 'tech' | 'science' | 'ai' | 'devtools' | string;
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+const { logo = 'database', category = 'tech', size = 'md', class: customClass = '' } = Astro.props;
+
+const sizeClasses: Record<string, string> = {
+  sm: 'w-8 h-8 p-1.5',
+  md: 'w-12 h-12 p-2.5',
+  lg: 'w-16 h-16 p-3.5',
+};
+
+const categoryColors: Record<string, string> = {
+  tech: 'bg-sky-100 text-sky-600 dark:bg-sky-900/30 dark:text-sky-400',
+  technology: 'bg-sky-100 text-sky-600 dark:bg-sky-900/30 dark:text-sky-400',
+  science: 'bg-violet-100 text-violet-600 dark:bg-violet-900/30 dark:text-violet-400',
+  ai: 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400',
+  'artificial-intelligence': 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400',
+  devtools: 'bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400',
+  'developer-tools': 'bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400',
+};
+
+const icons: Record<string, string> = {
+  browser: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full h-full"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+  cpu: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full h-full"><rect x="2" y="3" width="20" height="18" rx="2"/><rect x="6" y="5" width="4" height="4"/><rect x="14" y="5" width="4" height="4"/><rect x="6" y="12" width="4" height="4"/><rect x="14" y="12" width="4" height="4"/><line x1="6" y1="19" x2="6.01" y2="19"/><line x1="10" y1="19" x2="10.01" y2="19"/><line x1="14" y1="19" x2="14.01" y2="19"/><line x1="18" y1="19" x2="18.01" y2="19"/></svg>`,
+  wasm: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full h-full"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="2 8.5 12 14 22 8.5"/></svg>`,
+  server: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full h-full"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>`,
+  chart: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full h-full"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
+  transformer: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full h-full"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="12" y1="10" x2="12" y2="14"/><polyline points="8 10 12 6 16 10"/><polyline points="8 14 12 18 16 14"/></svg>`,
+  database: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full h-full"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14"/><path d="M21 5v14"/><ellipse cx="12" cy="19" rx="9" ry="3"/></svg>`,
+  clipboard: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full h-full"><rect x="9" y="3" width="6" height="6" rx="1"/><path d="M5 9v12a2 2 0 002 2h10a2 2 0 002-2V9"/><path d="M9 3v6"/><path d="M15 3v6"/></svg>`,
+  star: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full h-full"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  telescope: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full h-full"><path d="M10 2h4v4"/><path d="M4 18l3-3 4 4 4-4 3 3"/><path d="M12 18V6"/><path d="M8 14h8"/><path d="M10 4h4"/></svg>`,
+  atom: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full h-full"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="10" ry="3"/><ellipse cx="12" cy="12" rx="3" ry="10"/></svg>`,
+  fusion: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full h-full"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="16" cy="16" r="1.5" fill="currentColor"/><circle cx="8" cy="16" r="1.5" fill="currentColor"/><circle cx="16" cy="8" r="1.5" fill="currentColor"/></svg>`,
+  shield: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full h-full"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+  key: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-full h-full"><circle cx="8" cy="16" r="2"/><path d="M12 16v-6a4 4 0 018 0v6"/><circle cx="16" cy="12" r="2"/></svg>`,
+};
+
+const svgContent = icons[logo] || icons.database;
+const chosenSize = sizeClasses[size] || sizeClasses.md;
+const chosenColor = categoryColors[category] || categoryColors.tech;
+---
+
+<div class={`inline-flex items-center justify-center rounded-xl shadow-xs shrink-0 ${chosenSize} ${chosenColor} ${customClass}`} aria-hidden="true" set:html={svgContent}>
+</div>

@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import ArticleCard from '../components/ui/ArticleCard.astro';
+import ArticleLogo from '../components/ui/ArticleLogo.astro';
 import NewsletterHero from '../components/newsletter/NewsletterHero.astro';
 import NewsletterExitIntent from '../components/newsletter/NewsletterExitIntent.astro';
 import { getPublishedArticles, getArticleSlug, getArticleReadingTime } from '../data/articles';
@@ -170,25 +171,53 @@ const latestArticles = sortedArticles.slice(0, 6);
         <a href="/articles/" class="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-brand-primary hover:text-brand-sky-deep transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded py-1"><span>Explore Complete Archive</span><span aria-hidden="true">&rarr;</span></a>
       </div>
       <div class="grid gap-8 lg:grid-cols-12 items-stretch">
-        <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs transition-all duration-300 hover:shadow-md hover:border-brand-primary/30 lg:col-span-7 min-w-0 dark:border-neutral-700 dark:bg-neutral-900">
-          <div>
-            <div class="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-sky-900 flex items-center justify-center p-6 text-white mb-6 shadow-inner">
+        <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs transition-all duration-300 hover:shadow-md hover:border-brand-primary/30 lg:col-span-7 min-w-0 dark:border-neutral-700 dark:bg-neutral-900" itemprop="mainEntity" itemscope itemtype="https://schema.org/Article">
+          <a href="/articles/choosing-a-database-in-2026/" class="block" aria-label="Read article: Choosing a Database in 2026">
+            <div class="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 flex items-center justify-center p-6 text-white mb-6 shadow-inner">
               <div class="absolute inset-0 opacity-15" aria-hidden="true"><svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 120" preserveAspectRatio="none"><path d="M0 60 Q 90 20, 180 60 T 360 60 T 540 60 T 720 60" fill="none" stroke="white" stroke-width="2"></path><path d="M0 80 Q 90 40, 180 80 T 360 80 T 540 80 T 720 80" fill="none" stroke="white" stroke-width="1"></path></svg></div>
               <div class="relative z-10 text-center"><span class="inline-block rounded-lg bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 font-mono text-xs font-bold text-sky-200 uppercase tracking-widest mb-2">TOPIC #03</span><p class="text-xs uppercase tracking-widest text-slate-300 font-semibold">Featured Knowledge Guide</p></div>
               <div class="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-white/95 backdrop-blur-md px-3 py-1 text-xs font-bold text-text-primary shadow-xs"><span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span><span>Developer Tools</span></div>
               <span class="absolute bottom-4 right-4 rounded-full bg-neutral-900/85 backdrop-blur-md px-2.5 py-1 text-[11px] font-semibold text-slate-200 border border-white/10">13 min read</span>
+              <!-- Article Logo -->
+              <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <ArticleLogo logo="database" category="devtools" size="lg" />
+              </div>
             </div>
-            <div class="flex items-center gap-3 text-xs text-text-muted mb-3"><span class="font-bold text-text-primary">Marina Kowalski</span><span aria-hidden="true">&bull;</span><time datetime="2026-11-15T08:00:00.000Z">Nov 15, 2026</time></div>
-            <h3 class="text-2xl sm:text-3xl font-extrabold leading-tight text-text-primary transition-colors group-hover:text-brand-primary"><a href="/articles/choosing-a-database-in-2026/" class="focus-visible:outline-none focus-visible:underline">Choosing a Database in 2026: A Pragmatic Systems Engineering Guide</a></h3>
-            <p class="mt-4 text-base leading-relaxed text-text-secondary">A comprehensive decision framework for modern data architectures: PostgreSQL extensions, SQLite at the edge, serverless autoscaling, vector search engines, and real-time columnar OLAP.</p>
-          </div>
-          <div class="mt-8 pt-5 border-t border-neutral-200 flex items-center justify-between"><a href="/articles/choosing-a-database-in-2026/" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-primary transition-all group-hover:gap-2.5 hover:text-brand-sky-deep" aria-label="Read full analysis"><span>Read Article</span><span aria-hidden="true">&rarr;</span></a><span class="text-xs text-text-muted font-medium">13 min read</span></div>
+            <div class="flex items-center gap-3 text-xs text-text-muted mb-3"><span class="font-bold text-text-primary" itemprop="author">Micro Signal Cosmos</span><span aria-hidden="true">&bull;</span><time datetime="2026-11-15T08:00:00.000Z">Nov 15, 2026</time></div>
+            <h3 class="text-2xl sm:text-3xl font-extrabold leading-tight text-text-primary transition-colors group-hover:text-brand-primary" itemprop="headline"><span class="focus-visible:outline-none focus-visible:underline">Choosing a Database in 2026: A Pragmatic Systems Engineering Guide</span></h3>
+            <p class="mt-4 text-base leading-relaxed text-text-secondary" itemprop="description">A comprehensive decision framework for modern data architectures: PostgreSQL extensions, SQLite at the edge, serverless autoscaling, vector search engines, and real-time columnar OLAP.</p>
+          </a>
+          <div class="mt-8 pt-5 border-t border-neutral-200 flex items-center justify-between"><a href="/articles/choosing-a-database-in-2026/" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-primary transition-all group-hover:gap-2.5 hover:text-brand-primary-hover" aria-label="Read full analysis"><span>Read Article</span><span aria-hidden="true">&rarr;</span></a><span class="text-xs text-text-muted font-medium">13 min read</span></div>
         </article>
         <div class="flex flex-col gap-6 lg:col-span-5 min-w-0 justify-between">
           <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs transition-all duration-300 hover:shadow-md hover:border-brand-primary/30 flex-1 dark:border-neutral-700 dark:bg-neutral-900">
-            <div><div class="flex items-center justify-between gap-2 text-xs mb-3"><span class="badge badge--science">Science</span><span class="font-medium text-text-muted text-xs">11 min read</span></div><h3 class="text-lg sm:text-xl font-bold leading-snug text-text-primary transition-colors group-hover:text-brand-primary"><a href="/articles/how-we-know-what-stars-are-made-of/" class="focus-visible:outline-none focus-visible:underline">How We Know What Stars Are Made Of: The Physics of Stellar Spectroscopy</a></h3><p class="mt-2.5 text-sm leading-relaxed text-text-secondary line-clamp-2">The detective story of quantum astrophysics: how Fraunhofer absorption lines, atomic orbital transitions, and modern diffraction spectrographs allow us to weigh and analyze stars trillions of miles away.</p></div><div class="mt-5 pt-4 border-t border-neutral-200 flex items-center justify-between text-xs text-text-muted"><div class="flex items-center gap-2"><span class="font-medium text-text-primary">Arun Mehta</span><span aria-hidden="true">&bull;</span><time datetime="2026-11-09T08:00:00.000Z">Nov 9, 2026</time></div><a href="/articles/how-we-know-what-stars-are-made-of/" class="font-bold text-brand-primary group-hover:text-brand-sky-deep inline-flex items-center gap-1 uppercase tracking-wider text-[11px]"><span>Read</span><span aria-hidden="true">&rarr;</span></a></div></article>
+            <div>
+              <div class="flex items-center justify-between gap-2 text-xs mb-3">
+                <div class="flex items-center gap-2">
+                  <ArticleLogo logo="star" category="science" size="sm" />
+                  <span class="badge badge--science">Science</span>
+                </div>
+                <span class="font-medium text-text-muted text-xs">11 min read</span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-bold leading-snug text-text-primary transition-colors group-hover:text-brand-primary"><a href="/articles/how-we-know-what-stars-are-made-of/" class="focus-visible:outline-none focus-visible:underline">How We Know What Stars Are Made Of: The Physics of Stellar Spectroscopy</a></h3>
+              <p class="mt-2.5 text-sm leading-relaxed text-text-secondary line-clamp-2">The detective story of quantum astrophysics: how Fraunhofer absorption lines, atomic orbital transitions, and modern diffraction spectrographs allow us to weigh and analyze stars trillions of miles away.</p>
+            </div>
+            <div class="mt-5 pt-4 border-t border-neutral-200 flex items-center justify-between text-xs text-text-muted"><div class="flex items-center gap-2"><span class="font-medium text-text-primary">Micro Signal Cosmos</span><span aria-hidden="true">&bull;</span><time datetime="2026-11-09T08:00:00.000Z">Nov 9, 2026</time></div><a href="/articles/how-we-know-what-stars-are-made-of/" class="font-bold text-brand-primary group-hover:text-brand-primary-hover inline-flex items-center gap-1 uppercase tracking-wider text-[11px]"><span>Read</span><span aria-hidden="true">&rarr;</span></a></div>
+          </article>
           <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs transition-all duration-300 hover:shadow-md hover:border-brand-primary/30 flex-1 dark:border-neutral-700 dark:bg-neutral-900">
-            <div><div class="flex items-center justify-between gap-2 text-xs mb-3"><span class="badge badge--tech">Technology</span><span class="font-medium text-text-muted text-xs">12 min read</span></div><h3 class="text-lg sm:text-xl font-bold leading-snug text-text-primary transition-colors group-hover:text-brand-primary"><a href="/articles/how-browsers-actually-render-a-page/" class="focus-visible:outline-none focus-visible:underline">How Browsers Actually Render a Page: From Raw Bytes to Pixels</a></h3><p class="mt-2.5 text-sm leading-relaxed text-text-secondary line-clamp-2">A technical deep dive into Blink and Gecko: DOM parsing, CSSOM construction, render tree calculation, layout geometry, GPU rasterization, and compositor layering.</p></div><div class="mt-5 pt-4 border-t border-neutral-200 flex items-center justify-between text-xs text-text-muted"><div class="flex items-center gap-2"><span class="font-medium text-text-primary">Marina Kowalski</span><span aria-hidden="true">&bull;</span><time datetime="2026-11-02T08:00:00.000Z">Nov 2, 2026</time></div><a href="/articles/how-browsers-actually-render-a-page/" class="font-bold text-brand-primary group-hover:text-brand-sky-deep inline-flex items-center gap-1 uppercase tracking-wider text-[11px]"><span>Read</span><span aria-hidden="true">&rarr;</span></a></div></article>
+            <div>
+              <div class="flex items-center justify-between gap-2 text-xs mb-3">
+                <div class="flex items-center gap-2">
+                  <ArticleLogo logo="browser" category="tech" size="sm" />
+                  <span class="badge badge--tech">Technology</span>
+                </div>
+                <span class="font-medium text-text-muted text-xs">12 min read</span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-bold leading-snug text-text-primary transition-colors group-hover:text-brand-primary"><a href="/articles/how-browsers-actually-render-a-page/" class="focus-visible:outline-none focus-visible:underline">How Browsers Actually Render a Page: From Raw Bytes to Pixels</a></h3>
+              <p class="mt-2.5 text-sm leading-relaxed text-text-secondary line-clamp-2">A technical deep dive into Blink and Gecko: DOM parsing, CSSOM construction, render tree calculation, layout geometry, GPU rasterization, and compositor layering.</p>
+            </div>
+            <div class="mt-5 pt-4 border-t border-neutral-200 flex items-center justify-between text-xs text-text-muted"><div class="flex items-center gap-2"><span class="font-medium text-text-primary">Micro Signal Cosmos</span><span aria-hidden="true">&bull;</span><time datetime="2026-11-02T08:00:00.000Z">Nov 2, 2026</time></div><a href="/articles/how-browsers-actually-render-a-page/" class="font-bold text-brand-primary group-hover:text-brand-primary-hover inline-flex items-center gap-1 uppercase tracking-wider text-[11px]"><span>Read</span><span aria-hidden="true">&rarr;</span></a></div>
+          </article>
         </div>
       </div>
     </div>
@@ -227,6 +256,7 @@ const latestArticles = sortedArticles.slice(0, 6);
             excerpt={article.data.description}
             author={article.data.author}
             publishedDate={article.data.publishDate}
+            logo={article.data.logo}
           />
         ))}
       </div>

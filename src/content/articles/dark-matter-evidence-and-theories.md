@@ -1,6 +1,7 @@
 ---
 title: "Dark Matter: The Evidence, the Candidates, and the Search"
 description: "Why 85% of all matter in the universe is invisible: galactic rotation curves, the Bullet Cluster, Cosmic Microwave Background fluctuations, and the hunt for WIMPs and axions."
+logo: "atom"
 slug: "dark-matter-evidence-and-theories"
 publishDate: "2026-11-11T08:00:00Z"
 category: "science"

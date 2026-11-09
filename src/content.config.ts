@@ -49,6 +49,9 @@ const articles = defineCollection({
     /** Path or URL to editorial cover image (e.g. '/images/articles/my-image.webp') */
     coverImage: z.string().optional(),
 
+    /** Unique article logo / icon identifier */
+    logo: z.string().optional(),
+
     /** Descriptive accessibility alt text for cover image */
     coverImageAlt: z.string().optional(),
 

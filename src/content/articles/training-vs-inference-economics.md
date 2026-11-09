@@ -1,6 +1,7 @@
 ---
 title: "Training vs. Inference Economics: The True Cost of Running LLMs"
 description: "A financial and hardware engineering breakdown of modern frontier models: memory bandwidth bottlenecks, KV cache sizing, FP8 quantization, and cloud unit economics."
+logo: "chart"
 slug: "training-vs-inference-economics"
 publishDate: "2026-11-05T08:00:00Z"
 category: "artificial-intelligence"

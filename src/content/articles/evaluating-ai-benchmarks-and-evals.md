@@ -1,6 +1,7 @@
 ---
 title: "Evaluating AI: Modern Benchmarks, Evaluation Harnesses, and LLM-as-a-Judge"
 description: "How to design production evaluation harnesses for LLM applications: ground truth dataset curation, RAGAS metrics, Promptfoo CI/CD integration, and LLM-as-a-judge bias mitigation."
+logo: "clipboard"
 slug: "evaluating-ai-benchmarks-and-evals"
 publishDate: "2026-11-08T08:00:00Z"
 category: "artificial-intelligence"

@@ -1,6 +1,7 @@
 ---
 title: "HTTPS Deep Dive: TLS 1.3, Public Key Infrastructure, and Modern Web Cryptography"
 description: "A comprehensive systems exploration of secure communication: the 1-RTT TLS 1.3 handshake, Diffie-Hellman ephemeral key exchange, X.509 certificate chains, Certificate Transparency logs, and mutual TLS (mTLS)."
+logo: "shield"
 slug: "https-deep-dive"
 publishDate: "2026-11-13T08:00:00Z"
 category: "developer-tools"

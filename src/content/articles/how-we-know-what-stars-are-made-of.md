@@ -1,6 +1,7 @@
 ---
 title: "How We Know What Stars Are Made Of: The Physics of Stellar Spectroscopy"
 description: "The detective story of quantum astrophysics: how Fraunhofer absorption lines, atomic orbital transitions, and modern diffraction spectrographs allow us to weigh and analyze stars trillions of miles away."
+logo: "star"
 slug: "how-we-know-what-stars-are-made-of"
 publishDate: "2026-11-09T08:00:00Z"
 category: "science"

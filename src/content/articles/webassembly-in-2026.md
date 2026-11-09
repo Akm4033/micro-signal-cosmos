@@ -1,6 +1,7 @@
 ---
 title: "WebAssembly in 2026: Beyond the Browser and the Rise of the Component Model"
 description: "How WASI 0.2, the WebAssembly Component Model, and lightweight serverless runtimes are transforming edge computing, distributed microservices, and cross-language plugin systems."
+logo: "wasm"
 slug: "webassembly-in-2026"
 publishDate: "2026-11-03T08:00:00Z"
 category: "technology"

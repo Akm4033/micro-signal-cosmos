@@ -1,6 +1,7 @@
 ---
 title: "How LLMs Actually Work: Under the Hood of the Transformer Architecture"
 description: "A rigorous mathematical and algorithmic explanation of modern decoder-only transformers: self-attention, rotary positional embeddings (RoPE), SwiGLU activations, and decoding heuristics."
+logo: "transformer"
 slug: "how-llms-actually-work"
 publishDate: "2026-11-06T08:00:00Z"
 category: "artificial-intelligence"

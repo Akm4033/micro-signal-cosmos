@@ -1,19 +1,53 @@
 ---
 import Base from '../layouts/Base.astro';
-import { getAllAuthors } from '../data/authors';
-import { getPublishedArticles, getArticleSlug, getArticleReadingTime } from '../data/articles';
+import { getPublishedArticles, getArticleSlug } from '../data/articles';
 
-const authorsList = getAllAuthors();
 const allArticles = await getPublishedArticles();
 
 const siteUrl = 'https://microsignalcosmos.com';
-const authorsUrl = `${siteUrl}/authors/`;
+const focusAreasUrl = `${siteUrl}/authors/`;
+
+const focusAreas = [
+  {
+    key: 'systems',
+    title: 'Systems & Infrastructure',
+    tagline: 'Core Systems, Networks & Compilers',
+    description: 'Browser internals, CPU architecture, WebAssembly, Linux networking, TLS 1.3, passwordless authentication, and production database internals.',
+    color: '#1d4ed8',
+    badgeClass: 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800',
+    iconBg: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
+    categories: ['technology', 'developer-tools'],
+    keyTopics: ['Browser Engines', 'CPU Pipelines', 'WebAssembly', 'TLS 1.3 & PKI', 'Database Engines']
+  },
+  {
+    key: 'ai-ml',
+    title: 'AI & Machine Learning',
+    tagline: 'Transformer Architecture & Inference Systems',
+    description: 'Transformer internals, KV cache optimization, LLM training and serving economics, RAG pipelines from scratch, and rigorous model evaluation benchmarks.',
+    color: '#059669',
+    badgeClass: 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800',
+    iconBg: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400',
+    categories: ['artificial-intelligence'],
+    keyTopics: ['Attention Mechanics', 'Inference Economics', 'RAG Architecture', 'Benchmark Auditing']
+  },
+  {
+    key: 'science',
+    title: 'Science & Physics',
+    tagline: 'Observational Astrophysics & Energy',
+    description: 'Stellar spectroscopy, exoplanet atmospheric transmission, dark matter observational evidence, and nuclear fusion confinement physics.',
+    color: '#7c3aed',
+    badgeClass: 'bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-950/40 dark:text-purple-300 dark:border-purple-800',
+    iconBg: 'bg-purple-500/10 text-purple-600 dark:text-purple-400',
+    categories: ['science'],
+    keyTopics: ['Spectroscopy', 'Atmospheric Transit', 'Dark Matter Evidence', 'Fusion Physics']
+  }
+];
 ---
 
 <Base
-  title="Authors & Editorial Lenses | Micro Signal Cosmos"
-  description="Meet the technical writers and domain lenses behind Micro Signal Cosmos."
-  canonical={authorsUrl}
+  title="Editorial Focus Areas & Standards | Micro Signal Cosmos"
+  description="Explore our three specialized editorial focus areas: Systems & Infrastructure, AI & Machine Learning, and Science & Physics."
+  canonical={focusAreasUrl}
 >
   <main id="main-content" class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800">
     <div class="container-wide">
@@ -25,7 +59,7 @@ const authorsUrl = `${siteUrl}/authors/`;
             <a href="/" class="transition-colors hover:text-brand-primary">Home</a>
           </li>
           <li aria-hidden="true" class="text-neutral-400">/</li>
-          <li class="font-semibold text-text-primary" aria-current="page">Authors &amp; Domain Lenses</li>
+          <li class="font-semibold text-text-primary" aria-current="page">Editorial Focus Areas</li>
         </ol>
       </nav>
 
@@ -33,88 +67,74 @@ const authorsUrl = `${siteUrl}/authors/`;
       <header class="mx-auto max-w-3xl text-center mb-16">
         <div class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3.5 py-1 text-xs font-bold tracking-widest text-brand-primary uppercase shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
           <span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span>
-          <span>Editorial Authors</span>
+          <span>Editorial Focus Areas</span>
         </div>
         <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl lg:text-5xl">
-          The Minds Behind the <span class="text-brand-primary">Signals</span>
+          Three Lenses. <span class="text-brand-primary">One High Standard.</span>
         </h1>
         <p class="mt-4 text-base sm:text-lg leading-relaxed text-text-secondary">
-          Micro Signal Cosmos is written through three specialized domain lenses, each bringing deep engineering and scientific inquiry to complex technical concepts.
+          Micro Signal Cosmos organizes its technical investigations into three specialized focus areas. Each area is treated with deep rigor, verified with code or math, and grounded in primary source literature.
         </p>
       </header>
 
-      <!-- Authors Grid -->
-      <div class="grid gap-8 md:grid-cols-3">
-        {authorsList.map((author) => {
-          const authorArticles = allArticles.filter(
-            (a) => a.data.author.toLowerCase() === author.key.toLowerCase()
+      <!-- Focus Areas Grid -->
+      <div class="grid gap-8 md:grid-cols-3 mb-16">
+        {focusAreas.map((area) => {
+          const areaArticles = allArticles.filter((a) =>
+            area.categories.includes(a.data.category.toLowerCase())
           );
 
           return (
             <article
-              id={author.key}
-              class="editorial-card group flex flex-col justify-between"
+              id={area.key}
+              class="editorial-card group flex flex-col justify-between bg-white border border-neutral-200 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 dark:bg-neutral-900 dark:border-neutral-700"
             >
               <div class="p-6 sm:p-8">
-                <div class="flex items-center gap-4 mb-6">
-                  <div class="w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center font-bold text-xl overflow-hidden shrink-0">
-                    {author.avatar ? (
-                      <img src={author.avatar} alt={author.name} class="w-full h-full object-cover" />
-                    ) : (
-                      author.initials
-                    )}
-                  </div>
-                  <div>
-                    <h2 class="text-xl font-bold text-text-primary group-hover:text-brand-primary transition-colors">
-                      {author.name}
-                    </h2>
-                    <p class="text-xs font-semibold text-brand-primary uppercase tracking-wider mt-0.5">
-                      {author.role}
-                    </p>
-                  </div>
+                <!-- Header badge & title -->
+                <div class="mb-4">
+                  <span class={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider border ${area.badgeClass}`}>
+                    {area.tagline}
+                  </span>
+                  <h2 class="text-xl font-bold text-text-primary group-hover:text-brand-primary transition-colors mt-3">
+                    {area.title}
+                  </h2>
                 </div>
 
-                <p class="text-sm leading-relaxed text-text-secondary">
-                  {author.bio}
+                <p class="text-sm leading-relaxed text-text-secondary mb-6">
+                  {area.description}
                 </p>
 
-                <!-- Social / Profile Links -->
-                <div class="mt-6 pt-5 border-t border-neutral-200 dark:border-neutral-700 flex flex-wrap items-center gap-3 text-xs">
-                  {author.links.github && (
-                    <a href={author.links.github} target="_blank" rel="noopener noreferrer" class="font-medium text-brand-primary hover:underline">
-                      GitHub &rarr;
-                    </a>
-                  )}
-                  {author.links.mastodon && (
-                    <a href={author.links.mastodon} target="_blank" rel="noopener noreferrer" class="font-medium text-brand-primary hover:underline">
-                      Mastodon &rarr;
-                    </a>
-                  )}
-                  {author.links.twitter && (
-                    <a href={author.links.twitter} target="_blank" rel="noopener noreferrer" class="font-medium text-brand-primary hover:underline">
-                      X &rarr;
-                    </a>
-                  )}
-                  {author.links.site && (
-                    <a href={author.links.site} target="_blank" rel="noopener noreferrer" class="font-medium text-brand-primary hover:underline">
-                      Personal Site &rarr;
-                    </a>
-                  )}
-                  {author.links.blog && (
-                    <a href={author.links.blog} target="_blank" rel="noopener noreferrer" class="font-medium text-brand-primary hover:underline">
-                      Blog &rarr;
-                    </a>
-                  )}
+                <!-- Key Topics Tag Cloud -->
+                <div class="pt-4 border-t border-neutral-200 dark:border-neutral-800">
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted block mb-2.5">
+                    Core Topics Covered
+                  </span>
+                  <div class="flex flex-wrap gap-1.5">
+                    {area.keyTopics.map((topic) => (
+                      <span class="px-2 py-0.5 rounded-md bg-neutral-100 text-neutral-700 text-xs font-medium dark:bg-neutral-800 dark:text-neutral-300">
+                        {topic}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              <!-- Published Articles by Author -->
-              <div class="bg-neutral-50 px-6 py-5 border-t border-neutral-200 dark:bg-neutral-800/50 dark:border-neutral-700">
-                <span class="text-xs font-bold uppercase tracking-wider text-text-muted block mb-3">
-                  Articles ({authorArticles.length})
-                </span>
+              <!-- Published Articles in this Focus Area -->
+              <div class="bg-neutral-50 px-6 py-5 border-t border-neutral-200 rounded-b-2xl dark:bg-neutral-800/40 dark:border-neutral-700">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-xs font-bold uppercase tracking-wider text-text-muted">
+                    Published Guides ({areaArticles.length})
+                  </span>
+                  <a
+                    href={`/category/${area.categories[0]}/`}
+                    class="text-xs font-semibold text-brand-primary hover:underline inline-flex items-center gap-1"
+                  >
+                    <span>Browse Stream</span>
+                    <span aria-hidden="true">&rarr;</span>
+                  </a>
+                </div>
                 <ul class="space-y-2 text-xs">
-                  {authorArticles.slice(0, 3).map((art) => (
+                  {areaArticles.slice(0, 4).map((art) => (
                     <li>
                       <a
                         href={`/articles/${getArticleSlug(art)}/`}
@@ -130,6 +150,24 @@ const authorsUrl = `${siteUrl}/authors/`;
           );
         })}
       </div>
+
+      <!-- Editorial Verification Guarantee Banner -->
+      <section class="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10 shadow-xs dark:border-neutral-800 dark:bg-neutral-900">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-2xl font-bold text-text-primary">Our Editorial Commitment</h2>
+          <p class="mt-3 text-sm sm:text-base leading-relaxed text-text-secondary">
+            Micro Signal Cosmos operates as a solo technical publication assisted by AI research tools. Every article undergoes strict manual verification: code is compiled and executed, mathematical proofs are rechecked, and every factual statement is linked to an authoritative primary source.
+          </p>
+          <div class="mt-6 flex flex-wrap justify-center gap-4">
+            <a href="/about/" class="btn-primary text-xs sm:text-sm">
+              Read About Our Process &rarr;
+            </a>
+            <a href="/articles/" class="btn-secondary text-xs sm:text-sm">
+              Explore All Articles
+            </a>
+          </div>
+        </div>
+      </section>
 
     </div>
   </main>
