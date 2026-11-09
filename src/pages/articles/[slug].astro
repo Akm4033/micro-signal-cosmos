@@ -453,19 +453,37 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
               // Copy Link Handler with Visual & Accessible Feedback
               const copyBtn = document.getElementById('copy-link-btn');
               const copyText = document.getElementById('copy-text');
+              let copyTimeout = null;
               if (copyBtn && copyText) {
                 copyBtn.addEventListener('click', async () => {
                   const url = copyBtn.getAttribute('data-url') || window.location.href;
                   try {
-                    await navigator.clipboard.writeText(url);
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                      await navigator.clipboard.writeText(url);
+                    } else {
+                      const tempInput = document.createElement('textarea');
+                      tempInput.value = url;
+                      tempInput.style.position = 'fixed';
+                      tempInput.style.opacity = '0';
+                      document.body.appendChild(tempInput);
+                      tempInput.focus();
+                      tempInput.select();
+                      document.execCommand('copy');
+                      document.body.removeChild(tempInput);
+                    }
                     copyText.textContent = 'Copied!';
                     copyBtn.classList.add('border-[#3478F6]', 'text-[#3478F6]', 'bg-[#3478F6]/10');
-                    setTimeout(() => {
+                    if (copyTimeout) clearTimeout(copyTimeout);
+                    copyTimeout = setTimeout(() => {
                       copyText.textContent = 'Copy Link';
                       copyBtn.classList.remove('border-[#3478F6]', 'text-[#3478F6]', 'bg-[#3478F6]/10');
                     }, 2500);
                   } catch (e) {
                     copyText.textContent = 'Copied!';
+                    if (copyTimeout) clearTimeout(copyTimeout);
+                    copyTimeout = setTimeout(() => {
+                      copyText.textContent = 'Copy Link';
+                    }, 2500);
                   }
                 });
               }
@@ -880,12 +898,15 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
 
   /* Responsive Tables */
   .article-content :global(table) {
+    display: block;
     width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     border-collapse: collapse;
     margin: 2rem 0;
     border: 1px solid #E3E8EF;
     border-radius: 0.5rem;
-    overflow: hidden;
     font-size: 0.9375rem;
   }
 

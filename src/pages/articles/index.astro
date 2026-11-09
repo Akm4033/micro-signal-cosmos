@@ -325,7 +325,24 @@ const archiveJsonLd = {
     let currentFilter = 'all';
     let currentQuery = '';
 
-    function filterArticles() {
+    function updateUrl() {
+      try {
+        const url = new URL(window.location.href);
+        if (currentQuery.trim()) {
+          url.searchParams.set('q', currentQuery.trim());
+        } else {
+          url.searchParams.delete('q');
+        }
+        if (currentFilter !== 'all') {
+          url.searchParams.set('category', currentFilter);
+        } else {
+          url.searchParams.delete('category');
+        }
+        window.history.replaceState({}, '', url.toString());
+      } catch (_) {}
+    }
+
+    function filterArticles(syncUrl = true) {
       let visibleCount = 0;
       const q = currentQuery.trim().toLowerCase();
 
@@ -360,6 +377,10 @@ const archiveJsonLd = {
         } else {
           noResultsState.classList.add('hidden');
         }
+      }
+
+      if (syncUrl) {
+        updateUrl();
       }
     }
 
@@ -425,5 +446,26 @@ const archiveJsonLd = {
         }
       });
     }
+
+    // Initialize from URL search parameters (?q=... and ?category=...)
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialQuery = urlParams.get('q');
+      const initialCat = urlParams.get('category');
+
+      if (initialCat) {
+        const catBtn = document.querySelector(`[data-category-filter="${CSS.escape(initialCat.toLowerCase())}"]`);
+        if (catBtn) {
+          catBtn.click();
+        }
+      }
+
+      if (initialQuery && searchInput) {
+        searchInput.value = initialQuery;
+        currentQuery = initialQuery;
+        if (clearBtn) clearBtn.classList.remove('hidden');
+        filterArticles(false);
+      }
+    } catch (_) {}
   })();
 </script>
