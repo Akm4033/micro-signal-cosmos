@@ -25,7 +25,7 @@ const defaultDesc = 'Understand the world. Explore beyond it. CURION is an AI-po
   <meta name="generator" content={Astro.generator}>
   <title>{title}</title>
   <meta name="description" content={description || defaultDesc}>
-  <meta name="theme-color" content="#090D16">
+  <meta name="theme-color" content="#2563EB">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,6 +45,21 @@ const defaultDesc = 'Understand the world. Explore beyond it. CURION is an AI-po
   <meta name="twitter:image" content={ogImageUrl}>
   <link rel="alternate" type="application/rss+xml" title="CURION" href="/rss.xml">
   <link rel="sitemap" href="/sitemap.xml">
+
+  <!-- Immediate Theme Determination to Prevent Flash (Light-First Default) -->
+  <script is:inline>
+    (function() {
+      try {
+        var t = localStorage.getItem('curion_theme');
+        if (t === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
   <script type="application/ld+json" is:inline set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@graph": [
@@ -79,105 +94,132 @@ const defaultDesc = 'Understand the world. Explore beyond it. CURION is an AI-po
     ]
   })} />
 </head>
-<body class="bg-neutral-50 text-text-primary antialiased dark:bg-[#070b14] dark:text-neutral-100 min-h-screen flex flex-col">
+<body class="bg-[#F8FAFC] text-[#172033] dark:bg-[#0B1120] dark:text-[#F8FAFC] min-h-screen flex flex-col antialiased">
   <!-- Reading Progress Bar -->
   <div id="reading-progress-bar" aria-hidden="true"></div>
-  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-brand-primary focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white focus:shadow-lg focus:outline-none">Skip to main content</a>
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white focus:shadow-lg focus:outline-none">Skip to main content</a>
 
-  <!-- Top Utility Bar -->
-  <div class="border-b border-neutral-200/90 bg-white/80 text-[11px] font-medium text-neutral-600 hidden sm:block dark:border-neutral-800 dark:bg-[#090d16]/80 backdrop-blur-sm">
+  <!-- Top Editorial Utility Bar -->
+  <div class="border-b border-slate-200 bg-white/80 text-[11px] font-medium text-slate-600 hidden sm:block dark:border-slate-800 dark:bg-slate-900/80 backdrop-blur-sm">
     <div class="container-wide flex items-center justify-between py-1.5">
-      <div class="flex items-center gap-3">
-        <span class="inline-flex items-center gap-1.5 font-black uppercase tracking-wider text-text-primary">
-          <span class="h-1.5 w-1.5 rounded-full bg-brand-primary animate-pulse"></span>CURION
+      <div class="flex items-center gap-2.5">
+        <span class="inline-flex items-center gap-1.5 font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100">
+          <span class="h-1.5 w-1.5 rounded-full bg-blue-600"></span>CURION
         </span>
-        <span aria-hidden="true" class="text-neutral-300 dark:text-neutral-600">&bull;</span>
-        <span class="text-text-muted">AI-Powered Global Knowledge Discovery & Learning Platform</span>
+        <span aria-hidden="true" class="text-slate-300 dark:text-slate-700">&bull;</span>
+        <span class="text-slate-500 dark:text-slate-400">Scientific Knowledge &amp; Systems Engineering Platform</span>
       </div>
-      <div class="flex items-center gap-4">
-        <a href="/tools/" class="hover:text-text-primary transition-colors">Tools</a>
-        <a href="/authors/" class="hover:text-text-primary transition-colors">Research Desk</a>
-        <a href="/about/" class="hover:text-text-primary transition-colors">About</a>
-        <a href="/contact/" class="hover:text-text-primary transition-colors">Contact</a>
-        <a href="/rss.xml" class="hover:text-brand-primary font-semibold transition-colors flex items-center gap-1"><span>RSS</span><span aria-hidden="true">&rarr;</span></a>
+      <div class="flex items-center gap-4 text-slate-500 dark:text-slate-400">
+        <a href="/tools/" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Tools</a>
+        <a href="/authors/" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Research Desk</a>
+        <a href="/about/" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</a>
+        <a href="/contact/" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</a>
+        <a href="/rss.xml" class="hover:text-blue-600 dark:hover:text-blue-400 font-semibold transition-colors flex items-center gap-1"><span>RSS</span><span aria-hidden="true">&rarr;</span></a>
       </div>
     </div>
   </div>
 
-  <!-- Header / Navigation -->
-  <header class="sticky top-0 z-50 border-b border-neutral-200/90 bg-white/95 backdrop-blur-md shadow-xs dark:border-neutral-800 dark:bg-[#070b14]/95">
+  <!-- Header / Navigation (Clean, Light-First Masthead) -->
+  <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/95 transition-colors">
     <div class="container-wide">
-      <div class="flex min-h-16 sm:min-h-18 items-center justify-between gap-3 sm:gap-4 lg:gap-8 py-2 sm:py-0">
+      <div class="flex min-h-16 items-center justify-between gap-3 py-2 sm:py-0">
         <!-- Brand Emblem & Wordmark -->
-        <a href="/" class="shrink-0 flex items-center gap-3 group py-1" aria-label="CURION Homepage">
-          <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-blue-600 via-brand-primary to-indigo-700 p-0.5 shadow-[0_2px_8px_rgba(29,78,216,0.35)] flex items-center justify-center transition-transform group-hover:scale-105">
-            <svg class="w-full h-full p-1" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="64" cy="64" r="44" stroke="#ffffff" stroke-width="6" stroke-opacity="0.3"/>
-              <path d="M 88 38 A 38 38 0 1 0 88 90" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
-              <circle cx="64" cy="64" r="10" fill="#ffffff"/>
+        <a href="/" class="shrink-0 flex items-center gap-2.5 sm:gap-3 group py-1" aria-label="CURION Homepage">
+          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-blue-600 p-1 flex items-center justify-center transition-transform group-hover:scale-105 shadow-xs">
+            <svg class="w-full h-full" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="64" cy="64" r="44" stroke="#ffffff" stroke-width="7" stroke-opacity="0.35"/>
+              <path d="M 88 38 A 38 38 0 1 0 88 90" stroke="#ffffff" stroke-width="9" stroke-linecap="round"/>
+              <circle cx="64" cy="64" r="9" fill="#ffffff"/>
             </svg>
           </div>
           <div class="flex flex-col justify-center">
-            <span class="block text-xl sm:text-2xl font-black tracking-tight text-text-primary group-hover:text-brand-primary transition-colors">CURION</span>
-            <span class="block text-[10px] font-bold tracking-[0.18em] text-text-muted uppercase">Explore Beyond</span>
+            <span class="block text-xl sm:text-2xl font-black tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors dark:text-white leading-none">CURION</span>
+            <span class="block text-[9.5px] font-semibold tracking-[0.16em] text-slate-500 uppercase dark:text-slate-400 mt-1">Explore Beyond</span>
           </div>
         </a>
 
-        <!-- Desktop Nav -->
+        <!-- Desktop Navigation -->
         <nav aria-label="Main navigation" class="hidden items-center gap-1 xl:gap-1.5 lg:flex">
-          <a href="/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all rounded-lg text-text-primary hover:text-brand-primary hover:bg-neutral-100 dark:hover:bg-neutral-800/60" title="Home">Home</a>
-          <a href="/articles/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all rounded-lg text-text-secondary hover:text-brand-primary hover:bg-neutral-100 dark:hover:bg-neutral-800/60" title="Articles">Articles</a>
-          <a href="/category/technology/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all rounded-lg text-text-secondary hover:text-brand-primary hover:bg-neutral-100 dark:hover:bg-neutral-800/60" title="Technology">Technology</a>
-          <a href="/category/artificial-intelligence/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all rounded-lg text-text-secondary hover:text-brand-primary hover:bg-neutral-100 dark:hover:bg-neutral-800/60" title="AI & ML">AI &amp; ML</a>
-          <a href="/category/science/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all rounded-lg text-text-secondary hover:text-brand-primary hover:bg-neutral-100 dark:hover:bg-neutral-800/60" title="Science">Science</a>
-          <a href="/category/developer-tools/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all rounded-lg text-text-secondary hover:text-brand-primary hover:bg-neutral-100 dark:hover:bg-neutral-800/60" title="Developer Tools">Dev Tools</a>
-          <a href="/tools/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all rounded-lg text-text-secondary hover:text-brand-primary hover:bg-neutral-100 dark:hover:bg-neutral-800/60" title="Tools">Tools</a>
-          <a href="/about/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide transition-all rounded-lg text-text-secondary hover:text-brand-primary hover:bg-neutral-100 dark:hover:bg-neutral-800/60" title="About">About</a>
+          <a href="/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide rounded-lg text-slate-900 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-100 dark:hover:bg-slate-800 transition-colors" title="Home">Home</a>
+          <a href="/articles/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide rounded-lg text-slate-600 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" title="Articles">Articles</a>
+          <a href="/category/technology/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide rounded-lg text-slate-600 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" title="Technology">Technology</a>
+          <a href="/category/artificial-intelligence/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide rounded-lg text-slate-600 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" title="AI & ML">AI &amp; ML</a>
+          <a href="/category/science/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide rounded-lg text-slate-600 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" title="Science">Science</a>
+          <a href="/category/developer-tools/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide rounded-lg text-slate-600 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" title="Developer Tools">Dev Tools</a>
+          <a href="/tools/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide rounded-lg text-slate-600 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" title="Tools">Tools</a>
+          <a href="/about/" class="px-2.5 py-1.5 text-xs font-semibold tracking-wide rounded-lg text-slate-600 hover:text-blue-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" title="About">About</a>
         </nav>
 
-        <!-- Search Button + Mobile Nav -->
-        <div class="flex items-center gap-2 sm:gap-2.5">
+        <!-- Right Controls: Search + Theme Toggle + Mobile Drawer -->
+        <div class="flex items-center gap-2">
+          <!-- Quick Search Button -->
           <a
             href="/articles/"
-            class="flex h-9 sm:h-10 items-center justify-center gap-2 rounded-xl border border-neutral-200 bg-neutral-50 px-3 sm:px-3.5 text-xs font-semibold text-text-primary transition-all hover:border-brand-primary hover:bg-white hover:text-brand-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary dark:border-neutral-700 dark:bg-neutral-800/60 dark:hover:bg-neutral-800"
-            aria-label="Search knowledge archive"
+            class="flex h-9 items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 text-xs font-medium text-slate-700 hover:border-blue-400 hover:bg-white hover:text-blue-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 transition-all"
+            aria-label="Search articles"
             title="Search CURION Knowledge Archive"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
             <span class="hidden sm:inline">Search</span>
           </a>
 
-          <!-- Mobile Drawer Details -->
+          <!-- Theme Toggle (Light / Dark Switch) -->
+          <button
+            id="theme-toggle-btn"
+            type="button"
+            class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 hover:text-blue-600 hover:border-blue-300 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:text-white transition-colors cursor-pointer"
+            aria-label="Toggle visual theme"
+            title="Toggle dark/light theme"
+          >
+            <!-- Sun icon for dark mode -->
+            <svg class="hidden dark:block h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <!-- Moon icon for light mode -->
+            <svg class="block dark:hidden h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+
+          <!-- Mobile Drawer Toggle -->
           <details class="relative lg:hidden" id="mobile-nav-details">
-            <summary class="flex h-9 w-9 sm:h-10 sm:w-10 cursor-pointer list-none items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 text-text-primary transition-all hover:border-brand-primary hover:bg-white hover:text-brand-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary dark:border-neutral-700 dark:bg-neutral-800/60 dark:hover:bg-neutral-800" aria-label="Toggle navigation menu" id="mobile-nav-toggle">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <summary class="flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 hover:border-blue-400 hover:text-blue-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 transition-all" aria-label="Toggle navigation menu" id="mobile-nav-toggle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <line x1="3" y1="12" x2="21" y2="12"></line>
                 <line x1="3" y1="6" x2="21" y2="6"></line>
                 <line x1="3" y1="18" x2="21" y2="18"></line>
               </svg>
             </summary>
-            <div class="absolute right-0 top-full mt-2 w-72 rounded-2xl border border-neutral-200 bg-white p-5 shadow-2xl transition-all dark:border-neutral-700 dark:bg-[#0f172a] z-50" role="dialog" aria-label="Mobile Navigation Menu">
-              <div class="mb-3 pb-2 border-b border-neutral-200 flex items-center justify-between dark:border-neutral-700">
-                <span class="text-xs font-bold uppercase tracking-wider text-text-muted">CURION Discovery</span>
-                <span class="text-[10px] font-semibold text-brand-primary uppercase">4 Pillars</span>
+            <div class="absolute right-0 top-full mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-xl border border-slate-200 bg-white p-4 shadow-xl dark:border-slate-700 dark:bg-slate-900 z-50" role="dialog" aria-label="Mobile Navigation Menu">
+              <div class="mb-3 pb-2 border-b border-slate-100 flex items-center justify-between dark:border-slate-800">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">CURION Navigation</span>
+                <span class="text-[10px] font-semibold text-blue-600 uppercase">4 Pillars</span>
               </div>
               <nav class="flex flex-col space-y-1">
-                <a href="/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between bg-brand-primary/10 text-brand-primary"><span>Home</span><span aria-hidden="true" class="text-xs text-text-muted">&rarr;</span></a>
-                <a href="/articles/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-text-secondary hover:bg-neutral-100 hover:text-brand-primary dark:hover:bg-neutral-800"><span>Articles</span><span aria-hidden="true" class="text-xs text-text-muted">&rarr;</span></a>
-                <a href="/category/technology/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-text-secondary hover:bg-neutral-100 hover:text-brand-primary dark:hover:bg-neutral-800"><span>Technology</span><span aria-hidden="true" class="text-xs text-text-muted">&rarr;</span></a>
-                <a href="/category/artificial-intelligence/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-text-secondary hover:bg-neutral-100 hover:text-brand-primary dark:hover:bg-neutral-800"><span>AI &amp; ML</span><span aria-hidden="true" class="text-xs text-text-muted">&rarr;</span></a>
-                <a href="/category/science/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-text-secondary hover:bg-neutral-100 hover:text-brand-primary dark:hover:bg-neutral-800"><span>Science</span><span aria-hidden="true" class="text-xs text-text-muted">&rarr;</span></a>
-                <a href="/category/developer-tools/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-text-secondary hover:bg-neutral-100 hover:text-brand-primary dark:hover:bg-neutral-800"><span>Developer Tools</span><span aria-hidden="true" class="text-xs text-text-muted">&rarr;</span></a>
-                <a href="/tools/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-text-secondary hover:bg-neutral-100 hover:text-brand-primary dark:hover:bg-neutral-800"><span>Tools</span><span aria-hidden="true" class="text-xs text-text-muted">&rarr;</span></a>
-                <a href="/about/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-text-secondary hover:bg-neutral-100 hover:text-brand-primary dark:hover:bg-neutral-800"><span>About</span><span aria-hidden="true" class="text-xs text-text-muted">&rarr;</span></a>
+                <a href="/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-blue-600 bg-blue-50 dark:bg-blue-950/40"><span>Home</span><span aria-hidden="true" class="text-xs text-slate-400">&rarr;</span></a>
+                <a href="/articles/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-slate-700 hover:bg-slate-50 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-slate-800"><span>Articles</span><span aria-hidden="true" class="text-xs text-slate-400">&rarr;</span></a>
+                <a href="/category/technology/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-slate-700 hover:bg-slate-50 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-slate-800"><span>Technology</span><span aria-hidden="true" class="text-xs text-slate-400">&rarr;</span></a>
+                <a href="/category/artificial-intelligence/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-slate-700 hover:bg-slate-50 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-slate-800"><span>AI &amp; ML</span><span aria-hidden="true" class="text-xs text-slate-400">&rarr;</span></a>
+                <a href="/category/science/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-slate-700 hover:bg-slate-50 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-slate-800"><span>Science</span><span aria-hidden="true" class="text-xs text-slate-400">&rarr;</span></a>
+                <a href="/category/developer-tools/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-slate-700 hover:bg-slate-50 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-slate-800"><span>Developer Tools</span><span aria-hidden="true" class="text-xs text-slate-400">&rarr;</span></a>
+                <a href="/tools/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-slate-700 hover:bg-slate-50 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-slate-800"><span>Tools</span><span aria-hidden="true" class="text-xs text-slate-400">&rarr;</span></a>
+                <a href="/about/" class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between text-slate-700 hover:bg-slate-50 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-slate-800"><span>About</span><span aria-hidden="true" class="text-xs text-slate-400">&rarr;</span></a>
               </nav>
-              <div class="mt-4 pt-4 border-t border-neutral-200 flex flex-col gap-2 dark:border-neutral-700">
-                <a href="/articles/" class="flex items-center justify-center gap-1.5 rounded-xl bg-brand-primary py-2.5 text-xs font-semibold text-white shadow-xs transition-colors hover:bg-blue-700"><span>Search All Knowledge</span><span aria-hidden="true">&rarr;</span></a>
-                <div class="flex items-center justify-around text-xs text-text-muted pt-1">
-                  <a href="/about/" class="hover:text-text-primary">About</a><span>&bull;</span><a href="/authors/" class="hover:text-text-primary">Research</a><span>&bull;</span><a href="/contact/" class="hover:text-text-primary">Contact</a>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex flex-col gap-2 dark:border-slate-800">
+                <a href="/articles/" class="flex items-center justify-center gap-1.5 rounded-lg bg-blue-600 py-2 text-xs font-semibold text-white shadow-xs transition-colors hover:bg-blue-700"><span>Search All Knowledge</span><span aria-hidden="true">&rarr;</span></a>
+                <div class="flex items-center justify-around text-xs text-slate-500 pt-1">
+                  <a href="/about/" class="hover:text-blue-600">About</a><span>&bull;</span><a href="/authors/" class="hover:text-blue-600">Research</a><span>&bull;</span><a href="/contact/" class="hover:text-blue-600">Contact</a>
                 </div>
               </div>
             </div>
@@ -187,87 +229,96 @@ const defaultDesc = 'Understand the world. Explore beyond it. CURION is an AI-po
     </div>
   </header>
 
-  <main id="main-content" class="flex-1">
+  <main id="main-content" class="flex-1 w-full max-w-full min-w-0">
     <slot />
   </main>
 
-  <!-- Footer -->
-  <footer class="border-t border-neutral-200/90 bg-[#070b14] text-neutral-300 dark:border-neutral-800">
-    <div class="container-wide py-16">
-      <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-5">
+  <!-- Clean Professional Editorial Footer (Neutral 900 Background #111827) -->
+  <footer class="border-t border-slate-200 bg-[#111827] text-slate-300 dark:border-slate-800 w-full max-w-full">
+    <div class="container-wide py-14 sm:py-16">
+      <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5">
         <div class="lg:col-span-2">
           <a href="/" class="text-2xl font-black tracking-tight text-white flex items-center gap-2">
-            <span class="text-brand-primary">CURION</span>
+            <span>CURION</span>
           </a>
-          <p class="mt-2 text-xs font-bold uppercase tracking-widest text-neutral-400">Understand the world. Explore beyond it.</p>
-          <p class="mt-4 max-w-sm text-sm leading-relaxed text-neutral-300">An AI-powered global knowledge discovery and learning platform exploring systems engineering, AI/ML foundations, astrophysics, and developer infrastructure through rigorous research.</p>
-          <div class="mt-6 flex items-center gap-3">
-            <a href="https://github.com/Akm4033/micro-signal-cosmos" target="_blank" rel="noopener noreferrer" class="flex h-9 items-center gap-1.5 rounded-lg border border-neutral-700 bg-neutral-800/80 px-3 text-xs font-medium text-neutral-200 transition-colors hover:border-brand-primary hover:text-brand-primary" aria-label="CURION on GitHub"><span>GitHub</span><span aria-hidden="true">↗</span></a>
-            <a href="https://www.youtube.com/@MicroSignalCosmos" target="_blank" rel="noopener noreferrer" class="flex h-9 items-center gap-1.5 rounded-lg border border-neutral-700 bg-neutral-800/80 px-3 text-xs font-medium text-neutral-200 transition-colors hover:border-brand-primary hover:text-brand-primary" aria-label="CURION Channel"><span>YouTube</span><span aria-hidden="true">↗</span></a>
+          <p class="mt-2 text-xs font-bold uppercase tracking-widest text-slate-400">Understand the world. Explore beyond it.</p>
+          <p class="mt-3.5 max-w-sm text-xs sm:text-sm leading-relaxed text-slate-300">A global scientific knowledge discovery and learning platform exploring systems engineering, neural architectures, astrophysics, and developer infrastructure through rigorous research.</p>
+          <div class="mt-5 flex items-center gap-3">
+            <a href="https://github.com/Akm4033/micro-signal-cosmos" target="_blank" rel="noopener noreferrer" class="flex h-8 items-center gap-1.5 rounded-md border border-slate-700 bg-slate-800/80 px-2.5 text-xs font-medium text-slate-200 transition-colors hover:border-blue-500 hover:text-white" aria-label="CURION on GitHub"><span>GitHub</span><span aria-hidden="true">↗</span></a>
+            <a href="https://www.youtube.com/@MicroSignalCosmos" target="_blank" rel="noopener noreferrer" class="flex h-8 items-center gap-1.5 rounded-md border border-slate-700 bg-slate-800/80 px-2.5 text-xs font-medium text-slate-200 transition-colors hover:border-blue-500 hover:text-white" aria-label="CURION Channel"><span>YouTube</span><span aria-hidden="true">↗</span></a>
           </div>
         </div>
+
         <div>
-          <h2 class="text-xs font-bold uppercase tracking-widest text-white mb-4">4 Knowledge Pillars</h2>
-          <ul class="space-y-2.5 text-sm">
-            <li><a href="/category/technology/" class="text-neutral-300 transition-colors hover:text-white hover:underline underline-offset-4">Technology</a></li>
-            <li><a href="/category/artificial-intelligence/" class="text-neutral-300 transition-colors hover:text-white hover:underline underline-offset-4">AI &amp; ML</a></li>
-            <li><a href="/category/science/" class="text-neutral-300 transition-colors hover:text-white hover:underline underline-offset-4">Science</a></li>
-            <li><a href="/category/developer-tools/" class="text-neutral-300 transition-colors hover:text-white hover:underline underline-offset-4">Developer Tools</a></li>
+          <h2 class="text-xs font-bold uppercase tracking-widest text-white mb-3">4 Knowledge Pillars</h2>
+          <ul class="space-y-2 text-xs sm:text-sm">
+            <li><a href="/category/technology/" class="text-slate-300 transition-colors hover:text-white hover:underline underline-offset-4">Systems &amp; Technology</a></li>
+            <li><a href="/category/artificial-intelligence/" class="text-slate-300 transition-colors hover:text-white hover:underline underline-offset-4">AI &amp; Neural Foundations</a></li>
+            <li><a href="/category/science/" class="text-slate-300 transition-colors hover:text-white hover:underline underline-offset-4">Astrophysics &amp; Physics</a></li>
+            <li><a href="/category/developer-tools/" class="text-slate-300 transition-colors hover:text-white hover:underline underline-offset-4">Developer Infrastructure</a></li>
           </ul>
         </div>
+
         <div>
-          <h2 class="text-xs font-bold uppercase tracking-widest text-white mb-4">Discover</h2>
-          <ul class="space-y-2.5 text-sm">
-            <li><a href="/articles/" class="text-neutral-300 transition-colors hover:text-white hover:underline underline-offset-4">All Articles</a></li>
-            <li><a href="/tools/" class="text-neutral-300 transition-colors hover:text-white hover:underline underline-offset-4">Tools &amp; Stack</a></li>
-            <li><a href="/authors/" class="text-neutral-300 transition-colors hover:text-white hover:underline underline-offset-4">Research Desk</a></li>
-            <li><a href="/about/" class="text-neutral-300 transition-colors hover:text-white hover:underline underline-offset-4">About CURION</a></li>
-            <li><a href="/contact/" class="text-neutral-300 transition-colors hover:text-white hover:underline underline-offset-4">Contact</a></li>
-            <li><a href="/rss.xml" class="text-neutral-300 transition-colors hover:text-white hover:underline underline-offset-4">RSS Feed</a></li>
+          <h2 class="text-xs font-bold uppercase tracking-widest text-white mb-3">Discover</h2>
+          <ul class="space-y-2 text-xs sm:text-sm">
+            <li><a href="/articles/" class="text-slate-300 transition-colors hover:text-white hover:underline underline-offset-4">All Articles</a></li>
+            <li><a href="/tools/" class="text-slate-300 transition-colors hover:text-white hover:underline underline-offset-4">Tools &amp; Stack</a></li>
+            <li><a href="/authors/" class="text-slate-300 transition-colors hover:text-white hover:underline underline-offset-4">Research Desk</a></li>
+            <li><a href="/about/" class="text-slate-300 transition-colors hover:text-white hover:underline underline-offset-4">About CURION</a></li>
+            <li><a href="/contact/" class="text-slate-300 transition-colors hover:text-white hover:underline underline-offset-4">Contact</a></li>
+            <li><a href="/rss.xml" class="text-slate-300 transition-colors hover:text-white hover:underline underline-offset-4">RSS Feed</a></li>
           </ul>
         </div>
-        <div>
-          <h2 class="text-xs font-bold uppercase tracking-widest text-white mb-4">Trust &amp; Legal</h2>
-          <ul class="space-y-2.5 text-sm">
-            <li><a href="/privacy-policy/" class="text-neutral-300 transition-colors hover:text-white hover:underline underline-offset-4">Privacy Policy</a></li>
-            <li><a href="/terms/" class="text-neutral-300 transition-colors hover:text-white hover:underline underline-offset-4">Terms of Use</a></li>
-            <li><a href="/disclaimer/" class="text-neutral-300 transition-colors hover:text-white hover:underline underline-offset-4">Disclaimer &amp; Notices</a></li>
-            <li><a href="/sitemap.xml" class="text-neutral-300 transition-colors hover:text-white hover:underline underline-offset-4">XML Sitemap</a></li>
-          </ul>
-        </div>
+
         <div class="newsletter-footer space-y-3">
-          <h3 class="text-xs font-bold uppercase tracking-widest text-white">CURION Briefings</h3>
-          <p class="text-xs leading-relaxed text-neutral-300">Weekly deep dives into system internals, neural architectures, and astrophysics.</p>
-          <form action="https://buttondown.email/api/emails/embed-subscribe/microsignalcosmos" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.email/microsignalcosmos', 'popupwindow'); return true;" class="flex flex-col sm:flex-row gap-2">
-            <input type="email" name="email" required placeholder="email@domain.com" aria-label="Email address" class="rounded-lg border border-neutral-700 bg-neutral-800/90 px-3 py-2 text-xs text-white placeholder-neutral-400 focus:border-brand-primary focus:outline-none focus:ring-1 focus:ring-brand-primary">
+          <h2 class="text-xs font-bold uppercase tracking-widest text-white">CURION Briefings</h2>
+          <p class="text-xs leading-relaxed text-slate-300">Weekly technical breakdowns into system internals, neural architectures, and astrophysics.</p>
+          <form action="https://buttondown.email/api/emails/embed-subscribe/microsignalcosmos" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.email/microsignalcosmos', 'popupwindow'); return true;" class="flex flex-col gap-2 w-full max-w-full">
+            <input type="email" name="email" required placeholder="name@domain.com" aria-label="Email address" class="rounded-lg border border-slate-700 bg-slate-800/90 px-3 py-2 text-xs text-white placeholder-slate-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 w-full box-border">
             <input type="hidden" value="1" name="embed">
-            <button type="submit" class="rounded-lg bg-brand-primary px-3.5 py-2 text-xs font-semibold text-white transition-colors hover:bg-blue-600">Join</button>
+            <button type="submit" class="rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-semibold text-white transition-colors hover:bg-blue-500 w-full sm:w-auto self-start cursor-pointer">Subscribe</button>
           </form>
-          <p class="text-[10px] text-neutral-400">Zero spam. Unsubscribe anytime with 1 click.</p>
+          <p class="text-[10px] text-slate-400">Zero spam. Unsubscribe anytime with 1 click.</p>
         </div>
       </div>
-      <div class="mt-14 border-t border-neutral-800 pt-8 flex flex-col items-center justify-between gap-4 text-xs text-neutral-400 sm:flex-row">
+
+      <div class="mt-12 border-t border-slate-800 pt-6 flex flex-col items-center justify-between gap-3 text-xs text-slate-400 sm:flex-row">
         <p>&copy; 2026 CURION. All rights reserved.</p>
-        <div class="flex flex-wrap items-center gap-6">
+        <div class="flex flex-wrap items-center gap-4 sm:gap-6">
           <a href="/privacy-policy/" class="hover:text-white transition-colors">Privacy</a>
           <a href="/terms/" class="hover:text-white transition-colors">Terms</a>
           <a href="/disclaimer/" class="hover:text-white transition-colors">Disclaimer</a>
-          <a href="/contact/" class="hover:text-white transition-colors">Contact Desk</a>
+          <a href="/sitemap.xml" class="hover:text-white transition-colors">Sitemap</a>
+          <a href="/contact/" class="hover:text-white transition-colors">Contact</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- Theme Toggle & Reading Bar Scripts -->
   <script is:inline>
     (function() {
+      // Reading progress bar
       const bar = document.getElementById('reading-progress-bar');
-      if (!bar) return;
-      window.addEventListener('scroll', function() {
-        const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        if (height > 0) { bar.style.width = (winScroll / height) * 100 + '%'; }
-      }, { passive: true });
+      if (bar) {
+        window.addEventListener('scroll', function() {
+          const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          if (height > 0) { bar.style.transform = 'scaleX(' + (winScroll / height) + ')'; }
+        }, { passive: true });
+      }
+
+      // Theme toggle functionality
+      const toggleBtn = document.getElementById('theme-toggle-btn');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', function() {
+          const isDark = document.documentElement.classList.toggle('dark');
+          try {
+            localStorage.setItem('curion_theme', isDark ? 'dark' : 'light');
+          } catch(e) {}
+        });
+      }
     })();
   </script>
 </body>

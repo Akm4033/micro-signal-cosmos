@@ -12,43 +12,43 @@ const buttondownUsername = import.meta.env.PUBLIC_BUTTONDOWN_USERNAME || 'micros
 
 <div
   id="exit-intent-modal"
-  class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/75 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300"
+  class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"
   role="dialog"
   aria-modal="true"
   aria-labelledby="exit-modal-title"
   style="box-sizing: border-box;"
 >
-  <!-- Modal Card with Strict 3D Framing & Guaranteed Bounded Dimensions -->
+  <!-- Modal Card: Strictly Contained, Compact 3D Framing -->
   <div
-    class="relative w-full max-w-[390px] mx-auto rounded-3xl border border-neutral-200/90 border-b-4 border-b-neutral-300/80 bg-white p-5 sm:p-6 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.45)] transition-all duration-300 scale-95 dark:border-neutral-700 dark:border-b-neutral-600 dark:bg-[#0f172a] overflow-hidden"
+    class="relative w-full max-w-[350px] mx-auto rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.2)] transition-all duration-300 scale-95 dark:border-slate-800 dark:bg-[#0f172a] overflow-hidden"
     id="exit-modal-panel"
-    style="box-sizing: border-box; max-width: min(390px, 92vw);"
+    style="box-sizing: border-box; width: min(350px, calc(100vw - 32px)); max-width: min(350px, calc(100vw - 32px));"
   >
     <!-- Close button -->
     <button
       id="exit-modal-close"
       type="button"
-      class="absolute top-3.5 right-3.5 text-neutral-400 hover:text-neutral-700 dark:hover:text-white p-2 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+      class="absolute top-3.5 right-3.5 text-slate-400 hover:text-slate-700 dark:hover:text-white p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
       aria-label="Close dialog"
     >
-      <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+      <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
       </svg>
     </button>
 
-    <!-- Top Badge with 3D Pop -->
-    <div class="inline-flex items-center gap-1.5 rounded-full bg-brand-primary/10 border border-brand-primary/25 px-2.5 py-0.5 text-[11px] font-bold text-brand-primary uppercase tracking-wider mb-2.5">
-      <span class="h-1.5 w-1.5 rounded-full bg-brand-primary animate-pulse"></span>
+    <!-- Top Badge -->
+    <div class="inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-200/80 px-2.5 py-0.5 text-[10px] font-bold text-blue-700 uppercase tracking-wider mb-2.5 dark:bg-blue-950/50 dark:border-blue-800 dark:text-blue-300">
+      <span class="h-1.5 w-1.5 rounded-full bg-blue-600 animate-pulse"></span>
       <span>CURION Briefing</span>
     </div>
 
     <!-- Title & Subtitle -->
-    <h2 id="exit-modal-title" class="text-xl sm:text-[22px] font-black text-neutral-900 tracking-tight leading-snug dark:text-white">
+    <h2 id="exit-modal-title" class="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-snug dark:text-white">
       Level up your technical intuition
     </h2>
 
-    <p class="mt-2 text-xs sm:text-[13px] text-neutral-600 leading-relaxed dark:text-neutral-300">
-      Get our free <strong class="text-neutral-900 dark:text-white font-bold">{leadMagnet}</strong> plus CURION weekly technical briefings sent straight to your inbox.
+    <p class="mt-1.5 text-xs text-slate-600 leading-relaxed dark:text-slate-300">
+      Get our free <strong class="text-slate-900 dark:text-white font-semibold">{leadMagnet}</strong> plus weekly technical briefings sent straight to your inbox.
     </p>
 
     <!-- Bulletproof Form: 100% Contained Inside Modal Box -->
@@ -57,7 +57,7 @@ const buttondownUsername = import.meta.env.PUBLIC_BUTTONDOWN_USERNAME || 'micros
       method="post"
       target="popupwindow"
       onsubmit={`window.open('https://buttondown.email/${buttondownUsername}', 'popupwindow'); return true;`}
-      class="mt-5 space-y-3 w-full block"
+      class="mt-4 flex flex-col gap-2.5 w-full block"
       style="box-sizing: border-box; width: 100%; max-width: 100%; overflow: hidden;"
     >
       <div class="w-full block" style="box-sizing: border-box; width: 100%; max-width: 100%;">
@@ -67,8 +67,8 @@ const buttondownUsername = import.meta.env.PUBLIC_BUTTONDOWN_USERNAME || 'micros
           required
           placeholder="Enter your email address..."
           aria-label="Email for free cheat sheet"
-          style="box-sizing: border-box; width: 100%; max-width: 100%; height: 44px;"
-          class="w-full h-11 block rounded-xl border border-neutral-300 bg-neutral-50 px-3.5 text-xs sm:text-sm text-neutral-900 placeholder-neutral-400 focus:border-brand-primary focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-primary/25 dark:border-neutral-700 dark:bg-neutral-800/90 dark:text-white dark:placeholder-neutral-500 transition-all"
+          style="box-sizing: border-box; width: 100%; max-width: 100%; height: 40px;"
+          class="w-full h-10 block rounded-xl border border-slate-300 bg-slate-50 px-3 text-xs text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:border-slate-700 dark:bg-slate-800/90 dark:text-white dark:placeholder-slate-500 transition-all"
         />
       </div>
 
@@ -78,20 +78,20 @@ const buttondownUsername = import.meta.env.PUBLIC_BUTTONDOWN_USERNAME || 'micros
       <div class="w-full block" style="box-sizing: border-box; width: 100%; max-width: 100%; overflow: hidden;">
         <button
           type="submit"
-          style="box-sizing: border-box; width: 100%; max-width: 100%; height: 44px; display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%); color: #ffffff !important; border: none; cursor: pointer; border-radius: 12px; box-shadow: 0 4px 0 #1e3a8a, 0 8px 16px rgba(29, 78, 216, 0.35);"
-          class="w-full h-11 flex items-center justify-center gap-2 text-center rounded-xl font-bold text-xs uppercase tracking-wider text-white hover:brightness-110 hover:-translate-y-0.5 active:translate-y-1 active:shadow-[0_1px_0_#1e3a8a] transition-all"
+          style="box-sizing: border-box; width: 100%; max-width: 100%; height: 40px; display: flex; align-items: center; justify-content: center; gap: 6px; background: #2563eb; color: #ffffff !important; border: none; cursor: pointer; border-radius: 10px; box-shadow: 0 3px 0 #1d4ed8;"
+          class="w-full h-10 flex items-center justify-center gap-1.5 text-center font-bold text-xs uppercase tracking-wider text-white hover:bg-blue-700 hover:brightness-105 active:translate-y-0.5 active:shadow-[0_1px_0_#1d4ed8] transition-all"
         >
-          <span style="color: #ffffff !important; font-weight: 800; font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; display: inline-block;">
+          <span style="color: #ffffff !important; font-weight: 700; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase;">
             Send Me The Free Guide
           </span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="stroke: #ffffff !important; display: inline-block;" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="stroke: #ffffff !important;" aria-hidden="true">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
         </button>
       </div>
 
-      <p class="text-[11px] text-center text-neutral-500 dark:text-neutral-400 pt-1 leading-tight" style="color: #71717a;">
+      <p class="text-[11px] text-center text-slate-500 dark:text-slate-400 pt-0.5 leading-tight">
         No spam, ever. Unsubscribe anytime with 1 click.
       </p>
     </form>

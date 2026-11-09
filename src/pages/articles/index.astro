@@ -187,33 +187,28 @@ const archiveUrl = `${siteUrl}/articles/`;
                 data-article-card
                 data-category={categorySlug}
                 data-search-text={searchableText}
-                class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_18px_36px_-6px_rgba(29,78,216,0.14),0_6px_16px_-2px_rgba(0,0,0,0.06)] hover:-translate-y-1.5 hover:border-brand-primary/40 hover:border-b-brand-primary/70 transition-all duration-300 dark:bg-neutral-900 dark:border-neutral-800 dark:border-b-neutral-700"
+                class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xs hover:shadow-lg hover:-translate-y-1 hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-200 dark:bg-slate-900 dark:border-slate-800"
               >
                 <div>
-                  <div class={`relative h-36 sm:h-40 w-full shrink-0 overflow-hidden flex items-center justify-center transition-colors border-b ${
-                    categorySlug.includes('tech') ? 'bg-gradient-to-br from-sky-50 via-blue-50/70 to-slate-100 border-sky-100 dark:bg-[#070c18] dark:border-sky-950' :
-                    categorySlug.includes('art') || categorySlug.includes('ai') ? 'bg-gradient-to-br from-emerald-50 via-teal-50/70 to-slate-100 border-emerald-100 dark:bg-[#061210] dark:border-emerald-950' :
-                    categorySlug.includes('sci') ? 'bg-gradient-to-br from-violet-50 via-purple-50/70 to-slate-100 border-violet-100 dark:bg-[#0e0a1a] dark:border-purple-950' :
-                    'bg-gradient-to-br from-amber-50 via-orange-50/70 to-slate-100 border-amber-100 dark:bg-[#140e06] dark:border-amber-950'
-                  }`}>
-                    <!-- Dynamic 2D/3D Interactive Graphic (Moves & Tilts on Card Hover) -->
+                  <div class="relative h-40 sm:h-44 w-full shrink-0 overflow-hidden flex items-center justify-center transition-colors border-b border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50">
+                    <!-- Scientific Vector Graphic -->
                     <ArticleVisual slug={slug} category={categorySlug} logo={article.data.logo || categorySlug} />
 
-                    <a href={categoryHref} class="absolute top-2.5 left-2.5 badge badge--featured shadow-xs font-bold text-[10px] z-20">
+                    <a href={categoryHref} class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/90 border border-slate-200 text-slate-800 shadow-xs z-20 dark:bg-slate-800/90 dark:border-slate-700 dark:text-slate-200">
                       {categoryName}
                     </a>
                   </div>
 
                   <div class="p-4 sm:p-5">
-                    <div class="flex items-center gap-2 text-xs mb-2 text-text-muted">
-                      <span class="font-medium text-text-primary text-[11px]">{author.name}</span>
-                      <span aria-hidden="true" class="text-neutral-300 dark:text-neutral-600">&bull;</span>
+                    <div class="flex items-center gap-2 text-xs mb-2 text-slate-500 dark:text-slate-400">
+                      <span class="font-medium text-slate-900 dark:text-slate-200 text-[11px]">{author.name}</span>
+                      <span aria-hidden="true" class="text-slate-300 dark:text-slate-600">&bull;</span>
                       <time datetime={isoDate} class="text-[11px]">{formattedDate}</time>
-                      <span aria-hidden="true" class="text-neutral-300 dark:text-neutral-600">&bull;</span>
+                      <span aria-hidden="true" class="text-slate-300 dark:text-slate-600">&bull;</span>
                       <span class="text-[11px]">{getArticleReadingTime(article)}</span>
                     </div>
 
-                    <h3 class="text-base sm:text-lg font-bold leading-snug text-text-primary group-hover:text-brand-primary transition-colors line-clamp-2">
+                    <h3 class="text-base sm:text-lg font-bold leading-snug text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 dark:text-white dark:group-hover:text-blue-400">
                       <a
                         href={`/articles/${slug}/`}
                         class="focus-visible:outline-none focus-visible:underline"
@@ -222,24 +217,24 @@ const archiveUrl = `${siteUrl}/articles/`;
                       </a>
                     </h3>
 
-                    <p class="mt-2 text-xs sm:text-sm leading-relaxed text-text-secondary line-clamp-2">
+                    <p class="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 line-clamp-2 dark:text-slate-400">
                       {article.data.description}
                     </p>
                   </div>
                 </div>
 
                 <div class="px-4 pb-4 sm:px-5 sm:pb-5 mt-auto">
-                  <div class="flex items-center justify-between border-t border-neutral-100 pt-3 dark:border-neutral-800">
+                  <div class="flex items-center justify-between border-t border-slate-100 pt-3 dark:border-slate-800">
                     <div class="flex items-center gap-2">
-                      <div class="w-6 h-6 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center text-[10px] font-bold shadow-2xs">
+                      <div class="w-6 h-6 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center text-[10px] font-bold border border-blue-200 shadow-2xs dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-900">
                         {author.initials}
                       </div>
-                      <span class="text-[11px] font-semibold text-text-muted">{author.role}</span>
+                      <span class="text-[11px] font-medium text-slate-500 dark:text-slate-400">{author.role}</span>
                     </div>
 
                     <a
                       href={`/articles/${slug}/`}
-                      class="inline-flex items-center gap-1 text-xs font-bold text-brand-primary group-hover:text-brand-primary-hover group-hover:translate-x-0.5 transition-all"
+                      class="inline-flex items-center gap-1 text-xs font-bold text-blue-600 group-hover:text-blue-700 group-hover:translate-x-0.5 transition-all dark:text-blue-400"
                     >
                       <span>Read</span>
                       <span aria-hidden="true">&rarr;</span>

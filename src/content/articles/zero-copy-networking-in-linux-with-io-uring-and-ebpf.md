@@ -14,7 +14,7 @@ featured: false
 draft: false
 coverImage: "/og/zero-copy-networking-in-linux-with-io-uring-and-ebpf.svg"
 coverImageAlt: "Technical illustration for Zero-Copy Networking in Linux with io_uring and eBPF"
-seoTitle: "Zero-Copy Networking in Linux with io_uring and eB | Micro Signal Cosmos"
+seoTitle: "Zero-Copy Networking in Linux with io_uring and eB | CURION"
 seoDescription: "Building and operating high-throughput systems requires understanding the exact boundary where software abstractions meet physical hardware. When stan..."
 hasAffiliateLinks: false
 hasAiAssistance: true

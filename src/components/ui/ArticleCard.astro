@@ -1,5 +1,4 @@
 ---
-import ArticleLogo from './ArticleLogo.astro';
 import ArticleVisual from './ArticleVisual.astro';
 import { getAuthor } from '../../data/authors';
 
@@ -61,49 +60,51 @@ const isoDate = rawDate ? new Date(rawDate).toISOString() : '';
 ---
 
 <article
-  class={`group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200/90 border-b-2 border-b-neutral-300/80 bg-white shadow-[0_2px_4px_rgba(0,0,0,0.03),0_6px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_-10px_rgba(29,78,216,0.18),0_8px_20px_-4px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 hover:border-brand-primary/50 hover:border-b-brand-primary/80 transition-all duration-300 dark:bg-neutral-900 dark:border-neutral-800 dark:border-b-neutral-700 ${className}`}
+  class={`group flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xs hover:shadow-lg hover:-translate-y-1 hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-200 dark:bg-slate-900 dark:border-slate-800 ${className}`}
   itemscope
   itemtype="https://schema.org/Article"
 >
   <a href={articleHref} class="block" aria-label={`Read article: ${title}`}>
-    <!-- 3D Technical Visual Header (Luminous & High Contrast) -->
+    <!-- Scientific Vector Visual Header (High Contrast & Responsive) -->
     <div
-      class={`relative h-36 sm:h-40 w-full shrink-0 overflow-hidden flex items-center justify-center transition-colors border-b ${
-        categoryVariant === 'tech' ? 'bg-gradient-to-br from-sky-50 via-blue-50/70 to-slate-100 border-sky-100 dark:bg-[#070c18] dark:border-sky-950' :
-        categoryVariant === 'ai' ? 'bg-gradient-to-br from-emerald-50 via-teal-50/70 to-slate-100 border-emerald-100 dark:bg-[#061210] dark:border-emerald-950' :
-        categoryVariant === 'science' ? 'bg-gradient-to-br from-violet-50 via-purple-50/70 to-slate-100 border-violet-100 dark:bg-[#0e0a1a] dark:border-purple-950' :
-        'bg-gradient-to-br from-amber-50 via-orange-50/70 to-slate-100 border-amber-100 dark:bg-[#140e06] dark:border-amber-950'
-      }`}
+      class="relative h-40 sm:h-44 w-full shrink-0 overflow-hidden flex items-center justify-center transition-colors border-b border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50"
     >
-      <!-- Dynamic 2D/3D Interactive Graphic (Hover Motion & Pulse) -->
+      <!-- Technical Vector Graphic -->
       <ArticleVisual slug={slug || ''} category={categoryVariant} logo={logo || catSlug} />
 
-      <!-- Elevated 3D Category Pill -->
-      <span class={`absolute top-3 left-3 badge badge--${categoryVariant} shadow-xs font-bold text-[10px] pointer-events-none z-20`}>
+      <!-- Category Pill -->
+      <span
+        class={`absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-xs pointer-events-none z-20 ${
+          categoryVariant === 'tech' ? 'bg-sky-50 text-sky-700 border border-sky-200 dark:bg-sky-950/70 dark:text-sky-300 dark:border-sky-800' :
+          categoryVariant === 'ai' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/70 dark:text-emerald-300 dark:border-emerald-800' :
+          categoryVariant === 'science' ? 'bg-purple-50 text-purple-700 border border-purple-200 dark:bg-purple-950/70 dark:text-purple-300 dark:border-purple-800' :
+          'bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950/70 dark:text-amber-300 dark:border-amber-800'
+        }`}
+      >
         {category}
       </span>
     </div>
 
     <!-- Article Content -->
     <div class="p-4 sm:p-5">
-      <div class="flex items-center gap-2 text-xs mb-2 text-text-muted">
-        <span class="font-medium text-text-primary text-[11px]" itemprop="author">{authorName}</span>
+      <div class="flex items-center gap-2 text-xs mb-2 text-slate-500 dark:text-slate-400">
+        <span class="font-medium text-slate-900 dark:text-slate-200 text-[11px]" itemprop="author">{authorName}</span>
         {formattedDate && (
           <>
-            <span aria-hidden="true" class="text-neutral-300 dark:text-neutral-600">&bull;</span>
+            <span aria-hidden="true" class="text-slate-300 dark:text-slate-600">&bull;</span>
             <time datetime={isoDate} class="text-[11px]" itemprop="datePublished">{formattedDate}</time>
           </>
         )}
-        <span aria-hidden="true" class="text-neutral-300 dark:text-neutral-600">&bull;</span>
+        <span aria-hidden="true" class="text-slate-300 dark:text-slate-600">&bull;</span>
         <span class="text-[11px]" itemprop="timeRequired">{readingTime}</span>
       </div>
 
-      <h3 class="text-base sm:text-lg font-bold leading-snug text-text-primary group-hover:text-brand-primary transition-colors line-clamp-2" itemprop="headline">
+      <h3 class="text-base sm:text-lg font-bold leading-snug text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 dark:text-white dark:group-hover:text-blue-400" itemprop="headline">
         <span class="focus-visible:outline-none focus-visible:underline">{title}</span>
       </h3>
 
       {excerpt && (
-        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-text-secondary line-clamp-2" itemprop="description">
+        <p class="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 line-clamp-2 dark:text-slate-400" itemprop="description">
           {excerpt}
         </p>
       )}
@@ -112,17 +113,17 @@ const isoDate = rawDate ? new Date(rawDate).toISOString() : '';
 
   <!-- Compact Card Footer -->
   <div class="px-4 pb-4 sm:px-5 sm:pb-5 mt-auto">
-    <div class="flex items-center justify-between border-t border-neutral-100 pt-3 dark:border-neutral-800">
+    <div class="flex items-center justify-between border-t border-slate-100 pt-3 dark:border-slate-800">
       <div class="flex items-center gap-2">
-        <div class="w-6 h-6 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center text-[10px] font-black shadow-2xs">
+        <div class="w-6 h-6 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center text-[10px] font-bold border border-blue-100 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-900">
           {authorData.initials || 'CU'}
         </div>
-        <span class="text-[11px] font-semibold text-text-muted">{authorData.role || 'CURION Research Desk'}</span>
+        <span class="text-[11px] font-medium text-slate-500 dark:text-slate-400">{authorData.role || 'CURION Research Desk'}</span>
       </div>
 
       <a
         href={articleHref}
-        class="inline-flex items-center gap-1 text-xs font-bold text-brand-primary group-hover:text-brand-primary-hover group-hover:translate-x-0.5 transition-all"
+        class="inline-flex items-center gap-1 text-xs font-bold text-blue-600 group-hover:text-blue-700 group-hover:translate-x-0.5 transition-all dark:text-blue-400 dark:group-hover:text-blue-300"
         aria-label={`Read ${title}`}
       >
         <span>Read</span>
