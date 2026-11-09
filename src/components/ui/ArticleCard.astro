@@ -61,13 +61,21 @@ const isoDate = rawDate ? new Date(rawDate).toISOString() : '';
 
 <article class={`editorial-card group flex flex-col justify-between ${className}`} itemscope itemtype="https://schema.org/Article">
   <a href={articleHref} class="block" aria-label={`Read article: ${title}`}>
-    <!-- Article Visual with Logo -->
-    <div class="editorial-card__media relative aspect-[16/10] w-full overflow-hidden bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900">
-      <div class="editorial-card__gradient absolute inset-0"></div>
-      <span class={`editorial-card__category absolute bottom-3 left-3 badge badge--${categoryVariant}`}>{category}</span>
-      <!-- Article Logo -->
-      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <ArticleLogo logo={logo || catSlug} category={categoryVariant} size="lg" />
+    <!-- Article Visual with Logo (Clean, Friendly 2D Flat Design) -->
+    <div class={`editorial-card__media relative aspect-[16/10] w-full overflow-hidden flex items-center justify-center transition-colors ${
+      categoryVariant === 'tech' ? 'bg-sky-50/80 border-b border-sky-100 dark:bg-sky-950/20 dark:border-sky-900/40' :
+      categoryVariant === 'ai' ? 'bg-emerald-50/80 border-b border-emerald-100 dark:bg-emerald-950/20 dark:border-emerald-900/40' :
+      categoryVariant === 'science' ? 'bg-violet-50/80 border-b border-violet-100 dark:bg-violet-950/20 dark:border-violet-900/40' :
+      'bg-amber-50/80 border-b border-amber-100 dark:bg-amber-950/20 dark:border-amber-900/40'
+    }`}>
+      <!-- Subtle Flat Grid Pattern -->
+      <div class="absolute inset-0 opacity-40 pointer-events-none" aria-hidden="true">
+        <div class="w-full h-full bg-[radial-gradient(#CBD5E1_1px,transparent_1px)] [background-size:16px_16px] dark:opacity-10"></div>
+      </div>
+      <span class={`editorial-card__category absolute top-3 left-3 badge badge--${categoryVariant} shadow-2xs`}>{category}</span>
+      <!-- Center Article Logo on Elevated Pill -->
+      <div class="relative z-10 p-3 rounded-2xl bg-white shadow-xs border border-neutral-200/80 group-hover:scale-105 transition-transform duration-200 dark:bg-neutral-800 dark:border-neutral-700">
+        <ArticleLogo logo={logo || catSlug} category={categoryVariant} size="md" />
       </div>
     </div>
 

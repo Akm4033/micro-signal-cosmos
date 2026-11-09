@@ -72,48 +72,40 @@ const latestArticles = sortedArticles.slice(0, 6);
             </span>
           </div>
 
-          <!-- Card Visual Anchor (Warm & Engaging, Strict Overflow Immunity) -->
+          <!-- Card Visual Anchor (Warm & Friendly 2D Flat, Strict Overflow Immunity) -->
           <a
             href="/articles/how-llms-actually-work/"
-            class="block relative w-full h-44 sm:h-48 overflow-hidden bg-gradient-to-br from-slate-900 via-sky-950 to-indigo-950 p-5 text-white transition-transform group-hover:scale-[1.01]"
+            class="block relative w-full h-44 sm:h-48 overflow-hidden bg-gradient-to-br from-sky-50 via-emerald-50/50 to-indigo-50 border-b border-sky-100 p-5 text-slate-800 transition-all hover:bg-sky-100/50 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 dark:border-neutral-700 dark:text-neutral-100"
             aria-label="Read featured guide: How LLMs Actually Work"
           >
-            <!-- Background Pattern -->
-            <div class="absolute inset-0 opacity-20 pointer-events-none" aria-hidden="true">
-              <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" preserveAspectRatio="none">
-                <defs>
-                  <pattern id="card-neural-grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                    <circle cx="2" cy="2" r="1" fill="white" opacity="0.3"></circle>
-                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="white" stroke-width="0.5" opacity="0.2"></path>
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#card-neural-grid)"></rect>
-              </svg>
+            <!-- Background Flat Grid Motif -->
+            <div class="absolute inset-0 opacity-40 pointer-events-none" aria-hidden="true">
+              <div class="w-full h-full bg-[radial-gradient(#94A3B8_1px,transparent_1px)] [background-size:18px_18px] dark:opacity-10"></div>
             </div>
 
             <!-- Foreground Content in Visual -->
             <div class="relative z-10 flex h-full flex-col justify-between">
               <div class="flex items-center justify-between">
-                <span class="rounded-md bg-white/15 backdrop-blur-md px-2.5 py-1 text-[11px] font-bold tracking-wider text-sky-200 uppercase border border-white/20">
+                <span class="rounded-full bg-white/95 shadow-2xs px-2.5 py-1 text-[11px] font-bold tracking-wider text-emerald-700 uppercase border border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800">
                   AI &amp; Machine Learning
                 </span>
-                <span class="text-[11px] font-mono text-sky-300/80">#FOUNDATIONS</span>
+                <span class="text-[11px] font-mono text-slate-500 font-semibold dark:text-neutral-400">#FOUNDATIONS</span>
               </div>
 
               <!-- Center Graphic -->
-              <div class="flex items-center gap-3 my-auto">
-                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-sky-500/20 border border-sky-400/40 text-sky-300 shadow-md">
+              <div class="flex items-center gap-3.5 my-auto">
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white shadow-xs border border-emerald-200/80 text-emerald-600 dark:bg-neutral-800 dark:border-neutral-700">
                   <ArticleLogo logo="transformer" category="ai" size="sm" />
                 </div>
                 <div>
-                  <p class="text-xs font-bold uppercase tracking-wider text-white">Transformer Architecture</p>
-                  <p class="text-[11px] text-sky-200/80">Self-Attention &bull; Embeddings &bull; RoPE</p>
+                  <p class="text-sm font-bold tracking-tight text-slate-900 dark:text-white">Transformer Architecture</p>
+                  <p class="text-xs text-slate-600 dark:text-neutral-400">Self-Attention &bull; Embeddings &bull; RoPE</p>
                 </div>
               </div>
 
-              <div class="flex items-center justify-between text-[11px] text-slate-300">
+              <div class="flex items-center justify-between text-xs text-slate-500 dark:text-neutral-400">
                 <span>Interactive Visual Guide</span>
-                <span class="font-bold text-white group-hover:text-sky-300 transition-colors inline-flex items-center gap-1">
+                <span class="font-bold text-brand-primary inline-flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                   Read Guide &rarr;
                 </span>
               </div>
@@ -168,15 +160,20 @@ const latestArticles = sortedArticles.slice(0, 6);
       <div class="grid gap-8 lg:grid-cols-12 items-stretch">
         <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8 shadow-xs transition-all duration-300 hover:shadow-md hover:border-brand-primary/30 lg:col-span-7 min-w-0 dark:border-neutral-700 dark:bg-neutral-900" itemprop="mainEntity" itemscope itemtype="https://schema.org/Article">
           <a href="/articles/choosing-a-database-in-2026/" class="block" aria-label="Read article: Choosing a Database in 2026">
-            <div class="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 flex items-center justify-center p-6 text-white mb-6 shadow-inner">
-              <div class="absolute inset-0 opacity-15" aria-hidden="true"><svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 120" preserveAspectRatio="none"><path d="M0 60 Q 90 20, 180 60 T 360 60 T 540 60 T 720 60" fill="none" stroke="white" stroke-width="2"></path><path d="M0 80 Q 90 40, 180 80 T 360 80 T 540 80 T 720 80" fill="none" stroke="white" stroke-width="1"></path></svg></div>
-              <div class="relative z-10 text-center"><span class="inline-block rounded-lg bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 font-mono text-xs font-bold text-sky-200 uppercase tracking-widest mb-2">TOPIC #03</span><p class="text-xs uppercase tracking-widest text-slate-300 font-semibold">Featured Knowledge Guide</p></div>
-              <div class="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-white/95 backdrop-blur-md px-3 py-1 text-xs font-bold text-text-primary shadow-xs"><span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span><span>Developer Tools</span></div>
-              <span class="absolute bottom-4 right-4 rounded-full bg-neutral-900/85 backdrop-blur-md px-2.5 py-1 text-[11px] font-semibold text-slate-200 border border-white/10">13 min read</span>
-              <!-- Article Logo -->
-              <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <ArticleLogo logo="database" category="devtools" size="lg" />
+            <div class="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-gradient-to-br from-amber-50 via-amber-100/50 to-orange-50 border border-amber-200/80 flex items-center justify-center p-6 text-slate-900 mb-6 shadow-xs dark:from-neutral-900 dark:via-neutral-850 dark:to-neutral-900 dark:border-neutral-700 dark:text-white">
+              <div class="absolute inset-0 opacity-30 pointer-events-none" aria-hidden="true">
+                <div class="w-full h-full bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:20px_20px] dark:opacity-10"></div>
               </div>
+              <div class="relative z-10 text-center">
+                <div class="inline-flex p-3 rounded-2xl bg-white shadow-xs border border-amber-200 mb-3 group-hover:scale-105 transition-transform dark:bg-neutral-800 dark:border-neutral-700">
+                  <ArticleLogo logo="database" category="devtools" size="lg" />
+                </div>
+                <p class="text-xs uppercase tracking-widest text-amber-900 font-bold dark:text-amber-300">Featured Knowledge Guide</p>
+              </div>
+              <div class="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-text-primary shadow-xs border border-neutral-200">
+                <span class="h-1.5 w-1.5 rounded-full bg-brand-warning"></span><span>Developer Tools</span>
+              </div>
+              <span class="absolute bottom-4 right-4 rounded-full bg-white px-2.5 py-1 text-[11px] font-semibold text-slate-700 border border-neutral-200 shadow-xs dark:bg-neutral-800 dark:text-neutral-200">13 min read</span>
             </div>
             <div class="flex items-center gap-3 text-xs text-text-muted mb-3"><span class="font-bold text-text-primary" itemprop="author">Micro Signal Cosmos</span><span aria-hidden="true">&bull;</span><time datetime="2026-11-15T08:00:00.000Z">Nov 15, 2026</time></div>
             <h3 class="text-2xl sm:text-3xl font-extrabold leading-tight text-text-primary transition-colors group-hover:text-brand-primary" itemprop="headline"><span class="focus-visible:outline-none focus-visible:underline">Choosing a Database in 2026: A Pragmatic Systems Engineering Guide</span></h3>

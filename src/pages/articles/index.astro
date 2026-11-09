@@ -189,13 +189,20 @@ const archiveUrl = `${siteUrl}/articles/`;
                 class="editorial-card group flex flex-col justify-between"
               >
                 <div>
-                  <div class="editorial-card__media relative aspect-[16/10] w-full overflow-hidden bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900">
-                    <div class="editorial-card__gradient absolute inset-0"></div>
-                    <a href={categoryHref} class="editorial-card__category">
+                  <div class={`editorial-card__media relative aspect-[16/10] w-full overflow-hidden flex items-center justify-center transition-colors ${
+                    categorySlug.includes('tech') ? 'bg-sky-50/80 border-b border-sky-100 dark:bg-sky-950/20 dark:border-sky-900/40' :
+                    categorySlug.includes('art') || categorySlug.includes('ai') ? 'bg-emerald-50/80 border-b border-emerald-100 dark:bg-emerald-950/20 dark:border-emerald-900/40' :
+                    categorySlug.includes('sci') ? 'bg-violet-50/80 border-b border-violet-100 dark:bg-violet-950/20 dark:border-violet-900/40' :
+                    'bg-amber-50/80 border-b border-amber-100 dark:bg-amber-950/20 dark:border-amber-900/40'
+                  }`}>
+                    <div class="absolute inset-0 opacity-40 pointer-events-none" aria-hidden="true">
+                      <div class="w-full h-full bg-[radial-gradient(#CBD5E1_1px,transparent_1px)] [background-size:16px_16px] dark:opacity-10"></div>
+                    </div>
+                    <a href={categoryHref} class="absolute top-3 left-3 badge badge--featured shadow-2xs">
                       {categoryName}
                     </a>
-                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      <ArticleLogo logo={article.data.logo || categorySlug} category={categorySlug} size="lg" />
+                    <div class="relative z-10 p-3 rounded-2xl bg-white shadow-xs border border-neutral-200/80 group-hover:scale-105 transition-transform duration-200 dark:bg-neutral-800 dark:border-neutral-700">
+                      <ArticleLogo logo={article.data.logo || categorySlug} category={categorySlug} size="md" />
                     </div>
                   </div>
 
