@@ -4,6 +4,7 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  canonical?: string;
   canonicalURL?: string;
   image?: string;
   type?: 'website' | 'article';
@@ -13,6 +14,7 @@ interface Props {
 const {
   title = 'Micro Signal Cosmos | Discover More. Understand Better.',
   description = 'Explore technology, science, artificial intelligence, digital discoveries and practical guides.',
+  canonical: canonicalProp,
   canonicalURL,
   image,
   type = 'website',
@@ -22,7 +24,7 @@ const {
 // Canonical URL configuration: Target upcoming production custom domain
 const productionBase = 'https://microsignalcosmos.com';
 const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : productionBase;
-const canonical = canonicalURL || new URL(Astro.url.pathname, productionBase).href;
+const canonical = canonicalProp || canonicalURL || new URL(Astro.url.pathname, productionBase).href;
 
 // Resolve social sharing image (default to high-resolution brand vector if none provided):
 let resolvedImage: string = `${productionBase}/favicon.svg`;
@@ -83,7 +85,7 @@ const finalJsonLd = jsonLd || defaultJsonLd;
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#0B0F19" />
+    <meta name="theme-color" content="#FFFFFF" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -129,14 +131,33 @@ const finalJsonLd = jsonLd || defaultJsonLd;
   </head>
 
   <body>
+    <!-- Reading Progress Bar -->
+    <div id="reading-progress-bar" aria-hidden="true"></div>
+
     <!-- Accessible Skip to Content Link -->
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-sky-400 focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-slate-950 focus:shadow-lg focus:outline-none"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-[#3478F6] focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white focus:shadow-lg focus:outline-none"
     >
       Skip to main content
     </a>
 
     <slot />
+
+    <!-- Reading Progress Scroll Script (Passive, non-blocking) -->
+    <script is:inline>
+      (function() {
+        const bar = document.getElementById('reading-progress-bar');
+        if (!bar) return;
+        window.addEventListener('scroll', function() {
+          const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          if (height > 0) {
+            const scrolled = (winScroll / height) * 100;
+            bar.style.width = scrolled + '%';
+          }
+        }, { passive: true });
+      })();
+    </script>
   </body>
 </html>

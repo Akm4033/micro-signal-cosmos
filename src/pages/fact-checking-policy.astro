@@ -1,0 +1,168 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Fact-checking Standards | Micro Signal Cosmos"
+  description="Fact-checking and verification standards for Micro Signal Cosmos. Read our protocols for verifying scientific claims, AI benchmarks, and technical assertions."
+  canonical="https://microsignalcosmos.com/fact-checking-policy/"
+>
+  <Header />
+
+  <main id="main-content" class="bg-[#F7F9FC] py-12 sm:py-20">
+    <div class="container-main">
+
+      <!-- Breadcrumbs -->
+      <nav aria-label="Breadcrumb" class="mb-8">
+        <ol class="flex items-center gap-2 text-xs text-[#697586]">
+          <li>
+            <a href="/" class="transition-colors hover:text-[#14233B]">Home</a>
+          </li>
+          <li aria-hidden="true" class="text-slate-300">/</li>
+          <li aria-current="page" class="font-medium text-[#14233B]">Fact-checking Standards</li>
+        </ol>
+      </nav>
+
+      <!-- Header Section -->
+      <div class="mx-auto max-w-3xl text-center">
+        <div class="inline-flex items-center gap-2 rounded-full border border-[#E3E8EF] bg-white px-3.5 py-1.5 shadow-xs">
+          <span class="h-2 w-2 rounded-full bg-[#3478F6]"></span>
+          <span class="text-xs font-semibold tracking-wider text-[#14233B] uppercase">
+            Accuracy & Verification
+          </span>
+        </div>
+
+        <h1 class="mt-6 text-3xl font-extrabold tracking-tight text-[#14233B] sm:text-5xl">
+          Fact-Checking <span class="text-[#3478F6]">Standards</span>
+        </h1>
+
+        <p class="mt-4 text-xs font-medium uppercase tracking-widest text-[#697586]">
+          Effective Date: November 2026 &bull; Micro Signal Cosmos Editorial Desk
+        </p>
+
+        <p class="mt-4 text-base leading-relaxed text-[#4B5565] sm:text-lg">
+          How our researchers and editors verify scientific claims, artificial intelligence benchmarks, and technological assertions before publication.
+        </p>
+      </div>
+
+      <!-- Main Document -->
+      <article class="mx-auto mt-12 max-w-3xl rounded-2xl border border-[#E3E8EF] bg-white p-8 sm:p-12 shadow-sm text-sm leading-relaxed text-[#4B5565] space-y-10">
+
+        <!-- 1. The Verification Mandate -->
+        <section aria-labelledby="verification-mandate">
+          <h2 id="verification-mandate" class="text-xl font-bold tracking-tight text-[#14233B]">
+            1. The Verification Mandate
+          </h2>
+          <p class="mt-3">
+            In digital science and technology journalism, precision is non-negotiable. A misstated metric, an exaggerated benchmark, or an unverified claim can mislead students, engineers, and researchers. At <strong class="font-semibold text-[#14233B]">Micro Signal Cosmos</strong>, every published assertion must be grounded in observable data, mathematical consistency, and credible research.
+          </p>
+        </section>
+
+        <!-- 2. Three-Tier Verification Protocol -->
+        <section aria-labelledby="three-tier" class="border-t border-[#E3E8EF] pt-8">
+          <h2 id="three-tier" class="text-xl font-bold tracking-tight text-[#14233B]">
+            2. Our Three-Tier Verification Protocol
+          </h2>
+          <p class="mt-3">
+            Before an article is scheduled for release, it passes through three mandatory checkpoints:
+          </p>
+
+          <div class="mt-6 space-y-4">
+            <div class="rounded-xl border border-[#E3E8EF] bg-[#F7F9FC] p-5">
+              <span class="text-xs font-extrabold uppercase tracking-wider text-[#3478F6]">Tier 01</span>
+              <h3 class="mt-1 text-sm font-bold text-[#14233B]">Primary Source Extraction</h3>
+              <p class="mt-2 text-xs leading-relaxed text-[#697586]">
+                Authors must locate and link the foundational research paper, repository commit, or institutional release behind every substantive claim. Press summaries and secondary rewrites are not accepted as primary evidence.
+              </p>
+            </div>
+
+            <div class="rounded-xl border border-[#E3E8EF] bg-[#F7F9FC] p-5">
+              <span class="text-xs font-extrabold uppercase tracking-wider text-[#3478F6]">Tier 02</span>
+              <h3 class="mt-1 text-sm font-bold text-[#14233B]">Benchmark & Methodology Scrutiny</h3>
+              <p class="mt-2 text-xs leading-relaxed text-[#697586]">
+                When reporting on performance claims (e.g. LLM accuracy scores, hardware speedups, quantum fidelity), editors inspect the test methodology, dataset contamination caveats, compute parameters, and comparative baselines.
+              </p>
+            </div>
+
+            <div class="rounded-xl border border-[#E3E8EF] bg-[#F7F9FC] p-5">
+              <span class="text-xs font-extrabold uppercase tracking-wider text-[#3478F6]">Tier 03</span>
+              <h3 class="mt-1 text-sm font-bold text-[#14233B]">Editorial Cross-Verification</h3>
+              <p class="mt-2 text-xs leading-relaxed text-[#697586]">
+                A second editorial staff member independently reviews the piece for conceptual clarity, absence of hyperbole, correct units of measurement, accurate citations, and accessible readability.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Hierarchy of Sourcing -->
+        <section aria-labelledby="sourcing-hierarchy" class="border-t border-[#E3E8EF] pt-8">
+          <h2 id="sourcing-hierarchy" class="text-xl font-bold tracking-tight text-[#14233B]">
+            3. Hierarchy of Sourcing Credibility
+          </h2>
+          <p class="mt-3">
+            We categorize external information sources into strict tiers of reliability:
+          </p>
+          <ul class="mt-4 list-disc space-y-2 pl-6">
+            <li><strong class="font-semibold text-[#14233B]">High Priority:</strong> Peer-reviewed scientific literature (Nature, Science, Physical Review, IEEE, ACM transactions), verified astronomical observational data (NASA, ESA, ESO), and open-source codebase commits.</li>
+            <li><strong class="font-semibold text-[#14233B]">Medium Priority:</strong> arXiv preprints, technical whitepapers from established labs, and published interviews with named researchers. Preprints are explicitly identified as non-peer-reviewed.</li>
+            <li><strong class="font-semibold text-[#14233B]">Carefully Scrutinized:</strong> Corporate promotional marketing, product launch keynote slides, and industry association reports.</li>
+            <li><strong class="font-semibold text-[#14233B]">Disallowed as Proof:</strong> Unverified social media rumors, anonymous forum threads, speculative tabloids, or AI-generated aggregate summaries.</li>
+          </ul>
+        </section>
+
+        <!-- 4. Handling Speculative or Emerging Frontiers -->
+        <section aria-labelledby="emerging-science" class="border-t border-[#E3E8EF] pt-8">
+          <h2 id="emerging-science" class="text-xl font-bold tracking-tight text-[#14233B]">
+            4. Reporting on Emerging or Contested Science
+          </h2>
+          <p class="mt-3">
+            Not all scientific breakthroughs are settled consensus. When reporting on early-stage findings—such as room-temperature superconductivity candidates, biosignature detections on exoplanets, or theoretical physics models:
+          </p>
+          <ul class="mt-4 list-disc space-y-2 pl-6">
+            <li>We clearly state that the findings are preliminary and subject to independent replication.</li>
+            <li>We include critical perspectives and dissenting analyses from qualified scientists in the field.</li>
+            <li>We avoid declaring discoveries as definitive until independent replication has occurred.</li>
+          </ul>
+        </section>
+
+        <!-- 5. What Happens When Readers Report a Discrepancy -->
+        <section aria-labelledby="reporting" class="border-t border-[#E3E8EF] pt-8">
+          <h2 id="reporting" class="text-xl font-bold tracking-tight text-[#14233B]">
+            5. Reader Inquiries & Challenge Process
+          </h2>
+          <p class="mt-3">
+            We view our readership as active collaborators in scientific truth. If you detect a numerical error, misattributed citation, or misleading explanation:
+          </p>
+          <ol class="mt-4 list-decimal space-y-2 pl-6">
+            <li>Email our editorial desk via our <a href="/contact/" class="font-semibold text-[#3478F6] hover:underline">Contact Form</a> or direct desk channel.</li>
+            <li>Include the specific article URL, paragraph, and counter-evidence (such as a link to the primary paper).</li>
+            <li>Our team will investigate within 48 business hours and, if verified, update the article in accordance with our <a href="/corrections-policy/" class="font-semibold text-[#3478F6] hover:underline">Corrections Policy</a>.</li>
+          </ol>
+        </section>
+
+        <!-- Related Standards Navigation -->
+        <section class="border-t border-[#E3E8EF] pt-8">
+          <h3 class="text-base font-bold text-[#14233B]">Related Governance Standards</h3>
+          <div class="mt-4 grid gap-3 sm:grid-cols-3">
+            <a href="/editorial-policy/" class="rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] p-3 text-xs font-semibold text-[#14233B] transition-colors hover:border-[#3478F6] hover:text-[#3478F6]">
+              Editorial Policy &rarr;
+            </a>
+            <a href="/corrections-policy/" class="rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] p-3 text-xs font-semibold text-[#14233B] transition-colors hover:border-[#3478F6] hover:text-[#3478F6]">
+              Corrections Policy &rarr;
+            </a>
+            <a href="/about/" class="rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] p-3 text-xs font-semibold text-[#14233B] transition-colors hover:border-[#3478F6] hover:text-[#3478F6]">
+              About the Publication &rarr;
+            </a>
+          </div>
+        </section>
+
+      </article>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+

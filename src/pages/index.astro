@@ -1,31 +1,45 @@
-
 ---
 import Layout from '../layouts/Layout.astro';
-
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import FeaturedArticles from '../components/FeaturedArticles.astro';
 import Categories from '../components/Categories.astro';
 import LatestArticles from '../components/LatestArticles.astro';
+import PopularArticles from '../components/PopularArticles.astro';
+import EditorialMission from '../components/EditorialMission.astro';
 import Newsletter from '../components/Newsletter.astro';
 import Footer from '../components/Footer.astro';
 ---
 
 <Layout
   title="Micro Signal Cosmos | Discover More. Understand Better."
-  description="Explore technology, science, artificial intelligence, digital innovation and practical tutorials. Discover more and understand better with Micro Signal Cosmos."
+  description="Explore the world of technology, science, artificial intelligence and innovation through insightful articles, practical guides and ideas that shape our future."
 >
-
   <Header />
 
   <main id="main-content">
+    <!-- Section B: Hero Section -->
     <Hero />
+
+    <!-- Section C: Featured Articles -->
     <FeaturedArticles />
+
+    <!-- Section D: Explore Categories -->
     <Categories />
+
+    <!-- Section E: Latest Articles Grid -->
     <LatestArticles />
+
+    <!-- Section F: Popular & Essential Articles -->
+    <PopularArticles />
+
+    <!-- Section G: Editorial Mission Statement -->
+    <EditorialMission />
+
+    <!-- Section H: Newsletter Transparent Notice -->
     <Newsletter />
   </main>
 
+  <!-- Section I: Footer -->
   <Footer />
-
 </Layout>

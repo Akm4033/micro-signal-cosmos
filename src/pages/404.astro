@@ -11,94 +11,84 @@ import { CATEGORIES } from '../data/categories';
 >
   <Header />
 
-  <main id="main-content" class="relative isolate flex min-h-[calc(100vh-80px-340px)] items-center justify-center overflow-hidden bg-[#0B0F19] py-16 sm:py-24">
-    <!-- Atmospheric Cosmic Glow -->
-    <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
-      <div class="absolute -top-40 right-1/4 h-96 w-96 rounded-full bg-blue-500/10 blur-[120px]"></div>
-      <div class="absolute -bottom-40 left-1/4 h-96 w-96 rounded-full bg-purple-500/10 blur-[120px]"></div>
-    </div>
-
+  <main id="main-content" class="relative isolate flex min-h-[calc(100vh-80px-340px)] items-center justify-center bg-[#F7F9FC] py-16 sm:py-24">
     <div class="container-main text-center">
-      <div class="mx-auto max-w-2xl">
+      <div class="mx-auto max-w-2xl rounded-2xl border border-[#E3E8EF] bg-white p-8 sm:p-14 shadow-sm">
 
-        <!-- Prominent Error Badge & 404 Visual -->
-        <div class="relative mx-auto mb-8 flex flex-col items-center justify-center">
-          <!-- Background Glow Effect -->
-          <div class="absolute h-48 w-48 rounded-full bg-gradient-to-br from-sky-500/20 to-purple-500/20 blur-2xl" aria-hidden="true"></div>
-
-          <!-- Inline Cosmic Signal Graphic -->
-          <div class="relative mb-6 flex h-32 w-32 items-center justify-center rounded-full border border-sky-400/30 bg-gradient-to-br from-[#151C2E] to-[#1C1733] shadow-[0_0_60px_rgba(0,210,255,0.15)]">
+        <!-- 404 Radar Visual -->
+        <div class="relative mx-auto mb-6 flex flex-col items-center justify-center">
+          <div class="relative mb-6 flex h-28 w-28 items-center justify-center rounded-2xl border border-[#E3E8EF] bg-[#F7F9FC] shadow-inner">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 80 80"
               fill="none"
-              class="h-16 w-16"
+              class="h-14 w-14"
               role="img"
               aria-label="Lost cosmic transmission radar illustration"
             >
               <!-- Outer orbit / radar boundary -->
-              <circle cx="40" cy="40" r="34" stroke="#38BDF8" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="4 3"/>
+              <circle cx="40" cy="40" r="34" stroke="#3478F6" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="4 3"/>
               <!-- Intermediate orbital resonance ring -->
-              <circle cx="40" cy="40" r="24" stroke="#A78BFA" stroke-opacity=".4" stroke-width="1.5"/>
+              <circle cx="40" cy="40" r="24" stroke="#14233B" stroke-opacity=".2" stroke-width="1.5"/>
               <!-- Inner signal core orbit -->
-              <circle cx="40" cy="40" r="14" stroke="#38BDF8" stroke-opacity=".6" stroke-width="1.5"/>
+              <circle cx="40" cy="40" r="14" stroke="#3478F6" stroke-opacity=".5" stroke-width="1.5"/>
               <!-- Polar axes -->
-              <path d="M12 40H68M40 12V68" stroke="#38BDF8" stroke-opacity=".3" stroke-width="1.5"/>
+              <path d="M12 40H68M40 12V68" stroke="#14233B" stroke-opacity=".2" stroke-width="1.5"/>
               <!-- Interrupted signal waveform -->
-              <path d="M25 40L32 30L39 49L46 33L53 40" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M25 40L32 30L39 49L46 33L53 40" stroke="#3478F6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
               <!-- Drifting signal pulse -->
-              <circle cx="46" cy="33" r="3.5" fill="#A78BFA"/>
+              <circle cx="46" cy="33" r="3.5" fill="#3478F6"/>
               <!-- Satellite drift point -->
-              <circle cx="64" cy="22" r="2.5" fill="#38BDF8" fill-opacity=".7"/>
+              <circle cx="64" cy="22" r="2.5" fill="#14233B" fill-opacity=".6"/>
             </svg>
           </div>
 
           <!-- Prominent 404 Error Number -->
-          <span class="block text-7xl font-extrabold tracking-tight text-white/90 sm:text-8xl lg:text-9xl">
-            4<span class="bg-gradient-to-r from-sky-400 to-purple-400 bg-clip-text text-transparent">0</span>4
+          <span class="block text-6xl font-black tracking-tight text-[#14233B] sm:text-7xl">
+            4<span class="text-[#3478F6]">0</span>4
           </span>
         </div>
 
         <!-- Main Heading -->
-        <h1 class="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl uppercase">
-          Signal <span class="bg-gradient-to-r from-sky-400 to-purple-400 bg-clip-text text-transparent">Lost</span>
+        <h1 class="text-2xl font-extrabold tracking-tight text-[#14233B] sm:text-3xl uppercase">
+          Signal <span class="text-[#3478F6]">Lost</span>
         </h1>
 
         <!-- Supporting Message (Exact required wording) -->
-        <p class="mx-auto mt-6 max-w-lg text-base leading-8 text-slate-300 sm:text-lg">
+        <p class="mx-auto mt-4 max-w-md text-sm leading-relaxed text-[#4B5565] sm:text-base">
           The page you're looking for seems to have drifted beyond our observable universe.
         </p>
 
         <!-- Prominent Actions -->
-        <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
           <a
             href="/"
-            class="inline-flex items-center justify-center gap-2 rounded-lg bg-sky-400 px-8 py-3.5 text-sm font-bold text-slate-950 transition-all hover:-translate-y-1 hover:bg-sky-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-400"
+            class="inline-flex items-center justify-center gap-2 rounded-lg bg-[#3478F6] px-6 py-2.5 text-xs font-semibold text-white shadow-xs transition-colors hover:bg-[#2563EB]"
           >
             Return Home
-            <span aria-hidden="true">→</span>
+            <span aria-hidden="true">&rarr;</span>
           </a>
 
           <a
-            href="/#categories"
-            class="inline-flex items-center justify-center rounded-lg border border-white/15 px-8 py-3.5 text-sm font-semibold text-white transition-all hover:border-purple-400 hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-400"
+            href="/articles/"
+            class="inline-flex items-center justify-center rounded-lg border border-[#E3E8EF] bg-white px-6 py-2.5 text-xs font-semibold text-[#14233B] transition-colors hover:bg-[#F7F9FC]"
           >
-            Explore Categories
+            Browse All Articles
           </a>
         </div>
 
-        <!-- Category Exploration Hub (Points to existing homepage categories section) -->
-        <div class="mt-14 border-t border-white/10 pt-8">
-          <p class="text-xs font-semibold tracking-wider text-slate-400 uppercase">
-            Active Discovery Frequencies
+        <!-- Category Exploration Hub -->
+        <div class="mt-10 border-t border-[#E3E8EF] pt-8">
+          <p class="text-xs font-bold uppercase tracking-wider text-[#697586]">
+            Active Knowledge Pillars
           </p>
 
-          <div class="mt-5 flex flex-wrap justify-center gap-2.5">
+          <div class="mt-4 flex flex-wrap justify-center gap-2">
             {CATEGORIES.map((category) => (
               <a
                 href={category.href}
-                class="rounded-lg border border-white/10 bg-[#151C2E] px-4 py-2 text-xs font-medium text-slate-300 transition-all hover:-translate-y-0.5 hover:border-sky-400/40 hover:text-sky-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-400"
-                title={`Explore ${category.name} archive`}
+                class="rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] px-3.5 py-1.5 text-xs font-medium text-[#14233B] transition-all hover:border-[#3478F6] hover:bg-white hover:text-[#3478F6]"
+                title={`Explore ${category.name} stream`}
               >
                 {category.name}
               </a>

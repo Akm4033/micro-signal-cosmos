@@ -24,6 +24,7 @@ function getCategoryInfo(categoryValue: string) {
       name: categoryValue,
       icon: 'MS',
       accent: 'sky' as const,
+      href: `/category/${norm}/`,
     }
   );
 }
@@ -32,137 +33,141 @@ const mainCategoryInfo = mainFeatured ? getCategoryInfo(mainFeatured.data.catego
 ---
 
 {mainFeatured && (
-  <section class="bg-[#0B0F19] py-20" aria-labelledby="featured-heading">
+  <section class="bg-[#F7F9FC] py-16 sm:py-20 border-b border-[#E3E8EF]" aria-labelledby="featured-heading">
     <div class="container-main">
 
-      <!-- Section Heading -->
-      <div class="mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+      <!-- Section Header -->
+      <div class="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
         <div>
-          <p class="mb-3 text-xs font-bold tracking-[0.2em] text-[#00D2FF] uppercase">
-            Editor's Selection
-          </p>
+          <div class="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-[#3478F6] uppercase mb-2">
+            <span class="h-1.5 w-1.5 rounded-full bg-[#3478F6]"></span>
+            <span>Editor's Selection</span>
+          </div>
 
-          <h2 id="featured-heading" class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Featured <span class="text-[#00D2FF]">Insights</span>
+          <h2 id="featured-heading" class="text-3xl font-extrabold tracking-tight text-[#14233B] sm:text-4xl">
+            Featured <span class="text-[#3478F6]">Insights</span>
           </h2>
 
-          <p class="mt-3 max-w-xl text-sm leading-7 text-slate-300">
-            Explore ideas, discoveries and technologies worth understanding.
+          <p class="mt-2 text-sm leading-relaxed text-[#697586] max-w-xl">
+            Essential long-form analysis, fundamental concepts, and primary scientific breakthroughs worth understanding.
           </p>
         </div>
 
         <a
           href="/articles/"
-          class="text-sm font-semibold text-[#00D2FF] transition-colors hover:text-sky-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded"
+          class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#3478F6] hover:text-[#2563EB] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6] rounded"
         >
-          Explore all articles →
+          <span>Explore complete archive</span>
+          <span aria-hidden="true">&rarr;</span>
         </a>
       </div>
 
-      <!-- Featured Article Grid -->
-      <div class="grid gap-6 lg:grid-cols-2">
+      <!-- Featured Articles Layout (1 Prominent + 2 Supporting) -->
+      <div class="grid gap-8 lg:grid-cols-12 items-stretch">
 
-        <!-- Main Featured Article -->
-        <article class="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#151C2E] transition-all duration-300 hover:-translate-y-1 hover:border-sky-400/40">
-
-          <div class="relative flex min-h-64 items-center justify-center overflow-hidden bg-gradient-to-br from-[#15304B] via-[#182441] to-[#281D46] sm:min-h-80">
-
-            <div class="absolute inset-0 opacity-30">
-              <div class="absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full border border-sky-400/40"></div>
-              <div class="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full border border-purple-400/50"></div>
-              <div class="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full border border-sky-400/60"></div>
-            </div>
-
-            <div class="relative flex h-28 w-28 items-center justify-center rounded-full border border-sky-400/30 bg-sky-400/10 shadow-[0_0_60px_rgba(0,210,255,0.15)]">
-              <span class="text-5xl font-bold text-sky-300" aria-hidden="true">
-                {mainCategoryInfo?.icon || 'AI'}
+        <!-- Prominent Lead Article (7 Cols) -->
+        <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-[#E3E8EF] bg-white p-6 sm:p-8 shadow-xs transition-all duration-300 hover:shadow-md hover:border-[#CBD5E1] lg:col-span-7">
+          <div>
+            <!-- Visual / Image Placeholder Container -->
+            <div class="relative aspect-video w-full overflow-hidden rounded-xl bg-gradient-to-br from-[#14233B] via-[#1E3A63] to-[#2563EB] flex items-center justify-center p-6 text-white mb-6">
+              <span class="text-6xl font-black text-white/10 tracking-widest">
+                {mainCategoryInfo?.icon || 'MS'}
               </span>
+
+              <div class="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur-md px-3 py-1 text-xs font-bold text-[#14233B]">
+                <span class="h-1.5 w-1.5 rounded-full bg-[#3478F6]"></span>
+                <span>{mainCategoryInfo?.name || mainFeatured.data.category}</span>
+              </div>
+
+              {mainFeatured.data.readingTime && (
+                <span class="absolute bottom-4 right-4 rounded-full bg-[#101B2D]/80 backdrop-blur-md px-2.5 py-1 text-[11px] font-medium text-slate-200">
+                  {mainFeatured.data.readingTime}
+                </span>
+              )}
             </div>
 
-            <span class="absolute left-5 top-5 rounded-full border border-sky-400/30 bg-[#0B0F19]/70 px-3 py-1.5 text-xs font-semibold text-sky-300 backdrop-blur">
-              Featured Article
-            </span>
+            <div class="flex items-center gap-3 text-xs text-[#697586] mb-3">
+              <span class="font-medium text-[#14233B]">{mainFeatured.data.author}</span>
+              <span aria-hidden="true">&bull;</span>
+              <time datetime={mainFeatured.data.publishDate.toISOString()}>
+                {mainFeatured.data.publishDate.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })}
+              </time>
+            </div>
 
-          </div>
-
-          <div class="flex flex-1 flex-col p-7">
-
-            <span class="text-xs font-semibold tracking-wider text-[#00D2FF] uppercase">
-              {mainCategoryInfo?.name || mainFeatured.data.category}
-            </span>
-
-            <h3 class="mt-4 text-2xl font-bold leading-snug text-white transition-colors group-hover:text-sky-300">
-              {mainFeatured.data.title}
+            <h3 class="text-2xl sm:text-3xl font-extrabold leading-tight text-[#14233B] transition-colors group-hover:text-[#3478F6]">
+              <a href={`/articles/${mainFeatured.data.slug || mainFeatured.id}/`} class="focus-visible:outline-none focus-visible:underline">
+                {mainFeatured.data.title}
+              </a>
             </h3>
 
-            <p class="mt-4 text-sm leading-7 text-slate-300">
+            <p class="mt-4 text-base leading-relaxed text-[#202938]">
               {mainFeatured.data.description}
             </p>
+          </div>
 
-            <div class="mt-auto pt-7">
-              <a
-                href={`/articles/${mainFeatured.data.slug || mainFeatured.id}/`}
-                class="inline-flex items-center gap-2 text-sm font-bold text-[#00D2FF] transition-all hover:gap-3 focus-visible:outline-none focus-visible:underline"
-              >
-                Read Article <span aria-hidden="true">→</span>
-              </a>
-            </div>
-
+          <div class="mt-8 pt-5 border-t border-[#E3E8EF] flex items-center justify-between">
+            <a
+              href={`/articles/${mainFeatured.data.slug || mainFeatured.id}/`}
+              class="inline-flex items-center gap-1.5 text-sm font-bold text-[#3478F6] transition-all group-hover:gap-2.5 hover:text-[#2563EB]"
+              aria-label={`Read article: ${mainFeatured.data.title}`}
+            >
+              <span>Read Full Analysis</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
           </div>
         </article>
 
-        <!-- Supporting Articles -->
-        <div class="grid gap-6 sm:grid-rows-2">
-
-          {supportingArticles.map((article, idx) => {
+        <!-- 2 Supporting Articles Column (5 Cols) -->
+        <div class="flex flex-col gap-6 lg:col-span-5 justify-between">
+          {supportingArticles.map((article) => {
             const catInfo = getCategoryInfo(article.data.category);
             const slug = article.data.slug || article.id;
-            const number = String(idx + 1).padStart(2, '0');
+            const formattedDate = article.data.publishDate.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            });
 
             return (
-              <article class="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#151C2E] transition-all duration-300 hover:-translate-y-1 hover:border-purple-400/40 sm:flex-row">
-
-                <div class="relative flex min-h-44 items-center justify-center overflow-hidden bg-gradient-to-br from-[#182D46] to-[#252044] sm:min-h-0 sm:w-2/5">
-                  <span class="text-6xl font-bold text-white/10">
-                    {number}
-                  </span>
-
-                  <div class="absolute bottom-4 left-4 h-2 w-2 rounded-full bg-[#00D2FF] shadow-[0_0_15px_#00D2FF]"></div>
-                </div>
-
-                <div class="flex flex-1 flex-col p-6">
-
-                  <span
-                    class:list={[
-                      'text-xs font-semibold tracking-wider uppercase',
-                      catInfo.accent === 'purple' ? 'text-purple-400' : 'text-[#00D2FF]',
-                    ]}
-                  >
-                    {catInfo.name}
-                  </span>
-
-                  <h3 class="mt-3 text-lg font-bold leading-snug text-white transition-colors group-hover:text-sky-300">
-                    {article.data.title}
-                  </h3>
-
-                  <p class="mt-3 text-sm leading-6 text-slate-300 line-clamp-2">
-                    {article.data.description}
-                  </p>
-
-                  <div class="mt-auto pt-5">
-                    <a
-                      href={`/articles/${slug}/`}
-                      class="inline-flex items-center gap-2 text-sm font-semibold text-[#00D2FF] focus-visible:outline-none focus-visible:underline"
-                    >
-                      Read More <span aria-hidden="true">→</span>
-                    </a>
+              <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-[#E3E8EF] bg-white p-6 shadow-xs transition-all duration-300 hover:shadow-md hover:border-[#CBD5E1] flex-1">
+                <div>
+                  <div class="flex items-center justify-between gap-2 text-xs mb-3">
+                    <span class="font-bold uppercase tracking-wider text-[#3478F6]">
+                      {catInfo.name}
+                    </span>
+                    {article.data.readingTime && (
+                      <span class="text-[#697586]">{article.data.readingTime}</span>
+                    )}
                   </div>
 
+                  <h3 class="text-lg sm:text-xl font-bold leading-snug text-[#14233B] transition-colors group-hover:text-[#3478F6]">
+                    <a href={`/articles/${slug}/`} class="focus-visible:outline-none focus-visible:underline">
+                      {article.data.title}
+                    </a>
+                  </h3>
+
+                  <p class="mt-2.5 text-sm leading-relaxed text-[#202938] line-clamp-2">
+                    {article.data.description}
+                  </p>
+                </div>
+
+                <div class="mt-5 pt-4 border-t border-[#E3E8EF] flex items-center justify-between text-xs text-[#697586]">
+                  <span>{formattedDate}</span>
+                  <a
+                    href={`/articles/${slug}/`}
+                    class="font-semibold text-[#3478F6] group-hover:text-[#2563EB] inline-flex items-center gap-1"
+                  >
+                    <span>Read</span>
+                    <span aria-hidden="true">&rarr;</span>
+                  </a>
                 </div>
               </article>
             );
           })}
-
         </div>
 
       </div>

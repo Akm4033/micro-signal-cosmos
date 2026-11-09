@@ -34,7 +34,6 @@ const category = CATEGORIES.find(
 
 const categoryName = category?.name || article.data.category;
 const categoryHref = category?.href || `/category/${article.data.category}/`;
-const categoryAccent = category?.accent || 'sky';
 
 // Format publication and update dates
 const publishDateFormatted = article.data.publishDate.toLocaleDateString('en-US', {
@@ -53,13 +52,14 @@ const updatedDateFormatted = article.data.updatedDate
   : null;
 const updatedDateISO = article.data.updatedDate ? article.data.updatedDate.toISOString() : null;
 
-// Determine related articles:
-// Prioritize published articles from the same category, excluding current article.
-// Fallback to other recent published articles if needed, up to 3 total.
+// Determine related articles
 const allPublished = await getPublishedArticles();
 const currentSlug = article.data.slug || article.id;
-const otherArticles = allPublished.filter((a) => (a.data.slug || a.id) !== currentSlug);
+const currentIndex = allPublished.findIndex((a) => (a.data.slug || a.id) === currentSlug);
+const prevArticle = currentIndex > 0 ? allPublished[currentIndex - 1] : null;
+const nextArticle = currentIndex < allPublished.length - 1 ? allPublished[currentIndex + 1] : null;
 
+const otherArticles = allPublished.filter((a) => (a.data.slug || a.id) !== currentSlug);
 const sameCategoryArticles = otherArticles.filter(
   (a) => a.data.category.toLowerCase().trim() === article.data.category.toLowerCase().trim()
 );
@@ -69,7 +69,7 @@ const differentCategoryArticles = otherArticles.filter(
 
 const relatedArticles = [...sameCategoryArticles, ...differentCategoryArticles].slice(0, 3);
 
-// JSON-LD Structured Data (NewsArticle, BlogPosting, TechArticle + BreadcrumbList)
+// JSON-LD Structured Data
 const siteUrl = 'https://microsignalcosmos.com';
 const articleUrl = `${siteUrl}/articles/${currentSlug}/`;
 
@@ -137,6 +137,9 @@ const articleJsonLd = {
     },
   ],
 };
+
+const shareEncodedUrl = encodeURIComponent(articleUrl);
+const shareEncodedTitle = encodeURIComponent(article.data.title);
 ---
 
 <Layout
@@ -148,195 +151,169 @@ const articleJsonLd = {
 >
   <Header />
 
-  <main id="main-content" class="bg-[#0B0F19] py-12 sm:py-16 lg:py-20">
+  <main id="main-content" class="bg-[#F7F9FC] py-10 sm:py-14 lg:py-16">
     <div class="container-main">
 
-      <!-- Breadcrumbs and Navigation -->
-      <div class="mx-auto max-w-3xl mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <!-- Breadcrumbs Navigation -->
+      <div class="mx-auto max-w-3xl mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between text-xs sm:text-sm text-[#697586]">
         <nav aria-label="Breadcrumb">
-          <ol class="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-400">
+          <ol class="flex flex-wrap items-center gap-1.5 sm:gap-2">
             <li>
-              <a
-                href="/"
-                class="transition-colors hover:text-sky-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded"
-              >
+              <a href="/" class="hover:text-[#3478F6] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6] rounded">
                 Home
               </a>
             </li>
-            <li aria-hidden="true" class="text-slate-600">/</li>
+            <li aria-hidden="true" class="text-slate-400">/</li>
             <li>
-              <a
-                href="/articles/"
-                class="transition-colors hover:text-sky-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded"
-              >
+              <a href="/articles/" class="hover:text-[#3478F6] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6] rounded">
                 Articles
               </a>
             </li>
-            <li aria-hidden="true" class="text-slate-600">/</li>
-            <li class="font-medium text-slate-300 truncate max-w-[200px] sm:max-w-xs" aria-current="page">
-              {article.data.title}
+            <li aria-hidden="true" class="text-slate-400">/</li>
+            <li>
+              <a href={categoryHref} class="hover:text-[#3478F6] transition-colors font-medium">
+                {categoryName}
+              </a>
             </li>
           </ol>
         </nav>
 
         <a
           href="/articles/"
-          class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-sky-400 transition-all hover:gap-2 hover:text-sky-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded"
+          class="inline-flex items-center gap-1 font-semibold text-[#3478F6] hover:text-[#2563EB] transition-colors"
         >
-          <span aria-hidden="true">←</span> Back to all articles
+          <span>&larr;</span> Back to all articles
         </a>
       </div>
 
-      <!-- Article Header -->
-      <header class="mx-auto max-w-3xl">
-        <!-- Category Badge -->
-        <div class="mb-5">
-          <a
-            href={categoryHref}
-            class:list={[
-              'inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-semibold tracking-wider uppercase transition-all focus-visible:outline-none focus-visible:ring-2',
-              categoryAccent === 'purple'
-                ? 'border-purple-400/30 bg-purple-400/10 text-purple-300 hover:border-purple-400 hover:bg-purple-400/20 focus-visible:ring-purple-400'
-                : 'border-sky-400/30 bg-sky-400/10 text-sky-300 hover:border-sky-400 hover:bg-sky-400/20 focus-visible:ring-sky-400',
-            ]}
-          >
-            <span
-              class:list={[
-                'h-1.5 w-1.5 rounded-full',
-                categoryAccent === 'purple' ? 'bg-purple-400' : 'bg-sky-400',
-              ]}
-              aria-hidden="true"
-            ></span>
-            {categoryName}
-          </a>
-        </div>
-
-        <!-- Main Title -->
-        <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl leading-tight sm:leading-tight">
-          {article.data.title}
-        </h1>
-
-        <!-- Excerpt / Description -->
-        <p class="mt-6 text-lg sm:text-xl font-normal leading-relaxed text-slate-300">
-          {article.data.description}
-        </p>
-
-        <!-- Meta Bar (Author, Dates, Reading Time) -->
-        <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-y border-white/10 py-5 text-xs sm:text-sm text-slate-400">
-          <!-- Author -->
-          <div class="flex items-center gap-2.5">
-            <div
-              class="flex h-8 w-8 items-center justify-center rounded-full border border-sky-400/30 bg-sky-400/10 text-xs font-bold text-sky-300 shadow-[0_0_15px_rgba(56,189,248,0.15)]"
-              aria-hidden="true"
+      <!-- Main Article Card Surface -->
+      <article class="mx-auto max-w-3xl rounded-2xl border border-[#E3E8EF] bg-white p-6 sm:p-10 lg:p-12 shadow-xs">
+        
+        <!-- Article Header -->
+        <header class="border-b border-[#E3E8EF] pb-8">
+          <!-- Category Badge -->
+          <div class="mb-4">
+            <a
+              href={categoryHref}
+              class="inline-flex items-center gap-2 rounded-full border border-[#E3E8EF] bg-[#F7F9FC] px-3.5 py-1 text-xs font-bold tracking-wider uppercase text-[#3478F6] transition-colors hover:border-[#3478F6]"
             >
-              MS
-            </div>
-            <div>
-              <span class="block font-medium text-slate-200">{article.data.author}</span>
-            </div>
+              <span class="h-1.5 w-1.5 rounded-full bg-[#3478F6]"></span>
+              <span>{categoryName}</span>
+            </a>
           </div>
 
-          <span aria-hidden="true" class="hidden text-slate-700 sm:inline">•</span>
+          <!-- Main Article Title -->
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#14233B] leading-[1.18]">
+            {article.data.title}
+          </h1>
 
-          <!-- Publication Date -->
-          <div class="flex items-center gap-1.5">
-            <svg
-              class="h-4 w-4 text-slate-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="1.75"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
-            <span>
-              Published <time datetime={publishDateISO} class="text-slate-300">{publishDateFormatted}</time>
-            </span>
-          </div>
+          <!-- Article Excerpt / Lead -->
+          <p class="mt-5 text-lg sm:text-xl font-normal leading-relaxed text-[#202938]">
+            {article.data.description}
+          </p>
 
-          <!-- Updated Date (conditional) -->
-          {updatedDateFormatted && (
-            <>
-              <span aria-hidden="true" class="hidden text-slate-700 sm:inline">•</span>
-              <div class="flex items-center gap-1.5">
-                <svg
-                  class="h-4 w-4 text-slate-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="1.75"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                  />
-                </svg>
-                <span>
-                  Updated <time datetime={updatedDateISO} class="text-slate-300">{updatedDateFormatted}</time>
+          <!-- Metadata & Share Actions Bar -->
+          <div class="mt-8 pt-6 border-t border-[#E3E8EF] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs sm:text-sm text-[#697586]">
+            <!-- Author & Dates -->
+            <div class="flex flex-wrap items-center gap-3">
+              <a href="/authors/" class="flex items-center gap-2 font-medium text-[#14233B] hover:text-[#3478F6] transition-colors">
+                <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[#EEF1F5] text-xs font-bold text-[#3478F6]">
+                  MS
                 </span>
-              </div>
-            </>
-          )}
+                <span>{article.data.author}</span>
+              </a>
 
-          <span aria-hidden="true" class="hidden text-slate-700 sm:inline">•</span>
+              <span aria-hidden="true">&bull;</span>
 
-          <!-- Reading Time -->
-          {article.data.readingTime && (
-            <div class="flex items-center gap-1.5">
-              <svg
-                class="h-4 w-4 text-slate-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="1.75"
-                aria-hidden="true"
+              <time datetime={publishDateISO}>
+                {publishDateFormatted}
+              </time>
+
+              {updatedDateFormatted && (
+                <>
+                  <span aria-hidden="true">&bull;</span>
+                  <span>Updated {updatedDateFormatted}</span>
+                </>
+              )}
+
+              {article.data.readingTime && (
+                <>
+                  <span aria-hidden="true">&bull;</span>
+                  <span>{article.data.readingTime}</span>
+                </>
+              )}
+            </div>
+
+            <!-- Social Share Bar & Copy Link -->
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-semibold text-[#14233B] uppercase tracking-wider mr-1">Share:</span>
+              
+              <!-- Copy Link Button -->
+              <button
+                type="button"
+                id="copy-link-btn"
+                class="inline-flex h-8 items-center gap-1.5 rounded-md border border-[#E3E8EF] bg-[#F7F9FC] px-2.5 text-xs font-medium text-[#202938] hover:border-[#3478F6] hover:text-[#3478F6] transition-colors"
+                aria-label="Copy link to clipboard"
+                data-url={articleUrl}
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <span class="text-slate-300">{article.data.readingTime}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                </svg>
+                <span id="copy-text">Copy</span>
+              </button>
+
+              <!-- Twitter / X -->
+              <a
+                href={`https://twitter.com/intent/tweet?text=${shareEncodedTitle}&url=${shareEncodedUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex h-8 w-8 items-center justify-center rounded-md border border-[#E3E8EF] bg-[#F7F9FC] text-[#202938] hover:border-[#3478F6] hover:text-[#3478F6] transition-colors"
+                aria-label="Share on X / Twitter"
+              >
+                <span class="text-xs font-bold">𝕏</span>
+              </a>
+
+              <!-- LinkedIn -->
+              <a
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareEncodedUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex h-8 w-8 items-center justify-center rounded-md border border-[#E3E8EF] bg-[#F7F9FC] text-[#202938] hover:border-[#3478F6] hover:text-[#3478F6] transition-colors"
+                aria-label="Share on LinkedIn"
+              >
+                <span class="text-xs font-bold">in</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Cover Image (when provided) -->
+          {article.data.coverImage && (
+            <div class="mt-8 overflow-hidden rounded-xl border border-[#E3E8EF] bg-[#F7F9FC]">
+              <img
+                src={article.data.coverImage}
+                alt={article.data.title}
+                width="1200"
+                height="630"
+                class="h-auto max-h-[460px] w-full object-cover"
+                loading="lazy"
+              />
             </div>
           )}
-        </div>
+        </header>
 
-        <!-- Cover Image (when provided) -->
-        {article.data.coverImage && (
-          <div class="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-[#151C2E]">
-            <img
-              src={article.data.coverImage}
-              alt={article.data.title}
-              width="1200"
-              height="630"
-              class="h-auto max-h-[480px] w-full object-cover"
-              loading="lazy"
-            />
-          </div>
-        )}
-      </header>
-
-      <!-- 1. Above-the-Fold Ad Slot (Reserved Height / Zero CLS) -->
-      <div class="ad-slot-container ad-slot-above-fold" role="region" aria-label="Sponsored Space">
-        <div class="ad-slot-inner">
-          <span class="ad-slot-badge">Advertisement</span>
-          <div class="ad-slot-placeholder" data-ad-slot="above-fold">
-            <!-- Reserved for 728x90 Leaderboard / Responsive Banner -->
+        <!-- 1. Above-the-Fold Ad Slot (Reserved Height / Zero CLS) -->
+        <div class="ad-slot-container ad-slot-above-fold" role="region" aria-label="Sponsored Space">
+          <div class="ad-slot-inner">
+            <span class="ad-slot-badge">Advertisement</span>
+            <div class="ad-slot-placeholder" data-ad-slot="above-fold">
+              <!-- Reserved for 728x90 Leaderboard / Responsive Banner -->
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Article Content Area -->
-      <article class="mx-auto max-w-3xl mt-8">
-        <div class="article-content" id="article-body-content">
+        <!-- Article Content Column -->
+        <div class="article-content mt-8" id="article-body-content">
           <Content />
         </div>
 
@@ -365,6 +342,26 @@ const articleJsonLd = {
                 body.appendChild(tpl.content.cloneNode(true));
               }
             }
+
+            // Copy Link Handler
+            const copyBtn = document.getElementById('copy-link-btn');
+            const copyText = document.getElementById('copy-text');
+            if (copyBtn && copyText) {
+              copyBtn.addEventListener('click', async () => {
+                const url = copyBtn.getAttribute('data-url') || window.location.href;
+                try {
+                  await navigator.clipboard.writeText(url);
+                  copyText.textContent = 'Copied!';
+                  copyBtn.classList.add('border-[#3478F6]', 'text-[#3478F6]');
+                  setTimeout(() => {
+                    copyText.textContent = 'Copy';
+                    copyBtn.classList.remove('border-[#3478F6]', 'text-[#3478F6]');
+                  }, 2500);
+                } catch (e) {
+                  copyText.textContent = 'Copied!';
+                }
+              });
+            }
           })();
         </script>
 
@@ -378,15 +375,15 @@ const articleJsonLd = {
           </div>
         </div>
 
-        <!-- Article Tags -->
+        <!-- Article Topic Tags -->
         {article.data.tags && article.data.tags.length > 0 && (
-          <div class="mt-12 pt-8 border-t border-white/10">
+          <div class="mt-10 pt-6 border-t border-[#E3E8EF]">
             <div class="flex flex-wrap items-center gap-2">
-              <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 mr-2">
-                Topic Tags:
+              <span class="text-xs font-bold uppercase tracking-wider text-[#14233B] mr-2">
+                Tagged Topics:
               </span>
               {article.data.tags.map((tag) => (
-                <span class="rounded-lg border border-white/10 bg-[#151C2E] px-3 py-1 text-xs font-medium text-slate-300">
+                <span class="rounded-md border border-[#E3E8EF] bg-[#F7F9FC] px-3 py-1 text-xs font-semibold text-[#202938]">
                   #{tag}
                 </span>
               ))}
@@ -394,63 +391,86 @@ const articleJsonLd = {
           </div>
         )}
 
-        <!-- Editorial Footer Callout -->
-        <div class="mt-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 rounded-2xl border border-white/10 bg-[#151C2E] p-6 sm:p-8">
-          <div>
-            <p class="text-xs font-bold uppercase tracking-[0.2em] text-sky-400">
-              Published in {categoryName}
-            </p>
-            <p class="mt-1 text-sm leading-relaxed text-slate-400">
-              Explore more analysis, insights, and discoveries in this field.
-            </p>
-          </div>
-          <div class="flex flex-wrap items-center gap-3">
-            <a
-              href={categoryHref}
-              class="inline-flex items-center gap-2 rounded-lg border border-sky-400/40 bg-sky-400/10 px-4 py-2.5 text-xs font-semibold text-sky-300 transition-all hover:bg-sky-400/20 hover:border-sky-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
-            >
-              Browse {categoryName} →
-            </a>
-            <a
-              href="/articles/"
-              class="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-semibold text-slate-300 transition-all hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
-            >
-              All Articles
-            </a>
+        <!-- Author Biography & Editorial Trust Box -->
+        <div class="mt-10 rounded-xl border border-[#E3E8EF] bg-[#F7F9FC] p-6 sm:p-7">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#14233B] text-white font-bold text-base shadow-sm">
+              MS
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <h3 class="text-base font-bold text-[#14233B]">
+                  {article.data.author}
+                </h3>
+                <a href="/authors/" class="text-xs font-semibold text-[#3478F6] hover:underline">
+                  View Editorial Team &rarr;
+                </a>
+              </div>
+              <p class="mt-1.5 text-xs sm:text-sm leading-relaxed text-[#202938]">
+                Editorial and research collective at Micro Signal Cosmos. We analyze emerging developments in technology, science, artificial intelligence, and computing with an emphasis on primary sources, verifiable evidence, and clear conceptual explanations.
+              </p>
+            </div>
           </div>
         </div>
+
+        <!-- Previous and Next Article Navigation -->
+        {(prevArticle || nextArticle) && (
+          <nav aria-label="Adjacent Articles" class="mt-10 pt-8 border-t border-[#E3E8EF] grid gap-4 sm:grid-cols-2">
+            {prevArticle ? (
+              <a
+                href={`/articles/${prevArticle.data.slug || prevArticle.id}/`}
+                class="group flex flex-col justify-between rounded-xl border border-[#E3E8EF] bg-[#F7F9FC] p-4 transition-all hover:border-[#3478F6] hover:bg-white"
+              >
+                <span class="text-[11px] font-bold uppercase tracking-wider text-[#697586] group-hover:text-[#3478F6]">
+                  &larr; Previous Article
+                </span>
+                <span class="mt-2 text-sm font-bold text-[#14233B] line-clamp-2 group-hover:text-[#3478F6]">
+                  {prevArticle.data.title}
+                </span>
+              </a>
+            ) : <div></div>}
+
+            {nextArticle ? (
+              <a
+                href={`/articles/${nextArticle.data.slug || nextArticle.id}/`}
+                class="group flex flex-col justify-between rounded-xl border border-[#E3E8EF] bg-[#F7F9FC] p-4 text-right transition-all hover:border-[#3478F6] hover:bg-white"
+              >
+                <span class="text-[11px] font-bold uppercase tracking-wider text-[#697586] group-hover:text-[#3478F6]">
+                  Next Article &rarr;
+                </span>
+                <span class="mt-2 text-sm font-bold text-[#14233B] line-clamp-2 group-hover:text-[#3478F6]">
+                  {nextArticle.data.title}
+                </span>
+              </a>
+            ) : <div></div>}
+          </nav>
+        )}
+
       </article>
 
       <!-- Related Articles Section -->
       {relatedArticles.length > 0 && (
-        <section class="mx-auto mt-20 max-w-4xl border-t border-white/10 pt-16" aria-labelledby="related-heading">
+        <section class="mx-auto mt-16 max-w-4xl" aria-labelledby="related-heading">
           <div class="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
-              <p class="text-xs font-bold uppercase tracking-[0.2em] text-sky-400">
+              <p class="text-xs font-bold uppercase tracking-widest text-[#3478F6] mb-1">
                 Continue Reading
               </p>
-              <h2 id="related-heading" class="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                Related <span class="text-sky-400">Articles</span>
+              <h2 id="related-heading" class="text-2xl font-extrabold tracking-tight text-[#14233B] sm:text-3xl">
+                Related <span class="text-[#3478F6]">Investigations</span>
               </h2>
             </div>
             <a
               href="/articles/"
-              class="text-xs sm:text-sm font-semibold text-sky-400 transition-colors hover:text-sky-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded"
+              class="text-xs sm:text-sm font-semibold text-[#3478F6] hover:text-[#2563EB] transition-colors"
             >
-              View all articles →
+              Browse complete catalog &rarr;
             </a>
           </div>
 
-          <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div class="grid gap-6 md:grid-cols-3">
             {relatedArticles.map((rel) => {
               const relSlug = rel.data.slug || rel.id;
-              const relCat = CATEGORIES.find(
-                (c) =>
-                  c.slug.toLowerCase() === rel.data.category.toLowerCase().trim() ||
-                  c.name.toLowerCase() === rel.data.category.toLowerCase().trim()
-              );
-              const relCatName = relCat?.name || rel.data.category;
-              const relCatAccent = relCat?.accent || 'sky';
               const relDateFormatted = rel.data.publishDate.toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'short',
@@ -458,42 +478,30 @@ const articleJsonLd = {
               });
 
               return (
-                <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#151C2E] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-sky-400/40">
+                <article class="group flex flex-col justify-between rounded-xl border border-[#E3E8EF] bg-white p-5 shadow-xs transition-all duration-300 hover:shadow-md hover:border-[#CBD5E1]">
                   <div>
-                    <div class="flex items-center justify-between gap-2 text-xs">
-                      <span
-                        class:list={[
-                          'font-semibold uppercase tracking-wider',
-                          relCatAccent === 'purple' ? 'text-purple-400' : 'text-sky-400',
-                        ]}
-                      >
-                        {relCatName}
-                      </span>
-                      <span class="text-slate-400">{rel.data.readingTime || '5 min read'}</span>
-                    </div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-[#3478F6]">
+                      {rel.data.category}
+                    </span>
 
-                    <h3 class="mt-4 text-base font-bold leading-snug text-white transition-colors group-hover:text-sky-300">
-                      <a
-                        href={`/articles/${relSlug}/`}
-                        class="focus-visible:outline-none focus-visible:underline"
-                      >
+                    <h3 class="mt-2 text-base font-bold leading-snug text-[#14233B] transition-colors group-hover:text-[#3478F6]">
+                      <a href={`/articles/${relSlug}/`} class="focus-visible:outline-none focus-visible:underline">
                         {rel.data.title}
                       </a>
                     </h3>
 
-                    <p class="mt-3 text-xs leading-relaxed text-slate-400 line-clamp-3">
+                    <p class="mt-2 text-xs leading-relaxed text-[#202938] line-clamp-2">
                       {rel.data.description}
                     </p>
                   </div>
 
-                  <div class="mt-6 flex items-center justify-between border-t border-white/5 pt-4 text-xs">
-                    <span class="text-slate-400">{relDateFormatted}</span>
+                  <div class="mt-5 pt-3 border-t border-[#E3E8EF] flex items-center justify-between text-[11px] text-[#697586]">
+                    <span>{relDateFormatted}</span>
                     <a
                       href={`/articles/${relSlug}/`}
-                      class="inline-flex items-center gap-1 font-semibold text-sky-400 transition-all group-hover:gap-2"
-                      aria-label={`Read article: ${rel.data.title}`}
+                      class="font-semibold text-[#3478F6] group-hover:text-[#2563EB]"
                     >
-                      Read <span aria-hidden="true">→</span>
+                      Read &rarr;
                     </a>
                   </div>
                 </article>
@@ -511,29 +519,29 @@ const articleJsonLd = {
 
 <style>
   /* ===================================================
-     ARTICLE CONTENT STYLING (PREMIUM DARK MAGAZINE)
+     ARTICLE CONTENT STYLING (PREMIUM LIGHT MAGAZINE)
      =================================================== */
   .article-content {
-    color: #E2E8F0; /* Slate-200: anti-glare high readability on deep canvas */
-    font-size: 1.125rem;
+    color: #202938; /* Deep charcoal text */
+    font-size: 1.125rem; /* 18px */
     line-height: 1.75;
   }
 
   /* Headings */
   .article-content :global(h2) {
-    color: #F8FAFC; /* Slate-50 heading */
+    color: #14233B;
     font-size: 1.75rem;
     font-weight: 700;
     line-height: 1.3;
     margin-top: 2.75rem;
     margin-bottom: 1.25rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #EEF1F5;
     letter-spacing: -0.02em;
   }
 
   .article-content :global(h3) {
-    color: #F8FAFC;
+    color: #14233B;
     font-size: 1.375rem;
     font-weight: 600;
     line-height: 1.35;
@@ -543,7 +551,7 @@ const articleJsonLd = {
   }
 
   .article-content :global(h4) {
-    color: #F1F5F9;
+    color: #14233B;
     font-size: 1.15rem;
     font-weight: 600;
     line-height: 1.4;
@@ -558,12 +566,12 @@ const articleJsonLd = {
 
   /* Emphasis */
   .article-content :global(strong) {
-    color: #F8FAFC;
-    font-weight: 600;
+    color: #14233B;
+    font-weight: 700;
   }
 
   .article-content :global(em) {
-    color: #E2E8F0;
+    color: #202938;
     font-style: italic;
   }
 
@@ -583,23 +591,23 @@ const articleJsonLd = {
   }
 
   .article-content :global(li) {
-    margin-bottom: 0.65rem;
-    padding-left: 0.35rem;
-    color: #E2E8F0;
+    margin-bottom: 0.5rem;
+    padding-left: 0.25rem;
+    color: #202938;
   }
 
   .article-content :global(li::marker) {
-    color: #00D2FF; /* Electric cyan bullet accent */
+    color: #3478F6;
   }
 
   /* Blockquotes */
   .article-content :global(blockquote) {
     margin: 2rem 0;
     padding: 1.25rem 1.75rem;
-    background: rgba(21, 28, 46, 0.6);
-    border-left: 4px solid #00D2FF;
-    border-radius: 0 0.875rem 0.875rem 0;
-    color: #E2E8F0;
+    background: #F8FAFC;
+    border-left: 4px solid #3478F6;
+    border-radius: 0 0.5rem 0.5rem 0;
+    color: #202938;
     font-style: italic;
   }
 
@@ -609,38 +617,38 @@ const articleJsonLd = {
 
   /* Links */
   .article-content :global(a) {
-    color: #00D2FF;
+    color: #3478F6;
     text-decoration: underline;
-    text-underline-offset: 4px;
+    text-underline-offset: 3px;
     transition: color 0.2s ease;
   }
 
   .article-content :global(a:hover) {
-    color: #38BDF8;
+    color: #2563EB;
   }
 
   /* Inline Code */
   .article-content :global(:not(pre) > code) {
-    background: #1C2940;
-    color: #7DD3FC;
-    padding: 0.2rem 0.5rem;
+    background: #EEF1F5;
+    color: #2563EB;
+    padding: 0.15rem 0.45rem;
     border-radius: 0.375rem;
     font-size: 0.875em;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid #E2E8F0;
   }
 
   /* Preformatted & Code Blocks */
   .article-content :global(pre) {
-    background: #151C2E !important;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0.875rem;
+    background: #0F172A !important;
+    border: 1px solid #334155;
+    border-radius: 0.75rem;
     padding: 1.25rem 1.5rem;
     margin: 2rem 0;
-    overflow-x: auto; /* Horizontally scrollable on mobile */
+    overflow-x: auto;
     font-size: 0.875rem;
     line-height: 1.7;
-    color: #E2E8F0;
+    color: #F1F5F9;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -657,36 +665,36 @@ const articleJsonLd = {
     width: 100%;
     border-collapse: collapse;
     margin: 2rem 0;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0.75rem;
+    border: 1px solid #E3E8EF;
+    border-radius: 0.5rem;
     overflow: hidden;
     font-size: 0.9375rem;
   }
 
   .article-content :global(th) {
-    background: #151C2E;
-    color: #F8FAFC;
-    font-weight: 600;
+    background: #F8FAFC;
+    color: #14233B;
+    font-weight: 700;
     text-align: left;
     padding: 0.85rem 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 2px solid #E3E8EF;
   }
 
   .article-content :global(td) {
     padding: 0.85rem 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    color: #E2E8F0;
+    border-bottom: 1px solid #E3E8EF;
+    color: #202938;
   }
 
   .article-content :global(tr:nth-child(even) td) {
-    background: rgba(21, 28, 46, 0.35);
+    background: #F8FAFC;
   }
 
   /* Horizontal Divider */
   .article-content :global(hr) {
     border: none;
     height: 1px;
-    background: linear-gradient(to right, transparent, rgba(0, 210, 255, 0.4), transparent);
+    background: #E3E8EF;
     margin: 3rem 0;
   }
 
@@ -694,7 +702,7 @@ const articleJsonLd = {
   @media (max-width: 640px) {
     .article-content {
       font-size: 1rem;
-      line-height: 1.75;
+      line-height: 1.7;
     }
     .article-content :global(h2) {
       font-size: 1.45rem;
@@ -711,4 +719,3 @@ const articleJsonLd = {
     }
   }
 </style>
-

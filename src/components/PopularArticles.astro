@@ -1,0 +1,82 @@
+---
+import { getPublishedArticles } from '../data/articles';
+
+// Editorially curated selection of prominent published articles
+const publishedArticles = await getPublishedArticles();
+const popularArticles = publishedArticles.slice(0, 3);
+---
+
+{popularArticles.length > 0 && (
+  <section class="bg-white py-16 sm:py-20 border-b border-[#E3E8EF]" aria-labelledby="popular-heading">
+    <div class="container-main">
+
+      <!-- Section Header -->
+      <div class="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-[#3478F6] uppercase mb-2">
+            <span class="h-1.5 w-1.5 rounded-full bg-[#3478F6]"></span>
+            <span>Curated Analysis</span>
+          </div>
+
+          <h2 id="popular-heading" class="text-3xl font-extrabold tracking-tight text-[#14233B] sm:text-4xl">
+            Popular & <span class="text-[#3478F6]">Essential Reads</span>
+          </h2>
+
+          <p class="mt-2 text-sm leading-relaxed text-[#697586] max-w-xl">
+            Selected investigations, technical overviews, and foundational articles recommended by our editorial desk.
+          </p>
+        </div>
+
+        <a
+          href="/articles/"
+          class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#3478F6] hover:text-[#2563EB] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6] rounded"
+        >
+          <span>Browse All</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+
+      <!-- Popular Articles Grid -->
+      <div class="grid gap-6 md:grid-cols-3">
+        {popularArticles.map((article, index) => {
+          const slug = article.data.slug || article.id;
+          const ranking = String(index + 1).padStart(2, '0');
+
+          return (
+            <article class="group relative flex flex-col justify-between rounded-xl border border-[#E3E8EF] bg-[#F7F9FC] p-6 transition-all duration-300 hover:bg-white hover:border-[#3478F6] hover:shadow-md">
+              <div>
+                <div class="flex items-center justify-between text-xs mb-3">
+                  <span class="text-2xl font-black text-[#E3E8EF] group-hover:text-[#3478F6]/20 transition-colors">
+                    #{ranking}
+                  </span>
+                  <span class="rounded-full bg-white border border-[#E3E8EF] px-2.5 py-0.5 font-bold uppercase tracking-wider text-[10px] text-[#3478F6]">
+                    {article.data.category}
+                  </span>
+                </div>
+
+                <h3 class="text-lg font-bold leading-snug text-[#14233B] transition-colors group-hover:text-[#3478F6]">
+                  <a href={`/articles/${slug}/`} class="focus-visible:outline-none focus-visible:underline">
+                    {article.data.title}
+                  </a>
+                </h3>
+
+                <p class="mt-2 text-sm leading-relaxed text-[#202938] line-clamp-2">
+                  {article.data.description}
+                </p>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-[#E3E8EF]/80 flex items-center justify-between text-xs text-[#697586]">
+                <span>{article.data.readingTime || '5 min read'}</span>
+                <span class="font-semibold text-[#3478F6] group-hover:translate-x-0.5 transition-transform">
+                  Read &rarr;
+                </span>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+    </div>
+  </section>
+)}
+
