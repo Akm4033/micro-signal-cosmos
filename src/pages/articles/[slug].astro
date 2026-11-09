@@ -244,16 +244,9 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
           </a>
 
           <div class="flex items-center gap-2 text-xs font-semibold text-[#697586]">
-            <a
-              href="/fact-checking-policy/"
-              class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-3 py-0.5 text-[11px] font-bold text-emerald-700 border border-emerald-200 hover:bg-emerald-100 transition-colors"
-              title="Verified according to Micro Signal Cosmos Fact-Checking Standards"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span>Peer Verified</span>
-            </a>
+            <span class="inline-flex items-center gap-1 rounded-full bg-[#3478F6]/10 px-2.5 py-0.5 text-[11px] font-bold text-[#3478F6]">
+              Knowledge Guide
+            </span>
             <span class="text-slate-300" aria-hidden="true">&bull;</span>
             <span class="text-[#697586]">{readingTime}</span>
           </div>
@@ -390,7 +383,7 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
               <!-- Top Row Info -->
               <div class="relative z-10 flex items-center justify-between">
                 <span class="inline-block rounded-md bg-white/10 backdrop-blur-md px-3 py-1 font-mono text-[11px] font-bold text-sky-200 uppercase tracking-widest border border-white/15">
-                  EDITORIAL DISPATCH #{categoryIcon}
+                  TOPIC GUIDE &bull; {categoryName.toUpperCase()}
                 </span>
                 <span class="text-xs font-mono text-white/50 uppercase">Micro Signal Cosmos</span>
               </div>
@@ -404,8 +397,8 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
 
               <!-- Bottom Row Info -->
               <div class="relative z-10 flex items-center justify-between text-[11px] text-slate-300">
-                <span>Verified Scientific & Technological Journalism</span>
-                <span class="font-semibold text-white">Full Investigation Below &darr;</span>
+                <span>Discover More. Understand Better.</span>
+                <span class="font-semibold text-white">Read Article Below &darr;</span>
               </div>
             </div>
           )}
@@ -538,7 +531,7 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
             <AiDisclosure className="mt-8" />
           )}
 
-          <!-- Academic References & Primary Citations -->
+          <!-- Sources & Further Reading -->
           {article.data.references && article.data.references.length > 0 && (
             <section aria-labelledby="article-references" class="mt-10 rounded-xl border border-[#E3E8EF] bg-white p-6 sm:p-7 shadow-xs">
               <div class="flex items-center gap-2 border-b border-[#E3E8EF] pb-3">
@@ -546,7 +539,7 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
                   &para;
                 </span>
                 <h2 id="article-references" class="text-sm font-bold uppercase tracking-wider text-[#14233B]">
-                  Academic References & Primary Citations
+                  Sources & Further Reading
                 </h2>
               </div>
               <ol class="mt-4 list-decimal space-y-2 pl-5 text-xs text-[#4B5565] leading-relaxed">
@@ -592,7 +585,7 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
                     </p>
                   </div>
                   <a href="/authors/" class="text-xs font-bold text-[#3478F6] hover:underline">
-                    View Editorial Directory &rarr;
+                    About the Authors &rarr;
                   </a>
                 </div>
                 <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#4B5565]">
@@ -682,28 +675,20 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
             </div>
           )}
 
-          <!-- Editorial Trust Card -->
+          <!-- About Micro Signal Cosmos Card -->
           <div class="rounded-2xl border border-[#E3E8EF] bg-white p-6 shadow-xs">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-[#14233B]">
-              Editorial Standards
-            </h3>
-            <ul class="mt-3 space-y-2.5 text-xs text-[#4B5565]">
-              <li class="flex items-start gap-2">
-                <span class="text-[#3478F6] font-bold">&check;</span>
-                <span>Verified against peer-reviewed literature</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-[#3478F6] font-bold">&check;</span>
-                <span>Transparent error corrections policy</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-[#3478F6] font-bold">&check;</span>
-                <span>Independent, non-sponsored analysis</span>
-              </li>
-            </ul>
+            <div class="flex items-center gap-2">
+              <span class="h-2 w-2 rounded-full bg-[#3478F6]"></span>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-[#14233B]">
+                About Micro Signal Cosmos
+              </h3>
+            </div>
+            <p class="mt-3 text-xs leading-relaxed text-[#4B5565]">
+              An independent knowledge blog sharing clear, accessible guides and thoughtful insights across technology, science, artificial intelligence, and digital tools.
+            </p>
             <div class="mt-4 pt-3 border-t border-[#E3E8EF] flex items-center justify-between text-[11px]">
-              <a href="/editorial-policy/" class="font-bold text-[#3478F6] hover:underline">Editorial Policy &rarr;</a>
-              <a href="/fact-checking-policy/" class="font-bold text-[#3478F6] hover:underline">Fact-Checking &rarr;</a>
+              <a href="/about/" class="font-bold text-[#3478F6] hover:underline">About Us &rarr;</a>
+              <a href="/articles/" class="font-bold text-[#3478F6] hover:underline">All Articles &rarr;</a>
             </div>
           </div>
 
@@ -741,7 +726,7 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
                 Continue Reading
               </p>
               <h2 id="related-heading" class="text-2xl font-extrabold tracking-tight text-[#14233B] sm:text-3xl">
-                Related <span class="text-[#3478F6]">Investigations</span>
+                Related <span class="text-[#3478F6]">Articles</span>
               </h2>
             </div>
             <a
