@@ -14,7 +14,7 @@ const aboutJsonLd = {
       '@type': 'AboutPage',
       '@id': `${aboutUrl}#aboutpage`,
       name: 'About Us | Micro Signal Cosmos',
-      description: 'Learn about Micro Signal Cosmos, our editorial mission, vision, and our commitment to clear, verified science, technology, and AI journalism.',
+      description: 'Learn about Micro Signal Cosmos, our mission, vision, and how we explore science, technology, and AI through clear, practical guides.',
       url: aboutUrl,
       mainEntity: {
         '@type': 'Organization',
@@ -45,7 +45,7 @@ const aboutJsonLd = {
 
 <Layout
   title="About Us | Micro Signal Cosmos"
-  description="Learn about Micro Signal Cosmos, our editorial mission, vision, and our commitment to clear, verified science, technology, and AI journalism."
+  description="Learn about Micro Signal Cosmos, our mission, vision, and how we explore science, technology, and AI through clear, practical guides."
   canonical={aboutUrl}
   jsonLd={aboutJsonLd}
 >
@@ -89,7 +89,7 @@ const aboutJsonLd = {
       <!-- Core Mission Card -->
       <div class="mx-auto mt-14 max-w-4xl rounded-2xl border border-[#E3E8EF] bg-white p-8 sm:p-12 shadow-sm">
         <span class="text-xs font-bold tracking-[0.2em] text-[#3478F6] uppercase">
-          Our Editorial Philosophy
+          Our Publishing Philosophy
         </span>
 
         <h2 class="mt-3 text-2xl font-bold tracking-tight text-[#14233B] sm:text-3xl">
@@ -98,19 +98,19 @@ const aboutJsonLd = {
 
         <div class="mt-6 space-y-5 text-base leading-relaxed text-[#4B5565]">
           <p>
-            In today's fast-moving digital ecosystem, information is ubiquitous, but genuine comprehension is rare. Daily feeds are flooded with sensational headlines, hype-driven narratives, and jargon-heavy abstracts that leave readers more perplexed than enlightened.
+            In today's fast-moving digital ecosystem, information is ubiquitous, but genuine comprehension is rare. Daily feeds are flooded with sensational headlines, hype-driven narratives, and surface-level abstracts that leave readers more perplexed than enlightened.
           </p>
 
           <p>
-            The name <strong class="font-semibold text-[#14233B]">Micro Signal Cosmos</strong> reflects our core metaphor: just as radio astronomers filter electromagnetic static to detect faint, revealing micro-signals from distant corners of the cosmos, our editorial desk filters through digital noise to isolate the foundational scientific and technological breakthroughs that genuinely shape human destiny.
+            The name <strong class="font-semibold text-[#14233B]">Micro Signal Cosmos</strong> reflects our core philosophy: just as radio astronomers filter electromagnetic static to detect faint, revealing micro-signals from distant corners of the cosmos, we filter through internet noise to isolate the foundational engineering, AI architectures, and scientific discoveries that actually matter.
           </p>
 
           <p>
-            We are independent bloggers, technologists, and knowledge curators—not a corporate newsroom or institutional research facility. We transparently integrate modern generative AI tools (including ChatGPT, Claude, Gemini, and Perplexity) to assist with research screening, conceptual drafting, and data synthesis. Crucially, every published insight, tutorial, and reference is personally evaluated, fact-checked, and refined by human hands to deliver genuine educational value.
+            Micro Signal Cosmos is a solo technical media publication. We operate with an AI-assisted workflow—leveraging modern language models (Claude, ChatGPT, Gemini, Perplexity) for comprehensive literature screening, comparative research, and initial drafting. Crucially, every line of code, architectural diagram, and factual assertion is verified, tested, and edited by human hands before publication.
           </p>
 
           <p>
-            Whether dissecting how attention mechanisms operate inside modern transformer models, investigating planetary probes studying interstellar space, or charting the architectural shifts in decentralized computing, our mission remains steadfast: to empower curious minds to explore without intimidation and understand with lasting confidence.
+            To present deep technical subjects with domain precision, our articles are written through three specialized domain lenses: <strong class="font-semibold text-[#0ea5e9]">Dr. Marina Kowalski</strong> (Systems Engineering & Browser Internals), <strong class="font-semibold text-emerald-600">Kai Nakamura</strong> (Machine Learning & LLM Infrastructure), and <strong class="font-semibold text-[#8b5cf6]">Dr. Arun Mehta</strong> (Astrophysics & Observational Science).
           </p>
         </div>
       </div>
@@ -118,33 +118,33 @@ const aboutJsonLd = {
       <!-- Core Pillars Grid -->
       <div class="mx-auto mt-16 max-w-5xl">
         <div class="text-center">
-          <p class="text-xs font-bold tracking-[0.2em] text-[#3478F6] uppercase">
+          <p class="text-xs font-bold tracking-[0.2em] text-[#0ea5e9] uppercase">
             Curated Knowledge Streams
           </p>
           <h2 class="mt-2 text-2xl font-bold tracking-tight text-[#14233B] sm:text-3xl">
             Our Core Coverage Pillars
           </h2>
           <p class="mx-auto mt-3 max-w-2xl text-sm text-[#697586]">
-            Carefully structured verticals designed for lifelong learners, research engineers, software developers, and technology enthusiasts.
+            Structured technical verticals designed for software engineers, ML researchers, and curious systems thinkers.
           </p>
         </div>
 
-        <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {CATEGORIES.map((cat, index) => (
             <a
               href={cat.href}
-              class="group flex flex-col justify-between rounded-xl border border-[#E3E8EF] bg-white p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-[#3478F6] hover:shadow-md"
+              class="group flex flex-col justify-between rounded-xl border border-[#E3E8EF] bg-white p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-[#0ea5e9] hover:shadow-md"
             >
               <div>
                 <div class="flex items-center justify-between">
-                  <span class="flex h-10 w-10 items-center justify-center rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] text-sm font-bold text-[#14233B] group-hover:border-[#3478F6]/30 group-hover:bg-[#3478F6]/10 group-hover:text-[#3478F6]">
+                  <span class="flex h-10 w-10 items-center justify-center rounded-lg border border-[#E3E8EF] bg-[#F7F9FC] text-sm font-bold text-[#14233B] group-hover:border-[#0ea5e9]/30 group-hover:bg-sky-50 group-hover:text-[#0ea5e9]">
                     {cat.icon}
                   </span>
                   <span class="text-xs font-bold tracking-widest text-[#9AA4B2] uppercase">
-                    Pillar 0{index + 1}
+                    0{index + 1}
                   </span>
                 </div>
-                <h3 class="mt-4 text-lg font-bold text-[#14233B] group-hover:text-[#3478F6]">
+                <h3 class="mt-4 text-lg font-bold text-[#14233B] group-hover:text-[#0ea5e9]">
                   {cat.name}
                 </h3>
                 <p class="mt-2 text-xs leading-relaxed text-[#697586]">
@@ -152,7 +152,7 @@ const aboutJsonLd = {
                 </p>
               </div>
 
-              <div class="mt-6 flex items-center gap-1.5 text-xs font-semibold text-[#3478F6]">
+              <div class="mt-6 flex items-center gap-1.5 text-xs font-semibold text-[#0ea5e9]">
                 <span>Explore stream</span>
                 <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">&rarr;</span>
               </div>
@@ -161,68 +161,68 @@ const aboutJsonLd = {
         </div>
       </div>
 
-      <!-- Editorial Values -->
+      <!-- Publishing Process & Corrections Policy -->
       <div class="mx-auto mt-20 max-w-5xl border-t border-[#E3E8EF] pt-16">
         <div class="text-center">
-          <p class="text-xs font-bold tracking-[0.2em] text-[#3478F6] uppercase">
-            Commitment to Quality
+          <p class="text-xs font-bold tracking-[0.2em] text-[#0ea5e9] uppercase">
+            Transparency & Process
           </p>
           <h2 class="mt-2 text-2xl font-bold tracking-tight text-[#14233B] sm:text-3xl">
-            Our Editorial Standards
+            How We Research, Build & Correct
           </h2>
           <p class="mx-auto mt-3 max-w-xl text-sm text-[#697586]">
-            Every published dispatch adheres to rigorous editorial integrity and verification principles.
+            Our commitment to technical rigor, runnable code, and transparent corrections.
           </p>
         </div>
 
         <div class="mt-10 grid gap-6 sm:grid-cols-3">
           <div class="rounded-xl border border-[#E3E8EF] bg-white p-7 shadow-xs">
-            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#3478F6]/10 text-xs font-extrabold text-[#3478F6]">01</span>
-            <h3 class="mt-4 text-base font-bold text-[#14233B]">Accuracy & Primary Sourcing</h3>
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-sky-100 text-xs font-extrabold text-[#0ea5e9]">01</span>
+            <h3 class="mt-4 text-base font-bold text-[#14233B]">Primary Sources & Code Verification</h3>
             <p class="mt-2 text-xs leading-relaxed text-[#697586]">
-              We prioritize peer-reviewed research papers, official technical documentation, and primary engineering disclosures over second-hand reports.
+              We consult official specifications, run benchmarks, test scripts in live environments, and link directly to public documentation and papers.
             </p>
           </div>
 
           <div class="rounded-xl border border-[#E3E8EF] bg-white p-7 shadow-xs">
-            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#3478F6]/10 text-xs font-extrabold text-[#3478F6]">02</span>
-            <h3 class="mt-4 text-base font-bold text-[#14233B]">Clarity Without Hype</h3>
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-sky-100 text-xs font-extrabold text-[#0ea5e9]">02</span>
+            <h3 class="mt-4 text-base font-bold text-[#14233B]">Honest Business Model</h3>
             <p class="mt-2 text-xs leading-relaxed text-[#697586]">
-              We reject clickbait and exaggerated claims. We outline real-world capabilities alongside technical limitations and security considerations.
+              We are funded through non-intrusive display ads, transparent affiliate links for vetted tools (marked with ★), and digital technical products.
             </p>
           </div>
 
           <div class="rounded-xl border border-[#E3E8EF] bg-white p-7 shadow-xs">
-            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#3478F6]/10 text-xs font-extrabold text-[#3478F6]">03</span>
-            <h3 class="mt-4 text-base font-bold text-[#14233B]">Respect for the Reader</h3>
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-sky-100 text-xs font-extrabold text-[#0ea5e9]">03</span>
+            <h3 class="mt-4 text-base font-bold text-[#14233B]">Rapid Corrections Policy</h3>
             <p class="mt-2 text-xs leading-relaxed text-[#697586]">
-              Your attention is valuable. Our articles feature clean 18px reading typography, clear structural headings, and zero intrusive popups or layout shifts.
+              Found a bug in a snippet or an outdated metric? Send a note via our contact page and we will verify, patch, and document the fix promptly.
             </p>
           </div>
         </div>
 
-        <!-- Transparency & Governance Grid -->
+        <!-- Quick Navigation Grid -->
         <div class="mt-14 rounded-2xl border border-[#E3E8EF] bg-[#EEF1F5]/60 p-8">
-          <h3 class="text-base font-bold text-[#14233B]">Our Standards & Transparency</h3>
+          <h3 class="text-base font-bold text-[#14233B]">Explore Micro Signal Cosmos</h3>
           <p class="mt-1 text-xs text-[#697586]">
-            Explore our publishing principles, AI methodology, and writer directory:
+            Dive deeper into our technical library, author profiles, or engineering tools:
           </p>
           <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <a href="/editorial-policy/" class="rounded-lg border border-[#E3E8EF] bg-white p-4 text-left transition-colors hover:border-[#3478F6] hover:bg-slate-50">
-              <span class="block text-xs font-bold text-[#14233B]">Editorial & AI Note &rarr;</span>
-              <span class="mt-1 block text-[11px] text-[#697586]">How we research and verify content</span>
+            <a href="/articles/" class="rounded-lg border border-[#E3E8EF] bg-white p-4 text-left transition-colors hover:border-[#0ea5e9] hover:bg-slate-50">
+              <span class="block text-xs font-bold text-[#14233B]">All 15 Articles &rarr;</span>
+              <span class="mt-1 block text-[11px] text-[#697586]">Browse our complete library</span>
             </a>
-            <a href="/authors/" class="rounded-lg border border-[#E3E8EF] bg-white p-4 text-left transition-colors hover:border-[#3478F6] hover:bg-slate-50">
-              <span class="block text-xs font-bold text-[#14233B]">Authors & Writers &rarr;</span>
-              <span class="mt-1 block text-[11px] text-[#697586]">Meet our blogging contributors</span>
+            <a href="/authors/" class="rounded-lg border border-[#E3E8EF] bg-white p-4 text-left transition-colors hover:border-[#0ea5e9] hover:bg-slate-50">
+              <span class="block text-xs font-bold text-[#14233B]">Author Lenses &rarr;</span>
+              <span class="mt-1 block text-[11px] text-[#697586]">Marina, Kai & Arun</span>
             </a>
-            <a href="/privacy-policy/" class="rounded-lg border border-[#E3E8EF] bg-white p-4 text-left transition-colors hover:border-[#3478F6] hover:bg-slate-50">
-              <span class="block text-xs font-bold text-[#14233B]">Privacy Policy &rarr;</span>
-              <span class="mt-1 block text-[11px] text-[#697586]">How we protect reader privacy</span>
+            <a href="/tools/" class="rounded-lg border border-[#E3E8EF] bg-white p-4 text-left transition-colors hover:border-[#0ea5e9] hover:bg-slate-50">
+              <span class="block text-xs font-bold text-[#14233B]">Recommended Tools &rarr;</span>
+              <span class="mt-1 block text-[11px] text-[#697586]">Cloud, AI & database stack</span>
             </a>
-            <a href="/contact/" class="rounded-lg border border-[#E3E8EF] bg-white p-4 text-left transition-colors hover:border-[#3478F6] hover:bg-slate-50">
+            <a href="/contact/" class="rounded-lg border border-[#E3E8EF] bg-white p-4 text-left transition-colors hover:border-[#0ea5e9] hover:bg-slate-50">
               <span class="block text-xs font-bold text-[#14233B]">Contact Us &rarr;</span>
-              <span class="mt-1 block text-[11px] text-[#697586]">Questions, feedback, or suggestions</span>
+              <span class="mt-1 block text-[11px] text-[#697586]">Feedback or report a fix</span>
             </a>
           </div>
         </div>
@@ -230,15 +230,15 @@ const aboutJsonLd = {
         <!-- Action Banner -->
         <div class="mt-12 flex flex-wrap items-center justify-between gap-4 rounded-xl border border-[#E3E8EF] bg-white p-6 shadow-xs sm:p-8">
           <div>
-            <h4 class="text-base font-bold text-[#14233B]">Have feedback or a research proposal?</h4>
-            <p class="mt-1 text-xs text-[#697586]">We welcome thoughtful story pitches, technical inquiries, and academic feedback.</p>
+            <h4 class="text-base font-bold text-[#14233B]">Have feedback or spotted a fix?</h4>
+            <p class="mt-1 text-xs text-[#697586]">We review reader suggestions and patch technical discrepancies promptly.</p>
           </div>
           <div class="flex items-center gap-3">
             <a
               href="/contact/"
-              class="inline-flex items-center justify-center rounded-lg bg-[#3478F6] px-5 py-2.5 text-xs font-semibold text-white shadow-xs transition-colors hover:bg-[#2563EB]"
+              class="inline-flex items-center justify-center rounded-lg bg-[#0ea5e9] px-5 py-2.5 text-xs font-semibold text-white shadow-xs transition-colors hover:bg-[#0284c7]"
             >
-              Contact Editorial Desk
+              Contact Our Team
             </a>
             <a
               href="/articles/"

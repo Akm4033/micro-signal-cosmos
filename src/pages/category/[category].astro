@@ -144,12 +144,12 @@ const categoryJsonLd = {
             )}
             {articles.length > 1 && (
               <span class="rounded-full border border-[#E3E8EF] bg-white px-3 py-1 text-[#3478F6]">
-                {articles.length} Published Investigations
+                {articles.length} Published Articles
               </span>
             )}
             {articles.length === 0 && (
               <span class="rounded-full border border-[#E3E8EF] bg-white px-3 py-1 text-[#697586]">
-                Editorial Pipeline Active
+                More Articles Coming Soon
               </span>
             )}
           </div>
@@ -265,17 +265,17 @@ const categoryJsonLd = {
             
             <div class="inline-flex items-center gap-2 rounded-full border border-[#E3E8EF] bg-[#F7F9FC] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#3478F6]">
               <span class="h-1.5 w-1.5 rounded-full bg-[#3478F6]"></span>
-              <span>Editorial Pipeline Active</span>
+              <span>More Articles Coming Soon</span>
             </div>
 
             <h3 class="mt-4 text-xl sm:text-2xl font-bold tracking-tight text-[#14233B]">
-              New deep dives arriving this week. Explore our latest featured articles below.
+              New guides arriving soon. Explore our latest featured articles below.
             </h3>
 
             <p class="mt-3 text-sm sm:text-base leading-relaxed text-[#202938] max-w-xl mx-auto">
               {articles.length === 0
-                ? `Our editors are finalizing our inaugural briefings for ${category.name}. In the meantime, explore our latest published investigations across the platform:`
-                : `Our editorial team is authoring additional deep dives for ${category.name}. In the meantime, explore these recommended featured analyses:`}
+                ? `We are actively working on upcoming guides for ${category.name}. In the meantime, explore our latest published articles across the platform:`
+                : `We are preparing additional guides for ${category.name}. In the meantime, explore these recommended articles:`}
             </p>
 
             <!-- Quick Cards Linking to Published Articles -->

@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { CATEGORIES } from '../../data/categories';
 import { getPublishedArticles, getArticleReadingTime } from '../../data/articles';
+import { getAuthor } from '../../data/authors';
 
 // Retrieve all published, non-draft articles sorted by date descending
 const publishedArticles = await getPublishedArticles();
@@ -221,6 +222,8 @@ const archiveJsonLd = {
 
             const searchableText = `${article.data.title} ${article.data.description} ${categoryName} ${categorySlug} ${(article.data.tags || []).join(' ')} ${article.data.author}`.toLowerCase();
 
+            const author = getAuthor(article.data.author);
+
             return (
               <article
                 data-article-card
@@ -255,7 +258,7 @@ const archiveJsonLd = {
 
                 <div class="mt-8 flex items-center justify-between border-t border-[#E3E8EF] pt-4 text-xs text-[#697586]">
                   <div class="flex items-center gap-2">
-                    <span class="font-medium text-[#14233B]">{article.data.author}</span>
+                    <span class="font-medium text-[#14233B]">{author.name}</span>
                     <span aria-hidden="true">&bull;</span>
                     <time datetime={isoDate}>{formattedDate}</time>
                   </div>

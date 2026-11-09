@@ -1,0 +1,38 @@
+---
+const buttondownUsername = import.meta.env.PUBLIC_BUTTONDOWN_USERNAME || 'microsignalcosmos';
+---
+
+<div class="newsletter-footer space-y-3">
+  <h3 class="text-xs font-bold uppercase tracking-widest text-white">
+    Subscribe to The Signal
+  </h3>
+  <p class="text-xs leading-relaxed text-slate-300">
+    Weekly deep dives into system internals, AI engineering, and astrophysics.
+  </p>
+  <form
+    action={`https://buttondown.email/api/emails/embed-subscribe/${buttondownUsername}`}
+    method="post"
+    target="popupwindow"
+    onsubmit="window.open('https://buttondown.email/' + '${buttondownUsername}', 'popupwindow'); return true;"
+    class="flex flex-col sm:flex-row gap-2"
+  >
+    <input
+      type="email"
+      name="email"
+      required
+      placeholder="email@domain.com"
+      aria-label="Email address"
+      class="rounded-lg border border-slate-700 bg-slate-800/90 px-3 py-2 text-xs text-white placeholder-slate-400 focus:border-[#0ea5e9] focus:outline-none focus:ring-1 focus:ring-[#0ea5e9]"
+    />
+    <input type="hidden" value="1" name="embed" />
+    <button
+      type="submit"
+      class="rounded-lg bg-[#0ea5e9] px-3.5 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0284c7]"
+    >
+      Join
+    </button>
+  </form>
+  <p class="text-[10px] text-slate-400">
+    No tracking pixels. Unsubscribe anytime.
+  </p>
+</div>

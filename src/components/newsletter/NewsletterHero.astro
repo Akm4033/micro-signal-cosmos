@@ -1,0 +1,84 @@
+---
+export interface Props {
+  className?: string;
+  leadMagnet?: string;
+}
+
+const {
+  className = '',
+  leadMagnet = 'Systems & AI Architecture Cheat Sheet Pack',
+} = Astro.props;
+
+const buttondownUsername = import.meta.env.PUBLIC_BUTTONDOWN_USERNAME || 'microsignalcosmos';
+---
+
+<section
+  class={`newsletter-hero bg-[#101B2D] text-white py-16 sm:py-20 relative overflow-hidden ${className}`}
+  aria-labelledby="newsletter-hero-heading"
+>
+  <!-- Background Fine Technical Grid -->
+  <div class="pointer-events-none absolute inset-0 -z-10 opacity-10" aria-hidden="true">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="nl-hero-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+          <path d="M 32 0 L 0 0 0 32" fill="none" stroke="white" stroke-width="1" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#nl-hero-grid)" />
+    </svg>
+  </div>
+
+  <div class="container-main text-center">
+    <div class="mx-auto max-w-2xl">
+      <!-- Badge -->
+      <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-500/10 px-3.5 py-1 text-xs font-bold tracking-widest text-sky-300 uppercase">
+        <span class="h-1.5 w-1.5 rounded-full bg-[#0ea5e9]"></span>
+        <span>The Signal Weekly</span>
+      </div>
+
+      <h2 id="newsletter-hero-heading" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+        Understand How Modern Systems Actually Work
+      </h2>
+
+      <p class="mt-4 text-base sm:text-lg leading-relaxed text-slate-300">
+        Every Thursday: deep technical teardowns, reproducible architectures, and zero hype. Join curious engineers, ML builders, and science enthusiasts.
+      </p>
+
+      <!-- Lead Magnet Callout Card -->
+      <div class="mt-6 rounded-xl border border-sky-500/25 bg-slate-900/60 p-3.5 text-xs text-sky-200 flex items-center justify-center gap-2">
+        <span class="font-bold text-white uppercase tracking-wider text-[11px] bg-[#0ea5e9]/20 px-2 py-0.5 rounded">Free Instant Bonus</span>
+        <span>Get the <strong class="text-white">{leadMagnet}</strong> sent to your inbox.</span>
+      </div>
+
+      <!-- Buttondown Subscribe Form -->
+      <form
+        action={`https://buttondown.email/api/emails/embed-subscribe/${buttondownUsername}`}
+        method="post"
+        target="popupwindow"
+        onsubmit="window.open('https://buttondown.email/' + '${buttondownUsername}', 'popupwindow'); return true;"
+        class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto"
+      >
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder="Enter your work or personal email..."
+          aria-label="Email address for newsletter"
+          class="w-full rounded-lg border border-slate-700 bg-slate-800/90 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-[#0ea5e9] focus:outline-none focus:ring-2 focus:ring-[#0ea5e9]/40"
+        />
+        <!-- Honeypot -->
+        <input type="hidden" value="1" name="embed" />
+        <button
+          type="submit"
+          class="w-full sm:w-auto shrink-0 rounded-lg bg-[#0ea5e9] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0284c7] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0ea5e9]"
+        >
+          Subscribe Free
+        </button>
+      </form>
+
+      <p class="mt-4 text-xs text-slate-400">
+        No tracking pixels &bull; No sponsor spam &bull; Unsubscribe anytime with one click.
+      </p>
+    </div>
+  </div>
+</section>

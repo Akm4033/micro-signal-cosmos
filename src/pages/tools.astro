@@ -1,0 +1,173 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { AFFILIATE_TOOLS } from '../data/affiliate';
+
+const siteUrl = 'https://microsignalcosmos.com';
+const toolsUrl = `${siteUrl}/tools/`;
+
+const categories = [
+  'Cloud & Infrastructure',
+  'AI & ML Infrastructure',
+  'Databases & Backend',
+  'Developer Productivity & Security',
+] as const;
+
+const toolsJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      '@id': `${toolsUrl}#tools`,
+      name: 'Tools & Infrastructure Directory | Micro Signal Cosmos',
+      description: 'Curated developer tools, cloud infrastructure, AI platforms, and databases recommended by Micro Signal Cosmos.',
+      url: toolsUrl,
+      isPartOf: {
+        '@id': `${siteUrl}/#website`,
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${toolsUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: `${siteUrl}/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Tools & Resources',
+          item: toolsUrl,
+        },
+      ],
+    },
+  ],
+};
+---
+
+<Layout
+  title="Recommended Tools & Infrastructure | Micro Signal Cosmos"
+  description="Curated developer tools, cloud platforms, AI infrastructure, and databases vetted and recommended by our engineering contributors."
+  canonical={toolsUrl}
+  jsonLd={toolsJsonLd}
+>
+  <Header />
+
+  <main id="main-content" class="bg-[#F7F9FC] py-12 sm:py-20">
+    <div class="container-main">
+
+      <!-- Breadcrumbs -->
+      <nav aria-label="Breadcrumb" class="mb-8">
+        <ol class="flex items-center gap-2 text-xs text-[#697586]">
+          <li>
+            <a href="/" class="transition-colors hover:text-[#14233B]">Home</a>
+          </li>
+          <li aria-hidden="true" class="text-slate-300">/</li>
+          <li aria-current="page" class="font-medium text-[#14233B]">Tools & Resources</li>
+        </ol>
+      </nav>
+
+      <!-- Header -->
+      <div class="mx-auto max-w-3xl text-center">
+        <div class="inline-flex items-center gap-2 rounded-full border border-[#0ea5e9]/30 bg-sky-50 px-3.5 py-1.5 shadow-2xs">
+          <span class="h-2 w-2 rounded-full bg-[#0ea5e9]"></span>
+          <span class="text-xs font-semibold tracking-wider text-[#0284c7] uppercase">
+            Curated Engineering Stack
+          </span>
+        </div>
+
+        <h1 class="mt-6 text-3xl font-extrabold tracking-tight text-[#14233B] sm:text-5xl">
+          Tools & <span class="text-[#0ea5e9]">Infrastructure</span>
+        </h1>
+
+        <p class="mt-4 text-base leading-relaxed text-[#4B5565] sm:text-lg">
+          The databases, cloud providers, and developer utilities we rely on and dissect across our articles.
+        </p>
+      </div>
+
+      <!-- Affiliate Disclosure Banner -->
+      <div class="mx-auto mt-10 max-w-4xl rounded-xl border border-amber-200/90 bg-amber-50/70 p-5 text-xs text-amber-950 shadow-2xs">
+        <div class="flex items-start gap-3">
+          <span class="text-amber-600 text-base font-bold select-none">★</span>
+          <div>
+            <strong class="font-bold uppercase tracking-wider text-[11px] text-amber-900 block mb-1">
+              Affiliate Link Transparency Policy
+            </strong>
+            <p class="leading-relaxed text-amber-900/90">
+              Links marked with a star symbol (<span class="font-bold text-amber-700">★</span>) are partner or affiliate links. If you sign up or purchase through them, we may receive a commission at no additional cost to you. We strictly recommend infrastructure, platforms, and software that our contributors actively test, benchmark, and respect.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools Grouped by Category -->
+      <div class="mx-auto mt-14 max-w-4xl space-y-12">
+        {categories.map((category) => {
+          const tools = AFFILIATE_TOOLS.filter((t) => t.category === category);
+          return (
+            <section aria-labelledby={`cat-${category.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}>
+              <div class="border-b border-[#E3E8EF] pb-3 mb-6">
+                <h2
+                  id={`cat-${category.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+                  class="text-xl font-bold text-[#14233B] flex items-center justify-between"
+                >
+                  <span>{category}</span>
+                  <span class="text-xs font-semibold text-[#697586] bg-slate-100 px-2.5 py-0.5 rounded-full">
+                    {tools.length} Resources
+                  </span>
+                </h2>
+              </div>
+
+              <div class="grid gap-4 sm:grid-cols-2">
+                {tools.map((tool) => (
+                  <div class="rounded-xl border border-[#E3E8EF] bg-white p-5 shadow-xs transition-all hover:border-[#0ea5e9] hover:shadow-md flex flex-col justify-between">
+                    <div>
+                      <div class="flex items-center justify-between gap-2 mb-2">
+                        <span class="text-[11px] font-bold text-[#0ea5e9] uppercase tracking-wider bg-sky-50 px-2 py-0.5 rounded">
+                          {tool.tag}
+                        </span>
+                        {tool.featured && (
+                          <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded uppercase">
+                            Recommended
+                          </span>
+                        )}
+                      </div>
+
+                      <h3 class="text-base font-bold text-[#14233B]">
+                        {tool.name}
+                      </h3>
+
+                      <p class="mt-2 text-xs leading-relaxed text-[#4B5565]">
+                        {tool.description}
+                      </p>
+                    </div>
+
+                    <div class="mt-5 pt-4 border-t border-[#E3E8EF] flex items-center justify-between">
+                      <span class="text-[11px] text-[#697586]">Vetted tool</span>
+                      <a
+                        href={tool.link}
+                        target="_blank"
+                        rel="sponsored nofollow noopener"
+                        class="inline-flex items-center gap-1.5 rounded-lg bg-[#0ea5e9] px-3.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-[#0284c7]"
+                      >
+                        <span>Visit {tool.name}</span>
+                        <span class="text-amber-200">★</span>
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          );
+        })}
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

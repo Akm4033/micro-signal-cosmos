@@ -18,7 +18,7 @@ const contactJsonLd = {
       '@type': 'ContactPage',
       '@id': `${contactUrl}#contactpage`,
       name: 'Contact Us | Micro Signal Cosmos',
-      description: 'Get in touch with the Micro Signal Cosmos editorial team for story inquiries, feedback, corrections, and partnerships.',
+      description: 'Get in touch with the Micro Signal Cosmos team for article feedback, questions, corrections, or collaboration inquiries.',
       url: contactUrl,
       mainEntity: {
         '@type': 'Organization',
@@ -49,7 +49,7 @@ const contactJsonLd = {
 
 <Layout
   title="Contact Us | Micro Signal Cosmos"
-  description="Get in touch with the Micro Signal Cosmos editorial team for story inquiries, feedback, corrections, and partnerships."
+  description="Get in touch with the Micro Signal Cosmos team for article feedback, questions, corrections, or collaboration inquiries."
   canonical={contactUrl}
   jsonLd={contactJsonLd}
 >
@@ -74,16 +74,16 @@ const contactJsonLd = {
         <div class="inline-flex items-center gap-2 rounded-full border border-[#E3E8EF] bg-white px-3.5 py-1.5 shadow-xs">
           <span class="h-2 w-2 rounded-full bg-[#3478F6]"></span>
           <span class="text-xs font-semibold tracking-wider text-[#14233B] uppercase">
-            Communications Desk
+            Get In Touch
           </span>
         </div>
 
         <h1 class="mt-6 text-3xl font-extrabold tracking-tight text-[#14233B] sm:text-5xl">
-          Connect With <span class="text-[#3478F6]">Our Editorial Desk</span>
+          Connect With <span class="text-[#3478F6]">Our Team</span>
         </h1>
 
         <p class="mt-4 text-base leading-relaxed text-[#4B5565] sm:text-lg">
-          Whether you have feedback on an article, a research paper to share, or an editorial correction, we welcome your inquiry.
+          Whether you have feedback on an article, a question, or a collaboration proposal, we'd love to hear from you.
         </p>
       </div>
 
@@ -91,46 +91,46 @@ const contactJsonLd = {
       <section class="mx-auto mt-12 max-w-4xl" aria-labelledby="channels-heading">
         <h2 id="channels-heading" class="sr-only">Communication Channels</h2>
         <div class="grid gap-6 sm:grid-cols-3">
-          <!-- Editorial & Pitches -->
+          <!-- Article Inquiries & Feedback -->
           <div class="rounded-xl border border-[#E3E8EF] bg-white p-6 shadow-xs transition-all hover:border-[#3478F6]">
             <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#3478F6]/10 text-xs font-bold text-[#3478F6]">
-              ED
+              AI
             </span>
-            <h3 class="mt-4 text-base font-bold text-[#14233B]">Editorial Inquiries</h3>
+            <h3 class="mt-4 text-base font-bold text-[#14233B]">Article Inquiries</h3>
             <p class="mt-1 text-xs leading-relaxed text-[#697586]">
-              Story suggestions, research leads, and reader commentary on published dispatches.
+              Article suggestions, topic ideas, and general feedback on our guides.
             </p>
             <a href="#contact-message" class="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#3478F6]">
-              <span>Compose Message</span>
+              <span>Send Feedback</span>
               <span aria-hidden="true">&darr;</span>
             </a>
           </div>
 
-          <!-- Corrections & Accuracy -->
+          <!-- Corrections & Feedback -->
           <div class="rounded-xl border border-[#E3E8EF] bg-white p-6 shadow-xs transition-all hover:border-[#3478F6]">
             <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#14233B]/10 text-xs font-bold text-[#14233B]">
-              QC
+              CF
             </span>
-            <h3 class="mt-4 text-base font-bold text-[#14233B]">Corrections Desk</h3>
+            <h3 class="mt-4 text-base font-bold text-[#14233B]">Corrections & Updates</h3>
             <p class="mt-1 text-xs leading-relaxed text-[#697586]">
-              Spotted a factual or numerical discrepancy? Help us maintain peer-level accuracy.
+              Spotted a typo, broken link, or outdated information? Let us know so we can fix it promptly.
             </p>
-            <a href="/corrections-policy/" class="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#3478F6]">
-              <span>Review Policy &rarr;</span>
+            <a href="#contact-message" class="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#3478F6]">
+              <span>Report an Issue &darr;</span>
             </a>
           </div>
 
-          <!-- Media & Partnerships -->
+          <!-- Collaborations & General Inquiries -->
           <div class="rounded-xl border border-[#E3E8EF] bg-white p-6 shadow-xs transition-all hover:border-[#3478F6]">
             <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-500/10 text-xs font-bold text-emerald-600">
               PR
             </span>
-            <h3 class="mt-4 text-base font-bold text-[#14233B]">Media & Partnerships</h3>
+            <h3 class="mt-4 text-base font-bold text-[#14233B]">Collaborations & Inquiries</h3>
             <p class="mt-1 text-xs leading-relaxed text-[#697586]">
-              Syndication quotes, press inquiries, and educational collaboration requests.
+              Guest writing requests, partner inquiries, and general questions.
             </p>
             <a href="#contact-message" class="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#3478F6]">
-              <span>Send Request</span>
+              <span>Send Message</span>
               <span aria-hidden="true">&darr;</span>
             </a>
           </div>
@@ -144,7 +144,7 @@ const contactJsonLd = {
         <div class="rounded-2xl border border-[#E3E8EF] bg-white p-8 shadow-sm sm:p-10 lg:col-span-3">
           <h2 class="text-xl font-bold text-[#14233B]">Send a Message</h2>
           <p class="mt-1 text-xs text-[#697586]">
-            Our editorial staff reviews reader communications regularly, typically responding within 24 to 48 business hours.
+            Our team reviews reader messages regularly, typically responding within 24 to 48 hours.
           </p>
 
           {isFormLive ? (
@@ -154,8 +154,8 @@ const contactJsonLd = {
               class="mt-6 space-y-4"
             >
               <input type="hidden" name="access_key" value={web3formsKey} />
-              <input type="hidden" name="subject" value="Transmission to Micro Signal Cosmos" />
-              <input type="hidden" name="from_name" value="Micro Signal Cosmos Reader Desk" />
+              <input type="hidden" name="subject" value="Message to Micro Signal Cosmos" />
+              <input type="hidden" name="from_name" value="Micro Signal Cosmos Contact Form" />
               <!-- Honeypot Spam Protection -->
               <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off" />
 
@@ -197,9 +197,9 @@ const contactJsonLd = {
                   class="mt-1.5 w-full rounded-lg border border-[#E3E8EF] bg-white px-3.5 py-2.5 text-sm text-[#202938] shadow-xs focus:border-[#3478F6] focus:outline-none focus:ring-2 focus:ring-[#3478F6]/20"
                 >
                   <option value="general">General Reader Inquiry</option>
-                  <option value="editorial">Editorial / Article Feedback</option>
+                  <option value="feedback">Article Feedback & Ideas</option>
                   <option value="correction">Correction Report</option>
-                  <option value="press">Media & Collaboration</option>
+                  <option value="collaboration">Collaboration & Inquiries</option>
                 </select>
               </div>
 
@@ -270,9 +270,9 @@ const contactJsonLd = {
                   class="mt-1.5 w-full rounded-lg border border-[#E3E8EF] bg-white px-3.5 py-2.5 text-sm text-[#202938] shadow-xs focus:border-[#3478F6] focus:outline-none focus:ring-2 focus:ring-[#3478F6]/20"
                 >
                   <option value="general">General Reader Inquiry</option>
-                  <option value="editorial">Editorial / Article Feedback</option>
+                  <option value="feedback">Article Feedback & Ideas</option>
                   <option value="correction">Correction Report</option>
-                  <option value="press">Media & Collaboration</option>
+                  <option value="collaboration">Collaboration & Inquiries</option>
                 </select>
               </div>
 
@@ -306,7 +306,7 @@ const contactJsonLd = {
               </div>
 
               <p class="text-center text-[11px] text-[#697586]">
-                Notice: Electronic messages are routed to our editorial verification queue.
+                Your message will be sent directly to our team.
               </p>
             </form>
           )}
@@ -353,7 +353,7 @@ const contactJsonLd = {
               <strong class="font-semibold text-[#14233B]">Micro Signal Cosmos</strong><br />
               Independent digital technology and science publication.<br />
               Target domain: <span class="font-mono text-[11px]">microsignalcosmos.com</span><br />
-              All editorial transmissions are archived in accordance with our data privacy guidelines.
+              All messages are handled in accordance with our privacy policy.
             </p>
           </div>
         </div>

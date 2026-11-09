@@ -81,9 +81,9 @@ const mainCategoryInfo = mainFeatured ? getCategoryInfo(mainFeatured.data.catego
 
               <div class="relative z-10 text-center">
                 <span class="inline-block rounded-lg bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 font-mono text-xs font-bold text-sky-200 uppercase tracking-widest mb-2">
-                  DISPATCH #{mainCategoryInfo?.icon || '01'}
+                  TOPIC #{mainCategoryInfo?.icon || '01'}
                 </span>
-                <p class="text-xs uppercase tracking-widest text-slate-300 font-semibold">Primary Editorial Feature</p>
+                <p class="text-xs uppercase tracking-widest text-slate-300 font-semibold">Featured Knowledge Guide</p>
               </div>
 
               <!-- Top Left: Category Badge -->
@@ -131,10 +131,10 @@ const mainCategoryInfo = mainFeatured ? getCategoryInfo(mainFeatured.data.catego
               class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#3478F6] transition-all group-hover:gap-2.5 hover:text-[#2563EB]"
               aria-label={`Read full analysis: ${mainFeatured.data.title}`}
             >
-              <span>Read Full Analysis</span>
+              <span>Read Article</span>
               <span aria-hidden="true">&rarr;</span>
             </a>
-            <span class="text-xs text-[#697586] font-medium">Fact-checked</span>
+            <span class="text-xs text-[#697586] font-medium">{mainFeatured.data.readingTime || 'Guide'}</span>
           </div>
         </article>
 

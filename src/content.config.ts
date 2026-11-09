@@ -24,13 +24,13 @@ const articles = defineCollection({
     /** Optional last modified timestamp for revisions */
     updatedDate: z.coerce.date().optional(),
 
-    /** Content stream pillar (must match one of the 7 official publication categories) */
+    /** Content stream pillar (must match one of the 4 official publication categories) */
     category: z.string().refine(
       (val) =>
         validCategorySlugs.includes(val.toLowerCase()) ||
         validCategoryNames.includes(val.toLowerCase()),
       {
-        message: `Category must match one of the seven official categories: ${validCategorySlugs.join(', ')}`,
+        message: `Category must match one of the official categories: ${validCategorySlugs.join(', ')}`,
       }
     ),
 

@@ -8,6 +8,18 @@ export default defineConfig({
   site: process.env.SITE_URL || 'https://microsignalcosmos.com',
   redirects: {
     '/privacy': '/privacy-policy/',
+    '/editorial-policy': '/about/',
+    '/fact-checking-policy': '/about/',
+    '/corrections-policy': '/contact/',
+    // Consolidated Categories (7 -> 4)
+    '/category/digital-world': '/category/technology/',
+    '/category/tutorials': '/category/developer-tools/',
+    '/category/software-tools': '/category/developer-tools/',
+    '/category/innovation': '/category/technology/',
+    // Legacy initial test articles redirected to complete in-depth versions
+    '/articles/understanding-artificial-intelligence': '/articles/how-llms-actually-work/',
+    '/articles/scientific-discoveries-and-the-universe': '/articles/how-we-know-what-stars-are-made-of/',
+    '/articles/technologies-shaping-digital-future': '/articles/how-browsers-actually-render-a-page/',
   },
   vite: {
     plugins: [tailwindcss()]

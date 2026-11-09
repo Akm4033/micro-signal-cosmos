@@ -12,7 +12,7 @@ const { className = '', compact = false } = Astro.props;
 <div
   class={`ai-transparency-note rounded-xl border border-[#E3E8EF] bg-[#F8FAFC] p-4 text-xs leading-relaxed text-[#4B5565] ${className}`}
   role="note"
-  aria-label="Editorial and AI Assistance Transparency Statement"
+  aria-label="AI and Content Transparency Notice"
 >
   <div class="flex items-start gap-3">
     <div class="mt-0.5 flex-shrink-0 text-[#3478F6]">
@@ -23,10 +23,7 @@ const { className = '', compact = false } = Astro.props;
     <div class="space-y-1">
       <div class="flex items-center gap-2">
         <span class="font-bold tracking-wider text-[#14233B] uppercase text-[10px]">
-          Editorial Transparency & AI Assistance
-        </span>
-        <span class="rounded bg-[#3478F6]/10 px-1.5 py-0.5 text-[9px] font-semibold text-[#3478F6]">
-          Human Verified
+          Content & AI Notice
         </span>
       </div>
       <p class="text-[#4B5565]">
@@ -34,7 +31,7 @@ const { className = '', compact = false } = Astro.props;
       </p>
       {!compact && (
         <p class="text-[11px] text-[#697586]">
-          Learn more about our methodology in our <a href="/editorial-policy/#ai-assistance" class="underline underline-offset-2 hover:text-[#14233B] font-medium text-[#3478F6]">Editorial Policy</a> and <a href="/fact-checking-policy/" class="underline underline-offset-2 hover:text-[#14233B] font-medium text-[#3478F6]">Verification Standards</a>.
+          Have questions or feedback? Feel free to <a href="/contact/" class="underline underline-offset-2 hover:text-[#14233B] font-medium text-[#3478F6]">reach out to us</a>.
         </p>
       )}
     </div>

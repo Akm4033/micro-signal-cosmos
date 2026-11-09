@@ -14,7 +14,8 @@ import { render } from 'astro:content';
 import ArticleAd from '../../components/ads/ArticleAd.astro';
 import SidebarAd from '../../components/ads/SidebarAd.astro';
 import AffiliateDisclosure from '../../components/monetization/AffiliateDisclosure.astro';
-import AiDisclosure from '../../components/monetization/AiDisclosure.astro';
+import NewsletterInline from '../../components/newsletter/NewsletterInline.astro';
+import NewsletterExitIntent from '../../components/newsletter/NewsletterExitIntent.astro';
 
 export async function getStaticPaths() {
   const publishedArticles = await getPublishedArticles();
@@ -233,7 +234,7 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
       <!-- Main Article Header Surface -->
       <header class="mx-auto max-w-5xl rounded-2xl border border-[#E3E8EF] bg-white p-6 sm:p-10 lg:p-12 shadow-xs mb-8">
         
-        <!-- Category & Fact-Checked Pills -->
+        <!-- Category & Badge Pills -->
         <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
           <a
             href={categoryHref}
@@ -267,11 +268,19 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
           
           <!-- Author & Dates Line -->
           <div class="flex flex-wrap items-center gap-3">
-            <a href="/authors/" class="flex items-center gap-2 font-bold text-[#14233B] hover:text-[#3478F6] transition-colors">
-              <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[#14233B] text-[10px] font-black text-white">
-                {author.initials}
-              </span>
-              <span>{author.name}</span>
+            <a href="/authors/" class="flex items-center gap-2.5 font-bold text-[#14233B] hover:text-[#0ea5e9] transition-colors">
+              {author.avatar ? (
+                <img src={author.avatar} alt={author.name} class="h-7 w-7 rounded-full object-cover" width="28" height="28" />
+              ) : (
+                <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[#14233B] text-[10px] font-black text-white">
+                  {author.initials}
+                </span>
+              )}
+              <div>
+                <span>{author.name}</span>
+                <span class="text-slate-400 font-normal mx-1">&bull;</span>
+                <span class="text-xs font-normal text-[#697586]">{author.role}</span>
+              </div>
             </a>
 
             <span aria-hidden="true" class="text-slate-300">&bull;</span>
@@ -526,10 +535,11 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
             </div>
           )}
 
-          <!-- Editorial & AI Research Transparency Note -->
-          {article.data.hasAiAssistance !== false && (
-            <AiDisclosure className="mt-8" />
-          )}
+          <!-- Newsletter Inline Variant -->
+          <NewsletterInline
+            className="mt-10"
+            leadMagnetTitle={article.data.title + ' Architecture & Reference Sheet'}
+          />
 
           <!-- Sources & Further Reading -->
           {article.data.references && article.data.references.length > 0 && (
@@ -571,26 +581,40 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
           <!-- Author Biography & Contributor Credential Box -->
           <div class="mt-10 rounded-xl border border-[#E3E8EF] bg-[#F7F9FC] p-6 sm:p-7">
             <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#14233B] text-white font-black text-sm shadow-sm">
-                {author.initials}
-              </div>
+              {author.avatar ? (
+                <img src={author.avatar} alt={author.name} class="h-14 w-14 shrink-0 rounded-2xl object-cover shadow-sm" width="56" height="56" />
+              ) : (
+                <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#14233B] text-white font-black text-sm shadow-sm">
+                  {author.initials}
+                </div>
+              )}
               <div class="flex-1">
                 <div class="flex flex-wrap items-center justify-between gap-2">
                   <div>
                     <h3 class="text-base font-bold text-[#14233B]">
                       {author.name}
                     </h3>
-                    <p class="text-[11px] font-semibold text-[#3478F6] uppercase tracking-wider">
+                    <p class="text-[11px] font-semibold text-[#0ea5e9] uppercase tracking-wider">
                       {author.role}
                     </p>
                   </div>
-                  <a href="/authors/" class="text-xs font-bold text-[#3478F6] hover:underline">
-                    About the Authors &rarr;
+                  <a href="/authors/" class="text-xs font-bold text-[#0ea5e9] hover:underline">
+                    Author Profile &rarr;
                   </a>
                 </div>
                 <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#4B5565]">
                   {author.bio}
                 </p>
+                {author.expertise && author.expertise.length > 0 && (
+                  <div class="mt-3 flex flex-wrap gap-1.5 pt-3 border-t border-[#E3E8EF]/80">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-[#697586] mr-1">Focus:</span>
+                    {author.expertise.map((exp) => (
+                      <span class="text-[10px] font-semibold text-[#14233B] bg-white border border-[#E3E8EF] px-2 py-0.5 rounded">
+                        {exp}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -785,6 +809,8 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
 
     </div>
   </main>
+
+  <NewsletterExitIntent leadMagnet="Free System Architecture & Cheat Sheet Bundle" />
 
   <Footer />
 </Layout>

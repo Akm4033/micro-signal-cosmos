@@ -5,11 +5,14 @@ const currentPath = Astro.url.pathname;
 
 const navItems = [
   { name: 'Home', shortName: 'Home', href: '/' },
+  { name: 'Articles', shortName: 'Articles', href: '/articles/' },
   ...CATEGORIES.map((c) => ({
     name: c.name,
     shortName: c.shortName || c.name,
     href: c.href,
   })),
+  { name: 'Tools', shortName: 'Tools', href: '/tools/' },
+  { name: 'About', shortName: 'About', href: '/about/' },
 ];
 ---
 
@@ -18,20 +21,21 @@ const navItems = [
   <div class="container-main flex items-center justify-between py-1.5">
     <div class="flex items-center gap-3">
       <span class="inline-flex items-center gap-1.5 font-bold uppercase tracking-wider text-[#14233B]">
-        <span class="h-1.5 w-1.5 rounded-full bg-[#3478F6]"></span>
+        <span class="h-1.5 w-1.5 rounded-full bg-[#0ea5e9]"></span>
         Micro Signal Cosmos
       </span>
       <span aria-hidden="true" class="text-slate-300">&bull;</span>
-      <span>Technology, Science & AI Guides</span>
+      <span>Technical Publication & Systems Engineering</span>
       <span aria-hidden="true" class="text-slate-300">&bull;</span>
       <span>Discover More. Understand Better.</span>
     </div>
 
     <div class="flex items-center gap-4">
-      <a href="/articles/" class="hover:text-[#14233B] transition-colors">Explore All Articles</a>
-      <a href="/about/" class="hover:text-[#14233B] transition-colors">About Us</a>
+      <a href="/tools/" class="hover:text-[#14233B] transition-colors">Tools</a>
+      <a href="/authors/" class="hover:text-[#14233B] transition-colors">Authors</a>
+      <a href="/about/" class="hover:text-[#14233B] transition-colors">About</a>
       <a href="/contact/" class="hover:text-[#14233B] transition-colors">Contact</a>
-      <a href="/rss.xml" class="hover:text-[#3478F6] font-semibold transition-colors flex items-center gap-1">
+      <a href="/rss.xml" class="hover:text-[#0ea5e9] font-semibold transition-colors flex items-center gap-1">
         <span>RSS</span>
         <span aria-hidden="true">&rarr;</span>
       </a>

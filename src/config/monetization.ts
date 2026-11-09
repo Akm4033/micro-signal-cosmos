@@ -74,7 +74,7 @@ export const monetizationConfig: MonetizationConfig = {
   affiliate: {
     enabled: getEnv('PUBLIC_AFFILIATE_ENABLED') !== 'false',
     defaultDisclosureText:
-      'Disclosure: Some links on Micro Signal Cosmos may be affiliate links. If you click through and make a purchase, we may earn an affiliate commission at no additional cost to you. We only recommend digital tools and software we find genuinely useful, and editorial integrity is our top priority.',
+      'Disclosure: Some links on Micro Signal Cosmos may be affiliate links. If you click through and make a purchase, we may earn an affiliate commission at no additional cost to you. We only recommend tools and resources we find genuinely useful.',
   },
   consent: {
     // Privacy consent banner enabled by default to respect GDPR, ePrivacy, and CCPA
@@ -85,7 +85,7 @@ export const monetizationConfig: MonetizationConfig = {
   aiDisclosure: {
     enabled: true,
     statement:
-      'Micro Signal Cosmos is an independent blogging publication. We utilize advanced AI research tools (such as ChatGPT, Claude, Gemini, and Perplexity) for literature screening, drafting, and analysis. All published work is evaluated, synthesized, and verified by our human editorial team.',
+      'Micro Signal Cosmos is an independent blogging publication. We use modern AI tools (including ChatGPT, Claude, Gemini, and Perplexity) to assist with research and drafting. All published articles and tutorials are reviewed, edited, and verified by our human team to ensure genuine clarity and usefulness.',
   },
 };
 

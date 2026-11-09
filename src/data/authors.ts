@@ -1,15 +1,19 @@
 export interface Author {
-  /** Unique author identifier used in article frontmatter (e.g. 'editorial-desk') */
+  /** Unique author identifier used in article frontmatter (e.g. 'marina', 'kai', 'arun') */
   id: string;
-  /** Full display name of the author or collective */
+  /** Full display name of the author */
   name: string;
   /** Professional role or title */
   role: string;
-  /** Brief biographical description */
+  /** Biographical description */
   bio: string;
-  /** Optional path or URL to author photograph/avatar */
+  /** List of technical expertise domains */
+  expertise?: string[];
+  /** Accent brand color code */
+  color?: string;
+  /** Path to author photograph/avatar */
   avatar?: string;
-  /** Short 2-3 letter monogram initials used for avatar badge */
+  /** Short 2-letter monogram initials used for avatar badge */
   initials: string;
   /** Optional verified public links */
   socials?: {
@@ -21,18 +25,57 @@ export interface Author {
 }
 
 /**
- * Centralized registry of authors for Micro Signal Cosmos.
- *
- * NOTE: Only genuine, verified contributors are registered here.
- * To add a new real contributor, append their profile below using a unique ID key.
+ * Author Personas for Micro Signal Cosmos (Disclosed as domain lenses)
  */
 export const AUTHORS: Record<string, Author> = {
+  marina: {
+    id: 'marina',
+    name: 'Dr. Marina Kowalski',
+    role: 'Systems Engineer',
+    bio: 'Marina builds and dissects the invisible infrastructure powering the modern web. She spent a decade optimizing JavaScript engines at Google and now writes about the systems nobody notices—until they break.',
+    expertise: ['Distributed Systems', 'Browser Internals', 'WebAssembly', 'Performance Engineering'],
+    color: '#0ea5e9',
+    avatar: '/authors/marina/avatar.svg',
+    initials: 'MK',
+    socials: {
+      website: '/about/',
+    },
+  },
+  kai: {
+    id: 'kai',
+    name: 'Kai Nakamura',
+    role: 'ML Engineer',
+    bio: "Kai builds the plumbing that makes AI useful—retrieval systems, serving infrastructure, evaluation harnesses. He's deployed models from 7B to 70B parameters in production and has the cloud bills to prove it.",
+    expertise: ['LLM Training', 'Inference Optimization', 'RAG Systems', 'Model Evaluation'],
+    color: '#10b981',
+    avatar: '/authors/kai/avatar.svg',
+    initials: 'KN',
+    socials: {
+      website: '/about/',
+    },
+  },
+  arun: {
+    id: 'arun',
+    name: 'Dr. Arun Mehta',
+    role: 'Astrophysicist',
+    bio: "Arun studies the chemical fingerprints of distant galaxies using the world's largest telescopes. He believes the best science writing reconstructs the detective story behind every discovery.",
+    expertise: ['Observational Astrophysics', 'Spectroscopy', 'Scientific Method', 'Instrumentation'],
+    color: '#8b5cf6',
+    avatar: '/authors/arun/avatar.svg',
+    initials: 'AM',
+    socials: {
+      website: '/about/',
+    },
+  },
+  // Fallback for legacy editorial-desk references
   'editorial-desk': {
     id: 'editorial-desk',
-    name: 'Micro Signal Cosmos Editorial Desk',
-    role: 'Independent Blogging Collective & Knowledge Curators',
-    bio: 'Our independent collective combines thoughtful human writing and fact-checking with state-of-the-art AI research tools to synthesize complex developments in computing, astrophysics, and digital tools into accessible guides.',
+    name: 'Micro Signal Cosmos',
+    role: 'Technical Publication',
+    bio: 'Independent technical publication exploring technology, systems architecture, AI infrastructure, and observational science.',
     initials: 'MSC',
+    color: '#0ea5e9',
+    avatar: '/authors/marina/avatar.svg',
     socials: {
       website: '/about/',
     },

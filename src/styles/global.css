@@ -23,14 +23,42 @@
 :root {
   color-scheme: light;
 
+  /* Brand Tokens */
+  --brand-sky: #0ea5e9;
+  --brand-sky-deep: #0284c7;
+  --brand-sky-muted: #e0f2fe;
+  --brand-violet: #8b5cf6;
+  --brand-violet-deep: #7c3aed;
+  --brand-violet-muted: #f3e8ff;
+
+  /* Warm Neutrals */
+  --neutral-950: #0a0f1a;
+  --neutral-900: #111827;
+  --neutral-800: #1f2937;
+  --neutral-700: #374151;
+  --neutral-600: #4b5563;
+  --neutral-500: #6b7280;
+  --neutral-400: #9ca3af;
+  --neutral-300: #d1d5db;
+  --neutral-200: #e5e7eb;
+  --neutral-100: #f3f4f6;
+  --neutral-50: #f9fafb;
+  --neutral-0: #ffffff;
+
+  /* Containers */
+  --container-narrow: 640px;
+  --container-medium: 896px;
+  --container-wide: 1152px;
+  --container-full: 1408px;
+
   --page-bg: #F7F9FC;
   --surface: #FFFFFF;
   --surface-subtle: #EEF1F5;
   --card-bg: #FFFFFF;
   --primary: #14233B;
   --primary-dark: #101B2D;
-  --accent: #3478F6;
-  --accent-hover: #2563EB;
+  --accent: #0ea5e9;
+  --accent-hover: #0284c7;
   --text-primary: #14233B;
   --text-body: #202938;
   --text-muted: #697586;
