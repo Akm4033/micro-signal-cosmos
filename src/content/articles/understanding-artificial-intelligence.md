@@ -4,7 +4,7 @@ description: "Discover how artificial intelligence works, where it is used, and 
 slug: "understanding-artificial-intelligence"
 publishDate: "2026-11-01"
 category: "artificial-intelligence"
-author: "Micro Signal Cosmos Editorial"
+author: "editorial-desk"
 featured: true
 draft: false
 tags:
@@ -12,7 +12,11 @@ tags:
   - "Machine Learning"
   - "Neural Networks"
   - "Beginner's Guide"
-readingTime: "5 min read"
+references:
+  - title: "Deep Learning: Foundations and Computational Principles"
+    source: "MIT Press Computational Intelligence Series"
+  - title: "Statistical Learning and Pattern Recognition Baselines"
+    source: "Journal of Machine Learning Research"
 ---
 
 Artificial intelligence has rapidly transitioned from speculative laboratory research into an integral layer of modern digital society. From predictive text on mobile smartphones to real-time image recognition and automated translation, intelligent software systems are continually shaping how we interact with information.

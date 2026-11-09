@@ -1,22 +1,30 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { CATEGORIES } from './categories';
+import { calculateReadingTime } from '../utils/readingTime';
 
 export type Article = CollectionEntry<'articles'>;
 
 /**
  * Returns all published articles sorted by publishDate descending.
- * Draft articles are strictly excluded from public listings.
+ * Draft articles are strictly excluded from public listings and sitemaps.
+ *
+ * @param includeDrafts - Set to true ONLY in local editorial preview environments
  */
-export async function getPublishedArticles(): Promise<Article[]> {
+export async function getPublishedArticles(includeDrafts = false): Promise<Article[]> {
+  const allowDrafts =
+    includeDrafts ||
+    process.env.ENABLE_DRAFTS === 'true' ||
+    Boolean(import.meta.env?.ENABLE_DRAFTS === 'true');
+
   const articles = await getCollection('articles', ({ data }) => {
-    return !data.draft;
+    return allowDrafts ? true : !data.draft;
   });
 
   return articles.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
 }
 
 /**
- * Returns all featured, non-draft articles sorted by date.
+ * Returns all featured, non-draft articles sorted by publish date.
  */
 export async function getFeaturedArticles(): Promise<Article[]> {
   const articles = await getPublishedArticles();
@@ -24,7 +32,7 @@ export async function getFeaturedArticles(): Promise<Article[]> {
 }
 
 /**
- * Returns non-draft articles belonging to a specific category slug or name.
+ * Returns non-draft articles belonging to a specific category slug or formal name.
  */
 export async function getArticlesByCategory(categorySlug: string): Promise<Article[]> {
   const articles = await getPublishedArticles();
@@ -41,4 +49,21 @@ export async function getArticlesByCategory(categorySlug: string): Promise<Artic
   });
 }
 
+/**
+ * Consistently resolves reading time across the entire site.
+ * Uses manual frontmatter override if provided; otherwise calculates dynamically
+ * at approximately 200 words per minute from the Markdown article body.
+ */
+export function getArticleReadingTime(article: Article): string {
+  if (article.data.readingTime) {
+    return article.data.readingTime;
+  }
+  return calculateReadingTime(article.body);
+}
 
+/**
+ * Helper to resolve the canonical slug for an article.
+ */
+export function getArticleSlug(article: Article): string {
+  return article.data.slug || article.id;
+}

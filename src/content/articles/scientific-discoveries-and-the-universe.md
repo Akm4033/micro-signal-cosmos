@@ -4,7 +4,7 @@ description: "Explore the importance of scientific research and the discoveries 
 slug: "scientific-discoveries-and-the-universe"
 publishDate: "2026-11-06"
 category: "science"
-author: "Micro Signal Cosmos Editorial"
+author: "editorial-desk"
 featured: false
 draft: false
 tags:
@@ -12,7 +12,12 @@ tags:
   - "Astrophysics"
   - "Cosmos"
   - "Scientific Method"
-readingTime: "7 min read"
+references:
+  - title: "Multi-Messenger Astrophysics and Gravitational Waves"
+    source: "LIGO Scientific Collaboration"
+    url: "https://www.ligo.caltech.edu/"
+  - title: "The Next Generation Space Telescope and Deep Field Observations"
+    source: "NASA Astrophysics Science Division"
 ---
 
 Throughout human history, looking upward at the night sky has inspired profound philosophical and scientific inquiry. What began as naked-eye stargazing has transformed over centuries into a rigorous, multi-spectral science capable of peering billions of years into the cosmic past.

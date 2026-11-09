@@ -3,14 +3,20 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { CATEGORIES } from '../../data/categories';
-import { getPublishedArticles, type Article } from '../../data/articles';
+import {
+  getPublishedArticles,
+  getArticleReadingTime,
+  getArticleSlug,
+  type Article,
+} from '../../data/articles';
+import { getAuthor } from '../../data/authors';
 import { render } from 'astro:content';
 
 export async function getStaticPaths() {
   const publishedArticles = await getPublishedArticles();
 
   return publishedArticles.map((article) => {
-    const slug = article.data.slug || article.id;
+    const slug = getArticleSlug(article);
     return {
       params: { slug },
       props: { article },
@@ -24,6 +30,12 @@ interface Props {
 
 const { article } = Astro.props;
 const { Content, headings = [] } = await render(article);
+
+// Resolve author profile from centralized registry
+const author = getAuthor(article.data.author);
+
+// Consistently compute reading time
+const readingTime = getArticleReadingTime(article);
 
 // Filter Table of Contents headings (h2 and h3)
 const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
@@ -58,12 +70,12 @@ const updatedDateISO = article.data.updatedDate ? article.data.updatedDate.toISO
 
 // Determine adjacent (prev/next) and related articles
 const allPublished = await getPublishedArticles();
-const currentSlug = article.data.slug || article.id;
-const currentIndex = allPublished.findIndex((a) => (a.data.slug || a.id) === currentSlug);
+const currentSlug = getArticleSlug(article);
+const currentIndex = allPublished.findIndex((a) => getArticleSlug(a) === currentSlug);
 const prevArticle = currentIndex > 0 ? allPublished[currentIndex - 1] : null;
 const nextArticle = currentIndex < allPublished.length - 1 ? allPublished[currentIndex + 1] : null;
 
-const otherArticles = allPublished.filter((a) => (a.data.slug || a.id) !== currentSlug);
+const otherArticles = allPublished.filter((a) => getArticleSlug(a) !== currentSlug);
 const sameCategoryArticles = otherArticles.filter(
   (a) => a.data.category.toLowerCase().trim() === article.data.category.toLowerCase().trim()
 );
@@ -72,6 +84,18 @@ const differentCategoryArticles = otherArticles.filter(
 );
 
 const relatedArticles = [...sameCategoryArticles, ...differentCategoryArticles].slice(0, 3);
+
+// Cover Image & Alt Text
+const coverImage = article.data.coverImage;
+const coverImageAlt = article.data.coverImageAlt || article.data.title;
+const coverImageCredit = article.data.coverImageCredit;
+const coverImageCaption = article.data.coverImageCaption;
+
+// Page Title & Meta Description (supports optional SEO overrides)
+const pageTitle = article.data.seoTitle
+  ? `${article.data.seoTitle} | Micro Signal Cosmos`
+  : `${article.data.title} | Micro Signal Cosmos`;
+const pageDescription = article.data.seoDescription || article.data.description;
 
 // JSON-LD Structured Data
 const siteUrl = 'https://microsignalcosmos.com';
@@ -84,7 +108,7 @@ const articleJsonLd = {
       '@type': ['NewsArticle', 'BlogPosting', 'TechArticle'],
       '@id': `${articleUrl}#article`,
       headline: article.data.title,
-      description: article.data.description,
+      description: pageDescription,
       url: articleUrl,
       mainEntityOfPage: {
         '@type': 'WebPage',
@@ -93,8 +117,9 @@ const articleJsonLd = {
       datePublished: publishDateISO,
       dateModified: updatedDateISO || publishDateISO,
       author: {
-        '@type': 'Person',
-        name: article.data.author,
+        '@type': author.id === 'editorial-desk' ? 'Organization' : 'Person',
+        name: author.name,
+        url: `${siteUrl}/authors/`,
       },
       publisher: {
         '@type': 'Organization',
@@ -109,10 +134,8 @@ const articleJsonLd = {
       },
       articleSection: categoryName,
       keywords: (article.data.tags || []).join(', '),
-      image: article.data.coverImage
-        ? (article.data.coverImage.startsWith('http')
-            ? article.data.coverImage
-            : `${siteUrl}${article.data.coverImage}`)
+      image: coverImage
+        ? (coverImage.startsWith('http') ? coverImage : `${siteUrl}${coverImage}`)
         : `${siteUrl}/favicon.svg`,
     },
     {
@@ -147,10 +170,10 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
 ---
 
 <Layout
-  title={`${article.data.title} | Micro Signal Cosmos`}
-  description={article.data.description}
+  title={pageTitle}
+  description={pageDescription}
   type="article"
-  image={article.data.coverImage}
+  image={coverImage}
   jsonLd={articleJsonLd}
 >
   <Header />
@@ -215,7 +238,7 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
               <span>Peer Verified</span>
             </a>
             <span class="text-slate-300" aria-hidden="true">&bull;</span>
-            <span class="text-[#697586]">{article.data.readingTime || '6 min read'}</span>
+            <span class="text-[#697586]">{readingTime}</span>
           </div>
         </div>
 
@@ -236,9 +259,9 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
           <div class="flex flex-wrap items-center gap-3">
             <a href="/authors/" class="flex items-center gap-2 font-bold text-[#14233B] hover:text-[#3478F6] transition-colors">
               <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[#14233B] text-[10px] font-black text-white">
-                MS
+                {author.initials}
               </span>
-              <span>{article.data.author}</span>
+              <span>{author.name}</span>
             </a>
 
             <span aria-hidden="true" class="text-slate-300">&bull;</span>
@@ -315,17 +338,24 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
 
         <!-- Featured Visual / Editorial Header Artwork -->
         <div class="mt-8">
-          {article.data.coverImage ? (
-            <div class="overflow-hidden rounded-xl border border-[#E3E8EF] bg-[#F7F9FC]">
+          {coverImage ? (
+            <figure class="overflow-hidden rounded-xl border border-[#E3E8EF] bg-[#F7F9FC]">
               <img
-                src={article.data.coverImage}
-                alt={article.data.title}
+                src={coverImage}
+                alt={coverImageAlt}
                 width="1200"
                 height="630"
                 class="h-auto max-h-[480px] w-full object-cover"
                 loading="eager"
               />
-            </div>
+              {(coverImageCaption || coverImageCredit) && (
+                <figcaption class="px-4 py-2 text-right text-[11px] text-[#697586] border-t border-[#E3E8EF] bg-white">
+                  {coverImageCaption && <span>{coverImageCaption}</span>}
+                  {coverImageCaption && coverImageCredit && <span> &bull; </span>}
+                  {coverImageCredit && <span class="italic font-medium">Credit: {coverImageCredit}</span>}
+                </figcaption>
+              )}
+            </figure>
           ) : (
             <div class="relative aspect-[21/9] sm:aspect-[24/9] w-full overflow-hidden rounded-xl bg-gradient-to-br from-[#101B2D] via-[#14233B] to-[#1E3A63] p-6 text-white shadow-inner flex flex-col justify-between">
               <!-- Technical Lattice Overlay -->
@@ -516,20 +546,57 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
             </div>
           )}
 
-          <!-- Author Biography & Editorial Collective Credential Box -->
+          <!-- Academic References & Primary Citations -->
+          {article.data.references && article.data.references.length > 0 && (
+            <section aria-labelledby="article-references" class="mt-10 rounded-xl border border-[#E3E8EF] bg-white p-6 sm:p-7 shadow-xs">
+              <div class="flex items-center gap-2 border-b border-[#E3E8EF] pb-3">
+                <span class="flex h-5 w-5 items-center justify-center rounded bg-[#14233B] text-[10px] font-bold text-white">
+                  &para;
+                </span>
+                <h2 id="article-references" class="text-sm font-bold uppercase tracking-wider text-[#14233B]">
+                  Academic References & Primary Citations
+                </h2>
+              </div>
+              <ol class="mt-4 list-decimal space-y-2 pl-5 text-xs text-[#4B5565] leading-relaxed">
+                {article.data.references.map((ref) => {
+                  if (typeof ref === 'string') {
+                    return <li>{ref}</li>;
+                  }
+                  return (
+                    <li>
+                      <strong class="font-semibold text-[#14233B]">{ref.title}</strong>
+                      {ref.source && <span class="text-[#697586]"> &mdash; {ref.source}</span>}
+                      {ref.url && (
+                        <a
+                          href={ref.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="ml-1.5 font-semibold text-[#3478F6] hover:underline"
+                        >
+                          [Source ↗]
+                        </a>
+                      )}
+                    </li>
+                  );
+                })}
+              </ol>
+            </section>
+          )}
+
+          <!-- Author Biography & Contributor Credential Box -->
           <div class="mt-10 rounded-xl border border-[#E3E8EF] bg-[#F7F9FC] p-6 sm:p-7">
             <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#14233B] text-white font-black text-sm shadow-sm">
-                MS
+                {author.initials}
               </div>
               <div class="flex-1">
                 <div class="flex flex-wrap items-center justify-between gap-2">
                   <div>
                     <h3 class="text-base font-bold text-[#14233B]">
-                      {article.data.author}
+                      {author.name}
                     </h3>
                     <p class="text-[11px] font-semibold text-[#3478F6] uppercase tracking-wider">
-                      Multidisciplinary Research & Writing Desk
+                      {author.role}
                     </p>
                   </div>
                   <a href="/authors/" class="text-xs font-bold text-[#3478F6] hover:underline">
@@ -537,7 +604,7 @@ const shareEncodedTitle = encodeURIComponent(article.data.title);
                   </a>
                 </div>
                 <p class="mt-2 text-xs sm:text-sm leading-relaxed text-[#4B5565]">
-                  Micro Signal Cosmos dispatches are synthesized, verified, and cross-referenced by our staff editorial collective. We prioritize primary peer-reviewed literature, official documentation, and mathematical consistency across all published topics.
+                  {author.bio}
                 </p>
               </div>
             </div>

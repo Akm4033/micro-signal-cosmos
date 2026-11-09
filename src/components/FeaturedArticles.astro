@@ -1,6 +1,6 @@
 ---
 import { CATEGORIES } from '../data/categories';
-import { getFeaturedArticles, getPublishedArticles, type Article } from '../data/articles';
+import { getFeaturedArticles, getPublishedArticles, getArticleReadingTime, type Article } from '../data/articles';
 
 // Retrieve featured and published articles (drafts strictly excluded)
 const featuredArticles = await getFeaturedArticles();
@@ -93,11 +93,9 @@ const mainCategoryInfo = mainFeatured ? getCategoryInfo(mainFeatured.data.catego
               </div>
 
               <!-- Bottom Right: Reading Time -->
-              {mainFeatured.data.readingTime && (
-                <span class="absolute bottom-4 right-4 rounded-full bg-[#101B2D]/85 backdrop-blur-md px-2.5 py-1 text-[11px] font-semibold text-slate-200 border border-white/10">
-                  {mainFeatured.data.readingTime}
-                </span>
-              )}
+              <span class="absolute bottom-4 right-4 rounded-full bg-[#101B2D]/85 backdrop-blur-md px-2.5 py-1 text-[11px] font-semibold text-slate-200 border border-white/10">
+                {getArticleReadingTime(mainFeatured)}
+              </span>
             </div>
 
             <!-- Meta Line -->
@@ -158,9 +156,7 @@ const mainCategoryInfo = mainFeatured ? getCategoryInfo(mainFeatured.data.catego
                     <span class="inline-flex items-center gap-1.5 rounded-full bg-[#3478F6]/10 px-2.5 py-0.5 font-bold uppercase tracking-wider text-[11px] text-[#3478F6]">
                       {catInfo.name}
                     </span>
-                    {article.data.readingTime && (
-                      <span class="font-medium text-[#697586] text-xs">{article.data.readingTime}</span>
-                    )}
+                    <span class="font-medium text-[#697586] text-xs">{getArticleReadingTime(article)}</span>
                   </div>
 
                   <h3 class="text-lg sm:text-xl font-bold leading-snug text-[#14233B] transition-colors group-hover:text-[#3478F6]">

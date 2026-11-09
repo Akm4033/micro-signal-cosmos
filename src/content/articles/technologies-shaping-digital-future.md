@@ -4,7 +4,7 @@ description: "An introduction to the emerging technologies influencing how we co
 slug: "technologies-shaping-digital-future"
 publishDate: "2026-11-04"
 category: "technology"
-author: "Micro Signal Cosmos Editorial"
+author: "editorial-desk"
 featured: false
 draft: false
 tags:
@@ -12,7 +12,11 @@ tags:
   - "Computing"
   - "Edge Architecture"
   - "Hardware"
-readingTime: "6 min read"
+references:
+  - title: "Architectures for Edge Computing and Distributed Intelligence"
+    source: "IEEE Computer Society"
+  - title: "Next-Generation Semiconductor Packaging and Interconnect Standards"
+    source: "International Roadmap for Devices and Systems"
 ---
 
 The landscape of modern computing is undergoing a profound structural transition. For the past two decades, technological progress was characterized primarily by the centralization of computing power inside hyper-scale data centers and the ubiquity of mobile smartphones.

@@ -1,5 +1,5 @@
 ---
-import { getPublishedArticles } from '../data/articles';
+import { getPublishedArticles, getArticleReadingTime } from '../data/articles';
 
 // Editorially curated selection of prominent published articles
 const publishedArticles = await getPublishedArticles();
@@ -49,7 +49,7 @@ const listArticles = publishedArticles.slice(0, 3);
                   Staff Pick
                 </span>
                 <span class="text-xs font-semibold text-[#697586]">
-                  {primaryPick.data.readingTime || '6 min read'}
+                  {getArticleReadingTime(primaryPick)}
                 </span>
               </div>
 
@@ -99,7 +99,7 @@ const listArticles = publishedArticles.slice(0, 3);
                       {article.data.category}
                     </span>
                     <span aria-hidden="true" class="text-slate-300">&bull;</span>
-                    <span class="text-[#697586]">{article.data.readingTime || '5 min read'}</span>
+                    <span class="text-[#697586]">{getArticleReadingTime(article)}</span>
                   </div>
 
                   <h3 class="text-base sm:text-lg font-bold text-[#14233B] group-hover:text-[#3478F6] transition-colors leading-snug">
