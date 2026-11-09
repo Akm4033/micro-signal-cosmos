@@ -80,6 +80,15 @@ const articles = defineCollection({
         ])
       )
       .default([]),
+
+    /** Whether the article contains affiliate or sponsored product links */
+    hasAffiliateLinks: z.boolean().default(false),
+
+    /** Optional custom affiliate disclosure copy for specific partner programs */
+    affiliateDisclosure: z.string().optional(),
+
+    /** Transparent AI research assistance indicator */
+    hasAiAssistance: z.boolean().default(true),
   }),
 });
 

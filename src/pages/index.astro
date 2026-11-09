@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import FeaturedArticles from '../components/FeaturedArticles.astro';
 import Categories from '../components/Categories.astro';
 import LatestArticles from '../components/LatestArticles.astro';
+import HomepageAd from '../components/ads/HomepageAd.astro';
 import PopularArticles from '../components/PopularArticles.astro';
 import EditorialMission from '../components/EditorialMission.astro';
 import Newsletter from '../components/Newsletter.astro';
@@ -29,6 +30,9 @@ import Footer from '../components/Footer.astro';
 
     <!-- Section E: Latest Articles Grid -->
     <LatestArticles />
+
+    <!-- Optional Section: Homepage Advertisement Slot (Configurable, Zero CLS) -->
+    <HomepageAd />
 
     <!-- Section F: Popular & Essential Articles -->
     <PopularArticles />

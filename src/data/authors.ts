@@ -30,8 +30,8 @@ export const AUTHORS: Record<string, Author> = {
   'editorial-desk': {
     id: 'editorial-desk',
     name: 'Micro Signal Cosmos Editorial Desk',
-    role: 'Editorial Collective & Technical Fact-checking',
-    bio: 'Our multidisciplinary editorial collective synthesizes complex developments in computing, astrophysics, artificial intelligence, and digital infrastructure into grounded, peer-level educational dispatches.',
+    role: 'Independent Blogging Collective & Knowledge Curators',
+    bio: 'Our independent collective combines thoughtful human writing and fact-checking with state-of-the-art AI research tools to synthesize complex developments in computing, astrophysics, and digital tools into accessible guides.',
     initials: 'MSC',
     socials: {
       website: '/about/',

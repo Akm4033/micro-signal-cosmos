@@ -1,0 +1,100 @@
+---
+import { monetizationConfig } from '../../config/monetization';
+
+const enabled = monetizationConfig.consent.enabled;
+---
+
+{enabled && (
+  <div
+    id="msc-consent-banner"
+    class="fixed bottom-0 inset-x-0 z-50 p-4 transition-transform duration-300 transform translate-y-full"
+    role="region"
+    aria-label="Privacy and cookie consent"
+    style="display: none;"
+  >
+    <div class="mx-auto max-w-4xl rounded-2xl border border-[#E3E8EF] bg-white/95 p-5 shadow-2xl backdrop-blur-md sm:p-6 sm:flex sm:items-center sm:justify-between gap-6">
+      <div class="space-y-2 sm:max-w-2xl">
+        <div class="flex items-center gap-2">
+          <span class="h-2 w-2 rounded-full bg-[#3478F6]"></span>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-[#14233B]">
+            Your Privacy & Cookies
+          </h3>
+        </div>
+        <p class="text-xs leading-relaxed text-[#4B5565]">
+          Micro Signal Cosmos respects your data privacy. We use essential cookies to maintain site functionality and, with your consent, optional analytical and advertising cookies to measure readership and support our independent research.
+          Review our <a href="/privacy-policy/" class="text-[#3478F6] underline underline-offset-2 hover:text-[#2563EB]">Privacy Policy</a> and <a href="/terms/" class="text-[#3478F6] underline underline-offset-2 hover:text-[#2563EB]">Terms of Service</a>.
+        </p>
+      </div>
+
+      <div class="mt-4 flex flex-wrap items-center gap-2.5 sm:mt-0 flex-shrink-0">
+        <button
+          type="button"
+          id="msc-consent-reject"
+          class="rounded-xl border border-[#E3E8EF] bg-white px-3.5 py-2 text-xs font-semibold text-[#4B5565] transition hover:bg-[#F8FAFC] hover:text-[#14233B] focus-visible:outline-2 focus-visible:outline-[#3478F6]"
+        >
+          Essential Only
+        </button>
+        <button
+          type="button"
+          id="msc-consent-accept"
+          class="rounded-xl bg-[#3478F6] px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-[#2563EB] focus-visible:outline-2 focus-visible:outline-[#3478F6]"
+        >
+          Accept All
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    (function() {
+      const STORAGE_KEY = 'msc_consent_status';
+      const banner = document.getElementById('msc-consent-banner');
+      const acceptBtn = document.getElementById('msc-consent-accept');
+      const rejectBtn = document.getElementById('msc-consent-reject');
+
+      if (!banner || !acceptBtn || !rejectBtn) return;
+
+      const currentConsent = localStorage.getItem(STORAGE_KEY);
+
+      function updateGoogleConsent(granted) {
+        if (typeof window.gtag === 'function') {
+          window.gtag('consent', 'update', {
+            'analytics_storage': granted ? 'granted' : 'denied',
+            'ad_storage': granted ? 'granted' : 'denied',
+            'ad_user_data': granted ? 'granted' : 'denied',
+            'ad_personalization': granted ? 'granted' : 'denied'
+          });
+        }
+        window.dispatchEvent(new CustomEvent('msc_consent_updated', {
+          detail: { status: granted ? 'accepted' : 'rejected' }
+        }));
+      }
+
+      if (!currentConsent) {
+        banner.style.display = 'block';
+        setTimeout(function() {
+          banner.classList.remove('translate-y-full');
+        }, 100);
+      } else if (currentConsent === 'accepted') {
+        updateGoogleConsent(true);
+      } else {
+        updateGoogleConsent(false);
+      }
+
+      acceptBtn.addEventListener('click', function() {
+        localStorage.setItem(STORAGE_KEY, 'accepted');
+        banner.classList.add('translate-y-full');
+        setTimeout(function() { banner.style.display = 'none'; }, 300);
+        updateGoogleConsent(true);
+      });
+
+      rejectBtn.addEventListener('click', function() {
+        localStorage.setItem(STORAGE_KEY, 'rejected');
+        banner.classList.add('translate-y-full');
+        setTimeout(function() { banner.style.display = 'none'; }, 300);
+        updateGoogleConsent(false);
+      });
+    })();
+  </script>
+)}
+

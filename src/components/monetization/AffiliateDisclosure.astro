@@ -1,0 +1,36 @@
+---
+import { monetizationConfig } from '../../config/monetization';
+
+export interface Props {
+  customText?: string;
+  className?: string;
+}
+
+const { customText, className = '' } = Astro.props;
+const disclosureText = customText || monetizationConfig.affiliate.defaultDisclosureText;
+---
+
+<aside
+  class={`affiliate-disclosure my-6 rounded-xl border border-amber-200/80 bg-amber-50/60 p-4 text-xs leading-relaxed text-amber-950 sm:p-5 ${className}`}
+  aria-label="Affiliate link disclosure"
+>
+  <div class="flex items-start gap-3">
+    <div class="mt-0.5 flex-shrink-0 text-amber-600">
+      <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    </div>
+    <div class="space-y-1">
+      <p class="font-bold tracking-wider text-amber-900 uppercase text-[10px]">
+        Affiliate & Sponsorship Disclosure
+      </p>
+      <p class="text-amber-900/90">
+        {disclosureText}
+      </p>
+      <p class="text-[11px] text-amber-800/80">
+        Read our full <a href="/editorial-policy/#editorial-independence" class="underline underline-offset-2 hover:text-amber-950 font-medium">Commercial Independence Policy</a> to learn how we evaluate tools and technology.
+      </p>
+    </div>
+  </div>
+</aside>
+

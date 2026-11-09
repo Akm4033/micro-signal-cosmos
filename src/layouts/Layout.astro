@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import { monetizationConfig, isAdsEnabled } from '../config/monetization';
+import CookieConsent from '../components/consent/CookieConsent.astro';
 
 interface Props {
   title?: string;
@@ -140,6 +142,49 @@ const finalJsonLd = noindex ? null : (jsonLd || defaultJsonLd);
     <link rel="alternate" type="application/rss+xml" title="Micro Signal Cosmos" href="/rss.xml" />
     <link rel="sitemap" href="/sitemap.xml" />
 
+    <!-- Search Engine Verification (Configurable via PUBLIC_GSC_VERIFICATION) -->
+    {monetizationConfig.analytics.gscVerification && (
+      <meta name="google-site-verification" content={monetizationConfig.analytics.gscVerification} />
+    )}
+
+    <!-- Google AdSense Script (Configurable via PUBLIC_ADS_ENABLED & PUBLIC_ADSENSE_CLIENT_ID) -->
+    {isAdsEnabled() && monetizationConfig.ads.adsenseClientId && (
+      <script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${monetizationConfig.ads.adsenseClientId}`}
+        crossorigin="anonymous"
+      ></script>
+    )}
+
+    <!-- Google Analytics 4 with Consent Mode v2 (Configurable via PUBLIC_GA_MEASUREMENT_ID) -->
+    {monetizationConfig.analytics.gaMeasurementId && (
+      <>
+        <script is:inline>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('consent', 'default', {
+            'analytics_storage': 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied'
+          });
+        </script>
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${monetizationConfig.analytics.gaMeasurementId}`}
+        ></script>
+        <script is:inline define:vars={{ gaId: monetizationConfig.analytics.gaMeasurementId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', gaId, {
+            anonymize_ip: true,
+            send_page_view: true
+          });
+        </script>
+      </>
+    )}
+
     <!-- Structured Data (JSON-LD) -->
     {finalJsonLd && (
       <script
@@ -179,5 +224,7 @@ const finalJsonLd = noindex ? null : (jsonLd || defaultJsonLd);
         }, { passive: true });
       })();
     </script>
+    <!-- Privacy & Cookie Consent Banner -->
+    <CookieConsent />
   </body>
 </html>

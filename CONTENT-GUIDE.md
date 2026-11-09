@@ -114,6 +114,9 @@ The metadata block between the triple-dashed lines (`---`) at the top of your ar
 | `seoTitle` | string | Optional | Custom `<title>` tag for search engines (defaults to `{title} \| Micro Signal Cosmos`). |
 | `seoDescription`| string | Optional | Custom meta description for search engines and social cards (defaults to `description`). |
 | `references` | object[] | Optional | List of academic citations with `title`, `url`, `source`, and `accessDate` (see [Section 7](#academic--research-references)). |
+| `hasAffiliateLinks` | boolean | Optional | Defaults to `false`. Set to `true` to render FTC-compliant affiliate disclosure box. |
+| `affiliateDisclosure` | string | Optional | Custom affiliate disclosure text override for specific brand partner programs. |
+| `hasAiAssistance` | boolean | Optional | Defaults to `true`. Renders the transparent AI-assisted research & human review notice. |
 
 ---
 

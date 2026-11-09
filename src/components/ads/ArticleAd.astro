@@ -1,0 +1,19 @@
+---
+import AdSlot from './AdSlot.astro';
+
+export interface Props {
+  position: 'above-fold' | 'in-content' | 'post-article';
+  adUnitId?: string;
+  className?: string;
+}
+
+const { position, adUnitId, className = '' } = Astro.props;
+---
+
+<AdSlot
+  slot={position}
+  format={position === 'in-content' ? 'rectangle' : 'horizontal'}
+  adUnitId={adUnitId}
+  className={`my-10 ${className}`}
+/>
+

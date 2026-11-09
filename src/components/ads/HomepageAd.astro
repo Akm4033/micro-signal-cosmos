@@ -1,0 +1,19 @@
+---
+import AdSlot from './AdSlot.astro';
+
+export interface Props {
+  adUnitId?: string;
+  className?: string;
+}
+
+const { adUnitId, className = '' } = Astro.props;
+---
+
+<div class={`container-main my-12 ${className}`}>
+  <AdSlot
+    slot="homepage"
+    format="horizontal"
+    adUnitId={adUnitId}
+  />
+</div>
+
