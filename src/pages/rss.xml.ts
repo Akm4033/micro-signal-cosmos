@@ -6,7 +6,7 @@ export const GET: APIRoute = async (context) => {
   const publishedArticles = await getPublishedArticles();
 
   // Determine site base URL (from astro.config.mjs `site` property if configured, defaulting to production canonical)
-  const siteUrl = (context.site ? context.site.href.replace(/\/$/, '') : '') || 'https://microsignalcosmos.com';
+  const siteUrl = (context.site ? context.site.href.replace(/\/$/, '') : '') || process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev';
   const channelLink = siteUrl;
   const feedSelfLink = `${siteUrl}/rss.xml`;
 

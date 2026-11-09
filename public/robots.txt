@@ -3,4 +3,4 @@ Allow: /
 Disallow: /404
 Disallow: /404.html
 
-Sitemap: https://microsignalcosmos.com/sitemap.xml
+Sitemap: https://micro-signal-cosmos.pages.dev/sitemap.xml

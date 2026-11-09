@@ -181,13 +181,14 @@ function verifyPassword(password, hash, salt) {
   return verify === hash;
 }
 
-// Ensure default admin user exists
+// Ensure default admin user exists (Local offline studio only - never exposed to public edge)
 function ensureDefaultAdmin() {
   const checkUser = db.prepare('SELECT id FROM users WHERE username = ?');
   const existing = checkUser.get('admin');
 
   if (!existing) {
-    const adminPassword = process.env.ADMIN_PASSWORD || 'Cosmos@Editorial2026!';
+    const isCustomPassword = Boolean(process.env.ADMIN_PASSWORD);
+    const adminPassword = process.env.ADMIN_PASSWORD || crypto.randomBytes(16).toString('hex');
     const { hash, salt } = hashPassword(adminPassword);
     const userId = crypto.randomUUID();
     const now = new Date().toISOString();
@@ -197,7 +198,11 @@ function ensureDefaultAdmin() {
       VALUES (?, ?, ?, ?, 'admin', ?)
     `);
     insertUser.run(userId, 'admin', hash, salt, now);
-    console.log('[Studio DB] Default administrator initialized: admin');
+    if (!isCustomPassword) {
+      console.log('[Studio DB Security Notice] ADMIN_PASSWORD was not specified in .env. A secure one-time local password was generated:', adminPassword);
+    } else {
+      console.log('[Studio DB] Default administrator initialized: admin');
+    }
   }
 }
 
