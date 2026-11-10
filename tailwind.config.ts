@@ -6,19 +6,34 @@ export default {
   theme: {
     extend: {
       colors: {
-        // CURION Premium Light-First Design System Tokens
-        main: '#F8FAFC',
-        card: '#FFFFFF',
-        'border-default': '#E2E8F0',
-        'footer-bg': '#111827',
+        // CURION Midnight & Light Editorial Design System Tokens
+        main: 'var(--bg-main, #05070E)',
+        card: 'var(--bg-card, #0B101D)',
+        surface: 'var(--bg-surface, #0B101D)',
+        elevated: 'var(--bg-elevated, #111827)',
+        'border-default': 'var(--border-color, rgba(255, 255, 255, 0.08))',
+        'footer-bg': 'var(--footer-bg, #030509)',
+        cosmic: {
+          base: '#05070E',
+          surface: '#0B101D',
+          elevated: '#111827',
+          border: 'rgba(255, 255, 255, 0.08)',
+          'border-subtle': 'rgba(255, 255, 255, 0.05)',
+        },
+        electric: {
+          blue: '#3B82F6',
+          hover: '#60A5FA',
+          light: 'rgba(59, 130, 246, 0.14)',
+          glow: 'rgba(59, 130, 246, 0.25)',
+        },
         curion: {
-          blue: '#2563EB',
-          'blue-hover': '#1D4ED8',
-          'blue-light': '#EFF6FF',
-          cyan: '#0891B2',
-          'cyan-hover': '#0E7490',
-          'cyan-light': '#ECFEFF',
-          dark: '#111827',
+          blue: '#3B82F6',
+          'blue-hover': '#60A5FA',
+          'blue-light': 'rgba(59, 130, 246, 0.14)',
+          cyan: '#22D3EE',
+          'cyan-hover': '#38BDF8',
+          'cyan-light': 'rgba(34, 211, 238, 0.15)',
+          dark: '#0B101D',
         },
         neutral: {
           50: '#F8FAFC',
@@ -90,6 +105,8 @@ export default {
       boxShadow: {
         editorial: '0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03)',
         'editorial-hover': '0 10px 25px -5px rgba(37,99,235,0.08), 0 8px 10px -6px rgba(0,0,0,0.04)',
+        midnight: '0 12px 28px -6px rgba(0, 0, 0, 0.45)',
+        'electric-glow': '0 0 25px rgba(59, 130, 246, 0.25)',
       },
     },
   },
