@@ -15,7 +15,7 @@
     --bg-subtle: #F1F5F9;
     --text-primary: #0F172A;
     --text-secondary: #475569;
-    --text-muted: #94A3B8;
+    --text-muted: #64748B;
     --brand-primary: #2563EB;
     --brand-primary-hover: #1D4ED8;
     --brand-primary-light: #EFF6FF;
@@ -37,7 +37,7 @@
     --bg-subtle: #111827;
     --text-primary: #F8FAFC;
     --text-secondary: #94A3B8;
-    --text-muted: #64748B;
+    --text-muted: #94A3B8;
     --brand-primary: #3B82F6;
     --brand-primary-hover: #60A5FA;
     --brand-primary-light: rgba(59, 130, 246, 0.14);
@@ -51,9 +51,33 @@
   }
 
   html {
-    scroll-behavior: smooth;
     max-width: 100%;
     overflow-x: hidden;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    .card-editorial:hover, .card-midnight:hover,
+    .btn-primary:hover, .btn-3d-primary:hover, .btn-curion-primary:hover, .btn-electric:hover,
+    .btn-ghost:hover, .btn-secondary:hover, .btn-3d-secondary:hover, .btn-curion-secondary:hover {
+      transform: none !important;
+    }
+
+    #reading-progress-bar {
+      transition: none !important;
+    }
   }
 
   body {
@@ -74,9 +98,8 @@
   }
 
   :focus-visible {
-    outline: none;
-    ring: 2px solid #2563EB;
-    ring-offset: 2px;
+    outline: 2px solid #3B82F6;
+    outline-offset: 2px;
   }
 
   /* Reading progress bar */
