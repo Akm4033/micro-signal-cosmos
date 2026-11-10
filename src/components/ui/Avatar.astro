@@ -16,7 +16,7 @@ const sizeClasses = {
 const classes = `inline-flex items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary font-bold ${sizeClasses[size]} ${className}`;
 ---
 {src ? (
-  <img src={src} alt={alt || ''} class={`rounded-full object-cover ${sizeClasses[size]} ${className}`} {...rest} />
+  <img src={src} alt={alt || ''} loading="lazy" decoding="async" class={`rounded-full object-cover ${sizeClasses[size]} ${className}`} {...rest} />
 ) : (
   <span class={classes} {...rest}>{initials}</span>
 )}

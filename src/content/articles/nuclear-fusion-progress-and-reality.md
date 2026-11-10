@@ -1,6 +1,6 @@
 ---
 title: "Nuclear Fusion: Engineering the Star in the Jar"
-description: "A technical evaluation of controlled thermonuclear fusion: magnetic confinement tokamaks, inertial confinement laser breakthroughs, high-temperature REBCO superconductors, and the commercial road ahead."
+description: "A technical evaluation of controlled fusion: tokamak magnetic confinement, laser ignition breakthroughs, high-temperature REBCO magnets, and commercial scale."
 logo: "fusion"
 slug: "nuclear-fusion-progress-and-reality"
 publishDate: "2026-11-09T08:00:00Z"

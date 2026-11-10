@@ -1,6 +1,6 @@
 ---
 title: "How LLMs Actually Work: Under the Hood of the Transformer Architecture"
-description: "A rigorous mathematical and algorithmic explanation of modern decoder-only transformers: self-attention, rotary positional embeddings (RoPE), SwiGLU activations, and decoding heuristics."
+description: "A rigorous mathematical explanation of decoder-only transformers: self-attention mechanisms, RoPE positional embeddings, SwiGLU activations, and KV caching."
 logo: "transformer"
 slug: "how-llms-actually-work"
 publishDate: "2026-11-06T08:00:00Z"

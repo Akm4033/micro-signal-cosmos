@@ -1,6 +1,6 @@
 ---
 title: "Choosing a Database in 2026: A Pragmatic Systems Engineering Guide"
-description: "A comprehensive decision framework for modern data architectures: PostgreSQL extensions, SQLite at the edge, serverless autoscaling, vector search engines, and real-time columnar OLAP."
+description: "A pragmatic decision framework for data architectures: PostgreSQL extensions, edge SQLite, serverless autoscaling, vector retrieval, and columnar OLAP."
 logo: "database"
 slug: "choosing-a-database-in-2026"
 publishDate: "2026-11-09T09:30:00Z"

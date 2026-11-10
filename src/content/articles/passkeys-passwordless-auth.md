@@ -1,6 +1,6 @@
 ---
 title: "Passkeys: The Practical Engineering Guide to Passwordless Authentication"
-description: "A deep dive into FIDO2, WebAuthn, and asymmetric public-key authentication: how passkeys eliminate phishing, the difference between device-bound and synced keys, and architectural migration flows."
+description: "A practical engineering guide to FIDO2 and WebAuthn: how passkeys eliminate phishing, device-bound vs. synced credentials, and migration architectures."
 logo: "key"
 slug: "passkeys-passwordless-auth"
 publishDate: "2026-11-09T09:00:00Z"

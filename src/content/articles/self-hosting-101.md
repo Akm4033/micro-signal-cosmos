@@ -1,6 +1,6 @@
 ---
 title: "Self-Hosting 101: Modern Production Infrastructure on a Budget"
-description: "A production-tested blueprint for self-hosting developer services: Docker Compose orchestration, Caddy reverse proxy with automated TLS, Tailscale overlay networking, and restic backups."
+description: "A production-tested blueprint for self-hosting: Docker Compose orchestration, Caddy automated TLS reverse proxies, Tailscale overlay mesh, and restic backups."
 logo: "server"
 slug: "self-hosting-101"
 publishDate: "2026-11-04T08:00:00Z"

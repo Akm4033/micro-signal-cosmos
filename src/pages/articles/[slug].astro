@@ -92,9 +92,9 @@ const relatedForProps = relatedArticlesData.map((a) => ({
 }));
 
 // Page Title & Meta Description
-const pageTitle = article.data.seoTitle
-  ? `${article.data.seoTitle} | CURION`
-  : `${article.data.title} | CURION`;
+const rawSeoTitle = article.data.seoTitle || article.data.title;
+const cleanSeoTitle = rawSeoTitle.replace(/\s*\|\s*CURION\s*$/i, '');
+const pageTitle = `${cleanSeoTitle} | CURION`;
 const pageDescription = article.data.seoDescription || article.data.description;
 
 const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
@@ -166,7 +166,8 @@ const breadcrumbSchema = {
 <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbSchema)} />
 
 <ArticleLayout
-  title={pageTitle}
+  title={article.data.title}
+  seoTitle={pageTitle}
   description={pageDescription}
   author={article.data.author}
   authorName={author.name}

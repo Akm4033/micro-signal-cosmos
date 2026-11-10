@@ -1,6 +1,6 @@
 ---
 title: "Zero-Copy Networking in Linux with io_uring and eBPF"
-description: "Building and operating high-throughput systems requires understanding the exact boundary where software abstractions meet physical hardware. When stan..."
+description: "Architecting zero-copy Linux networking: eliminate kernel-user space memory copies, reduce CPU context switches, and maximize throughput with io_uring and eBPF."
 logo: "networking"
 publishDate: "2026-11-09T10:39:07.360Z"
 updatedDate: "2026-11-09T10:39:07.360Z"
@@ -14,8 +14,8 @@ featured: false
 draft: false
 coverImage: "/og/zero-copy-networking-in-linux-with-io-uring-and-ebpf.svg"
 coverImageAlt: "Technical illustration for Zero-Copy Networking in Linux with io_uring and eBPF"
-seoTitle: "Zero-Copy Networking in Linux with io_uring and eB | CURION"
-seoDescription: "Building and operating high-throughput systems requires understanding the exact boundary where software abstractions meet physical hardware. When stan..."
+seoTitle: "Zero-Copy Networking in Linux with io_uring and eBPF"
+seoDescription: "Architecting zero-copy Linux networking: eliminate kernel-user space memory copies, reduce CPU context switches, and maximize throughput with io_uring and eBPF."
 hasAffiliateLinks: false
 hasAiAssistance: true
 references:

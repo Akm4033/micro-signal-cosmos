@@ -1,6 +1,6 @@
 ---
 title: "Build Your Own RAG from Scratch: A Production Engineering Guide"
-description: "How to engineer a production Retrieval-Augmented Generation pipeline: semantic chunking, dense embeddings, BM25 hybrid search, cross-encoder reranking, and hallucination reduction."
+description: "Engineer a production RAG pipeline: semantic chunking, dense embeddings, BM25 hybrid search, cross-encoder reranking, and hallucination mitigation."
 logo: "rag"
 slug: "build-your-own-rag-from-scratch"
 publishDate: "2026-11-07T08:00:00Z"

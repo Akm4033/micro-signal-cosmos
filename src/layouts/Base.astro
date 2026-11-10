@@ -9,9 +9,10 @@ interface Props {
   author?: string;
   publishedTime?: string;
   modifiedTime?: string;
+  noindex?: boolean;
 }
 
-const { title, description, canonical, ogImage, author, publishedTime, modifiedTime } = Astro.props;
+const { title, description, canonical, ogImage, author, publishedTime, modifiedTime, noindex = false } = Astro.props;
 const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const canonicalUrl = canonical || (siteUrl + Astro.url.pathname);
 const ogImageUrl = ogImage || '/favicon.svg';
@@ -51,7 +52,11 @@ function isNavActive(href: string) {
       --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
     }
   </style>
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  {noindex ? (
+    <meta name="robots" content="noindex, nofollow">
+  ) : (
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  )}
   <link rel="canonical" href={canonicalUrl}>
   <meta property="og:site_name" content="CURION">
   <meta property="og:locale" content="en_US">

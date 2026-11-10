@@ -471,6 +471,7 @@
     height: auto;
     border-radius: 0.75rem;
     margin: 2rem 0;
+    content-visibility: auto;
   }
 
   /* Code Copy Button */

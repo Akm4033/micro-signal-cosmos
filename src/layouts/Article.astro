@@ -6,6 +6,7 @@ import { getAuthor } from '../data/authors';
 
 interface Props {
   title: string;
+  seoTitle?: string;
   description: string;
   author: string;
   authorName?: string;
@@ -27,6 +28,7 @@ interface Props {
 
 const {
   title,
+  seoTitle,
   description,
   author,
   category,
@@ -63,9 +65,15 @@ const variantMap: Record<string, 'tech' | 'science' | 'ai' | 'devtools'> = {
 const categoryVariant = catVariantProp || variantMap[category.toLowerCase().replace(/\s+/g, '-')] || 'tech';
 const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const resolvedCanonical = canonical || `${siteUrl}/articles/${Astro.params.slug || ''}/`;
+
+// Compute clean headline for visible <h1> (without brand suffix)
+const cleanHeadline = title.replace(/\s*\|\s*CURION\s*$/i, '');
+// Compute clean page title for <title> in <head> (ensures exactly one "| CURION" suffix)
+const cleanSeoTitle = (seoTitle || cleanHeadline).replace(/\s*\|\s*CURION\s*$/i, '');
+const fullPageTitle = `${cleanSeoTitle} | CURION`;
 ---
 
-<Base title={title} description={description} canonical={resolvedCanonical} ogImage={ogImage} author={author} publishedTime={publishedTime} modifiedTime={updatedTime}>
+<Base title={fullPageTitle} description={description} canonical={resolvedCanonical} ogImage={ogImage} author={author} publishedTime={publishedTime} modifiedTime={updatedTime}>
   <div class="container-wide py-10 lg:py-16">
     <article class="max-w-5xl mx-auto">
       <header class="article-header mb-8">
@@ -86,12 +94,12 @@ const resolvedCanonical = canonical || `${siteUrl}/articles/${Astro.params.slug 
           <span aria-hidden="true" class="text-slate-300 dark:text-slate-600">&bull;</span>
           <span class="text-sm text-slate-500 dark:text-slate-400">{readingTime}</span>
         </div>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">{title}</h1>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">{cleanHeadline}</h1>
         <p class="mt-4 text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-300 max-w-2xl">{description}</p>
         <div class="mt-6 flex items-center gap-4 author-byline">
           <div class="w-11 h-11 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-sm border border-blue-200 shadow-2xs dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-900 overflow-hidden">
             {authorAvatar ? (
-              <img src={authorAvatar} alt={authorName} class="w-full h-full object-cover" />
+              <img src={authorAvatar} alt={authorName} width="44" height="44" decoding="async" class="w-full h-full object-cover" />
             ) : (
               authorData.initials || author.charAt(0).toUpperCase()
             )}
@@ -134,7 +142,7 @@ const resolvedCanonical = canonical || `${siteUrl}/articles/${Astro.params.slug 
           <div class="author-card p-5 rounded-xl border border-slate-200 bg-slate-50 dark:border-white/[0.08] dark:bg-[#0B101D]">
             <div class="flex items-start gap-3">
               <div class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm shrink-0 overflow-hidden dark:bg-blue-950/60 dark:text-blue-400 border border-blue-200/60 dark:border-blue-900/60">
-                {authorAvatar ? <img src={authorAvatar} alt={authorName} class="w-full h-full object-cover" /> : authorData.initials}
+                {authorAvatar ? <img src={authorAvatar} alt={authorName} width="40" height="40" loading="lazy" decoding="async" class="w-full h-full object-cover" /> : authorData.initials}
               </div>
               <div>
                 <p class="font-semibold text-slate-900 dark:text-white text-sm">{authorName}</p>
@@ -215,7 +223,7 @@ const resolvedCanonical = canonical || `${siteUrl}/articles/${Astro.params.slug 
       <div class="mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8 dark:border-white/[0.08] dark:bg-[#0B101D]">
         <div class="flex items-start gap-4">
           <div class="w-14 h-14 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg shrink-0 overflow-hidden dark:bg-blue-950/60 dark:text-blue-400 border border-blue-200/60 dark:border-blue-900/60">
-            {authorAvatar ? <img src={authorAvatar} alt={authorName} class="w-full h-full object-cover" /> : authorData.initials}
+            {authorAvatar ? <img src={authorAvatar} alt={authorName} width="56" height="56" loading="lazy" decoding="async" class="w-full h-full object-cover" /> : authorData.initials}
           </div>
           <div>
             <h3 class="font-bold text-slate-900 dark:text-white text-lg">{authorName}</h3>
