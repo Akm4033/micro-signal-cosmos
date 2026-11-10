@@ -11,7 +11,7 @@ const {
 ---
 
 <section
-  class={`newsletter-hero bg-[#101B2D] text-white py-16 sm:py-20 relative overflow-hidden ${className}`}
+  class={`newsletter-hero bg-[#070B14] dark:bg-[#030509] border-t border-b border-slate-200 dark:border-white/[0.08] text-white py-16 sm:py-20 relative overflow-hidden ${className}`}
   aria-labelledby="newsletter-hero-heading"
 >
   <!-- Background Fine Technical Grid -->
@@ -29,8 +29,8 @@ const {
   <div class="container-main text-center">
     <div class="mx-auto max-w-2xl">
       <!-- Badge -->
-      <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-500/10 px-3.5 py-1 text-xs font-bold tracking-widest text-sky-300 uppercase">
-        <span class="h-1.5 w-1.5 rounded-full bg-[#0ea5e9]"></span>
+      <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/10 px-3.5 py-1 text-xs font-bold tracking-widest text-blue-300 uppercase font-mono text-[10.5px]">
+        <span class="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse"></span>
         <span>CURION Knowledge Syndication</span>
       </div>
 
@@ -60,7 +60,7 @@ const {
         <a
           href="/rss.xml"
           target="_blank"
-          class="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-slate-700 bg-slate-800/80 text-xs font-bold uppercase tracking-wider text-slate-200 hover:bg-slate-700 hover:text-white transition-all text-center inline-flex items-center justify-center gap-1.5"
+          class="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-white/[0.1] bg-white/[0.04] text-xs font-bold uppercase tracking-wider text-slate-200 hover:bg-white/[0.08] hover:text-white transition-all text-center inline-flex items-center justify-center gap-1.5 font-mono"
         >
           <span>Open /rss.xml</span>
           <span aria-hidden="true">&rarr;</span>
@@ -68,8 +68,8 @@ const {
       </div>
 
       <!-- Lead Magnet Callout Card -->
-      <div class="mt-6 rounded-xl border border-sky-500/25 bg-slate-900/60 p-3.5 text-xs text-sky-200 flex items-center justify-center gap-2">
-        <span class="font-bold text-white uppercase tracking-wider text-[11px] bg-[#0ea5e9]/20 px-2 py-0.5 rounded">Free Access</span>
+      <div class="mt-6 rounded-xl border border-blue-500/25 bg-white/[0.03] p-3.5 text-xs text-blue-200 flex items-center justify-center gap-2">
+        <span class="font-bold text-white uppercase tracking-wider text-[11px] bg-blue-500/20 px-2 py-0.5 rounded font-mono">Free Access</span>
         <span>Includes the <strong class="text-white">{leadMagnet}</strong> directly in our open archive.</span>
       </div>
 
