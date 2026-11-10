@@ -115,12 +115,12 @@ export const AFFILIATE_TOOLS: AffiliateTool[] = [
     tag: 'Privacy Analytics',
   },
   {
-    id: 'buttondown',
-    name: 'Buttondown',
+    id: 'miniflux',
+    name: 'Miniflux',
     category: 'Developer Productivity & Security',
-    description: 'Minimalist, privacy-friendly newsletter software for technical writers and developers with Markdown first-class.',
-    link: 'https://buttondown.email/?ref=microsignal',
-    tag: 'Email & Newsletter',
+    description: 'Minimalist, open-source, opinionated feed reader written in Go. Free, self-hostable, and fast.',
+    link: 'https://miniflux.app/',
+    tag: 'RSS & Syndication',
   },
   {
     id: 'raycast',

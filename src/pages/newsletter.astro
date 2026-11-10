@@ -3,11 +3,12 @@ import Base from '../layouts/Base.astro';
 
 const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const newsletterUrl = `${siteUrl}/newsletter/`;
+const rssUrl = `${siteUrl}/rss.xml`;
 ---
 
 <Base
-  title="CURION Briefings: Systems & AI Newsletter | CURION"
-  description="Weekly technical deep dives into browser internals, LLM architectures, distributed databases, and astrophysics. Free, zero tracking, unsubscribe anytime."
+  title="CURION Briefings: Systems & AI Syndication | CURION"
+  description="Weekly technical deep dives into browser internals, LLM architectures, distributed databases, and astrophysics. Free, zero tracking, open RSS 2.0 syndication."
   canonical={newsletterUrl}
   ogImage="/favicon.svg"
 >
@@ -21,7 +22,7 @@ const newsletterUrl = `${siteUrl}/newsletter/`;
             <a href="/" class="transition-colors hover:text-brand-primary">Home</a>
           </li>
           <li aria-hidden="true" class="text-neutral-400">/</li>
-          <li class="font-semibold text-text-primary" aria-current="page">Newsletter</li>
+          <li class="font-semibold text-text-primary" aria-current="page">Briefings &amp; RSS</li>
         </ol>
       </nav>
 
@@ -30,135 +31,147 @@ const newsletterUrl = `${siteUrl}/newsletter/`;
         
         <div class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3.5 py-1 text-xs font-bold tracking-widest text-brand-primary uppercase shadow-xs dark:border-neutral-700 dark:bg-neutral-800">
           <span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span>
-          <span>CURION BRIEFINGS</span>
+          <span>CURION BRIEFINGS &amp; SYNDICATION</span>
         </div>
 
         <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl lg:text-5xl leading-tight">
-          Engineering &amp; Systems Deep Dives, Every Friday
+          Engineering &amp; Systems Deep Dives, Every Week
         </h1>
 
         <p class="mt-4 text-base sm:text-lg leading-relaxed text-text-secondary">
-          Join engineers, researchers, and systems practitioners receiving one comprehensive architectural breakdown, runnable code, and curated technical analysis each week.
+          Join engineers, researchers, and systems practitioners receiving comprehensive architectural breakdowns, runnable code, and curated scientific analysis. Distributed via open web standards.
         </p>
 
-        <!-- Subscription Form -->
-        <div class="mt-8 rounded-2xl border border-neutral-200 bg-neutral-50 p-6 sm:p-8 dark:border-neutral-700 dark:bg-neutral-800/60">
-          <form
-            action="https://buttondown.email/api/emails/embed-subscribe/microsignalcosmos"
-            method="post"
-            target="popupwindow"
-            onsubmit="window.open('https://buttondown.email/microsignalcosmos', 'popupwindow'); return true;"
-            class="space-y-4"
-          >
-            <div class="space-y-2">
-              <label for="newsletter-email-input" class="block text-xs font-bold uppercase tracking-wider text-text-primary">
-                Your Email Address
-              </label>
-              <input
-                id="newsletter-email-input"
-                type="email"
-                name="email"
-                required
-                placeholder="developer@domain.com"
-                class="input text-base"
-                autocomplete="email"
-              />
-            </div>
-            <input type="hidden" value="1" name="embed" />
-            <button
-              type="submit"
-              class="btn-primary w-full text-base py-3.5 shadow-sm"
-            >
-              <span>Subscribe to CURION Briefings</span>
-              <span aria-hidden="true">&rarr;</span>
-            </button>
-            <div class="flex flex-wrap items-center justify-between text-xs text-text-muted pt-2 gap-2">
-              <span class="flex items-center gap-1.5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                Zero tracking pixels
-              </span>
-              <span class="flex items-center gap-1.5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                1-click unsubscribe
-              </span>
-              <span class="flex items-center gap-1.5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                No third-party data sharing
-              </span>
-            </div>
-          </form>
-        </div>
-
-        <!-- Lead Magnets Package -->
-        <div class="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-700">
-          <h2 class="text-lg font-bold text-text-primary mb-2">
-            Included Free: The 5-Part Systems Architecture Starter Pack
-          </h2>
-          <p class="text-sm text-text-secondary mb-6">
-            All new subscribers immediately receive direct download access to our 5 verified technical cheat sheets and templates:
-          </p>
-
-          <div class="grid gap-4 sm:grid-cols-2">
-            <div class="rounded-xl border border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-800">
-              <span class="text-xs font-bold text-brand-primary uppercase">Asset 01</span>
-              <h3 class="font-bold text-sm text-text-primary mt-1">Critical Rendering Path Cheat Sheet</h3>
-              <p class="text-xs text-text-muted mt-1">Blink/Gecko pipeline breakdown with sub-frame profiling benchmarks.</p>
+        <!-- Subscription Channels Grid -->
+        <div class="mt-8 grid gap-6 sm:grid-cols-2">
+          <!-- Channel 1: Open RSS 2.0 (Primary) -->
+          <div class="rounded-2xl border border-blue-200 bg-blue-50/60 p-6 dark:border-blue-900/60 dark:bg-blue-950/40 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 mb-3">
+                <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white font-bold text-xs">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 11a9 9 0 0 1 9 9"></path>
+                    <path d="M4 4a16 16 0 0 1 16 16"></path>
+                    <circle cx="5" cy="19" r="1"></circle>
+                  </svg>
+                </span>
+                <span class="text-xs font-bold uppercase tracking-wider text-blue-700 dark:text-blue-300">Open RSS 2.0 Feed</span>
+              </div>
+              <h2 class="text-base font-bold text-slate-900 dark:text-white">Subscribe via RSS Reader</h2>
+              <p class="mt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Add our feed to Feedly, NetNewsWire, Apple News, Thunderbird, or Miniflux for instant, private reading.
+              </p>
             </div>
 
-            <div class="rounded-xl border border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-800">
-              <span class="text-xs font-bold text-brand-primary uppercase">Asset 02</span>
-              <h3 class="font-bold text-sm text-text-primary mt-1">Production RAG Starter Kit</h3>
-              <p class="text-xs text-text-muted mt-1">Python retrieval engine with semantic chunking and cross-encoder reranking.</p>
+            <div class="mt-6 space-y-2">
+              <button
+                id="copy-main-rss-btn"
+                type="button"
+                class="w-full py-2.5 px-4 rounded-xl bg-blue-600 text-xs font-bold uppercase tracking-wider text-white hover:bg-blue-700 active:translate-y-0.5 transition-all cursor-pointer inline-flex items-center justify-center gap-2"
+              >
+                <span id="copy-main-rss-text">Copy RSS Feed URL</span>
+              </button>
+              <a
+                href="/rss.xml"
+                target="_blank"
+                class="block w-full text-center py-2 px-4 rounded-xl border border-blue-200 bg-white text-xs font-bold text-blue-700 hover:bg-blue-50 dark:border-blue-800 dark:bg-slate-900 dark:text-blue-300 transition-colors"
+              >
+                Open Raw /rss.xml &rarr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Channel 2: Direct Email Subscription -->
+          <div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-800/60 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 mb-3">
+                <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-neutral-700 text-white font-bold text-xs">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                  </svg>
+                </span>
+                <span class="text-xs font-bold uppercase tracking-wider text-text-muted">Direct Email Dispatch</span>
+              </div>
+              <h2 class="text-base font-bold text-slate-900 dark:text-white">Subscribe by Email</h2>
+              <p class="mt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Prefer email dispatches? Send a one-click subscription request to our editorial desk.
+              </p>
             </div>
 
-            <div class="rounded-xl border border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-800">
-              <span class="text-xs font-bold text-brand-primary uppercase">Asset 03</span>
-              <h3 class="font-bold text-sm text-text-primary mt-1">Self-Hosted Bare-Metal Stack</h3>
-              <p class="text-xs text-text-muted mt-1">Docker Compose repo with Caddy, automated TLS, Prometheus, and daily backups.</p>
-            </div>
-
-            <div class="rounded-xl border border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-800">
-              <span class="text-xs font-bold text-brand-primary uppercase">Asset 04</span>
-              <h3 class="font-bold text-sm text-text-primary mt-1">Database Decision Matrix (2026)</h3>
-              <p class="text-xs text-text-muted mt-1">Decision framework comparing PostgreSQL, libSQL/SQLite, DuckDB, and ClickHouse.</p>
-            </div>
-
-            <div class="rounded-xl border border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-800 sm:col-span-2">
-              <span class="text-xs font-bold text-brand-primary uppercase">Asset 05</span>
-              <h3 class="font-bold text-sm text-text-primary mt-1">LLM Token Inference Cost Calculator</h3>
-              <p class="text-xs text-text-muted mt-1">Python notebook calculating KV cache VRAM footprint and vLLM token unit economics.</p>
+            <div class="mt-6">
+              <a
+                href="mailto:editorial@curion.pages.dev?subject=Subscribe%20to%20CURION%20Briefings&body=Please%20add%20my%20email%20address%20to%20the%20CURION%20weekly%20editorial%20dispatch."
+                class="w-full py-2.5 px-4 rounded-xl border border-neutral-300 bg-white text-xs font-bold uppercase tracking-wider text-slate-700 hover:bg-slate-100 dark:border-neutral-600 dark:bg-neutral-800 dark:text-slate-200 transition-colors text-center inline-flex items-center justify-center gap-1.5"
+              >
+                <span>Send Subscription Request</span>
+                <span aria-hidden="true">&rarr;</span>
+              </a>
+              <span class="block mt-2 text-[10px] text-center text-text-muted">Direct to editorial@curion.pages.dev &bull; Zero spam</span>
             </div>
           </div>
         </div>
 
-        <!-- Issue Format Breakdown -->
+        <!-- Privacy & Standards Guarantees -->
+        <div class="mt-8 flex flex-wrap items-center justify-between text-xs text-text-muted pt-4 border-t border-neutral-200 dark:border-neutral-700 gap-3">
+          <span class="flex items-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Zero tracking pixels
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            100% Open RSS 2.0 Web Standard
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            No third-party data sharing
+          </span>
+        </div>
+
+        <!-- Open Architecture Starter Pack (Direct Access, No Paywall) -->
         <div class="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-700">
-          <h2 class="text-lg font-bold text-text-primary mb-4">
-            What Every Friday Edition Delivers
-          </h2>
-          <ul class="space-y-3 text-sm text-text-secondary">
-            <li class="flex items-start gap-3">
-              <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary font-bold text-xs mt-0.5">1</span>
-              <div>
-                <strong class="text-text-primary">One Core Architecture Breakdown:</strong>
-                Deep dive into a system mechanism (e.g., CPU cache line contention, TLS 1.3 key exchange, or vector index quantization) with diagrams and runnable snippets.
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary font-bold text-xs mt-0.5">2</span>
-              <div>
-                <strong class="text-text-primary">Production Tooling &amp; Infrastructure:</strong>
-                Real-world configuration files, self-hosted deployment blueprints, and cost analysis from live cloud workloads.
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary font-bold text-xs mt-0.5">3</span>
-              <div>
-                <strong class="text-text-primary">Research Paper of the Week:</strong>
-                Plain-English summary of an essential arXiv paper or systems RFC with practical takeaways for practitioners.
-              </div>
-            </li>
-          </ul>
+          <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+            <div>
+              <h2 class="text-lg font-bold text-text-primary">
+                Open Access: 5-Part Systems Architecture Starter Pack
+              </h2>
+              <p class="text-xs sm:text-sm text-text-secondary mt-0.5">
+                Freely accessible directly in our articles archive — zero email gates or paywalls:
+              </p>
+            </div>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <a href="/articles/how-browsers-actually-render-a-page/" class="group block rounded-xl border border-neutral-200 bg-white p-4 hover:border-blue-400 hover:shadow-xs dark:border-neutral-700 dark:bg-neutral-800 transition-all">
+              <span class="text-[10px] font-bold text-brand-primary uppercase">Guide 01</span>
+              <h3 class="font-bold text-sm text-text-primary group-hover:text-blue-600 transition-colors mt-1">Critical Rendering Path Breakdown</h3>
+              <p class="text-xs text-text-muted mt-1">Blink &amp; Gecko pipeline from raw bytes to GPU raster tiles.</p>
+            </a>
+
+            <a href="/articles/build-your-own-rag-from-scratch/" class="group block rounded-xl border border-neutral-200 bg-white p-4 hover:border-blue-400 hover:shadow-xs dark:border-neutral-700 dark:bg-neutral-800 transition-all">
+              <span class="text-[10px] font-bold text-brand-primary uppercase">Guide 02</span>
+              <h3 class="font-bold text-sm text-text-primary group-hover:text-blue-600 transition-colors mt-1">Production RAG Architecture</h3>
+              <p class="text-xs text-text-muted mt-1">Semantic chunking, dense embeddings, and cross-encoder rerankers.</p>
+            </a>
+
+            <a href="/articles/self-hosting-101/" class="group block rounded-xl border border-neutral-200 bg-white p-4 hover:border-blue-400 hover:shadow-xs dark:border-neutral-700 dark:bg-neutral-800 transition-all">
+              <span class="text-[10px] font-bold text-brand-primary uppercase">Guide 03</span>
+              <h3 class="font-bold text-sm text-text-primary group-hover:text-blue-600 transition-colors mt-1">Self-Hosted Production Stack</h3>
+              <p class="text-xs text-text-muted mt-1">Linux edge gateway, automated TLS, WireGuard, and Docker fleet.</p>
+            </a>
+
+            <a href="/articles/choosing-a-database-in-2026/" class="group block rounded-xl border border-neutral-200 bg-white p-4 hover:border-blue-400 hover:shadow-xs dark:border-neutral-700 dark:bg-neutral-800 transition-all">
+              <span class="text-[10px] font-bold text-brand-primary uppercase">Guide 04</span>
+              <h3 class="font-bold text-sm text-text-primary group-hover:text-blue-600 transition-colors mt-1">Database Decision Framework (2026)</h3>
+              <p class="text-xs text-text-muted mt-1">PostgreSQL, SQLite at the edge, serverless auto-scale, and OLAP.</p>
+            </a>
+
+            <a href="/articles/training-vs-inference-economics/" class="group block rounded-xl border border-neutral-200 bg-white p-4 hover:border-blue-400 hover:shadow-xs dark:border-neutral-700 dark:bg-neutral-800 transition-all sm:col-span-2">
+              <span class="text-[10px] font-bold text-brand-primary uppercase">Guide 05</span>
+              <h3 class="font-bold text-sm text-text-primary group-hover:text-blue-600 transition-colors mt-1">LLM Training vs. Inference Economics</h3>
+              <p class="text-xs text-text-muted mt-1">Unit economics crossover curves, fixed CAPEX to token OPEX analysis.</p>
+            </a>
+          </div>
         </div>
 
       </div>
@@ -167,3 +180,25 @@ const newsletterUrl = `${siteUrl}/newsletter/`;
   </main>
 </Base>
 
+<script is:inline>
+  (function() {
+    const btn = document.getElementById('copy-main-rss-btn');
+    const text = document.getElementById('copy-main-rss-text');
+    if (!btn || !text) return;
+
+    btn.addEventListener('click', async () => {
+      const feedUrl = window.location.origin + '/rss.xml';
+      try {
+        await navigator.clipboard.writeText(feedUrl);
+        text.textContent = 'Feed URL Copied! ✓';
+        btn.classList.add('bg-emerald-600');
+        setTimeout(() => {
+          text.textContent = 'Copy RSS Feed URL';
+          btn.classList.remove('bg-emerald-600');
+        }, 2500);
+      } catch (err) {
+        window.open('/rss.xml', '_blank');
+      }
+    });
+  })();
+</script>

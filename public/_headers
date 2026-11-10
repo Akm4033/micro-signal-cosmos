@@ -1,5 +1,5 @@
 # =========================================================================
-# MICRO SIGNAL COSMOS — HTTP HEADERS & CACHING POLICY
+# CURION — HTTP HEADERS, SECURITY & CACHING POLICY
 # Supported by Cloudflare Pages, Netlify, and compatible static CDN engines
 # =========================================================================
 
@@ -26,12 +26,13 @@
   Cache-Control: public, max-age=86400, must-revalidate
   Content-Type: text/plain; charset=UTF-8
 
-# 4. Global Security Headers for all HTML and static responses
+# 4. Global Security Headers for all HTML and static responses (Zero Third-Party Dependency)
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
   X-XSS-Protection: 1; mode=block
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com https://buttondown.email; frame-ancestors 'none'; base-uri 'self';
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self';
+
 

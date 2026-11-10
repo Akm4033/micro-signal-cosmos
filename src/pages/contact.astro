@@ -3,11 +3,16 @@ import Base from '../layouts/Base.astro';
 
 const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const contactUrl = `${siteUrl}/contact/`;
+
+// Verified production contact email
+const contactEmail = 'editorial@curion.pages.dev';
+const correctionsEmail = 'editorial@curion.pages.dev';
+const hasContactEmail = Boolean(contactEmail && contactEmail.includes('@'));
 ---
 
 <Base
-  title="Contact Desk | CURION"
-  description="Get in touch with the CURION research team for article feedback, technical errata, rapid corrections, or collaboration inquiries."
+  title="Contact &amp; Errata Desk | CURION"
+  description="Contact the CURION research desk for article feedback, peer review errata, technical inquiries, or collaboration."
   canonical={contactUrl}
 >
   <main id="main-content" class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-neutral-900/50 dark:border-neutral-800">
@@ -25,167 +30,200 @@ const contactUrl = `${siteUrl}/contact/`;
       </nav>
 
       <!-- Hero Header -->
-      <header class="mb-12">
+      <header class="mb-10">
         <div class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3.5 py-1 text-xs font-bold tracking-widest text-brand-primary uppercase shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
           <span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span>
-          <span>Contact &amp; Errata</span>
+          <span>CURION Editorial Desk</span>
         </div>
         <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl">
-          Get in Touch
+          Contact &amp; Technical Errata
         </h1>
         <p class="mt-4 text-base sm:text-lg leading-relaxed text-text-secondary">
-          Have feedback on an investigation, found code errata, or want to suggest a technical topic? We respond promptly.
+          Have feedback on a systems architecture breakdown, discovered code errata, or wish to propose a research investigation? We review all submissions.
         </p>
       </header>
 
       <!-- Direct Contact Channels -->
-      <div class="grid gap-6 sm:grid-cols-2 mb-12">
+      <div class="grid gap-6 sm:grid-cols-2 mb-10">
         <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
-          <h2 class="text-sm font-bold uppercase tracking-wider text-text-muted mb-2">Editorial Desk</h2>
-          <p class="text-sm text-text-secondary">Direct research and correction inquiries:</p>
-          <a href="mailto:editorial@curion.pages.dev" class="mt-3 inline-block font-semibold text-brand-primary hover:underline">
-            editorial@curion.pages.dev
-          </a>
+          <h2 class="text-xs font-bold uppercase tracking-wider text-text-muted mb-2">Editorial &amp; Research Desk</h2>
+          <p class="text-xs sm:text-sm text-text-secondary leading-relaxed">Direct editorial inquiries, topic submissions, and peer review:</p>
+          {hasContactEmail ? (
+            <a href={`mailto:${contactEmail}`} class="mt-3 inline-block font-semibold text-brand-primary hover:underline text-sm">
+              {contactEmail}
+            </a>
+          ) : (
+            <span class="mt-3 inline-block font-mono text-xs text-slate-500">Available via message composer below</span>
+          )}
         </div>
+
         <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
-          <h2 class="text-sm font-bold uppercase tracking-wider text-text-muted mb-2">Code Errata &amp; Issues</h2>
-          <p class="text-sm text-text-secondary">Submit public corrections or bug reports via GitHub:</p>
-          <a href="https://github.com/Akm4033/micro-signal-cosmos/issues" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block font-semibold text-brand-primary hover:underline">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-text-muted mb-2">Public Issue Tracker</h2>
+          <p class="text-xs sm:text-sm text-text-secondary leading-relaxed">Submit verified errata, typos, or reproducible bugs via GitHub:</p>
+          <a href="https://github.com/Akm4033/micro-signal-cosmos/issues" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block font-semibold text-brand-primary hover:underline text-sm">
             GitHub Issues &rarr;
           </a>
         </div>
       </div>
 
-      <!-- Contact Form -->
+      <!-- Contact Message Composer (Zero Third-Party Dependency) -->
       <div class="rounded-2xl border border-neutral-200 bg-white p-6 sm:p-10 shadow-xs dark:border-neutral-700 dark:bg-neutral-900">
-        <h2 class="text-xl font-bold text-text-primary mb-2">Send a Message</h2>
-        <p class="text-xs text-text-secondary mb-6">All submissions are validated on the server with active spam protection.</p>
+        <div class="flex items-center justify-between mb-2">
+          <h2 class="text-xl font-bold text-text-primary">Contact Message Composer</h2>
+          <span class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">100% Private</span>
+        </div>
+        <p class="text-xs text-text-secondary mb-6 leading-relaxed">
+          Compose your message below. You can copy the formatted draft to your clipboard with one click, or send it directly using your preferred email client.
+        </p>
 
-        <!-- Feedback Notification Box -->
-        <div id="contact-status" class="hidden mb-6 rounded-xl p-4 text-xs font-semibold leading-relaxed transition-all" role="alert"></div>
+        <!-- Dynamic Feedback Notification Box -->
+        <div id="composer-status" class="hidden mb-6 rounded-xl p-4 text-xs font-semibold leading-relaxed transition-all" role="alert"></div>
 
-        <form
-          id="contact-form"
-          action="/api/contact"
-          method="POST"
-          class="space-y-6"
-        >
-          <!-- Anti-spam Honeypot (invisible to real users) -->
-          <input type="text" name="_gotcha" id="contact-gotcha" style="display:none !important;" tabindex="-1" autocomplete="off" aria-hidden="true" />
-
-          <div class="space-y-2">
-            <label for="contact-name" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Your Name <span class="text-red-500">*</span></label>
-            <input type="text" id="contact-name" name="name" required minlength="2" placeholder="Dr. Jane Doe" class="input" />
-          </div>
-          <div class="space-y-2">
-            <label for="contact-email" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Email Address <span class="text-red-500">*</span></label>
-            <input type="email" id="contact-email" name="email" required placeholder="jane@example.com" class="input" />
-          </div>
-          <div class="space-y-2">
-            <label for="contact-subject" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Subject <span class="text-red-500">*</span></label>
-            <input type="text" id="contact-subject" name="subject" required minlength="3" placeholder="Correction: How Browsers Render / Topic Request" class="input" />
-          </div>
-          <div class="space-y-2">
-            <label for="contact-message" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Message <span class="text-red-500">*</span></label>
-            <textarea id="contact-message" name="message" rows="5" required minlength="10" maxlength="5000" placeholder="Your message, code snippet errata, or inquiry..." class="input"></textarea>
-            <span class="text-[10px] text-text-muted block text-right">Min 10 characters</span>
+        <form id="contact-composer-form" class="space-y-5">
+          <div class="space-y-1.5">
+            <label for="composer-name" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Your Name <span class="text-blue-600">*</span></label>
+            <input type="text" id="composer-name" name="name" required minlength="2" placeholder="Dr. Jane Doe" class="input" />
           </div>
 
-          <button id="contact-submit-btn" type="submit" class="btn-primary w-full cursor-pointer transition-all">
-            <span id="contact-btn-text">Send Message</span>
-            <span id="contact-btn-icon" aria-hidden="true">&rarr;</span>
-          </button>
+          <div class="space-y-1.5">
+            <label for="composer-email" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Your Email Address <span class="text-blue-600">*</span></label>
+            <input type="email" id="composer-email" name="email" required placeholder="jane@example.com" class="input" />
+          </div>
+
+          <div class="space-y-1.5">
+            <label for="composer-subject" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Subject / Topic <span class="text-blue-600">*</span></label>
+            <input type="text" id="composer-subject" name="subject" required minlength="3" placeholder="Errata: How Browsers Render / New Investigation Proposal" class="input" />
+          </div>
+
+          <div class="space-y-1.5">
+            <label for="composer-message" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Message Content <span class="text-blue-600">*</span></label>
+            <textarea id="composer-message" name="message" rows="5" required minlength="10" maxlength="5000" placeholder="Please describe the correction, reference paper, or inquiry in detail..." class="input"></textarea>
+            <span class="text-[10px] text-text-muted block text-right">Minimum 10 characters</span>
+          </div>
+
+          <!-- Dual Action Buttons: Copy to Clipboard (Primary) & Open Email Client (Secondary) -->
+          <div class="pt-2 flex flex-col sm:flex-row gap-3">
+            <button
+              id="composer-copy-btn"
+              type="button"
+              class="btn-primary flex-1 py-3 cursor-pointer text-xs uppercase tracking-wider font-bold inline-flex items-center justify-center gap-2"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+              </svg>
+              <span id="composer-copy-text">Copy Message to Clipboard</span>
+            </button>
+
+            {hasContactEmail && (
+              <button
+                id="composer-mailto-btn"
+                type="button"
+                class="flex-1 py-3 px-4 rounded-xl border border-slate-300 bg-slate-50 text-slate-800 hover:bg-slate-100 text-xs uppercase tracking-wider font-bold transition-all inline-flex items-center justify-center gap-2 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 cursor-pointer"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M22 17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.5C2 7 4 5 6.5 5H18c2.2 0 4 1.8 4 4v8Z"></path>
+                  <polyline points="15,9 18,9 18,11"></polyline>
+                  <path d="m6.5 5 5.5 5 5.5-5"></path>
+                </svg>
+                <span>Open in Email Client</span>
+              </button>
+            )}
+          </div>
         </form>
+
+        <!-- Formatted Preview Accordion (Collapsible) -->
+        <details class="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-3.5 text-xs text-slate-600 dark:border-slate-800 dark:bg-slate-800/50 dark:text-slate-400">
+          <summary class="cursor-pointer font-semibold text-slate-700 dark:text-slate-300 select-none">
+            View formatted draft template
+          </summary>
+          <pre id="composer-preview" class="mt-3 p-3 rounded-lg bg-white border border-slate-200 font-mono text-[11px] text-slate-800 overflow-x-auto dark:bg-slate-900 dark:border-slate-700 dark:text-slate-200 whitespace-pre-wrap">Fill in the fields above to preview your message format.</pre>
+        </details>
       </div>
 
     </div>
   </main>
-
-  <script is:inline>
-    (function() {
-      const form = document.getElementById('contact-form');
-      const statusBox = document.getElementById('contact-status');
-      const submitBtn = document.getElementById('contact-submit-btn');
-      const btnText = document.getElementById('contact-btn-text');
-      const btnIcon = document.getElementById('contact-btn-icon');
-
-      if (!form || !statusBox || !submitBtn) return;
-
-      form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-
-        // Basic client validation
-        const name = (document.getElementById('contact-name')?.value || '').trim();
-        const email = (document.getElementById('contact-email')?.value || '').trim();
-        const subject = (document.getElementById('contact-subject')?.value || '').trim();
-        const message = (document.getElementById('contact-message')?.value || '').trim();
-        const gotcha = (document.getElementById('contact-gotcha')?.value || '').trim();
-
-        if (name.length < 2) {
-          showStatus('Please enter a valid name (at least 2 characters).', 'error');
-          return;
-        }
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-          showStatus('Please enter a valid email address.', 'error');
-          return;
-        }
-        if (subject.length < 3) {
-          showStatus('Please enter a valid subject.', 'error');
-          return;
-        }
-        if (message.length < 10) {
-          showStatus('Message must be at least 10 characters long.', 'error');
-          return;
-        }
-
-        // Loading state
-        submitBtn.disabled = true;
-        submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
-        btnText.textContent = 'Verifying & Sending...';
-        btnIcon.textContent = '⏳';
-        hideStatus();
-
-        try {
-          const res = await fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify({ name, email, subject, message, _gotcha: gotcha })
-          });
-
-          const data = await res.json().catch(() => ({}));
-
-          if (res.ok && data.success) {
-            showStatus(data.message || 'Thank you! Your message has been received.', 'success');
-            form.reset();
-          } else {
-            showStatus(data.error || 'Unable to deliver message. Please contact us directly at editorial@curion.pages.dev.', 'error');
-          }
-        } catch (err) {
-          showStatus('Network connection error. Please try again or email us directly at editorial@curion.pages.dev.', 'error');
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.classList.remove('opacity-70', 'cursor-not-allowed');
-          btnText.textContent = 'Send Message';
-          btnIcon.textContent = '→';
-        }
-      });
-
-      function showStatus(msg, type) {
-        statusBox.textContent = msg;
-        statusBox.classList.remove('hidden', 'bg-red-50', 'text-red-700', 'border', 'border-red-200', 'bg-emerald-50', 'text-emerald-700', 'border-emerald-200', 'dark:bg-red-950/50', 'dark:text-red-300', 'dark:border-red-900', 'dark:bg-emerald-950/50', 'dark:text-emerald-300', 'dark:border-emerald-900');
-        if (type === 'error') {
-          statusBox.classList.add('bg-red-50', 'text-red-700', 'border', 'border-red-200', 'dark:bg-red-950/50', 'dark:text-red-300', 'dark:border-red-900');
-        } else {
-          statusBox.classList.add('bg-emerald-50', 'text-emerald-700', 'border', 'border-emerald-200', 'dark:bg-emerald-950/50', 'dark:text-emerald-300', 'dark:border-emerald-900');
-        }
-      }
-
-      function hideStatus() {
-        statusBox.classList.add('hidden');
-      }
-    })();
-  </script>
 </Base>
+
+<script is:inline define:vars={{ targetEmail: contactEmail }}>
+  (function() {
+    const nameInput = document.getElementById('composer-name');
+    const emailInput = document.getElementById('composer-email');
+    const subjectInput = document.getElementById('composer-subject');
+    const messageInput = document.getElementById('composer-message');
+    const preview = document.getElementById('composer-preview');
+    const copyBtn = document.getElementById('composer-copy-btn');
+    const copyText = document.getElementById('composer-copy-text');
+    const mailtoBtn = document.getElementById('composer-mailto-btn');
+    const statusBox = document.getElementById('composer-status');
+
+    function getFormattedMessage() {
+      const name = (nameInput?.value || '').trim() || '[Your Name]';
+      const email = (emailInput?.value || '').trim() || '[Your Email]';
+      const subject = (subjectInput?.value || '').trim() || '[Subject]';
+      const body = (messageInput?.value || '').trim() || '[Message]';
+      const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+      return `TO: ${targetEmail}\nFROM: ${name} <${email}>\nDATE: ${date}\nSUBJECT: [CURION Inquiry] ${subject}\n\n${body}`;
+    }
+
+    function updatePreview() {
+      if (preview) {
+        preview.textContent = getFormattedMessage();
+      }
+    }
+
+    [nameInput, emailInput, subjectInput, messageInput].forEach(el => {
+      el?.addEventListener('input', updatePreview);
+    });
+
+    function showStatus(msg, type) {
+      if (!statusBox) return;
+      statusBox.textContent = msg;
+      statusBox.classList.remove('hidden', 'bg-red-50', 'text-red-700', 'border', 'border-red-200', 'bg-emerald-50', 'text-emerald-700', 'border-emerald-200', 'dark:bg-red-950/50', 'dark:text-red-300', 'dark:border-red-900', 'dark:bg-emerald-950/50', 'dark:text-emerald-300', 'dark:border-emerald-900');
+      if (type === 'error') {
+        statusBox.classList.add('bg-red-50', 'text-red-700', 'border', 'border-red-200', 'dark:bg-red-950/50', 'dark:text-red-300', 'dark:border-red-900');
+      } else {
+        statusBox.classList.add('bg-emerald-50', 'text-emerald-700', 'border', 'border-emerald-200', 'dark:bg-emerald-950/50', 'dark:text-emerald-300', 'dark:border-emerald-900');
+      }
+    }
+
+    // 1. Copy to Clipboard
+    copyBtn?.addEventListener('click', async () => {
+      const name = (nameInput?.value || '').trim();
+      const message = (messageInput?.value || '').trim();
+
+      if (name.length < 2 || message.length < 5) {
+        showStatus('Please provide your name and a brief message before copying.', 'error');
+        return;
+      }
+
+      const formatted = getFormattedMessage();
+      try {
+        await navigator.clipboard.writeText(formatted);
+        showStatus('Message successfully copied to clipboard! You can paste it directly into your email client.', 'success');
+        if (copyText) {
+          copyText.textContent = 'Copied to Clipboard! ✓';
+          copyBtn.classList.add('bg-emerald-600');
+          setTimeout(() => {
+            copyText.textContent = 'Copy Message to Clipboard';
+            copyBtn.classList.remove('bg-emerald-600');
+          }, 2500);
+        }
+      } catch (err) {
+        showStatus('Clipboard access denied. Please select and copy the text from the preview box below.', 'error');
+      }
+    });
+
+    // 2. Open in Email Client (mailto)
+    mailtoBtn?.addEventListener('click', () => {
+      const subject = (subjectInput?.value || '').trim() || 'Editorial Inquiry';
+      const body = (messageInput?.value || '').trim();
+      const name = (nameInput?.value || '').trim();
+      const email = (emailInput?.value || '').trim();
+
+      const mailtoUrl = `mailto:${encodeURIComponent(targetEmail)}?subject=${encodeURIComponent('[CURION] ' + subject)}&body=${encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + body)}`;
+      window.location.href = mailtoUrl;
+    });
+  })();
+</script>

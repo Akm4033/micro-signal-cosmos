@@ -97,12 +97,12 @@
       "keywords": ["plausible", "privacy analytics", "cookie free", "gdpr compliant analytics", "web stats"]
     },
     {
-      "name": "Buttondown",
-      "slug": "buttondown",
-      "category": "newsletter",
-      "url": "https://buttondown.email/?ref=microsignal",
-      "commission": "30% recurring",
-      "keywords": ["buttondown", "newsletter", "email delivery", "markdown newsletter", "developer email"]
+      "name": "Miniflux",
+      "slug": "miniflux",
+      "category": "syndication",
+      "url": "https://miniflux.app/",
+      "commission": "Open Source",
+      "keywords": ["miniflux", "rss", "feed reader", "syndication", "open source"]
     },
     {
       "name": "Raycast",

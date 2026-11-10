@@ -44,9 +44,13 @@ function isNavActive(href: string) {
   <meta name="description" content={description || defaultDesc}>
   <meta name="theme-color" content="#2563EB">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- High-Performance Zero-Network System Font Stack -->
+  <style is:inline>
+    :root {
+      --font-system: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+    }
+  </style>
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href={canonicalUrl}>
   <meta property="og:site_name" content="CURION">
@@ -309,14 +313,29 @@ function isNavActive(href: string) {
         </div>
 
         <div class="newsletter-footer space-y-3">
-          <h2 class="text-xs font-bold uppercase tracking-widest text-white">CURION Briefings</h2>
-          <p class="text-xs leading-relaxed text-slate-300">Weekly technical breakdowns into system internals, neural architectures, and astrophysics.</p>
-          <form action="https://buttondown.email/api/emails/embed-subscribe/microsignalcosmos" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.email/microsignalcosmos', 'popupwindow'); return true;" class="flex flex-col gap-2 w-full max-w-full">
-            <input type="email" name="email" required placeholder="name@domain.com" aria-label="Email address" class="rounded-lg border border-slate-700 bg-slate-800/90 px-3 py-2 text-xs text-white placeholder-slate-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 w-full box-border">
-            <input type="hidden" value="1" name="embed">
-            <button type="submit" class="rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-semibold text-white transition-colors hover:bg-blue-500 w-full sm:w-auto self-start cursor-pointer">Subscribe</button>
-          </form>
-          <p class="text-[10px] text-slate-400">Zero spam. Unsubscribe anytime with 1 click.</p>
+          <h2 class="text-xs font-bold uppercase tracking-widest text-white">CURION Syndication</h2>
+          <p class="text-xs leading-relaxed text-slate-300">Weekly technical breakdowns via open RSS 2.0 web standards.</p>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <a
+              href="/rss.xml"
+              target="_blank"
+              class="inline-flex items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-blue-500 text-center"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 11a9 9 0 0 1 9 9"></path>
+                <path d="M4 4a16 16 0 0 1 16 16"></path>
+                <circle cx="5" cy="19" r="1"></circle>
+              </svg>
+              <span>/rss.xml</span>
+            </a>
+            <a
+              href="/newsletter/"
+              class="inline-flex items-center justify-center rounded-lg border border-slate-700 bg-slate-800/90 px-3 py-2 text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-700 transition-colors text-center"
+            >
+              Reader Options &rarr;
+            </a>
+          </div>
+          <p class="text-[10px] text-slate-400">Zero tracking &bull; 100% open web standards.</p>
         </div>
       </div>
 

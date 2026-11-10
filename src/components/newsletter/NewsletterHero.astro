@@ -8,8 +8,6 @@ const {
   className = '',
   leadMagnet = 'Systems & AI Architecture Cheat Sheet Pack',
 } = Astro.props;
-
-const buttondownUsername = import.meta.env.PUBLIC_BUTTONDOWN_USERNAME || 'microsignalcosmos';
 ---
 
 <section
@@ -33,7 +31,7 @@ const buttondownUsername = import.meta.env.PUBLIC_BUTTONDOWN_USERNAME || 'micros
       <!-- Badge -->
       <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-500/10 px-3.5 py-1 text-xs font-bold tracking-widest text-sky-300 uppercase">
         <span class="h-1.5 w-1.5 rounded-full bg-[#0ea5e9]"></span>
-        <span>CURION Briefings</span>
+        <span>CURION Knowledge Syndication</span>
       </div>
 
       <h2 id="newsletter-hero-heading" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
@@ -41,44 +39,66 @@ const buttondownUsername = import.meta.env.PUBLIC_BUTTONDOWN_USERNAME || 'micros
       </h2>
 
       <p class="mt-4 text-base sm:text-lg leading-relaxed text-slate-300">
-        Every Thursday: deep technical teardowns, reproducible architectures, and zero hype. Join curious engineers, ML builders, and science enthusiasts.
+        Every week: in-depth technical breakdowns, reproducible architectures, and zero marketing hype. Follow CURION via open RSS 2.0 syndication.
       </p>
+
+      <!-- Open RSS Syndication Actions -->
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
+        <button
+          id="hero-copy-rss-btn"
+          type="button"
+          class="btn-3d-primary w-full sm:w-auto shrink-0 cursor-pointer inline-flex items-center justify-center gap-2"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 11a9 9 0 0 1 9 9"></path>
+            <path d="M4 4a16 16 0 0 1 16 16"></path>
+            <circle cx="5" cy="19" r="1"></circle>
+          </svg>
+          <span id="hero-copy-rss-text">Copy RSS Feed URL</span>
+        </button>
+
+        <a
+          href="/rss.xml"
+          target="_blank"
+          class="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-slate-700 bg-slate-800/80 text-xs font-bold uppercase tracking-wider text-slate-200 hover:bg-slate-700 hover:text-white transition-all text-center inline-flex items-center justify-center gap-1.5"
+        >
+          <span>Open /rss.xml</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
 
       <!-- Lead Magnet Callout Card -->
       <div class="mt-6 rounded-xl border border-sky-500/25 bg-slate-900/60 p-3.5 text-xs text-sky-200 flex items-center justify-center gap-2">
-        <span class="font-bold text-white uppercase tracking-wider text-[11px] bg-[#0ea5e9]/20 px-2 py-0.5 rounded">Free Instant Bonus</span>
-        <span>Get the <strong class="text-white">{leadMagnet}</strong> sent to your inbox.</span>
+        <span class="font-bold text-white uppercase tracking-wider text-[11px] bg-[#0ea5e9]/20 px-2 py-0.5 rounded">Free Access</span>
+        <span>Includes the <strong class="text-white">{leadMagnet}</strong> directly in our open archive.</span>
       </div>
 
-      <!-- Buttondown Subscribe Form -->
-      <form
-        action={`https://buttondown.email/api/emails/embed-subscribe/${buttondownUsername}`}
-        method="post"
-        target="popupwindow"
-        onsubmit="window.open('https://buttondown.email/' + '${buttondownUsername}', 'popupwindow'); return true;"
-        class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto"
-      >
-        <input
-          type="email"
-          name="email"
-          required
-          placeholder="Enter your work or personal email..."
-          aria-label="Email address for newsletter"
-          class="w-full rounded-lg border border-slate-700 bg-slate-800/90 px-4 py-3 text-sm text-white placeholder-slate-400 focus:border-[#0ea5e9] focus:outline-none focus:ring-2 focus:ring-[#0ea5e9]/40"
-        />
-        <!-- Honeypot -->
-        <input type="hidden" value="1" name="embed" />
-        <button
-          type="submit"
-          class="btn-3d-primary w-full sm:w-auto shrink-0"
-        >
-          <span>Subscribe Free</span>
-        </button>
-      </form>
-
       <p class="mt-4 text-xs text-slate-400">
-        No tracking pixels &bull; No sponsor spam &bull; Unsubscribe anytime with one click.
+        Zero algorithms &bull; Zero tracking pixels &bull; 100% open web standards.
       </p>
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (function() {
+    const btn = document.getElementById('hero-copy-rss-btn');
+    const text = document.getElementById('hero-copy-rss-text');
+    if (!btn || !text) return;
+
+    btn.addEventListener('click', async () => {
+      const feedUrl = window.location.origin + '/rss.xml';
+      try {
+        await navigator.clipboard.writeText(feedUrl);
+        text.textContent = 'Feed URL Copied! ✓';
+        btn.classList.add('bg-emerald-600');
+        setTimeout(() => {
+          text.textContent = 'Copy RSS Feed URL';
+          btn.classList.remove('bg-emerald-600');
+        }, 2500);
+      } catch (err) {
+        window.open('/rss.xml', '_blank');
+      }
+    });
+  })();
+</script>
