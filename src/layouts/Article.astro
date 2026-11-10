@@ -120,7 +120,7 @@ const fullPageTitle = `${cleanSeoTitle} | CURION`;
         <!-- Sidebar: TOC + Share + Author -->
         <aside class="toc-sidebar sticky top-24 space-y-8 hidden lg:block">
           <nav class="toc" aria-label="Table of Contents">
-            <h3 class="text-caption uppercase tracking-wider text-text-muted mb-3 font-bold font-mono text-[11px]">Contents</h3>
+            <h2 class="text-caption uppercase tracking-wider text-text-muted mb-3 font-bold font-mono text-[11px]">Contents</h2>
             <ol class="space-y-2 text-sm">
               <slot name="toc" />
             </ol>
@@ -254,7 +254,7 @@ const fullPageTitle = `${cleanSeoTitle} | CURION`;
                     <span class="text-slate-500 dark:text-slate-400 font-mono text-[11px]">{item.readingTime}</span>
                   </div>
                   <h3 class="text-base sm:text-lg font-bold leading-snug text-slate-900 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
-                    <a href={`/articles/${item.slug}/`} class="focus-visible:outline-none focus-visible:underline">
+                    <a href={`/articles/${item.slug}/`} class="hover:underline">
                       {item.title}
                     </a>
                   </h3>

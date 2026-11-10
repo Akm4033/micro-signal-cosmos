@@ -381,6 +381,30 @@ function isNavActive(href: string) {
           } catch(e) {}
         });
       }
+
+      // Mobile navigation drawer interaction & Escape key dismissal
+      const mobileNav = document.getElementById('mobile-nav-details');
+      const mobileToggle = document.getElementById('mobile-nav-toggle');
+      if (mobileNav && mobileToggle) {
+        mobileNav.addEventListener('toggle', function() {
+          mobileToggle.setAttribute('aria-expanded', String(mobileNav.open));
+        });
+
+        document.addEventListener('click', function(e) {
+          if (mobileNav.open && !mobileNav.contains(e.target)) {
+            mobileNav.removeAttribute('open');
+            mobileToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && mobileNav.open) {
+            mobileNav.removeAttribute('open');
+            mobileToggle.setAttribute('aria-expanded', 'false');
+            mobileToggle.focus();
+          }
+        });
+      }
     })();
   </script>
 </body>
