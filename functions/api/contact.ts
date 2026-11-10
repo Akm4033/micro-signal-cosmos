@@ -84,9 +84,9 @@ export const onRequestPost = async (context: { request: Request; env: Env }) => 
     // 3. Provider dispatch via server-side secrets
     const web3formsKey = context.env.WEB3FORMS_KEY;
     const resendApiKey = context.env.RESEND_API_KEY;
-    const contactEmail = context.env.CONTACT_EMAIL || 'editorial@curion.pages.dev';
+    const contactEmail = context.env.CONTACT_EMAIL || '';
 
-    if (resendApiKey) {
+    if (resendApiKey && contactEmail) {
       const resendRes = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
@@ -103,7 +103,7 @@ export const onRequestPost = async (context: { request: Request; env: Env }) => 
       });
 
       if (!resendRes.ok) {
-        return new Response(JSON.stringify({ success: false, error: 'Failed to deliver message via email provider. Please contact us directly at editorial@curion.pages.dev.' }), {
+        return new Response(JSON.stringify({ success: false, error: 'Failed to deliver message via email provider. Please submit your inquiry via GitHub Issues or the Contact Composer.' }), {
           status: 502,
           headers: { 'Content-Type': 'application/json' },
         });
@@ -146,7 +146,7 @@ export const onRequestPost = async (context: { request: Request; env: Env }) => 
     // Graceful fallback when server-side secret has not yet been set in Cloudflare dashboard
     return new Response(JSON.stringify({
       success: true,
-      message: 'Your message has been validated and accepted by the server. (Note: Email provider credentials are not yet configured in the Cloudflare Pages environment; for immediate inquiries, please reach out directly to editorial@curion.pages.dev).',
+      message: 'Your message has been validated and accepted by the server. (Note: Server-side email delivery credentials are not configured; please use the Contact Composer to copy your message or submit via GitHub Issues).',
       configured: false
     }), {
       status: 200,

@@ -4,6 +4,9 @@ import Base from '../layouts/Base.astro';
 const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const newsletterUrl = `${siteUrl}/newsletter/`;
 const rssUrl = `${siteUrl}/rss.xml`;
+const configuredEmail = import.meta.env.PUBLIC_CONTACT_EMAIL || '';
+const hasContactEmail = Boolean(configuredEmail && configuredEmail.trim().includes('@'));
+const contactEmail = hasContactEmail ? configuredEmail.trim() : '';
 ---
 
 <Base
@@ -91,23 +94,44 @@ const rssUrl = `${siteUrl}/rss.xml`;
                     <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                   </svg>
                 </span>
-                <span class="text-xs font-bold uppercase tracking-wider text-text-muted">Direct Email Dispatch</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-text-muted">
+                  {hasContactEmail ? "Direct Email Dispatch" : "Editorial Desk Contact"}
+                </span>
               </div>
-              <h2 class="text-base font-bold text-slate-900 dark:text-white">Subscribe by Email</h2>
+              <h2 class="text-base font-bold text-slate-900 dark:text-white">
+                {hasContactEmail ? "Subscribe by Email" : "Editorial Inquiries"}
+              </h2>
               <p class="mt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                Prefer email dispatches? Send a one-click subscription request to our editorial desk.
+                {hasContactEmail
+                  ? "Prefer email dispatches? Send a one-click subscription request to our editorial desk."
+                  : "Have feedback on an investigation or wish to collaborate? Reach our research desk via the Contact Composer."}
               </p>
             </div>
 
             <div class="mt-6">
-              <a
-                href="mailto:editorial@curion.pages.dev?subject=Subscribe%20to%20CURION%20Briefings&body=Please%20add%20my%20email%20address%20to%20the%20CURION%20weekly%20editorial%20dispatch."
-                class="w-full py-2.5 px-4 rounded-xl border border-neutral-300 bg-white text-xs font-bold uppercase tracking-wider text-slate-700 hover:bg-slate-100 dark:border-neutral-600 dark:bg-neutral-800 dark:text-slate-200 transition-colors text-center inline-flex items-center justify-center gap-1.5"
-              >
-                <span>Send Subscription Request</span>
-                <span aria-hidden="true">&rarr;</span>
-              </a>
-              <span class="block mt-2 text-[10px] text-center text-text-muted">Direct to editorial@curion.pages.dev &bull; Zero spam</span>
+              {hasContactEmail ? (
+                <>
+                  <a
+                    href={`mailto:${contactEmail}?subject=Subscribe%20to%20CURION%20Briefings&body=Please%20add%20my%20email%20address%20to%20the%20CURION%20weekly%20editorial%20dispatch.`}
+                    class="w-full py-2.5 px-4 rounded-xl border border-neutral-300 bg-white text-xs font-bold uppercase tracking-wider text-slate-700 hover:bg-slate-100 dark:border-neutral-600 dark:bg-neutral-800 dark:text-slate-200 transition-colors text-center inline-flex items-center justify-center gap-1.5"
+                  >
+                    <span>Send Subscription Request</span>
+                    <span aria-hidden="true">&rarr;</span>
+                  </a>
+                  <span class="block mt-2 text-[10px] text-center text-text-muted">Direct to {contactEmail} &bull; Zero spam</span>
+                </>
+              ) : (
+                <>
+                  <a
+                    href="/contact/"
+                    class="w-full py-2.5 px-4 rounded-xl border border-neutral-300 bg-white text-xs font-bold uppercase tracking-wider text-slate-700 hover:bg-slate-100 dark:border-neutral-600 dark:bg-neutral-800 dark:text-slate-200 transition-colors text-center inline-flex items-center justify-center gap-1.5"
+                  >
+                    <span>Open Contact Composer</span>
+                    <span aria-hidden="true">&rarr;</span>
+                  </a>
+                  <span class="block mt-2 text-[10px] text-center text-text-muted">100% private &bull; Zero third-party tracker</span>
+                </>
+              )}
             </div>
           </div>
         </div>
