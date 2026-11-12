@@ -1,6 +1,9 @@
 # Google Search Console Verification
 /google5c0a51bbd4a9595b.html /google5c0a51bbd4a9595b.html 200
 
+# Bing Webmaster Tools Verification
+/BingSiteAuth.xml /BingSiteAuth.xml 200
+
 # Cloudflare Pages 301 Permanent Redirects
 /privacy    /privacy-policy/   301
 /privacy/   /privacy-policy/   301
