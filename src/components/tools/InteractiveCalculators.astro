@@ -3,7 +3,7 @@
 // Client-side, zero-dependency, high-precision interactive utilities.
 ---
 
-<div class="my-10 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-white/[0.08] dark:bg-[#0B101D] sm:p-8" id="engineering-calculators">
+<div class="my-10 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-white/[0.08] dark:bg-[#0B101D] sm:p-8 overflow-hidden w-full max-w-full" id="engineering-calculators">
   <!-- Header -->
   <div class="mb-8 flex flex-col justify-between gap-4 border-b border-neutral-200 pb-6 dark:border-white/[0.08] sm:flex-row sm:items-center">
     <div>
@@ -61,9 +61,9 @@
   <!-- 1. AI INFERENCE COST & TOKEN CALCULATOR -->
   <!-- ========================================================================= -->
   <div id="calc-ai-panel" role="tabpanel" aria-labelledby="calc-ai-tab" class="calc-panel">
-    <div class="grid gap-8 lg:grid-cols-12">
+    <div class="grid gap-8 lg:grid-cols-2 items-start w-full min-w-0">
       <!-- Input Controls -->
-      <div class="space-y-6 lg:col-span-7">
+      <div class="space-y-6 w-full min-w-0">
         <!-- Model Selection -->
         <div>
           <label for="ai-model-select" class="block text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300">
@@ -98,7 +98,7 @@
             max="32000"
             step="100"
             value="1500"
-            class="mt-2 h-2 w-full cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
+            class="mt-2 h-2 w-full max-w-full block box-border cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
           />
           <div class="mt-1 flex justify-between text-[11px] text-neutral-400">
             <span>100</span>
@@ -123,7 +123,7 @@
             max="4096"
             step="50"
             value="600"
-            class="mt-2 h-2 w-full cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
+            class="mt-2 h-2 w-full max-w-full block box-border cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
           />
           <div class="mt-1 flex justify-between text-[11px] text-neutral-400">
             <span>50</span>
@@ -148,7 +148,7 @@
             max="25000"
             step="50"
             value="1000"
-            class="mt-2 h-2 w-full cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
+            class="mt-2 h-2 w-full max-w-full block box-border cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
           />
           <div class="mt-1 flex justify-between text-[11px] text-neutral-400">
             <span>10</span>
@@ -160,7 +160,7 @@
       </div>
 
       <!-- Cost Summary Cards -->
-      <div class="flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50/70 p-6 dark:border-white/[0.08] dark:bg-[#121826] lg:col-span-5">
+      <div class="flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50/70 p-6 dark:border-white/[0.08] dark:bg-[#121826] w-full min-w-0">
         <div>
           <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
             Inference Spend Projection
@@ -205,9 +205,9 @@
   <!-- 2. BANDWIDTH-DELAY PRODUCT (BDP) CALCULATOR -->
   <!-- ========================================================================= -->
   <div id="calc-network-panel" role="tabpanel" aria-labelledby="calc-network-tab" class="calc-panel hidden">
-    <div class="grid gap-8 lg:grid-cols-12">
+    <div class="grid gap-8 lg:grid-cols-2 items-start w-full min-w-0">
       <!-- Controls -->
-      <div class="space-y-6 lg:col-span-7">
+      <div class="space-y-6 w-full min-w-0">
         <!-- Bandwidth Input -->
         <div>
           <label for="net-bandwidth" class="block text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300">
@@ -248,7 +248,7 @@
             max="300"
             step="0.5"
             value="45"
-            class="mt-2 h-2 w-full cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
+            class="mt-2 h-2 w-full max-w-full block box-border cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
           />
           <!-- Latency Presets -->
           <div class="mt-2 flex flex-wrap gap-1.5">
@@ -273,7 +273,7 @@
       </div>
 
       <!-- Output Summary -->
-      <div class="flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50/70 p-6 dark:border-white/[0.08] dark:bg-[#121826] lg:col-span-5">
+      <div class="flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50/70 p-6 dark:border-white/[0.08] dark:bg-[#121826] w-full min-w-0">
         <div>
           <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
             Buffer &amp; Throughput Metrics
@@ -312,9 +312,9 @@
   <!-- 3. COSMIC REDSHIFT & LOOKBACK TIME CALCULATOR -->
   <!-- ========================================================================= -->
   <div id="calc-astro-panel" role="tabpanel" aria-labelledby="calc-astro-tab" class="calc-panel hidden">
-    <div class="grid gap-8 lg:grid-cols-12">
+    <div class="grid gap-8 lg:grid-cols-2 items-start w-full min-w-0">
       <!-- Controls -->
-      <div class="space-y-6 lg:col-span-7">
+      <div class="space-y-6 w-full min-w-0">
         <div>
           <div class="flex items-center justify-between text-xs font-semibold">
             <label for="astro-z-input" class="text-neutral-700 dark:text-neutral-300">
@@ -329,7 +329,7 @@
             max="12.0"
             step="0.01"
             value="1.0"
-            class="mt-2 h-2 w-full cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
+            class="mt-2 h-2 w-full max-w-full block box-border cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
           />
           <div class="mt-2 flex items-center gap-3">
             <span class="text-xs text-neutral-500">Exact Value:</span>
@@ -367,7 +367,7 @@
       </div>
 
       <!-- Output Summary -->
-      <div class="flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50/70 p-6 dark:border-white/[0.08] dark:bg-[#121826] lg:col-span-5">
+      <div class="flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50/70 p-6 dark:border-white/[0.08] dark:bg-[#121826] w-full min-w-0">
         <div>
           <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
             Cosmological Parameters
@@ -648,3 +648,4 @@
     }
   });
 </script>
+

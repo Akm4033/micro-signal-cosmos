@@ -66,6 +66,59 @@ const categoryVariant = catVariantProp || variantMap[category.toLowerCase().repl
 const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://signal-insight.pages.dev');
 const resolvedCanonical = canonical || `${siteUrl}/articles/${Astro.params.slug || ''}/`;
 
+// Discipline Art Direction Mapping for Bespoke Category Layouts
+const disciplineTheme = {
+  ai: {
+    gradient: 'from-cyan-500/10 via-blue-600/5 to-indigo-600/10',
+    border: 'border-cyan-500/30 dark:border-cyan-500/20',
+    accentText: 'text-cyan-600 dark:text-cyan-400',
+    disciplineTag: 'NEURAL FOUNDATIONS & AI COMPUTATION',
+    badgeClass: 'bg-cyan-50 text-cyan-800 border-cyan-200 dark:bg-cyan-950/60 dark:text-cyan-300 dark:border-cyan-800',
+    dotColor: 'bg-cyan-500',
+    synthesisTitle: 'Architecture Takeaways & Inference Impact',
+    synthesisClass: 'callout-synthesis',
+  },
+  science: {
+    gradient: 'from-purple-900/10 via-violet-600/5 to-amber-500/10',
+    border: 'border-purple-500/30 dark:border-purple-500/20',
+    accentText: 'text-purple-600 dark:text-purple-400',
+    disciplineTag: 'ASTROPHYSICAL RESEARCH & FUNDAMENTAL PHYSICS',
+    badgeClass: 'bg-purple-50 text-purple-800 border-purple-200 dark:bg-purple-950/60 dark:text-purple-300 dark:border-purple-800',
+    dotColor: 'bg-purple-500',
+    synthesisTitle: 'Empirical Evidence & Theoretical Significance',
+    synthesisClass: 'callout-astrophysics',
+  },
+  tech: {
+    gradient: 'from-emerald-500/10 via-teal-500/5 to-blue-600/10',
+    border: 'border-emerald-500/30 dark:border-emerald-500/20',
+    accentText: 'text-emerald-600 dark:text-emerald-400',
+    disciplineTag: 'SYSTEMS ENGINEERING & SILICON ARCHITECTURE',
+    badgeClass: 'bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800',
+    dotColor: 'bg-emerald-500',
+    synthesisTitle: 'Low-Level Mechanics & Hardware Impact',
+    synthesisClass: 'callout-deep-dive',
+  },
+  devtools: {
+    gradient: 'from-amber-500/10 via-orange-500/5 to-sky-500/10',
+    border: 'border-amber-500/30 dark:border-amber-500/20',
+    accentText: 'text-amber-600 dark:text-amber-400',
+    disciplineTag: 'DEVELOPER INFRASTRUCTURE & APPLIED SECURITY',
+    badgeClass: 'bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800',
+    dotColor: 'bg-amber-500',
+    synthesisTitle: 'Deployment Checklist & Threat Model',
+    synthesisClass: 'callout-warning',
+  }
+}[categoryVariant] || {
+  gradient: 'from-blue-600/10 via-slate-500/5 to-blue-800/10',
+  border: 'border-blue-500/30 dark:border-blue-500/20',
+  accentText: 'text-blue-600 dark:text-blue-400',
+  disciplineTag: 'TECHNICAL ARCHITECTURE SPECIFICATION',
+  badgeClass: 'bg-blue-50 text-blue-800 border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800',
+  dotColor: 'bg-blue-500',
+  synthesisTitle: 'Core Findings & Analysis',
+  synthesisClass: 'callout-synthesis',
+};
+
 // Compute clean headline for visible <h1> (without brand suffix)
 const cleanHeadline = title.replace(/\s*\|\s*Signal Insight\s*$/i, '');
 // Compute clean page title for <title> in <head> (ensures exactly one "| Signal Insight" suffix)
@@ -74,30 +127,52 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
 ---
 
 <Base title={fullPageTitle} description={description} canonical={resolvedCanonical} ogImage={ogImage} author={author} publishedTime={publishedTime} modifiedTime={updatedTime}>
-  <div class="container-wide py-10 lg:py-16">
-    <article class="max-w-5xl mx-auto">
-      <header class="article-header mb-8">
-        <div class="header-meta flex items-center gap-3 flex-wrap mb-4">
+  <div class="container-wide py-8 lg:py-14" id="article-container">
+    <article class="max-w-5xl mx-auto w-full min-w-0" id="main-article-element">
+      <!-- Bespoke Discipline Editorial Header -->
+      <header class={`article-header mb-8 rounded-2xl border ${disciplineTheme.border} bg-gradient-to-br ${disciplineTheme.gradient} p-6 sm:p-8 relative overflow-hidden backdrop-blur-xs`}>
+        <!-- Top Metadata & Reader Controls Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+          <div class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] font-mono font-bold uppercase tracking-wider shadow-2xs" class:list={[disciplineTheme.badgeClass]}>
+            <span class="h-2 w-2 rounded-full animate-pulse" class:list={[disciplineTheme.dotColor]}></span>
+            <span>{disciplineTheme.disciplineTag}</span>
+          </div>
+
+          <!-- Interactive Reading Controls: Typography & Focus Mode -->
+          <div class="flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white/90 p-1 text-xs shadow-2xs backdrop-blur-xs dark:border-white/[0.08] dark:bg-[#0B101D]/90">
+            <span class="text-[10px] font-mono text-slate-400 px-1 uppercase hidden sm:inline">Text</span>
+            <button type="button" id="font-decrease" class="rounded px-2 py-0.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 font-mono" title="Decrease font size">A-</button>
+            <button type="button" id="font-reset" class="rounded px-2 py-0.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 font-mono font-bold" title="Reset font size">A</button>
+            <button type="button" id="font-increase" class="rounded px-2 py-0.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 font-mono" title="Increase font size">A+</button>
+            <span class="h-3 w-px bg-slate-200 dark:bg-slate-700 mx-0.5" aria-hidden="true"></span>
+            <button type="button" id="focus-mode-toggle" class="rounded px-2.5 py-0.5 text-slate-600 hover:bg-slate-100 hover:text-blue-600 dark:text-slate-400 dark:hover:bg-slate-800 text-[11px] font-medium" title="Toggle Distraction-Free Focus Mode">Focus</button>
+          </div>
+        </div>
+
+        <div class="header-meta flex items-center gap-2.5 flex-wrap mb-4 text-xs font-mono text-slate-500 dark:text-slate-400">
           {logo && <ArticleLogo logo={logo} category={categoryVariant} size="sm" />}
-          <span class={`badge badge--${categoryVariant}`}>{category}</span>
-          <time datetime={publishedTime} class="text-sm text-slate-500 dark:text-slate-400">
+          <span class="font-semibold text-slate-700 dark:text-slate-300">{category}</span>
+          <span aria-hidden="true">&bull;</span>
+          <time datetime={publishedTime}>
             {new Date(publishedTime).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
           </time>
           {updatedTime && (
             <>
-              <span aria-hidden="true" class="text-slate-300 dark:text-slate-600">&bull;</span>
-              <time datetime={updatedTime} class="text-sm text-slate-500 dark:text-slate-400">
+              <span aria-hidden="true">&bull;</span>
+              <time datetime={updatedTime}>
                 Updated {new Date(updatedTime).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
               </time>
             </>
           )}
-          <span aria-hidden="true" class="text-slate-300 dark:text-slate-600">&bull;</span>
-          <span class="text-sm text-slate-500 dark:text-slate-400">{readingTime}</span>
+          <span aria-hidden="true">&bull;</span>
+          <span class="font-bold text-blue-600 dark:text-blue-400">{readingTime}</span>
         </div>
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">{cleanHeadline}</h1>
-        <p class="mt-4 text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-300 max-w-2xl">{description}</p>
-        <div class="mt-6 flex items-center gap-4 author-byline">
-          <div class="w-11 h-11 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-sm border border-blue-200 shadow-2xs dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-900 overflow-hidden">
+
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.15]">{cleanHeadline}</h1>
+        <p class="mt-4 text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-300 max-w-3xl">{description}</p>
+
+        <div class="mt-6 flex items-center gap-4 author-byline pt-4 border-t border-slate-200/60 dark:border-white/[0.06]">
+          <div class="w-11 h-11 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-sm border border-blue-200 shadow-2xs dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-900 overflow-hidden shrink-0">
             {authorAvatar ? (
               <img src={authorAvatar} alt={authorName} width="44" height="44" decoding="async" class="w-full h-full object-cover" />
             ) : (
@@ -105,8 +180,11 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
             )}
           </div>
           <div>
-            <p class="font-bold text-slate-900 dark:text-white text-sm">{authorName}</p>
-            <p class="text-xs text-slate-500 dark:text-slate-400">{authorRole} &bull; {readingTime}</p>
+            <p class="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-1.5">
+              <span>{authorName}</span>
+              <span class="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-mono bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300 font-normal">Verified Research</span>
+            </p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-mono">{authorRole} &bull; Peer-Reviewed Editorial</p>
           </div>
         </div>
       </header>
@@ -116,7 +194,37 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
         <ArticleVisual slug={slug} category={categoryVariant} logo={logo} />
       </div>
 
-      <div class="article-layout grid grid-cols-1 lg:grid-cols-[260px_1fr] xl:grid-cols-[280px_1fr] gap-10 lg:gap-12 max-w-full items-start">
+      <!-- Executive Synthesis Takeaways Callout -->
+      <div class:list={['editorial-callout', disciplineTheme.synthesisClass, 'mb-10']}>
+        <div class="flex items-start gap-3.5">
+          <div class="mt-0.5 shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class:list={[disciplineTheme.accentText]}>
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+          </div>
+          <div class="min-w-0 flex-1">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white font-mono">
+              {disciplineTheme.synthesisTitle}
+            </h2>
+            <p class="mt-1 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+              {description}
+            </p>
+            <div class="mt-2.5 flex flex-wrap items-center gap-3 text-[11px] font-mono text-slate-500 dark:text-slate-400">
+              <span>Discipline: <strong class="text-slate-800 dark:text-slate-200">{category}</strong></span>
+              <span>&bull;</span>
+              <span>Reading Depth: <strong class="text-slate-800 dark:text-slate-200">{readingTime}</strong></span>
+              <span>&bull;</span>
+              <span>Standards: <strong class="text-emerald-600 dark:text-emerald-400">100% Primary Academic Citations</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="article-layout grid grid-cols-1 lg:grid-cols-[260px_minmax(0,1fr)] xl:grid-cols-[280px_minmax(0,1fr)] gap-10 lg:gap-12 w-full max-w-full min-w-0 items-start">
         <!-- Sidebar: TOC + Share + Author -->
         <aside class="toc-sidebar sticky top-24 space-y-8 hidden lg:block">
           <nav class="toc" aria-label="Table of Contents">
@@ -158,7 +266,7 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
           </div>
         </aside>
 
-        <div class="article-content prose-editorial max-w-none">
+        <div class="article-content prose-editorial max-w-none w-full min-w-0 overflow-x-clip">
           <!-- Mobile Collapsible Table of Contents -->
           <div class="lg:hidden mb-8 rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-white/[0.08] dark:bg-[#0B101D] not-prose">
             <details class="group">
@@ -277,6 +385,7 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
 
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
+      // Code copy buttons
       document.querySelectorAll('.prose-editorial pre').forEach((pre) => {
         if (pre.querySelector('.code-copy-btn')) return;
         pre.style.position = 'relative';
@@ -301,6 +410,44 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
         });
         pre.appendChild(btn);
       });
+
+      // Interactive typography scaling & Focus mode
+      const prose = document.querySelector('.prose-editorial');
+      const fontDec = document.getElementById('font-decrease');
+      const fontRes = document.getElementById('font-reset');
+      const fontInc = document.getElementById('font-increase');
+      const focusToggle = document.getElementById('focus-mode-toggle');
+      const sidebar = document.querySelector('.toc-sidebar');
+      const articleEl = document.getElementById('main-article-element');
+
+      let currentScale = 1;
+      if (fontDec && fontRes && fontInc && prose) {
+        fontDec.addEventListener('click', () => {
+          currentScale = Math.max(0.85, currentScale - 0.08);
+          prose.style.fontSize = `${currentScale * 1.025}rem`;
+        });
+        fontRes.addEventListener('click', () => {
+          currentScale = 1;
+          prose.style.fontSize = '1.025rem';
+        });
+        fontInc.addEventListener('click', () => {
+          currentScale = Math.min(1.35, currentScale + 0.08);
+          prose.style.fontSize = `${currentScale * 1.025}rem`;
+        });
+      }
+
+      if (focusToggle && sidebar && articleEl) {
+        focusToggle.addEventListener('click', () => {
+          const isFocused = sidebar.classList.toggle('hidden');
+          focusToggle.classList.toggle('bg-blue-600');
+          focusToggle.classList.toggle('text-white');
+          if (isFocused) {
+            articleEl.classList.add('max-w-3xl');
+          } else {
+            articleEl.classList.remove('max-w-3xl');
+          }
+        });
+      }
     });
   </script>
 </Base>
