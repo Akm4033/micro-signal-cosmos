@@ -137,7 +137,7 @@ api-internal.local {
 }
 ```
 
-For teams looking to deploy secure reverse proxies, configure modern TLS parameters, and automate certificate renewals with zero downtime, open-source solutions like Caddy paired with developer tools from [1Password](https://1password.com/?aff=microsignal_https-deep-dive) ★ provide robust secrets and key infrastructure management.
+For teams looking to deploy secure reverse proxies, configure modern TLS parameters, and automate certificate renewals with zero downtime, open-source solutions like Caddy paired with developer tools from [1Password](https://1password.com/?aff=signalinsight_https-deep-dive) ★ provide robust secrets and key infrastructure management.
 
 ---
 

@@ -63,7 +63,7 @@ const variantMap: Record<string, 'tech' | 'science' | 'ai' | 'devtools'> = {
 };
 
 const categoryVariant = catVariantProp || variantMap[category.toLowerCase().replace(/\s+/g, '-')] || 'tech';
-const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://Signal Insight.pages.dev');
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const resolvedCanonical = canonical || `${siteUrl}/articles/${Astro.params.slug || ''}/`;
 
 // Compute clean headline for visible <h1> (without brand suffix)

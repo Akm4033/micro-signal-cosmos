@@ -28,7 +28,7 @@
   <line x1="80" y1="490" x2="1120" y2="490" stroke="#1f2937" stroke-width="1.5" />
 
   <g transform="translate(80, 545)">
-    <text x="0" y="0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">MICRO SIGNAL <tspan fill="#f59e0b">COSMOS</tspan></text>
+    <text x="0" y="0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">SIGNAL <tspan fill="#f59e0b">INSIGHT</tspan></text>
     <text x="0" y="24" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#9ca3af" letter-spacing="0.15em">DISCOVER MORE. UNDERSTAND BETTER.</text>
     <text x="1040" y="0" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#f3f4f6">Curated Technical Stream</text>
     <text x="1040" y="24" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#9ca3af">Comprehensive Deep Dives</text>

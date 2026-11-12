@@ -1,6 +1,6 @@
 # Signal Insight — Editorial Publishing & Content Guide
 
-Welcome to the **Signal Insight** editorial publishing guide. This document provides simple, step-by-step instructions for writers, editors, and contributors to draft, preview, format, and publish articles on [microsignalcosmos.com](https://microsignalcosmos.com).
+Welcome to the **Signal Insight** editorial publishing guide. This document provides simple, step-by-step instructions for writers, editors, and contributors to draft, preview, format, and publish articles on [signal-insight.pages.dev](https://signal-insight.pages.dev).
 
 No deep coding knowledge is required. All articles are written in plain text using standard **Markdown (`.md`)**.
 

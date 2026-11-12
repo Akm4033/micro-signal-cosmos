@@ -46,7 +46,7 @@ The website compiles to 100% static HTML, CSS, client-side assets, RSS 2.0 XML, 
 Ensure all code is committed to your repository:
 ```bash
 git remote -v
-# origin  https://github.com/Akm4033/Signal Insight.git
+# origin  https://github.com/Akm4033/signal-insight.git
 ```
 
 ### Step 2: Connect Repository to Cloudflare Pages
@@ -89,8 +89,8 @@ Add the following DNS records in your registrar's control panel:
 
 | Type | Name / Host | Target / Destination | TTL |
 | :--- | :--- | :--- | :--- |
-| **CNAME** | `@` (or root) | `Signal Insight.pages.dev` | Auto / 1 Hour |
-| **CNAME** | `www` | `Signal Insight.pages.dev` | Auto / 1 Hour |
+| **CNAME** | `@` (or root) | `signal-insight.pages.dev` | Auto / 1 Hour |
+| **CNAME** | `www` | `signal-insight.pages.dev` | Auto / 1 Hour |
 
 *(Note: If your DNS registrar does not support CNAME flattening on root `@`, use their ALIAS/ANAME record or point nameservers directly to Cloudflare.)*
 
@@ -137,5 +137,5 @@ Do **NOT** submit search console verifications until the real production domain 
   - Both Cloudflare Pages and Netlify store immutable artifacts for every build deployment.
   - In the event of an unwanted change, navigate to the **Deployments** tab in the dashboard, find the previously working commit, and click **Rollback to this deployment**. The previous version goes live at the edge in under 5 seconds.
 - **Preview Deployments:**
-  - Every pull request or non-main branch automatically receives a private preview URL (`https://<branch>.Signal Insight.pages.dev`) for testing prior to merging to `main`.
+  - Every pull request or non-main branch automatically receives a private preview URL (`https://<branch>.signal-insight.pages.dev`) for testing prior to merging to `main`.
 

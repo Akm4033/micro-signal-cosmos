@@ -38,7 +38,7 @@ When architecting a self-hosted stack, avoid hyperscalers (AWS, Azure, GCP) for 
 | **DigitalOcean Droplet** | 4 vCPU, 8GB RAM | ~$48 / month | 5 TB included |
 | **Hetzner Cloud (CPX31)** | 4 vCPU, 8GB RAM, 160GB NVMe | **~€12 / month** | **20 TB included** |
 
-For reliable, budget-conscious infrastructure, provisioning an Ubuntu 24.04 LTS node on [Hetzner Cloud](https://hetzner.cloud/?ref=microsignal_self-hosting) ★ or [DigitalOcean](https://www.digitalocean.com/?ref=microsignal_self-hosting) ★ provides top-tier hardware economics.
+For reliable, budget-conscious infrastructure, provisioning an Ubuntu 24.04 LTS node on [Hetzner Cloud](https://hetzner.cloud/?ref=signalinsight_self-hosting) ★ or [DigitalOcean](https://www.digitalocean.com/?ref=signalinsight_self-hosting) ★ provides top-tier hardware economics.
 
 ---
 

@@ -124,7 +124,7 @@ When renting on-demand GPUs for training vs. continuous serving, hyperscaler pri
 | **RunPod / Specialized Cloud** | ~$3.19 – $3.89 / GPU | ~$2,450 / month |
 | **Lambda Labs** | **~$2.49 – $2.99 / GPU** | **~$1,950 / month** |
 
-Teams running dedicated model inference save over **70% in monthly operational expense** by utilizing dedicated GPU cloud platforms like [Lambda Labs](https://lambdalabs.com/?via=microsignal_inference-economics) ★ or decentralized GPU clouds rather than traditional enterprise hyperscalers.
+Teams running dedicated model inference save over **70% in monthly operational expense** by utilizing dedicated GPU cloud platforms like [Lambda Labs](https://lambdalabs.com/?via=signalinsight_inference-economics) ★ or decentralized GPU clouds rather than traditional enterprise hyperscalers.
 
 ---
 

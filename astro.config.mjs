@@ -1,48 +1,27 @@
-// astro.config.mjs
+// @ts-check
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
-import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
-import rss from '@astrojs/rss';
+import tailwindcss from '@tailwindcss/vite';
 
+// https://astro.build/config
 export default defineConfig({
-  site: 'https://signal-insight.pages.dev',
-  integrations: [
-    tailwind({ applyBaseStyles: false }),
-    mdx(),
-    sitemap({
-      changefreq: 'weekly',
-      priority: 0.7,
-      lastmod: new Date(),
-    }),
-    rss({
-      title: 'Signal Insight',
-      description: 'Your daily signal for technology, science, and knowledge.',
-      site: 'https://signal-insight.pages.dev',
-    }),
-  ],
-  markdown: {
-    shikiConfig: {
-      theme: 'github-dark',
-      wrap: true,
-    },
-    gfm: true,
-  },
-  compressHTML: true,
-  build: {
-    inlineStylesheets: 'auto',
-    assets: 'assets',
-  },
-  image: {
-    service: {
-      entrypoint: 'astro/assets/services/sharp',
-    },
+  // Canonical site domain for metadata, sitemaps, and RSS feeds
+  site: process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev',
+  redirects: {
+    '/privacy': '/privacy-policy/',
+    '/editorial-policy': '/about/',
+    '/fact-checking-policy': '/about/',
+    '/corrections-policy': '/contact/',
+    // Consolidated Categories (7 -> 4)
+    '/category/digital-world': '/category/technology/',
+    '/category/tutorials': '/category/developer-tools/',
+    '/category/software-tools': '/category/developer-tools/',
+    '/category/innovation': '/category/technology/',
+    // Legacy initial test articles redirected to complete in-depth versions
+    '/articles/understanding-artificial-intelligence': '/articles/how-llms-actually-work/',
+    '/articles/scientific-discoveries-and-the-universe': '/articles/how-we-know-what-stars-are-made-of/',
+    '/articles/technologies-shaping-digital-future': '/articles/how-browsers-actually-render-a-page/',
   },
   vite: {
-    resolve: {
-      alias: {
-        '@/*': './src/*',
-      },
-    },
-  },
+    plugins: [tailwindcss()]
+  }
 });

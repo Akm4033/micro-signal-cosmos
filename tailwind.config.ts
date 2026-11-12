@@ -26,7 +26,7 @@ export default {
           light: 'rgba(59, 130, 246, 0.14)',
           glow: 'rgba(59, 130, 246, 0.25)',
         },
-        Signal Insight: {
+        'signal-insight': {
           blue: '#3B82F6',
           'blue-hover': '#60A5FA',
           'blue-light': 'rgba(59, 130, 246, 0.14)',

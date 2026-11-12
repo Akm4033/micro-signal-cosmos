@@ -143,7 +143,7 @@ Logits: ["the": 14.2, "a": 12.1, "consensus": 18.9, "dog": 1.2]
 - **Temperature ($T$)**: Scales logit magnitudes before softmax. Lower temperature ($T \to 0$) sharpens peaks (deterministic greedy decoding); higher temperature flattens distribution (creative, varied outputs).
 - **Top-$p$ (Nucleus Sampling)**: Dynamically truncates the candidate list to the smallest set of tokens whose cumulative probability exceeds threshold $p$ (typically 0.9), filtering out low-probability nonsense while retaining natural vocabulary diversity.
 
-To explore interactive transformer weights and inspect layer activations in real-time, developers use [Hugging Face Enterprise](https://huggingface.co/?ref=microsignal_transformer-internals) ★ alongside local GPU serving harnesses.
+To explore interactive transformer weights and inspect layer activations in real-time, developers use [Hugging Face Enterprise](https://huggingface.co/?ref=signalinsight_transformer-internals) ★ alongside local GPU serving harnesses.
 
 ---
 

@@ -29,7 +29,7 @@ const CATEGORY_NAMES = {
 /**
  * Generate a branded 1200x630 vector SVG Open Graph banner
  */
-function generateOgSvg({ slug, title, category, readingTime = '10 min read', authorName = 'Cosmos Engineering' }) {
+function generateOgSvg({ slug, title, category, readingTime = '10 min read', authorName = 'Signal Insight Engineering' }) {
   const cat = (category || 'technology').toLowerCase();
   const accentColor = CATEGORY_COLORS[cat] || '#0ea5e9';
   const catLabel = CATEGORY_NAMES[cat] || 'TECHNOLOGY';
@@ -86,8 +86,8 @@ function generateOgSvg({ slug, title, category, readingTime = '10 min read', aut
 
   <g transform="translate(80, 545)">
     <!-- Brand / Tagline -->
-    <text x="0" y="0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">MICRO SIGNAL <tspan fill="${accentColor}">COSMOS</tspan></text>
-    <text x="0" y="24" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#9ca3af" letter-spacing="0.15em">DISCOVER MORE. UNDERSTAND BETTER.</text>
+    <text x="0" y="0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">SIGNAL <tspan fill="${accentColor}">INSIGHT</tspan></text>
+    <text x="0" y="24" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#9ca3af" letter-spacing="0.15em">UNDERSTAND THE WORLD. EXPLORE BEYOND IT.</text>
 
     <!-- Author & Reading time -->
     <text x="1040" y="0" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="700" fill="#f3f4f6">${esc(authorName)}</text>
@@ -121,7 +121,7 @@ async function runSeoAgent({ slug, title, content, category = 'technology', auth
     title,
     category,
     readingTime,
-    authorName: author === 'kai' ? 'Kai Nakamura' : author === 'arun' ? 'Dr. Arun Mehta' : author === 'marina' ? 'Dr. Marina Kowalski' : 'Cosmos Editorial Desk'
+    authorName: author === 'kai' ? 'Kai Nakamura' : author === 'arun' ? 'Dr. Arun Mehta' : author === 'marina' ? 'Dr. Marina Kowalski' : 'Signal Insight Editorial Desk'
   });
 
   // 2. Discover Cross-Links from cross-links.yml

@@ -76,7 +76,7 @@ Consider an interface for an image analysis microservice defined in WIT:
 
 ```wit
 // analyzer.wit
-package microsignal:vision@0.1.0;
+package signalinsight:vision@0.1.0;
 
 interface analyzer {
     record dimensions {
@@ -126,7 +126,7 @@ fn handle_request(req: Request) -> anyhow::Result<impl IntoResponse> {
 }
 ```
 
-Compiling this with `cargo component build --release` produces a self-contained 2.1MB binary. When dispatched by [Cloudflare Workers](https://workers.cloudflare.com/?ref=microsignal_wasm) ★ or Fastly Compute, the runtime instantiates the worker, executes the handler, and tears down the memory instance in less than **2 milliseconds total turnaround time**.
+Compiling this with `cargo component build --release` produces a self-contained 2.1MB binary. When dispatched by [Cloudflare Workers](https://workers.cloudflare.com/?ref=signalinsight_wasm) ★ or Fastly Compute, the runtime instantiates the worker, executes the handler, and tears down the memory instance in less than **2 milliseconds total turnaround time**.
 
 ---
 
@@ -141,7 +141,7 @@ Does your workload require custom Linux kernel modules or direct hardware driver
              └── NO ──> Standard Go / Rust Container on Cloud VPS
 ```
 
-For teams building self-hosted distributed systems or deploying edge microservices, deploying lightweight Wasm runtimes atop virtual private servers from [DigitalOcean](https://www.digitalocean.com/?ref=microsignal_wasm) ★ provides massive cost savings over managed Kubernetes clusters.
+For teams building self-hosted distributed systems or deploying edge microservices, deploying lightweight Wasm runtimes atop virtual private servers from [DigitalOcean](https://www.digitalocean.com/?ref=signalinsight_wasm) ★ provides massive cost savings over managed Kubernetes clusters.
 
 ---
 

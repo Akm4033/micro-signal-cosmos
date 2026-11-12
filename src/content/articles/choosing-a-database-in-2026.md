@@ -68,7 +68,7 @@ Through its modular extension system, PostgreSQL has swallowed up domains that p
 
 Historically, scaling Postgres meant managing connection pooling proxies (PgBouncer), allocating fixed EC2 disk storage, and wrestling with read replicas.
 
-Modern cloud Postgres platforms like [Neon](https://neon.tech/?utm_source=microsignal_database-selection) ★ and [Supabase](https://supabase.com/?utm_source=microsignal_database-selection) ★ separate storage from compute:
+Modern cloud Postgres platforms like [Neon](https://neon.tech/?utm_source=signalinsight_database-selection) ★ and [Supabase](https://supabase.com/?utm_source=signalinsight_database-selection) ★ separate storage from compute:
 - **Instant Database Branching**: Create a copy-on-write database branch for every pull request in 500ms.
 - **Scale to Zero**: Compute instances sleep when idle, cutting staging and preview database costs to $0.
 - **Bottomless Cloud Storage**: Storage scales automatically on S3/NVMe backplanes without manual volume resizing.
@@ -85,7 +85,7 @@ In 2026, two innovations changed everything:
 In WAL mode, readers do not block writers, and writers do not block readers. A single SQLite instance on modern NVMe drives can comfortably execute **over 50,000 read queries per second** with sub-millisecond latency.
 
 ### 2. Distributed Edge SQLite (Turso / libSQL)
-[Turso](https://turso.tech/?ref=microsignal_database-selection) ★ extends SQLite with replication over HTTP and WebSocket protocols:
+[Turso](https://turso.tech/?ref=signalinsight_database-selection) ★ extends SQLite with replication over HTTP and WebSocket protocols:
 - An edge worker in Sydney reads from a local in-memory SQLite replica (**< 1ms response**).
 - Writes are asynchronously forwarded to a primary database region.
 - Ideal for user sessions, multi-tenant B2B apps, and distributed edge workers.
@@ -102,7 +102,7 @@ Are you storing fewer than 500,000 vector embeddings?
    │           Keep your application data and vectors in the same ACID database!
    └── NO
         └── Are you searching across 10M+ vectors with dynamic payload filtering at 500+ QPS?
-             ├── YES ──> Dedicated Vector Engine ([Qdrant Cloud](https://qdrant.tech/?partner=microsignal_database-selection) ★ / Pinecone)
+             ├── YES ──> Dedicated Vector Engine ([Qdrant Cloud](https://qdrant.tech/?partner=signalinsight_database-selection) ★ / Pinecone)
              └── NO ──> Optimize pgvector with unlogged tables or memory caching.
 ```
 
@@ -112,13 +112,13 @@ Are you storing fewer than 500,000 vector embeddings?
 
 ```
 Need transactional integrity, relational joins, and maximum ecosystem support?
-   └──> PostgreSQL ([Neon](https://neon.tech/?utm_source=microsignal_database-selection) ★ / [Supabase](https://supabase.com/?utm_source=microsignal_database-selection) ★)
+   └──> PostgreSQL ([Neon](https://neon.tech/?utm_source=signalinsight_database-selection) ★ / [Supabase](https://supabase.com/?utm_source=signalinsight_database-selection) ★)
 
 Building a lightweight microservice, CLI tool, or edge application?
-   └──> SQLite / libSQL ([Turso](https://turso.tech/?ref=microsignal_database-selection) ★)
+   └──> SQLite / libSQL ([Turso](https://turso.tech/?ref=signalinsight_database-selection) ★)
 
 Need in-memory sub-millisecond caching or pub/sub queues?
-   └──> Redis / Dragonfly ([Upstash Serverless Redis](https://upstash.com/?utm_source=microsignal_database-selection) ★)
+   └──> Redis / Dragonfly ([Upstash Serverless Redis](https://upstash.com/?utm_source=signalinsight_database-selection) ★)
 
 Running local analytical queries on massive CSV / Parquet datasets?
    └──> DuckDB

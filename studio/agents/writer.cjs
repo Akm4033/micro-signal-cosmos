@@ -21,7 +21,7 @@ async function runWritingAgent({ topic, category = 'technology', researchData = 
     science: 'Arun Mehta (Astrophysicist)',
     'developer-tools': 'Marina Kowalski (Systems Engineer)'
   };
-  const authorPersona = authorPersonas[cat] || 'Cosmos Systems Engineer';
+  const authorPersona = authorPersonas[cat] || 'Signal Insight Systems Engineer';
 
   const sourcesList = (researchData.sources || []).map(s => `- ${s.title} (${s.source || s.url})`).join('\n');
   const invariantsList = (researchData.invariants || []).map(i => `- ${i}`).join('\n');

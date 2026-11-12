@@ -7,7 +7,7 @@
 ## Phase 1: Domain & Infrastructure (Owner Action Required)
 
 - [ ] **Domain Approval & Purchase:**
-  - Secure the official production domain (e.g. `microsignalcosmos.com`).
+  - Secure the official production domain (e.g. `signal-insight.pages.dev`).
   - Configure DNS records to point to the chosen hosting provider (Cloudflare Pages or Netlify).
 - [ ] **SSL / TLS Certificate:**
   - Verify HTTPS certificate is active (`Full (strict)` mode on Cloudflare).
@@ -22,9 +22,9 @@
 
 All editorial placeholders have been replaced with honest, digital-first publication disclosures and contact channels:
 
-- [x] **`src/pages/contact.astro`**: Formalized editorial inboxes (`editorial@microsignalcosmos.com`, `corrections@microsignalcosmos.com`, `contact@microsignalcosmos.com`) with clean digital-first publishing disclosures.
-- [x] **`src/pages/privacy-policy.astro` & `src/pages/privacy.astro`**: Established effective date (November 2026), dedicated privacy desk (`privacy@microsignalcosmos.com`), and dual-route support (`/privacy` and `/privacy-policy`).
-- [x] **`src/pages/terms.astro`**: Clean terms of service with designated legal desk (`legal@microsignalcosmos.com`) and standard electronic publishing governance.
+- [x] **`src/pages/contact.astro`**: Formalized editorial inboxes (`editorial@signal-insight.pages.dev`, `corrections@signal-insight.pages.dev`, `contact@signal-insight.pages.dev`) with clean digital-first publishing disclosures.
+- [x] **`src/pages/privacy-policy.astro` & `src/pages/privacy.astro`**: Established effective date (November 2026), dedicated privacy desk (`privacy@signal-insight.pages.dev`), and dual-route support (`/privacy` and `/privacy-policy`).
+- [x] **`src/pages/terms.astro`**: Clean terms of service with designated legal desk (`legal@signal-insight.pages.dev`) and standard electronic publishing governance.
 - [x] **`src/pages/disclaimer.astro`**: Clear educational, scientific, and technical disclaimers with direct corrections and reader communication channels.
 - [x] **Monetization Architecture**: Pre-allocated zero-CLS ad placement slots (Above-the-fold, Mid-article in-feed, Post-article) ready for ad network script insertion.
 
@@ -39,7 +39,7 @@ All editorial placeholders have been replaced with honest, digital-first publica
   - The form automatically handles honeypot spam protection and live dispatch.
 - [ ] **Social Media Verification:**
   - Verify Facebook link (`https://www.facebook.com/profile.php?id=61596288235891`).
-  - Verify YouTube link (`https://www.youtube.com/@MicroSignalCosmos`).
+  - Verify YouTube link (`https://www.youtube.com/@SignalInsight`).
   - Update any future handles (X / Bluesky / LinkedIn) in `Footer.astro` and `contact.astro`.
 
 ---

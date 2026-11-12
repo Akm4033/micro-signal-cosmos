@@ -1,6 +1,6 @@
 # Signal Insight — Monetization & Traffic Growth Guide
 
-This guide details the monetization architecture, traffic analytics, affiliate linking standards, and privacy compliance systems implemented across [microsignalcosmos.com](https://microsignalcosmos.com).
+This guide details the monetization architecture, traffic analytics, affiliate linking standards, and privacy compliance systems implemented across [signal-insight.pages.dev](https://signal-insight.pages.dev).
 
 ---
 
@@ -45,7 +45,7 @@ Configure these variables in your **Cloudflare Pages Dashboard** (`Project Setti
 * **Homepage Transition:** Horizontal responsive banner between the Latest Articles feed and Popular stream (`HomepageAd`).
 
 ### Step-by-Step Activation (Once Approved)
-1. Apply directly through [Google AdSense](https://adsense.google.com/) with your production custom domain (`https://microsignalcosmos.com`).
+1. Apply directly through [Google AdSense](https://adsense.google.com/) with your production custom domain (`https://signal-insight.pages.dev`).
 2. Once approved, note your publisher ID (format: `ca-pub-XXXXXXXXXXXXXXXX`).
 3. In Cloudflare Pages:
    - Navigate to **Workers & Pages** > **Signal Insight** > **Settings** > **Environment variables**.

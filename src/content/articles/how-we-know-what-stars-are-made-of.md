@@ -119,7 +119,7 @@ Modern spectrographs no longer rely on simple glass prisms. Instruments like the
 - **Diffraction Gratings**: Silicon plates etched with thousands of microscopic grooves per millimeter, achieving extreme spectral resolution ($R = \lambda / \Delta \lambda > 2,700$).
 - **Microshutter Arrays**: 250,000 individually controllable micro-shutters that capture the spectra of hundreds of distant galaxies simultaneously in a single exposure.
 
-For readers looking to explore the mathematical foundations of astrophysics and quantum mechanics through interactive problem-solving, [Brilliant.org](https://brilliant.org/?ref=microsignal_astrophysics) ★ provides comprehensive foundational courses in orbital mechanics and quantum physics.
+For readers looking to explore the mathematical foundations of astrophysics and quantum mechanics through interactive problem-solving, [Brilliant.org](https://brilliant.org/?ref=signalinsight_astrophysics) ★ provides comprehensive foundational courses in orbital mechanics and quantum physics.
 
 ---
 

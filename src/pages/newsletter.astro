@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://Signal Insight.pages.dev');
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const newsletterUrl = `${siteUrl}/newsletter/`;
 const rssUrl = `${siteUrl}/rss.xml`;
 const configuredEmail = import.meta.env.PUBLIC_CONTACT_EMAIL || '';

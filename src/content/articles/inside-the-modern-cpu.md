@@ -155,7 +155,7 @@ To diagnose performance bottlenecks in production systems, engineers use hardwar
 - **Linux `perf`**: Measures cache miss rates, IPC, and branch mispredictions directly from hardware counters (`perf stat -e cache-misses,branch-misses,instructions,cycles`).
 - **Intel VTune Profiler** & **AMD uProf**: Industry-standard profiling tools that map microarchitectural bottlenecks directly to source code lines.
 
-For engineers hosting performance-critical systems and compiling bare-metal workloads, high-frequency dedicated bare metal nodes from [Hetzner Cloud](https://hetzner.cloud/?ref=microsignal_cpu-architecture) ★ provide unshared physical cores with predictable memory bandwidth.
+For engineers hosting performance-critical systems and compiling bare-metal workloads, high-frequency dedicated bare metal nodes from [Hetzner Cloud](https://hetzner.cloud/?ref=signalinsight_cpu-architecture) ★ provide unshared physical cores with predictable memory bandwidth.
 
 ---
 

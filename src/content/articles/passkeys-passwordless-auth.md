@@ -87,7 +87,7 @@ A common source of architectural confusion is the distinction between **Synced P
 
 | Feature | Synced Passkeys (Multi-Device) | Device-Bound Passkeys (Single Device) |
 |---|---|---|
-| **Storage Medium** | Cloud Keychains (iCloud Keychain, Google Password Manager, 1Password) | Physical Hardware Security Key (e.g. [YubiKey](https://www.yubico.com/?aff=microsignal_passkeys) ★) |
+| **Storage Medium** | Cloud Keychains (iCloud Keychain, Google Password Manager, 1Password) | Physical Hardware Security Key (e.g. [YubiKey](https://www.yubico.com/?aff=signalinsight_passkeys) ★) |
 | **Sync Mechanism** | End-to-end encrypted sync across user devices | Non-exportable hardware chip; strictly local |
 | **Recovery** | Recoverable if phone is lost via cloud account | Requires registered backup key |
 | **Target Audience** | Consumer applications & broad B2B SaaS | High-security infrastructure, military, and financial administrators |
@@ -98,7 +98,7 @@ For consumer SaaS, supporting **Synced Passkeys** is essential: if a user drops 
 
 ## 4. Implementation in Modern Web Applications
 
-Implementing WebAuthn natively requires encoding ArrayBuffers and parsing CBOR binaries. Modern teams typically leverage open-source libraries (such as `@simplewebauthn/browser` and `@simplewebauthn/server`) or complete auth platforms like [Clerk](https://clerk.com/?ref=microsignal_passkeys) ★.
+Implementing WebAuthn natively requires encoding ArrayBuffers and parsing CBOR binaries. Modern teams typically leverage open-source libraries (such as `@simplewebauthn/browser` and `@simplewebauthn/server`) or complete auth platforms like [Clerk](https://clerk.com/?ref=signalinsight_passkeys) ★.
 
 ```javascript
 // Client-side authentication with SimpleWebAuthn
@@ -137,7 +137,7 @@ async function handlePasskeyLogin() {
 
 1. **Offer Passkeys as an opt-in upgrade first**: Allow existing password users to add a passkey in their security settings.
 2. **Implement Conditional UI (Autofill)**: Use `autocomplete="username webauthn"` on inputs so users can tap their passkey directly from the system keyboard suggestions.
-3. **Always prompt for a backup passkey**: Encourage users to register both their phone and a secondary device or password manager like [1Password](https://1password.com/?aff=microsignal_passkeys) ★ or physical [YubiKey](https://www.yubico.com/?aff=microsignal_passkeys) ★.
+3. **Always prompt for a backup passkey**: Encourage users to register both their phone and a secondary device or password manager like [1Password](https://1password.com/?aff=signalinsight_passkeys) ★ or physical [YubiKey](https://www.yubico.com/?aff=signalinsight_passkeys) ★.
 
 ---
 

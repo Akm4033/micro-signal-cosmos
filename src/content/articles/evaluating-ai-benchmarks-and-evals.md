@@ -171,7 +171,7 @@ jobs:
           "
 ```
 
-For comprehensive enterprise trace tracking, dataset versioning, and continuous production monitoring, tools like [Weights & Biases](https://wandb.ai/?ref=microsignal_evals) ★ and [LangSmith](https://www.langchain.com/langsmith?ref=microsignal_evals) ★ offer real-time telemetry over multi-step agent graphs.
+For comprehensive enterprise trace tracking, dataset versioning, and continuous production monitoring, tools like [Weights & Biases](https://wandb.ai/?ref=signalinsight_evals) ★ and [LangSmith](https://www.langchain.com/langsmith?ref=signalinsight_evals) ★ offer real-time telemetry over multi-step agent graphs.
 
 ---
 

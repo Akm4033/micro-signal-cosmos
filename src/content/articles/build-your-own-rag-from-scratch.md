@@ -108,7 +108,7 @@ def recursive_chunk_text(text: str, max_tokens: int = 512, overlap: int = 64) ->
 
 Dense vector search (cosine similarity on embedding vectors) captures general conceptual meaning, but struggles with exact strings (e.g., `"CVE-2024-38077"` or `"User ID 89211"`). Sparse search (BM25) excels at exact matches.
 
-Modern vector databases like [Qdrant Cloud](https://qdrant.tech/?partner=microsignal_rag) ★ implement native **Hybrid Search**:
+Modern vector databases like [Qdrant Cloud](https://qdrant.tech/?partner=signalinsight_rag) ★ implement native **Hybrid Search**:
 
 ```python
 # qdrant_hybrid_search.py
@@ -196,7 +196,7 @@ Grounded Technical Response:
 """
 ```
 
-For teams looking for fully managed, high-performance vector infrastructure with built-in hybrid search, [Qdrant Cloud](https://qdrant.tech/?partner=microsignal_rag) ★ and [Pinecone](https://www.pinecone.io/?ref=microsignal_rag) ★ provide native sub-10ms query execution with multi-tenant namespaces.
+For teams looking for fully managed, high-performance vector infrastructure with built-in hybrid search, [Qdrant Cloud](https://qdrant.tech/?partner=signalinsight_rag) ★ and [Pinecone](https://www.pinecone.io/?ref=signalinsight_rag) ★ provide native sub-10ms query execution with multi-tenant namespaces.
 
 ---
 

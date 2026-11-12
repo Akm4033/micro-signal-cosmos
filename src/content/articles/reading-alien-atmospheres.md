@@ -119,7 +119,7 @@ All raw and calibrated data from the Hubble and James Webb Space Telescopes is c
 
 Using Python packages like `astropy`, `lightkurve`, and `eureka!`, independent researchers and computer science students can download raw pixel time-series data, extract stellar light curves, and reproduce exoplanet transmission spectra on their own laptops.
 
-For scientists and data researchers requiring high-memory Jupyter compute instances to reduce massive MAST FITS data cubes, cloud environments like [DigitalOcean Droplets](https://www.digitalocean.com/?ref=microsignal_alien-atmospheres) ★ provide immediate, reproducible scientific compute.
+For scientists and data researchers requiring high-memory Jupyter compute instances to reduce massive MAST FITS data cubes, cloud environments like [DigitalOcean Droplets](https://www.digitalocean.com/?ref=signalinsight_alien-atmospheres) ★ provide immediate, reproducible scientific compute.
 
 ---
 

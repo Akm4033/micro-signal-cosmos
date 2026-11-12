@@ -35,7 +35,7 @@
 
   <g transform="translate(80, 545)">
     <!-- Brand / Tagline -->
-    <text x="0" y="0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">MICRO SIGNAL <tspan fill="#10b981">COSMOS</tspan></text>
+    <text x="0" y="0" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">SIGNAL <tspan fill="#10b981">INSIGHT</tspan></text>
     <text x="0" y="24" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#9ca3af" letter-spacing="0.15em">DISCOVER MORE. UNDERSTAND BETTER.</text>
 
     <!-- Author & Reading time -->

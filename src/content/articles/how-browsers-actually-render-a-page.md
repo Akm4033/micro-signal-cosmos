@@ -181,7 +181,7 @@ To diagnose bottlenecks in the rendering path, open Chrome DevTools, navigate to
 | **Paint** | `Paint` | Reduce complex CSS blur filters and non-promoted transforms |
 | **Composite** | `Composite Layers` | Animate strictly `transform` and `opacity` properties |
 
-For enterprise observability across client interactions, modern teams rely on specialized monitoring platforms like [Datadog](https://www.datadoghq.com/?ref=microsignal_browser-rendering) ★ and [Sentry Performance Monitoring](https://sentry.io/?ref=microsignal_browser-rendering) ★ to trace real-user Core Web Vitals (INP, LCP, CLS) across global network edges.
+For enterprise observability across client interactions, modern teams rely on specialized monitoring platforms like [Datadog](https://www.datadoghq.com/?ref=signalinsight_browser-rendering) ★ and [Sentry Performance Monitoring](https://sentry.io/?ref=signalinsight_browser-rendering) ★ to trace real-user Core Web Vitals (INP, LCP, CLS) across global network edges.
 
 ---
 

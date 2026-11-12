@@ -41,7 +41,7 @@ const categoriesWithArticles = CATEGORIES.filter((c) => {
   });
 });
 
-const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://Signal Insight.pages.dev');
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
 const categoryUrl = `${siteUrl}/category/${category.slug}/`;
 ---
 
