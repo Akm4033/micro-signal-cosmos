@@ -1,5 +1,5 @@
 /**
- * Micro Signal Cosmos — AI Editorial Studio Client Application (Phase 5 Edition)
+ * Signal Insight — AI Editorial Studio Client Application (Phase 5 Edition)
  * Modular, reactive interface for topics, autonomous multi-agent pipelines,
  * human review queues, dual-pane markdown editing, safety controls, and publishing.
  */

@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
-  <!-- CURION Brand Emblem: Knowledge Discovery & Global Exploration -->
+  <!-- Signal Insight Brand Emblem: Knowledge Discovery & Global Exploration -->
   <defs>
-    <linearGradient id="curion-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="Signal Insight-grad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#38bdf8"/>
       <stop offset="50%" stop-color="#1d4ed8"/>
       <stop offset="100%" stop-color="#8b5cf6"/>
@@ -20,7 +20,7 @@
   <circle cx="64" cy="64" r="46" fill="url(#beacon-glow)"/>
 
   <!-- Orbital Knowledge Ring (Stylized Open 'C' Arc) -->
-  <path d="M 88 38 A 38 38 0 1 0 88 90" stroke="url(#curion-grad)" stroke-width="7" stroke-linecap="round"/>
+  <path d="M 88 38 A 38 38 0 1 0 88 90" stroke="url(#Signal Insight-grad)" stroke-width="7" stroke-linecap="round"/>
 
   <!-- Internal Precision Vector Grid -->
   <line x1="26" y1="64" x2="102" y2="64" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 3" stroke-opacity="0.5"/>

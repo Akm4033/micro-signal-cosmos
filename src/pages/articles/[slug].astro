@@ -93,11 +93,11 @@ const relatedForProps = relatedArticlesData.map((a) => ({
 
 // Page Title & Meta Description
 const rawSeoTitle = article.data.seoTitle || article.data.title;
-const cleanSeoTitle = rawSeoTitle.replace(/\s*\|\s*CURION\s*$/i, '');
-const pageTitle = `${cleanSeoTitle} | CURION`;
+const cleanSeoTitle = rawSeoTitle.replace(/\s*\|\s*Signal Insight\s*$/i, '');
+const pageTitle = `${cleanSeoTitle} | Signal Insight`;
 const pageDescription = article.data.seoDescription || article.data.description;
 
-const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://Signal Insight.pages.dev');
 const articleUrl = `${siteUrl}/articles/${currentSlug}/`;
 
 const articleSchema = {
@@ -116,7 +116,7 @@ const articleSchema = {
   },
   "publisher": {
     "@type": "Organization",
-    "name": "CURION",
+    "name": "Signal Insight",
     "url": siteUrl,
     "logo": {
       "@type": "ImageObject",

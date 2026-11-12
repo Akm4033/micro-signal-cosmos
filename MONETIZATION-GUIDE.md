@@ -1,4 +1,4 @@
-# Micro Signal Cosmos — Monetization & Traffic Growth Guide
+# Signal Insight — Monetization & Traffic Growth Guide
 
 This guide details the monetization architecture, traffic analytics, affiliate linking standards, and privacy compliance systems implemented across [microsignalcosmos.com](https://microsignalcosmos.com).
 
@@ -6,7 +6,7 @@ This guide details the monetization architecture, traffic analytics, affiliate l
 
 ## 1. Architectural Principles
 
-Micro Signal Cosmos is an independent blogging and knowledge-sharing platform. Our monetization architecture is engineered with the following non-negotiable standards:
+Signal Insight is an independent blogging and knowledge-sharing platform. Our monetization architecture is engineered with the following non-negotiable standards:
 
 1. **Disabled by Default:** All advertising containers, third-party network scripts, and analytics collectors remain **completely disabled** until you explicitly provide your genuine account IDs via environment variables.
 2. **Zero Empty Containers & Zero Layout Shift (CLS):** When advertising is disabled, the website renders **zero empty boxes, borders, or blank gaps**. When advertising is enabled, containers reserve fixed min-heights matching standard IAB dimensions to eliminate Cumulative Layout Shift.
@@ -48,7 +48,7 @@ Configure these variables in your **Cloudflare Pages Dashboard** (`Project Setti
 1. Apply directly through [Google AdSense](https://adsense.google.com/) with your production custom domain (`https://microsignalcosmos.com`).
 2. Once approved, note your publisher ID (format: `ca-pub-XXXXXXXXXXXXXXXX`).
 3. In Cloudflare Pages:
-   - Navigate to **Workers & Pages** > **micro-signal-cosmos** > **Settings** > **Environment variables**.
+   - Navigate to **Workers & Pages** > **Signal Insight** > **Settings** > **Environment variables**.
    - Add `PUBLIC_ADS_ENABLED = "true"`.
    - Add `PUBLIC_ADSENSE_CLIENT_ID = "ca-pub-XXXXXXXXXXXXXXXX"`.
    - Save and trigger a deployment.
@@ -58,7 +58,7 @@ Configure these variables in your **Cloudflare Pages Dashboard** (`Project Setti
 
 ## 4. Affiliate Monetization & Ethical Disclosures
 
-Micro Signal Cosmos supports legitimate affiliate relationships for recommending genuinely useful developer tools, software platforms, and science books.
+Signal Insight supports legitimate affiliate relationships for recommending genuinely useful developer tools, software platforms, and science books.
 
 ### FTC & Search Engine Compliance
 Whenever an article contains affiliate links:

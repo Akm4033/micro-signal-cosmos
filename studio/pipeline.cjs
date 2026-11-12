@@ -1,5 +1,5 @@
 /**
- * Micro Signal Cosmos — Master Autonomous Pipeline & Guardrails
+ * Signal Insight — Master Autonomous Pipeline & Guardrails
  * Coordinates the 4 specialized agents in sequence:
  * 1. ResearchAgent -> 2. WritingAgent -> 3. ReviewingAgent -> 4. SeoAgent
  * Enforces rate limits (max 2/day), API budget caps, idempotency locks,

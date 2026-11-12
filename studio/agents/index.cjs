@@ -1,5 +1,5 @@
 /**
- * Micro Signal Cosmos — Specialized Agent Team
+ * Signal Insight — Specialized Agent Team
  * Centralized exports for the 4 autonomous editorial pipeline agents:
  * 1. ResearchAgent (Primary source compilation & citation verification)
  * 2. WritingAgent (Systems deep dive authoring with multi-LLM routing)

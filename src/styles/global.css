@@ -7,7 +7,7 @@
   }
 
   :root {
-    /* CURION Light Editorial Tokens */
+    /* Signal Insight Light Editorial Tokens */
     --bg-main: #F8FAFC;
     --bg-surface: #FFFFFF;
     --bg-card: #FFFFFF;
@@ -29,7 +29,7 @@
   }
 
   html.dark {
-    /* CURION Deep Cosmic Midnight Tokens */
+    /* Signal Insight Deep Cosmic Midnight Tokens */
     --bg-main: #05070E;
     --bg-surface: #0B101D;
     --bg-card: #0B101D;
@@ -70,8 +70,8 @@
     }
 
     .card-editorial:hover, .card-midnight:hover,
-    .btn-primary:hover, .btn-3d-primary:hover, .btn-curion-primary:hover, .btn-electric:hover,
-    .btn-ghost:hover, .btn-secondary:hover, .btn-3d-secondary:hover, .btn-curion-secondary:hover {
+    .btn-primary:hover, .btn-3d-primary:hover, .btn-Signal Insight-primary:hover, .btn-electric:hover,
+    .btn-ghost:hover, .btn-secondary:hover, .btn-3d-secondary:hover, .btn-Signal Insight-secondary:hover {
       transform: none !important;
     }
 
@@ -260,7 +260,7 @@
   html.dark .badge--devtools { background-color: rgba(245, 158, 11, 0.15); color: #FCD34D; border-color: rgba(245, 158, 11, 0.3); }
 
   /* Professional Buttons */
-  .btn-primary, .btn-3d-primary, .btn-curion-primary, .btn-electric {
+  .btn-primary, .btn-3d-primary, .btn-Signal Insight-primary, .btn-electric {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -281,21 +281,21 @@
     min-height: 42px;
     max-width: 100%;
   }
-  html.dark .btn-primary, html.dark .btn-3d-primary, html.dark .btn-curion-primary, html.dark .btn-electric {
+  html.dark .btn-primary, html.dark .btn-3d-primary, html.dark .btn-Signal Insight-primary, html.dark .btn-electric {
     background-color: #3B82F6;
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.25);
   }
-  .btn-primary:hover, .btn-3d-primary:hover, .btn-curion-primary:hover, .btn-electric:hover {
+  .btn-primary:hover, .btn-3d-primary:hover, .btn-Signal Insight-primary:hover, .btn-electric:hover {
     background-color: #1D4ED8;
     transform: translateY(-1px);
     box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
   }
-  html.dark .btn-primary:hover, html.dark .btn-3d-primary:hover, html.dark .btn-curion-primary:hover, html.dark .btn-electric:hover {
+  html.dark .btn-primary:hover, html.dark .btn-3d-primary:hover, html.dark .btn-Signal Insight-primary:hover, html.dark .btn-electric:hover {
     background-color: #60A5FA;
     color: #05070E !important;
     box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);
   }
-  .btn-primary:active, .btn-3d-primary:active, .btn-curion-primary:active, .btn-electric:active {
+  .btn-primary:active, .btn-3d-primary:active, .btn-Signal Insight-primary:active, .btn-electric:active {
     transform: translateY(0);
   }
 
@@ -328,7 +328,7 @@
     color: #60A5FA;
   }
 
-  .btn-secondary, .btn-3d-secondary, .btn-curion-secondary {
+  .btn-secondary, .btn-3d-secondary, .btn-Signal Insight-secondary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -349,7 +349,7 @@
     min-height: 42px;
     max-width: 100%;
   }
-  .btn-secondary:hover, .btn-3d-secondary:hover, .btn-curion-secondary:hover {
+  .btn-secondary:hover, .btn-3d-secondary:hover, .btn-Signal Insight-secondary:hover {
     border-color: #2563EB;
     color: #2563EB;
     background-color: var(--brand-primary-light);

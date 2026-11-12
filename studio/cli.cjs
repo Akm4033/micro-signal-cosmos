@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Micro Signal Cosmos — Command-Line Pipeline Runner
+ * Signal Insight — Command-Line Pipeline Runner
  * Usage:
  *   node studio/cli.cjs --next
  *   node studio/cli.cjs --topic "Speculative Decoding in LLMs" --category "artificial-intelligence"
@@ -41,7 +41,7 @@ async function main() {
     category = row.category;
   } else if (!topicTitle) {
     console.log(`
-Micro Signal Cosmos — Autonomous Editorial Pipeline CLI
+Signal Insight — Autonomous Editorial Pipeline CLI
 ======================================================
 Usage:
   node studio/cli.cjs --next

@@ -1,6 +1,6 @@
-# Micro Signal Cosmos - Article Images Guide
+# Signal Insight - Article Images Guide
 
-This directory holds featured cover images, diagrams, and inline media for Micro Signal Cosmos articles.
+This directory holds featured cover images, diagrams, and inline media for Signal Insight articles.
 
 ## Image Specification Standards
 
@@ -29,7 +29,7 @@ This directory holds featured cover images, diagrams, and inline media for Micro
    coverImage: "/images/articles/quantum-computing-breakthroughs-cover.webp"
    coverImageAlt: "Conceptual visualization of a superconducting quantum processor with luminous qubit circuits"
    coverImageCaption: "Superconducting quantum circuits operating at sub-kelvin temperatures."
-   coverImageCredit: "Micro Signal Cosmos Visual Research / Open Science Commons"
+   coverImageCredit: "Signal Insight Visual Research / Open Science Commons"
    ```
 
 6. **Accessibility & Licensing:**

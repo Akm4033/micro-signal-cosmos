@@ -94,10 +94,10 @@ export const onRequestPost = async (context: { request: Request; env: Env }) => 
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: 'CURION Contact Desk <contact@curion.pages.dev>',
+          from: 'Signal Insight Contact Desk <contact@Signal Insight.pages.dev>',
           to: [contactEmail],
           reply_to: email,
-          subject: `[CURION Contact] ${subject} - from ${name}`,
+          subject: `[Signal Insight Contact] ${subject} - from ${name}`,
           text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`,
         }),
       });
@@ -109,7 +109,7 @@ export const onRequestPost = async (context: { request: Request; env: Env }) => 
         });
       }
 
-      return new Response(JSON.stringify({ success: true, message: 'Your message has been delivered to the CURION editorial desk.' }), {
+      return new Response(JSON.stringify({ success: true, message: 'Your message has been delivered to the Signal Insight editorial desk.' }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
       });
@@ -123,15 +123,15 @@ export const onRequestPost = async (context: { request: Request; env: Env }) => 
           access_key: web3formsKey,
           name,
           email,
-          subject: `[CURION] ${subject}`,
+          subject: `[Signal Insight] ${subject}`,
           message,
-          from_name: 'CURION Contact Desk',
+          from_name: 'Signal Insight Contact Desk',
         }),
       });
 
       const w3Json = (await w3Res.json().catch(() => ({}))) as Record<string, any>;
       if (w3Json.success) {
-        return new Response(JSON.stringify({ success: true, message: 'Your message has been delivered to the CURION editorial desk.' }), {
+        return new Response(JSON.stringify({ success: true, message: 'Your message has been delivered to the Signal Insight editorial desk.' }), {
           status: 200,
           headers: { 'Content-Type': 'application/json' },
         });

@@ -1,5 +1,5 @@
 /**
- * Micro Signal Cosmos — ReviewingAgent
+ * Signal Insight — ReviewingAgent
  * Automated pre-flight quality gatekeeper. Performs strict factual grounding checks,
  * citation validation, code runnability review, and AI cliche penalties.
  */

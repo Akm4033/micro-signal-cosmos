@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://Signal Insight.pages.dev');
 const newsletterUrl = `${siteUrl}/newsletter/`;
 const rssUrl = `${siteUrl}/rss.xml`;
 const configuredEmail = import.meta.env.PUBLIC_CONTACT_EMAIL || '';
@@ -10,7 +10,7 @@ const contactEmail = hasContactEmail ? configuredEmail.trim() : '';
 ---
 
 <Base
-  title="CURION Briefings: Systems & AI Syndication | CURION"
+  title="Signal Insight Briefings: Systems & AI Syndication | Signal Insight"
   description="Weekly technical deep dives into browser internals, LLM architectures, distributed databases, and astrophysics. Free, zero tracking, open RSS 2.0 syndication."
   canonical={newsletterUrl}
   ogImage="/favicon.svg"
@@ -34,7 +34,7 @@ const contactEmail = hasContactEmail ? configuredEmail.trim() : '';
         
         <div class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3.5 py-1 text-xs font-bold tracking-widest text-brand-primary uppercase shadow-xs dark:border-white/[0.08] dark:bg-[#070B14] dark:text-blue-400 font-mono text-[10.5px]">
           <span class="h-1.5 w-1.5 rounded-full bg-brand-primary dark:bg-blue-400"></span>
-          <span>CURION BRIEFINGS &amp; SYNDICATION</span>
+          <span>Signal Insight BRIEFINGS &amp; SYNDICATION</span>
         </div>
 
         <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl lg:text-5xl leading-tight">
@@ -112,7 +112,7 @@ const contactEmail = hasContactEmail ? configuredEmail.trim() : '';
               {hasContactEmail ? (
                 <>
                   <a
-                    href={`mailto:${contactEmail}?subject=Subscribe%20to%20CURION%20Briefings&body=Please%20add%20my%20email%20address%20to%20the%20CURION%20weekly%20editorial%20dispatch.`}
+                    href={`mailto:${contactEmail}?subject=Subscribe%20to%20Signal Insight%20Briefings&body=Please%20add%20my%20email%20address%20to%20the%20Signal Insight%20weekly%20editorial%20dispatch.`}
                     class="w-full py-2.5 px-4 rounded-xl border border-neutral-300 bg-white text-xs font-bold uppercase tracking-wider text-slate-700 hover:bg-slate-100 dark:border-neutral-600 dark:bg-neutral-800 dark:text-slate-200 transition-colors text-center inline-flex items-center justify-center gap-1.5"
                   >
                     <span>Send Subscription Request</span>

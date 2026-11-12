@@ -1,8 +1,8 @@
-# Micro Signal Cosmos — Production Deployment Guide
+# Signal Insight — Production Deployment Guide
 
 *Discover More. Understand Better.*
 
-This guide provides step-by-step instructions for deploying the **Micro Signal Cosmos** static publishing platform to production.
+This guide provides step-by-step instructions for deploying the **Signal Insight** static publishing platform to production.
 
 ---
 
@@ -30,7 +30,7 @@ The website compiles to 100% static HTML, CSS, client-side assets, RSS 2.0 XML, 
 | **Commercial Terms** | Generous, creator-friendly | Fair use limits | Strict non-commercial limit on hobby tier |
 
 ### Primary Recommendation: Cloudflare Pages
-**Cloudflare Pages** is recommended as the primary hosting platform for Micro Signal Cosmos:
+**Cloudflare Pages** is recommended as the primary hosting platform for Signal Insight:
 1. **Unlimited Bandwidth:** Crucial for a media magazine as traffic grows and articles circulate on social platforms.
 2. **Lowest Global Latency:** Direct integration with Cloudflare's Anycast edge delivers sub-50ms TTFB worldwide.
 3. **HTTP/3 & Automatic Brotli/Gzip:** Enabled automatically out-of-the-box.
@@ -46,18 +46,18 @@ The website compiles to 100% static HTML, CSS, client-side assets, RSS 2.0 XML, 
 Ensure all code is committed to your repository:
 ```bash
 git remote -v
-# origin  https://github.com/Akm4033/micro-signal-cosmos.git
+# origin  https://github.com/Akm4033/Signal Insight.git
 ```
 
 ### Step 2: Connect Repository to Cloudflare Pages
 1. Sign in to the [Cloudflare Dashboard](https://dash.cloudflare.com/).
 2. In the left navigation, select **Workers & Pages** > **Create application** > **Pages** > **Connect to Git**.
-3. Select your GitHub account and choose `micro-signal-cosmos`.
+3. Select your GitHub account and choose `Signal Insight`.
 4. Click **Begin setup**.
 
 ### Step 3: Configure Build Settings
 Fill in the deployment settings:
-- **Project Name:** `micro-signal-cosmos`
+- **Project Name:** `Signal Insight`
 - **Production Branch:** `main`
 - **Framework Preset:** `Astro`
 - **Build Command:** `npm run build`
@@ -89,8 +89,8 @@ Add the following DNS records in your registrar's control panel:
 
 | Type | Name / Host | Target / Destination | TTL |
 | :--- | :--- | :--- | :--- |
-| **CNAME** | `@` (or root) | `micro-signal-cosmos.pages.dev` | Auto / 1 Hour |
-| **CNAME** | `www` | `micro-signal-cosmos.pages.dev` | Auto / 1 Hour |
+| **CNAME** | `@` (or root) | `Signal Insight.pages.dev` | Auto / 1 Hour |
+| **CNAME** | `www` | `Signal Insight.pages.dev` | Auto / 1 Hour |
 
 *(Note: If your DNS registrar does not support CNAME flattening on root `@`, use their ALIAS/ANAME record or point nameservers directly to Cloudflare.)*
 
@@ -137,5 +137,5 @@ Do **NOT** submit search console verifications until the real production domain 
   - Both Cloudflare Pages and Netlify store immutable artifacts for every build deployment.
   - In the event of an unwanted change, navigate to the **Deployments** tab in the dashboard, find the previously working commit, and click **Rollback to this deployment**. The previous version goes live at the edge in under 5 seconds.
 - **Preview Deployments:**
-  - Every pull request or non-main branch automatically receives a private preview URL (`https://<branch>.micro-signal-cosmos.pages.dev`) for testing prior to merging to `main`.
+  - Every pull request or non-main branch automatically receives a private preview URL (`https://<branch>.Signal Insight.pages.dev`) for testing prior to merging to `main`.
 

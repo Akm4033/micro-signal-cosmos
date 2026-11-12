@@ -4,7 +4,7 @@ import { getPublishedArticles, getArticleSlug } from '../data/articles';
 
 const allArticles = await getPublishedArticles();
 
-const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://Signal Insight.pages.dev');
 const focusAreasUrl = `${siteUrl}/authors/`;
 
 const focusAreas = [
@@ -45,7 +45,7 @@ const focusAreas = [
 ---
 
 <Base
-  title="Research Focus Areas & Standards | CURION"
+  title="Research Focus Areas & Standards | Signal Insight"
   description="Explore our three specialized research focus areas: Systems & Infrastructure, AI & Machine Learning, and Science & Physics."
   canonical={focusAreasUrl}
 >
@@ -73,7 +73,7 @@ const focusAreas = [
           Three Lenses. <span class="text-brand-primary dark:text-blue-400">One High Standard.</span>
         </h1>
         <p class="mt-4 text-base sm:text-lg leading-relaxed text-text-secondary">
-          CURION organizes its technical investigations into three specialized focus areas. Each area is treated with deep rigor, verified with code or math, and grounded in primary source literature.
+          Signal Insight organizes its technical investigations into three specialized focus areas. Each area is treated with deep rigor, verified with code or math, and grounded in primary source literature.
         </p>
       </header>
 
@@ -156,7 +156,7 @@ const focusAreas = [
         <div class="max-w-3xl mx-auto text-center">
           <h2 class="text-2xl font-bold text-text-primary">Our Editorial Commitment</h2>
           <p class="mt-3 text-sm sm:text-base leading-relaxed text-text-secondary">
-            CURION operates as an independent technical publication assisted by AI research tools. Every article undergoes strict manual verification: code is compiled and executed, mathematical proofs are rechecked, and every factual statement is linked to an authoritative primary source.
+            Signal Insight operates as an independent technical publication assisted by AI research tools. Every article undergoes strict manual verification: code is compiled and executed, mathematical proofs are rechecked, and every factual statement is linked to an authoritative primary source.
           </p>
           <div class="mt-6 flex flex-wrap justify-center gap-4">
             <a href="/about/" class="btn-primary text-xs sm:text-sm">

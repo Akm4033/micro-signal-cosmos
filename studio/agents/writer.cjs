@@ -1,5 +1,5 @@
 /**
- * Micro Signal Cosmos — WritingAgent
+ * Signal Insight — WritingAgent
  * Longform systems authoring (2,000–3,500 words) conforming to the publication's
  * 4 domain lenses with architectural diagrams, production code, and benchmark tables.
  */
@@ -26,7 +26,7 @@ async function runWritingAgent({ topic, category = 'technology', researchData = 
   const sourcesList = (researchData.sources || []).map(s => `- ${s.title} (${s.source || s.url})`).join('\n');
   const invariantsList = (researchData.invariants || []).map(i => `- ${i}`).join('\n');
 
-  const systemPrompt = `You are ${authorPersona}, lead technical writer for Micro Signal Cosmos.
+  const systemPrompt = `You are ${authorPersona}, lead technical writer for Signal Insight.
 You write deeply technical, rigorous longform articles for senior practitioners and systems engineers.
 RULES:
 1. Avoid superficial analogies, corporate buzzwords, and AI cliches ("delve into", "testament to", "in conclusion", "tapestry").

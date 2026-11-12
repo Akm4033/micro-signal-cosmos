@@ -94,7 +94,7 @@ The answer is the **Hierarchical Trust Chain**:
   - Signs Leaf / End-Entity Certificates
         |
         v
-[Leaf Server Certificate] (e.g. curion.internal)
+[Leaf Server Certificate] (e.g. Signal Insight.internal)
   - Contains Subject Alternative Names (SAN)
   - Contains Server Public Key
   - Valid for 90 days

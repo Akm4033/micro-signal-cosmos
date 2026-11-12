@@ -1,5 +1,5 @@
 /**
- * Micro Signal Cosmos — AI Editorial Studio API Server
+ * Signal Insight — AI Editorial Studio API Server
  * Lightweight, zero-dependency Node.js HTTP server.
  * Provides complete REST API for Topic Discovery, Multi-LLM Drafting, Article Editing,
  * Fact-Checking, Approval Workflow, Publishing, and Real-time Auditing.
@@ -784,7 +784,7 @@ const server = http.createServer(async (req, res) => {
 if (require.main === module) {
   server.listen(PORT, () => {
     console.log(`=======================================================`);
-    console.log(` MICRO SIGNAL COSMOS — AI EDITORIAL STUDIO RUNNING`);
+    console.log(` Signal Insight — AI EDITORIAL STUDIO RUNNING`);
     console.log(` Local Dashboard URL: http://localhost:${PORT}`);
     console.log(` API Endpoint:        http://localhost:${PORT}/api/`);
     console.log(` Storage Engine:      .editorial/studio.db (SQLite WAL)`);

@@ -1,5 +1,5 @@
 /**
- * Micro Signal Cosmos — Production Publishing Engine
+ * Signal Insight — Production Publishing Engine
  * Converts approved SQLite article records into strictly typed Astro Markdown collection files.
  * Enforces editorial approval, schema validation, and audit trail logging.
  */

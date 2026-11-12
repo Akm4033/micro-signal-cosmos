@@ -1,5 +1,5 @@
 /**
- * Micro Signal Cosmos — Multi-LLM Provider Engine
+ * Signal Insight — Multi-LLM Provider Engine
  * Modular server-side connector for Anthropic Claude, OpenAI, and Google Gemini.
  * Includes intelligent synthesis, multi-model comparison, and deterministic test fallback.
  */
@@ -21,7 +21,7 @@ async function callOpenAI({ model = 'gpt-4o', systemPrompt, userPrompt, temperat
   const body = {
     model,
     messages: [
-      { role: 'system', content: systemPrompt || 'You are a senior technical writer and systems engineer for Micro Signal Cosmos.' },
+      { role: 'system', content: systemPrompt || 'You are a senior technical writer and systems engineer for Signal Insight.' },
       { role: 'user', content: userPrompt }
     ],
     temperature,
@@ -60,7 +60,7 @@ async function callAnthropic({ model = 'claude-3-5-sonnet-20241022', systemPromp
 
   const body = {
     model,
-    system: systemPrompt || 'You are a principal technical author and researcher for Micro Signal Cosmos.',
+    system: systemPrompt || 'You are a principal technical author and researcher for Signal Insight.',
     messages: [
       { role: 'user', content: userPrompt }
     ],

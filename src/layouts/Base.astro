@@ -13,10 +13,10 @@ interface Props {
 }
 
 const { title, description, canonical, ogImage, author, publishedTime, modifiedTime, noindex = false } = Astro.props;
-const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://Signal Insight.pages.dev');
 const canonicalUrl = canonical || (siteUrl + Astro.url.pathname);
 const ogImageUrl = ogImage || '/favicon.svg';
-const defaultDesc = 'Understand the world. Explore beyond it. CURION is an AI-powered global knowledge discovery and learning platform exploring systems engineering, AI/ML foundations, astrophysics, and developer infrastructure.';
+const defaultDesc = 'Understand the world. Explore beyond it. Signal Insight is an AI-powered global knowledge discovery and learning platform exploring systems engineering, AI/ML foundations, astrophysics, and developer infrastructure.';
 
 const pathname = Astro.url.pathname;
 const navLinks = [
@@ -58,7 +58,7 @@ function isNavActive(href: string) {
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   )}
   <link rel="canonical" href={canonicalUrl}>
-  <meta property="og:site_name" content="CURION">
+  <meta property="og:site_name" content="Signal Insight">
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
   <meta property="og:title" content={title}>
@@ -69,14 +69,14 @@ function isNavActive(href: string) {
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description || defaultDesc}>
   <meta name="twitter:image" content={ogImageUrl}>
-  <link rel="alternate" type="application/rss+xml" title="CURION" href="/rss.xml">
+  <link rel="alternate" type="application/rss+xml" title="Signal Insight" href="/rss.xml">
   <link rel="sitemap" href="/sitemap.xml">
 
   <!-- Immediate Theme Determination to Prevent Flash (Deep Midnight Default) -->
   <script is:inline>
     (function() {
       try {
-        var t = localStorage.getItem('curion_theme');
+        var t = localStorage.getItem('Signal Insight_theme');
         if (t === 'light') {
           document.documentElement.classList.remove('dark');
         } else {
@@ -92,7 +92,7 @@ function isNavActive(href: string) {
       {
         "@type": "Organization",
         "@id": `${siteUrl}/#organization`,
-        "name": "CURION",
+        "name": "Signal Insight",
         "url": siteUrl,
         "logo": {
           "@type": "ImageObject",
@@ -100,12 +100,12 @@ function isNavActive(href: string) {
           "width": 512,
           "height": 512
         },
-        "description": "Understand the world. Explore beyond it. CURION is an AI-powered global knowledge discovery and learning platform."
+        "description": "Understand the world. Explore beyond it. Signal Insight is an AI-powered global knowledge discovery and learning platform."
       },
       {
         "@type": "WebSite",
         "@id": `${siteUrl}/#website`,
-        "name": "CURION",
+        "name": "Signal Insight",
         "url": siteUrl,
         "publisher": { "@id": `${siteUrl}/#organization` },
         "potentialAction": {
@@ -130,7 +130,7 @@ function isNavActive(href: string) {
     <div class="container-wide flex items-center justify-between py-1.5">
       <div class="flex items-center gap-2.5">
         <span class="inline-flex items-center gap-1.5 font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100">
-          <span class="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>CURION
+          <span class="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>Signal Insight
         </span>
         <span aria-hidden="true" class="text-slate-300 dark:text-slate-700">&bull;</span>
         <span class="text-slate-500 dark:text-slate-400 font-mono text-[10.5px]">Open Scientific Research &amp; Systems Platform</span>
@@ -150,7 +150,7 @@ function isNavActive(href: string) {
     <div class="container-wide">
       <div class="flex min-h-16 items-center justify-between gap-3 py-2 sm:py-0">
         <!-- Brand Emblem & Wordmark -->
-        <a href="/" class="shrink-0 flex items-center gap-2.5 sm:gap-3 group py-1" aria-label="CURION Homepage">
+        <a href="/" class="shrink-0 flex items-center gap-2.5 sm:gap-3 group py-1" aria-label="Signal Insight Homepage">
           <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-blue-600 p-1 flex items-center justify-center transition-transform group-hover:scale-105 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
             <svg class="w-full h-full" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="64" cy="64" r="44" stroke="#ffffff" stroke-width="7" stroke-opacity="0.35"/>
@@ -159,7 +159,7 @@ function isNavActive(href: string) {
             </svg>
           </div>
           <div class="flex flex-col justify-center">
-            <span class="block text-xl sm:text-2xl font-black tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors dark:text-white leading-none">CURION</span>
+            <span class="block text-xl sm:text-2xl font-black tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors dark:text-white leading-none">Signal Insight</span>
             <span class="block text-[9.5px] font-semibold tracking-[0.16em] text-slate-500 uppercase dark:text-slate-400 mt-1">Explore Beyond</span>
           </div>
         </a>
@@ -193,7 +193,7 @@ function isNavActive(href: string) {
             href="/articles/"
             class="flex h-9 items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 text-xs font-medium text-slate-700 hover:border-blue-400 hover:bg-white hover:text-blue-600 dark:border-white/[0.1] dark:bg-[#0B101D] dark:text-slate-200 dark:hover:border-blue-500/50 dark:hover:bg-[#111827] transition-all"
             aria-label="Search articles"
-            title="Search CURION Knowledge Archive"
+            title="Search Signal Insight Knowledge Archive"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="11" cy="11" r="8"></circle>
@@ -240,7 +240,7 @@ function isNavActive(href: string) {
             </summary>
             <div class="absolute right-0 top-full mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-xl border border-slate-200 bg-white p-4 shadow-xl dark:border-white/[0.1] dark:bg-[#0B101D] z-50" role="dialog" aria-label="Mobile Navigation Menu">
               <div class="mb-3 pb-2 border-b border-slate-100 flex items-center justify-between dark:border-white/[0.08]">
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">CURION Navigation</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Signal Insight Navigation</span>
                 <span class="text-[10px] font-semibold text-blue-600 uppercase font-mono">4 Pillars</span>
               </div>
               <nav class="flex flex-col space-y-1">
@@ -286,13 +286,13 @@ function isNavActive(href: string) {
       <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5">
         <div class="lg:col-span-2">
           <a href="/" class="text-2xl font-black tracking-tight text-white flex items-center gap-2">
-            <span>CURION</span>
+            <span>Signal Insight</span>
           </a>
           <p class="mt-2 text-xs font-bold uppercase tracking-widest text-slate-400">Understand the world. Explore beyond it.</p>
           <p class="mt-3.5 max-w-sm text-xs sm:text-sm leading-relaxed text-slate-300">A global scientific knowledge discovery and learning platform exploring systems engineering, neural architectures, astrophysics, and developer infrastructure through rigorous research.</p>
           <div class="mt-5 flex items-center gap-3">
-            <a href="https://github.com/Akm4033/micro-signal-cosmos" target="_blank" rel="noopener noreferrer" class="flex h-8 items-center gap-1.5 rounded-md border border-slate-700 bg-slate-800/80 px-2.5 text-xs font-medium text-slate-200 transition-colors hover:border-blue-500 hover:text-white" aria-label="CURION on GitHub"><span>GitHub</span><span aria-hidden="true">↗</span></a>
-            <a href="https://www.youtube.com/@MicroSignalCosmos" target="_blank" rel="noopener noreferrer" class="flex h-8 items-center gap-1.5 rounded-md border border-slate-700 bg-slate-800/80 px-2.5 text-xs font-medium text-slate-200 transition-colors hover:border-blue-500 hover:text-white" aria-label="CURION Channel"><span>YouTube</span><span aria-hidden="true">↗</span></a>
+            <a href="https://github.com/Akm4033/Signal Insight" target="_blank" rel="noopener noreferrer" class="flex h-8 items-center gap-1.5 rounded-md border border-slate-700 bg-slate-800/80 px-2.5 text-xs font-medium text-slate-200 transition-colors hover:border-blue-500 hover:text-white" aria-label="Signal Insight on GitHub"><span>GitHub</span><span aria-hidden="true">↗</span></a>
+            <a href="https://www.youtube.com/@MicroSignalCosmos" target="_blank" rel="noopener noreferrer" class="flex h-8 items-center gap-1.5 rounded-md border border-slate-700 bg-slate-800/80 px-2.5 text-xs font-medium text-slate-200 transition-colors hover:border-blue-500 hover:text-white" aria-label="Signal Insight Channel"><span>YouTube</span><span aria-hidden="true">↗</span></a>
           </div>
         </div>
 
@@ -312,14 +312,14 @@ function isNavActive(href: string) {
             <li><a href="/articles/" class="text-slate-300 transition-colors hover:text-white hover:underline underline-offset-4">All Articles</a></li>
             <li><a href="/tools/" class="text-slate-300 transition-colors hover:text-white hover:underline underline-offset-4">Tools &amp; Stack</a></li>
             <li><a href="/authors/" class="text-slate-300 transition-colors hover:text-white hover:underline underline-offset-4">Research Desk</a></li>
-            <li><a href="/about/" class="text-slate-300 transition-colors hover:text-white hover:underline underline-offset-4">About CURION</a></li>
+            <li><a href="/about/" class="text-slate-300 transition-colors hover:text-white hover:underline underline-offset-4">About Signal Insight</a></li>
             <li><a href="/contact/" class="text-slate-300 transition-colors hover:text-white hover:underline underline-offset-4">Contact</a></li>
             <li><a href="/rss.xml" class="text-slate-300 transition-colors hover:text-white hover:underline underline-offset-4">RSS Feed</a></li>
           </ul>
         </nav>
 
         <div class="newsletter-footer space-y-3">
-          <h3 class="text-xs font-bold uppercase tracking-widest text-white">CURION Syndication</h3>
+          <h3 class="text-xs font-bold uppercase tracking-widest text-white">Signal Insight Syndication</h3>
           <p class="text-xs leading-relaxed text-slate-300">Weekly technical breakdowns via open RSS 2.0 web standards.</p>
           <div class="flex flex-col sm:flex-row gap-2">
             <a
@@ -346,7 +346,7 @@ function isNavActive(href: string) {
       </div>
 
       <div class="mt-12 border-t border-slate-800 pt-6 flex flex-col items-center justify-between gap-3 text-xs text-slate-400 sm:flex-row">
-        <p>&copy; 2026 CURION. All rights reserved.</p>
+        <p>&copy; 2026 Signal Insight. All rights reserved.</p>
         <nav aria-label="Legal and utility navigation" class="flex flex-wrap items-center gap-4 sm:gap-6">
           <a href="/privacy-policy/" class="hover:text-white transition-colors">Privacy</a>
           <a href="/terms/" class="hover:text-white transition-colors">Terms</a>
@@ -377,7 +377,7 @@ function isNavActive(href: string) {
         toggleBtn.addEventListener('click', function() {
           const isDark = document.documentElement.classList.toggle('dark');
           try {
-            localStorage.setItem('curion_theme', isDark ? 'dark' : 'light');
+            localStorage.setItem('Signal Insight_theme', isDark ? 'dark' : 'light');
           } catch(e) {}
         });
       }

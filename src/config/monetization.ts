@@ -1,5 +1,5 @@
 /**
- * CURION - Monetization, Analytics & Privacy Configuration
+ * Signal Insight - Monetization, Analytics & Privacy Configuration
  *
  * This configuration manages all advertising, affiliate, analytics, and consent settings.
  * All monetization and tracking integrations are DISABLED BY DEFAULT to ensure privacy,
@@ -74,18 +74,18 @@ export const monetizationConfig: MonetizationConfig = {
   affiliate: {
     enabled: getEnv('PUBLIC_AFFILIATE_ENABLED') !== 'false',
     defaultDisclosureText:
-      'Disclosure: Some links on CURION may be affiliate links. If you click through and make a purchase, we may earn an affiliate commission at no additional cost to you. We only recommend tools and resources we find genuinely useful.',
+      'Disclosure: Some links on Signal Insight may be affiliate links. If you click through and make a purchase, we may earn an affiliate commission at no additional cost to you. We only recommend tools and resources we find genuinely useful.',
   },
   consent: {
     // Privacy consent banner enabled by default to respect GDPR, ePrivacy, and CCPA
     enabled: getEnv('PUBLIC_CONSENT_ENABLED') !== 'false',
-    cookieName: 'curion_consent_status',
+    cookieName: 'Signal Insight_consent_status',
     cookieMaxAgeDays: 180,
   },
   aiDisclosure: {
     enabled: true,
     statement:
-      'CURION is an independent knowledge discovery and learning platform. We use modern AI tools to assist with research and drafting. All published articles are reviewed, edited, and verified by our editorial desk to ensure genuine clarity, accuracy, and usefulness.',
+      'Signal Insight is an independent knowledge discovery and learning platform. We use modern AI tools to assist with research and drafting. All published articles are reviewed, edited, and verified by our editorial desk to ensure genuine clarity, accuracy, and usefulness.',
   },
 };
 

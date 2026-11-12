@@ -1,4 +1,4 @@
-# Micro Signal Cosmos — Pre-Launch Checklist
+# Signal Insight — Pre-Launch Checklist
 
 *Review and complete these items prior to announcing the website publicly.*
 

@@ -63,14 +63,14 @@ const variantMap: Record<string, 'tech' | 'science' | 'ai' | 'devtools'> = {
 };
 
 const categoryVariant = catVariantProp || variantMap[category.toLowerCase().replace(/\s+/g, '-')] || 'tech';
-const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://Signal Insight.pages.dev');
 const resolvedCanonical = canonical || `${siteUrl}/articles/${Astro.params.slug || ''}/`;
 
 // Compute clean headline for visible <h1> (without brand suffix)
-const cleanHeadline = title.replace(/\s*\|\s*CURION\s*$/i, '');
-// Compute clean page title for <title> in <head> (ensures exactly one "| CURION" suffix)
-const cleanSeoTitle = (seoTitle || cleanHeadline).replace(/\s*\|\s*CURION\s*$/i, '');
-const fullPageTitle = `${cleanSeoTitle} | CURION`;
+const cleanHeadline = title.replace(/\s*\|\s*Signal Insight\s*$/i, '');
+// Compute clean page title for <title> in <head> (ensures exactly one "| Signal Insight" suffix)
+const cleanSeoTitle = (seoTitle || cleanHeadline).replace(/\s*\|\s*Signal Insight\s*$/i, '');
+const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
 ---
 
 <Base title={fullPageTitle} description={description} canonical={resolvedCanonical} ogImage={ogImage} author={author} publishedTime={publishedTime} modifiedTime={updatedTime}>

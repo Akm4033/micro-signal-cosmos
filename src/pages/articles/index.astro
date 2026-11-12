@@ -16,12 +16,12 @@ const categoryCounts = publishedArticles.reduce<Record<string, number>>((acc, ar
   return acc;
 }, {});
 
-const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://Signal Insight.pages.dev');
 const archiveUrl = `${siteUrl}/articles/`;
 ---
 
 <Base
-  title="Explore All Articles | CURION"
+  title="Explore All Articles | Signal Insight"
   description="Explore our complete editorial catalog of technology, science, artificial intelligence, and developer tools. Filter by topic or search our published archives."
   canonical={archiveUrl}
 >

@@ -1,5 +1,5 @@
 /**
- * Micro Signal Cosmos — ResearchAgent
+ * Signal Insight — ResearchAgent
  * Retrieves, verifies, and compiles primary sources (arXiv, RFCs, GitHub, docs)
  * into a structured research brief before article authoring.
  */
@@ -62,7 +62,7 @@ async function runResearchAgent({ topic, category = 'technology', notes = '', jo
   let invariants = [];
   let benchmarks = [];
 
-  const systemPrompt = `You are the ResearchAgent for Micro Signal Cosmos.
+  const systemPrompt = `You are the ResearchAgent for Signal Insight.
 Your role is to collect, ground, and verify technical primary sources (papers, RFCs, GitHub repos, specs).
 Given a topic, extract 4 key architectural invariants, expected production benchmark metrics, and source citations.
 Output in structured format. No fluff. Ground every claim.`;

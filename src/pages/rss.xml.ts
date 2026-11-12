@@ -6,7 +6,7 @@ export const GET: APIRoute = async (context) => {
   const publishedArticles = await getPublishedArticles();
 
   // Determine site base URL (from astro.config.mjs `site` property if configured, defaulting to production canonical)
-  const siteUrl = (context.site ? context.site.href.replace(/\/$/, '') : '') || process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev';
+  const siteUrl = (context.site ? context.site.href.replace(/\/$/, '') : '') || process.env.SITE_URL || 'https://Signal Insight.pages.dev';
   const channelLink = siteUrl;
   const feedSelfLink = `${siteUrl}/rss.xml`;
 
@@ -38,8 +38,8 @@ export const GET: APIRoute = async (context) => {
   const rssContent = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title><![CDATA[CURION]]></title>
-    <description><![CDATA[Understand the world. Explore beyond it. CURION is an AI-powered global knowledge discovery and learning platform.]]></description>
+    <title><![CDATA[Signal Insight]]></title>
+    <description><![CDATA[Understand the world. Explore beyond it. Signal Insight is an AI-powered global knowledge discovery and learning platform.]]></description>
     <link>${channelLink}</link>
     <language>en-US</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>

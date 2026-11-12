@@ -1,5 +1,5 @@
 /**
- * Micro Signal Cosmos — SeoAgent
+ * Signal Insight — SeoAgent
  * Discovers semantic cross-links, matches compliant affiliate partners,
  * synthesizes SERP metadata, and generates branded 1200x630 Open Graph SVG cover assets.
  */
@@ -177,7 +177,7 @@ async function runSeoAgent({ slug, title, content, category = 'technology', auth
   }
 
   // 4. Generate SEO SERP Metadata
-  const seoTitle = `${title.slice(0, 50)} | Micro Signal Cosmos`;
+  const seoTitle = `${title.slice(0, 50)} | Signal Insight`;
   const cleanSnippet = content.replace(/[#*`_\[\]]/g, '').slice(0, 150).trim();
   const seoDescription = `${cleanSnippet}...`;
 

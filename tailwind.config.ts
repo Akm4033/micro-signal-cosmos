@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // CURION Midnight & Light Editorial Design System Tokens
+        // Signal Insight Midnight & Light Editorial Design System Tokens
         main: 'var(--bg-main, #05070E)',
         card: 'var(--bg-card, #0B101D)',
         surface: 'var(--bg-surface, #0B101D)',
@@ -26,7 +26,7 @@ export default {
           light: 'rgba(59, 130, 246, 0.14)',
           glow: 'rgba(59, 130, 246, 0.25)',
         },
-        curion: {
+        Signal Insight: {
           blue: '#3B82F6',
           'blue-hover': '#60A5FA',
           'blue-light': 'rgba(59, 130, 246, 0.14)',

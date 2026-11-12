@@ -1,6 +1,6 @@
-# Micro Signal Cosmos — Editorial Publishing & Content Guide
+# Signal Insight — Editorial Publishing & Content Guide
 
-Welcome to the **Micro Signal Cosmos** editorial publishing guide. This document provides simple, step-by-step instructions for writers, editors, and contributors to draft, preview, format, and publish articles on [microsignalcosmos.com](https://microsignalcosmos.com).
+Welcome to the **Signal Insight** editorial publishing guide. This document provides simple, step-by-step instructions for writers, editors, and contributors to draft, preview, format, and publish articles on [microsignalcosmos.com](https://microsignalcosmos.com).
 
 No deep coding knowledge is required. All articles are written in plain text using standard **Markdown (`.md`)**.
 
@@ -49,8 +49,8 @@ featured: false
 coverImage: "/images/articles/quantum-computing-frontiers-cover.webp"
 coverImageAlt: "Cryogenic dilution refrigerator chamber housing a quantum processor chip"
 coverImageCaption: "Superconducting quantum circuits operating inside a sub-kelvin cryostat."
-coverImageCredit: "Micro Signal Cosmos Visual Research / Open Science Commons"
-seoTitle: "The Next Frontier in Quantum Supercomputing | Micro Signal Cosmos"
+coverImageCredit: "Signal Insight Visual Research / Open Science Commons"
+seoTitle: "The Next Frontier in Quantum Supercomputing | Signal Insight"
 seoDescription: "An in-depth analysis of quantum coherence and error mitigation transforming next-generation computational physics."
 references:
   - title: "Quantum error correction using surface codes"
@@ -111,7 +111,7 @@ The metadata block between the triple-dashed lines (`---`) at the top of your ar
 | `coverImageCaption` | string | Optional | Explanatory caption displayed directly beneath the image in the reader. |
 | `coverImageCredit` | string | Optional | Attribution/source acknowledgment (e.g. `"NASA / JPL-Caltech"`). |
 | `readingTime` | string | Optional | Manual override (e.g. `"8 min read"`). If omitted, **calculated automatically** at ~200 wpm. |
-| `seoTitle` | string | Optional | Custom `<title>` tag for search engines (defaults to `{title} \| Micro Signal Cosmos`). |
+| `seoTitle` | string | Optional | Custom `<title>` tag for search engines (defaults to `{title} \| Signal Insight`). |
 | `seoDescription`| string | Optional | Custom meta description for search engines and social cards (defaults to `description`). |
 | `references` | object[] | Optional | List of academic citations with `title`, `url`, `source`, and `accessDate` (see [Section 7](#academic--research-references)). |
 | `hasAffiliateLinks` | boolean | Optional | Defaults to `false`. Set to `true` to render FTC-compliant affiliate disclosure box. |
@@ -122,7 +122,7 @@ The metadata block between the triple-dashed lines (`---`) at the top of your ar
 
 ## 4. Official Categories & Taxonomy
 
-Micro Signal Cosmos enforces a consistent 7-category taxonomy. Always set `category` to one of the following exact slugs (or formal names):
+Signal Insight enforces a consistent 7-category taxonomy. Always set `category` to one of the following exact slugs (or formal names):
 
 | Slug | Display Name | Core Editorial Subject Matter |
 | :--- | :--- | :--- |
@@ -140,7 +140,7 @@ Micro Signal Cosmos enforces a consistent 7-category taxonomy. Always set `categ
 
 To protect reader trust and comply with search engine E-E-A-T (Experience, Expertise, Authoritativeness, and Trustworthiness) criteria:
 
-- **Default Editorial Identity:** All institutional and collaborative analysis is authored by `"editorial-desk"`, representing the **Micro Signal Cosmos Editorial Desk**.
+- **Default Editorial Identity:** All institutional and collaborative analysis is authored by `"editorial-desk"`, representing the **Signal Insight Editorial Desk**.
 - **No Fabricated Personas:** **Never create fictional author names, synthetic avatars, or false academic credentials.**
 - **Adding Real Contributors:** When onboarding real-world human writers, engineers, or academic guest columnists, register their verified profile in `src/data/authors.ts`:
   ```typescript
@@ -175,7 +175,7 @@ public/images/articles/
 
 ## 7. Academic & Research References
 
-High-quality research references distinguish Micro Signal Cosmos from generic tech blogs. Whenever your article draws from academic papers, preprints, or official technical standards, add a structured `references` array to the frontmatter:
+High-quality research references distinguish Signal Insight from generic tech blogs. Whenever your article draws from academic papers, preprints, or official technical standards, add a structured `references` array to the frontmatter:
 
 ```yaml
 references:
@@ -236,7 +236,7 @@ To preview your draft on your computer before publishing:
 
 ## 10. Git & Cloudflare Deployment Safety
 
-Micro Signal Cosmos is hosted on **Cloudflare Pages** and automatically synchronized with the GitHub repository.
+Signal Insight is hosted on **Cloudflare Pages** and automatically synchronized with the GitHub repository.
 
 ### Publishing Checklist
 Before pushing to production:
