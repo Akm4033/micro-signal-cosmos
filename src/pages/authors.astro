@@ -4,7 +4,7 @@ import { getPublishedArticles, getArticleSlug } from '../data/articles';
 
 const allArticles = await getPublishedArticles();
 
-const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev');
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://signal-insight.pages.dev');
 const focusAreasUrl = `${siteUrl}/authors/`;
 
 const focusAreas = [

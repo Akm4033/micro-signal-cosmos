@@ -94,7 +94,7 @@ export const onRequestPost = async (context: { request: Request; env: Env }) => 
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: 'Signal Insight Contact Desk <contact@micro-signal-cosmos.pages.dev>',
+          from: 'Signal Insight Contact Desk <contact@signal-insight.pages.dev>',
           to: [contactEmail],
           reply_to: email,
           subject: `[Signal Insight Contact] ${subject} - from ${name}`,

@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   // Canonical site domain for metadata, sitemaps, and RSS feeds
-  site: process.env.SITE_URL || 'https://micro-signal-cosmos.pages.dev',
+  site: process.env.SITE_URL || 'https://signal-insight.pages.dev',
   redirects: {
     '/privacy': '/privacy-policy/',
     '/editorial-policy': '/about/',
