@@ -1,0 +1,650 @@
+---
+// InteractiveCalculators.astro — Signal Insight Engineering Calculators
+// Client-side, zero-dependency, high-precision interactive utilities.
+---
+
+<div class="my-10 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-white/[0.08] dark:bg-[#0B101D] sm:p-8" id="engineering-calculators">
+  <!-- Header -->
+  <div class="mb-8 flex flex-col justify-between gap-4 border-b border-neutral-200 pb-6 dark:border-white/[0.08] sm:flex-row sm:items-center">
+    <div>
+      <div class="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-0.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
+        <span class="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+        <span>Interactive Utilities</span>
+      </div>
+      <h2 class="mt-2 text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
+        Signal Insight Engineering Workbench
+      </h2>
+      <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+        Client-side technical calculators computed in real time. Zero tracking, zero network requests.
+      </p>
+    </div>
+
+    <!-- Tab Buttons -->
+    <div class="flex flex-wrap gap-1 rounded-xl bg-neutral-100 p-1 dark:bg-white/[0.04]" role="tablist" aria-label="Engineering Calculators">
+      <button
+        type="button"
+        role="tab"
+        aria-selected="true"
+        aria-controls="calc-ai-panel"
+        id="calc-ai-tab"
+        class="calc-tab-btn rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all bg-white text-neutral-900 shadow-xs dark:bg-blue-600 dark:text-white"
+        data-target="calc-ai-panel"
+      >
+        AI Inference Cost
+      </button>
+      <button
+        type="button"
+        role="tab"
+        aria-selected="false"
+        aria-controls="calc-network-panel"
+        id="calc-network-tab"
+        class="calc-tab-btn rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+        data-target="calc-network-panel"
+      >
+        Network BDP Sizer
+      </button>
+      <button
+        type="button"
+        role="tab"
+        aria-selected="false"
+        aria-controls="calc-astro-panel"
+        id="calc-astro-tab"
+        class="calc-tab-btn rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+        data-target="calc-astro-panel"
+      >
+        Cosmic Redshift (z)
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 1. AI INFERENCE COST & TOKEN CALCULATOR -->
+  <!-- ========================================================================= -->
+  <div id="calc-ai-panel" role="tabpanel" aria-labelledby="calc-ai-tab" class="calc-panel">
+    <div class="grid gap-8 lg:grid-cols-12">
+      <!-- Input Controls -->
+      <div class="space-y-6 lg:col-span-7">
+        <!-- Model Selection -->
+        <div>
+          <label for="ai-model-select" class="block text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300">
+            Target Model Architecture
+          </label>
+          <select
+            id="ai-model-select"
+            class="mt-2 block w-full rounded-xl border border-neutral-300 bg-white px-3.5 py-2.5 text-sm text-neutral-900 shadow-xs focus:border-blue-500 focus:outline-hidden focus:ring-1 focus:ring-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-white"
+          >
+            <option value="deepseek-v3" data-input="0.14" data-output="0.28">DeepSeek-V3 ($0.14 / $0.28 per 1M)</option>
+            <option value="deepseek-r1" data-input="0.55" data-output="2.19">DeepSeek-R1 Reasoning ($0.55 / $2.19 per 1M)</option>
+            <option value="gpt-4o" data-input="2.50" data-output="10.00">OpenAI GPT-4o ($2.50 / $10.00 per 1M)</option>
+            <option value="gpt-4o-mini" data-input="0.15" data-output="0.60">OpenAI GPT-4o-mini ($0.15 / $0.60 per 1M)</option>
+            <option value="claude-sonnet" data-input="3.00" data-output="15.00" selected>Anthropic Claude 3.5 Sonnet ($3.00 / $15.00 per 1M)</option>
+            <option value="gemini-flash" data-input="0.075" data-output="0.30">Google Gemini 1.5 Flash ($0.075 / $0.30 per 1M)</option>
+            <option value="llama-70b" data-input="0.59" data-output="0.79">Meta Llama 3.3 70B (Hosted/Groq) ($0.59 / $0.79 per 1M)</option>
+          </select>
+        </div>
+
+        <!-- Input Tokens Slider -->
+        <div>
+          <div class="flex items-center justify-between text-xs font-semibold">
+            <label for="ai-input-tokens" class="text-neutral-700 dark:text-neutral-300">
+              Avg Prompt / Context Tokens
+            </label>
+            <span id="ai-input-display" class="font-mono text-blue-600 dark:text-blue-400">1,500 tokens</span>
+          </div>
+          <input
+            type="range"
+            id="ai-input-tokens"
+            min="100"
+            max="32000"
+            step="100"
+            value="1500"
+            class="mt-2 h-2 w-full cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
+          />
+          <div class="mt-1 flex justify-between text-[11px] text-neutral-400">
+            <span>100</span>
+            <span>8,000</span>
+            <span>16,000</span>
+            <span>32,000</span>
+          </div>
+        </div>
+
+        <!-- Output Tokens Slider -->
+        <div>
+          <div class="flex items-center justify-between text-xs font-semibold">
+            <label for="ai-output-tokens" class="text-neutral-700 dark:text-neutral-300">
+              Avg Completion / Output Tokens
+            </label>
+            <span id="ai-output-display" class="font-mono text-blue-600 dark:text-blue-400">600 tokens</span>
+          </div>
+          <input
+            type="range"
+            id="ai-output-tokens"
+            min="50"
+            max="4096"
+            step="50"
+            value="600"
+            class="mt-2 h-2 w-full cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
+          />
+          <div class="mt-1 flex justify-between text-[11px] text-neutral-400">
+            <span>50</span>
+            <span>1,024</span>
+            <span>2,048</span>
+            <span>4,096</span>
+          </div>
+        </div>
+
+        <!-- Daily Volume Slider -->
+        <div>
+          <div class="flex items-center justify-between text-xs font-semibold">
+            <label for="ai-requests" class="text-neutral-700 dark:text-neutral-300">
+              Daily Request Volume
+            </label>
+            <span id="ai-requests-display" class="font-mono text-blue-600 dark:text-blue-400">1,000 req/day</span>
+          </div>
+          <input
+            type="range"
+            id="ai-requests"
+            min="10"
+            max="25000"
+            step="50"
+            value="1000"
+            class="mt-2 h-2 w-full cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
+          />
+          <div class="mt-1 flex justify-between text-[11px] text-neutral-400">
+            <span>10</span>
+            <span>5,000</span>
+            <span>15,000</span>
+            <span>25,000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cost Summary Cards -->
+      <div class="flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50/70 p-6 dark:border-white/[0.08] dark:bg-[#121826] lg:col-span-5">
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+            Inference Spend Projection
+          </h3>
+
+          <div class="mt-4 space-y-4">
+            <div class="rounded-lg border border-neutral-200 bg-white p-4 dark:border-white/[0.06] dark:bg-[#0B101D]">
+              <div class="text-xs text-neutral-500 dark:text-neutral-400">Cost Per Single Request</div>
+              <div id="ai-cost-request" class="mt-1 text-2xl font-extrabold text-neutral-900 dark:text-white">$0.0135</div>
+              <div id="ai-token-breakdown" class="mt-0.5 text-[11px] text-neutral-400">Prompt: $0.0045 · Completion: $0.0090</div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div class="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/[0.06] dark:bg-[#0B101D]">
+                <div class="text-[11px] text-neutral-500 dark:text-neutral-400">Daily Burn</div>
+                <div id="ai-cost-daily" class="mt-1 text-lg font-bold text-neutral-900 dark:text-white">$13.50</div>
+              </div>
+              <div class="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/[0.06] dark:bg-[#0B101D]">
+                <div class="text-[11px] text-neutral-500 dark:text-neutral-400">Monthly Projection (30d)</div>
+                <div id="ai-cost-monthly" class="mt-1 text-lg font-bold text-blue-600 dark:text-blue-400">$405.00</div>
+              </div>
+            </div>
+
+            <div class="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/[0.06] dark:bg-[#0B101D]">
+              <div class="text-[11px] text-neutral-500 dark:text-neutral-400">Monthly Total Tokens Processed</div>
+              <div id="ai-tokens-monthly" class="mt-1 text-sm font-semibold text-neutral-800 dark:text-neutral-200">63.0 Million Tokens</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 border-t border-neutral-200 pt-4 text-xs text-neutral-500 dark:border-white/[0.08] dark:text-neutral-400">
+          <span>Explore architecture:</span>
+          <a href="/articles/training-vs-inference-economics/" class="ml-1 text-blue-600 hover:underline dark:text-blue-400">
+            Training vs. Inference Economics &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 2. BANDWIDTH-DELAY PRODUCT (BDP) CALCULATOR -->
+  <!-- ========================================================================= -->
+  <div id="calc-network-panel" role="tabpanel" aria-labelledby="calc-network-tab" class="calc-panel hidden">
+    <div class="grid gap-8 lg:grid-cols-12">
+      <!-- Controls -->
+      <div class="space-y-6 lg:col-span-7">
+        <!-- Bandwidth Input -->
+        <div>
+          <label for="net-bandwidth" class="block text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300">
+            Link Bandwidth (Capacity)
+          </label>
+          <div class="mt-2 flex rounded-xl shadow-xs">
+            <input
+              type="number"
+              id="net-bandwidth"
+              value="1"
+              min="1"
+              max="100000"
+              class="block w-full rounded-l-xl border border-neutral-300 bg-white px-3.5 py-2.5 text-sm text-neutral-900 focus:border-blue-500 focus:outline-hidden focus:ring-1 focus:ring-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-white"
+            />
+            <select
+              id="net-bandwidth-unit"
+              class="rounded-r-xl border border-l-0 border-neutral-300 bg-neutral-100 px-3.5 text-xs font-semibold text-neutral-700 dark:border-white/[0.1] dark:bg-[#1A2234] dark:text-neutral-300"
+            >
+              <option value="1">Mbps</option>
+              <option value="1000" selected>Gbps</option>
+              <option value="1000000">Tbps</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Latency / RTT Input -->
+        <div>
+          <div class="flex items-center justify-between text-xs font-semibold">
+            <label for="net-rtt" class="text-neutral-700 dark:text-neutral-300">
+              Round-Trip Time (RTT Latency)
+            </label>
+            <span id="net-rtt-display" class="font-mono text-blue-600 dark:text-blue-400">45.0 ms</span>
+          </div>
+          <input
+            type="range"
+            id="net-rtt"
+            min="0.2"
+            max="300"
+            step="0.5"
+            value="45"
+            class="mt-2 h-2 w-full cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
+          />
+          <!-- Latency Presets -->
+          <div class="mt-2 flex flex-wrap gap-1.5">
+            <button type="button" class="net-preset-btn rounded border border-neutral-200 bg-white px-2 py-0.5 text-[11px] text-neutral-600 hover:border-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-neutral-300" data-rtt="0.5">
+              Same Datacenter (0.5ms)
+            </button>
+            <button type="button" class="net-preset-btn rounded border border-neutral-200 bg-white px-2 py-0.5 text-[11px] text-neutral-600 hover:border-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-neutral-300" data-rtt="18">
+              Regional CDN (18ms)
+            </button>
+            <button type="button" class="net-preset-btn rounded border border-neutral-200 bg-white px-2 py-0.5 text-[11px] text-neutral-600 hover:border-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-neutral-300" data-rtt="45">
+              Coast-to-Coast (45ms)
+            </button>
+            <button type="button" class="net-preset-btn rounded border border-neutral-200 bg-white px-2 py-0.5 text-[11px] text-neutral-600 hover:border-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-neutral-300" data-rtt="75">
+              Trans-Atlantic (75ms)
+            </button>
+          </div>
+        </div>
+
+        <p class="text-xs text-neutral-500 dark:text-neutral-400">
+          The Bandwidth-Delay Product (<span class="font-mono">BDP = Bandwidth × RTT</span>) represents the maximum volume of unacknowledged data in transit required to fully saturate the physical connection.
+        </p>
+      </div>
+
+      <!-- Output Summary -->
+      <div class="flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50/70 p-6 dark:border-white/[0.08] dark:bg-[#121826] lg:col-span-5">
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+            Buffer &amp; Throughput Metrics
+          </h3>
+
+          <div class="mt-4 space-y-4">
+            <div class="rounded-lg border border-neutral-200 bg-white p-4 dark:border-white/[0.06] dark:bg-[#0B101D]">
+              <div class="text-xs text-neutral-500 dark:text-neutral-400">Bandwidth-Delay Product (BDP)</div>
+              <div id="net-bdp-bytes" class="mt-1 text-2xl font-extrabold text-blue-600 dark:text-blue-400">5.63 MB</div>
+              <div id="net-bdp-bits" class="mt-0.5 text-[11px] text-neutral-400">45.0 Megabits in flight</div>
+            </div>
+
+            <div class="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/[0.06] dark:bg-[#0B101D]">
+              <div class="text-[11px] text-neutral-500 dark:text-neutral-400">Optimal Linux Socket Buffer (<span class="font-mono">SO_RCVBUF</span>)</div>
+              <div id="net-buffer-rec" class="mt-1 text-base font-bold text-neutral-900 dark:text-white">~11.25 MB (2× BDP for overhead)</div>
+            </div>
+
+            <div class="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/[0.06] dark:bg-[#0B101D]">
+              <div class="text-[11px] text-neutral-500 dark:text-neutral-400">Theoretical Transfer Time for 1 GB File</div>
+              <div id="net-transfer-time" class="mt-1 text-base font-bold text-neutral-900 dark:text-white">8.05 seconds</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 border-t border-neutral-200 pt-4 text-xs text-neutral-500 dark:border-white/[0.08] dark:text-neutral-400">
+          <span>Read related deep-dive:</span>
+          <a href="/articles/zero-copy-networking-in-linux-with-io-uring-and-ebpf/" class="ml-1 text-blue-600 hover:underline dark:text-blue-400">
+            Zero-Copy Linux Networking with io_uring &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 3. COSMIC REDSHIFT & LOOKBACK TIME CALCULATOR -->
+  <!-- ========================================================================= -->
+  <div id="calc-astro-panel" role="tabpanel" aria-labelledby="calc-astro-tab" class="calc-panel hidden">
+    <div class="grid gap-8 lg:grid-cols-12">
+      <!-- Controls -->
+      <div class="space-y-6 lg:col-span-7">
+        <div>
+          <div class="flex items-center justify-between text-xs font-semibold">
+            <label for="astro-z-input" class="text-neutral-700 dark:text-neutral-300">
+              Cosmological Redshift (<span class="font-mono">z</span>)
+            </label>
+            <span id="astro-z-display" class="font-mono text-blue-600 dark:text-blue-400">z = 1.000</span>
+          </div>
+          <input
+            type="range"
+            id="astro-z-slider"
+            min="0.001"
+            max="12.0"
+            step="0.01"
+            value="1.0"
+            class="mt-2 h-2 w-full cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
+          />
+          <div class="mt-2 flex items-center gap-3">
+            <span class="text-xs text-neutral-500">Exact Value:</span>
+            <input
+              type="number"
+              id="astro-z-exact"
+              value="1.000"
+              min="0.0001"
+              max="1500"
+              step="0.001"
+              class="w-28 rounded-lg border border-neutral-300 bg-white px-2.5 py-1 text-xs font-mono text-neutral-900 focus:border-blue-500 focus:outline-hidden dark:border-white/[0.1] dark:bg-[#121826] dark:text-white"
+            />
+          </div>
+
+          <!-- Astronomical Presets -->
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <button type="button" class="astro-preset-btn rounded border border-neutral-200 bg-white px-2 py-0.5 text-[11px] text-neutral-600 hover:border-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-neutral-300" data-z="0.0038">
+              Virgo Cluster (z=0.0038)
+            </button>
+            <button type="button" class="astro-preset-btn rounded border border-neutral-200 bg-white px-2 py-0.5 text-[11px] text-neutral-600 hover:border-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-neutral-300" data-z="0.158">
+              Quasar 3C 273 (z=0.158)
+            </button>
+            <button type="button" class="astro-preset-btn rounded border border-neutral-200 bg-white px-2 py-0.5 text-[11px] text-neutral-600 hover:border-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-neutral-300" data-z="2.0">
+              Cosmic Noon Peak (z=2.0)
+            </button>
+            <button type="button" class="astro-preset-btn rounded border border-neutral-200 bg-white px-2 py-0.5 text-[11px] text-neutral-600 hover:border-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-neutral-300" data-z="10.6">
+              JWST GN-z11 Galaxy (z=10.6)
+            </button>
+          </div>
+        </div>
+
+        <p class="text-xs text-neutral-500 dark:text-neutral-400">
+          Computed using standard flat <span class="font-mono">&Lambda;CDM</span> cosmology (<span class="font-mono">H<sub>0</sub> &approx; 67.4 km/s/Mpc, &Omega;<sub>m</sub> &approx; 0.315, &Omega;<sub>&Lambda;</sub> &approx; 0.685</span>).
+        </p>
+      </div>
+
+      <!-- Output Summary -->
+      <div class="flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50/70 p-6 dark:border-white/[0.08] dark:bg-[#121826] lg:col-span-5">
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+            Cosmological Parameters
+          </h3>
+
+          <div class="mt-4 space-y-4">
+            <div class="rounded-lg border border-neutral-200 bg-white p-4 dark:border-white/[0.06] dark:bg-[#0B101D]">
+              <div class="text-xs text-neutral-500 dark:text-neutral-400">Estimated Lookback Time</div>
+              <div id="astro-lookback" class="mt-1 text-2xl font-extrabold text-blue-600 dark:text-blue-400">7.94 Billion Years</div>
+              <div id="astro-age" class="mt-0.5 text-[11px] text-neutral-400">Universe was ~5.86 Gyr old at emission</div>
+            </div>
+
+            <div class="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/[0.06] dark:bg-[#0B101D]">
+              <div class="text-[11px] text-neutral-500 dark:text-neutral-400">Wavelength Stretching Factor (<span class="font-mono">1 + z</span>)</div>
+              <div id="astro-stretch" class="mt-1 text-base font-bold text-neutral-900 dark:text-white">2.000× (100% redshift stretch)</div>
+            </div>
+
+            <div class="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/[0.06] dark:bg-[#0B101D]">
+              <div class="text-[11px] text-neutral-500 dark:text-neutral-400">Apparent Recession Velocity (Relativistic)</div>
+              <div id="astro-velocity" class="mt-1 text-base font-bold text-neutral-900 dark:text-white">180,000 km/s (0.600 c)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 border-t border-neutral-200 pt-4 text-xs text-neutral-500 dark:border-white/[0.08] dark:text-neutral-400">
+          <span>Read related deep-dive:</span>
+          <a href="/articles/how-we-know-what-stars-are-made-of/" class="ml-1 text-blue-600 hover:underline dark:text-blue-400">
+            How We Know What Stars Are Made Of &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    // -------------------------------------------------------------------------
+    // TAB SWITCHING LOGIC
+    // -------------------------------------------------------------------------
+    const tabs = document.querySelectorAll('.calc-tab-btn');
+    const panels = document.querySelectorAll('.calc-panel');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetId = tab.getAttribute('data-target');
+
+        // Update tabs
+        tabs.forEach(t => {
+          t.setAttribute('aria-selected', 'false');
+          t.classList.remove('bg-white', 'text-neutral-900', 'shadow-xs', 'dark:bg-blue-600', 'dark:text-white');
+          t.classList.add('text-neutral-600', 'dark:text-neutral-400');
+        });
+        tab.setAttribute('aria-selected', 'true');
+        tab.classList.add('bg-white', 'text-neutral-900', 'shadow-xs', 'dark:bg-blue-600', 'dark:text-white');
+        tab.classList.remove('text-neutral-600', 'dark:text-neutral-400');
+
+        // Update panels
+        panels.forEach(p => {
+          if (p.id === targetId) {
+            p.classList.remove('hidden');
+          } else {
+            p.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // -------------------------------------------------------------------------
+    // 1. AI CALCULATOR LOGIC
+    // -------------------------------------------------------------------------
+    const modelSelect = document.getElementById('ai-model-select');
+    const inputTokensSlider = document.getElementById('ai-input-tokens');
+    const outputTokensSlider = document.getElementById('ai-output-tokens');
+    const requestsSlider = document.getElementById('ai-requests');
+
+    const inputDisplay = document.getElementById('ai-input-display');
+    const outputDisplay = document.getElementById('ai-output-display');
+    const requestsDisplay = document.getElementById('ai-requests-display');
+
+    const costRequest = document.getElementById('ai-cost-request');
+    const tokenBreakdown = document.getElementById('ai-token-breakdown');
+    const costDaily = document.getElementById('ai-cost-daily');
+    const costMonthly = document.getElementById('ai-cost-monthly');
+    const tokensMonthly = document.getElementById('ai-tokens-monthly');
+
+    function updateAICalculator() {
+      if (!modelSelect) return;
+      const opt = modelSelect.selectedOptions[0];
+      const costPerMInput = parseFloat(opt.getAttribute('data-input') || '0');
+      const costPerMOutput = parseFloat(opt.getAttribute('data-output') || '0');
+
+      const inTokens = parseInt(inputTokensSlider.value, 10);
+      const outTokens = parseInt(outputTokensSlider.value, 10);
+      const reqs = parseInt(requestsSlider.value, 10);
+
+      inputDisplay.textContent = inTokens.toLocaleString() + ' tokens';
+      outputDisplay.textContent = outTokens.toLocaleString() + ' tokens';
+      requestsDisplay.textContent = reqs.toLocaleString() + ' req/day';
+
+      const promptCostPerReq = (inTokens / 1_000_000) * costPerMInput;
+      const outputCostPerReq = (outTokens / 1_000_000) * costPerMOutput;
+      const totalCostPerReq = promptCostPerReq + outputCostPerReq;
+
+      const dailySpend = totalCostPerReq * reqs;
+      const monthlySpend = dailySpend * 30;
+      const monthlyTokens = (inTokens + outTokens) * reqs * 30;
+
+      costRequest.textContent = '$' + totalCostPerReq.toFixed(4);
+      tokenBreakdown.textContent = `Prompt: $${promptCostPerReq.toFixed(4)} · Completion: $${outputCostPerReq.toFixed(4)}`;
+      costDaily.textContent = '$' + dailySpend.toFixed(2);
+      costMonthly.textContent = '$' + monthlySpend.toFixed(2);
+
+      if (monthlyTokens >= 1_000_000_000) {
+        tokensMonthly.textContent = (monthlyTokens / 1_000_000_000).toFixed(2) + ' Billion Tokens';
+      } else {
+        tokensMonthly.textContent = (monthlyTokens / 1_000_000).toFixed(2) + ' Million Tokens';
+      }
+    }
+
+    if (modelSelect) {
+      modelSelect.addEventListener('change', updateAICalculator);
+      inputTokensSlider.addEventListener('input', updateAICalculator);
+      outputTokensSlider.addEventListener('input', updateAICalculator);
+      requestsSlider.addEventListener('input', updateAICalculator);
+      updateAICalculator();
+    }
+
+    // -------------------------------------------------------------------------
+    // 2. NETWORK BDP CALCULATOR LOGIC
+    // -------------------------------------------------------------------------
+    const netBandwidth = document.getElementById('net-bandwidth');
+    const netBandwidthUnit = document.getElementById('net-bandwidth-unit');
+    const netRtt = document.getElementById('net-rtt');
+    const netRttDisplay = document.getElementById('net-rtt-display');
+    const netBdpBytes = document.getElementById('net-bdp-bytes');
+    const netBdpBits = document.getElementById('net-bdp-bits');
+    const netBufferRec = document.getElementById('net-buffer-rec');
+    const netTransferTime = document.getElementById('net-transfer-time');
+    const netPresetBtns = document.querySelectorAll('.net-preset-btn');
+
+    function updateNetworkCalculator() {
+      if (!netBandwidth) return;
+      const bwVal = parseFloat(netBandwidth.value) || 1;
+      const unitMult = parseFloat(netBandwidthUnit.value) || 1;
+      const totalMbps = bwVal * unitMult;
+      const rttMs = parseFloat(netRtt.value) || 1;
+
+      netRttDisplay.textContent = rttMs.toFixed(1) + ' ms';
+
+      // BDP in bits = (Mbps * 1e6) * (rttMs / 1000)
+      const bdpBits = (totalMbps * 1_000_000) * (rttMs / 1000);
+      const bdpBytes = bdpBits / 8;
+
+      let bdpDisplay = '';
+      if (bdpBytes >= 1_073_741_824) {
+        bdpDisplay = (bdpBytes / 1_073_741_824).toFixed(2) + ' GB';
+      } else if (bdpBytes >= 1_048_576) {
+        bdpDisplay = (bdpBytes / 1_048_576).toFixed(2) + ' MB';
+      } else {
+        bdpDisplay = (bdpBytes / 1024).toFixed(1) + ' KB';
+      }
+
+      netBdpBytes.textContent = bdpDisplay;
+      netBdpBits.textContent = (bdpBits / 1_000_000).toFixed(1) + ' Megabits in flight';
+
+      const recBuffer = bdpBytes * 2;
+      let recDisplay = '';
+      if (recBuffer >= 1_048_576) {
+        recDisplay = '~' + (recBuffer / 1_048_576).toFixed(2) + ' MB (2× BDP)';
+      } else {
+        recDisplay = '~' + (recBuffer / 1024).toFixed(1) + ' KB (2× BDP)';
+      }
+      netBufferRec.textContent = recDisplay;
+
+      // Transfer time for 1GB file = (8 * 1024 Megabits) / totalMbps + (rttMs / 1000 for handshake)
+      const secToTransfer = (8192 / totalMbps) + (rttMs / 1000);
+      if (secToTransfer < 1) {
+        netTransferTime.textContent = (secToTransfer * 1000).toFixed(0) + ' milliseconds';
+      } else {
+        netTransferTime.textContent = secToTransfer.toFixed(2) + ' seconds';
+      }
+    }
+
+    if (netBandwidth) {
+      netBandwidth.addEventListener('input', updateNetworkCalculator);
+      netBandwidthUnit.addEventListener('change', updateNetworkCalculator);
+      netRtt.addEventListener('input', updateNetworkCalculator);
+
+      netPresetBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          netRtt.value = btn.getAttribute('data-rtt');
+          updateNetworkCalculator();
+        });
+      });
+
+      updateNetworkCalculator();
+    }
+
+    // -------------------------------------------------------------------------
+    // 3. COSMIC REDSHIFT CALCULATOR LOGIC
+    // -------------------------------------------------------------------------
+    const astroZSlider = document.getElementById('astro-z-slider');
+    const astroZExact = document.getElementById('astro-z-exact');
+    const astroZDisplay = document.getElementById('astro-z-display');
+    const astroLookback = document.getElementById('astro-lookback');
+    const astroAge = document.getElementById('astro-age');
+    const astroStretch = document.getElementById('astro-stretch');
+    const astroVelocity = document.getElementById('astro-velocity');
+    const astroPresetBtns = document.querySelectorAll('.astro-preset-btn');
+
+    // Approximate Lambda-CDM lookback time function (H0=67.4, Om=0.315, Ol=0.685)
+    function calculateLookbackTime(z) {
+      const H0 = 67.4; // km/s/Mpc
+      const Om = 0.315;
+      const Ol = 0.685;
+      const Th = 977.8 / H0; // Hubble time in Gyr (~14.5 Gyr)
+
+      // Numerical integration of dz' / ((1+z') * sqrt(Om*(1+z')^3 + Ol))
+      const steps = 100;
+      const dz = z / steps;
+      let integral = 0;
+      for (let i = 0; i < steps; i++) {
+        const zp = (i + 0.5) * dz;
+        const Ez = Math.sqrt(Om * Math.pow(1 + zp, 3) + Ol);
+        integral += dz / ((1 + zp) * Ez);
+      }
+      return Th * integral;
+    }
+
+    function updateAstroCalculator(source) {
+      if (!astroZSlider) return;
+      let z = 1.0;
+      if (source === 'exact') {
+        z = parseFloat(astroZExact.value) || 0.001;
+        if (z <= 12.0) astroZSlider.value = z;
+      } else {
+        z = parseFloat(astroZSlider.value) || 0.001;
+        astroZExact.value = z.toFixed(3);
+      }
+
+      astroZDisplay.textContent = 'z = ' + z.toFixed(3);
+
+      // Wavelength shift
+      const stretch = 1 + z;
+      astroStretch.textContent = `${stretch.toFixed(3)}× (${(z * 100).toFixed(0)}% stretch)`;
+
+      // Relativistic Doppler velocity: beta = ((1+z)^2 - 1) / ((1+z)^2 + 1)
+      const zPlusOneSq = Math.pow(1 + z, 2);
+      const beta = (zPlusOneSq - 1) / (zPlusOneSq + 1);
+      const velKmS = beta * 299792;
+      astroVelocity.textContent = `${Math.round(velKmS).toLocaleString()} km/s (${beta.toFixed(3)} c)`;
+
+      // Lookback time
+      const totalAge = 13.8; // Age of universe in Gyr
+      let lookback = calculateLookbackTime(z);
+      if (lookback > 13.75) lookback = 13.75;
+      const universeAge = Math.max(0.05, totalAge - lookback);
+
+      astroLookback.textContent = lookback.toFixed(2) + ' Billion Years';
+      astroAge.textContent = `Universe was ~${universeAge.toFixed(2)} Gyr old at emission`;
+    }
+
+    if (astroZSlider) {
+      astroZSlider.addEventListener('input', () => updateAstroCalculator('slider'));
+      astroZExact.addEventListener('input', () => updateAstroCalculator('exact'));
+
+      astroPresetBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const zVal = parseFloat(btn.getAttribute('data-z'));
+          astroZSlider.value = zVal;
+          astroZExact.value = zVal;
+          updateAstroCalculator('exact');
+        });
+      });
+
+      updateAstroCalculator('slider');
+    }
+  });
+</script>

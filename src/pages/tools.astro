@@ -1,17 +1,52 @@
 ---
 import Base from '../layouts/Base.astro';
+import InteractiveCalculators from '../components/tools/InteractiveCalculators.astro';
 
 const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://signal-insight.pages.dev');
 const canonicalUrl = `${siteUrl}/tools/`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Signal Insight Engineering Workbench & Utilities",
+  "url": canonicalUrl,
+  "description": "Interactive technical calculators for AI token inference pricing, network bandwidth-delay product (BDP) buffer sizing, and cosmic redshift lookback time.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Signal Insight",
+    "url": siteUrl
+  }
+};
 ---
 
-<Base title="Tools & Resources | Signal Insight" description="The software, services, and infrastructure powering the Signal Insight knowledge platform." canonical={canonicalUrl}>
+<Base title="Interactive Engineering Tools & Resources | Signal Insight" description="Interactive engineering calculators for AI inference costs, network BDP buffer sizing, cosmic redshift, and curated technical resources." canonical={canonicalUrl}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <div class="container-narrow py-12 sm:py-16">
-    <header class="mb-12">
-      <h1 class="text-display font-extrabold tracking-tight text-text-primary">Tools &amp; Resources</h1>
-      <p class="mt-4 text-lead text-text-secondary">Everything below is in our daily engineering workflow. We've tested alternatives; these are what stuck.</p>
-      <p class="mt-2 text-sm text-text-muted"><strong>Affiliate disclosure:</strong> Links marked <strong>★</strong> are affiliate partner links. We earn a commission at no extra cost to you. We only link products we personally use in production and recommend to colleagues. <a href="/about/#business-model" class="text-brand-primary underline">Full disclosure &rarr;</a></p>
+    <header class="mb-10">
+      <div class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3.5 py-1 text-xs font-bold tracking-widest text-brand-primary uppercase shadow-xs dark:border-white/[0.08] dark:bg-[#0B101D] dark:text-blue-400">
+        <span class="h-1.5 w-1.5 rounded-full bg-brand-primary"></span>
+        <span class="font-mono text-[10.5px]">Technical Utilities &amp; Stack</span>
+      </div>
+      <h1 class="mt-4 text-display font-extrabold tracking-tight text-text-primary">Tools &amp; Engineering Workbench</h1>
+      <p class="mt-4 text-lead text-text-secondary">Interactive technical calculators for systems architects and researchers, alongside the battle-tested infrastructure powering Signal Insight.</p>
     </header>
+
+    <!-- Interactive Technical Calculators -->
+    <InteractiveCalculators />
+
+    <div class="mt-14 mb-8 border-t border-neutral-200 pt-10 dark:border-white/[0.08]">
+      <h2 class="text-display-sm font-bold tracking-tight text-text-primary">Curated Stack &amp; Recommended Infrastructure</h2>
+      <p class="mt-2 text-sm text-text-secondary">Production-proven developer tools and infrastructure we personally run and recommend.</p>
+      <p class="mt-1 text-xs text-text-muted"><strong>Affiliate disclosure:</strong> Links marked <strong>★</strong> are affiliate partner links. We earn a commission at no extra cost to you if you purchase through our links. <a href="/about/#business-model" class="text-brand-primary underline">Full disclosure &rarr;</a></p>
+    </div>
 
     <!-- Development Environment -->
     <section class="mb-16">
