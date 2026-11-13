@@ -1,33 +1,34 @@
 ---
 // InteractiveCalculators.astro — Signal Insight Engineering Calculators
-// Client-side, zero-dependency, high-precision interactive utilities.
+// Client-side, zero-dependency, high-precision technical utilities.
+// 100% Slider-free: utilizes quick preset chips & number inputs to eliminate horizontal track overflows permanently.
 ---
 
-<div class="my-10 rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-white/[0.08] dark:bg-[#0B101D] sm:p-8 overflow-hidden w-full max-w-full" id="engineering-calculators">
+<div class="my-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-white/[0.08] dark:bg-[#0B101D] sm:p-8 overflow-hidden w-full max-w-full" id="engineering-calculators">
   <!-- Header -->
-  <div class="mb-8 flex flex-col justify-between gap-4 border-b border-neutral-200 pb-6 dark:border-white/[0.08] sm:flex-row sm:items-center">
+  <div class="mb-8 flex flex-col justify-between gap-4 border-b border-slate-200 pb-6 dark:border-white/[0.08] sm:flex-row sm:items-center">
     <div>
-      <div class="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-0.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
-        <span class="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
-        <span>Interactive Utilities</span>
+      <div class="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-0.5 text-xs font-semibold text-blue-600 dark:text-blue-400 font-mono">
+        <span class="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+        <span>Interactive Systems Workbench</span>
       </div>
-      <h2 class="mt-2 text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
+      <h2 class="mt-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
         Signal Insight Engineering Workbench
       </h2>
-      <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
-        Client-side technical calculators computed in real time. Zero tracking, zero network requests.
+      <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">
+        Deterministic technical calculators computed instantly in your browser. Zero tracking, zero network requests.
       </p>
     </div>
 
     <!-- Tab Buttons -->
-    <div class="flex flex-wrap gap-1 rounded-xl bg-neutral-100 p-1 dark:bg-white/[0.04]" role="tablist" aria-label="Engineering Calculators">
+    <div class="flex flex-wrap gap-1 rounded-xl bg-slate-100 p-1 dark:bg-white/[0.04]" role="tablist" aria-label="Engineering Calculators">
       <button
         type="button"
         role="tab"
         aria-selected="true"
         aria-controls="calc-ai-panel"
         id="calc-ai-tab"
-        class="calc-tab-btn rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all bg-white text-neutral-900 shadow-xs dark:bg-blue-600 dark:text-white"
+        class="calc-tab-btn rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all bg-white text-slate-900 shadow-xs dark:bg-blue-600 dark:text-white"
         data-target="calc-ai-panel"
       >
         AI Inference Cost
@@ -38,7 +39,7 @@
         aria-selected="false"
         aria-controls="calc-network-panel"
         id="calc-network-tab"
-        class="calc-tab-btn rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+        class="calc-tab-btn rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
         data-target="calc-network-panel"
       >
         Network BDP Sizer
@@ -49,7 +50,7 @@
         aria-selected="false"
         aria-controls="calc-astro-panel"
         id="calc-astro-tab"
-        class="calc-tab-btn rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+        class="calc-tab-btn rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
         data-target="calc-astro-panel"
       >
         Cosmic Redshift (z)
@@ -58,7 +59,7 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- 1. AI INFERENCE COST & TOKEN CALCULATOR -->
+  <!-- 1. AI INFERENCE COST & TOKEN CALCULATOR (SLIDER-FREE CHIP INTERFACE) -->
   <!-- ========================================================================= -->
   <div id="calc-ai-panel" role="tabpanel" aria-labelledby="calc-ai-tab" class="calc-panel">
     <div class="grid gap-8 lg:grid-cols-2 items-start w-full min-w-0">
@@ -66,12 +67,12 @@
       <div class="space-y-6 w-full min-w-0">
         <!-- Model Selection -->
         <div>
-          <label for="ai-model-select" class="block text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300">
+          <label for="ai-model-select" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono">
             Target Model Architecture
           </label>
           <select
             id="ai-model-select"
-            class="mt-2 block w-full rounded-xl border border-neutral-300 bg-white px-3.5 py-2.5 text-sm text-neutral-900 shadow-xs focus:border-blue-500 focus:outline-hidden focus:ring-1 focus:ring-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-white"
+            class="mt-2 block w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-xs focus:border-blue-500 focus:outline-hidden focus:ring-1 focus:ring-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-white"
           >
             <option value="deepseek-v3" data-input="0.14" data-output="0.28">DeepSeek-V3 ($0.14 / $0.28 per 1M)</option>
             <option value="deepseek-r1" data-input="0.55" data-output="2.19">DeepSeek-R1 Reasoning ($0.55 / $2.19 per 1M)</option>
@@ -83,349 +84,390 @@
           </select>
         </div>
 
-        <!-- Input Tokens Slider -->
+        <!-- Prompt Tokens: Number Input & Preset Chips -->
         <div>
-          <div class="flex items-center justify-between text-xs font-semibold">
-            <label for="ai-input-tokens" class="text-neutral-700 dark:text-neutral-300">
+          <div class="flex items-center justify-between text-xs font-semibold mb-2">
+            <label for="ai-input-tokens" class="text-slate-700 dark:text-slate-300">
               Avg Prompt / Context Tokens
             </label>
             <span id="ai-input-display" class="font-mono text-blue-600 dark:text-blue-400">1,500 tokens</span>
           </div>
-          <input
-            type="range"
-            id="ai-input-tokens"
-            min="100"
-            max="32000"
-            step="100"
-            value="1500"
-            class="mt-2 h-2 w-full max-w-full block box-border cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
-          />
-          <div class="mt-1 flex justify-between text-[11px] text-neutral-400">
-            <span>100</span>
-            <span>8,000</span>
-            <span>16,000</span>
-            <span>32,000</span>
+          <div class="flex items-center gap-2 mb-2">
+            <input
+              type="number"
+              id="ai-input-tokens"
+              min="1"
+              max="2000000"
+              value="1500"
+              class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 shadow-xs focus:border-blue-500 focus:outline-hidden dark:border-white/[0.1] dark:bg-[#121826] dark:text-white font-mono"
+            />
+          </div>
+          <!-- Preset Chips (Fast 1-Click Sizing) -->
+          <div class="flex flex-wrap gap-1.5" id="ai-prompt-chips">
+            <button type="button" class="ai-chip rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-mono text-slate-600 hover:border-blue-500 hover:text-blue-600 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-slate-300" data-val="500">500</button>
+            <button type="button" class="ai-chip rounded-md border border-blue-500 bg-blue-50 px-2.5 py-1 text-xs font-mono text-blue-700 font-bold dark:border-blue-500 dark:bg-blue-950/60 dark:text-blue-300" data-val="1500">1.5k</button>
+            <button type="button" class="ai-chip rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-mono text-slate-600 hover:border-blue-500 hover:text-blue-600 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-slate-300" data-val="4000">4k</button>
+            <button type="button" class="ai-chip rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-mono text-slate-600 hover:border-blue-500 hover:text-blue-600 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-slate-300" data-val="16000">16k</button>
+            <button type="button" class="ai-chip rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-mono text-slate-600 hover:border-blue-500 hover:text-blue-600 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-slate-300" data-val="32000">32k</button>
+            <button type="button" class="ai-chip rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-mono text-slate-600 hover:border-blue-500 hover:text-blue-600 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-slate-300" data-val="128000">128k</button>
           </div>
         </div>
 
-        <!-- Output Tokens Slider -->
+        <!-- Completion Tokens: Number Input & Preset Chips -->
         <div>
-          <div class="flex items-center justify-between text-xs font-semibold">
-            <label for="ai-output-tokens" class="text-neutral-700 dark:text-neutral-300">
+          <div class="flex items-center justify-between text-xs font-semibold mb-2">
+            <label for="ai-output-tokens" class="text-slate-700 dark:text-slate-300">
               Avg Completion / Output Tokens
             </label>
             <span id="ai-output-display" class="font-mono text-blue-600 dark:text-blue-400">600 tokens</span>
           </div>
-          <input
-            type="range"
-            id="ai-output-tokens"
-            min="50"
-            max="4096"
-            step="50"
-            value="600"
-            class="mt-2 h-2 w-full max-w-full block box-border cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
-          />
-          <div class="mt-1 flex justify-between text-[11px] text-neutral-400">
-            <span>50</span>
-            <span>1,024</span>
-            <span>2,048</span>
-            <span>4,096</span>
+          <div class="flex items-center gap-2 mb-2">
+            <input
+              type="number"
+              id="ai-output-tokens"
+              min="1"
+              max="64000"
+              value="600"
+              class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 shadow-xs focus:border-blue-500 focus:outline-hidden dark:border-white/[0.1] dark:bg-[#121826] dark:text-white font-mono"
+            />
+          </div>
+          <div class="flex flex-wrap gap-1.5" id="ai-output-chips">
+            <button type="button" class="ai-chip rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-mono text-slate-600 hover:border-blue-500 hover:text-blue-600 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-slate-300" data-val="100">100</button>
+            <button type="button" class="ai-chip rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-mono text-slate-600 hover:border-blue-500 hover:text-blue-600 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-slate-300" data-val="300">300</button>
+            <button type="button" class="ai-chip rounded-md border border-blue-500 bg-blue-50 px-2.5 py-1 text-xs font-mono text-blue-700 font-bold dark:border-blue-500 dark:bg-blue-950/60 dark:text-blue-300" data-val="600">600</button>
+            <button type="button" class="ai-chip rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-mono text-slate-600 hover:border-blue-500 hover:text-blue-600 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-slate-300" data-val="1500">1.5k</button>
+            <button type="button" class="ai-chip rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-mono text-slate-600 hover:border-blue-500 hover:text-blue-600 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-slate-300" data-val="4000">4k</button>
           </div>
         </div>
 
-        <!-- Daily Volume Slider -->
+        <!-- Daily Volume: Number Input & Preset Chips -->
         <div>
-          <div class="flex items-center justify-between text-xs font-semibold">
-            <label for="ai-requests" class="text-neutral-700 dark:text-neutral-300">
+          <div class="flex items-center justify-between text-xs font-semibold mb-2">
+            <label for="ai-requests" class="text-slate-700 dark:text-slate-300">
               Daily Request Volume
             </label>
             <span id="ai-requests-display" class="font-mono text-blue-600 dark:text-blue-400">1,000 req/day</span>
           </div>
-          <input
-            type="range"
-            id="ai-requests"
-            min="10"
-            max="25000"
-            step="50"
-            value="1000"
-            class="mt-2 h-2 w-full max-w-full block box-border cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
-          />
-          <div class="mt-1 flex justify-between text-[11px] text-neutral-400">
-            <span>10</span>
-            <span>5,000</span>
-            <span>15,000</span>
-            <span>25,000</span>
+          <div class="flex items-center gap-2 mb-2">
+            <input
+              type="number"
+              id="ai-requests"
+              min="1"
+              max="10000000"
+              value="1000"
+              class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 shadow-xs focus:border-blue-500 focus:outline-hidden dark:border-white/[0.1] dark:bg-[#121826] dark:text-white font-mono"
+            />
+          </div>
+          <div class="flex flex-wrap gap-1.5" id="ai-req-chips">
+            <button type="button" class="ai-chip rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-mono text-slate-600 hover:border-blue-500 hover:text-blue-600 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-slate-300" data-val="100">100 req</button>
+            <button type="button" class="ai-chip rounded-md border border-blue-500 bg-blue-50 px-2.5 py-1 text-xs font-mono text-blue-700 font-bold dark:border-blue-500 dark:bg-blue-950/60 dark:text-blue-300" data-val="1000">1k req</button>
+            <button type="button" class="ai-chip rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-mono text-slate-600 hover:border-blue-500 hover:text-blue-600 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-slate-300" data-val="5000">5k req</button>
+            <button type="button" class="ai-chip rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-mono text-slate-600 hover:border-blue-500 hover:text-blue-600 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-slate-300" data-val="25000">25k req</button>
+            <button type="button" class="ai-chip rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-mono text-slate-600 hover:border-blue-500 hover:text-blue-600 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-slate-300" data-val="100000">100k req</button>
           </div>
         </div>
       </div>
 
-      <!-- Cost Summary Cards -->
-      <div class="flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50/70 p-6 dark:border-white/[0.08] dark:bg-[#121826] w-full min-w-0">
-        <div>
-          <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-            Inference Spend Projection
-          </h3>
+      <!-- Live Spend Projection Card -->
+      <div class="rounded-xl border border-slate-200 bg-slate-50 p-6 dark:border-white/[0.08] dark:bg-[#121826] w-full min-w-0">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
+          Inference Spend Projection
+        </h3>
 
-          <div class="mt-4 space-y-4">
-            <div class="rounded-lg border border-neutral-200 bg-white p-4 dark:border-white/[0.06] dark:bg-[#0B101D]">
-              <div class="text-xs text-neutral-500 dark:text-neutral-400">Cost Per Single Request</div>
-              <div id="ai-cost-request" class="mt-1 text-2xl font-extrabold text-neutral-900 dark:text-white">$0.0135</div>
-              <div id="ai-token-breakdown" class="mt-0.5 text-[11px] text-neutral-400">Prompt: $0.0045 · Completion: $0.0090</div>
+        <!-- Cost Per Single Request -->
+        <div class="mt-4 rounded-lg bg-white p-4 border border-slate-200/80 dark:bg-white/[0.04] dark:border-white/[0.06]">
+          <span class="text-xs text-slate-500 dark:text-slate-400">Cost Per Single Request</span>
+          <div class="mt-1 text-2xl font-black tracking-tight text-slate-900 dark:text-white" id="ai-cost-single">
+            $0.0135
+          </div>
+          <div class="mt-1 text-[11px] text-slate-500 dark:text-slate-400 font-mono" id="ai-cost-breakdown">
+            Prompt: $0.0045 &bull; Completion: $0.0090
+          </div>
+        </div>
+
+        <!-- Daily & Monthly Spend Grid -->
+        <div class="mt-4 grid grid-cols-2 gap-3">
+          <div class="rounded-lg bg-white p-4 border border-slate-200/80 dark:bg-white/[0.04] dark:border-white/[0.06]">
+            <span class="text-xs text-slate-500 dark:text-slate-400">Daily Burn</span>
+            <div class="mt-1 text-xl font-bold text-slate-900 dark:text-white" id="ai-cost-daily">
+              $13.50
             </div>
-
-            <div class="grid grid-cols-2 gap-3">
-              <div class="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/[0.06] dark:bg-[#0B101D]">
-                <div class="text-[11px] text-neutral-500 dark:text-neutral-400">Daily Burn</div>
-                <div id="ai-cost-daily" class="mt-1 text-lg font-bold text-neutral-900 dark:text-white">$13.50</div>
-              </div>
-              <div class="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/[0.06] dark:bg-[#0B101D]">
-                <div class="text-[11px] text-neutral-500 dark:text-neutral-400">Monthly Projection (30d)</div>
-                <div id="ai-cost-monthly" class="mt-1 text-lg font-bold text-blue-600 dark:text-blue-400">$405.00</div>
-              </div>
-            </div>
-
-            <div class="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/[0.06] dark:bg-[#0B101D]">
-              <div class="text-[11px] text-neutral-500 dark:text-neutral-400">Monthly Total Tokens Processed</div>
-              <div id="ai-tokens-monthly" class="mt-1 text-sm font-semibold text-neutral-800 dark:text-neutral-200">63.0 Million Tokens</div>
+          </div>
+          <div class="rounded-lg bg-white p-4 border border-slate-200/80 dark:bg-white/[0.04] dark:border-white/[0.06]">
+            <span class="text-xs text-slate-500 dark:text-slate-400">Monthly Projection (30d)</span>
+            <div class="mt-1 text-xl font-black text-blue-600 dark:text-blue-400" id="ai-cost-monthly">
+              $405.00
             </div>
           </div>
         </div>
 
-        <div class="mt-6 border-t border-neutral-200 pt-4 text-xs text-neutral-500 dark:border-white/[0.08] dark:text-neutral-400">
-          <span>Explore architecture:</span>
-          <a href="/articles/training-vs-inference-economics/" class="ml-1 text-blue-600 hover:underline dark:text-blue-400">
-            Training vs. Inference Economics &rarr;
-          </a>
+        <!-- Monthly Token Throughput -->
+        <div class="mt-4 rounded-lg bg-white p-4 border border-slate-200/80 dark:bg-white/[0.04] dark:border-white/[0.06]">
+          <span class="text-xs text-slate-500 dark:text-slate-400">Monthly Total Tokens Processed</span>
+          <div class="mt-1 text-lg font-bold font-mono text-slate-900 dark:text-white" id="ai-monthly-tokens">
+            63.00 Million Tokens
+          </div>
         </div>
+
+        <p class="mt-4 text-[11px] text-slate-500 dark:text-slate-400">
+          Explore architecture: <a href="/articles/training-vs-inference-economics/" class="text-blue-600 dark:text-blue-400 hover:underline">Training vs. Inference Economics &rarr;</a>
+        </p>
       </div>
     </div>
   </div>
 
   <!-- ========================================================================= -->
-  <!-- 2. BANDWIDTH-DELAY PRODUCT (BDP) CALCULATOR -->
+  <!-- 2. NETWORK BDP SIZER (SLIDER-FREE CHIP & NUMBER INTERFACE) -->
   <!-- ========================================================================= -->
   <div id="calc-network-panel" role="tabpanel" aria-labelledby="calc-network-tab" class="calc-panel hidden">
     <div class="grid gap-8 lg:grid-cols-2 items-start w-full min-w-0">
-      <!-- Controls -->
+      <!-- Input Controls -->
       <div class="space-y-6 w-full min-w-0">
+        <div>
+          <span class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-2">
+            Topology Presets
+          </span>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <button type="button" class="net-preset-btn rounded-lg border border-slate-200 bg-slate-50 p-2 text-left text-xs hover:border-blue-500 dark:border-white/[0.08] dark:bg-white/[0.04] dark:hover:border-blue-400 transition-colors" data-bw="10000" data-unit="mbps" data-rtt="2">
+              <span class="font-bold block text-slate-900 dark:text-white">Local DC</span>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400">10G LAN &bull; 2ms</span>
+            </button>
+            <button type="button" class="net-preset-btn rounded-lg border border-slate-200 bg-slate-50 p-2 text-left text-xs hover:border-blue-500 dark:border-white/[0.08] dark:bg-white/[0.04] dark:hover:border-blue-400 transition-colors" data-bw="1" data-unit="gbps" data-rtt="18">
+              <span class="font-bold block text-slate-900 dark:text-white">Metro Cloud</span>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400">1G Metro &bull; 18ms</span>
+            </button>
+            <button type="button" class="net-preset-btn rounded-lg border border-blue-500 bg-blue-50 p-2 text-left text-xs dark:border-blue-500 dark:bg-blue-950/60 transition-colors" data-bw="1" data-unit="gbps" data-rtt="70">
+              <span class="font-bold block text-blue-900 dark:text-blue-300">Cross-Country</span>
+              <span class="text-[10px] text-blue-700 dark:text-blue-400">1G US-East/West &bull; 70ms</span>
+            </button>
+            <button type="button" class="net-preset-btn rounded-lg border border-slate-200 bg-slate-50 p-2 text-left text-xs hover:border-blue-500 dark:border-white/[0.08] dark:bg-white/[0.04] dark:hover:border-blue-400 transition-colors" data-bw="10" data-unit="gbps" data-rtt="140">
+              <span class="font-bold block text-slate-900 dark:text-white">Transatlantic</span>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400">10G NYC-LON &bull; 140ms</span>
+            </button>
+            <button type="button" class="net-preset-btn rounded-lg border border-slate-200 bg-slate-50 p-2 text-left text-xs hover:border-blue-500 dark:border-white/[0.08] dark:bg-white/[0.04] dark:hover:border-blue-400 transition-colors" data-bw="100" data-unit="gbps" data-rtt="80">
+              <span class="font-bold block text-slate-900 dark:text-white">Core Backbone</span>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400">100G Fabric &bull; 80ms</span>
+            </button>
+            <button type="button" class="net-preset-btn rounded-lg border border-slate-200 bg-slate-50 p-2 text-left text-xs hover:border-blue-500 dark:border-white/[0.08] dark:bg-white/[0.04] dark:hover:border-blue-400 transition-colors" data-bw="100" data-unit="mbps" data-rtt="220">
+              <span class="font-bold block text-slate-900 dark:text-white">Global Edge</span>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400">100M Edge &bull; 220ms</span>
+            </button>
+          </div>
+        </div>
+
         <!-- Bandwidth Input -->
         <div>
-          <label for="net-bandwidth" class="block text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300">
-            Link Bandwidth (Capacity)
+          <label for="net-bandwidth" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono">
+            Network Link Bandwidth
           </label>
-          <div class="mt-2 flex rounded-xl shadow-xs">
+          <div class="mt-2 flex gap-2">
             <input
               type="number"
               id="net-bandwidth"
               value="1"
               min="1"
-              max="100000"
-              class="block w-full rounded-l-xl border border-neutral-300 bg-white px-3.5 py-2.5 text-sm text-neutral-900 focus:border-blue-500 focus:outline-hidden focus:ring-1 focus:ring-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-white"
+              step="any"
+              class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-xs focus:border-blue-500 focus:outline-hidden dark:border-white/[0.1] dark:bg-[#121826] dark:text-white font-mono"
             />
             <select
               id="net-bandwidth-unit"
-              class="rounded-r-xl border border-l-0 border-neutral-300 bg-neutral-100 px-3.5 text-xs font-semibold text-neutral-700 dark:border-white/[0.1] dark:bg-[#1A2234] dark:text-neutral-300"
+              class="rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-xs focus:border-blue-500 focus:outline-hidden dark:border-white/[0.1] dark:bg-[#121826] dark:text-white font-mono"
             >
-              <option value="1">Mbps</option>
-              <option value="1000" selected>Gbps</option>
-              <option value="1000000">Tbps</option>
+              <option value="mbps">Mbps</option>
+              <option value="gbps" selected>Gbps</option>
             </select>
           </div>
         </div>
 
-        <!-- Latency / RTT Input -->
+        <!-- Latency Input -->
         <div>
-          <div class="flex items-center justify-between text-xs font-semibold">
-            <label for="net-rtt" class="text-neutral-700 dark:text-neutral-300">
+          <div class="flex items-center justify-between text-xs font-semibold mb-2">
+            <label for="net-rtt" class="text-slate-700 dark:text-slate-300">
               Round-Trip Time (RTT Latency)
             </label>
-            <span id="net-rtt-display" class="font-mono text-blue-600 dark:text-blue-400">45.0 ms</span>
+            <span id="net-rtt-display" class="font-mono text-blue-600 dark:text-blue-400">70 ms</span>
           </div>
-          <input
-            type="range"
-            id="net-rtt"
-            min="0.2"
-            max="300"
-            step="0.5"
-            value="45"
-            class="mt-2 h-2 w-full max-w-full block box-border cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
-          />
-          <!-- Latency Presets -->
-          <div class="mt-2 flex flex-wrap gap-1.5">
-            <button type="button" class="net-preset-btn rounded border border-neutral-200 bg-white px-2 py-0.5 text-[11px] text-neutral-600 hover:border-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-neutral-300" data-rtt="0.5">
-              Same Datacenter (0.5ms)
-            </button>
-            <button type="button" class="net-preset-btn rounded border border-neutral-200 bg-white px-2 py-0.5 text-[11px] text-neutral-600 hover:border-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-neutral-300" data-rtt="18">
-              Regional CDN (18ms)
-            </button>
-            <button type="button" class="net-preset-btn rounded border border-neutral-200 bg-white px-2 py-0.5 text-[11px] text-neutral-600 hover:border-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-neutral-300" data-rtt="45">
-              Coast-to-Coast (45ms)
-            </button>
-            <button type="button" class="net-preset-btn rounded border border-neutral-200 bg-white px-2 py-0.5 text-[11px] text-neutral-600 hover:border-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-neutral-300" data-rtt="75">
-              Trans-Atlantic (75ms)
-            </button>
+          <div class="flex items-center gap-2">
+            <input
+              type="number"
+              id="net-rtt"
+              value="70"
+              min="1"
+              max="2000"
+              class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-xs focus:border-blue-500 focus:outline-hidden dark:border-white/[0.1] dark:bg-[#121826] dark:text-white font-mono"
+            />
+            <span class="text-xs font-mono text-slate-500 dark:text-slate-400 shrink-0">ms</span>
           </div>
         </div>
-
-        <p class="text-xs text-neutral-500 dark:text-neutral-400">
-          The Bandwidth-Delay Product (<span class="font-mono">BDP = Bandwidth × RTT</span>) represents the maximum volume of unacknowledged data in transit required to fully saturate the physical connection.
-        </p>
       </div>
 
-      <!-- Output Summary -->
-      <div class="flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50/70 p-6 dark:border-white/[0.08] dark:bg-[#121826] w-full min-w-0">
-        <div>
-          <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-            Buffer &amp; Throughput Metrics
-          </h3>
+      <!-- Results Card -->
+      <div class="rounded-xl border border-slate-200 bg-slate-50 p-6 dark:border-white/[0.08] dark:bg-[#121826] w-full min-w-0">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
+          TCP Buffer &amp; In-Flight Capacity
+        </h3>
 
-          <div class="mt-4 space-y-4">
-            <div class="rounded-lg border border-neutral-200 bg-white p-4 dark:border-white/[0.06] dark:bg-[#0B101D]">
-              <div class="text-xs text-neutral-500 dark:text-neutral-400">Bandwidth-Delay Product (BDP)</div>
-              <div id="net-bdp-bytes" class="mt-1 text-2xl font-extrabold text-blue-600 dark:text-blue-400">5.63 MB</div>
-              <div id="net-bdp-bits" class="mt-0.5 text-[11px] text-neutral-400">45.0 Megabits in flight</div>
-            </div>
-
-            <div class="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/[0.06] dark:bg-[#0B101D]">
-              <div class="text-[11px] text-neutral-500 dark:text-neutral-400">Optimal Linux Socket Buffer (<span class="font-mono">SO_RCVBUF</span>)</div>
-              <div id="net-buffer-rec" class="mt-1 text-base font-bold text-neutral-900 dark:text-white">~11.25 MB (2× BDP for overhead)</div>
-            </div>
-
-            <div class="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/[0.06] dark:bg-[#0B101D]">
-              <div class="text-[11px] text-neutral-500 dark:text-neutral-400">Theoretical Transfer Time for 1 GB File</div>
-              <div id="net-transfer-time" class="mt-1 text-base font-bold text-neutral-900 dark:text-white">8.05 seconds</div>
-            </div>
+        <div class="mt-4 rounded-lg bg-white p-4 border border-slate-200/80 dark:bg-white/[0.04] dark:border-white/[0.06]">
+          <span class="text-xs text-slate-500 dark:text-slate-400">Bandwidth-Delay Product (BDP)</span>
+          <div class="mt-1 text-2xl font-black tracking-tight text-slate-900 dark:text-white font-mono" id="net-bdp-bytes">
+            8.75 MB
+          </div>
+          <div class="mt-1 text-[11px] text-slate-500 dark:text-slate-400 font-mono" id="net-bdp-bits">
+            70.0 Megabits in flight
           </div>
         </div>
 
-        <div class="mt-6 border-t border-neutral-200 pt-4 text-xs text-neutral-500 dark:border-white/[0.08] dark:text-neutral-400">
-          <span>Read related deep-dive:</span>
-          <a href="/articles/zero-copy-networking-in-linux-with-io-uring-and-ebpf/" class="ml-1 text-blue-600 hover:underline dark:text-blue-400">
-            Zero-Copy Linux Networking with io_uring &rarr;
-          </a>
+        <div class="mt-4 rounded-lg bg-white p-4 border border-slate-200/80 dark:bg-white/[0.04] dark:border-white/[0.06]">
+          <span class="text-xs text-slate-500 dark:text-slate-400">Recommended TCP Socket Window Size (2× BDP)</span>
+          <div class="mt-1 text-xl font-bold text-blue-600 dark:text-blue-400 font-mono" id="net-buffer-rec">
+            ~17.50 MB (2× BDP)
+          </div>
+          <div class="mt-1 text-[10.5px] text-slate-500 dark:text-slate-400">
+            Configure via <code class="font-mono text-slate-800 dark:text-slate-200">sysctl net.ipv4.tcp_rmem / tcp_wmem</code>
+          </div>
         </div>
+
+        <div class="mt-4 rounded-lg bg-white p-4 border border-slate-200/80 dark:bg-white/[0.04] dark:border-white/[0.06]">
+          <span class="text-xs text-slate-500 dark:text-slate-400">Theoretical Transfer Duration (1 GB File)</span>
+          <div class="mt-1 text-lg font-bold font-mono text-slate-900 dark:text-white" id="net-transfer-time">
+            8.26 seconds
+          </div>
+        </div>
+
+        <p class="mt-4 text-[11px] text-slate-500 dark:text-slate-400">
+          Related guide: <a href="/articles/zero-copy-networking-in-linux-with-io-uring-and-ebpf/" class="text-blue-600 dark:text-blue-400 hover:underline">Zero-Copy Linux Networking with io_uring &rarr;</a>
+        </p>
       </div>
     </div>
   </div>
 
   <!-- ========================================================================= -->
-  <!-- 3. COSMIC REDSHIFT & LOOKBACK TIME CALCULATOR -->
+  <!-- 3. COSMIC REDSHIFT CALCULATOR (SLIDER-FREE PRESET & STEPPER INTERFACE) -->
   <!-- ========================================================================= -->
   <div id="calc-astro-panel" role="tabpanel" aria-labelledby="calc-astro-tab" class="calc-panel hidden">
     <div class="grid gap-8 lg:grid-cols-2 items-start w-full min-w-0">
-      <!-- Controls -->
+      <!-- Input Controls -->
       <div class="space-y-6 w-full min-w-0">
         <div>
-          <div class="flex items-center justify-between text-xs font-semibold">
-            <label for="astro-z-input" class="text-neutral-700 dark:text-neutral-300">
-              Cosmological Redshift (<span class="font-mono">z</span>)
-            </label>
-            <span id="astro-z-display" class="font-mono text-blue-600 dark:text-blue-400">z = 1.000</span>
+          <span class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono mb-2">
+            Cosmological Epoch &amp; Landmark Presets
+          </span>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <button type="button" class="astro-preset-btn rounded-lg border border-slate-200 bg-slate-50 p-2 text-left text-xs hover:border-purple-500 dark:border-white/[0.08] dark:bg-white/[0.04] dark:hover:border-purple-400 transition-colors" data-z="0.0038">
+              <span class="font-bold block text-slate-900 dark:text-white">Virgo Cluster</span>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">z = 0.0038</span>
+            </button>
+            <button type="button" class="astro-preset-btn rounded-lg border border-slate-200 bg-slate-50 p-2 text-left text-xs hover:border-purple-500 dark:border-white/[0.08] dark:bg-white/[0.04] dark:hover:border-purple-400 transition-colors" data-z="0.158">
+              <span class="font-bold block text-slate-900 dark:text-white">Quasar 3C 273</span>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">z = 0.158</span>
+            </button>
+            <button type="button" class="astro-preset-btn rounded-lg border border-purple-500 bg-purple-50 p-2 text-left text-xs dark:border-purple-500 dark:bg-purple-950/60 transition-colors" data-z="2.0">
+              <span class="font-bold block text-purple-900 dark:text-purple-300">Cosmic Noon</span>
+              <span class="text-[10px] text-purple-700 dark:text-purple-400 font-mono">z = 2.000</span>
+            </button>
+            <button type="button" class="astro-preset-btn rounded-lg border border-slate-200 bg-slate-50 p-2 text-left text-xs hover:border-purple-500 dark:border-white/[0.08] dark:bg-white/[0.04] dark:hover:border-purple-400 transition-colors" data-z="6.5">
+              <span class="font-bold block text-slate-900 dark:text-white">Reionization</span>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">z = 6.500</span>
+            </button>
+            <button type="button" class="astro-preset-btn rounded-lg border border-slate-200 bg-slate-50 p-2 text-left text-xs hover:border-purple-500 dark:border-white/[0.08] dark:bg-white/[0.04] dark:hover:border-purple-400 transition-colors" data-z="10.603">
+              <span class="font-bold block text-slate-900 dark:text-white">JWST GN-z11</span>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">z = 10.603</span>
+            </button>
+            <button type="button" class="astro-preset-btn rounded-lg border border-slate-200 bg-slate-50 p-2 text-left text-xs hover:border-purple-500 dark:border-white/[0.08] dark:bg-white/[0.04] dark:hover:border-purple-400 transition-colors" data-z="14.32">
+              <span class="font-bold block text-slate-900 dark:text-white">JWST JADES-GS</span>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">z = 14.320</span>
+            </button>
           </div>
-          <input
-            type="range"
-            id="astro-z-slider"
-            min="0.001"
-            max="12.0"
-            step="0.01"
-            value="1.0"
-            class="mt-2 h-2 w-full max-w-full block box-border cursor-pointer appearance-none rounded-lg bg-neutral-200 accent-blue-600 dark:bg-white/[0.1]"
-          />
-          <div class="mt-2 flex items-center gap-3">
-            <span class="text-xs text-neutral-500">Exact Value:</span>
+        </div>
+
+        <!-- Direct Numerical Input with Stepper Buttons -->
+        <div>
+          <div class="flex items-center justify-between text-xs font-semibold mb-2">
+            <label for="astro-z-exact" class="text-slate-700 dark:text-slate-300">
+              Cosmological Redshift (z)
+            </label>
+            <span id="astro-z-display" class="font-mono text-purple-600 dark:text-purple-400">z = 2.000</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" id="astro-step-down" class="rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-bold hover:bg-slate-50 dark:border-white/[0.1] dark:bg-[#121826] dark:text-white font-mono" title="Decrease z by 0.5">-0.5</button>
             <input
               type="number"
               id="astro-z-exact"
-              value="1.000"
               min="0.0001"
-              max="1500"
+              max="50"
               step="0.001"
-              class="w-28 rounded-lg border border-neutral-300 bg-white px-2.5 py-1 text-xs font-mono text-neutral-900 focus:border-blue-500 focus:outline-hidden dark:border-white/[0.1] dark:bg-[#121826] dark:text-white"
+              value="2.000"
+              class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 shadow-xs focus:border-purple-500 focus:outline-hidden dark:border-white/[0.1] dark:bg-[#121826] dark:text-white font-mono text-center"
             />
+            <button type="button" id="astro-step-up" class="rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-bold hover:bg-slate-50 dark:border-white/[0.1] dark:bg-[#121826] dark:text-white font-mono" title="Increase z by 0.5">+0.5</button>
           </div>
-
-          <!-- Astronomical Presets -->
-          <div class="mt-3 flex flex-wrap gap-1.5">
-            <button type="button" class="astro-preset-btn rounded border border-neutral-200 bg-white px-2 py-0.5 text-[11px] text-neutral-600 hover:border-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-neutral-300" data-z="0.0038">
-              Virgo Cluster (z=0.0038)
-            </button>
-            <button type="button" class="astro-preset-btn rounded border border-neutral-200 bg-white px-2 py-0.5 text-[11px] text-neutral-600 hover:border-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-neutral-300" data-z="0.158">
-              Quasar 3C 273 (z=0.158)
-            </button>
-            <button type="button" class="astro-preset-btn rounded border border-neutral-200 bg-white px-2 py-0.5 text-[11px] text-neutral-600 hover:border-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-neutral-300" data-z="2.0">
-              Cosmic Noon Peak (z=2.0)
-            </button>
-            <button type="button" class="astro-preset-btn rounded border border-neutral-200 bg-white px-2 py-0.5 text-[11px] text-neutral-600 hover:border-blue-500 dark:border-white/[0.1] dark:bg-[#121826] dark:text-neutral-300" data-z="10.6">
-              JWST GN-z11 Galaxy (z=10.6)
-            </button>
-          </div>
+          <p class="mt-2 text-[11px] text-slate-500 dark:text-slate-400">
+            Computed using standard flat &Lambda;CDM cosmology (H₀ &approx; 67.4 km/s/Mpc, &Omega;<sub>m</sub> &approx; 0.315, &Omega;<sub>&Lambda;</sub> &approx; 0.685).
+          </p>
         </div>
-
-        <p class="text-xs text-neutral-500 dark:text-neutral-400">
-          Computed using standard flat <span class="font-mono">&Lambda;CDM</span> cosmology (<span class="font-mono">H<sub>0</sub> &approx; 67.4 km/s/Mpc, &Omega;<sub>m</sub> &approx; 0.315, &Omega;<sub>&Lambda;</sub> &approx; 0.685</span>).
-        </p>
       </div>
 
-      <!-- Output Summary -->
-      <div class="flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50/70 p-6 dark:border-white/[0.08] dark:bg-[#121826] w-full min-w-0">
-        <div>
-          <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-            Cosmological Parameters
-          </h3>
+      <!-- Results Card -->
+      <div class="rounded-xl border border-slate-200 bg-slate-50 p-6 dark:border-white/[0.08] dark:bg-[#121826] w-full min-w-0">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
+          Cosmological Parameters
+        </h3>
 
-          <div class="mt-4 space-y-4">
-            <div class="rounded-lg border border-neutral-200 bg-white p-4 dark:border-white/[0.06] dark:bg-[#0B101D]">
-              <div class="text-xs text-neutral-500 dark:text-neutral-400">Estimated Lookback Time</div>
-              <div id="astro-lookback" class="mt-1 text-2xl font-extrabold text-blue-600 dark:text-blue-400">7.94 Billion Years</div>
-              <div id="astro-age" class="mt-0.5 text-[11px] text-neutral-400">Universe was ~5.86 Gyr old at emission</div>
-            </div>
-
-            <div class="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/[0.06] dark:bg-[#0B101D]">
-              <div class="text-[11px] text-neutral-500 dark:text-neutral-400">Wavelength Stretching Factor (<span class="font-mono">1 + z</span>)</div>
-              <div id="astro-stretch" class="mt-1 text-base font-bold text-neutral-900 dark:text-white">2.000× (100% redshift stretch)</div>
-            </div>
-
-            <div class="rounded-lg border border-neutral-200 bg-white p-3 dark:border-white/[0.06] dark:bg-[#0B101D]">
-              <div class="text-[11px] text-neutral-500 dark:text-neutral-400">Apparent Recession Velocity (Relativistic)</div>
-              <div id="astro-velocity" class="mt-1 text-base font-bold text-neutral-900 dark:text-white">180,000 km/s (0.600 c)</div>
-            </div>
+        <div class="mt-4 rounded-lg bg-white p-4 border border-slate-200/80 dark:bg-white/[0.04] dark:border-white/[0.06]">
+          <span class="text-xs text-slate-500 dark:text-slate-400">Estimated Lookback Time</span>
+          <div class="mt-1 text-2xl font-black tracking-tight text-purple-600 dark:text-purple-400" id="astro-lookback">
+            10.42 Billion Years
+          </div>
+          <div class="mt-1 text-[11px] text-slate-500 dark:text-slate-400 font-mono" id="astro-age">
+            Universe was ~3.38 Gyr old at emission
           </div>
         </div>
 
-        <div class="mt-6 border-t border-neutral-200 pt-4 text-xs text-neutral-500 dark:border-white/[0.08] dark:text-neutral-400">
-          <span>Read related deep-dive:</span>
-          <a href="/articles/how-we-know-what-stars-are-made-of/" class="ml-1 text-blue-600 hover:underline dark:text-blue-400">
-            How We Know What Stars Are Made Of &rarr;
-          </a>
+        <div class="mt-4 rounded-lg bg-white p-4 border border-slate-200/80 dark:bg-white/[0.04] dark:border-white/[0.06]">
+          <span class="text-xs text-slate-500 dark:text-slate-400">Wavelength Stretching Factor (1 + z)</span>
+          <div class="mt-1 text-xl font-bold font-mono text-slate-900 dark:text-white" id="astro-stretch">
+            3.000&times; (200% stretch)
+          </div>
         </div>
+
+        <div class="mt-4 rounded-lg bg-white p-4 border border-slate-200/80 dark:bg-white/[0.04] dark:border-white/[0.06]">
+          <span class="text-xs text-slate-500 dark:text-slate-400">Apparent Recession Velocity (Relativistic)</span>
+          <div class="mt-1 text-lg font-bold font-mono text-slate-900 dark:text-white" id="astro-velocity">
+            239,834 km/s (0.800 c)
+          </div>
+        </div>
+
+        <p class="mt-4 text-[11px] text-slate-500 dark:text-slate-400">
+          Related research: <a href="/articles/dark-matter-evidence-and-theories/" class="text-purple-600 dark:text-purple-400 hover:underline">Dark Matter &amp; Cosmic Expansion &rarr;</a>
+        </p>
       </div>
     </div>
   </div>
 </div>
 
+<!-- ========================================================================= -->
+<!-- JAVASCRIPT: CLEAN, DETERMINISTIC, ZERO-DEPENDENCY ENGINE -->
+<!-- ========================================================================= -->
 <script is:inline>
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', () => {
     // -------------------------------------------------------------------------
     // TAB SWITCHING LOGIC
     // -------------------------------------------------------------------------
-    const tabs = document.querySelectorAll('.calc-tab-btn');
+    const tabBtns = document.querySelectorAll('.calc-tab-btn');
     const panels = document.querySelectorAll('.calc-panel');
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const targetId = tab.getAttribute('data-target');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
 
-        // Update tabs
-        tabs.forEach(t => {
-          t.setAttribute('aria-selected', 'false');
-          t.classList.remove('bg-white', 'text-neutral-900', 'shadow-xs', 'dark:bg-blue-600', 'dark:text-white');
-          t.classList.add('text-neutral-600', 'dark:text-neutral-400');
+        tabBtns.forEach(b => {
+          b.setAttribute('aria-selected', 'false');
+          b.className = 'calc-tab-btn rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white';
         });
-        tab.setAttribute('aria-selected', 'true');
-        tab.classList.add('bg-white', 'text-neutral-900', 'shadow-xs', 'dark:bg-blue-600', 'dark:text-white');
-        tab.classList.remove('text-neutral-600', 'dark:text-neutral-400');
 
-        // Update panels
+        btn.setAttribute('aria-selected', 'true');
+        btn.className = 'calc-tab-btn rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all bg-white text-slate-900 shadow-xs dark:bg-blue-600 dark:text-white';
+
         panels.forEach(p => {
           if (p.id === targetId) {
             p.classList.remove('hidden');
@@ -437,63 +479,94 @@
     });
 
     // -------------------------------------------------------------------------
-    // 1. AI CALCULATOR LOGIC
+    // 1. AI TOKEN & INFERENCE COST CALCULATOR LOGIC
     // -------------------------------------------------------------------------
-    const modelSelect = document.getElementById('ai-model-select');
-    const inputTokensSlider = document.getElementById('ai-input-tokens');
-    const outputTokensSlider = document.getElementById('ai-output-tokens');
-    const requestsSlider = document.getElementById('ai-requests');
+    const aiModelSelect = document.getElementById('ai-model-select');
+    const aiInputTokens = document.getElementById('ai-input-tokens');
+    const aiOutputTokens = document.getElementById('ai-output-tokens');
+    const aiRequests = document.getElementById('ai-requests');
 
-    const inputDisplay = document.getElementById('ai-input-display');
-    const outputDisplay = document.getElementById('ai-output-display');
-    const requestsDisplay = document.getElementById('ai-requests-display');
+    const aiInputDisplay = document.getElementById('ai-input-display');
+    const aiOutputDisplay = document.getElementById('ai-output-display');
+    const aiRequestsDisplay = document.getElementById('ai-requests-display');
 
-    const costRequest = document.getElementById('ai-cost-request');
-    const tokenBreakdown = document.getElementById('ai-token-breakdown');
-    const costDaily = document.getElementById('ai-cost-daily');
-    const costMonthly = document.getElementById('ai-cost-monthly');
-    const tokensMonthly = document.getElementById('ai-tokens-monthly');
+    const aiCostSingle = document.getElementById('ai-cost-single');
+    const aiCostBreakdown = document.getElementById('ai-cost-breakdown');
+    const aiCostDaily = document.getElementById('ai-cost-daily');
+    const aiCostMonthly = document.getElementById('ai-cost-monthly');
+    const aiMonthlyTokens = document.getElementById('ai-monthly-tokens');
 
-    function updateAICalculator() {
-      if (!modelSelect) return;
-      const opt = modelSelect.selectedOptions[0];
-      const costPerMInput = parseFloat(opt.getAttribute('data-input') || '0');
-      const costPerMOutput = parseFloat(opt.getAttribute('data-output') || '0');
+    function updateAiCalculator() {
+      if (!aiModelSelect || !aiInputTokens) return;
 
-      const inTokens = parseInt(inputTokensSlider.value, 10);
-      const outTokens = parseInt(outputTokensSlider.value, 10);
-      const reqs = parseInt(requestsSlider.value, 10);
+      const selectedOption = aiModelSelect.options[aiModelSelect.selectedIndex];
+      const costPerMillionInput = parseFloat(selectedOption.getAttribute('data-input')) || 3.0;
+      const costPerMillionOutput = parseFloat(selectedOption.getAttribute('data-output')) || 15.0;
 
-      inputDisplay.textContent = inTokens.toLocaleString() + ' tokens';
-      outputDisplay.textContent = outTokens.toLocaleString() + ' tokens';
-      requestsDisplay.textContent = reqs.toLocaleString() + ' req/day';
+      const inputTokens = parseInt(aiInputTokens.value, 10) || 0;
+      const outputTokens = parseInt(aiOutputTokens.value, 10) || 0;
+      const dailyReqs = parseInt(aiRequests.value, 10) || 0;
 
-      const promptCostPerReq = (inTokens / 1_000_000) * costPerMInput;
-      const outputCostPerReq = (outTokens / 1_000_000) * costPerMOutput;
-      const totalCostPerReq = promptCostPerReq + outputCostPerReq;
+      aiInputDisplay.textContent = inputTokens.toLocaleString() + ' tokens';
+      aiOutputDisplay.textContent = outputTokens.toLocaleString() + ' tokens';
+      aiRequestsDisplay.textContent = dailyReqs.toLocaleString() + ' req/day';
 
-      const dailySpend = totalCostPerReq * reqs;
-      const monthlySpend = dailySpend * 30;
-      const monthlyTokens = (inTokens + outTokens) * reqs * 30;
+      const promptCost = (inputTokens / 1_000_000) * costPerMillionInput;
+      const completionCost = (outputTokens / 1_000_000) * costPerMillionOutput;
+      const totalSingleCost = promptCost + completionCost;
 
-      costRequest.textContent = '$' + totalCostPerReq.toFixed(4);
-      tokenBreakdown.textContent = `Prompt: $${promptCostPerReq.toFixed(4)} · Completion: $${outputCostPerReq.toFixed(4)}`;
-      costDaily.textContent = '$' + dailySpend.toFixed(2);
-      costMonthly.textContent = '$' + monthlySpend.toFixed(2);
+      const dailyCost = totalSingleCost * dailyReqs;
+      const monthlyCost = dailyCost * 30;
 
-      if (monthlyTokens >= 1_000_000_000) {
-        tokensMonthly.textContent = (monthlyTokens / 1_000_000_000).toFixed(2) + ' Billion Tokens';
-      } else {
-        tokensMonthly.textContent = (monthlyTokens / 1_000_000).toFixed(2) + ' Million Tokens';
-      }
+      const totalMonthlyTokens = (inputTokens + outputTokens) * dailyReqs * 30;
+      const millionsMonthlyTokens = totalMonthlyTokens / 1_000_000;
+
+      aiCostSingle.textContent = '$' + totalSingleCost.toFixed(4);
+      aiCostBreakdown.textContent = `Prompt: $${promptCost.toFixed(4)} • Completion: $${completionCost.toFixed(4)}`;
+      aiCostDaily.textContent = '$' + dailyCost.toFixed(2);
+      aiCostMonthly.textContent = '$' + monthlyCost.toFixed(2);
+      aiMonthlyTokens.textContent = millionsMonthlyTokens.toFixed(2) + ' Million Tokens';
     }
 
-    if (modelSelect) {
-      modelSelect.addEventListener('change', updateAICalculator);
-      inputTokensSlider.addEventListener('input', updateAICalculator);
-      outputTokensSlider.addEventListener('input', updateAICalculator);
-      requestsSlider.addEventListener('input', updateAICalculator);
-      updateAICalculator();
+    if (aiModelSelect) {
+      aiModelSelect.addEventListener('change', updateAiCalculator);
+      aiInputTokens.addEventListener('input', updateAiCalculator);
+      aiOutputTokens.addEventListener('input', updateAiCalculator);
+      aiRequests.addEventListener('input', updateAiCalculator);
+
+      // Setup preset chip click listeners
+      document.querySelectorAll('#ai-prompt-chips .ai-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          aiInputTokens.value = btn.getAttribute('data-val');
+          updateAiCalculator();
+          highlightChip('#ai-prompt-chips', btn);
+        });
+      });
+
+      document.querySelectorAll('#ai-output-chips .ai-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          aiOutputTokens.value = btn.getAttribute('data-val');
+          updateAiCalculator();
+          highlightChip('#ai-output-chips', btn);
+        });
+      });
+
+      document.querySelectorAll('#ai-req-chips .ai-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          aiRequests.value = btn.getAttribute('data-val');
+          updateAiCalculator();
+          highlightChip('#ai-req-chips', btn);
+        });
+      });
+
+      function highlightChip(containerSelector, activeBtn) {
+        document.querySelectorAll(containerSelector + ' .ai-chip').forEach(b => {
+          b.className = 'ai-chip rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-mono text-slate-600 hover:border-blue-500 hover:text-blue-600 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-slate-300';
+        });
+        activeBtn.className = 'ai-chip rounded-md border border-blue-500 bg-blue-50 px-2.5 py-1 text-xs font-mono text-blue-700 font-bold dark:border-blue-500 dark:bg-blue-950/60 dark:text-blue-300';
+      }
+
+      updateAiCalculator();
     }
 
     // -------------------------------------------------------------------------
@@ -510,15 +583,15 @@
     const netPresetBtns = document.querySelectorAll('.net-preset-btn');
 
     function updateNetworkCalculator() {
-      if (!netBandwidth) return;
-      const bwVal = parseFloat(netBandwidth.value) || 1;
-      const unitMult = parseFloat(netBandwidthUnit.value) || 1;
-      const totalMbps = bwVal * unitMult;
-      const rttMs = parseFloat(netRtt.value) || 1;
+      if (!netBandwidth || !netRtt) return;
 
-      netRttDisplay.textContent = rttMs.toFixed(1) + ' ms';
+      const rawBw = parseFloat(netBandwidth.value) || 0;
+      const unit = netBandwidthUnit.value;
+      const totalMbps = unit === 'gbps' ? rawBw * 1000 : rawBw;
+      const rttMs = parseFloat(netRtt.value) || 0;
 
-      // BDP in bits = (Mbps * 1e6) * (rttMs / 1000)
+      netRttDisplay.textContent = rttMs + ' ms';
+
       const bdpBits = (totalMbps * 1_000_000) * (rttMs / 1000);
       const bdpBytes = bdpBits / 8;
 
@@ -543,8 +616,7 @@
       }
       netBufferRec.textContent = recDisplay;
 
-      // Transfer time for 1GB file = (8 * 1024 Megabits) / totalMbps + (rttMs / 1000 for handshake)
-      const secToTransfer = (8192 / totalMbps) + (rttMs / 1000);
+      const secToTransfer = (8192 / (totalMbps || 1)) + (rttMs / 1000);
       if (secToTransfer < 1) {
         netTransferTime.textContent = (secToTransfer * 1000).toFixed(0) + ' milliseconds';
       } else {
@@ -559,8 +631,15 @@
 
       netPresetBtns.forEach(btn => {
         btn.addEventListener('click', () => {
+          netBandwidth.value = btn.getAttribute('data-bw');
+          netBandwidthUnit.value = btn.getAttribute('data-unit');
           netRtt.value = btn.getAttribute('data-rtt');
           updateNetworkCalculator();
+
+          netPresetBtns.forEach(b => {
+            b.className = 'net-preset-btn rounded-lg border border-slate-200 bg-slate-50 p-2 text-left text-xs hover:border-blue-500 dark:border-white/[0.08] dark:bg-white/[0.04] dark:hover:border-blue-400 transition-colors';
+          });
+          btn.className = 'net-preset-btn rounded-lg border border-blue-500 bg-blue-50 p-2 text-left text-xs dark:border-blue-500 dark:bg-blue-950/60 transition-colors';
         });
       });
 
@@ -570,23 +649,22 @@
     // -------------------------------------------------------------------------
     // 3. COSMIC REDSHIFT CALCULATOR LOGIC
     // -------------------------------------------------------------------------
-    const astroZSlider = document.getElementById('astro-z-slider');
     const astroZExact = document.getElementById('astro-z-exact');
     const astroZDisplay = document.getElementById('astro-z-display');
     const astroLookback = document.getElementById('astro-lookback');
     const astroAge = document.getElementById('astro-age');
     const astroStretch = document.getElementById('astro-stretch');
     const astroVelocity = document.getElementById('astro-velocity');
+    const astroStepDown = document.getElementById('astro-step-down');
+    const astroStepUp = document.getElementById('astro-step-up');
     const astroPresetBtns = document.querySelectorAll('.astro-preset-btn');
 
-    // Approximate Lambda-CDM lookback time function (H0=67.4, Om=0.315, Ol=0.685)
     function calculateLookbackTime(z) {
-      const H0 = 67.4; // km/s/Mpc
+      const H0 = 67.4;
       const Om = 0.315;
       const Ol = 0.685;
-      const Th = 977.8 / H0; // Hubble time in Gyr (~14.5 Gyr)
+      const Th = 977.8 / H0;
 
-      // Numerical integration of dz' / ((1+z') * sqrt(Om*(1+z')^3 + Ol))
       const steps = 100;
       const dz = z / steps;
       let integral = 0;
@@ -598,31 +676,22 @@
       return Th * integral;
     }
 
-    function updateAstroCalculator(source) {
-      if (!astroZSlider) return;
-      let z = 1.0;
-      if (source === 'exact') {
-        z = parseFloat(astroZExact.value) || 0.001;
-        if (z <= 12.0) astroZSlider.value = z;
-      } else {
-        z = parseFloat(astroZSlider.value) || 0.001;
-        astroZExact.value = z.toFixed(3);
-      }
+    function updateAstroCalculator() {
+      if (!astroZExact) return;
+      let z = parseFloat(astroZExact.value) || 0.001;
+      if (z < 0.0001) z = 0.0001;
 
       astroZDisplay.textContent = 'z = ' + z.toFixed(3);
 
-      // Wavelength shift
       const stretch = 1 + z;
       astroStretch.textContent = `${stretch.toFixed(3)}× (${(z * 100).toFixed(0)}% stretch)`;
 
-      // Relativistic Doppler velocity: beta = ((1+z)^2 - 1) / ((1+z)^2 + 1)
       const zPlusOneSq = Math.pow(1 + z, 2);
       const beta = (zPlusOneSq - 1) / (zPlusOneSq + 1);
       const velKmS = beta * 299792;
       astroVelocity.textContent = `${Math.round(velKmS).toLocaleString()} km/s (${beta.toFixed(3)} c)`;
 
-      // Lookback time
-      const totalAge = 13.8; // Age of universe in Gyr
+      const totalAge = 13.8;
       let lookback = calculateLookbackTime(z);
       if (lookback > 13.75) lookback = 13.75;
       const universeAge = Math.max(0.05, totalAge - lookback);
@@ -631,21 +700,37 @@
       astroAge.textContent = `Universe was ~${universeAge.toFixed(2)} Gyr old at emission`;
     }
 
-    if (astroZSlider) {
-      astroZSlider.addEventListener('input', () => updateAstroCalculator('slider'));
-      astroZExact.addEventListener('input', () => updateAstroCalculator('exact'));
+    if (astroZExact) {
+      astroZExact.addEventListener('input', updateAstroCalculator);
+
+      astroStepDown?.addEventListener('click', () => {
+        let cur = parseFloat(astroZExact.value) || 1.0;
+        cur = Math.max(0.01, cur - 0.5);
+        astroZExact.value = cur.toFixed(3);
+        updateAstroCalculator();
+      });
+
+      astroStepUp?.addEventListener('click', () => {
+        let cur = parseFloat(astroZExact.value) || 1.0;
+        cur = cur + 0.5;
+        astroZExact.value = cur.toFixed(3);
+        updateAstroCalculator();
+      });
 
       astroPresetBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           const zVal = parseFloat(btn.getAttribute('data-z'));
-          astroZSlider.value = zVal;
-          astroZExact.value = zVal;
-          updateAstroCalculator('exact');
+          astroZExact.value = zVal.toFixed(3);
+          updateAstroCalculator();
+
+          astroPresetBtns.forEach(b => {
+            b.className = 'astro-preset-btn rounded-lg border border-slate-200 bg-slate-50 p-2 text-left text-xs hover:border-purple-500 dark:border-white/[0.08] dark:bg-white/[0.04] dark:hover:border-purple-400 transition-colors';
+          });
+          btn.className = 'astro-preset-btn rounded-lg border border-purple-500 bg-purple-50 p-2 text-left text-xs dark:border-purple-500 dark:bg-purple-950/60 transition-colors';
         });
       });
 
-      updateAstroCalculator('slider');
+      updateAstroCalculator();
     }
   });
 </script>
-
