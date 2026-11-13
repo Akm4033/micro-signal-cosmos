@@ -109,12 +109,14 @@
     position: fixed;
     top: 0;
     left: 0;
-    height: 2.5px;
-    background-color: #2563EB;
-    z-index: 50;
+    height: 3px;
+    background-color: var(--pillar-accent, #2563EB);
+    box-shadow: 0 0 10px var(--pillar-accent, rgba(37, 99, 235, 0.5));
+    z-index: 9999;
     transform-origin: 0% 50%;
     transform: scaleX(0);
     transition: transform 100ms ease-out;
+    pointer-events: none;
   }
 
   /* Responsive Typography */
@@ -467,18 +469,65 @@
     display: block !important;
     white-space: pre !important;
   }
+  .prose-editorial pre::-webkit-scrollbar {
+    height: 6px;
+  }
+  .prose-editorial pre::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.8);
+    border-radius: 3px;
+  }
+  .prose-editorial pre::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.3);
+    border-radius: 3px;
+  }
+  .prose-editorial pre::-webkit-scrollbar-thumb:hover {
+    background: rgba(148, 163, 184, 0.6);
+  }
+
+  /* macOS Terminal Code Frame */
+  .code-terminal {
+    margin: 2rem 0;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    background-color: #0B0F19;
+  }
+  .code-terminal .terminal-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background: #0B0F19;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    user-select: none;
+  }
+  .code-terminal pre,
+  .code-terminal pre.astro-code {
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 0 0 0.75rem 0.75rem !important;
+    background-color: #070B14 !important;
+    padding: 1.25rem !important;
+    box-shadow: none !important;
+  }
+
+  /* Editorial Pull-Quotes */
   .prose-editorial blockquote {
-    border-left: 3px solid #2563EB;
-    padding-left: 1.25rem;
-    margin: 1.75rem 0;
+    position: relative;
+    border-left: 4px solid var(--pillar-accent, #3B82F6);
+    background: linear-gradient(to right, rgba(59, 130, 246, 0.05), transparent);
+    border-radius: 0 0.75rem 0.75rem 0;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
     font-style: italic;
-    color: var(--text-secondary);
+    color: #334155;
     max-width: 100% !important;
     overflow-wrap: break-word !important;
   }
   html.dark .prose-editorial blockquote {
-    border-left-color: #3B82F6;
-    color: #94A3B8;
+    background: linear-gradient(to right, rgba(59, 130, 246, 0.08), transparent);
+    color: #CBD5E1;
   }
   .prose-editorial table {
     width: 100% !important;

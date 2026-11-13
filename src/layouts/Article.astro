@@ -198,7 +198,7 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
 ---
 
 <Base title={fullPageTitle} description={description} canonical={resolvedCanonical} ogImage={ogImage} author={author} publishedTime={publishedTime} modifiedTime={updatedTime}>
-  <div class="w-full max-w-full py-8 lg:py-14" id="article-container">
+  <div class="w-full max-w-full py-8 lg:py-14" id="article-container" style={`--pillar-accent: ${disciplineTheme.progressBarColor};`}>
     <article class="max-w-3xl lg:max-w-4xl mx-auto w-full min-w-0 px-4 sm:px-6 lg:px-8" id="main-article-element">
       <!-- Bespoke Discipline Editorial Header -->
       <header class={`article-header mb-8 rounded-2xl border ${disciplineTheme.border} bg-gradient-to-br ${disciplineTheme.gradient} p-6 sm:p-8 relative overflow-hidden backdrop-blur-xs`}>
@@ -450,32 +450,89 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
     </article>
   </div>
 
-  <script is:inline>
+  <script is:inline define:vars={{ accentColor: disciplineTheme.progressBarColor }}>
     document.addEventListener('DOMContentLoaded', () => {
-      // Code copy buttons
+      // Dynamic bespoke category progress bar styling
+      const progressBar = document.getElementById('reading-progress-bar');
+      if (progressBar && accentColor) {
+        progressBar.style.backgroundColor = accentColor;
+        progressBar.style.boxShadow = `0 0 12px ${accentColor}`;
+      }
+
+      // Transform code blocks into macOS terminal window style
       document.querySelectorAll('.prose-editorial pre').forEach((pre) => {
-        if (pre.querySelector('.code-copy-btn')) return;
-        pre.style.position = 'relative';
-        const btn = document.createElement('button');
-        btn.className = 'code-copy-btn';
-        btn.type = 'button';
-        btn.setAttribute('aria-label', 'Copy code to clipboard');
-        btn.innerText = 'Copy';
-        btn.addEventListener('click', async () => {
-          const code = pre.querySelector('code')?.innerText || pre.innerText;
+        if (pre.closest('.code-terminal')) return;
+
+        // Detect language
+        const code = pre.querySelector('code');
+        let lang = 'CODE';
+        if (pre.getAttribute('data-language')) {
+          lang = pre.getAttribute('data-language').toUpperCase();
+        } else if (code && code.className) {
+          const match = code.className.match(/language-([a-zA-Z0-9_+-]+)/);
+          if (match && match[1]) {
+            lang = match[1].toUpperCase();
+          }
+        }
+        if (lang === 'TEXT' || lang === 'PLAINTEXT') {
+          lang = 'DIAGRAM';
+        }
+
+        // Create terminal container
+        const terminal = document.createElement('div');
+        terminal.className = 'code-terminal not-prose';
+
+        // Create terminal header bar
+        const header = document.createElement('div');
+        header.className = 'terminal-bar';
+
+        // Window controls dots
+        const dots = document.createElement('div');
+        dots.className = 'flex items-center gap-1.5';
+        dots.innerHTML = `
+          <span class="w-2.5 h-2.5 rounded-full bg-[#EF4444]/90 inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#F59E0B]/90 inline-block"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#10B981]/90 inline-block"></span>
+        `;
+
+        // Language Badge
+        const badge = document.createElement('span');
+        badge.className = 'font-bold uppercase tracking-wider text-[10px] text-slate-300 font-mono';
+        badge.textContent = lang;
+
+        // Copy button
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'code-copy-btn-inline inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[11px] font-mono font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer border border-slate-700/60 dark:border-white/[0.08]';
+        copyBtn.type = 'button';
+        copyBtn.setAttribute('aria-label', 'Copy code to clipboard');
+        copyBtn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          <span class="btn-label">Copy</span>
+        `;
+
+        copyBtn.addEventListener('click', async () => {
+          const textToCopy = (code?.innerText || pre.innerText).trim();
           try {
-            await navigator.clipboard.writeText(code);
-            btn.innerText = 'Copied!';
-            btn.classList.add('copied');
+            await navigator.clipboard.writeText(textToCopy);
+            copyBtn.classList.add('text-emerald-400', 'border-emerald-500/40');
+            copyBtn.querySelector('.btn-label').textContent = 'Copied!';
             setTimeout(() => {
-              btn.innerText = 'Copy';
-              btn.classList.remove('copied');
+              copyBtn.classList.remove('text-emerald-400', 'border-emerald-500/40');
+              copyBtn.querySelector('.btn-label').textContent = 'Copy';
             }, 2000);
           } catch (err) {
-            btn.innerText = 'Failed';
+            copyBtn.querySelector('.btn-label').textContent = 'Failed';
           }
         });
-        pre.appendChild(btn);
+
+        header.appendChild(dots);
+        header.appendChild(badge);
+        header.appendChild(copyBtn);
+
+        // Insert terminal before pre and append pre into terminal
+        pre.parentNode.insertBefore(terminal, pre);
+        terminal.appendChild(header);
+        terminal.appendChild(pre);
       });
 
       // Interactive typography scaling & Reading width toggle

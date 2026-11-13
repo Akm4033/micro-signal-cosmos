@@ -15,7 +15,7 @@ const contactEmail = hasContactEmail ? configuredEmail.trim() : '';
   description="Contact the Signal Insight research desk for article feedback, peer review errata, technical inquiries, or collaboration."
   canonical={contactUrl}
 >
-  <main id="main-content" class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-[#05070E] dark:border-white/[0.08]">
+  <div class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-[#05070E] dark:border-white/[0.08]">
     <div class="container-narrow">
 
       <!-- Breadcrumbs -->
@@ -160,7 +160,7 @@ const contactEmail = hasContactEmail ? configuredEmail.trim() : '';
       </div>
 
     </div>
-  </main>
+  </div>
 </Base>
 
 <script is:inline define:vars={{ targetEmail: contactEmail }}>

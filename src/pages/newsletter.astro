@@ -15,7 +15,7 @@ const contactEmail = hasContactEmail ? configuredEmail.trim() : '';
   canonical={newsletterUrl}
   ogImage="/favicon.svg"
 >
-  <main id="main-content" class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-[#05070E] dark:border-white/[0.08]">
+  <div class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-[#05070E] dark:border-white/[0.08]">
     <div class="container-narrow">
 
       <!-- Breadcrumbs -->
@@ -66,14 +66,47 @@ const contactEmail = hasContactEmail ? configuredEmail.trim() : '';
               </p>
             </div>
 
-            <div class="mt-6 space-y-2">
+            <div class="mt-6 space-y-2.5">
               <button
                 id="copy-main-rss-btn"
                 type="button"
-                class="w-full py-2.5 px-4 rounded-xl bg-blue-600 text-xs font-bold uppercase tracking-wider text-white hover:bg-blue-700 active:translate-y-0.5 transition-all cursor-pointer inline-flex items-center justify-center gap-2"
+                class="w-full py-2.5 px-4 rounded-xl bg-blue-600 text-xs font-bold uppercase tracking-wider text-white hover:bg-blue-700 active:translate-y-0.5 transition-all cursor-pointer inline-flex items-center justify-center gap-2 shadow-xs"
               >
                 <span id="copy-main-rss-text">Copy RSS Feed URL</span>
               </button>
+              
+              <!-- 1-Click Feed Reader Shortcuts -->
+              <div class="pt-2 border-t border-blue-200/60 dark:border-white/[0.08]">
+                <span class="block text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 font-bold">1-Click Subscribe:</span>
+                <div class="grid grid-cols-3 gap-1.5 text-center text-[11px] font-mono">
+                  <a
+                    href={`https://feedly.com/i/subscription/feed/${encodeURIComponent(rssUrl)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="py-1.5 px-2 rounded-lg bg-white border border-blue-200 text-slate-700 hover:text-emerald-600 hover:border-emerald-300 dark:bg-[#0B101D] dark:border-white/[0.08] dark:text-slate-300 dark:hover:text-emerald-400 transition-colors"
+                    title="Subscribe in Feedly"
+                  >
+                    Feedly
+                  </a>
+                  <a
+                    href={`https://www.inoreader.com/feed/${encodeURIComponent(rssUrl)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="py-1.5 px-2 rounded-lg bg-white border border-blue-200 text-slate-700 hover:text-blue-600 hover:border-blue-300 dark:bg-[#0B101D] dark:border-white/[0.08] dark:text-slate-300 dark:hover:text-blue-400 transition-colors"
+                    title="Subscribe in Inoreader"
+                  >
+                    Inoreader
+                  </a>
+                  <a
+                    href={`feed://${Astro.site ? Astro.site.host : 'signal-insight.pages.dev'}/rss.xml`}
+                    class="py-1.5 px-2 rounded-lg bg-white border border-blue-200 text-slate-700 hover:text-amber-600 hover:border-amber-300 dark:bg-[#0B101D] dark:border-white/[0.08] dark:text-slate-300 dark:hover:text-amber-400 transition-colors"
+                    title="Subscribe in NetNewsWire / Native Feed App"
+                  >
+                    NetNewsWire
+                  </a>
+                </div>
+              </div>
+
               <a
                 href="/rss.xml"
                 target="_blank"
@@ -201,7 +234,7 @@ const contactEmail = hasContactEmail ? configuredEmail.trim() : '';
       </div>
 
     </div>
-  </main>
+  </div>
 </Base>
 
 <script is:inline>

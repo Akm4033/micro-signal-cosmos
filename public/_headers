@@ -26,7 +26,32 @@
   Cache-Control: public, max-age=86400, must-revalidate
   Content-Type: text/plain; charset=UTF-8
 
-# 4. Global Security Headers for all HTML and static responses (Zero Third-Party Dependency)
+# 4. HTML Documents — Instant edge revalidation so new articles and UI fixes reflect immediately
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/articles/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/tools/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/category/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/newsletter/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/about/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/contact/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/authors/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+# 5. Global Security Headers for all HTML and static responses (Zero Third-Party Dependency)
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
