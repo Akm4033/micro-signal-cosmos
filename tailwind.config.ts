@@ -95,7 +95,7 @@ export default {
         narrow: '680px',      // Article prose
         medium: '920px',      // Supporting pages
         wide: '1200px',       // Standard section
-        full: '1360px',       // Full page width
+        site: '1360px',       // Full page width
       },
       container: {
         center: true,
