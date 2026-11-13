@@ -3,8 +3,8 @@ title: "Reading Alien Atmospheres: Transmission Spectroscopy and the Search for 
 description: "How astronomers decode exoplanet atmospheres with JWST: transmission spectroscopy, transit depth filtering, and detecting methane, carbon dioxide, and water."
 logo: "telescope"
 slug: "reading-alien-atmospheres"
-publishDate: "2026-11-09T07:00:00Z"
-updatedDate: "2026-11-09T15:30:00Z"
+publishDate: "2026-10-30T08:00:00Z"
+updatedDate: "2026-10-30T15:30:00Z"
 category: "science"
 author: "arun"
 tags: ["Exoplanets", "JWST", "Biosignatures", "Astronomy", "Planetary Science"]

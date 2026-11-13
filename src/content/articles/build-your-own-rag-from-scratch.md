@@ -3,7 +3,7 @@ title: "Build Your Own RAG from Scratch: A Production Engineering Guide"
 description: "Engineer a production RAG pipeline: semantic chunking, dense embeddings, BM25 hybrid search, cross-encoder reranking, and hallucination mitigation."
 logo: "rag"
 slug: "build-your-own-rag-from-scratch"
-publishDate: "2026-11-07T08:00:00Z"
+publishDate: "2026-11-09T08:00:00Z"
 category: "artificial-intelligence"
 author: "kai"
 tags: ["RAG Systems", "Vector Search", "Embeddings", "Python", "Qdrant", "LLMs"]

@@ -3,7 +3,7 @@ title: "How LLMs Actually Work: Under the Hood of the Transformer Architecture"
 description: "A rigorous mathematical explanation of decoder-only transformers: self-attention mechanisms, RoPE positional embeddings, SwiGLU activations, and KV caching."
 logo: "transformer"
 slug: "how-llms-actually-work"
-publishDate: "2026-11-06T08:00:00Z"
+publishDate: "2026-11-07T08:00:00Z"
 category: "artificial-intelligence"
 author: "kai"
 tags: ["Transformer Architecture", "Deep Learning", "Mathematics", "Machine Learning", "Neural Networks"]
@@ -107,7 +107,7 @@ $$R_{\Theta, m}^d = \text{diag}\left( R_{\theta_1, m}, R_{\theta_2, m}, \dots, R
 
 Where each 2D rotation matrix is given by:
 
-$$R_{\theta_i, m} = \begin{pmatrix} \cos(m\theta_i) & -\sin(m\theta_i) \\ \sin(m\theta_i) & \cos(m\theta_i) \end{pmatrix}$$
+$$R_{\theta_i, m} = \begin{pmatrix} \cos(m\theta_i) & -\sin(m\theta_i) \\\\ \sin(m\theta_i) & \cos(m\theta_i) \end{pmatrix}$$
 
 **Why RoPE is mathematically superior:**
 When computing the inner product $(R_m Q)(R_n K)^T$, the absolute position $m$ cancels out into a relative distance $(m - n)$. The attention weight naturally encodes how far apart two tokens are, enabling context windows to scale from 4,000 tokens to 128,000+ tokens via position interpolation techniques.

@@ -3,7 +3,7 @@ title: "Inside the Modern CPU: Microarchitecture, Memory Hierarchies, and Latenc
 description: "A deep dive into CPU microarchitecture: out-of-order execution, branch prediction, SIMD vectorization, cache line false sharing, and hardware latency hiding."
 logo: "cpu"
 slug: "inside-the-modern-cpu"
-publishDate: "2026-11-02T08:00:00Z"
+publishDate: "2026-10-20T08:00:00Z"
 category: "technology"
 author: "marina"
 tags: ["CPU Architecture", "Hardware", "Performance Engineering", "Assembly", "Low-Level Systems"]

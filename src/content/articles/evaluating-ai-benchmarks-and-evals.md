@@ -3,7 +3,7 @@ title: "Evaluating AI: Modern Benchmarks, Evaluation Harnesses, and LLM-as-a-Jud
 description: "Design robust evaluation harnesses for LLM applications: ground truth curation, RAGAS metrics, Promptfoo CI/CD testing, and LLM-as-a-judge bias mitigation."
 logo: "clipboard"
 slug: "evaluating-ai-benchmarks-and-evals"
-publishDate: "2026-11-08T08:00:00Z"
+publishDate: "2026-11-10T08:00:00Z"
 category: "artificial-intelligence"
 author: "kai"
 tags: ["AI Evaluation", "Prompt Engineering", "CI/CD", "Machine Learning", "Software Testing"]

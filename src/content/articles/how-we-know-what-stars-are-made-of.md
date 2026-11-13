@@ -3,7 +3,7 @@ title: "How We Know What Stars Are Made Of: The Physics of Stellar Spectroscopy"
 description: "The physics of stellar spectroscopy: how Fraunhofer lines, atomic orbital transitions, and diffraction spectrographs reveal stellar chemical composition."
 logo: "star"
 slug: "how-we-know-what-stars-are-made-of"
-publishDate: "2026-11-09T08:00:00Z"
+publishDate: "2026-10-18T08:00:00Z"
 category: "science"
 author: "arun"
 tags: ["Astrophysics", "Quantum Mechanics", "Spectroscopy", "JWST", "Astronomy"]

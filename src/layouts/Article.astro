@@ -359,7 +359,7 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
             </span>
             <div>
               <h2 class="text-xs font-bold uppercase tracking-wider font-mono text-slate-900 dark:text-white">Investigation Index &amp; Roadmap</h2>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Complete architectural roadmap &bull; {readingTime} read</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Complete architectural roadmap &bull; {readingTime.toLowerCase().includes('read') ? readingTime : `${readingTime} read`}</p>
             </div>
           </div>
           <span class="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#060913] text-slate-500 dark:text-slate-400">

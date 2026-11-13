@@ -3,8 +3,8 @@ title: "Passkeys: The Practical Engineering Guide to Passwordless Authentication
 description: "A practical engineering guide to FIDO2 and WebAuthn: how passkeys eliminate phishing, device-bound vs. synced credentials, and migration architectures."
 logo: "key"
 slug: "passkeys-passwordless-auth"
-publishDate: "2026-11-09T09:00:00Z"
-updatedDate: "2026-11-09T17:30:00Z"
+publishDate: "2026-11-05T08:00:00Z"
+updatedDate: "2026-11-05T17:30:00Z"
 category: "developer-tools"
 author: "marina"
 tags: ["Passkeys", "WebAuthn", "FIDO2", "Authentication", "Cybersecurity", "Developer Tools"]

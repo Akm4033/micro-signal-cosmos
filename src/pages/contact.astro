@@ -4,11 +4,7 @@ import { site } from '../config/site';
 
 const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://signal-insight.pages.dev');
 const contactUrl = `${siteUrl}/contact/`;
-
-const formAction = "https://formspree.io/f/{id}";
-const isFormPending = formAction.includes('{id}');
-const isTodoEmail = site.contactEmail.startsWith('TODO');
-const showDevBanner = isTodoEmail && import.meta.env.DEV;
+const contactMailto = `mailto:${site.contactEmail}`;
 ---
 
 <Base
@@ -41,21 +37,15 @@ const showDevBanner = isTodoEmail && import.meta.env.DEV;
           Contact Signal Insight
         </h1>
         <p class="mt-4 text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-          For editorial feedback, corrections, or research proposals, email <a href={`mailto:${site.contactEmail}`} class="font-semibold text-blue-600 dark:text-blue-400 hover:underline font-mono">{site.contactEmail}</a>. We respond within two business days.
+          For editorial feedback, corrections, or research proposals, email <a href={contactMailto} class="font-semibold text-blue-600 dark:text-blue-400 hover:underline font-mono">{site.contactEmail}</a>. We respond within two business days.
         </p>
-
-        {showDevBanner && (
-          <p class="dev-banner mt-4 rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs font-mono text-amber-900 dark:border-amber-800 dark:bg-amber-950/50 dark:text-amber-200">
-            [SETUP] Contact email not configured yet
-          </p>
-        )}
       </header>
 
-      <!-- Main Contact Form (Formspree) -->
+      <!-- Main Contact Form / Message Composer -->
       <div class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-10 shadow-xs dark:border-white/[0.08] dark:bg-[#0B101D]">
         <div class="mb-6 pb-4 border-b border-slate-100 dark:border-white/[0.08] flex items-center justify-between">
           <div>
-            <h2 class="text-xl font-bold text-slate-900 dark:text-white">Send a Message</h2>
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white">Editorial Message Composer</h2>
             <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Direct transmission to the Signal Insight editorial inbox.</p>
           </div>
           <span class="px-2.5 py-1 rounded-full text-xs font-mono font-semibold bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300">
@@ -63,16 +53,7 @@ const showDevBanner = isTodoEmail && import.meta.env.DEV;
           </span>
         </div>
 
-        {isFormPending && (
-          <p class="setup-banner mb-6 rounded-xl border border-amber-300/80 bg-amber-50/90 p-4 text-xs font-mono text-amber-900 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-300">
-            [SETUP] Contact form not yet connected &mdash; email {site.contactEmail} instead.
-          </p>
-        )}
-
-        <!-- TODO(signal-insight): replace {id} with real Formspree form ID -->
-        <form action={formAction} method="POST" class="space-y-5">
-          <input type="hidden" name="_subject" value="Signal Insight contact" />
-
+        <form id="contact-form" action={contactMailto} method="GET" class="space-y-5">
           <div>
             <label for="contact-name" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5 font-mono">
               Your Name
@@ -103,12 +84,26 @@ const showDevBanner = isTodoEmail && import.meta.env.DEV;
           </div>
 
           <div>
+            <label for="contact-subject" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5 font-mono">
+              Subject
+            </label>
+            <input
+              type="text"
+              id="contact-subject"
+              name="subject"
+              required
+              placeholder="Technical Inquiry / Errata / Research Proposal"
+              class="w-full min-h-11 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:border-white/[0.1] dark:bg-[#070B14] dark:text-white dark:placeholder-slate-500 transition-colors shadow-2xs"
+            />
+          </div>
+
+          <div>
             <label for="contact-message" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5 font-mono">
               Message / Errata Details
             </label>
             <textarea
               id="contact-message"
-              name="message"
+              name="body"
               rows="5"
               required
               placeholder="Describe your question, architectural correction, or research inquiry..."
@@ -121,15 +116,38 @@ const showDevBanner = isTodoEmail && import.meta.env.DEV;
               type="submit"
               class="min-h-11 px-6 py-2.5 rounded-xl bg-blue-600 text-xs font-bold uppercase tracking-wider text-white shadow-xs hover:bg-blue-700 active:translate-y-0.5 transition-all cursor-pointer font-mono inline-flex items-center justify-center gap-2"
             >
-              <span>Send Message</span>
+              <span>Compose Message</span>
               <span aria-hidden="true">&rarr;</span>
             </button>
 
             <p class="text-xs text-slate-500 dark:text-slate-400">
-              We use privacy-first, cookie-free analytics (Cloudflare Web Analytics) to improve articles. No advertising trackers, zero session tracking.
+              We use privacy-first, cookie-free Cloudflare Web Analytics to measure site performance with zero session recording.
             </p>
           </div>
+
+          <div id="contact-status" class="hidden mt-4 rounded-xl border border-emerald-300/80 bg-emerald-50/90 p-4 text-xs font-mono text-emerald-900 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-300" role="status" aria-live="polite">
+            Preparing your transmission to {site.contactEmail}. If your email client does not open automatically, please send directly to <a href={contactMailto} class="underline font-bold">{site.contactEmail}</a>.
+          </div>
         </form>
+
+        <script is:inline>
+          document.getElementById('contact-form')?.addEventListener('submit', function(e) {
+            var name = document.getElementById('contact-name')?.value || '';
+            var email = document.getElementById('contact-email')?.value || '';
+            var subject = document.getElementById('contact-subject')?.value || 'Signal Insight Inquiry';
+            var body = document.getElementById('contact-message')?.value || '';
+            var status = document.getElementById('contact-status');
+            
+            var fullBody = body + '\n\n---\nSent by: ' + name + ' (' + email + ')';
+            var mailto = 'mailto:editorial@signal-insight.pages.dev?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(fullBody);
+            
+            if (status) {
+              status.classList.remove('hidden');
+            }
+            window.location.href = mailto;
+            e.preventDefault();
+          });
+        </script>
 
         <!-- Secondary GitHub Issues Path -->
         <div class="mt-8 pt-6 border-t border-slate-100 dark:border-white/[0.08] flex items-center justify-between text-xs text-slate-600 dark:text-slate-400">

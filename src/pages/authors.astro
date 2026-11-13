@@ -12,12 +12,12 @@ const focusAreas = [
     key: 'systems',
     title: 'Systems & Infrastructure',
     tagline: 'Core Systems, Networks & Compilers',
-    description: 'Browser internals, CPU architecture, WebAssembly, Linux networking, TLS 1.3, passwordless authentication, and production database internals.',
+    description: 'Browser internals, CPU microarchitecture, WebAssembly runtimes, Linux kernel networking, TLS 1.3 cryptographic handshakes, and runtime memory safety.',
     color: '#1d4ed8',
     badgeClass: 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800',
     iconBg: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
-    categories: ['technology', 'developer-tools'],
-    keyTopics: ['Browser Engines', 'CPU Pipelines', 'WebAssembly', 'TLS 1.3 & PKI', 'Database Engines']
+    categories: ['technology'],
+    keyTopics: ['Browser Engines', 'CPU Pipelines', 'WebAssembly', 'TLS 1.3 & PKI', 'Linux io_uring']
   },
   {
     key: 'ai-ml',
@@ -40,13 +40,24 @@ const focusAreas = [
     iconBg: 'bg-purple-500/10 text-purple-600 dark:text-purple-400',
     categories: ['science'],
     keyTopics: ['Spectroscopy', 'Atmospheric Transit', 'Dark Matter Evidence', 'Fusion Physics']
+  },
+  {
+    key: 'developer-tools',
+    title: 'Developer Infrastructure',
+    tagline: 'Storage, Tooling & Cloud Platforms',
+    description: 'Modern database architectures, authentication security with Passkeys, self-hosted deployment models, caching layers, and production engineering tooling.',
+    color: '#0284c7',
+    badgeClass: 'bg-sky-50 text-sky-700 border-sky-200 dark:bg-sky-950/40 dark:text-sky-300 dark:border-sky-800',
+    iconBg: 'bg-sky-500/10 text-sky-600 dark:text-sky-400',
+    categories: ['developer-tools'],
+    keyTopics: ['Database Engines', 'Passkeys & WebAuthn', 'Self-Hosting', 'Production Storage', 'Developer Tooling']
   }
 ];
 ---
 
 <Base
-  title="Research Focus Areas & Standards | Signal Insight"
-  description="Explore our three specialized research focus areas: Systems & Infrastructure, AI & Machine Learning, and Science & Physics."
+  title="4 Knowledge Pillars & Standards | Signal Insight"
+  description="Explore our four specialized knowledge pillars: Systems & Infrastructure, AI & Machine Learning, Science & Physics, and Developer Infrastructure."
   canonical={focusAreasUrl}
 >
   <div class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-[#05070E] dark:border-white/[0.08]">
@@ -59,7 +70,7 @@ const focusAreas = [
             <a href="/" class="transition-colors hover:text-brand-primary">Home</a>
           </li>
           <li aria-hidden="true" class="text-neutral-400">/</li>
-          <li class="font-semibold text-text-primary" aria-current="page">Editorial Focus Areas</li>
+          <li class="font-semibold text-text-primary" aria-current="page">Knowledge Pillars</li>
         </ol>
       </nav>
 
@@ -67,18 +78,18 @@ const focusAreas = [
       <header class="mx-auto max-w-3xl text-center mb-16">
         <div class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3.5 py-1 text-xs font-bold tracking-widest text-brand-primary uppercase shadow-xs dark:border-white/[0.08] dark:bg-[#0B101D] dark:text-blue-400 font-mono">
           <span class="h-1.5 w-1.5 rounded-full bg-brand-primary dark:bg-blue-400"></span>
-          <span>Editorial Focus Areas</span>
+          <span>4 Knowledge Pillars</span>
         </div>
         <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl lg:text-5xl">
-          Three Lenses. <span class="text-brand-primary dark:text-blue-400">One High Standard.</span>
+          Four Knowledge Pillars. <span class="text-brand-primary dark:text-blue-400">One High Standard.</span>
         </h1>
         <p class="mt-4 text-base sm:text-lg leading-relaxed text-text-secondary">
-          Signal Insight organizes its technical investigations into three specialized focus areas. Each area is treated with deep rigor, verified with code or math, and grounded in primary source literature.
+          Signal Insight organizes its technical investigations into four specialized knowledge pillars. Each area is treated with deep rigor, verified with code or math, and grounded in primary source literature.
         </p>
       </header>
 
       <!-- Focus Areas Grid -->
-      <div class="grid gap-8 md:grid-cols-3 mb-16">
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 mb-16">
         {focusAreas.map((area) => {
           const areaArticles = allArticles.filter((a) =>
             area.categories.includes(a.data.category.toLowerCase())
