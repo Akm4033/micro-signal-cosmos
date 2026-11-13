@@ -19,5 +19,10 @@
     "@tailwindcss/vite": "^4.3.5",
     "astro": "^7.4.7",
     "tailwindcss": "^4.3.5"
+  },
+  "devDependencies": {
+    "@axe-core/cli": "^4.14.0",
+    "lighthouse": "^13.6.0",
+    "sharp": "^0.33.5"
   }
 }
