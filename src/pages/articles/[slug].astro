@@ -196,7 +196,7 @@ const breadcrumbSchema = {
             href={`#${h.slug}`}
             class="toc-link flex items-baseline gap-2 py-1 text-slate-700 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors group"
           >
-            <span class="text-[10px] font-mono text-slate-400 dark:text-slate-500 font-bold shrink-0">{h.depth === 3 ? "↳" : String(idx + 1).padStart(2, '0')}</span>
+            <span class="text-[10px] font-mono text-slate-400 dark:text-slate-400 font-bold shrink-0">{h.depth === 3 ? "↳" : String(idx + 1).padStart(2, '0')}</span>
             <span class="group-hover:underline underline-offset-2 leading-tight">{h.text}</span>
           </a>
         </li>

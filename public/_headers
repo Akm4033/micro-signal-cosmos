@@ -59,6 +59,6 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
   Strict-Transport-Security: max-age=31536000
   X-XSS-Protection: 1; mode=block
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.clarity.ms https://scripts.clarity.ms https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://*.clarity.ms https://c.bing.com; object-src 'none'; connect-src 'self' https://*.clarity.ms https://c.bing.com https://cloudflareinsights.com https://*.cloudflareinsights.com; form-action 'self'; frame-ancestors 'none'; base-uri 'self';
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; object-src 'none'; connect-src 'self' https://cloudflareinsights.com https://*.cloudflareinsights.com; form-action 'self' https://formspree.io https://buttondown.email https://buttondown.com; frame-ancestors 'none'; base-uri 'self';
 
 

@@ -409,6 +409,8 @@
   html.dark .prose-editorial p { color: #CBD5E1; }
   .prose-editorial a { color: #2563EB; text-decoration: underline; text-underline-offset: 3px; font-weight: 500; overflow-wrap: break-word !important; word-break: break-word !important; }
   .prose-editorial a:hover { color: #1D4ED8; }
+  html.dark .prose-editorial a { color: #60A5FA; }
+  html.dark .prose-editorial a:hover { color: #93C5FD; }
   .prose-editorial code {
     background-color: #F1F5F9;
     padding: 0.15rem 0.4rem;

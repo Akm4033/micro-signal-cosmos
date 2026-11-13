@@ -135,8 +135,9 @@ const latestArticles = sortedArticles.slice(0, 6);
           <!-- Card Scientific Visual -->
           <a
             href="/articles/how-llms-actually-work/"
+            tabindex="-1"
+            aria-hidden="true"
             class="block relative w-full h-48 sm:h-52 overflow-hidden bg-slate-50 border-b border-slate-100 dark:bg-[#05070E] dark:border-white/[0.06] transition-all flex items-center justify-center p-3"
-            aria-label="Read featured guide: How LLMs Actually Work"
           >
             <ArticleVisual slug="how-llms-actually-work" category="ai" logo="transformer" />
             <span class="absolute top-3 left-3 bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full text-[10px] font-bold shadow-xs dark:bg-emerald-950/70 dark:text-emerald-300 dark:border-emerald-800">
@@ -206,7 +207,7 @@ const latestArticles = sortedArticles.slice(0, 6);
       <div class="grid gap-6 lg:grid-cols-12 items-stretch">
         <!-- Lead Feature (7 cols) -->
         <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-xs hover:shadow-lg hover:-translate-y-1 hover:border-blue-400 dark:hover:border-blue-500/60 dark:hover:shadow-[0_16px_36px_-6px_rgba(0,0,0,0.6),0_0_24px_rgba(59,130,246,0.18)] transition-all duration-200 lg:col-span-7 min-w-0 dark:border-white/[0.08] dark:bg-[#0B101D]" itemscope itemtype="https://schema.org/Article">
-          <a href="/articles/choosing-a-database-in-2026/" class="block" aria-label="Read article: Choosing a Database in 2026">
+          <a href="/articles/choosing-a-database-in-2026/" class="block">
             <!-- Scientific Visual Header -->
             <div class="relative h-48 sm:h-56 w-full overflow-hidden rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center p-3 mb-4 shadow-2xs dark:bg-[#05070E] dark:border-white/[0.06]">
               <ArticleVisual slug="choosing-a-database-in-2026" category="devtools" logo="database" />
