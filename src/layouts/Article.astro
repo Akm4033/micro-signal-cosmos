@@ -584,17 +584,6 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
         pre.parentNode.insertBefore(terminal, pre);
         terminal.appendChild(header);
         terminal.appendChild(pre);
-
-        // Wrap in ascii-diagram container if ASCII diagram detected
-        if (isAsciiDiagram) {
-          const diagramWrapper = document.createElement('div');
-          diagramWrapper.className = 'ascii-diagram not-prose';
-          diagramWrapper.setAttribute('role', 'img');
-          diagramWrapper.setAttribute('aria-label', 'Technical diagram (text form)');
-          diagramWrapper.setAttribute('tabindex', '0');
-          terminal.parentNode.insertBefore(diagramWrapper, terminal);
-          diagramWrapper.appendChild(terminal);
-        }
       });
 
       // Interactive typography scaling & Reading width toggle

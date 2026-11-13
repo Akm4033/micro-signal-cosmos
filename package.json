@@ -15,6 +15,7 @@
     "pipeline:run": "node studio/cli.cjs"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.9",
     "@tailwindcss/vite": "^4.3.5",
     "astro": "^7.4.7",
     "tailwindcss": "^4.3.5"

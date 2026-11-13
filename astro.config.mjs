@@ -1,11 +1,15 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import rehypeAsciiDiagram from './src/plugins/rehype-ascii-diagram.mjs';
 
 // https://astro.build/config
 export default defineConfig({
   // Canonical site domain for metadata, sitemaps, and RSS feeds
   site: process.env.SITE_URL || 'https://signal-insight.pages.dev',
+  markdown: {
+    rehypePlugins: [rehypeAsciiDiagram]
+  },
   redirects: {
     '/privacy': '/privacy-policy/',
     '/editorial-policy': '/about/',
