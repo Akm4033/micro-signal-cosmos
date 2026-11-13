@@ -30,6 +30,10 @@ export default function rehypeAsciiDiagram() {
         const hasAsciiTree = /^\s*\+--/m.test(text);
 
         if (hasBoxDrawing || hasAsciiTree) {
+          if (node.properties) {
+            delete node.properties.tabindex;
+            delete node.properties.tabIndex;
+          }
           const wrapper = {
             type: 'element',
             tagName: 'div',

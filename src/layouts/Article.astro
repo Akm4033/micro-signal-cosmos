@@ -505,16 +505,16 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
         });
       }
 
-      // Transform code blocks into macOS terminal window style and wrap ASCII diagrams (P1-6)
+      // Transform code blocks into macOS terminal window style (skipping build-time ASCII diagrams)
       document.querySelectorAll('.prose-editorial pre').forEach((pre) => {
-        if (pre.closest('.code-terminal')) return;
+        if (pre.closest('.code-terminal') || pre.closest('.ascii-diagram')) return;
 
         // Detect language & ASCII diagrams
         const code = pre.querySelector('code');
         const text = pre.textContent || '';
         const isBoxDrawing = /[┌─│└├┼┐┘┤┬┴┼═║╔╗╚╝╠╣╦╩╬]/.test(text);
         const isAsciiTableOrTree = /(\+--|\+==|\+-\+|\|[\s\w-]+---)/.test(text) && text.includes('|');
-        const isAsciiDiagram = isBoxDrawing || isAsciiTableOrTree;
+        if (isBoxDrawing || isAsciiTableOrTree) return;
 
         let lang = 'CODE';
         if (pre.getAttribute('data-language')) {
