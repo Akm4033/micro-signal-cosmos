@@ -198,8 +198,8 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
 ---
 
 <Base title={fullPageTitle} description={description} canonical={resolvedCanonical} ogImage={ogImage} author={author} publishedTime={publishedTime} modifiedTime={updatedTime}>
-  <div class="container-wide py-8 lg:py-14" id="article-container">
-    <article class="max-w-5xl mx-auto w-full min-w-0" id="main-article-element">
+  <div class="w-full max-w-full py-8 lg:py-14" id="article-container">
+    <article class="max-w-3xl lg:max-w-4xl mx-auto w-full min-w-0 px-4 sm:px-6 lg:px-8" id="main-article-element">
       <!-- Bespoke Discipline Editorial Header -->
       <header class={`article-header mb-8 rounded-2xl border ${disciplineTheme.border} bg-gradient-to-br ${disciplineTheme.gradient} p-6 sm:p-8 relative overflow-hidden backdrop-blur-xs`}>
         <!-- Top Metadata & Reader Controls Bar -->
@@ -209,14 +209,29 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
             <span>{disciplineTheme.disciplineTag}</span>
           </div>
 
-          <!-- Interactive Reading Controls: Typography & Focus Mode -->
-          <div class="flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white/90 p-1 text-xs shadow-2xs backdrop-blur-xs dark:border-white/[0.08] dark:bg-[#0B101D]/90">
-            <span class="text-[10px] font-mono text-slate-400 px-1 uppercase hidden sm:inline">Text</span>
-            <button type="button" id="font-decrease" class="rounded px-2 py-0.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 font-mono" title="Decrease font size">A-</button>
-            <button type="button" id="font-reset" class="rounded px-2 py-0.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 font-mono font-bold" title="Reset font size">A</button>
-            <button type="button" id="font-increase" class="rounded px-2 py-0.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 font-mono" title="Increase font size">A+</button>
-            <span class="h-3 w-px bg-slate-200 dark:bg-slate-700 mx-0.5" aria-hidden="true"></span>
-            <button type="button" id="focus-mode-toggle" class="rounded px-2.5 py-0.5 text-slate-600 hover:bg-slate-100 hover:text-blue-600 dark:text-slate-400 dark:hover:bg-slate-800 text-[11px] font-medium" title="Toggle Distraction-Free Focus Mode">Focus</button>
+          <!-- Interactive Reading Controls & Share Actions -->
+          <div class="flex items-center gap-2 flex-wrap">
+            <div class="flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white/90 p-1 text-xs shadow-2xs backdrop-blur-xs dark:border-white/[0.08] dark:bg-[#0B101D]/90">
+              <span class="text-[10px] font-mono text-slate-400 px-1 uppercase hidden sm:inline">Text</span>
+              <button type="button" id="font-decrease" class="rounded px-2 py-0.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 font-mono" title="Decrease font size">A-</button>
+              <button type="button" id="font-reset" class="rounded px-2 py-0.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 font-mono font-bold" title="Reset font size">A</button>
+              <button type="button" id="font-increase" class="rounded px-2 py-0.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 font-mono" title="Increase font size">A+</button>
+              <span class="h-3 w-px bg-slate-200 dark:bg-slate-700 mx-0.5" aria-hidden="true"></span>
+              <button type="button" id="focus-mode-toggle" class="rounded px-2.5 py-0.5 text-slate-600 hover:bg-slate-100 hover:text-blue-600 dark:text-slate-400 dark:hover:bg-slate-800 text-[11px] font-medium" title="Toggle Reading Width">Expand</button>
+            </div>
+
+            <!-- Share Buttons -->
+            <div class="flex items-center gap-1 rounded-xl border border-slate-200 bg-white/90 p-1 text-xs shadow-2xs backdrop-blur-xs dark:border-white/[0.08] dark:bg-[#0B101D]/90">
+              <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(resolvedCanonical)}`} target="_blank" rel="noopener noreferrer" class="p-1.5 rounded text-slate-500 hover:bg-slate-100 hover:text-blue-600 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors" aria-label="Share on X" title="Share on X">
+                <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 9.24-8.333-9.24-8.502 9.24 8.333 9.24-8.502-9.24-8.333 9.24 8.502 9.24 8.333-9.24-8.502-9.24-8.333 9.24 8.502 9.24 8.333-9.24-8.502-9.24Z"/></svg>
+              </a>
+              <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(resolvedCanonical)}`} target="_blank" rel="noopener noreferrer" class="p-1.5 rounded text-slate-500 hover:bg-slate-100 hover:text-blue-600 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors" aria-label="Share on LinkedIn" title="Share on LinkedIn">
+                <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v11z"/></svg>
+              </a>
+              <button type="button" id="copy-article-link-top" class="p-1.5 rounded text-slate-500 hover:bg-slate-100 hover:text-blue-600 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors cursor-pointer" aria-label="Copy Article Link" title="Copy Article Link">
+                <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -314,93 +329,55 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
         </div>
       </div>
 
-      <div class="article-layout flex flex-col lg:flex-row gap-8 lg:gap-12 w-full max-w-full min-w-0 items-start">
-        <!-- Sidebar: TOC + Share + Author -->
-        <aside class="toc-sidebar w-full lg:w-[260px] xl:w-[280px] shrink-0 sticky top-24 space-y-8 hidden lg:block">
-          <nav class="toc" aria-label="Table of Contents">
-            <h2 class="text-caption uppercase tracking-wider text-text-muted mb-3 font-bold font-mono text-[11px]">Contents</h2>
-            <ol class="space-y-2 text-sm">
-              <slot name="toc" />
-            </ol>
-          </nav>
-          <div class="share-actions space-y-3 pt-6 border-t border-slate-200 dark:border-white/[0.08]">
-            <span class="text-caption uppercase tracking-wider text-text-muted block mb-2 font-bold font-mono text-[11px]">Share</span>
-            <div class="flex gap-2">
-              <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(resolvedCanonical)}`} target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-neutral-100 hover:bg-brand-primary/10 text-text-secondary hover:text-brand-primary transition-colors dark:bg-[#0B101D] dark:border dark:border-white/[0.08] dark:hover:border-blue-500/50 dark:hover:text-blue-400" aria-label="Share on X">
-                <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 9.24-8.333-9.24-8.502 9.24 8.333 9.24-8.502-9.24-8.333 9.24 8.502 9.24 8.333-9.24-8.502-9.24-8.333 9.24 8.502 9.24 8.333-9.24-8.502-9.24Z"/></svg>
-              </a>
-              <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(resolvedCanonical)}`} target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-neutral-100 hover:bg-brand-primary/10 text-text-secondary hover:text-brand-primary transition-colors dark:bg-[#0B101D] dark:border dark:border-white/[0.08] dark:hover:border-blue-500/50 dark:hover:text-blue-400" aria-label="Share on LinkedIn">
-                <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v11z"/></svg>
-              </a>
-              <a href={`mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(resolvedCanonical)}`} class="p-2 rounded-lg bg-neutral-100 hover:bg-brand-primary/10 text-text-secondary hover:text-brand-primary transition-colors dark:bg-[#0B101D] dark:border dark:border-white/[0.08] dark:hover:border-blue-500/50 dark:hover:text-blue-400" aria-label="Share via Email">
-                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-              </a>
+      <!-- Executive Investigation Index & Table of Contents Card (Clean 2-Column Responsive Card) -->
+      <nav class="toc-index-card mb-12 rounded-2xl border border-slate-200 bg-slate-50/90 p-5 sm:p-7 dark:border-white/[0.08] dark:bg-[#0B101D]/70 shadow-2xs not-prose" aria-label="Investigation Index and Table of Contents">
+        <div class="flex items-center justify-between mb-5 pb-3 border-b border-slate-200/80 dark:border-white/[0.08]">
+          <div class="flex items-center gap-3">
+            <span class={`p-2 rounded-xl border ${disciplineTheme.border} ${disciplineTheme.bg} shadow-2xs`}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class={disciplineTheme.accentText}><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+            </span>
+            <div>
+              <h2 class="text-xs font-bold uppercase tracking-wider font-mono text-slate-900 dark:text-white">Investigation Index &amp; Roadmap</h2>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Complete architectural roadmap &bull; {readingTime} read</p>
             </div>
           </div>
-          <div class="author-card p-5 rounded-xl border border-slate-200 bg-slate-50 dark:border-white/[0.08] dark:bg-[#0B101D]">
-            <div class="flex items-start gap-3">
-              <div class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm shrink-0 overflow-hidden dark:bg-blue-950/60 dark:text-blue-400 border border-blue-200/60 dark:border-blue-900/60">
-                {authorAvatar ? <img src={authorAvatar} alt={authorName} width="40" height="40" loading="lazy" decoding="async" class="w-full h-full object-cover" /> : authorData.initials}
-              </div>
-              <div>
-                <p class="font-semibold text-slate-900 dark:text-white text-sm">{authorName}</p>
-                <p class="text-xs text-slate-500 dark:text-slate-400">{authorRole}</p>
-                <p class="mt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">{authorData.bio}</p>
-                <div class="mt-3 flex flex-wrap items-center gap-2 text-xs">
-                  {authorData.links.about && <a href={authorData.links.about} class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Editorial Standards</a>}
-                  {authorData.links.github && <><span class="text-slate-400" aria-hidden="true">&bull;</span><a href={authorData.links.github} target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">GitHub</a></>}
-                  {authorData.links.site && <><span class="text-slate-400" aria-hidden="true">&bull;</span><a href={authorData.links.site} target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Site</a></>}
-                </div>
-              </div>
-            </div>
-          </div>
-        </aside>
-
-        <div class="article-content prose-editorial flex-1 min-w-0 w-full max-w-full overflow-hidden">
-          <!-- Mobile Collapsible Table of Contents -->
-          <div class="lg:hidden mb-8 rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-white/[0.08] dark:bg-[#0B101D] not-prose">
-            <details class="group">
-              <summary class="flex items-center justify-between cursor-pointer font-bold text-sm text-slate-900 dark:text-white select-none">
-                <span class="inline-flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600 dark:text-blue-400"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
-                  Table of Contents
-                </span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-open:rotate-180 text-slate-400"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </summary>
-              <nav class="mt-3 pt-3 border-t border-slate-200 dark:border-white/[0.08] text-sm">
-                <ol class="space-y-2">
-                  <slot name="toc" />
-                </ol>
-              </nav>
-            </details>
-          </div>
-
-          <slot />
-
-          <!-- Primary References & Scientific Citations -->
-          {references && references.length > 0 && (
-            <section class="mt-12 pt-8 border-t border-slate-200 dark:border-white/[0.08] not-prose" aria-labelledby="references-heading">
-              <div class="flex items-center gap-2 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600 dark:text-blue-400"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                <h2 id="references-heading" class="text-lg font-bold text-slate-900 dark:text-white">Primary References &amp; Scientific Citations</h2>
-              </div>
-              <ol class="space-y-2.5 list-decimal list-inside text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-                {references.map((ref) => (
-                  <li class="leading-relaxed">
-                    <span class="font-medium text-slate-800 dark:text-slate-200">{ref.title}</span>
-                    {ref.source && <span class="text-slate-500 dark:text-slate-400"> &mdash; {ref.source}</span>}
-                    {ref.url && (
-                      <a href={ref.url} target="_blank" rel="noopener noreferrer" class="ml-1.5 text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-0.5">
-                        <span>[Source]</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                      </a>
-                    )}
-                  </li>
-                ))}
-              </ol>
-            </section>
-          )}
+          <span class="hidden sm:inline-flex items-center gap-1.5 text-[10.5px] font-mono font-bold uppercase px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#060913] text-slate-500 dark:text-slate-400">
+            <span>Direct Jump</span>
+            <span class={disciplineTheme.accentText}>&darr;</span>
+          </span>
         </div>
+        <ol class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2.5 text-sm">
+          <slot name="toc" />
+        </ol>
+      </nav>
+
+      <!-- Main Article Prose Content (Symmetrically Centered, Ample Margins, Zero Window Clipping) -->
+      <div class="article-content prose-editorial w-full max-w-full min-w-0">
+        <slot />
+
+        <!-- Primary References & Scientific Citations -->
+        {references && references.length > 0 && (
+          <section class="mt-14 pt-8 border-t border-slate-200 dark:border-white/[0.08] not-prose" aria-labelledby="references-heading">
+            <div class="flex items-center gap-2 mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600 dark:text-blue-400"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              <h2 id="references-heading" class="text-lg font-bold text-slate-900 dark:text-white">Primary References &amp; Scientific Citations</h2>
+            </div>
+            <ol class="space-y-2.5 list-decimal list-inside text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+              {references.map((ref) => (
+                <li class="leading-relaxed">
+                  <span class="font-medium text-slate-800 dark:text-slate-200">{ref.title}</span>
+                  {ref.source && <span class="text-slate-500 dark:text-slate-400"> &mdash; {ref.source}</span>}
+                  {ref.url && (
+                    <a href={ref.url} target="_blank" rel="noopener noreferrer" class="ml-1.5 text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-0.5">
+                      <span>[Source]</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
       </div>
 
       <!-- Tags -->
@@ -501,13 +478,12 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
         pre.appendChild(btn);
       });
 
-      // Interactive typography scaling & Focus mode
+      // Interactive typography scaling & Reading width toggle
       const prose = document.querySelector('.prose-editorial');
       const fontDec = document.getElementById('font-decrease');
       const fontRes = document.getElementById('font-reset');
       const fontInc = document.getElementById('font-increase');
       const focusToggle = document.getElementById('focus-mode-toggle');
-      const sidebar = document.querySelector('.toc-sidebar');
       const articleEl = document.getElementById('main-article-element');
 
       let currentScale = 1;
@@ -526,16 +502,26 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
         });
       }
 
-      if (focusToggle && sidebar && articleEl) {
+      if (focusToggle && articleEl) {
         focusToggle.addEventListener('click', () => {
-          const isFocused = sidebar.classList.toggle('hidden');
+          const isExpanded = articleEl.classList.toggle('max-w-5xl');
           focusToggle.classList.toggle('bg-blue-600');
           focusToggle.classList.toggle('text-white');
-          if (isFocused) {
-            articleEl.classList.add('max-w-3xl');
-          } else {
-            articleEl.classList.remove('max-w-3xl');
-          }
+          focusToggle.innerText = isExpanded ? 'Compact' : 'Expand';
+        });
+      }
+
+      // Copy Article Link button
+      const copyBtn = document.getElementById('copy-article-link-top');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(window.location.href);
+            copyBtn.classList.add('text-emerald-500');
+            setTimeout(() => {
+              copyBtn.classList.remove('text-emerald-500');
+            }, 2000);
+          } catch (e) {}
         });
       }
     });

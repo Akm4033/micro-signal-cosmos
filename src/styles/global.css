@@ -25,7 +25,7 @@
     --border-color: #E2E8F0;
     --border-subtle: rgba(15, 23, 42, 0.08);
     --border-accent: rgba(37, 99, 235, 0.35);
-    --footer-bg: #0B101D;
+    --footer-bg: #F8FAFC;
   }
 
   html.dark {
@@ -47,7 +47,7 @@
     --border-color: rgba(255, 255, 255, 0.08);
     --border-subtle: rgba(255, 255, 255, 0.06);
     --border-accent: rgba(59, 130, 246, 0.35);
-    --footer-bg: #030509;
+    --footer-bg: #050811;
   }
 
   html, body {
@@ -491,10 +491,17 @@
     border-collapse: collapse;
     margin: 2rem 0;
     font-size: 0.875rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+  }
+  .prose-editorial table thead,
+  .prose-editorial table tbody {
+    width: 100%;
+    min-width: 100%;
   }
   .prose-editorial th {
     text-align: left;
-    padding: 0.75rem 1rem;
+    padding: 0.85rem 1.15rem;
     border-bottom: 2px solid var(--border-color);
     font-weight: 700;
     background-color: var(--bg-subtle);
@@ -505,7 +512,7 @@
     color: #F8FAFC;
   }
   .prose-editorial td {
-    padding: 0.75rem 1rem;
+    padding: 0.85rem 1.15rem;
     border-bottom: 1px solid var(--border-color);
   }
   html.dark .prose-editorial td {

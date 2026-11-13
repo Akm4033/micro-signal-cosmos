@@ -188,23 +188,24 @@ const breadcrumbSchema = {
 >
   <Fragment slot="toc">
     {tocHeadings.length > 0 ? (
-      tocHeadings.map((h) => (
-        <li class={h.depth === 3 ? "pl-3 text-xs" : ""}>
+      tocHeadings.map((h, idx) => (
+        <li class={h.depth === 3 ? "pl-4 text-xs opacity-90" : "font-medium"}>
           <a
             href={`#${h.slug}`}
-            class="toc-link block text-text-secondary hover:text-brand-primary transition-colors py-1"
+            class="toc-link flex items-baseline gap-2 py-1 text-slate-700 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 transition-colors group"
           >
-            {h.text}
+            <span class="text-[10px] font-mono text-slate-400 dark:text-slate-500 font-bold shrink-0">{h.depth === 3 ? "↳" : String(idx + 1).padStart(2, '0')}</span>
+            <span class="group-hover:underline underline-offset-2 leading-tight">{h.text}</span>
           </a>
         </li>
       ))
     ) : (
-      <li class="text-xs text-text-muted italic">Overview</li>
+      <li class="text-xs text-slate-400 italic">Overview</li>
     )}
   </Fragment>
 
-  <!-- Editorial Content Body -->
-  <div class="space-y-6 w-full max-w-full min-w-0 overflow-hidden">
+  <!-- Editorial Content Body (No overflow clipping, wide responsive margins) -->
+  <div class="space-y-6 w-full max-w-full min-w-0">
     <Content />
   </div>
 
