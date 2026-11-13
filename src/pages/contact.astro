@@ -1,248 +1,137 @@
 ---
 import Base from '../layouts/Base.astro';
+import { site } from '../config/site';
 
 const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://signal-insight.pages.dev');
 const contactUrl = `${siteUrl}/contact/`;
 
-// Production contact email (configurable via environment variable)
-const configuredEmail = import.meta.env.PUBLIC_CONTACT_EMAIL || '';
-const hasContactEmail = Boolean(configuredEmail && configuredEmail.trim().includes('@'));
-const contactEmail = hasContactEmail ? configuredEmail.trim() : '';
+const isTodoEmail = site.contactEmail.startsWith('TODO');
+const showDevBanner = isTodoEmail && import.meta.env.DEV;
 ---
 
 <Base
-  title="Contact & Errata Desk | Signal Insight"
+  title="Contact Signal Insight | Editorial & Errata Desk"
   description="Contact the Signal Insight research desk for article feedback, peer review errata, technical inquiries, or collaboration."
   canonical={contactUrl}
+  ogImage="/og/default.png"
 >
   <div class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-[#05070E] dark:border-white/[0.08]">
     <div class="container-narrow">
 
       <!-- Breadcrumbs -->
       <nav aria-label="Breadcrumb" class="mb-8">
-        <ol class="flex items-center gap-2 text-xs text-text-muted">
+        <ol class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
           <li>
-            <a href="/" class="transition-colors hover:text-brand-primary">Home</a>
+            <a href="/" class="transition-colors hover:text-blue-600">Home</a>
           </li>
-          <li aria-hidden="true" class="text-neutral-400">/</li>
-          <li class="font-semibold text-text-primary" aria-current="page">Contact Desk</li>
+          <li aria-hidden="true" class="text-slate-400">/</li>
+          <li class="font-semibold text-slate-900 dark:text-white" aria-current="page">Contact</li>
         </ol>
       </nav>
 
       <!-- Hero Header -->
       <header class="mb-10">
-        <div class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3.5 py-1 text-xs font-bold tracking-widest text-brand-primary uppercase shadow-xs dark:border-white/[0.08] dark:bg-[#0B101D] dark:text-blue-400 font-mono text-[10.5px]">
-          <span class="h-1.5 w-1.5 rounded-full bg-brand-primary dark:bg-blue-400"></span>
-          <span>Signal Insight Editorial Desk</span>
+        <div class="inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/80 px-3.5 py-1 text-xs font-bold tracking-widest text-blue-700 uppercase shadow-2xs dark:border-blue-900/60 dark:bg-blue-950/40 dark:text-blue-300 font-mono">
+          <span class="h-1.5 w-1.5 rounded-full bg-blue-600 animate-pulse"></span>
+          <span>Editorial &amp; Research Desk</span>
         </div>
-        <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-text-primary sm:text-4xl">
-          Contact &amp; Technical Errata
+        <h1 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+          Contact Signal Insight
         </h1>
-        <p class="mt-4 text-base sm:text-lg leading-relaxed text-text-secondary">
-          Have feedback on a systems architecture breakdown, discovered code errata, or wish to propose a research investigation? We review all submissions.
+        <p class="mt-4 text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-300">
+          For editorial feedback, corrections, or research proposals, email <a href={`mailto:${site.contactEmail}`} class="font-semibold text-blue-600 dark:text-blue-400 hover:underline font-mono">{site.contactEmail}</a>. We respond within two business days.
         </p>
+
+        {showDevBanner && (
+          <p class="dev-banner mt-4 rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs font-mono text-amber-900 dark:border-amber-800 dark:bg-amber-950/50 dark:text-amber-200">
+            [SETUP] Contact email not configured yet
+          </p>
+        )}
       </header>
 
-      <!-- Direct Contact Channels -->
-      <div class="grid gap-6 sm:grid-cols-2 mb-10">
-        <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs dark:border-white/[0.08] dark:bg-[#0B101D]">
-          <div class="flex items-center justify-between mb-2">
-            <h2 class="text-xs font-bold uppercase tracking-wider text-text-muted font-mono text-[11px]">Editorial &amp; Research Desk</h2>
-            {hasContactEmail ? (
-              <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 dark:text-emerald-400 px-2 py-0.5 rounded-full font-mono">
-                <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span> Active
-              </span>
-            ) : (
-              <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-700 bg-amber-50 dark:bg-amber-950/50 dark:text-amber-400 px-2 py-0.5 rounded-full font-mono">
-                <span class="h-1.5 w-1.5 rounded-full bg-amber-500"></span> Composer Mode
-              </span>
-            )}
+      <!-- Main Contact Form (Formspree) -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-10 shadow-xs dark:border-white/[0.08] dark:bg-[#0B101D]">
+        <div class="mb-6 pb-4 border-b border-slate-100 dark:border-white/[0.08] flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white">Send a Message</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Direct transmission to the Signal Insight editorial inbox.</p>
           </div>
-          <p class="text-xs sm:text-sm text-text-secondary leading-relaxed">
-            {hasContactEmail
-              ? "Direct editorial inquiries, topic submissions, and peer review:"
-              : "Direct domain mailbox is pending MX record configuration. Please draft your message using the Contact Composer below, or submit via GitHub Issues:"}
-          </p>
-          {hasContactEmail ? (
-            <a href={`mailto:${contactEmail}`} class="mt-3 inline-block font-semibold text-brand-primary dark:text-blue-400 hover:underline text-sm font-mono">
-              {contactEmail}
-            </a>
-          ) : (
-            <div class="mt-3 inline-flex items-center gap-2 text-xs font-medium text-text-muted">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-              <span>Draft below &amp; copy to clipboard</span>
-            </div>
-          )}
+          <span class="px-2.5 py-1 rounded-full text-xs font-mono font-semibold bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300">
+            Verified Desk
+          </span>
         </div>
 
-        <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-xs dark:border-white/[0.08] dark:bg-[#0B101D]">
-          <h2 class="text-xs font-bold uppercase tracking-wider text-text-muted mb-2 font-mono text-[11px]">Public Issue Tracker</h2>
-          <p class="text-xs sm:text-sm text-text-secondary leading-relaxed">Submit verified errata, typos, or reproducible bugs via GitHub:</p>
-          <a href="https://github.com/Akm4033/signal-insight/issues" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block font-semibold text-brand-primary dark:text-blue-400 hover:underline text-sm font-mono">
-            GitHub Issues &rarr;
-          </a>
-        </div>
-      </div>
+        <!-- TODO(signal-insight): replace {id} with real Formspree form ID -->
+        <form action="https://formspree.io/f/{id}" method="POST" class="space-y-5">
+          <input type="hidden" name="_subject" value="Signal Insight contact" />
 
-      <!-- Contact Message Composer (Zero Third-Party Dependency) -->
-      <div class="rounded-2xl border border-neutral-200 bg-white p-6 sm:p-10 shadow-xs dark:border-white/[0.08] dark:bg-[#0B101D]">
-        <div class="flex items-center justify-between mb-2">
-          <h2 class="text-xl font-bold text-text-primary">Contact Message Composer</h2>
-          <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider bg-slate-100 dark:bg-white/[0.06] px-2 py-0.5 rounded font-mono text-[10px]">100% Private</span>
-        </div>
-        <p class="text-xs text-text-secondary mb-6 leading-relaxed">
-          Compose your message below. You can copy the formatted draft to your clipboard with one click, or send it directly using your preferred email client.
-        </p>
-
-        <!-- Dynamic Feedback Notification Box -->
-        <div id="composer-status" class="hidden mb-6 rounded-xl p-4 text-xs font-semibold leading-relaxed transition-all" role="alert"></div>
-
-        <form id="contact-composer-form" class="space-y-5">
-          <div class="space-y-1.5">
-            <label for="composer-name" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Your Name <span class="text-blue-600">*</span></label>
-            <input type="text" id="composer-name" name="name" required minlength="2" placeholder="Dr. Jane Doe" class="input" />
+          <div>
+            <label for="contact-name" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5 font-mono">
+              Your Name
+            </label>
+            <input
+              type="text"
+              id="contact-name"
+              name="name"
+              required
+              placeholder="Ada Lovelace"
+              class="w-full min-h-11 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:border-white/[0.1] dark:bg-[#070B14] dark:text-white dark:placeholder-slate-500 transition-colors shadow-2xs"
+            />
           </div>
 
-          <div class="space-y-1.5">
-            <label for="composer-email" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Your Email Address <span class="text-blue-600">*</span></label>
-            <input type="email" id="composer-email" name="email" required placeholder="jane@example.com" class="input" />
+          <div>
+            <label for="contact-email" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5 font-mono">
+              Email Address
+            </label>
+            <input
+              type="email"
+              id="contact-email"
+              name="email"
+              required
+              autocomplete="email"
+              placeholder="ada@example.com"
+              data-clarity-mask="true"
+              class="w-full min-h-11 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:border-white/[0.1] dark:bg-[#070B14] dark:text-white dark:placeholder-slate-500 transition-colors shadow-2xs"
+            />
           </div>
 
-          <div class="space-y-1.5">
-            <label for="composer-subject" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Subject / Topic <span class="text-blue-600">*</span></label>
-            <input type="text" id="composer-subject" name="subject" required minlength="3" placeholder="Errata: How Browsers Render / New Investigation Proposal" class="input" />
+          <div>
+            <label for="contact-message" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5 font-mono">
+              Message / Errata Details
+            </label>
+            <textarea
+              id="contact-message"
+              name="message"
+              rows="5"
+              required
+              data-clarity-mask="true"
+              placeholder="Describe your question, architectural correction, or research inquiry..."
+              class="w-full rounded-xl border border-slate-300 bg-white p-4 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:border-white/[0.1] dark:bg-[#070B14] dark:text-white dark:placeholder-slate-500 transition-colors shadow-2xs"
+            ></textarea>
           </div>
 
-          <div class="space-y-1.5">
-            <label for="composer-message" class="block text-xs font-bold uppercase tracking-wider text-text-muted">Message Content <span class="text-blue-600">*</span></label>
-            <textarea id="composer-message" name="message" rows="5" required minlength="10" maxlength="5000" placeholder="Please describe the correction, reference paper, or inquiry in detail..." class="input"></textarea>
-            <span class="text-[10px] text-text-muted block text-right">Minimum 10 characters</span>
-          </div>
-
-          <!-- Dual Action Buttons: Copy to Clipboard (Primary) & Open Email Client (Secondary) -->
-          <div class="pt-2 flex flex-col sm:flex-row gap-3">
+          <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
             <button
-              id="composer-copy-btn"
-              type="button"
-              class="btn-primary flex-1 py-3 cursor-pointer text-xs uppercase tracking-wider font-bold inline-flex items-center justify-center gap-2"
+              type="submit"
+              class="min-h-11 px-6 py-2.5 rounded-xl bg-blue-600 text-xs font-bold uppercase tracking-wider text-white shadow-xs hover:bg-blue-700 active:translate-y-0.5 transition-all cursor-pointer font-mono inline-flex items-center justify-center gap-2"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
-                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
-              </svg>
-              <span id="composer-copy-text">Copy Message to Clipboard</span>
+              <span>Send Message</span>
+              <span aria-hidden="true">&rarr;</span>
             </button>
 
-            {hasContactEmail && (
-              <button
-                id="composer-mailto-btn"
-                type="button"
-                class="flex-1 py-3 px-4 rounded-xl border border-slate-300 bg-slate-50 text-slate-800 hover:bg-slate-100 text-xs uppercase tracking-wider font-bold transition-all inline-flex items-center justify-center gap-2 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 cursor-pointer"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M22 17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.5C2 7 4 5 6.5 5H18c2.2 0 4 1.8 4 4v8Z"></path>
-                  <polyline points="15,9 18,9 18,11"></polyline>
-                  <path d="m6.5 5 5.5 5 5.5-5"></path>
-                </svg>
-                <span>Open in Email Client</span>
-              </button>
-            )}
+            <p class="text-xs text-slate-500 dark:text-slate-400">
+              We use privacy-first analytics and optional session recordings to improve articles. No advertising trackers.
+            </p>
           </div>
         </form>
 
-        <!-- Formatted Preview Accordion (Collapsible) -->
-        <details class="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-3.5 text-xs text-slate-600 dark:border-slate-800 dark:bg-slate-800/50 dark:text-slate-400">
-          <summary class="cursor-pointer font-semibold text-slate-700 dark:text-slate-300 select-none">
-            View formatted draft template
-          </summary>
-          <pre id="composer-preview" class="mt-3 p-3 rounded-lg bg-white border border-slate-200 font-mono text-[11px] text-slate-800 overflow-x-auto dark:bg-slate-900 dark:border-slate-700 dark:text-slate-200 whitespace-pre-wrap">Fill in the fields above to preview your message format.</pre>
-        </details>
+        <!-- Secondary GitHub Issues Path -->
+        <div class="mt-8 pt-6 border-t border-slate-100 dark:border-white/[0.08] flex items-center justify-between text-xs text-slate-600 dark:text-slate-400">
+          <span>For reproducible bugs and code errata, open an issue on <a href="https://github.com/Akm4033/signal-insight/issues" target="_blank" rel="noopener noreferrer" class="font-semibold text-blue-600 dark:text-blue-400 hover:underline">GitHub</a>.</span>
+          <a href="https://github.com/Akm4033/signal-insight/issues" target="_blank" rel="noopener noreferrer" class="font-mono font-bold text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400">Issues &rarr;</a>
+        </div>
       </div>
 
     </div>
   </div>
 </Base>
-
-<script is:inline define:vars={{ targetEmail: contactEmail }}>
-  (function() {
-    const nameInput = document.getElementById('composer-name');
-    const emailInput = document.getElementById('composer-email');
-    const subjectInput = document.getElementById('composer-subject');
-    const messageInput = document.getElementById('composer-message');
-    const preview = document.getElementById('composer-preview');
-    const copyBtn = document.getElementById('composer-copy-btn');
-    const copyText = document.getElementById('composer-copy-text');
-    const mailtoBtn = document.getElementById('composer-mailto-btn');
-    const statusBox = document.getElementById('composer-status');
-
-    function getFormattedMessage() {
-      const name = (nameInput?.value || '').trim() || '[Your Name]';
-      const email = (emailInput?.value || '').trim() || '[Your Email]';
-      const subject = (subjectInput?.value || '').trim() || '[Subject]';
-      const body = (messageInput?.value || '').trim() || '[Message]';
-      const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-      const recipient = targetEmail ? targetEmail : 'Signal Insight Editorial Desk';
-
-      return `TO: ${recipient}\nFROM: ${name} <${email}>\nDATE: ${date}\nSUBJECT: [Signal Insight Inquiry] ${subject}\n\n${body}`;
-    }
-
-    function updatePreview() {
-      if (preview) {
-        preview.textContent = getFormattedMessage();
-      }
-    }
-
-    [nameInput, emailInput, subjectInput, messageInput].forEach(el => {
-      el?.addEventListener('input', updatePreview);
-    });
-
-    function showStatus(msg, type) {
-      if (!statusBox) return;
-      statusBox.textContent = msg;
-      statusBox.classList.remove('hidden', 'bg-red-50', 'text-red-700', 'border', 'border-red-200', 'bg-emerald-50', 'text-emerald-700', 'border-emerald-200', 'dark:bg-red-950/50', 'dark:text-red-300', 'dark:border-red-900', 'dark:bg-emerald-950/50', 'dark:text-emerald-300', 'dark:border-emerald-900');
-      if (type === 'error') {
-        statusBox.classList.add('bg-red-50', 'text-red-700', 'border', 'border-red-200', 'dark:bg-red-950/50', 'dark:text-red-300', 'dark:border-red-900');
-      } else {
-        statusBox.classList.add('bg-emerald-50', 'text-emerald-700', 'border', 'border-emerald-200', 'dark:bg-emerald-950/50', 'dark:text-emerald-300', 'dark:border-emerald-900');
-      }
-    }
-
-    // 1. Copy to Clipboard
-    copyBtn?.addEventListener('click', async () => {
-      const name = (nameInput?.value || '').trim();
-      const message = (messageInput?.value || '').trim();
-
-      if (name.length < 2 || message.length < 5) {
-        showStatus('Please provide your name and a brief message before copying.', 'error');
-        return;
-      }
-
-      const formatted = getFormattedMessage();
-      try {
-        await navigator.clipboard.writeText(formatted);
-        showStatus('Message successfully copied to clipboard! You can paste it directly into your email client.', 'success');
-        if (copyText) {
-          copyText.textContent = 'Copied to Clipboard! ✓';
-          copyBtn.classList.add('bg-emerald-600');
-          setTimeout(() => {
-            copyText.textContent = 'Copy Message to Clipboard';
-            copyBtn.classList.remove('bg-emerald-600');
-          }, 2500);
-        }
-      } catch (err) {
-        showStatus('Clipboard access denied. Please select and copy the text from the preview box below.', 'error');
-      }
-    });
-
-    // 2. Open in Email Client (mailto)
-    mailtoBtn?.addEventListener('click', () => {
-      const subject = (subjectInput?.value || '').trim() || 'Editorial Inquiry';
-      const body = (messageInput?.value || '').trim();
-      const name = (nameInput?.value || '').trim();
-      const email = (emailInput?.value || '').trim();
-
-      const mailtoUrl = `mailto:${encodeURIComponent(targetEmail)}?subject=${encodeURIComponent('[Signal Insight] ' + subject)}&body=${encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + body)}`;
-      window.location.href = mailtoUrl;
-    });
-  })();
-</script>

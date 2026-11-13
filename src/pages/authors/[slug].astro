@@ -1,0 +1,128 @@
+---
+import Base from '../../layouts/Base.astro';
+import ArticleCard from '../../components/ui/ArticleCard.astro';
+import { authors, getAllAuthors, type Author } from '../../data/authors';
+import { getPublishedArticles, getArticleSlug, getArticleReadingTime } from '../../data/articles';
+import { site } from '../../config/site';
+
+export async function getStaticPaths() {
+  const allAuthors = getAllAuthors();
+  return allAuthors.map((author) => ({
+    params: { slug: author.key },
+    props: { author },
+  }));
+}
+
+interface Props {
+  author: Author;
+}
+
+const { author } = Astro.props;
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://signal-insight.pages.dev');
+const canonicalUrl = `${siteUrl}/authors/${author.key}/`;
+
+const allArticles = await getPublishedArticles();
+const authorArticles = allArticles.filter((art) => {
+  const artAuthor = (art.data.authorKey || art.data.author || '').toLowerCase();
+  return artAuthor === author.key.toLowerCase() || (author.key === 'editor' && (!artAuthor || artAuthor === 'editorial-desk'));
+});
+
+// Fallback to all articles if author has none specifically assigned
+const displayArticles = authorArticles.length > 0 ? authorArticles : allArticles.slice(0, 6);
+---
+
+<Base
+  title={`${author.name} — ${author.role} | Signal Insight`}
+  description={author.bio}
+  canonical={canonicalUrl}
+  ogImage="/og/default.png"
+>
+  <div class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-[#05070E] dark:border-white/[0.08]">
+    <div class="container-wide">
+
+      <!-- Breadcrumbs -->
+      <nav aria-label="Breadcrumb" class="mb-8">
+        <ol class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+          <li>
+            <a href="/" class="transition-colors hover:text-blue-600">Home</a>
+          </li>
+          <li aria-hidden="true" class="text-slate-400">/</li>
+          <li>
+            <a href="/authors/" class="transition-colors hover:text-blue-600">Research Desk</a>
+          </li>
+          <li aria-hidden="true" class="text-slate-400">/</li>
+          <li class="font-semibold text-slate-900 dark:text-white" aria-current="page">{author.name}</li>
+        </ol>
+      </nav>
+
+      <!-- Author Profile Header -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-10 shadow-xs dark:border-white/[0.08] dark:bg-[#0B101D] mb-12">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+          <!-- Author Photo / Avatar Placeholder (P2-5) -->
+          <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-2xl border border-blue-200 shadow-2xs dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-900 shrink-0">
+            {author.initials || author.name.charAt(0)}
+          </div>
+
+          <div class="flex-1 space-y-2">
+            <div class="flex flex-wrap items-center gap-3">
+              <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+                {author.name}
+              </h1>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300">
+                Verified Researcher
+              </span>
+            </div>
+            <p class="text-sm font-mono font-semibold text-blue-600 dark:text-blue-400">
+              {author.role}
+            </p>
+            <p class="text-sm text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed">
+              {author.bio}
+            </p>
+
+            <!-- Mailto Contact Link (P2-5) -->
+            <div class="pt-2 flex items-center gap-4 text-xs font-mono">
+              <a
+                href={`mailto:${site.contactEmail}?subject=${encodeURIComponent(`Inquiry for ${author.name}`)}`}
+                class="inline-flex items-center gap-1.5 text-blue-600 dark:text-blue-400 hover:underline font-semibold"
+              >
+                <span>Contact {author.name}</span>
+                <span aria-hidden="true">&rarr;</span>
+              </a>
+              {author.links.github && (
+                <a href={author.links.github} target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white">
+                  GitHub
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Published Articles by this Author -->
+      <section aria-labelledby="author-articles-heading">
+        <div class="mb-6 flex items-center justify-between">
+          <h2 id="author-articles-heading" class="text-xl font-bold text-slate-900 dark:text-white font-mono">
+            Investigations &amp; Guides ({displayArticles.length})
+          </h2>
+          <span class="text-xs text-slate-400 font-mono">Peer-Reviewed Archive</span>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {displayArticles.map((art) => (
+            <ArticleCard
+              title={art.data.title}
+              slug={getArticleSlug(art)}
+              category={art.data.category}
+              readingTime={getArticleReadingTime(art)}
+              excerpt={art.data.description}
+              author={art.data.author}
+              publishedDate={art.data.publishDate}
+              logo={art.data.logo}
+            />
+          ))}
+        </div>
+      </section>
+
+    </div>
+  </div>
+</Base>

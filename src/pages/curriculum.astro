@@ -1,0 +1,131 @@
+---
+import Base from '../layouts/Base.astro';
+
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://signal-insight.pages.dev');
+const pageUrl = `${siteUrl}/curriculum/`;
+---
+
+<Base
+  title="Guided Curriculum: LLM & Systems Foundations | Signal Insight"
+  description="Sequential engineering paths designed to take you from foundational intuition to production-grade mastery in LLM architectures and systems engineering."
+  canonical={pageUrl}
+  ogImage="/og/default.png"
+>
+  <div class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-[#05070E] dark:border-white/[0.08]">
+    <div class="container-wide">
+
+      <!-- Breadcrumbs -->
+      <nav aria-label="Breadcrumb" class="mb-8">
+        <ol class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+          <li>
+            <a href="/" class="transition-colors hover:text-blue-600">Home</a>
+          </li>
+          <li aria-hidden="true" class="text-slate-400">/</li>
+          <li class="font-semibold text-slate-900 dark:text-white" aria-current="page">Curriculum</li>
+        </ol>
+      </nav>
+
+      <header class="mb-12 max-w-3xl">
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/80 px-3.5 py-1 text-xs font-bold tracking-widest text-blue-700 uppercase shadow-2xs dark:border-blue-900/60 dark:bg-blue-950/40 dark:text-blue-300 font-mono">
+          <span class="h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
+          <span>Sequential Study Paths</span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
+          Guided Engineering Curriculum
+        </h1>
+        <p class="mt-4 text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-300">
+          Curated reading tracks engineered from primary sources, runnable code, and system diagrams. Designed for engineers who want to master fundamentals without marketing fluff.
+        </p>
+      </header>
+
+      <div class="grid gap-8 lg:grid-cols-2">
+        <!-- Track 1: LLM & Neural Foundations -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xs dark:bg-[#0B101D] dark:border-white/[0.08]">
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/70 dark:text-emerald-300 dark:border-emerald-800 font-mono">Pillar 01 · Neural Track</span>
+            <span class="text-xs font-semibold text-slate-400 font-mono">4 Modules</span>
+          </div>
+          <h2 class="text-2xl font-bold text-slate-900 dark:text-white">LLM &amp; Neural Foundations Path</h2>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            From autoregressive attention to production RAG systems and GPU inference economics.
+          </p>
+
+          <div class="mt-6 space-y-3">
+            <a href="/articles/how-llms-actually-work/" class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 bg-slate-50 hover:border-blue-500 hover:bg-white dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 transition-all text-sm font-medium">
+              <div>
+                <span class="block text-xs text-blue-600 dark:text-blue-400 font-mono font-bold">Module 01</span>
+                <span class="text-slate-900 dark:text-white">How LLMs Actually Work: Modern Decoder Block</span>
+              </div>
+              <span class="text-blue-600 dark:text-blue-400 ml-3">&rarr;</span>
+            </a>
+            <a href="/articles/build-your-own-rag-from-scratch/" class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 bg-slate-50 hover:border-blue-500 hover:bg-white dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 transition-all text-sm font-medium">
+              <div>
+                <span class="block text-xs text-blue-600 dark:text-blue-400 font-mono font-bold">Module 02</span>
+                <span class="text-slate-900 dark:text-white">Build Your Own RAG: Hybrid BM25 &amp; Vector Embeddings</span>
+              </div>
+              <span class="text-blue-600 dark:text-blue-400 ml-3">&rarr;</span>
+            </a>
+            <a href="/articles/training-vs-inference-economics/" class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 bg-slate-50 hover:border-blue-500 hover:bg-white dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 transition-all text-sm font-medium">
+              <div>
+                <span class="block text-xs text-blue-600 dark:text-blue-400 font-mono font-bold">Module 03</span>
+                <span class="text-slate-900 dark:text-white">Training vs. Inference Economics: CAPEX to OPEX Models</span>
+              </div>
+              <span class="text-blue-600 dark:text-blue-400 ml-3">&rarr;</span>
+            </a>
+            <a href="/articles/evaluating-ai-benchmarks-and-evals/" class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 bg-slate-50 hover:border-blue-500 hover:bg-white dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 transition-all text-sm font-medium">
+              <div>
+                <span class="block text-xs text-blue-600 dark:text-blue-400 font-mono font-bold">Module 04</span>
+                <span class="text-slate-900 dark:text-white">Evaluating AI: Benchmarks, Evals, and LLM-as-a-Judge</span>
+              </div>
+              <span class="text-blue-600 dark:text-blue-400 ml-3">&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Track 2: Systems & Runtime Engineering -->
+        <div class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xs dark:bg-[#0B101D] dark:border-white/[0.08]">
+          <div class="flex items-center justify-between mb-4">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-sky-50 text-sky-700 border border-sky-200 dark:bg-sky-950/70 dark:text-sky-300 dark:border-sky-800 font-mono">Pillar 02 · Systems Track</span>
+            <span class="text-xs font-semibold text-slate-400 font-mono">4 Modules</span>
+          </div>
+          <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Systems &amp; Runtime Engineering</h2>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            From raw silicon clock cycles to high-throughput zero-copy kernel networking.
+          </p>
+
+          <div class="mt-6 space-y-3">
+            <a href="/articles/inside-the-modern-cpu/" class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 bg-slate-50 hover:border-blue-500 hover:bg-white dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 transition-all text-sm font-medium">
+              <div>
+                <span class="block text-xs text-blue-600 dark:text-blue-400 font-mono font-bold">Module 01</span>
+                <span class="text-slate-900 dark:text-white">Inside the Modern CPU: Out-of-Order Execution &amp; Caches</span>
+              </div>
+              <span class="text-blue-600 dark:text-blue-400 ml-3">&rarr;</span>
+            </a>
+            <a href="/articles/how-browsers-actually-render-a-page/" class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 bg-slate-50 hover:border-blue-500 hover:bg-white dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 transition-all text-sm font-medium">
+              <div>
+                <span class="block text-xs text-blue-600 dark:text-blue-400 font-mono font-bold">Module 02</span>
+                <span class="text-slate-900 dark:text-white">How Browsers Render a Page: From Bytes to Pixels</span>
+              </div>
+              <span class="text-blue-600 dark:text-blue-400 ml-3">&rarr;</span>
+            </a>
+            <a href="/articles/webassembly-in-2026/" class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 bg-slate-50 hover:border-blue-500 hover:bg-white dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 transition-all text-sm font-medium">
+              <div>
+                <span class="block text-xs text-blue-600 dark:text-blue-400 font-mono font-bold">Module 03</span>
+                <span class="text-slate-900 dark:text-white">WebAssembly in 2026: Component Model &amp; WASI 0.2</span>
+              </div>
+              <span class="text-blue-600 dark:text-blue-400 ml-3">&rarr;</span>
+            </a>
+            <a href="/articles/zero-copy-networking-in-linux-with-io-uring-and-ebpf/" class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 bg-slate-50 hover:border-blue-500 hover:bg-white dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 transition-all text-sm font-medium">
+              <div>
+                <span class="block text-xs text-blue-600 dark:text-blue-400 font-mono font-bold">Module 04</span>
+                <span class="text-slate-900 dark:text-white">Zero-Copy Linux Networking: io_uring &amp; DMA Transfer</span>
+              </div>
+              <span class="text-blue-600 dark:text-blue-400 ml-3">&rarr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Base>

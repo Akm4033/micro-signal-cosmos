@@ -1,3 +1,5 @@
+import { site } from '../config/site';
+
 export interface Author {
   key: string;
   name: string;
@@ -11,6 +13,20 @@ export interface Author {
 }
 
 export const authors: Record<string, Author> = {
+  editor: {
+    key: 'editor',
+    name: site.author.name,
+    role: site.author.credential,
+    bio: site.author.bio,
+    avatar: '/favicon.svg',
+    color: '#2563eb',
+    bgColor: 'bg-blue-100 dark:bg-blue-900/30',
+    initials: 'ED',
+    links: {
+      about: '/about/',
+      github: 'https://github.com/Akm4033/signal-insight',
+    },
+  },
   'editorial-desk': {
     key: 'editorial-desk',
     name: 'Signal Insight',
@@ -69,8 +85,9 @@ export const authors: Record<string, Author> = {
   },
 };
 
-export function getAuthor(key: string): Author {
-  return authors[key] || authors['editorial-desk'];
+export function getAuthor(key?: string): Author {
+  if (!key) return authors.editor || authors['editorial-desk'];
+  return authors[key] || authors.editor || authors['editorial-desk'];
 }
 
 export function getAllAuthors(): Author[] {

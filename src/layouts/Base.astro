@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import NewsletterInline from '../components/newsletter/NewsletterInline.astro';
 
 interface Props {
   title: string;
@@ -15,19 +16,16 @@ interface Props {
 const { title, description, canonical, ogImage, author, publishedTime, modifiedTime, noindex = false } = Astro.props;
 const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://signal-insight.pages.dev');
 const canonicalUrl = canonical || (siteUrl + Astro.url.pathname);
-const ogImageUrl = ogImage || '/favicon.svg';
+const rawOg = ogImage && !ogImage.includes('favicon.svg') ? ogImage : '/og/default.png';
+const ogImageUrl = rawOg.startsWith('http') ? rawOg : `${siteUrl}${rawOg.startsWith('/') ? '' : '/'}${rawOg}`;
 const defaultDesc = 'Understand the world. Explore beyond it. Signal Insight is an AI-powered global knowledge discovery and learning platform exploring systems engineering, AI/ML foundations, astrophysics, and developer infrastructure.';
 
 const pathname = Astro.url.pathname;
 const navLinks = [
-  { name: 'Home', href: '/' },
   { name: 'Articles', href: '/articles/' },
-  { name: 'Technology', href: '/category/technology/' },
-  { name: 'AI & ML', href: '/category/artificial-intelligence/' },
-  { name: 'Science', href: '/category/science/' },
-  { name: 'Dev Tools', href: '/category/developer-tools/' },
+  { name: 'Curriculum', href: '/curriculum/' },
   { name: 'Tools', href: '/tools/' },
-  { name: 'About', href: '/about/' },
+  { name: 'Subscribe', href: '/newsletter/' },
 ];
 
 function isNavActive(href: string) {
@@ -76,6 +74,8 @@ function isNavActive(href: string) {
   <meta property="og:description" content={description || defaultDesc}>
   <meta property="og:url" content={canonicalUrl}>
   <meta property="og:image" content={ogImageUrl}>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description || defaultDesc}>
@@ -137,21 +137,21 @@ function isNavActive(href: string) {
   <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white focus:shadow-lg focus:outline-none">Skip to main content</a>
 
   <!-- Top Editorial Utility Bar (Precision Monospaced Research Header) -->
-  <div class="border-b border-slate-200/80 bg-white/80 text-[11px] font-medium text-slate-600 hidden sm:block dark:border-white/[0.06] dark:bg-[#05070E]/80 backdrop-blur-md">
+  <div class="border-b border-slate-200/80 bg-white/80 text-xs font-medium text-slate-600 hidden sm:block dark:border-white/[0.06] dark:bg-[#05070E]/80 backdrop-blur-md">
     <div class="container-wide flex items-center justify-between py-1.5">
       <div class="flex items-center gap-2.5">
         <span class="inline-flex items-center gap-1.5 font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100">
           <span class="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>Signal Insight
         </span>
         <span aria-hidden="true" class="text-slate-300 dark:text-slate-700">&bull;</span>
-        <span class="text-slate-500 dark:text-slate-400 font-mono text-[10.5px]">Open Scientific Research &amp; Systems Platform</span>
+        <span class="text-slate-500 dark:text-slate-400 font-mono text-xs">Open Scientific Research &amp; Systems Platform</span>
       </div>
-      <div class="flex items-center gap-4 text-slate-500 dark:text-slate-400 text-[11px]">
+      <div class="flex items-center gap-4 text-slate-500 dark:text-slate-400 text-xs">
         <a href="/tools/" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Tools</a>
         <a href="/authors/" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Research Desk</a>
         <a href="/about/" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</a>
         <a href="/contact/" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</a>
-        <a href="/rss.xml" class="hover:text-blue-600 dark:hover:text-blue-400 font-semibold transition-colors flex items-center gap-1 font-mono text-[10.5px]"><span>/rss.xml</span><span aria-hidden="true">&rarr;</span></a>
+        <a href="/rss.xml" class="hover:text-blue-600 dark:hover:text-blue-400 font-semibold transition-colors flex items-center gap-1 font-mono text-xs"><span>/rss.xml</span><span aria-hidden="true">&rarr;</span></a>
       </div>
     </div>
   </div>
@@ -199,26 +199,26 @@ function isNavActive(href: string) {
 
         <!-- Right Controls: Search + Theme Toggle + Mobile Drawer -->
         <div class="flex items-center gap-2">
-          <!-- Quick Search Button -->
+          <!-- Quick Search Button (>=44x44px target) -->
           <a
             href="/articles/"
-            class="flex h-9 items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 text-xs font-medium text-slate-700 hover:border-blue-400 hover:bg-white hover:text-blue-600 dark:border-white/[0.1] dark:bg-[#0B101D] dark:text-slate-200 dark:hover:border-blue-500/50 dark:hover:bg-[#111827] transition-all"
+            class="flex min-h-11 h-11 items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-3.5 text-xs font-medium text-slate-700 hover:border-blue-400 hover:bg-white hover:text-blue-600 dark:border-white/[0.1] dark:bg-[#0B101D] dark:text-slate-200 dark:hover:border-blue-500/50 dark:hover:bg-[#111827] transition-all"
             aria-label="Search articles"
             title="Search Signal Insight Knowledge Archive"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
             <span class="hidden sm:inline">Search</span>
-            <span class="hidden md:inline-block ml-1 px-1.5 py-0.2 rounded border border-slate-200 dark:border-white/[0.1] text-[10px] font-mono text-slate-400">⌘K</span>
+            <span class="hidden md:inline-block ml-1 px-1.5 py-0.5 rounded border border-slate-200 dark:border-white/[0.1] text-xs font-mono text-slate-400">⌘K</span>
           </a>
 
-          <!-- Theme Toggle (Light / Dark Switch) -->
+          <!-- Theme Toggle (>=44x44px target) -->
           <button
             id="theme-toggle-btn"
             type="button"
-            class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 hover:text-blue-600 hover:border-blue-300 dark:border-white/[0.1] dark:bg-[#0B101D] dark:text-slate-300 dark:hover:text-white transition-colors cursor-pointer"
+            class="flex min-h-11 min-w-11 h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 hover:text-blue-600 hover:border-blue-300 dark:border-white/[0.1] dark:bg-[#0B101D] dark:text-slate-300 dark:hover:text-white transition-colors cursor-pointer"
             aria-label="Toggle visual theme"
             title="Toggle dark/light theme"
           >
@@ -240,28 +240,39 @@ function isNavActive(href: string) {
             </svg>
           </button>
 
-          <!-- Mobile Drawer Toggle -->
-          <details class="relative lg:hidden" id="mobile-nav-details">
-            <summary class="flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 hover:border-blue-400 hover:text-blue-600 dark:border-white/[0.1] dark:bg-[#0B101D] dark:text-slate-200 transition-all" aria-label="Toggle navigation menu" id="mobile-nav-toggle">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <!-- Mobile Drawer Toggle (>=44x44px target) -->
+          <div class="relative lg:hidden">
+            <button
+              type="button"
+              id="mobile-nav-toggle"
+              aria-expanded="false"
+              aria-controls="mobile-nav-menu"
+              class="flex min-h-11 min-w-11 h-11 w-11 cursor-pointer items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 hover:border-blue-400 hover:text-blue-600 dark:border-white/[0.1] dark:bg-[#0B101D] dark:text-slate-200 transition-all"
+              aria-label="Toggle navigation menu"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <line x1="3" y1="12" x2="21" y2="12"></line>
                 <line x1="3" y1="6" x2="21" y2="6"></line>
                 <line x1="3" y1="18" x2="21" y2="18"></line>
               </svg>
-            </summary>
-            <div class="absolute right-0 top-full mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-xl border border-slate-200 bg-white p-4 shadow-xl dark:border-white/[0.1] dark:bg-[#0B101D] z-50" role="dialog" aria-label="Mobile Navigation Menu">
+            </button>
+            <nav
+              id="mobile-nav-menu"
+              class="hidden absolute right-0 top-full mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-xl border border-slate-200 bg-white p-4 shadow-xl dark:border-white/[0.1] dark:bg-[#0B101D] z-50"
+              aria-label="Mobile Navigation Menu"
+            >
               <div class="mb-3 pb-2 border-b border-slate-100 flex items-center justify-between dark:border-white/[0.08]">
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Signal Insight Navigation</span>
-                <span class="text-[10px] font-semibold text-blue-600 uppercase font-mono">4 Pillars</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Signal Insight</span>
+                <span class="text-xs font-semibold text-blue-600 uppercase font-mono">Navigation</span>
               </div>
-              <nav class="flex flex-col space-y-1">
+              <div class="flex flex-col space-y-1">
                 {navLinks.map((link) => {
                   const active = isNavActive(link.href);
                   return (
                     <a
                       href={link.href}
                       class:list={[
-                        'rounded-lg px-3 py-2 text-sm font-semibold transition-colors flex items-center justify-between',
+                        'min-h-11 rounded-lg px-3 py-2.5 text-sm font-semibold transition-colors flex items-center justify-between',
                         active
                           ? 'text-blue-700 bg-blue-50 dark:bg-blue-950/70 dark:text-blue-300 font-bold'
                           : 'text-slate-700 hover:bg-slate-50 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-slate-800'
@@ -273,15 +284,19 @@ function isNavActive(href: string) {
                     </a>
                   );
                 })}
-              </nav>
+              </div>
               <div class="mt-4 pt-3 border-t border-slate-100 flex flex-col gap-2 dark:border-white/[0.08]">
-                <a href="/articles/" class="flex items-center justify-center gap-1.5 rounded-lg bg-blue-600 py-2 text-xs font-semibold text-white shadow-xs transition-colors hover:bg-blue-700"><span>Search All Knowledge</span><span aria-hidden="true">&rarr;</span></a>
-                <div class="flex items-center justify-around text-xs text-slate-500 dark:text-slate-400 pt-1">
-                  <a href="/about/" class="hover:text-blue-600">About</a><span>&bull;</span><a href="/authors/" class="hover:text-blue-600">Research</a><span>&bull;</span><a href="/contact/" class="hover:text-blue-600">Contact</a>
+                <a href="/articles/" class="min-h-11 flex items-center justify-center gap-1.5 rounded-lg bg-blue-600 py-2.5 text-xs font-semibold text-white shadow-xs transition-colors hover:bg-blue-700 font-mono"><span>Search All Knowledge</span><span aria-hidden="true">&rarr;</span></a>
+                <div class="flex items-center justify-around text-xs text-slate-500 dark:text-slate-400 pt-2">
+                  <a href="/about/" class="hover:text-blue-600 p-2 min-h-11 flex items-center">About</a>
+                  <span aria-hidden="true">&bull;</span>
+                  <a href="/authors/" class="hover:text-blue-600 p-2 min-h-11 flex items-center">Research</a>
+                  <span aria-hidden="true">&bull;</span>
+                  <a href="/contact/" class="hover:text-blue-600 p-2 min-h-11 flex items-center">Contact</a>
                 </div>
               </div>
-            </div>
-          </details>
+            </nav>
+          </div>
         </div>
       </div>
     </div>
@@ -330,29 +345,16 @@ function isNavActive(href: string) {
         </nav>
 
         <div class="newsletter-footer space-y-3">
-          <h3 class="text-xs font-bold uppercase tracking-widest text-slate-900 dark:text-white">Signal Insight Syndication</h3>
-          <p class="text-xs leading-relaxed text-slate-600 dark:text-slate-300">Weekly technical breakdowns via open RSS 2.0 web standards.</p>
-          <div class="flex flex-col sm:flex-row gap-2">
-            <a
-              href="/rss.xml"
-              target="_blank"
-              class="inline-flex items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-blue-500 text-center shadow-2xs"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M4 11a9 9 0 0 1 9 9"></path>
-                <path d="M4 4a16 16 0 0 1 16 16"></path>
-                <circle cx="5" cy="19" r="1"></circle>
-              </svg>
+          <h3 class="text-xs font-bold uppercase tracking-widest text-slate-900 dark:text-white">Weekly Briefing</h3>
+          <p class="text-xs leading-relaxed text-slate-600 dark:text-slate-300">Join engineers getting systems breakdowns in their inbox every week.</p>
+          <NewsletterInline variant="compact" source="footer" />
+          <div class="pt-1 flex items-center justify-between text-xs text-slate-400">
+            <span>Prefer RSS?</span>
+            <a href="/rss.xml" target="_blank" class="hover:text-blue-500 font-mono text-xs inline-flex items-center gap-1">
               <span>/rss.xml</span>
-            </a>
-            <a
-              href="/newsletter/"
-              class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-medium text-slate-700 shadow-2xs hover:text-blue-600 hover:border-blue-400 transition-colors text-center dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-700"
-            >
-              Reader Options &rarr;
+              <span aria-hidden="true">&rarr;</span>
             </a>
           </div>
-          <p class="text-[10px] text-slate-500 dark:text-slate-400">Zero tracking &bull; 100% open web standards.</p>
         </div>
       </div>
 
@@ -393,26 +395,62 @@ function isNavActive(href: string) {
         });
       }
 
-      // Mobile navigation drawer interaction & Escape key dismissal
-      const mobileNav = document.getElementById('mobile-nav-details');
+      // Accessible Mobile navigation drawer interaction (P1-5: Escape closes, focus trapped)
       const mobileToggle = document.getElementById('mobile-nav-toggle');
-      if (mobileNav && mobileToggle) {
-        mobileNav.addEventListener('toggle', function() {
-          mobileToggle.setAttribute('aria-expanded', String(mobileNav.open));
+      const mobileMenu = document.getElementById('mobile-nav-menu');
+      if (mobileToggle && mobileMenu) {
+        function openMenu() {
+          mobileMenu.classList.remove('hidden');
+          mobileToggle.setAttribute('aria-expanded', 'true');
+          const firstLink = mobileMenu.querySelector('a');
+          if (firstLink) firstLink.focus();
+        }
+
+        function closeMenu() {
+          mobileMenu.classList.add('hidden');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+          mobileToggle.focus();
+        }
+
+        mobileToggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const isOpen = mobileToggle.getAttribute('aria-expanded') === 'true';
+          if (isOpen) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
         });
 
         document.addEventListener('click', function(e) {
-          if (mobileNav.open && !mobileNav.contains(e.target)) {
-            mobileNav.removeAttribute('open');
-            mobileToggle.setAttribute('aria-expanded', 'false');
+          const isOpen = mobileToggle.getAttribute('aria-expanded') === 'true';
+          if (isOpen && !mobileMenu.contains(e.target) && e.target !== mobileToggle) {
+            closeMenu();
           }
         });
 
         document.addEventListener('keydown', function(e) {
-          if (e.key === 'Escape' && mobileNav.open) {
-            mobileNav.removeAttribute('open');
-            mobileToggle.setAttribute('aria-expanded', 'false');
-            mobileToggle.focus();
+          const isOpen = mobileToggle.getAttribute('aria-expanded') === 'true';
+          if (!isOpen) return;
+
+          if (e.key === 'Escape') {
+            closeMenu();
+            return;
+          }
+
+          if (e.key === 'Tab') {
+            const focusableEls = mobileMenu.querySelectorAll('a, button');
+            if (!focusableEls.length) return;
+            const firstEl = focusableEls[0];
+            const lastEl = focusableEls[focusableEls.length - 1];
+
+            if (e.shiftKey && document.activeElement === firstEl) {
+              e.preventDefault();
+              lastEl.focus();
+            } else if (!e.shiftKey && document.activeElement === lastEl) {
+              e.preventDefault();
+              firstEl.focus();
+            }
           }
         });
       }

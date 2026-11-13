@@ -1,19 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
+import { site } from '../config/site';
 
 const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, '') : (process.env.SITE_URL || 'https://signal-insight.pages.dev');
 const newsletterUrl = `${siteUrl}/newsletter/`;
 const rssUrl = `${siteUrl}/rss.xml`;
-const configuredEmail = import.meta.env.PUBLIC_CONTACT_EMAIL || '';
-const hasContactEmail = Boolean(configuredEmail && configuredEmail.trim().includes('@'));
-const contactEmail = hasContactEmail ? configuredEmail.trim() : '';
 ---
 
 <Base
   title="Signal Insight Briefings: Systems & AI Syndication | Signal Insight"
-  description="Weekly technical deep dives into browser internals, LLM architectures, distributed databases, and astrophysics. Free, zero tracking, open RSS 2.0 syndication."
+  description="Weekly technical deep dives into browser internals, LLM architectures, distributed databases, and astrophysics. Free open syndication."
   canonical={newsletterUrl}
-  ogImage="/favicon.svg"
+  ogImage="/og/default.png"
 >
   <div class="bg-neutral-50 py-12 sm:py-20 border-b border-neutral-200 dark:bg-[#05070E] dark:border-white/[0.08]">
     <div class="container-narrow">
@@ -32,7 +30,7 @@ const contactEmail = hasContactEmail ? configuredEmail.trim() : '';
       <!-- Newsletter Hero Card -->
       <div class="rounded-3xl border border-neutral-200 bg-white p-8 sm:p-12 shadow-sm dark:border-white/[0.08] dark:bg-[#0B101D]">
         
-        <div class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3.5 py-1 text-xs font-bold tracking-widest text-brand-primary uppercase shadow-xs dark:border-white/[0.08] dark:bg-[#070B14] dark:text-blue-400 font-mono text-[10.5px]">
+        <div class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-3.5 py-1 text-xs font-bold tracking-widest text-brand-primary uppercase shadow-xs dark:border-white/[0.08] dark:bg-[#070B14] dark:text-blue-400 font-mono">
           <span class="h-1.5 w-1.5 rounded-full bg-brand-primary dark:bg-blue-400"></span>
           <span>Signal Insight BRIEFINGS &amp; SYNDICATION</span>
         </div>
@@ -42,27 +40,86 @@ const contactEmail = hasContactEmail ? configuredEmail.trim() : '';
         </h1>
 
         <p class="mt-4 text-base sm:text-lg leading-relaxed text-text-secondary">
-          Join engineers, researchers, and systems practitioners receiving comprehensive architectural breakdowns, runnable code, and curated scientific analysis. Distributed via open web standards.
+          Join engineers, researchers, and systems practitioners receiving comprehensive architectural breakdowns, runnable code, and curated scientific analysis. Distributed via open web standards and weekly email.
         </p>
 
         <!-- Subscription Channels Grid -->
         <div class="mt-8 grid gap-6 sm:grid-cols-2">
-          <!-- Channel 1: Open RSS 2.0 (Primary) -->
-          <div class="rounded-2xl border border-blue-200 bg-blue-50/60 p-6 dark:border-white/[0.08] dark:bg-[#070B14] flex flex-col justify-between">
+          <!-- Channel 1: Email Briefing (Primary) -->
+          <div class="rounded-2xl border border-blue-200 bg-blue-50/60 p-6 dark:border-blue-900/60 dark:bg-[#070B14] flex flex-col justify-between">
             <div>
               <div class="flex items-center gap-2 mb-3">
                 <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white font-bold text-xs">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                  </svg>
+                </span>
+                <span class="text-xs font-bold uppercase tracking-wider text-blue-700 dark:text-blue-300 font-mono">
+                  Weekly Email Briefing
+                </span>
+              </div>
+              <h2 class="text-base font-bold text-slate-900 dark:text-white">
+                Get the Weekly Editorial Dispatch
+              </h2>
+              <p class="mt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                One deep dive every week. Primary sources, runnable code, and systems architecture.
+              </p>
+            </div>
+
+            <form
+              method="post"
+              action={site.newsletterAction}
+              target="_blank"
+              class="mt-6 space-y-3"
+            >
+              <label for="newsletter-email-input" class="sr-only">Email address</label>
+              <input
+                id="newsletter-email-input"
+                type="email"
+                name="email"
+                required
+                autocomplete="email"
+                placeholder="you@company.com"
+                data-clarity-mask="true"
+                aria-describedby="newsletter-page-help"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-white/[0.12] bg-white dark:bg-[#05070E] text-slate-900 dark:text-white text-xs placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono"
+              />
+              <button
+                type="submit"
+                class="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
+              >
+                Get the weekly briefing
+              </button>
+              <p id="newsletter-page-help" class="text-xs text-slate-500 dark:text-slate-400 leading-tight">
+                One email per week. Unsubscribe anytime. We only use your email for the briefing.
+              </p>
+              <p class="text-xs text-emerald-600 dark:text-emerald-400 hidden" aria-live="polite" id="newsletter-post-submit">
+                Almost there &mdash; confirm via the email we just sent.
+              </p>
+            </form>
+          </div>
+
+          <!-- Channel 2: Open RSS 2.0 Feed -->
+          <div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 dark:border-white/[0.08] dark:bg-[#070B14] flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 mb-3">
+                <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-neutral-700 dark:bg-white/[0.08] text-white font-bold text-xs">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M4 11a9 9 0 0 1 9 9"></path>
                     <path d="M4 4a16 16 0 0 1 16 16"></path>
                     <circle cx="5" cy="19" r="1"></circle>
                   </svg>
                 </span>
-                <span class="text-xs font-bold uppercase tracking-wider text-blue-700 dark:text-blue-300 font-mono text-[11px]">Open RSS 2.0 Feed</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono">
+                  Open RSS 2.0 Feed
+                </span>
               </div>
-              <h2 class="text-base font-bold text-slate-900 dark:text-white">Subscribe via RSS Reader</h2>
+              <h2 class="text-base font-bold text-slate-900 dark:text-white">
+                Prefer RSS?
+              </h2>
               <p class="mt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                Add our feed to Feedly, NetNewsWire, Apple News, Thunderbird, or Miniflux for instant, private reading.
+                Add Signal Insight to your reader: Feedly, NetNewsWire, Inoreader, Miniflux, or native RSS reader.
               </p>
             </div>
 
@@ -70,20 +127,20 @@ const contactEmail = hasContactEmail ? configuredEmail.trim() : '';
               <button
                 id="copy-main-rss-btn"
                 type="button"
-                class="w-full py-2.5 px-4 rounded-xl bg-blue-600 text-xs font-bold uppercase tracking-wider text-white hover:bg-blue-700 active:translate-y-0.5 transition-all cursor-pointer inline-flex items-center justify-center gap-2 shadow-xs"
+                class="w-full py-2.5 px-4 rounded-xl border border-slate-300 dark:border-white/[0.12] bg-white dark:bg-[#0B101D] text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer inline-flex items-center justify-center gap-2"
               >
                 <span id="copy-main-rss-text">Copy RSS Feed URL</span>
               </button>
               
               <!-- 1-Click Feed Reader Shortcuts -->
-              <div class="pt-2 border-t border-blue-200/60 dark:border-white/[0.08]">
-                <span class="block text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 font-bold">1-Click Subscribe:</span>
-                <div class="grid grid-cols-3 gap-1.5 text-center text-[11px] font-mono">
+              <div class="pt-2 border-t border-neutral-200 dark:border-white/[0.08]">
+                <span class="block text-xs font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 font-bold">1-Click Subscribe:</span>
+                <div class="grid grid-cols-3 gap-1.5 text-center text-xs font-mono">
                   <a
                     href={`https://feedly.com/i/subscription/feed/${encodeURIComponent(rssUrl)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="py-1.5 px-2 rounded-lg bg-white border border-blue-200 text-slate-700 hover:text-emerald-600 hover:border-emerald-300 dark:bg-[#0B101D] dark:border-white/[0.08] dark:text-slate-300 dark:hover:text-emerald-400 transition-colors"
+                    class="py-1.5 px-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:text-emerald-600 hover:border-emerald-300 dark:bg-[#0B101D] dark:border-white/[0.08] dark:text-slate-300 dark:hover:text-emerald-400 transition-colors"
                     title="Subscribe in Feedly"
                   >
                     Feedly
@@ -92,14 +149,14 @@ const contactEmail = hasContactEmail ? configuredEmail.trim() : '';
                     href={`https://www.inoreader.com/feed/${encodeURIComponent(rssUrl)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="py-1.5 px-2 rounded-lg bg-white border border-blue-200 text-slate-700 hover:text-blue-600 hover:border-blue-300 dark:bg-[#0B101D] dark:border-white/[0.08] dark:text-slate-300 dark:hover:text-blue-400 transition-colors"
+                    class="py-1.5 px-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:text-blue-600 hover:border-blue-300 dark:bg-[#0B101D] dark:border-white/[0.08] dark:text-slate-300 dark:hover:text-blue-400 transition-colors"
                     title="Subscribe in Inoreader"
                   >
                     Inoreader
                   </a>
                   <a
                     href={`feed://${Astro.site ? Astro.site.host : 'signal-insight.pages.dev'}/rss.xml`}
-                    class="py-1.5 px-2 rounded-lg bg-white border border-blue-200 text-slate-700 hover:text-amber-600 hover:border-amber-300 dark:bg-[#0B101D] dark:border-white/[0.08] dark:text-slate-300 dark:hover:text-amber-400 transition-colors"
+                    class="py-1.5 px-2 rounded-lg bg-white border border-slate-200 text-slate-700 hover:text-amber-600 hover:border-amber-300 dark:bg-[#0B101D] dark:border-white/[0.08] dark:text-slate-300 dark:hover:text-amber-400 transition-colors"
                     title="Subscribe in NetNewsWire / Native Feed App"
                   >
                     NetNewsWire
@@ -110,79 +167,12 @@ const contactEmail = hasContactEmail ? configuredEmail.trim() : '';
               <a
                 href="/rss.xml"
                 target="_blank"
-                class="block w-full text-center py-2 px-4 rounded-xl border border-blue-200 bg-white text-xs font-bold text-blue-700 hover:bg-blue-50 dark:border-white/[0.08] dark:bg-[#05070E] dark:text-blue-400 transition-colors font-mono"
+                class="block w-full text-center py-2 px-4 rounded-xl border border-slate-200 bg-white text-xs font-bold text-slate-700 hover:bg-slate-50 dark:border-white/[0.08] dark:bg-[#05070E] dark:text-slate-300 transition-colors font-mono"
               >
                 Open Raw /rss.xml &rarr;
               </a>
             </div>
           </div>
-
-          <!-- Channel 2: Direct Email Subscription -->
-          <div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 dark:border-white/[0.08] dark:bg-[#070B14] flex flex-col justify-between">
-            <div>
-              <div class="flex items-center gap-2 mb-3">
-                <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-neutral-700 dark:bg-white/[0.08] text-white font-bold text-xs">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                  </svg>
-                </span>
-                <span class="text-xs font-bold uppercase tracking-wider text-text-muted font-mono text-[11px]">
-                  {hasContactEmail ? "Direct Email Dispatch" : "Editorial Desk Contact"}
-                </span>
-              </div>
-              <h2 class="text-base font-bold text-slate-900 dark:text-white">
-                {hasContactEmail ? "Subscribe by Email" : "Editorial Inquiries"}
-              </h2>
-              <p class="mt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                {hasContactEmail
-                  ? "Prefer email dispatches? Send a one-click subscription request to our editorial desk."
-                  : "Have feedback on an investigation or wish to collaborate? Reach our research desk via the Contact Composer."}
-              </p>
-            </div>
-
-            <div class="mt-6">
-              {hasContactEmail ? (
-                <>
-                  <a
-                    href={`mailto:${contactEmail}?subject=Subscribe%20to%20Signal Insight%20Briefings&body=Please%20add%20my%20email%20address%20to%20the%20Signal Insight%20weekly%20editorial%20dispatch.`}
-                    class="w-full py-2.5 px-4 rounded-xl border border-neutral-300 bg-white text-xs font-bold uppercase tracking-wider text-slate-700 hover:bg-slate-100 dark:border-neutral-600 dark:bg-neutral-800 dark:text-slate-200 transition-colors text-center inline-flex items-center justify-center gap-1.5"
-                  >
-                    <span>Send Subscription Request</span>
-                    <span aria-hidden="true">&rarr;</span>
-                  </a>
-                  <span class="block mt-2 text-[10px] text-center text-text-muted">Direct to {contactEmail} &bull; Zero spam</span>
-                </>
-              ) : (
-                <>
-                  <a
-                    href="/contact/"
-                    class="w-full py-2.5 px-4 rounded-xl border border-neutral-300 bg-white text-xs font-bold uppercase tracking-wider text-slate-700 hover:bg-slate-100 dark:border-neutral-600 dark:bg-neutral-800 dark:text-slate-200 transition-colors text-center inline-flex items-center justify-center gap-1.5"
-                  >
-                    <span>Open Contact Composer</span>
-                    <span aria-hidden="true">&rarr;</span>
-                  </a>
-                  <span class="block mt-2 text-[10px] text-center text-text-muted">100% private &bull; Zero third-party tracker</span>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <!-- Privacy & Standards Guarantees -->
-        <div class="mt-8 flex flex-wrap items-center justify-between text-xs text-text-muted pt-4 border-t border-neutral-200 dark:border-neutral-700 gap-3">
-          <span class="flex items-center gap-1.5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Zero tracking pixels
-          </span>
-          <span class="flex items-center gap-1.5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            100% Open RSS 2.0 Web Standard
-          </span>
-          <span class="flex items-center gap-1.5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            No third-party data sharing
-          </span>
         </div>
 
         <!-- Open Architecture Starter Pack (Direct Access, No Paywall) -->
@@ -190,46 +180,83 @@ const contactEmail = hasContactEmail ? configuredEmail.trim() : '';
           <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
             <div>
               <h2 class="text-lg font-bold text-text-primary">
-                Open Access: 5-Part Systems Architecture Starter Pack
+                5-Part Systems Architecture Starter Pack
               </h2>
               <p class="text-xs sm:text-sm text-text-secondary mt-0.5">
-                Freely accessible directly in our articles archive — zero email gates or paywalls:
+                Freely accessible directly in our articles archive &mdash; zero paywalls:
               </p>
             </div>
           </div>
 
           <div class="grid gap-4 sm:grid-cols-2">
             <a href="/articles/how-browsers-actually-render-a-page/" class="group block rounded-xl border border-neutral-200 bg-white p-4 hover:border-blue-400 hover:shadow-xs dark:border-neutral-700 dark:bg-neutral-800 transition-all">
-              <span class="text-[10px] font-bold text-brand-primary uppercase">Guide 01</span>
+              <span class="text-xs font-bold text-brand-primary uppercase">Guide 01</span>
               <h3 class="font-bold text-sm text-text-primary group-hover:text-blue-600 transition-colors mt-1">Critical Rendering Path Breakdown</h3>
               <p class="text-xs text-text-muted mt-1">Blink &amp; Gecko pipeline from raw bytes to GPU raster tiles.</p>
             </a>
 
             <a href="/articles/build-your-own-rag-from-scratch/" class="group block rounded-xl border border-neutral-200 bg-white p-4 hover:border-blue-400 hover:shadow-xs dark:border-neutral-700 dark:bg-neutral-800 transition-all">
-              <span class="text-[10px] font-bold text-brand-primary uppercase">Guide 02</span>
+              <span class="text-xs font-bold text-brand-primary uppercase">Guide 02</span>
               <h3 class="font-bold text-sm text-text-primary group-hover:text-blue-600 transition-colors mt-1">Production RAG Architecture</h3>
               <p class="text-xs text-text-muted mt-1">Semantic chunking, dense embeddings, and cross-encoder rerankers.</p>
             </a>
 
             <a href="/articles/self-hosting-101/" class="group block rounded-xl border border-neutral-200 bg-white p-4 hover:border-blue-400 hover:shadow-xs dark:border-neutral-700 dark:bg-neutral-800 transition-all">
-              <span class="text-[10px] font-bold text-brand-primary uppercase">Guide 03</span>
+              <span class="text-xs font-bold text-brand-primary uppercase">Guide 03</span>
               <h3 class="font-bold text-sm text-text-primary group-hover:text-blue-600 transition-colors mt-1">Self-Hosted Production Stack</h3>
               <p class="text-xs text-text-muted mt-1">Linux edge gateway, automated TLS, WireGuard, and Docker fleet.</p>
             </a>
 
             <a href="/articles/choosing-a-database-in-2026/" class="group block rounded-xl border border-neutral-200 bg-white p-4 hover:border-blue-400 hover:shadow-xs dark:border-neutral-700 dark:bg-neutral-800 transition-all">
-              <span class="text-[10px] font-bold text-brand-primary uppercase">Guide 04</span>
+              <span class="text-xs font-bold text-brand-primary uppercase">Guide 04</span>
               <h3 class="font-bold text-sm text-text-primary group-hover:text-blue-600 transition-colors mt-1">Database Decision Framework (2026)</h3>
               <p class="text-xs text-text-muted mt-1">PostgreSQL, SQLite at the edge, serverless auto-scale, and OLAP.</p>
             </a>
 
             <a href="/articles/training-vs-inference-economics/" class="group block rounded-xl border border-neutral-200 bg-white p-4 hover:border-blue-400 hover:shadow-xs dark:border-neutral-700 dark:bg-neutral-800 transition-all sm:col-span-2">
-              <span class="text-[10px] font-bold text-brand-primary uppercase">Guide 05</span>
+              <span class="text-xs font-bold text-brand-primary uppercase">Guide 05</span>
               <h3 class="font-bold text-sm text-text-primary group-hover:text-blue-600 transition-colors mt-1">LLM Training vs. Inference Economics</h3>
               <p class="text-xs text-text-muted mt-1">Unit economics crossover curves, fixed CAPEX to token OPEX analysis.</p>
             </a>
           </div>
         </div>
+
+      </div>
+
+    </div>
+  </div>
+</Base>
+
+<script is:inline>
+  (function() {
+    const btn = document.getElementById('copy-main-rss-btn');
+    const text = document.getElementById('copy-main-rss-text');
+    if (!btn || !text) return;
+
+    btn.addEventListener('click', async () => {
+      const feedUrl = window.location.origin + '/rss.xml';
+      try {
+        await navigator.clipboard.writeText(feedUrl);
+        text.textContent = 'Feed URL Copied! ✓';
+        btn.classList.add('bg-emerald-600');
+        setTimeout(() => {
+          text.textContent = 'Copy RSS Feed URL';
+          btn.classList.remove('bg-emerald-600');
+        }, 2500);
+      } catch (err) {
+        window.open('/rss.xml', '_blank');
+      }
+    });
+
+    const form = document.querySelector('form[action*="buttondown"]');
+    const postSubmit = document.getElementById('newsletter-post-submit');
+    if (form && postSubmit) {
+      form.addEventListener('submit', () => {
+        postSubmit.classList.remove('hidden');
+      });
+    }
+  })();
+</script>
 
       </div>
 

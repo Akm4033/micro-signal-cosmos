@@ -19,10 +19,15 @@ const articles = defineCollection({
     slug: z.string().optional(),
 
     /** Initial publication timestamp */
-    publishDate: z.coerce.date({ required_error: 'publishDate is required.' }),
+    publishDate: z.coerce.date().optional(),
+    pubDate: z.coerce.date().optional(),
 
     /** Optional last modified timestamp for revisions */
     updatedDate: z.coerce.date().optional(),
+
+    /** Author ID matching registry in src/data/authors.ts (defaults to 'editor') */
+    author: z.string().default('editor'),
+    authorKey: z.string().default('editor'),
 
     /** Content stream pillar (must match one of the 4 official publication categories) */
     category: z.string().refine(
@@ -33,9 +38,6 @@ const articles = defineCollection({
         message: `Category must match one of the official categories: ${validCategorySlugs.join(', ')}`,
       }
     ),
-
-    /** Author ID matching registry in src/data/authors.ts (defaults to 'editorial-desk') */
-    author: z.string().default('editorial-desk'),
 
     /** Topic keywords for classification and search indexing */
     tags: z.array(z.string()).default([]),

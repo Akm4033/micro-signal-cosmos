@@ -16,7 +16,7 @@
         Signal Insight Engineering Workbench
       </h2>
       <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">
-        Deterministic technical calculators computed instantly in your browser. Zero tracking, zero network requests.
+        Deterministic technical calculators computed instantly in your browser with zero network requests.
       </p>
     </div>
 
@@ -180,7 +180,7 @@
           <div class="mt-1 text-2xl font-black tracking-tight text-slate-900 dark:text-white" id="ai-cost-single">
             $0.0135
           </div>
-          <div class="mt-1 text-[11px] text-slate-500 dark:text-slate-400 font-mono" id="ai-cost-breakdown">
+          <div class="mt-1 text-xs text-slate-500 dark:text-slate-400 font-mono" id="ai-cost-breakdown">
             Prompt: $0.0045 &bull; Completion: $0.0090
           </div>
         </div>
@@ -209,7 +209,7 @@
           </div>
         </div>
 
-        <p class="mt-4 text-[11px] text-slate-500 dark:text-slate-400">
+        <p class="mt-4 text-xs text-slate-500 dark:text-slate-400">
           Explore architecture: <a href="/articles/training-vs-inference-economics/" class="text-blue-600 dark:text-blue-400 hover:underline">Training vs. Inference Economics &rarr;</a>
         </p>
       </div>
@@ -312,7 +312,7 @@
           <div class="mt-1 text-2xl font-black tracking-tight text-slate-900 dark:text-white font-mono" id="net-bdp-bytes">
             8.75 MB
           </div>
-          <div class="mt-1 text-[11px] text-slate-500 dark:text-slate-400 font-mono" id="net-bdp-bits">
+          <div class="mt-1 text-xs text-slate-500 dark:text-slate-400 font-mono" id="net-bdp-bits">
             70.0 Megabits in flight
           </div>
         </div>
@@ -322,7 +322,7 @@
           <div class="mt-1 text-xl font-bold text-blue-600 dark:text-blue-400 font-mono" id="net-buffer-rec">
             ~17.50 MB (2× BDP)
           </div>
-          <div class="mt-1 text-[10.5px] text-slate-500 dark:text-slate-400">
+          <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">
             Configure via <code class="font-mono text-slate-800 dark:text-slate-200">sysctl net.ipv4.tcp_rmem / tcp_wmem</code>
           </div>
         </div>
@@ -334,7 +334,7 @@
           </div>
         </div>
 
-        <p class="mt-4 text-[11px] text-slate-500 dark:text-slate-400">
+        <p class="mt-4 text-xs text-slate-500 dark:text-slate-400">
           Related guide: <a href="/articles/zero-copy-networking-in-linux-with-io-uring-and-ebpf/" class="text-blue-600 dark:text-blue-400 hover:underline">Zero-Copy Linux Networking with io_uring &rarr;</a>
         </p>
       </div>
@@ -401,7 +401,7 @@
             />
             <button type="button" id="astro-step-up" class="rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-bold hover:bg-slate-50 dark:border-white/[0.1] dark:bg-[#121826] dark:text-white font-mono" title="Increase z by 0.5">+0.5</button>
           </div>
-          <p class="mt-2 text-[11px] text-slate-500 dark:text-slate-400">
+          <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">
             Computed using standard flat &Lambda;CDM cosmology (H₀ &approx; 67.4 km/s/Mpc, &Omega;<sub>m</sub> &approx; 0.315, &Omega;<sub>&Lambda;</sub> &approx; 0.685).
           </p>
         </div>
@@ -418,7 +418,7 @@
           <div class="mt-1 text-2xl font-black tracking-tight text-purple-600 dark:text-purple-400" id="astro-lookback">
             10.42 Billion Years
           </div>
-          <div class="mt-1 text-[11px] text-slate-500 dark:text-slate-400 font-mono" id="astro-age">
+          <div class="mt-1 text-xs text-slate-500 dark:text-slate-400 font-mono" id="astro-age">
             Universe was ~3.38 Gyr old at emission
           </div>
         </div>
@@ -437,7 +437,7 @@
           </div>
         </div>
 
-        <p class="mt-4 text-[11px] text-slate-500 dark:text-slate-400">
+        <p class="mt-4 text-xs text-slate-500 dark:text-slate-400">
           Related research: <a href="/articles/dark-matter-evidence-and-theories/" class="text-purple-600 dark:text-purple-400 hover:underline">Dark Matter &amp; Cosmic Expansion &rarr;</a>
         </p>
       </div>
@@ -466,7 +466,7 @@
         });
 
         btn.setAttribute('aria-selected', 'true');
-        btn.className = 'calc-tab-btn rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all bg-white text-slate-900 shadow-xs dark:bg-blue-600 dark:text-white';
+        btn.className = 'calc-tab-btn rounded-lg px-3.5 py-1.5 font-semibold transition-all bg-white text-slate-900 shadow-xs dark:bg-blue-600 dark:text-white';
 
         panels.forEach(p => {
           if (p.id === targetId) {
@@ -563,7 +563,7 @@
         document.querySelectorAll(containerSelector + ' .ai-chip').forEach(b => {
           b.className = 'ai-chip rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-mono text-slate-600 hover:border-blue-500 hover:text-blue-600 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-slate-300';
         });
-        activeBtn.className = 'ai-chip rounded-md border border-blue-500 bg-blue-50 px-2.5 py-1 text-xs font-mono text-blue-700 font-bold dark:border-blue-500 dark:bg-blue-950/60 dark:text-blue-300';
+        activeBtn.className = 'ai-chip rounded-md border border-blue-500 bg-blue-50 px-2.5 py-1 font-mono text-blue-700 font-bold dark:border-blue-500 dark:bg-blue-950/60 dark:text-blue-300';
       }
 
       updateAiCalculator();
@@ -639,7 +639,7 @@
           netPresetBtns.forEach(b => {
             b.className = 'net-preset-btn rounded-lg border border-slate-200 bg-slate-50 p-2 text-left text-xs hover:border-blue-500 dark:border-white/[0.08] dark:bg-white/[0.04] dark:hover:border-blue-400 transition-colors';
           });
-          btn.className = 'net-preset-btn rounded-lg border border-blue-500 bg-blue-50 p-2 text-left text-xs dark:border-blue-500 dark:bg-blue-950/60 transition-colors';
+          btn.className = 'net-preset-btn rounded-lg border border-blue-500 bg-blue-50 p-2 text-left dark:border-blue-500 dark:bg-blue-950/60 transition-colors';
         });
       });
 
@@ -726,7 +726,7 @@
           astroPresetBtns.forEach(b => {
             b.className = 'astro-preset-btn rounded-lg border border-slate-200 bg-slate-50 p-2 text-left text-xs hover:border-purple-500 dark:border-white/[0.08] dark:bg-white/[0.04] dark:hover:border-purple-400 transition-colors';
           });
-          btn.className = 'astro-preset-btn rounded-lg border border-purple-500 bg-purple-50 p-2 text-left text-xs dark:border-purple-500 dark:bg-purple-950/60 transition-colors';
+          btn.className = 'astro-preset-btn rounded-lg border border-purple-500 bg-purple-50 p-2 text-left dark:border-purple-500 dark:bg-purple-950/60 transition-colors';
         });
       });
 

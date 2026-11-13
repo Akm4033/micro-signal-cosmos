@@ -87,7 +87,7 @@ const isoDate = rawDate ? new Date(rawDate).toISOString() : '';
 
     <!-- Article Content -->
     <div class="p-4 sm:p-5">
-      <div class="flex items-center gap-2 text-xs mb-2 text-slate-500 dark:text-slate-400 font-mono text-[10.5px]">
+      <div class="flex items-center gap-2 text-xs mb-2 text-slate-500 dark:text-slate-400 font-mono">
         <span class="font-medium text-slate-900 dark:text-slate-200" itemprop="author">{authorName}</span>
         {formattedDate && (
           <>
@@ -118,7 +118,7 @@ const isoDate = rawDate ? new Date(rawDate).toISOString() : '';
         <div class="w-6 h-6 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center text-[10px] font-bold border border-blue-100 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-900/60">
           {authorData.initials || 'SI'}
         </div>
-        <span class="text-[11px] font-medium text-slate-500 dark:text-slate-400">{authorData.role || 'Signal Insight Research Desk'}</span>
+        <span class="text-xs font-medium text-slate-500 dark:text-slate-400">{authorData.role || 'Signal Insight Research Desk'}</span>
       </div>
 
       <a

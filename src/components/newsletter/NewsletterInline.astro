@@ -1,76 +1,174 @@
 ---
+import { site } from '../../config/site';
+
 export interface Props {
   className?: string;
-  leadMagnetTitle?: string;
+  variant?: 'default' | 'compact';
+  source?: string;
 }
 
 const {
   className = '',
-  leadMagnetTitle = 'Technical Deep-Dive Checklist & Architecture Sheet',
+  variant = 'default',
+  source = 'inline'
 } = Astro.props;
+
+const isCompact = variant === 'compact';
 ---
 
-<aside
-  class={`newsletter-inline my-10 rounded-2xl border border-blue-200/80 bg-gradient-to-br from-blue-50/70 to-slate-50 p-6 sm:p-8 dark:border-white/[0.08] dark:from-[#0B101D] dark:to-[#070B14] ${className}`}
-  aria-label="Subscribe to technical guides"
->
-  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-    <div class="space-y-2 max-w-xl">
-      <div class="inline-flex items-center gap-1.5 rounded-full bg-blue-100/80 px-2.5 py-0.5 text-[11px] font-bold text-blue-700 uppercase tracking-wider dark:bg-blue-950/60 dark:text-blue-300 font-mono text-[10px]">
-        <span>Signal Insight Knowledge Stream</span>
+{isCompact ? (
+  <div class={`newsletter-compact ${className}`}>
+    <form
+      method="post"
+      action={site.newsletterAction}
+      target="_blank"
+      class="flex flex-col gap-2"
+      aria-label="Footer newsletter signup"
+    >
+      <input type="hidden" name="source" value={source} />
+      <label for="footer-email-input" class="sr-only">Email address</label>
+      <div class="flex items-center gap-1.5">
+        <input
+          type="email"
+          id="footer-email-input"
+          name="email"
+          required
+          autocomplete="email"
+          placeholder="you@company.com"
+          data-clarity-mask="true"
+          aria-describedby="footer-newsletter-help"
+          class="min-h-11 flex-1 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none dark:border-white/[0.1] dark:bg-[#0B101D] dark:text-white dark:placeholder-slate-400 transition-colors"
+        />
+        <button
+          type="submit"
+          class="min-h-11 shrink-0 rounded-lg bg-blue-600 px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-blue-500 active:translate-y-0.5 transition-all cursor-pointer inline-flex items-center justify-center font-mono"
+        >
+          Get the weekly briefing
+        </button>
       </div>
-      <h3 class="text-lg font-bold text-slate-900 dark:text-white">
-        Enjoying this technical investigation?
-      </h3>
-      <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-        Follow our open RSS 2.0 feed for weekly architectural breakdowns, reproducible code, and science research.
+      <p id="footer-newsletter-help" class="text-xs text-slate-400 leading-tight">
+        One email per week. Unsubscribe anytime. We only use your email for the briefing.
       </p>
-    </div>
-
-    <div class="w-full sm:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 shrink-0">
-      <button
-        id="inline-copy-rss-btn"
-        type="button"
-        class="rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-xs transition-all hover:bg-blue-700 active:translate-y-0.5 cursor-pointer inline-flex items-center justify-center gap-2 font-mono"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M4 11a9 9 0 0 1 9 9"></path>
-          <path d="M4 4a16 16 0 0 1 16 16"></path>
-          <circle cx="5" cy="19" r="1"></circle>
-        </svg>
-        <span id="inline-copy-rss-text">Copy RSS Feed</span>
-      </button>
-
-      <a
-        href="/rss.xml"
-        target="_blank"
-        class="rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-700 hover:bg-slate-50 transition-colors text-center dark:border-white/[0.08] dark:bg-[#05070E] dark:text-slate-300 font-mono"
-      >
-        View /rss.xml
-      </a>
-    </div>
+      <p class="newsletter-post-submit hidden text-xs font-semibold text-emerald-400 pt-1" aria-live="polite">
+        Almost there — confirm via the email we just sent.
+      </p>
+    </form>
   </div>
-</aside>
+) : (
+  <aside
+    class={`newsletter-inline my-10 rounded-2xl border border-blue-200/80 bg-gradient-to-br from-blue-50/70 to-slate-50 p-6 sm:p-8 dark:border-white/[0.08] dark:from-[#0B101D] dark:to-[#070B14] ${className}`}
+    aria-label="Subscribe to weekly engineering briefings"
+  >
+    <div class="space-y-6">
+      <div class="space-y-2 max-w-xl">
+        <div class="inline-flex items-center gap-1.5 rounded-full bg-blue-100/80 px-2.5 py-0.5 text-xs font-bold text-blue-700 uppercase tracking-wider dark:bg-blue-950/60 dark:text-blue-300 font-mono">
+          <span>Signal Insight Briefing</span>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 dark:text-white">
+          Get the Weekly Architecture Briefing
+        </h3>
+        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          Rigorous technical breakdowns, systems design, and AI infrastructure delivered every Thursday. Runnable code, zero advertising hype.
+        </p>
+      </div>
+
+      <!-- Real Email Form -->
+      <form
+        method="post"
+        action={site.newsletterAction}
+        target="_blank"
+        class="newsletter-email-form space-y-3 max-w-lg"
+      >
+        <input type="hidden" name="source" value={source} />
+        <label for={`newsletter-inline-email-${source}`} class="sr-only">Email address</label>
+        <div class="flex flex-col sm:flex-row items-stretch gap-2.5">
+          <input
+            type="email"
+            id={`newsletter-inline-email-${source}`}
+            name="email"
+            required
+            autocomplete="email"
+            placeholder="you@company.com"
+            data-clarity-mask="true"
+            aria-describedby={`newsletter-inline-help-${source}`}
+            class="min-h-11 flex-1 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:border-white/[0.1] dark:bg-[#070B14] dark:text-white dark:placeholder-slate-400 transition-all shadow-xs"
+          />
+          <button
+            type="submit"
+            class="min-h-11 shrink-0 rounded-xl bg-blue-600 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-xs hover:bg-blue-700 active:translate-y-0.5 transition-all cursor-pointer inline-flex items-center justify-center gap-2 font-mono"
+          >
+            Get the weekly briefing
+          </button>
+        </div>
+        <p id={`newsletter-inline-help-${source}`} class="text-xs text-slate-400 leading-relaxed">
+          One email per week. Unsubscribe anytime. We only use your email for the briefing.
+        </p>
+        <p class="newsletter-post-submit hidden text-xs font-semibold text-emerald-500 dark:text-emerald-400" aria-live="polite">
+          Almost there — confirm via the email we just sent.
+        </p>
+      </form>
+
+      <!-- Prefer RSS? Sub-block -->
+      <div class="pt-6 border-t border-slate-200/80 dark:border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white font-mono">
+            Prefer RSS?
+          </h4>
+          <p class="text-xs text-slate-400 mt-0.5">
+            Add Signal Insight to your reader. No ad trackers. Optional, anonymized session analytics only.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <button
+            type="button"
+            class="inline-copy-rss-btn min-h-11 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-bold uppercase tracking-wider text-slate-700 hover:bg-slate-50 transition-colors dark:border-white/[0.08] dark:bg-[#05070E] dark:text-slate-300 font-mono inline-flex items-center gap-1.5 cursor-pointer"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>
+            <span class="btn-copy-label">Copy RSS</span>
+          </button>
+          <a
+            href="/rss.xml"
+            target="_blank"
+            class="min-h-11 rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold uppercase tracking-wider text-slate-700 hover:bg-slate-200 transition-colors dark:bg-white/[0.06] dark:text-slate-300 dark:hover:bg-white/[0.1] font-mono inline-flex items-center gap-1"
+          >
+            <span>/rss.xml</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </aside>
+)}
 
 <script is:inline>
-  (function() {
-    const btn = document.getElementById('inline-copy-rss-btn');
-    const text = document.getElementById('inline-copy-rss-text');
-    if (!btn || !text) return;
-
-    btn.addEventListener('click', async () => {
-      const feedUrl = window.location.origin + '/rss.xml';
-      try {
-        await navigator.clipboard.writeText(feedUrl);
-        text.textContent = 'Feed Copied! ✓';
-        btn.classList.add('bg-emerald-600');
-        setTimeout(() => {
-          text.textContent = 'Copy RSS Feed';
-          btn.classList.remove('bg-emerald-600');
-        }, 2500);
-      } catch (err) {
-        window.open('/rss.xml', '_blank');
-      }
+  document.addEventListener('DOMContentLoaded', () => {
+    // Copy RSS logic
+    document.querySelectorAll('.inline-copy-rss-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const feedUrl = window.location.origin + '/rss.xml';
+        const label = btn.querySelector('.btn-copy-label');
+        try {
+          await navigator.clipboard.writeText(feedUrl);
+          if (label) label.textContent = 'Copied!';
+          btn.classList.add('text-emerald-500');
+          setTimeout(() => {
+            if (label) label.textContent = 'Copy RSS';
+            btn.classList.remove('text-emerald-500');
+          }, 2000);
+        } catch (e) {
+          window.open('/rss.xml', '_blank');
+        }
+      });
     });
-  })();
+
+    // Form submit inline feedback
+    document.querySelectorAll('form[action*="buttondown"]').forEach(form => {
+      form.addEventListener('submit', () => {
+        const feedback = form.querySelector('.newsletter-post-submit');
+        if (feedback) {
+          feedback.classList.remove('hidden');
+        }
+      });
+    });
+  });
 </script>

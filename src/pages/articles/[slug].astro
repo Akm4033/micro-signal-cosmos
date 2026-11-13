@@ -30,9 +30,6 @@ interface Props {
 const { article } = Astro.props;
 const { Content, headings = [] } = await render(article);
 
-// Resolve author profile from centralized registry
-const author = getAuthor(article.data.author);
-
 // Consistently compute reading time
 const readingTime = getArticleReadingTime(article);
 
@@ -55,8 +52,12 @@ const variantMap: Record<string, 'tech' | 'science' | 'ai' | 'devtools'> = {
 const categoryVariant = variantMap[categorySlug] || 'tech';
 
 // Format publication and update dates
-const publishDateISO = article.data.publishDate.toISOString();
-const updatedDateISO = article.data.updatedDate ? article.data.updatedDate.toISOString() : undefined;
+const pubDate = article.data.pubDate || article.data.publishDate || new Date('2026-01-01');
+const upDate = article.data.updatedDate || pubDate;
+const publishDateISO = pubDate.toISOString();
+const updatedDateISO = upDate.toISOString();
+const authorKey = article.data.authorKey || article.data.author || 'editor';
+const author = getAuthor(authorKey);
 
 // Determine related articles
 const allPublished = await getPublishedArticles();
@@ -102,17 +103,18 @@ const articleUrl = `${siteUrl}/articles/${currentSlug}/`;
 
 const articleSchema = {
   "@context": "https://schema.org",
-  "@type": "TechArticle",
+  "@type": "Article",
   "headline": article.data.title,
   "description": article.data.description,
   "url": articleUrl,
+  "image": `${siteUrl}/og/${currentSlug}.png`,
   "datePublished": publishDateISO,
-  "dateModified": updatedDateISO || publishDateISO,
+  "dateModified": updatedDateISO,
   "author": {
     "@type": "Person",
     "name": author.name,
     "jobTitle": author.role,
-    "url": author.links?.site || `${siteUrl}/about/`
+    "url": `${siteUrl}/authors/${author.key}/`
   },
   "publisher": {
     "@type": "Organization",
@@ -169,7 +171,7 @@ const breadcrumbSchema = {
   title={article.data.title}
   seoTitle={pageTitle}
   description={pageDescription}
-  author={article.data.author}
+  author={authorKey}
   authorName={author.name}
   authorRole={author.role}
   authorAvatar={author.avatar}
@@ -180,7 +182,7 @@ const breadcrumbSchema = {
   publishedTime={publishDateISO}
   updatedTime={updatedDateISO}
   canonical={articleUrl}
-  ogImage={article.data.coverImage || `/og/${currentSlug}.svg`}
+  ogImage={article.data.coverImage || `/og/${currentSlug}.png`}
   logo={article.data.logo}
   slug={currentSlug}
   references={article.data.references || []}

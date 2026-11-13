@@ -204,7 +204,7 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
       <header class={`article-header mb-8 rounded-2xl border ${disciplineTheme.border} bg-gradient-to-br ${disciplineTheme.gradient} p-6 sm:p-8 relative overflow-hidden backdrop-blur-xs`}>
         <!-- Top Metadata & Reader Controls Bar -->
         <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
-          <div class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] font-mono font-bold uppercase tracking-wider shadow-2xs" class:list={[disciplineTheme.badgeClass]}>
+          <div class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-mono font-bold uppercase tracking-wider shadow-2xs" class:list={[disciplineTheme.badgeClass]}>
             <span class="h-2 w-2 rounded-full animate-pulse" class:list={[disciplineTheme.dotColor]}></span>
             <span>{disciplineTheme.disciplineTag}</span>
           </div>
@@ -217,7 +217,7 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
               <button type="button" id="font-reset" class="rounded px-2 py-0.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 font-mono font-bold" title="Reset font size">A</button>
               <button type="button" id="font-increase" class="rounded px-2 py-0.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 font-mono" title="Increase font size">A+</button>
               <span class="h-3 w-px bg-slate-200 dark:bg-slate-700 mx-0.5" aria-hidden="true"></span>
-              <button type="button" id="focus-mode-toggle" class="rounded px-2.5 py-0.5 text-slate-600 hover:bg-slate-100 hover:text-blue-600 dark:text-slate-400 dark:hover:bg-slate-800 text-[11px] font-medium" title="Toggle Reading Width">Expand</button>
+              <button type="button" id="focus-mode-toggle" class="rounded px-2.5 py-0.5 text-slate-600 hover:bg-slate-100 hover:text-blue-600 dark:text-slate-400 dark:hover:bg-slate-800 text-xs font-medium" title="Toggle Reading Width">Expand</button>
             </div>
 
             <!-- Share Buttons -->
@@ -257,20 +257,41 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.15]">{cleanHeadline}</h1>
         <p class="mt-4 text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-300 max-w-3xl">{description}</p>
 
-        <div class="mt-6 flex items-center gap-4 author-byline pt-4 border-t border-slate-200/60 dark:border-white/[0.06]">
-          <div class="w-11 h-11 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-sm border border-blue-200 shadow-2xs dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-900 overflow-hidden shrink-0">
-            {authorAvatar ? (
-              <img src={authorAvatar} alt={authorName} width="44" height="44" decoding="async" class="w-full h-full object-cover" />
-            ) : (
-              authorData.initials || author.charAt(0).toUpperCase()
-            )}
+        <div class="mt-6 flex flex-wrap items-center justify-between gap-4 author-byline pt-4 border-t border-slate-200/60 dark:border-white/[0.06]">
+          <div class="flex items-center gap-3.5">
+            <a href={`/authors/${author}/`} class="w-11 h-11 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-sm border border-blue-200 shadow-2xs dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-900 overflow-hidden shrink-0 hover:ring-2 hover:ring-blue-500 transition-all" aria-label={`View ${authorName}'s profile and articles`}>
+              {authorAvatar ? (
+                <img src={authorAvatar} alt={authorName} width="44" height="44" decoding="async" class="w-full h-full object-cover" />
+              ) : (
+                authorData.initials || author.charAt(0).toUpperCase()
+              )}
+            </a>
+            <div>
+              <p class="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2">
+                <span>By <a href={`/authors/${author}/`} class="hover:text-blue-600 dark:hover:text-blue-400 underline decoration-slate-300 dark:decoration-slate-700 underline-offset-2">{authorName}</a></span>
+                <span class="text-slate-400 dark:text-slate-600 font-normal" aria-hidden="true">&bull;</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400 font-mono font-normal">{authorRole}</span>
+              </p>
+              <div class="flex flex-wrap items-center gap-2 mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                <a href="/about/" class="text-blue-600 dark:text-blue-400 hover:underline">Editorial standards &rarr;</a>
+              </div>
+            </div>
           </div>
-          <div>
-            <p class="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-1.5">
-              <span>{authorName}</span>
-              <span class="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-mono bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300 font-normal">Verified Research</span>
-            </p>
-            <p class="text-xs text-slate-500 dark:text-slate-400 font-mono">{authorRole} &bull; Peer-Reviewed Editorial</p>
+          <div class="flex items-center gap-2">
+            <button
+              type="button"
+              id="cite-article-btn"
+              data-slug={slug}
+              data-title={cleanHeadline}
+              data-author={authorName}
+              data-year={new Date(publishedTime).getFullYear()}
+              data-url={resolvedCanonical}
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-[#0B101D] text-xs font-mono font-medium text-slate-700 dark:text-slate-300 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              <span>Cite this guide</span>
+            </button>
+            <span id="cite-feedback" aria-live="polite" class="text-xs text-emerald-500 dark:text-emerald-400 font-mono hidden">Copied BibTeX!</span>
           </div>
         </div>
       </header>
@@ -299,12 +320,12 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
             <p class="mt-1 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
               {description}
             </p>
-            <div class="mt-2.5 flex flex-wrap items-center gap-3 text-[11px] font-mono text-slate-500 dark:text-slate-400">
+            <div class="mt-2.5 flex flex-wrap items-center gap-3 text-xs font-mono text-slate-500 dark:text-slate-400">
               <span>Discipline: <strong class="text-slate-800 dark:text-slate-200">{category}</strong></span>
               <span>&bull;</span>
               <span>Reading Depth: <strong class="text-slate-800 dark:text-slate-200">{readingTime}</strong></span>
               <span>&bull;</span>
-              <span>Standards: <strong class="text-emerald-600 dark:text-emerald-400">100% Primary Academic Citations</strong></span>
+              <span>Standards: <strong class="text-emerald-600 dark:text-emerald-400">Primary Academic Citations</strong></span>
             </div>
           </div>
         </div>
@@ -313,16 +334,16 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
       <!-- Bespoke Discipline Engineering Telemetry HUD (Distinct Aesthetic per Pillar) -->
       <div class:list={['mb-10 rounded-xl border p-4 font-mono text-xs shadow-2xs', disciplineHud.border, disciplineHud.bg]}>
         <div class="flex items-center justify-between border-b pb-2 mb-3 border-slate-200/80 dark:border-white/[0.08]">
-          <span class:list={['text-[11px] font-bold uppercase tracking-wider flex items-center gap-2', disciplineHud.accent]}>
+          <span class:list={['text-xs font-bold uppercase tracking-wider flex items-center gap-2', disciplineHud.accent]}>
             <span class="inline-block h-1.5 w-1.5 rounded-full bg-current animate-pulse"></span>
             {disciplineHud.label}
           </span>
-          <span class="text-[10px] text-slate-400 uppercase tracking-widest">Signal Insight Peer Review</span>
+          <span class="text-xs text-slate-400 uppercase tracking-widest">Signal Insight Peer Review</span>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-[11px]">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
           {disciplineHud.items.map((item) => (
             <div class="rounded-lg bg-white/60 dark:bg-black/40 p-2.5 border border-slate-200/60 dark:border-white/[0.05]">
-              <span class="block text-[9.5px] uppercase tracking-wider text-slate-400 font-bold mb-0.5">{item.key}</span>
+              <span class="block text-xs uppercase tracking-wider text-slate-400 font-bold mb-0.5">{item.key}</span>
               <span class:list={['font-semibold truncate block', disciplineHud.text]}>{item.val}</span>
             </div>
           ))}
@@ -338,10 +359,10 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
             </span>
             <div>
               <h2 class="text-xs font-bold uppercase tracking-wider font-mono text-slate-900 dark:text-white">Investigation Index &amp; Roadmap</h2>
-              <p class="text-[11px] text-slate-500 dark:text-slate-400">Complete architectural roadmap &bull; {readingTime} read</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Complete architectural roadmap &bull; {readingTime} read</p>
             </div>
           </div>
-          <span class="hidden sm:inline-flex items-center gap-1.5 text-[10.5px] font-mono font-bold uppercase px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#060913] text-slate-500 dark:text-slate-400">
+          <span class="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase px-2.5 py-1 rounded-lg border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-[#060913] text-slate-500 dark:text-slate-400">
             <span>Direct Jump</span>
             <span class={disciplineTheme.accentText}>&darr;</span>
           </span>
@@ -426,7 +447,7 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
                 <div>
                   <div class="flex items-center justify-between gap-2 text-xs mb-3">
                     <span class={`badge badge--${item.categoryVariant || 'tech'}`}>{item.category}</span>
-                    <span class="text-slate-500 dark:text-slate-400 font-mono text-[11px]">{item.readingTime}</span>
+                    <span class="text-slate-500 dark:text-slate-400 font-mono text-xs">{item.readingTime}</span>
                   </div>
                   <h3 class="text-base sm:text-lg font-bold leading-snug text-slate-900 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
                     <a href={`/articles/${item.slug}/`} class="hover:underline">
@@ -436,7 +457,7 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
                   <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400 line-clamp-3">{item.excerpt}</p>
                 </div>
                 <div class="mt-6 flex items-center justify-between border-t border-slate-100 pt-4 text-xs dark:border-white/[0.06]">
-                  <span class="text-slate-500 dark:text-slate-400 font-mono text-[11px]">{item.readingTime}</span>
+                  <span class="text-slate-500 dark:text-slate-400 font-mono text-xs">{item.readingTime}</span>
                   <a href={`/articles/${item.slug}/`} class="inline-flex items-center gap-1 font-bold text-blue-600 transition-all group-hover:gap-2 hover:text-blue-700 dark:text-blue-400">
                     <span>Read</span>
                     <span aria-hidden="true">&rarr;</span>
@@ -459,12 +480,42 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
         progressBar.style.boxShadow = `0 0 12px ${accentColor}`;
       }
 
-      // Transform code blocks into macOS terminal window style
+      // Cite this guide button (P2-1)
+      const citeBtn = document.getElementById('cite-article-btn');
+      const citeFeedback = document.getElementById('cite-feedback');
+      if (citeBtn && citeFeedback) {
+        citeBtn.addEventListener('click', async () => {
+          const { slug, title, author, year, url } = citeBtn.dataset;
+          const bibtex = `@article{signalinsight_${slug || 'article'},
+  title = {${title || ''}},
+  author = {${author || ''}},
+  year = {${year || new Date().getFullYear()}},
+  url = {${url || window.location.href}},
+  journal = {Signal Insight}
+}`;
+          try {
+            await navigator.clipboard.writeText(bibtex);
+            citeFeedback.classList.remove('hidden');
+            setTimeout(() => {
+              citeFeedback.classList.add('hidden');
+            }, 2500);
+          } catch (e) {
+            console.error('Failed to copy BibTeX:', e);
+          }
+        });
+      }
+
+      // Transform code blocks into macOS terminal window style and wrap ASCII diagrams (P1-6)
       document.querySelectorAll('.prose-editorial pre').forEach((pre) => {
         if (pre.closest('.code-terminal')) return;
 
-        // Detect language
+        // Detect language & ASCII diagrams
         const code = pre.querySelector('code');
+        const text = pre.textContent || '';
+        const isBoxDrawing = /[┌─│└├┼┐┘┤┬┴┼═║╔╗╚╝╠╣╦╩╬]/.test(text);
+        const isAsciiTableOrTree = /(\+--|\+==|\+-\+|\|[\s\w-]+---)/.test(text) && text.includes('|');
+        const isAsciiDiagram = isBoxDrawing || isAsciiTableOrTree;
+
         let lang = 'CODE';
         if (pre.getAttribute('data-language')) {
           lang = pre.getAttribute('data-language').toUpperCase();
@@ -474,7 +525,7 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
             lang = match[1].toUpperCase();
           }
         }
-        if (lang === 'TEXT' || lang === 'PLAINTEXT') {
+        if (lang === 'TEXT' || lang === 'PLAINTEXT' || isAsciiDiagram) {
           lang = 'DIAGRAM';
         }
 
@@ -497,14 +548,14 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
 
         // Language Badge
         const badge = document.createElement('span');
-        badge.className = 'font-bold uppercase tracking-wider text-[10px] text-slate-300 font-mono';
+        badge.className = 'font-bold uppercase tracking-wider text-xs text-slate-300 font-mono';
         badge.textContent = lang;
 
         // Copy button
         const copyBtn = document.createElement('button');
-        copyBtn.className = 'code-copy-btn-inline inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[11px] font-mono font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer border border-slate-700/60 dark:border-white/[0.08]';
+        copyBtn.className = 'code-copy-btn-inline inline-flex items-center gap-1.5 px-2.5 py-1 rounded font-mono font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer border border-slate-700/60 dark:border-white/[0.08]';
         copyBtn.type = 'button';
-        copyBtn.setAttribute('aria-label', 'Copy code to clipboard');
+        copyBtn.setAttribute('aria-label', isAsciiDiagram ? 'Copy diagram to clipboard' : 'Copy code to clipboard');
         copyBtn.innerHTML = `
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
           <span class="btn-label">Copy</span>
@@ -533,6 +584,17 @@ const fullPageTitle = `${cleanSeoTitle} | Signal Insight`;
         pre.parentNode.insertBefore(terminal, pre);
         terminal.appendChild(header);
         terminal.appendChild(pre);
+
+        // Wrap in ascii-diagram container if ASCII diagram detected
+        if (isAsciiDiagram) {
+          const diagramWrapper = document.createElement('div');
+          diagramWrapper.className = 'ascii-diagram not-prose';
+          diagramWrapper.setAttribute('role', 'img');
+          diagramWrapper.setAttribute('aria-label', 'Technical diagram (text form)');
+          diagramWrapper.setAttribute('tabindex', '0');
+          terminal.parentNode.insertBefore(diagramWrapper, terminal);
+          diagramWrapper.appendChild(terminal);
+        }
       });
 
       // Interactive typography scaling & Reading width toggle
