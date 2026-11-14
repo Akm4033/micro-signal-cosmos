@@ -11,6 +11,24 @@ const sortedArticles = [...articles].sort(
   (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
 );
 const latestArticles = sortedArticles.slice(0, 6);
+
+const dbArticle = articles.find((a) => getArticleSlug(a) === 'choosing-a-database-in-2026');
+const starsArticle = articles.find((a) => getArticleSlug(a) === 'how-we-know-what-stars-are-made-of');
+const browserArticle = articles.find((a) => getArticleSlug(a) === 'how-browsers-actually-render-a-page');
+
+function formatArticleDate(art: typeof articles[0] | undefined, fallback: string) {
+  if (!art) return fallback;
+  const d = art.data.publishDate || art.data.pubDate;
+  if (!d) return fallback;
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function getArticleIsoDate(art: typeof articles[0] | undefined, fallback: string) {
+  if (!art) return fallback;
+  const d = art.data.publishDate || art.data.pubDate;
+  if (!d) return fallback;
+  return d.toISOString();
+}
 ---
 
 <Base
@@ -31,91 +49,40 @@ const latestArticles = sortedArticles.slice(0, 6);
           <span>Signal Insight // KNOWLEDGE PLATFORM</span>
         </div>
         
-        <h1 class="text-3xl sm:text-5xl lg:text-[50px] font-black tracking-tight text-slate-900 dark:text-white leading-[1.12]">
-          Deep, clear technical guides for curious minds who want to understand how things work.
+        <h1 class="text-3xl sm:text-5xl lg:text-[46px] font-black tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+          First-principles guides to AI, systems engineering, and physics.
         </h1>
         
         <p class="mt-4 text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300">
-          Signal Insight publishes rigorous, accessible explorations across artificial intelligence, computing systems, developer tools, and the cosmos. Every guide is crafted from first principles, primary citations, and clear diagrams — welcoming passionate learners, students, and engineers alike.
+          Primary-source breakdowns of transformer internals, distributed systems, and astrophysics—built with clear architecture diagrams instead of surface-level summaries.
         </p>
 
-        <!-- Two CTAs Above the Fold -->
-        <div class="mt-6 flex flex-wrap items-center gap-3">
+        <!-- Primary CTA + Secondary Link Above the Fold -->
+        <div class="mt-6 flex flex-wrap items-center gap-4 sm:gap-6">
           <button
             type="button"
             id="hero-briefing-cta"
-            class="min-h-11 px-5 py-2.5 rounded-xl bg-blue-600 text-xs font-bold uppercase tracking-wider text-white shadow-xs hover:bg-blue-700 active:translate-y-0.5 transition-all cursor-pointer font-mono inline-flex items-center justify-center"
+            class="min-h-11 px-6 py-2.5 rounded-xl bg-blue-600 text-xs font-bold uppercase tracking-wider text-white shadow-xs hover:bg-blue-700 active:translate-y-0.5 transition-all cursor-pointer font-mono inline-flex items-center justify-center"
           >
-            Get the weekly briefing
+            Get the Weekly Briefing
           </button>
           <a
             href="/curriculum/"
-            class="min-h-11 px-5 py-2.5 rounded-xl border border-slate-300 bg-white text-xs font-bold uppercase tracking-wider text-slate-700 hover:bg-slate-50 transition-all dark:border-white/[0.1] dark:bg-[#0B101D] dark:text-slate-200 dark:hover:bg-[#111827] font-mono inline-flex items-center justify-center gap-1.5"
+            class="font-bold text-xs font-mono uppercase tracking-wider text-slate-700 hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400 inline-flex items-center gap-1.5 transition-colors py-2"
           >
-            <span>Start the LLM foundations path</span>
+            <span>Browse Learning Paths</span>
             <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
 
-        <!-- "Start here" Card Above Search -->
-        <div class="mt-6 mb-2 p-3.5 rounded-xl border border-blue-200/80 bg-blue-50/70 dark:border-blue-900/60 dark:bg-blue-950/40 flex items-center justify-between gap-3 text-xs sm:text-sm">
-          <span class="font-medium text-slate-700 dark:text-slate-200">New here?</span>
-          <a
-            href="/articles/how-llms-actually-work/"
-            class="font-bold text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1 font-mono text-xs"
-          >
-            <span>Read the transformer guide first</span>
-            <span aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
-
-        <!-- Search Bar Entry Point -->
-        <form action="/articles/" method="get" class="mt-3 max-w-xl">
-          <div class="relative flex items-center">
-            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-            </div>
-            <input
-              type="text"
-              name="q"
-              placeholder="Search guides, RFCs, and concepts…"
-              aria-label="Search guides, RFCs, and concepts"
-              class="w-full h-12 rounded-xl border border-slate-300 bg-white pl-11 pr-32 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:border-white/[0.1] dark:bg-[#0B101D] dark:text-white dark:placeholder-slate-400 transition-all shadow-xs"
-            />
-            <button
-              type="submit"
-              class="absolute right-1.5 h-9 px-4 rounded-lg bg-blue-600 text-xs font-bold text-white hover:bg-blue-700 transition-colors cursor-pointer font-mono"
-            >
-              Search guides
-            </button>
-          </div>
-        </form>
-
-        <!-- Suggested Topic Keywords -->
-        <div class="mt-3 flex flex-wrap items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
-          <span class="font-semibold text-slate-700 dark:text-slate-300 text-xs">Popular:</span>
-          <a href="/articles/?q=transformers" class="hover:text-blue-600 underline underline-offset-2">Transformers</a>
-          <span>&bull;</span>
-          <a href="/articles/?q=database" class="hover:text-blue-600 underline underline-offset-2">Databases</a>
-          <span>&bull;</span>
-          <a href="/articles/?q=fusion" class="hover:text-blue-600 underline underline-offset-2">Fusion</a>
-          <span>&bull;</span>
-          <a href="/articles/?q=passkeys" class="hover:text-blue-600 underline underline-offset-2">Passkeys</a>
-          <span>&bull;</span>
-          <a href="/articles/?q=webassembly" class="hover:text-blue-600 underline underline-offset-2">WASM</a>
-        </div>
-        
-        <!-- Active Knowledge Streams -->
-        <div class="mt-6 pt-5 border-t border-slate-200 flex items-center gap-2 overflow-x-auto no-scrollbar flex-nowrap pb-1 dark:border-slate-800">
-          <span class="shrink-0 text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mr-1">Streams:</span>
-          <a href="/category/technology/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100 dark:bg-sky-950/50 dark:text-sky-300 dark:border-sky-800 transition-all">Technology</a>
-          <a href="/category/artificial-intelligence/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800 transition-all">AI &amp; ML</a>
-          <a href="/category/science/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-50 text-purple-700 border border-purple-200 hover:bg-purple-100 dark:bg-purple-950/50 dark:text-purple-300 dark:border-purple-800 transition-all">Science</a>
-          <a href="/category/developer-tools/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100 dark:bg-amber-950/50 dark:text-amber-300 dark:border-amber-800 transition-all">Dev Tools</a>
-        </div>
+        <!-- Trust Line -->
+        <p class="mt-4 text-xs text-slate-500 dark:text-slate-400 font-mono flex items-center gap-2 flex-wrap">
+          <span>Free weekly issue</span>
+          <span aria-hidden="true">&bull;</span>
+          <span>Primary-source citations</span>
+          <span aria-hidden="true">&bull;</span>
+          <span>Zero spam</span>
+        </p>
       </div>
 
       <!-- Lead Hero Showcase Card -->
@@ -204,7 +171,7 @@ const latestArticles = sortedArticles.slice(0, 6);
         </a>
       </div>
 
-      <div class="grid gap-6 lg:grid-cols-12 items-stretch">
+      <div class="grid gap-6 lg:grid-cols-12 items-start">
         <!-- Lead Feature (7 cols) -->
         <article class="group flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-xs hover:shadow-lg hover:-translate-y-1 hover:border-blue-400 dark:hover:border-blue-500/60 dark:hover:shadow-[0_16px_36px_-6px_rgba(0,0,0,0.6),0_0_24px_rgba(59,130,246,0.18)] transition-all duration-200 lg:col-span-7 min-w-0 dark:border-white/[0.08] dark:bg-[#0B101D]" itemscope itemtype="https://schema.org/Article">
           <a href="/articles/choosing-a-database-in-2026/" class="block">
@@ -219,7 +186,7 @@ const latestArticles = sortedArticles.slice(0, 6);
             <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-2 font-mono">
               <span class="font-medium text-slate-900 dark:text-slate-200" itemprop="author">Signal Insight</span>
               <span aria-hidden="true" class="text-slate-300 dark:text-slate-700">&bull;</span>
-              <time datetime="2026-11-09T09:30:00.000Z">Nov 9, 2026</time>
+              <time datetime={getArticleIsoDate(dbArticle, "2026-11-11T08:00:00.000Z")}>{formatArticleDate(dbArticle, "Nov 11, 2026")}</time>
             </div>
             <h3 class="text-xl sm:text-2xl font-extrabold leading-snug text-slate-900 dark:text-white transition-colors group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-2" itemprop="headline">
               Choosing a Database in 2026: A Pragmatic Systems Engineering Guide
@@ -227,6 +194,22 @@ const latestArticles = sortedArticles.slice(0, 6);
             <p class="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 dark:text-slate-400 line-clamp-2" itemprop="description">
               A comprehensive decision framework for modern data architectures: PostgreSQL extensions, SQLite at the edge, serverless autoscaling, vector search engines, and real-time columnar OLAP.
             </p>
+
+            <!-- Key Architecture Takeaways (fills card & provides instant value) -->
+            <ul class="mt-4 space-y-2 border-t border-slate-100 pt-3 text-xs text-slate-600 dark:border-white/[0.06] dark:text-slate-300">
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 text-blue-600 dark:text-blue-400 font-bold" aria-hidden="true">&#10003;</span>
+                <span><strong>PostgreSQL Unification:</strong> Why pgvector and Citus absorb 80% of specialized database use cases.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 text-blue-600 dark:text-blue-400 font-bold" aria-hidden="true">&#10003;</span>
+                <span><strong>Embedded &amp; Edge:</strong> When SQLite + Turso/LibSQL outperforms distributed microservices.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="mt-0.5 text-blue-600 dark:text-blue-400 font-bold" aria-hidden="true">&#10003;</span>
+                <span><strong>Columnar OLAP:</strong> ClickHouse and DuckDB benchmarks for sub-second analytical queries.</span>
+              </li>
+            </ul>
           </a>
           <div class="mt-4 pt-3 border-t border-slate-100 dark:border-white/[0.06] flex items-center justify-between">
             <a href="/articles/choosing-a-database-in-2026/" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-600 transition-all group-hover:gap-2 hover:text-blue-700 dark:text-blue-400">
@@ -255,7 +238,7 @@ const latestArticles = sortedArticles.slice(0, 6);
               </p>
             </a>
             <div class="mt-3 pt-2.5 border-t border-slate-100 dark:border-white/[0.06] flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-mono">
-              <span class="font-medium">Nov 9, 2026</span>
+              <time datetime={getArticleIsoDate(starsArticle, "2026-10-18T08:00:00.000Z")} class="font-medium">{formatArticleDate(starsArticle, "Oct 18, 2026")}</time>
               <a href="/articles/how-we-know-what-stars-are-made-of/" class="font-bold text-blue-600 hover:text-blue-700 inline-flex items-center gap-1 uppercase tracking-wider dark:text-blue-400 font-sans">
                 <span>Read</span>
                 <span aria-hidden="true">&rarr;</span>
@@ -279,7 +262,7 @@ const latestArticles = sortedArticles.slice(0, 6);
               </p>
             </a>
             <div class="mt-3 pt-2.5 border-t border-slate-100 dark:border-white/[0.06] flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-mono">
-              <span class="font-medium">Nov 2, 2026</span>
+              <time datetime={getArticleIsoDate(browserArticle, "2026-11-01T08:00:00.000Z")} class="font-medium">{formatArticleDate(browserArticle, "Nov 1, 2026")}</time>
               <a href="/articles/how-browsers-actually-render-a-page/" class="font-bold text-blue-600 hover:text-blue-700 inline-flex items-center gap-1 uppercase tracking-wider dark:text-blue-400 font-sans">
                 <span>Read</span>
                 <span aria-hidden="true">&rarr;</span>
@@ -474,6 +457,59 @@ const latestArticles = sortedArticles.slice(0, 6);
           <span aria-hidden="true">&rarr;</span>
         </a>
       </div>
+
+      <!-- Search, Popular Topics & Stream Filters -->
+      <div class="mb-10 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-xs dark:border-white/[0.08] dark:bg-[#0B101D]">
+        <div class="max-w-2xl">
+          <form action="/articles/" method="get" class="w-full">
+            <div class="relative flex items-center">
+              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </div>
+              <input
+                type="text"
+                name="q"
+                placeholder="Search guides, RFCs, and concepts…"
+                aria-label="Search guides, RFCs, and concepts"
+                class="w-full h-12 rounded-xl border border-slate-300 bg-slate-50/50 pl-11 pr-32 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:border-white/[0.1] dark:bg-[#070B14] dark:text-white dark:placeholder-slate-400 transition-all shadow-xs"
+              />
+              <button
+                type="submit"
+                class="absolute right-1.5 h-9 px-4 rounded-lg bg-blue-600 text-xs font-bold text-white hover:bg-blue-700 transition-colors cursor-pointer font-mono"
+              >
+                Search
+              </button>
+            </div>
+          </form>
+
+          <!-- Suggested Topic Keywords -->
+          <div class="mt-3 flex flex-wrap items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+            <span class="font-semibold text-slate-700 dark:text-slate-300 text-xs">Popular:</span>
+            <a href="/articles/?q=transformers" class="hover:text-blue-600 underline underline-offset-2">Transformers</a>
+            <span aria-hidden="true">&bull;</span>
+            <a href="/articles/?q=database" class="hover:text-blue-600 underline underline-offset-2">Databases</a>
+            <span aria-hidden="true">&bull;</span>
+            <a href="/articles/?q=fusion" class="hover:text-blue-600 underline underline-offset-2">Fusion</a>
+            <span aria-hidden="true">&bull;</span>
+            <a href="/articles/?q=passkeys" class="hover:text-blue-600 underline underline-offset-2">Passkeys</a>
+            <span aria-hidden="true">&bull;</span>
+            <a href="/articles/?q=webassembly" class="hover:text-blue-600 underline underline-offset-2">WASM</a>
+          </div>
+        </div>
+
+        <!-- Active Knowledge Streams -->
+        <div class="mt-5 pt-4 border-t border-slate-100 flex items-center gap-2 overflow-x-auto no-scrollbar flex-nowrap pb-1 dark:border-white/[0.06]">
+          <span class="shrink-0 text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mr-1 font-mono">Streams:</span>
+          <a href="/category/technology/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100 dark:bg-sky-950/50 dark:text-sky-300 dark:border-sky-800 transition-all font-mono">Technology</a>
+          <a href="/category/artificial-intelligence/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800 transition-all font-mono">AI &amp; ML</a>
+          <a href="/category/science/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-50 text-purple-700 border border-purple-200 hover:bg-purple-100 dark:bg-purple-950/50 dark:text-purple-300 dark:border-purple-800 transition-all font-mono">Science</a>
+          <a href="/category/developer-tools/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100 dark:bg-amber-950/50 dark:text-amber-300 dark:border-amber-800 transition-all font-mono">Dev Tools</a>
+        </div>
+      </div>
+
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {latestArticles.map(article => (
           <ArticleCard
@@ -494,16 +530,16 @@ const latestArticles = sortedArticles.slice(0, 6);
   <!-- NEWSLETTER HERO -->
   <NewsletterHero />
 
-  <!-- STARTER PACK LEAD MAGNET (P1-7) -->
-  <section class="bg-white py-14 border-b border-slate-200 dark:bg-[#070B14] dark:border-white/[0.08]" id="starter-pack">
+  <!-- FEATURED DEEP DIVE BANNER -->
+  <section class="bg-white py-14 border-b border-slate-200 dark:bg-[#070B14] dark:border-white/[0.08]" id="featured-guide">
     <div class="container-narrow">
       <div class="rounded-2xl border border-blue-200/80 bg-gradient-to-br from-blue-50/70 to-slate-50 p-6 sm:p-8 dark:border-white/[0.08] dark:from-[#0B101D] dark:to-[#070B14] shadow-xs">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div class="space-y-2 max-w-lg">
-            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-100 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 font-mono">Free Download</span>
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Free Starter Pack — Architecture Poster + Cheat Sheet Bundle</h3>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-100 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 font-mono">Featured Deep Dive</span>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Featured Deep Dive — How LLMs Actually Work</h3>
             <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              Complete high-resolution vector reference posters for Transformer block topologies, CPU cache hierarchies, and zero-copy ring buffers.
+              A rigorous, first-principles exploration of modern decoder-only transformers: self-attention mechanics, RoPE embeddings, SwiGLU activations, and KV cache dynamics.
             </p>
           </div>
           <div class="shrink-0">
@@ -511,7 +547,7 @@ const latestArticles = sortedArticles.slice(0, 6);
               href="/articles/how-llms-actually-work/"
               class="min-h-11 px-5 py-2.5 rounded-xl bg-blue-600 text-xs font-bold uppercase tracking-wider text-white shadow-xs hover:bg-blue-700 active:translate-y-0.5 transition-all inline-flex items-center justify-center gap-1.5 font-mono"
             >
-              <span>Download the free bundle</span>
+              <span>Read the LLM starter guide</span>
               <span aria-hidden="true">&rarr;</span>
             </a>
           </div>
