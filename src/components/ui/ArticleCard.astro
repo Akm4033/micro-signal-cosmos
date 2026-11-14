@@ -1,6 +1,7 @@
 ---
 import ArticleVisual from './ArticleVisual.astro';
 import { getAuthor } from '../../data/authors';
+import { formatCategoryLabel } from '../../data/categories';
 
 interface Props {
   title: string;
@@ -51,6 +52,7 @@ const categoryVariantMap: Record<string, 'tech' | 'science' | 'ai' | 'devtools'>
   devtools: 'devtools',
 };
 const categoryVariant = (propVariant as 'tech' | 'science' | 'ai' | 'devtools') || categoryVariantMap[catSlug] || 'tech';
+const displayCategory = formatCategoryLabel(category);
 
 const rawDate = publishedTime || publishedDate;
 const formattedDate = rawDate
@@ -74,14 +76,14 @@ const isoDate = rawDate ? new Date(rawDate).toISOString() : '';
 
       <!-- Category Pill -->
       <span
-        class={`absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-xs pointer-events-none z-20 ${
+        class={`absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wide shadow-xs pointer-events-none z-20 ${
           categoryVariant === 'tech' ? 'bg-sky-50 text-sky-700 border border-sky-200 dark:bg-sky-950/70 dark:text-sky-300 dark:border-sky-800' :
           categoryVariant === 'ai' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/70 dark:text-emerald-300 dark:border-emerald-800' :
           categoryVariant === 'science' ? 'bg-purple-50 text-purple-700 border border-purple-200 dark:bg-purple-950/70 dark:text-purple-300 dark:border-purple-800' :
           'bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950/70 dark:text-amber-300 dark:border-amber-800'
         }`}
       >
-        {category}
+        {displayCategory}
       </span>
     </div>
 

@@ -181,7 +181,6 @@ function getArticleIsoDate(art: typeof articles[0] | undefined, fallback: string
               <div class="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200 px-2.5 py-0.5 text-xs font-bold text-amber-700 shadow-xs z-20 dark:bg-amber-950/70 dark:text-amber-300 dark:border-amber-800">
                 <span class="h-1.5 w-1.5 rounded-full bg-amber-500"></span><span>Developer Tools</span>
               </div>
-              <span class="absolute bottom-3 right-3 rounded-full bg-white px-2.5 py-0.5 text-xs font-semibold text-slate-700 border border-slate-200 shadow-xs dark:bg-white/[0.06] dark:border-white/[0.1] dark:text-slate-200 z-20 font-mono">13 min read</span>
             </div>
             <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-2 font-mono">
               <span class="font-medium text-slate-900 dark:text-slate-200" itemprop="author">Signal Insight</span>
@@ -227,7 +226,7 @@ function getArticleIsoDate(art: typeof articles[0] | undefined, fallback: string
             <a href="/articles/how-we-know-what-stars-are-made-of/" class="block">
               <div class="relative h-32 sm:h-36 w-full overflow-hidden rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center p-2 mb-3 shadow-2xs dark:bg-[#05070E] dark:border-white/[0.06]">
                 <ArticleVisual slug="how-we-know-what-stars-are-made-of" category="science" logo="star" />
-                <span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-purple-50 text-purple-700 border border-purple-200 dark:bg-purple-950/70 dark:text-purple-300 dark:border-purple-800">Science</span>
+                <span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide bg-purple-50 text-purple-700 border border-purple-200 dark:bg-purple-950/70 dark:text-purple-300 dark:border-purple-800">Science</span>
                 <span class="absolute bottom-2.5 right-2.5 text-[10px] font-semibold text-slate-600 bg-white/90 dark:bg-white/[0.06] dark:text-slate-300 px-2 py-0.5 rounded-md border border-slate-200 dark:border-white/[0.1] font-mono">11 min read</span>
               </div>
               <h3 class="text-sm sm:text-base font-bold leading-snug text-slate-900 dark:text-white transition-colors group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-2">
@@ -251,7 +250,7 @@ function getArticleIsoDate(art: typeof articles[0] | undefined, fallback: string
             <a href="/articles/how-browsers-actually-render-a-page/" class="block">
               <div class="relative h-32 sm:h-36 w-full overflow-hidden rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center p-2 mb-3 shadow-2xs dark:bg-[#05070E] dark:border-white/[0.06]">
                 <ArticleVisual slug="how-browsers-actually-render-a-page" category="tech" logo="browser" />
-                <span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-sky-50 text-sky-700 border border-sky-200 dark:bg-sky-950/70 dark:text-sky-300 dark:border-sky-800">Technology</span>
+                <span class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide bg-sky-50 text-sky-700 border border-sky-200 dark:bg-sky-950/70 dark:text-sky-300 dark:border-sky-800">Technology</span>
                 <span class="absolute bottom-2.5 right-2.5 text-[10px] font-semibold text-slate-600 bg-white/90 dark:bg-white/[0.06] dark:text-slate-300 px-2 py-0.5 rounded-md border border-slate-200 dark:border-white/[0.1] font-mono">12 min read</span>
               </div>
               <h3 class="text-sm sm:text-base font-bold leading-snug text-slate-900 dark:text-white transition-colors group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-2">
@@ -378,7 +377,7 @@ function getArticleIsoDate(art: typeof articles[0] | undefined, fallback: string
 
       <div class="grid gap-6 md:grid-cols-2">
         <!-- Path 1: Systems & Runtime Engineering -->
-        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs dark:bg-[#0B101D] dark:border-white/[0.08]">
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:p-6 shadow-xs dark:bg-[#0B101D] dark:border-white/[0.08] min-w-0">
           <div class="flex items-center justify-between mb-4">
             <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-sky-50 text-sky-700 border border-sky-200 dark:bg-sky-950/70 dark:text-sky-300 dark:border-sky-800 font-mono">Systems Path</span>
             <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 font-mono">4 Deep Dives</span>
@@ -386,27 +385,27 @@ function getArticleIsoDate(art: typeof articles[0] | undefined, fallback: string
           <h3 class="text-lg font-bold text-slate-900 dark:text-white">Systems &amp; Runtime Engineering</h3>
           <p class="mt-1 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">From raw silicon clock cycles to high-throughput zero-copy kernel networking.</p>
           <div class="mt-4 space-y-2.5">
-            <a href="/articles/inside-the-modern-cpu/" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-2xs dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 dark:hover:bg-white/[0.02] dark:text-slate-200 transition-all text-xs font-medium">
-              <span class="truncate">1. Inside the Modern CPU: Out-of-Order Execution &amp; Caches</span>
+            <a href="/articles/inside-the-modern-cpu/" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-2xs dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 dark:hover:bg-white/[0.02] dark:text-slate-200 transition-all text-xs font-medium min-w-0">
+              <span class="truncate min-w-0">1. Inside the Modern CPU: Out-of-Order Execution &amp; Caches</span>
               <span class="text-blue-600 dark:text-blue-400 shrink-0 ml-2">&rarr;</span>
             </a>
-            <a href="/articles/how-browsers-actually-render-a-page/" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-2xs dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 dark:hover:bg-white/[0.02] dark:text-slate-200 transition-all text-xs font-medium">
-              <span class="truncate">2. How Browsers Render a Page: From Bytes to Pixels</span>
+            <a href="/articles/how-browsers-actually-render-a-page/" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-2xs dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 dark:hover:bg-white/[0.02] dark:text-slate-200 transition-all text-xs font-medium min-w-0">
+              <span class="truncate min-w-0">2. How Browsers Render a Page: From Bytes to Pixels</span>
               <span class="text-blue-600 dark:text-blue-400 shrink-0 ml-2">&rarr;</span>
             </a>
-            <a href="/articles/webassembly-in-2026/" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-2xs dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 dark:hover:bg-white/[0.02] dark:text-slate-200 transition-all text-xs font-medium">
-              <span class="truncate">3. WebAssembly in 2026: Component Model &amp; WASI 0.2</span>
+            <a href="/articles/webassembly-in-2026/" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-2xs dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 dark:hover:bg-white/[0.02] dark:text-slate-200 transition-all text-xs font-medium min-w-0">
+              <span class="truncate min-w-0">3. WebAssembly in 2026: Component Model &amp; WASI 0.2</span>
               <span class="text-blue-600 dark:text-blue-400 shrink-0 ml-2">&rarr;</span>
             </a>
-            <a href="/articles/zero-copy-networking-in-linux-with-io-uring-and-ebpf/" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-2xs dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 dark:hover:bg-white/[0.02] dark:text-slate-200 transition-all text-xs font-medium">
-              <span class="truncate">4. Zero-Copy Linux Networking: io_uring &amp; DMA Transfer</span>
+            <a href="/articles/zero-copy-networking-in-linux-with-io-uring-and-ebpf/" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-2xs dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 dark:hover:bg-white/[0.02] dark:text-slate-200 transition-all text-xs font-medium min-w-0">
+              <span class="truncate min-w-0">4. Zero-Copy Linux Networking: io_uring &amp; DMA Transfer</span>
               <span class="text-blue-600 dark:text-blue-400 shrink-0 ml-2">&rarr;</span>
             </a>
           </div>
         </div>
 
         <!-- Path 2: AI & Neural Foundations -->
-        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-xs dark:bg-[#0B101D] dark:border-white/[0.08]">
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:p-6 shadow-xs dark:bg-[#0B101D] dark:border-white/[0.08] min-w-0">
           <div class="flex items-center justify-between mb-4">
             <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/70 dark:text-emerald-300 dark:border-emerald-800 font-mono">Neural Path</span>
             <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 font-mono">4 Deep Dives</span>
@@ -414,20 +413,20 @@ function getArticleIsoDate(art: typeof articles[0] | undefined, fallback: string
           <h3 class="text-lg font-bold text-slate-900 dark:text-white">AI &amp; Neural Foundations</h3>
           <p class="mt-1 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Mathematical transformer foundations, production RAG pipelines, and evaluation.</p>
           <div class="mt-4 space-y-2.5">
-            <a href="/articles/how-llms-actually-work/" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-2xs dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 dark:hover:bg-white/[0.02] dark:text-slate-200 transition-all text-xs font-medium">
-              <span class="truncate">1. How LLMs Actually Work: Transformer Architecture</span>
+            <a href="/articles/how-llms-actually-work/" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-2xs dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 dark:hover:bg-white/[0.02] dark:text-slate-200 transition-all text-xs font-medium min-w-0">
+              <span class="truncate min-w-0">1. How LLMs Actually Work: Transformer Architecture</span>
               <span class="text-blue-600 dark:text-blue-400 shrink-0 ml-2">&rarr;</span>
             </a>
-            <a href="/articles/build-your-own-rag-from-scratch/" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-2xs dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 dark:hover:bg-white/[0.02] dark:text-slate-200 transition-all text-xs font-medium">
-              <span class="truncate">2. Build Your Own RAG from Scratch: Hybrid Retrieval</span>
+            <a href="/articles/build-your-own-rag-from-scratch/" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-2xs dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 dark:hover:bg-white/[0.02] dark:text-slate-200 transition-all text-xs font-medium min-w-0">
+              <span class="truncate min-w-0">2. Build Your Own RAG from Scratch: Hybrid Retrieval</span>
               <span class="text-blue-600 dark:text-blue-400 shrink-0 ml-2">&rarr;</span>
             </a>
-            <a href="/articles/training-vs-inference-economics/" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-2xs dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 dark:hover:bg-white/[0.02] dark:text-slate-200 transition-all text-xs font-medium">
-              <span class="truncate">3. Training vs. Inference Economics: CAPEX to OPEX</span>
+            <a href="/articles/training-vs-inference-economics/" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-2xs dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 dark:hover:bg-white/[0.02] dark:text-slate-200 transition-all text-xs font-medium min-w-0">
+              <span class="truncate min-w-0">3. Training vs. Inference Economics: CAPEX to OPEX</span>
               <span class="text-blue-600 dark:text-blue-400 shrink-0 ml-2">&rarr;</span>
             </a>
-            <a href="/articles/evaluating-ai-benchmarks-and-evals/" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-2xs dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 dark:hover:bg-white/[0.02] dark:text-slate-200 transition-all text-xs font-medium">
-              <span class="truncate">4. Evaluating AI: Benchmarks, Evals, and LLM-as-a-Judge</span>
+            <a href="/articles/evaluating-ai-benchmarks-and-evals/" class="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white hover:border-blue-400 hover:shadow-2xs dark:border-white/[0.08] dark:bg-[#05070E] dark:hover:border-blue-500/60 dark:hover:bg-white/[0.02] dark:text-slate-200 transition-all text-xs font-medium min-w-0">
+              <span class="truncate min-w-0">4. Evaluating AI: Benchmarks, Evals, and LLM-as-a-Judge</span>
               <span class="text-blue-600 dark:text-blue-400 shrink-0 ml-2">&rarr;</span>
             </a>
           </div>
@@ -458,12 +457,13 @@ function getArticleIsoDate(art: typeof articles[0] | undefined, fallback: string
         </a>
       </div>
 
-      <!-- Search, Popular Topics & Stream Filters -->
-      <div class="mb-10 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-xs dark:border-white/[0.08] dark:bg-[#0B101D]">
-        <div class="max-w-2xl">
-          <form action="/articles/" method="get" class="w-full">
-            <div class="relative flex items-center">
-              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
+      <!-- Latest Articles Filter & Search Container (100% Full Width) -->
+      <div class="mb-10 w-full rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-xs dark:border-white/[0.08] dark:bg-[#0B101D]">
+        <!-- Full-Width Search Input Row -->
+        <form action="/articles/" method="get" class="w-full">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full">
+            <div class="relative flex-1 min-w-0 w-full">
+              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <circle cx="11" cy="11" r="8"></circle>
                   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -474,39 +474,40 @@ function getArticleIsoDate(art: typeof articles[0] | undefined, fallback: string
                 name="q"
                 placeholder="Search guides, RFCs, and concepts…"
                 aria-label="Search guides, RFCs, and concepts"
-                class="w-full h-12 rounded-xl border border-slate-300 bg-slate-50/50 pl-11 pr-32 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:border-white/[0.1] dark:bg-[#070B14] dark:text-white dark:placeholder-slate-400 transition-all shadow-xs"
+                class="w-full h-11 sm:h-12 rounded-xl border border-slate-300 bg-slate-50/60 pl-11 pr-4 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:border-white/[0.1] dark:bg-[#070B14] dark:text-white dark:placeholder-slate-400 transition-all shadow-xs"
               />
-              <button
-                type="submit"
-                class="absolute right-1.5 h-9 px-4 rounded-lg bg-blue-600 text-xs font-bold text-white hover:bg-blue-700 transition-colors cursor-pointer font-mono"
-              >
-                Search
-              </button>
             </div>
-          </form>
-
-          <!-- Suggested Topic Keywords -->
-          <div class="mt-3 flex flex-wrap items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
-            <span class="font-semibold text-slate-700 dark:text-slate-300 text-xs">Popular:</span>
-            <a href="/articles/?q=transformers" class="hover:text-blue-600 underline underline-offset-2">Transformers</a>
-            <span aria-hidden="true">&bull;</span>
-            <a href="/articles/?q=database" class="hover:text-blue-600 underline underline-offset-2">Databases</a>
-            <span aria-hidden="true">&bull;</span>
-            <a href="/articles/?q=fusion" class="hover:text-blue-600 underline underline-offset-2">Fusion</a>
-            <span aria-hidden="true">&bull;</span>
-            <a href="/articles/?q=passkeys" class="hover:text-blue-600 underline underline-offset-2">Passkeys</a>
-            <span aria-hidden="true">&bull;</span>
-            <a href="/articles/?q=webassembly" class="hover:text-blue-600 underline underline-offset-2">WASM</a>
+            <button
+              type="submit"
+              class="h-11 sm:h-12 px-6 rounded-xl bg-blue-600 text-xs font-bold uppercase tracking-wider text-white hover:bg-blue-700 active:translate-y-0.5 transition-all cursor-pointer font-mono shrink-0 inline-flex items-center justify-center gap-1.5 shadow-xs"
+            >
+              <span>Search</span>
+              <span aria-hidden="true">&rarr;</span>
+            </button>
           </div>
+        </form>
+
+        <!-- Suggested Topic Keywords -->
+        <div class="mt-3.5 flex flex-wrap items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+          <span class="font-semibold text-slate-700 dark:text-slate-300 text-xs">Popular:</span>
+          <a href="/articles/?q=transformers" class="hover:text-blue-600 underline underline-offset-2">Transformers</a>
+          <span aria-hidden="true">&bull;</span>
+          <a href="/articles/?q=database" class="hover:text-blue-600 underline underline-offset-2">Databases</a>
+          <span aria-hidden="true">&bull;</span>
+          <a href="/articles/?q=fusion" class="hover:text-blue-600 underline underline-offset-2">Fusion</a>
+          <span aria-hidden="true">&bull;</span>
+          <a href="/articles/?q=passkeys" class="hover:text-blue-600 underline underline-offset-2">Passkeys</a>
+          <span aria-hidden="true">&bull;</span>
+          <a href="/articles/?q=webassembly" class="hover:text-blue-600 underline underline-offset-2">WASM</a>
         </div>
 
         <!-- Active Knowledge Streams -->
-        <div class="mt-5 pt-4 border-t border-slate-100 flex items-center gap-2 overflow-x-auto no-scrollbar flex-nowrap pb-1 dark:border-white/[0.06]">
+        <div class="mt-4 pt-3.5 border-t border-slate-100 flex items-center gap-2 overflow-x-auto no-scrollbar flex-nowrap pb-1 dark:border-white/[0.06] max-w-full">
           <span class="shrink-0 text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mr-1 font-mono">Streams:</span>
-          <a href="/category/technology/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100 dark:bg-sky-950/50 dark:text-sky-300 dark:border-sky-800 transition-all font-mono">Technology</a>
-          <a href="/category/artificial-intelligence/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800 transition-all font-mono">AI &amp; ML</a>
-          <a href="/category/science/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-50 text-purple-700 border border-purple-200 hover:bg-purple-100 dark:bg-purple-950/50 dark:text-purple-300 dark:border-purple-800 transition-all font-mono">Science</a>
-          <a href="/category/developer-tools/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100 dark:bg-amber-950/50 dark:text-amber-300 dark:border-amber-800 transition-all font-mono">Dev Tools</a>
+          <a href="/category/technology/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100 dark:bg-sky-950/50 dark:text-sky-300 dark:border-sky-800 transition-all font-mono">Technology</a>
+          <a href="/category/artificial-intelligence/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800 transition-all font-mono">AI &amp; ML</a>
+          <a href="/category/science/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide bg-purple-50 text-purple-700 border border-purple-200 hover:bg-purple-100 dark:bg-purple-950/50 dark:text-purple-300 dark:border-purple-800 transition-all font-mono">Science</a>
+          <a href="/category/developer-tools/" class="shrink-0 whitespace-nowrap inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100 dark:bg-amber-950/50 dark:text-amber-300 dark:border-amber-800 transition-all font-mono">Dev Tools</a>
         </div>
       </div>
 

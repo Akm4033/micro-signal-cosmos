@@ -79,3 +79,27 @@ export function getCategoryInfo(slugOrName?: string | null): Category {
 
   return CATEGORIES[0];
 }
+
+const CATEGORY_DISPLAY_MAP: Record<string, string> = {
+  'developer-tools': 'Developer Tools',
+  'devtools': 'Developer Tools',
+  'artificial-intelligence': 'Artificial Intelligence',
+  'ai': 'Artificial Intelligence',
+  'technology': 'Technology',
+  'tech': 'Technology',
+  'science': 'Science',
+  'digital-world': 'Technology',
+  'innovation': 'Technology',
+  'tutorials': 'Developer Tools',
+  'software-tools': 'Developer Tools',
+};
+
+export function formatCategoryLabel(raw?: string | null): string {
+  if (!raw) return '';
+  const key = raw.trim().toLowerCase();
+  if (CATEGORY_DISPLAY_MAP[key]) return CATEGORY_DISPLAY_MAP[key];
+  return raw
+    .split(/[-_]+/)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+    .join(' ');
+}
